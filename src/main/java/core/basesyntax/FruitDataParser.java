@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.DataParser;
 import core.basesyntax.service.strategy.Operation;
+import exception.CustomException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,12 +15,16 @@ public class FruitDataParser implements DataParser<FruitTransactionDto> {
 
     @Override
     public List<FruitTransactionDto> parse(List<String> rawData) {
+        if (rawData == null) {
+            throw new CustomException("Raw data list is null");
+        }
+
         return rawData.stream()
                 .skip(1)
                 .map(line -> {
                     String[] columns = line.split(SEPARATOR);
                     if (columns.length != 3) {
-                        throw new IllegalArgumentException("Invalid format: " + line);
+                        throw new CustomException("Invalid format: " + line);
                     }
                     Operation operation = Operation
                             .validateOperation(columns[OPERATION_TYPE_INDEX_CSV]);

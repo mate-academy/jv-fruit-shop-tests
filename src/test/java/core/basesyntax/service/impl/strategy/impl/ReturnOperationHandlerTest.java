@@ -27,22 +27,23 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void apply_SupplyFruit_ok() {
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.RETURN, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.RETURN, FRUIT_NAME,
                 RETURNED_QUANTITY);
-        returnOperationHandler.apply(dto);
+        returnOperationHandler.apply(transaction);
         Map<Fruit, Integer> fruits = storage.getFruits();
-        assertEquals(RETURNED_QUANTITY, fruits.getOrDefault(new Fruit(FRUIT_NAME), 0));
+        Integer actualQuantity = fruits.get(new Fruit(FRUIT_NAME));
+        assertEquals(RETURNED_QUANTITY, actualQuantity);
     }
 
     @Test
     public void apply_SupplyExistingFruit_ok() {
         storage.addFruit(new Fruit(FRUIT_NAME), INITIAL_QUANTITY);
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.RETURN, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.RETURN, FRUIT_NAME,
                 RETURNED_QUANTITY);
-        returnOperationHandler.apply(dto);
+        returnOperationHandler.apply(transaction);
         Map<Fruit, Integer> fruits = storage.getFruits();
-        assertEquals(INITIAL_QUANTITY + RETURNED_QUANTITY,
-                fruits.getOrDefault(new Fruit(FRUIT_NAME), 0));
+        Integer actualQuantity = fruits.get(new Fruit(FRUIT_NAME));
+        assertEquals(INITIAL_QUANTITY + RETURNED_QUANTITY, actualQuantity);
     }
 
     @AfterEach

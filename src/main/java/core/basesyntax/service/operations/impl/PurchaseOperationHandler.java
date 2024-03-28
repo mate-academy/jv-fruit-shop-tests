@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.operations.OperationHandler;
+import exception.CustomException;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private final Storage storage;
@@ -20,7 +21,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int newQuantity = currentQuantity - quantity;
 
         if (newQuantity < 0) {
-            throw new RuntimeException("Negative balance after purchase: " + fruitName);
+            throw new CustomException("Negative balance after purchase: " + fruitName);
         }
 
         storage.addFruit(new Fruit(fruitName), newQuantity);

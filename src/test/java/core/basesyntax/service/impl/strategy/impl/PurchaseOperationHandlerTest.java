@@ -8,6 +8,7 @@ import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.operations.impl.PurchaseOperationHandler;
 import core.basesyntax.service.strategy.Operation;
+import exception.CustomException;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,6 @@ public class PurchaseOperationHandlerTest {
     private static final String FRUIT_NAME = "Apple";
     private static final int INITIAL_QUANTITY = 10;
     private static final int PURCHASE_QUANTITY = 5;
-
     private PurchaseOperationHandler purchaseOperationHandler;
     private Storage storage;
 
@@ -30,20 +30,23 @@ public class PurchaseOperationHandlerTest {
     @Test
     public void apply_SupplyFruit_ok() {
         storage.addFruit(new Fruit(FRUIT_NAME), INITIAL_QUANTITY);
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.PURCHASE, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.PURCHASE, FRUIT_NAME,
                 PURCHASE_QUANTITY);
-        purchaseOperationHandler.apply(dto);
+        purchaseOperationHandler.apply(transaction);
         Map<Fruit, Integer> fruits = storage.getFruits();
-        assertEquals(INITIAL_QUANTITY - PURCHASE_QUANTITY,
-                fruits.getOrDefault(new Fruit(FRUIT_NAME), 0));
+        Integer actualQuantity = fruits.get(new Fruit(FRUIT_NAME));
+        assertEquals(INITIAL_QUANTITY - PURCHASE_QUANTITY, actualQuantity);
     }
 
     @Test
     public void apply_PurchaseMoreThanAvailable_notOk() {
         storage.addFruit(new Fruit(FRUIT_NAME), INITIAL_QUANTITY);
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.PURCHASE, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.PURCHASE, FRUIT_NAME,
                 INITIAL_QUANTITY + 1);
-        assertThrows(RuntimeException.class, () -> purchaseOperationHandler.apply(dto));
+        CustomException customException = assertThrows(CustomException.class,
+                () -> purchaseOperationHandler.apply(transaction));
+        assertEquals("Negative balance after purchase: " + FRUIT_NAME,
+                customException.getMessage());
     }
 
     @AfterEach

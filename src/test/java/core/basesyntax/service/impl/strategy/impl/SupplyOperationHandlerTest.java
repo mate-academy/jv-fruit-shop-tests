@@ -28,22 +28,23 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void apply_SupplyFruit_ok() {
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.SUPPLY, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.SUPPLY, FRUIT_NAME,
                 SUPPLIED_QUANTITY);
-        supplyOperationHandler.apply(dto);
+        supplyOperationHandler.apply(transaction);
         Map<Fruit, Integer> fruits = storage.getFruits();
-        assertEquals(SUPPLIED_QUANTITY, fruits.getOrDefault(new Fruit(FRUIT_NAME), 0));
+        Integer actualQuantity = fruits.get(new Fruit(FRUIT_NAME));
+        assertEquals(SUPPLIED_QUANTITY, actualQuantity);
     }
 
     @Test
     public void apply_SupplyExistingFruit_ok() {
         storage.addFruit(new Fruit(FRUIT_NAME), INITIAL_QUANTITY);
-        FruitTransactionDto dto = new FruitTransactionDto(Operation.SUPPLY, FRUIT_NAME,
+        FruitTransactionDto transaction = new FruitTransactionDto(Operation.SUPPLY, FRUIT_NAME,
                 SUPPLIED_QUANTITY);
-        supplyOperationHandler.apply(dto);
+        supplyOperationHandler.apply(transaction);
         Map<Fruit, Integer> fruits = storage.getFruits();
-        assertEquals(INITIAL_QUANTITY + SUPPLIED_QUANTITY,
-                fruits.getOrDefault(new Fruit(FRUIT_NAME), 0));
+        Integer actualQuantity = fruits.get(new Fruit(FRUIT_NAME));
+        assertEquals(INITIAL_QUANTITY + SUPPLIED_QUANTITY, actualQuantity);
     }
 
     @AfterEach

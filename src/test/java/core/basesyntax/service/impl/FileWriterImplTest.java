@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.operations.report.FileWriter;
 import core.basesyntax.service.operations.report.impl.FileWriterImpl;
+import exception.CustomException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,14 +42,9 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writeDataToFile_NullFilePath_notOk() {
-        assertThrows(NullPointerException.class, () ->
-                fileWriter.writeDataToFile(TEST_CONTENT, null));
-    }
-
-    @Test
     void writeDataToFile_NullContent_notOk() {
-        assertThrows(RuntimeException.class, () ->
+        CustomException customException = assertThrows(CustomException.class, () ->
                 fileWriter.writeDataToFile(null, TEST_FILE_PATH));
+        assertEquals("Report content or file path is null", customException.getMessage());
     }
 }

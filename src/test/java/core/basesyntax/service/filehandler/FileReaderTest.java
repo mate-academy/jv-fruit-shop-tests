@@ -15,6 +15,8 @@ class FileReaderTest {
     private static final String STORAGE_FILE_PATH = "src/test/java/resources/StorageInfo.csv";
     private static final String NONEXISTENT_FILE_PATH = "src/test/java/resources/TestFile.csv";
     private static final String HEADER = "type,fruit,quantity";
+    private static final int SUB_LIST_START_INDEX = 1;
+    private static final int HEADER_INDEX = 0;
     private final FileReader read = new FileReader();
 
     @Test
@@ -26,7 +28,7 @@ class FileReaderTest {
     public void contains_headerLine_Ok() {
         try {
             List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
-            assertEquals(HEADER, lines.get(0), "The file should contain a header");
+            assertEquals(HEADER, lines.get(HEADER_INDEX), "The file should contain a header");
         } catch (IOException e) {
             throw new FileFoundException("There is no such file", e);
         }
@@ -37,7 +39,8 @@ class FileReaderTest {
         List<String> expectedInfo;
         try {
             List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
-            expectedInfo = lines.size() > 1 ? lines.subList(1, lines.size())
+            expectedInfo = lines.size() > SUB_LIST_START_INDEX
+                    ? lines.subList(SUB_LIST_START_INDEX, lines.size())
                     : Collections.emptyList();
         } catch (IOException e) {
             throw new FileFoundException("There is no such file", e);

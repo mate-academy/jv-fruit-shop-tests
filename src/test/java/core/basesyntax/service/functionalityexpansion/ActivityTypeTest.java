@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ActivityTypeTest {
+    private static final String PURCHASE_STRING = "p";
+    private static final String RETURN_STRING = "r";
+    private static final String SUPPLY_STRING = "s";
+    private static final String BALANCE_STRING = "b";
     private String code;
 
     @Test
@@ -28,25 +32,25 @@ class ActivityTypeTest {
 
     @Test
     void getByCode_activityPurchase_Ok() {
-        code = "p";
+        code = PURCHASE_STRING;
         assertEquals(ActivityType.PURCHASE, ActivityType.getByCode(code));
     }
 
     @Test
     void getByCode_activityBalance_Ok() {
-        code = "b";
+        code = BALANCE_STRING;
         assertEquals(ActivityType.BALANCE, ActivityType.getByCode(code));
     }
 
     @Test
     void getByCode_activitySupply_Ok() {
-        code = "s";
+        code = SUPPLY_STRING;
         assertEquals(ActivityType.SUPPLY, ActivityType.getByCode(code));
     }
 
     @Test
     void getByCode_activityReturn_Ok() {
-        code = "r";
+        code = RETURN_STRING;
         assertEquals(ActivityType.RETURN, ActivityType.getByCode(code));
     }
 }

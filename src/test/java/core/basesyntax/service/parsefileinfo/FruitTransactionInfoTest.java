@@ -6,18 +6,18 @@ import core.basesyntax.service.functionalityexpansion.ActivityType;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionInfoTest {
+    public static final int QUANTITY = 10;
+    public static final String FRUIT_NAME = "Apple";
 
     @Test
     void constructorAndAccessors_constructFruitTransactionInfo_Ok() {
         ActivityType activityType = ActivityType.PURCHASE;
-        String name = "Apple";
-        int quantity = 10;
 
         FruitTransactionInfo transactionInfo =
-                new FruitTransactionInfo(activityType, name, quantity);
+                new FruitTransactionInfo(activityType, FRUIT_NAME, QUANTITY);
 
         assertEquals(activityType, transactionInfo.activityType(), "Activity type should match");
-        assertEquals(name, transactionInfo.name(), "Name should match");
-        assertEquals(quantity, transactionInfo.quantity(), "Quantity should match");
+        assertEquals(FRUIT_NAME, transactionInfo.name(), "Name should match");
+        assertEquals(QUANTITY, transactionInfo.quantity(), "Quantity should match");
     }
 }

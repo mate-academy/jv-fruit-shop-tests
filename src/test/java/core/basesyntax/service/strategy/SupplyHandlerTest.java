@@ -8,12 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
+    private static final String FRUIT = "apple";
+    private static final int QUANTITY = 20;
+    private static final int ADD_QUANTITY = 200;
     private Storage storage;
     private BalanceHandler handler;
     private SupplyHandler supplyHandler;
-    private final String fruit = "apple";
-    private final int quantity = 20;
-    private final int addQuantity = 200;
 
     @BeforeEach
     void setUp() {
@@ -24,13 +24,13 @@ class SupplyHandlerTest {
 
     @Test
     void put_newInformationToStorage_Ok() {
-        assertNull(storage.getData().get(fruit),
+        assertNull(storage.getData().get(FRUIT),
                 "Fruit should not exist in storage before operation.");
-        handler.operate(fruit, quantity);
-        int actualQuantity = quantity + addQuantity;
-        supplyHandler.operate(fruit, addQuantity);
+        handler.operate(FRUIT, QUANTITY);
+        int actualQuantity = QUANTITY + ADD_QUANTITY;
+        supplyHandler.operate(FRUIT, ADD_QUANTITY);
 
-        assertEquals(actualQuantity, storage.getData().get(fruit),
+        assertEquals(actualQuantity, storage.getData().get(FRUIT),
                 "Storage does not contain the correct quantity of the fruit after operation.");
     }
 }

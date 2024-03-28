@@ -10,41 +10,40 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
-    private Storage storage;
+    private static final String FRUIT = "apple";
+    private static final int QUANTITY = 20;
+    private static final int SUBTRACT_QUANTITY = 5;
+    private final Storage storage = new Storage();
     private BalanceHandler handler;
     private PurchaseHandler purchaseHandler;
-    private final String fruit = "apple";
-    private final int quantity = 20;
-    private final int subtractQuantity = 5;
 
     @BeforeEach
     void setUp() {
-        storage = new Storage();
         handler = new BalanceHandler(storage);
         purchaseHandler = new PurchaseHandler(storage);
     }
 
     @Test
     void put_newInformationToStorage_Ok() {
-        assertNull(storage.getData().get(fruit),
+        assertNull(storage.getData().get(FRUIT),
                 "Fruit should not exist in storage before operation.");
-        handler.operate(fruit, quantity);
+        handler.operate(FRUIT, QUANTITY);
 
-        int actualQuantity = quantity - subtractQuantity;
-        purchaseHandler.operate(fruit, subtractQuantity);
+        int actualQuantity = QUANTITY - SUBTRACT_QUANTITY;
+        purchaseHandler.operate(FRUIT, SUBTRACT_QUANTITY);
 
-        assertEquals(actualQuantity, storage.getData().get(fruit),
+        assertEquals(actualQuantity, storage.getData().get(FRUIT),
                 "Storage does not contain the correct quantity of the fruit after operation.");
     }
 
     @Test
     void throw_productQuantityException_Ok() {
-        handler.operate(fruit, quantity);
+        handler.operate(FRUIT, QUANTITY);
 
         ProductQuantityException exception = assertThrows(ProductQuantityException.class,
-                () -> purchaseHandler.operate(fruit, 20));
+                () -> purchaseHandler.operate(FRUIT, QUANTITY));
         assertEquals("Attempting to remove more "
-                        + fruit + " than available.", exception.getMessage(),
+                        + FRUIT + " than available.", exception.getMessage(),
                 "Incorrect validation error message");
     }
 }

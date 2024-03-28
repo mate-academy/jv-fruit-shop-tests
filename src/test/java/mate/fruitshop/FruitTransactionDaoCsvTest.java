@@ -43,14 +43,14 @@ public class FruitTransactionDaoCsvTest {
 
         writeToInputFile(VALID_INPUT_DATA);
         Assertions.assertEquals(expected, dao.getAll());
-        deleteFile(INPUT_FILE_NAME);
+//        deleteFile(INPUT_FILE_NAME);
     }
 
     @Test
     void getAll_EmptyFile_ok() {
         writeToInputFile("");
         Assertions.assertEquals(Collections.emptyList(), dao.getAll());
-        deleteFile(INPUT_FILE_NAME);
+//        deleteFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class FruitTransactionDaoCsvTest {
                 b,banana,
                 s,,100""");
         Assertions.assertThrows(RuntimeException.class, dao::getAll);
-        deleteFile(INPUT_FILE_NAME);
+//        deleteFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -77,7 +77,6 @@ public class FruitTransactionDaoCsvTest {
         }
         Assertions.assertThrows(RuntimeException.class, dao::getAll);
     }
-    //saveReport: existingFile_ok, notExistingFile_ok,
 
     @Test
     void saveReport_notExistingFile_ok() {
@@ -88,7 +87,7 @@ public class FruitTransactionDaoCsvTest {
         }
         dao.saveReport(VALID_INPUT_DATA);
         Assertions.assertEquals(VALID_INPUT_DATA, readFromOutputFile());
-        deleteFile(OUTPUT_FILE_NAME);
+//        deleteFile(OUTPUT_FILE_NAME);
     }
 
     @Test
@@ -96,7 +95,7 @@ public class FruitTransactionDaoCsvTest {
         writeToInputFile("some random data");
         dao.saveReport(VALID_INPUT_DATA);
         Assertions.assertEquals(VALID_INPUT_DATA, readFromOutputFile());
-        deleteFile(OUTPUT_FILE_NAME);
+//        deleteFile(OUTPUT_FILE_NAME);
     }
 
     private void writeToInputFile(String dataToFile) {

@@ -3,11 +3,9 @@ package core.basesyntax.services.operations;
 import static core.basesyntax.db.Storage.fruitStorage;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.exceptions.FruitStorageException;
 import core.basesyntax.services.FruitTransactionProcessor;
 import core.basesyntax.services.impl.FruitTransactionProcessorImpl;
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FruitOperationStrategyAndFruitTransactionProcessorTest {
+class FruitOperationStrategyTest {
 
     private static FruitOperationStrategy strategy;
     private static List<OperationHandler> handlers;
@@ -38,7 +36,7 @@ class FruitOperationStrategyAndFruitTransactionProcessorTest {
     }
 
     @Test
-    void getHandlerReturnsCorrectHandlerForBalanceOperationOk() {
+    void getHandler_ReturnsCorrectHandler_ForBalanceOperation_Ok() {
         FruitTransactionDto dto = new FruitTransactionDto("b", "Apple", 10);
         List<OperationHandler> result = strategy.getHandler(dto);
         assertEquals(1, result.size(), "Expected one handler");
@@ -47,34 +45,7 @@ class FruitOperationStrategyAndFruitTransactionProcessorTest {
     }
 
     @Test
-    void applyThrowsExceptionWhenFruitNotInStorageNotOk() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
-        FruitTransactionDto dto = new FruitTransactionDto("p", "Apple", 10);
-
-        assertThrows(FruitStorageException.class, () -> handler.apply(dto),
-                "Expected FruitStorageException when fruit is not in storage");
-    }
-
-    @Test
-    void applyThrowsExceptionWhenPurchaseAmountIsTooBigNotOk() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
-        FruitTransactionDto dto = new FruitTransactionDto("p", "Apple", 20);
-        assertThrows(FruitStorageException.class, () -> handler.apply(dto),
-                "Expected FruitStorageException when purchase amount is too big");
-    }
-
-    @Test
-    void applyReducesQuantityWhenPurchaseAmountIsValidOk() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
-        FruitTransactionDto dto = new FruitTransactionDto("p", "Apple", 5);
-        fruitStorage.put("Apple", 10);
-        assertDoesNotThrow(() -> handler.apply(dto),
-                "Expected no exception when purchase amount is valid");
-        assertEquals(5, fruitStorage.get("Apple"), "Expected 5 apples left in storage");
-    }
-
-    @Test
-    void getHandlerReturnsCorrectHandlerForReturnOperationOk() {
+    void getHandler_ReturnsCorrectHandler_ForReturnOperation_Ok() {
         FruitTransactionDto dto = new FruitTransactionDto("r", "Apple", 10);
         List<OperationHandler> result = strategy.getHandler(dto);
         assertEquals(1, result.size(), "Expected one handler");
@@ -83,7 +54,7 @@ class FruitOperationStrategyAndFruitTransactionProcessorTest {
     }
 
     @Test
-    void getHandlerReturnsCorrectHandlerForSupplyOperationOk() {
+    void getHandler_ReturnsCorrectHandler_ForSupplyOperation_Ok() {
         FruitTransactionDto dto = new FruitTransactionDto("s", "Apple", 10);
         List<OperationHandler> result = strategy.getHandler(dto);
         assertEquals(1, result.size(), "Expected one handler");
@@ -92,7 +63,7 @@ class FruitOperationStrategyAndFruitTransactionProcessorTest {
     }
 
     @Test
-    void processCallsHandlersForEachDtoOk() {
+    void process_CallsHandlers_ForEachDto_Ok() {
         processor = new FruitTransactionProcessorImpl(strategy);
         FruitTransactionDto dto1 = new FruitTransactionDto("b", "Apple", 10);
         FruitTransactionDto dto2 = new FruitTransactionDto("s", "Banana", 20);

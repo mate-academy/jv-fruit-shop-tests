@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.service.exceptions.ValidationException;
 import core.basesyntax.service.functionalityexpansion.ActivityHandlerProvider;
 import core.basesyntax.service.parsefileinfo.FruitTransactionInfo;
 import core.basesyntax.service.strategy.ActivityHandler;
@@ -13,6 +14,9 @@ public class FruitShopService {
     }
 
     public ActivityHandler execute(List<FruitTransactionInfo> fruits) {
+        if (fruits.isEmpty()) {
+            throw new ValidationException("The list shouldn't be empty");
+        }
         ActivityHandler handler = null;
         for (FruitTransactionInfo fruit : fruits) {
             handler = activityProvider.getHandler(fruit.activityType());

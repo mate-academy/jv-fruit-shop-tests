@@ -1,5 +1,6 @@
 package core.basesyntax.service.parsefileinfo;
 
+import core.basesyntax.service.exceptions.ValidationException;
 import core.basesyntax.service.functionalityexpansion.ActivityType;
 
 public class TransactionParser {
@@ -10,6 +11,11 @@ public class TransactionParser {
 
     public FruitTransactionInfo parse(String activityString) {
         String[] activityTypeArray = activityString.split(SEPARATOR);
+
+        if (activityTypeArray.length != 3) {
+            throw new ValidationException("Input string length should be 3");
+        }
+
         ActivityType activityType = ActivityType
                 .getByCode(activityTypeArray[ACTIVITY_INDEX]);
         String name = activityTypeArray[NAME_INDEX];

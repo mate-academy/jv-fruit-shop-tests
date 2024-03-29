@@ -3,11 +3,9 @@ package core.basesyntax.service.filehandler;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.exceptions.FileFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -20,31 +18,21 @@ class FileReaderTest {
     private final FileReader read = new FileReader();
 
     @Test
-    public void throw_runtimeException_Ok() {
+    public void readFromFile_nonExistentFile_throwsRuntimeException_notOk() {
         assertThrows(RuntimeException.class, () -> read.readFromFile(NONEXISTENT_FILE_PATH));
     }
 
     @Test
-    public void contains_headerLine_Ok() {
-        try {
-            List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
-            assertEquals(HEADER, lines.get(HEADER_INDEX), "The file should contain a header");
-        } catch (IOException e) {
-            throw new FileFoundException("There is no such file", e);
-        }
+    public void readFromFile_headerLine_Ok() throws IOException {
+        List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
+        assertEquals(HEADER, lines.get(HEADER_INDEX), "The file should contain a header");
     }
 
     @Test
-    public void read_fromFile_Ok() {
+    public void readFromFile_returnsFileContents_Ok() throws IOException {
         List<String> expectedInfo;
-        try {
-            List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
-            expectedInfo = lines.size() > SUB_LIST_START_INDEX
-                    ? lines.subList(SUB_LIST_START_INDEX, lines.size())
-                    : Collections.emptyList();
-        } catch (IOException e) {
-            throw new FileFoundException("There is no such file", e);
-        }
+        List<String> lines = Files.readAllLines(Path.of(STORAGE_FILE_PATH));
+        expectedInfo = lines.subList(SUB_LIST_START_INDEX, lines.size());
 
         List<String> actualResult = read.readFromFile(STORAGE_FILE_PATH);
         assertEquals(expectedInfo, actualResult);

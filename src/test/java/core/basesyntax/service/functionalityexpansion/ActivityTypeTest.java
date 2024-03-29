@@ -10,23 +10,14 @@ class ActivityTypeTest {
     private static final String RETURN_STRING = "r";
     private static final String SUPPLY_STRING = "s";
     private static final String BALANCE_STRING = "b";
+    private static final String INVALID_CODE = "cx";
     private String code;
 
     @Test
-    void getByCode_invalidCode_NotOk() {
-        code = "c";
+    void getByCode_incorrectInput_NotOk() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> ActivityType.getByCode(code));
-        assertEquals("Unknown activity code: " + code, exception.getMessage(),
-                "Incorrect validation error message");
-    }
-
-    @Test
-    void getByCode_incorrectInputLength_NotOk() {
-        code = "cc";
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> ActivityType.getByCode(code));
-        assertEquals("Unknown activity code: " + code, exception.getMessage(),
+                () -> ActivityType.getByCode(INVALID_CODE));
+        assertEquals("Unknown activity code: " + INVALID_CODE, exception.getMessage(),
                 "Incorrect validation error message");
     }
 

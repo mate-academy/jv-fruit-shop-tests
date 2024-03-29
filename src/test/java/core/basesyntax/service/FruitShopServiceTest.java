@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.exceptions.ValidationException;
 import core.basesyntax.service.functionalityexpansion.ActivityHandlerProvider;
 import core.basesyntax.service.functionalityexpansion.ActivityType;
 import core.basesyntax.service.parsefileinfo.FruitTransactionInfo;
@@ -11,21 +12,29 @@ import core.basesyntax.service.strategy.ActivityHandler;
 import core.basesyntax.service.strategy.BalanceHandler;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceTest {
-    private final Storage storage = new Storage();
-    private final ActivityHandlerProvider activityProvider = new ActivityHandlerProvider(storage);
+    public static final List<FruitTransactionInfo> EMPTY_LIST = new ArrayList<>();
+    private Storage storage;
+    private ActivityHandlerProvider activityProvider;
+    private FruitShopService fruitShopService;
+
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+        activityProvider = new ActivityHandlerProvider(storage);
+        fruitShopService = new FruitShopService(activityProvider);
+    }
 
     @Test
-    void execute_nullInput_Ok() {
-        FruitShopService fruitShopService = new FruitShopService(activityProvider);
-        assertThrows(NullPointerException.class, () -> fruitShopService.execute(null));
+    void execute_nullInput_notOk() {
+        assertThrows(ValidationException.class, () -> fruitShopService.execute(EMPTY_LIST));
     }
 
     @Test
     void execute_correctActivity_Ok() {
-        FruitShopService fruitShopService = new FruitShopService(activityProvider);
         List<FruitTransactionInfo> testList = getList();
         ActivityHandler expectedActivity = new BalanceHandler(storage);
 

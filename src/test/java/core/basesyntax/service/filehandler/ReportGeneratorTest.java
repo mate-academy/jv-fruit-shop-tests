@@ -9,22 +9,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorTest {
-    private Storage storage;
-    private ReportGenerator generator;
+    private final Storage storage = new Storage();
+    private final ReportGenerator generator = new ReportGenerator();
 
     @BeforeEach
     void setUp() {
-        generator = new ReportGenerator();
-        storage = new Storage();
         storage.getData().clear();
     }
 
     @Test
     public void generate_correctInformation_Ok() {
-        String expected = String.format("fruit,quantity%nbanana,152%napple,90");
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator() + "apple,90";
         storage.getData().put("banana", 152);
         storage.getData().put("apple", 90);
 
+        System.out.println(expected);
         String actual = generator.generate(storage);
         assertEquals(expected, actual);
     }

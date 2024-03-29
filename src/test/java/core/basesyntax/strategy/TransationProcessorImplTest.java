@@ -33,7 +33,8 @@ class TransationProcessorImplTest {
                 = new SupplyOperationHandler(storage, fruitService);
         ReturnOperationHandler returnOperationHandler
                 = new ReturnOperationHandler(storage, fruitService);
-        BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitService);
+        BalanceOperationHandler balanceOperationHandler
+                = new BalanceOperationHandler(fruitService);
         PurchaseOperationHandler purchaseOperationHandler
                 = new PurchaseOperationHandler(storage, fruitService);
         OperationStategy operationStategy;
@@ -43,6 +44,7 @@ class TransationProcessorImplTest {
                         Operation.SUPPLY, supplyOperationHandler,
                         Operation.RETURN, returnOperationHandler);
         operationStategy = new OperationStategyImpl(operationStrategyMap);
+
         processor = new TransationProcessorImpl(operationStategy);
     }
 

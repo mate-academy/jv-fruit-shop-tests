@@ -36,9 +36,11 @@ class DataParserImplTest {
     @Test
     void parse_emptyData_notOk() {
         List<String> rawData = new ArrayList<>();
-        assertThrows(RuntimeException.class, () -> dataParser.parse(rawData));
-        String actual = assertThrows(RuntimeException.class, () ->
-                dataParser.parse(rawData)).getMessage();
-        assertEquals("File is empty", actual);
+
+        RuntimeException thrownException
+                = assertThrows(RuntimeException.class, () -> dataParser.parse(rawData));
+        String actual = thrownException.getMessage();
+        String expected = "File is empty";
+        assertEquals(expected, actual);
     }
 }

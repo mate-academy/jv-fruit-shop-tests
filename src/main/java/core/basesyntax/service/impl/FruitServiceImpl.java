@@ -12,6 +12,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void save(String nameFruit, int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity should be non-negative");
+        }
         storage.addFruit(nameFruit, quantity);
     }
 }

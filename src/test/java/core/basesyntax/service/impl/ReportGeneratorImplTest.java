@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,17 +28,13 @@ class ReportGeneratorImplTest {
 
     @Test
     void generate_dataIsValid_isOk() {
-        storage.addFruit("apple", 5);
         storage.addFruit("banana", 10);
-        List<String> formattedList = new ArrayList<>();
-        formattedList.add(TITLE);
-        storage.getFruits().forEach((fruit, quantity) -> formattedList
-                .add(fruit + COMA_SEPARATOR + quantity));
-        List<String> actual = formattedList;
-        List<String> expected = Arrays.asList(
-                new String("fruit,quantity"),
-                new String("banana,10"),
-                new String("apple,5"));
+        storage.addFruit("apple", 5);
+        List<String> actual = reportGenerator.generate();
+        List<String> expected = List.of(
+                "fruit,quantity",
+                "banana,10",
+                "apple,5");
         assertEquals(expected, actual);
 
     }
@@ -48,21 +42,30 @@ class ReportGeneratorImplTest {
     @Test
     void generate_emptyData_isOk() {
         List<String> actual = reportGenerator.generate();
-        List<String> expected = Arrays.asList(new String("fruit,quantity"));
+        List<String> expected = List.of(
+                "fruit,quantity");
         assertEquals(expected, actual);
     }
 
     @Test
-    void generate_oneFruitData_isOk() {
-        storage.addFruit("apple", 5);
-        List<String> formattedList = new ArrayList<>();
-        formattedList.add(TITLE);
-        storage.getFruits().forEach((fruit, quantity) -> formattedList
-                .add(fruit + COMA_SEPARATOR + quantity));
-        List<String> actual = formattedList;
-        List<String> expected = Arrays.asList(
-                new String("fruit,quantity"),
-                new String("apple,5"));
+    void generate_singleFruitInData_isOk() {
+        storage.addFruit("banana", 10);
+        List<String> actual = reportGenerator.generate();
+        List<String> expected = List.of(
+                "fruit,quantity",
+                "banana,10");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void generate_fruitWithZeroQuantity_isOk() {
+        storage.addFruit("banana", 0);
+        storage.addFruit("apple", 0);
+        List<String> actual = reportGenerator.generate();
+        List<String> expected = List.of(
+                "fruit,quantity",
+                "banana,0",
+                "apple,0");
         assertEquals(expected, actual);
     }
 }

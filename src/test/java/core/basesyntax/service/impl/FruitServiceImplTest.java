@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitService;
@@ -53,4 +54,19 @@ class FruitServiceImplTest {
         assertEquals(10, storage.getFruitQuantity("banana"));
         assertEquals(15, storage.getFruitQuantity("cherry"));
     }
+
+    @Test
+    void save_addTheSameFruitTwoTimes_isOk() {
+        fruitService.save("apple", 5);
+        fruitService.save("apple", 5);
+        fruitService.save("cherry", 15);
+
+        assertEquals(5, storage.getFruitQuantity("apple"));
+    }
+
+    @Test
+    void save_addFruitWithNegotiveQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> fruitService.save("apple", -5));
+    }
+
 }

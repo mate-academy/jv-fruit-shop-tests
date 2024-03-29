@@ -15,12 +15,11 @@ public class BalanceHandlerTest {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, "banana", 100);
         Map<String, Integer> fruitStore = new HashMap<>();
+        int expectedQuantity = 100;
+
         balanceStrategy.handleTransaction(transaction, fruitStore);
 
-        int expectedQuantity = 100;
         int actualQuantity = fruitStore.get("banana");
-
         assertEquals(expectedQuantity, actualQuantity);
-
     }
 }

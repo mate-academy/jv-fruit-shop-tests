@@ -40,17 +40,23 @@ class FileWriterImplTest {
     void write_NullFile_NotOk() {
         FileWriterImpl fileWriter = new FileWriterImpl();
         List<String> processedData = List.of("some_data");
+        String expected = "File name can't be null";
 
-        assertThrows(CantWriteToFileException.class, () -> fileWriter.write(processedData, null));
+        CantWriteToFileException exception = assertThrows(CantWriteToFileException.class,
+                        () -> fileWriter.write(processedData, null));
+
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void write_EmptyFile_NotOk() {
         FileWriterImpl fileWriter = new FileWriterImpl();
         List<String> processedData = List.of("some_data");
+        String expected = "Can't write data to file:" + processedData;
 
-        assertThrows(CantWriteToFileException.class,
+        CantWriteToFileException exception = assertThrows(CantWriteToFileException.class,
                 () -> fileWriter.write(processedData, WRITE_TO_FILE_EMPTY_PATH));
-    }
 
+        assertEquals(expected, exception.getMessage());
+    }
 }

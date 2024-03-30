@@ -48,5 +48,4 @@ class FruitDataParserTest {
         List<FruitTransactionDto> actual = parser.parse(EMPTY_DATA);
         assertEquals(EXPECTED_EMPTY_DATA, actual);
     }
-
 }

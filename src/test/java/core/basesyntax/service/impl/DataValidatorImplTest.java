@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.dto.FruitTransactionDto;
@@ -32,14 +33,21 @@ class DataValidatorImplTest {
 
     @Test
     void validateFruitType_IncorrectFruitType_NotOk() {
-        assertThrows(InvalidFruitTypeException.class,
+        String expected = "Your fruit can't have special symbols or numbers, now: "
+                + INCORRECT_FRUIT_DATA.fruit();
+        InvalidFruitTypeException exception = assertThrows(InvalidFruitTypeException.class,
                 () -> dataValidator.validate(INCORRECT_FRUIT_DATA));
+
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void validateQuantity_IncorrectQuantity_NotOk() {
-        assertThrows(InvalidQuantityException.class,
+        String expected = "Quantity of product can't be less than 0, now: "
+                + INCORRECT_QUANTITY_DATA.quantity();
+        InvalidQuantityException exception = assertThrows(InvalidQuantityException.class,
                 () -> dataValidator.validate(INCORRECT_QUANTITY_DATA));
-    }
 
+        assertEquals(expected, exception.getMessage());
+    }
 }

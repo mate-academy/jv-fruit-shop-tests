@@ -47,6 +47,7 @@ class StrategyServiceImplTest {
         Storage.fruitStorage.clear();
         strategyService.processData(List.of(transactionDto), operationStrategyMap);
         int actual = Storage.fruitStorage.get(FRUIT_NAME);
+
         assertEquals(1, Storage.fruitStorage.size());
         assertEquals(FRUIT_QUANTITY, actual);
     }

@@ -33,6 +33,7 @@ class SupplyOperationTest {
         SUPPLY_OPERATION.handle(validTransactionDto);
         int actualQuantity = Storage.fruitStorage.get(FRUIT);
         assertEquals(VALID_QUANTITY_AFTER, actualQuantity);
+
         SUPPLY_OPERATION.handle(validTransactionDto);
         actualQuantity = Storage.fruitStorage.get(FRUIT);
         assertEquals(VALID_QUANTITY_AFTER + QUANTITY, actualQuantity);

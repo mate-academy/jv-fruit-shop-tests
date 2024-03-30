@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
@@ -22,7 +22,7 @@ class ReportGeneratorImplTest {
         REPORT_WITHOUT_DATA = List.of("fruit,quantity");
     }
 
-    @AfterEach
+    @BeforeEach
     void clearStorage() {
         Storage.fruitStorage.clear();
     }

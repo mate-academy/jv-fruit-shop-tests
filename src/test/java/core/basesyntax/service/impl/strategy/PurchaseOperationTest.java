@@ -42,7 +42,14 @@ class PurchaseOperationTest {
 
     @Test
     void handleQuantityLessThanZero_NotOk() {
-        assertThrows(InvalidQuantityException.class,
+        String fruit = invalidTransactionDto.fruit();
+        String expected = String.format("Not enough %ss in storage, "
+                + "(now %d, required - %d) - can't do this operation",
+                fruit, Storage.fruitStorage.get(fruit), invalidTransactionDto.quantity());
+
+        InvalidQuantityException exception = assertThrows(InvalidQuantityException.class,
                 () -> operation.handle(invalidTransactionDto));
+
+        assertEquals(expected, exception.getMessage());
     }
 }

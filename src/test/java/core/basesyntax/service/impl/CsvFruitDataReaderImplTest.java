@@ -38,8 +38,11 @@ class CsvFruitDataReaderImplTest {
 
     @Test
     void readData_NonExistentFile_NotOk() {
-        assertThrows(CantReadFromFileException.class,
+        String expected = "Can't read from file: " + INCORRECT_FILE_PATH;
+        CantReadFromFileException exception = assertThrows(CantReadFromFileException.class,
                 () -> dataReader.readData(INCORRECT_FILE_PATH));
+
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
@@ -50,8 +53,10 @@ class CsvFruitDataReaderImplTest {
 
     @Test
     void readData_WithNullParam_NotOk() {
-        assertThrows(CantReadFromFileException.class,
+        String expected = "Your file can't be null!";
+        CantReadFromFileException exception = assertThrows(CantReadFromFileException.class,
                 () -> dataReader.readData(null));
-    }
 
+        assertEquals(expected, exception.getMessage());
+    }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -63,5 +64,10 @@ class TransactionServiceTest {
         expected.put("banana", 152);
         expected.put("apple", 90);
         Assertions.assertEquals(expected, Storage.fruits);
+    }
+
+    @AfterAll
+    static void afterAll() {
+        Storage.fruits.clear();
     }
 }

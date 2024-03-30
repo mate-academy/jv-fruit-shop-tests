@@ -35,7 +35,7 @@ public class FileServiceTest {
     }
 
     @Test
-    void readFromFile_existingFileName_Ok() {
+    void readFromFile_existingFileName_ok() {
         Assertions.assertNotEquals(null, fileService.readFromFile(INPUT_FILE_NAME));
     }
 }

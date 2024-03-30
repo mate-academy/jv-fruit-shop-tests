@@ -19,7 +19,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionServiceTest {
-
     private static TransactionService transactionService;
 
     @BeforeAll

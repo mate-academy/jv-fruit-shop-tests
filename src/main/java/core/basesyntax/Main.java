@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.ReportService;
@@ -37,7 +36,6 @@ public class Main {
         List<FruitTransaction> fruitTransactions =
                 transactionConvertor.convertToTransactionsList(inputFileLines);
         transactionService.executeTransactions(fruitTransactions);
-        System.out.println(Storage.fruits);
         String report = reportService.generateReport();
         fileService.writeToFile(OUTPUT_FILE_NAME, report);
     }

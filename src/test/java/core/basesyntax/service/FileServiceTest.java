@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,23 +17,22 @@ public class FileServiceTest {
 
     @Test
     void readFromFile_nullFileName_notOk() {
-        Assertions.assertThrows(NullPointerException.class, () -> fileService.readFromFile(null));
+        assertThrows(NullPointerException.class, () -> fileService.readFromFile(null));
     }
 
     @Test
     void writeToFile_nullFileName_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> fileService.writeToFile(null, ""));
+        assertThrows(NullPointerException.class, () -> fileService.writeToFile(null, ""));
     }
 
     @Test
     void readFromFile_notExistingFileName_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> fileService.readFromFile(""));
+        assertThrows(RuntimeException.class, () -> fileService.readFromFile(""));
     }
 
     @Test
     void writeToFile_notExistingFileName_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> fileService.writeToFile("", ""));
+        assertThrows(RuntimeException.class, () -> fileService.writeToFile("", ""));
     }
 
     @Test

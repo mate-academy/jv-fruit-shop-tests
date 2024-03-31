@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -10,17 +13,17 @@ import core.basesyntax.service.activity.SupplyTransactionHandler;
 import core.basesyntax.service.activity.TransactionHandler;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.ActivityStrategyImpl;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionServiceTest {
     private static TransactionService transactionService;
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
 
     @BeforeAll
     static void beforeAll() {
@@ -36,34 +39,26 @@ class TransactionServiceTest {
 
     @Test
     void executeTransactions_nullFruitTransactionList_ok() {
-        Assertions.assertThrows(NullPointerException.class,
+        assertThrows(NullPointerException.class,
                 () -> transactionService.executeTransactions(null));
     }
 
     @Test
     void executeTransactions_normalValues_ok() {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 13));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "apple", 10));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 5));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 50));
+        List<FruitTransaction> fruitTransactionList = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 100),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 13),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 20),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 5),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
         transactionService.executeTransactions(fruitTransactionList);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("banana", 152);
-        expected.put("apple", 90);
-        Assertions.assertEquals(expected, Storage.fruits);
+        expected.put(BANANA, 152);
+        expected.put(APPLE, 90);
+        assertEquals(expected, Storage.fruits);
     }
 
     @AfterAll

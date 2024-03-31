@@ -21,11 +21,12 @@ class DataProcessorImplTest {
 
     @BeforeEach
     void setUp() {
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceHandler());
-        operationHandlers.put(Operation.SUPPLY, new SupplyHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnHandler());
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceHandler(),
+                Operation.SUPPLY, new SupplyHandler(),
+                Operation.PURCHASE, new PurchaseHandler(),
+                Operation.RETURN, new ReturnHandler()
+        );
         dataProcessor = new DataProcessorImpl(operationHandlers);
     }
 

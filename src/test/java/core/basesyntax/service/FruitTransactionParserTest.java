@@ -21,7 +21,7 @@ class FruitTransactionParserTest {
     @Test
     void parse_ValidInput_ShouldReturnCorrectResult() {
         List<String> lines = Arrays.asList("b,banana,50", "s,apple,20");
-        List<FruitTransaction> expected = Arrays.asList(
+        List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 50),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 20)
         );

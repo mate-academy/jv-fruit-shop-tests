@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,8 @@ public class CsvReaderImplTest {
 
         CsvReaderImpl csvReader = new CsvReaderImpl();
 
-        List<String> lines = csvReader.readDataFromFile("src/main/resources/input.csv");
+        List<String> lines = csvReader.readDataFromFile("src/main/java/core/basesyntax"
+                + "/resources/input.csv");
 
         assertEquals(3, lines.size());
         assertTrue(lines.contains("1,John,Doe"));
@@ -30,10 +32,11 @@ public class CsvReaderImplTest {
     }
 
     private void createTestFile(String filePath) {
+        List<String> data = Arrays.asList("1,John,Doe", "2,Jane,Smith", "3,Bob,Johnson");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("1,John,Doe\n");
-            writer.write("2,Jane,Smith\n");
-            writer.write("3,Bob,Johnson\n");
+            for (String line : data) {
+                writer.write(line + System.lineSeparator());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -6,7 +6,6 @@ import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
-    private static final String EXPECTED_VALID = "fruit,quantity\r\nbanana,20\r\n";
     private ReportGenerator reportGenerator = new ReportGenerator();
 
     @Test
@@ -18,6 +17,8 @@ public class ReportGeneratorTest {
     @Test
     void generateReport_validData_ok() {
         Storage.fruits.put("banana", 20);
-        assertEquals(reportGenerator.generateReport(Storage.fruits), EXPECTED_VALID);
+        String expected = "fruit,quantity\r\n" +
+                "banana,20\r\n";
+        assertEquals(expected, reportGenerator.generateReport(Storage.fruits));
     }
 }

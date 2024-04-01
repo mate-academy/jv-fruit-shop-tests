@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
@@ -13,11 +14,10 @@ public class TransactionExecutor {
         this.strategy = new OperationStrategyImpl(strategyMap);
     }
 
-    public OperationStrategyImpl getStrategy() {
-        return strategy;
-    }
-
     public void execute(List<FruitTransaction> transactions) {
+        if (transactions.isEmpty()) {
+            throw new InvalidDataException("Invalid data");
+        }
         for (FruitTransaction transaction : transactions) {
             strategy.get(transaction.getOperation())
                     .handle(transaction.getFruit(), transaction.getQuantity());

@@ -9,8 +9,15 @@ public class ReportGeneratorTest {
     private ReportGenerator reportGenerator = new ReportGenerator();
 
     @Test
-    void generateReport_validData_Ok() {
+    void generateReport_emptyData_ok() {
         String actual = reportGenerator.generateReport(Storage.fruits);
         assertEquals(String.class, actual.getClass());
+    }
+
+    @Test
+    void generateReport_validData_ok() {
+        Storage.fruits.put("banana", 20);
+        String expected = "fruit,quantity\r\nbanana,20\r\n";
+        assertEquals(expected, reportGenerator.generateReport(Storage.fruits));
     }
 }

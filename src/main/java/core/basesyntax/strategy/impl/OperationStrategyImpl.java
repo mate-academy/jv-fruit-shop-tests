@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.strategy.OperationHandler;
@@ -14,6 +15,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
-        return strategy.get(operation);
+        if (operation != null) {
+            return strategy.get(operation);
+        } else {
+            throw new InvalidDataException("Operation is not exist");
+        }
     }
 }

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class PurchaseHandlerTest {
     @Test
-    public void handle_ValidTransaction_ShouldUpdatePurshase_Ok() {
+    public void handle_ValidTransaction_UpdatesPurchase_Ok() {
         PurchaseStrategy purchaseStrategy = new PurchaseStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, "banana", 30);
@@ -25,7 +25,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void valueLessThanZero_MustThrowException_NotOk() {
+    public void handle_QuantityExceedsAvailable_ThrowsException_NotOk() {
         PurchaseStrategy purchaseStrategy = new PurchaseStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, "banana", 70);

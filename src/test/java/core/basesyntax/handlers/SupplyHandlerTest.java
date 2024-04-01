@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class SupplyHandlerTest {
     @Test
-    public void handle_ValidTransaction_ShouldUpdateSupply_Ok() {
+    public void handle_ValidTransaction_UpdatesSupply_Ok() {
         SupplyStrategy supplyStrategy = new SupplyStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.SUPPLY, "banana", 100);

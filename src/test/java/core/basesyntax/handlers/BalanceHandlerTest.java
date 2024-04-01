@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class BalanceHandlerTest {
     @Test
-    public void handle_ValidTransaction_ShouldUpdateBalance_Ok() {
+    public void handle_ValidTransaction_UpdatesBalanceCorrectly_Ok() {
         BalanceStrategy balanceStrategy = new BalanceStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, "banana", 100);

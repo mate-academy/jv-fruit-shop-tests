@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class CsvReaderImplTest {
     @Test
-    public void testReadDataFromFile() {
+    public void readDataFromFile_ValidFile_ReturnsCorrectLines_Ok() {
         String testFilePath = "test.csv";
         createTestFile(testFilePath);
 

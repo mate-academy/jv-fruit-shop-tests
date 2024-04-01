@@ -1,7 +1,6 @@
 package core.basesyntax.readandwriteimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,7 +29,7 @@ public class CsvWriterImplTest {
     }
 
     @Test
-    void writeLinesToFile() throws IOException {
+    void writeLinesToFile_ValidLines_WritesToFile_Ok() throws IOException {
         csvWriter.writeLinesToFile(lines, filePath);
         String expectedContent = String
                 .join(System.lineSeparator(), lines) + System.lineSeparator();

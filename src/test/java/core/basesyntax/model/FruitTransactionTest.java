@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class FruitTransactionTest {
     @Test
-    public void constructor_ValidInput_ShouldSetFieldsCorrectly() {
+    public void constructor_ValidInput_SetsFieldsCorrectly_Ok() {
         FruitTransaction.Operation expectedOperation = FruitTransaction.Operation.BALANCE;
         String expectedFruit = "banana";
         int expectedQuantity = 50;

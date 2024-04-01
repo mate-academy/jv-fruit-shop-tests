@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class ReturnHandlerTest {
     @Test
-    public void handle_ValidTransaction_ShouldUpdateReturn_Ok() {
+    public void handle_ValidTransaction_UpdatesReturn_Ok() {
         ReturnStrategy returnStrategy = new ReturnStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, "banana", 100);

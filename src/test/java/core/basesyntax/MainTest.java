@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class MainTest {
     @Test
-    void main_createsOutputFileWithCorrectContent() {
+    void main_NoInput_CreatesOutputFileWithCorrectContent_Ok() {
         Main.main(new String[]{});
 
         File outputFile = new File("src/main/resources/output_file.csv");

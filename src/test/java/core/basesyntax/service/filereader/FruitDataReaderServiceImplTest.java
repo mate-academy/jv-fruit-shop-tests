@@ -33,6 +33,7 @@ public class FruitDataReaderServiceImplTest {
 
     @Test
     public void testReadData_FileNotFound_NotOk() {
-        assertThrows(DataReaderExeption.class, () -> fruitDataReaderService.readData(WRONG_FILE_PATH));
+        assertThrows(DataReaderExeption.class, ()
+                -> fruitDataReaderService.readData(WRONG_FILE_PATH));
     }
 }

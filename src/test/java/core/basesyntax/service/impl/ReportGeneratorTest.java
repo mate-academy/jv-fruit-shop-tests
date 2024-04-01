@@ -18,6 +18,6 @@ public class ReportGeneratorTest {
     @Test
     void generateReport_validData_ok() {
         Storage.fruits.put("banana", 20);
-        assertEquals(EXPECTED_VALID, reportGenerator.generateReport(Storage.fruits));
+        assertEquals(reportGenerator.generateReport(Storage.fruits), EXPECTED_VALID);
     }
 }

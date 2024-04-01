@@ -11,26 +11,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitDataReaderServiceImplTest {
-    private FruitDataReaderServiceImpl fruitDataReaderService;
+    public static final String FILE_PATH = "src/test/resources/input.csv";
+    public static final String WRONG_FILE_PATH = "src/test/resources/test/input.csv";
+    public static final FruitTransactionDto firstDto =
+            new FruitTransactionDto("s", "apple", 20);
+    public static final FruitTransactionDto secondDto =
+            new FruitTransactionDto("s", "banana", 30);
+    private FruitDataReaderServiceImpl fruitDataReaderService =
+            new FruitDataReaderServiceImpl(new FruitDataParser());
 
     @BeforeEach
     public void setUp() {
-        fruitDataReaderService = new FruitDataReaderServiceImpl(new FruitDataParser());
     }
 
     @Test
     public void testReadData_Ok() {
-        String filePath = "src/test/resources/input.csv";
-        FruitTransactionDto firstDto = new FruitTransactionDto("s", "apple", 20);
-        FruitTransactionDto secondDto = new FruitTransactionDto("s", "banana", 30);
         List<FruitTransactionDto> expected = List.of(firstDto, secondDto);
-        List<FruitTransactionDto> actual = fruitDataReaderService.readData(filePath);
+        List<FruitTransactionDto> actual = fruitDataReaderService.readData(FILE_PATH);
         assertEquals(expected, actual);
     }
 
     @Test
     public void testReadData_FileNotFound_NotOk() {
-        String filePath = "src/test/resources/test/input.csv";
-        assertThrows(DataReaderExeption.class, () -> fruitDataReaderService.readData(filePath));
+        assertThrows(DataReaderExeption.class, () -> fruitDataReaderService.readData(WRONG_FILE_PATH));
     }
 }

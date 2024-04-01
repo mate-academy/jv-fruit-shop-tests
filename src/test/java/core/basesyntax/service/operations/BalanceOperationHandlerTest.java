@@ -1,5 +1,7 @@
 package core.basesyntax.service.operations;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -35,15 +37,13 @@ public class BalanceOperationHandlerTest {
     @Test
     public void isApplicable_ValidBalanceOperation_Ok() {
         FruitTransactionDto dto = new FruitTransactionDto("b", "apple", 10);
-        boolean result = balanceOperationHandler.isApplicable(dto);
-        assertEquals(true, result);
+        assertTrue(balanceOperationHandler.isApplicable(dto));
     }
 
     @Test
     public void isApplicable_NonBalanceOperation_NotOk() {
         FruitTransactionDto dto = new FruitTransactionDto("s", "apple", 10);
-        boolean result = balanceOperationHandler.isApplicable(dto);
-        assertEquals(false, result);
+        assertFalse(balanceOperationHandler.isApplicable(dto));
     }
 
     @Test

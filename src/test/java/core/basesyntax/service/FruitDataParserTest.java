@@ -12,11 +12,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitDataParserTest {
-    private FruitDataParser fruitDataParser;
+    public static final FruitTransactionDto firstDto =
+            new FruitTransactionDto("s", "apple", 20);
+    public static final FruitTransactionDto secondDto =
+            new FruitTransactionDto("s", "banana", 30);
+    public static final int NUMBER_OF_ELEMENTS = 2;
+    public static final int FIRST_ELEMENT_INDEX = 0;
+    public static final int SECOND_ELEMENT_INDEX = 1;
+    private FruitDataParser fruitDataParser = new FruitDataParser();
 
     @BeforeEach
     public void setUp() {
-        fruitDataParser = new FruitDataParser();
     }
 
     @Test
@@ -25,12 +31,9 @@ public class FruitDataParserTest {
                 "s,apple,20",
                 "s,banana,30");
         List<FruitTransactionDto> result = fruitDataParser.parse(data);
-        FruitTransactionDto firstDto = new FruitTransactionDto("s", "apple", 20);
-        FruitTransactionDto secondDto = new FruitTransactionDto("s", "banana", 30);
-
-        assertEquals(2, result.size());
-        assertEquals(firstDto, result.get(0));
-        assertEquals(secondDto, result.get(1));
+        assertEquals(NUMBER_OF_ELEMENTS, result.size());
+        assertEquals(firstDto, result.get(FIRST_ELEMENT_INDEX));
+        assertEquals(secondDto, result.get(SECOND_ELEMENT_INDEX));
     }
 
     @Test

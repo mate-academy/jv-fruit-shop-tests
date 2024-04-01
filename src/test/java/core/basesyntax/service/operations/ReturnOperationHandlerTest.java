@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationHandlerTest {
-
+    public static final int EXPECTED_NUMBER = 15;
     private ReturnOperationHandler returnOperationHandler;
 
     @BeforeEach
@@ -27,7 +27,7 @@ public class ReturnOperationHandlerTest {
         FruitTransactionDto dto = new FruitTransactionDto("r", "apple", 5);
         returnOperationHandler.apply(dto);
 
-        assertEquals(15, Storage.fruits.get(new Fruit("apple")));
+        assertEquals(EXPECTED_NUMBER, Storage.fruits.get(new Fruit("apple")));
     }
 
     @Test

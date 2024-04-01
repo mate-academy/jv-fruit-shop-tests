@@ -13,7 +13,7 @@ public class FruitShopService {
         this.activityProvider = activityProvider;
     }
 
-    public ActivityHandler execute(List<FruitTransactionInfo> fruits) {
+    public void execute(List<FruitTransactionInfo> fruits) {
         if (fruits.isEmpty()) {
             throw new ValidationException("The list shouldn't be empty");
         }
@@ -22,6 +22,5 @@ public class FruitShopService {
             handler = activityProvider.getHandler(fruit.activityType());
             handler.operate(fruit.name(), fruit.quantity());
         }
-        return handler;
     }
 }

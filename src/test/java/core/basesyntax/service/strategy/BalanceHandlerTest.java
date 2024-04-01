@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +15,11 @@ class BalanceHandlerTest {
     @BeforeEach
     void setUp() {
         handler = new BalanceHandler(storage);
+        storage.getData().clear();
     }
 
     @Test
     void put_informationToStorage_Ok() {
-        assertNull(storage.getData().get(FRUIT),
-                "Fruit should not exist in storage before operation.");
         handler.operate(FRUIT, QUANTITY);
         assertEquals(QUANTITY, storage.getData().get(FRUIT),
                 "Storage does not contain the correct quantity of the fruit after operation.");

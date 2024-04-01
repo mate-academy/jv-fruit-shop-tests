@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,21 +11,18 @@ class ReturnHandlerTest {
     private static final int QUANTITY = 20;
     private static final int ADD_QUANTITY = 5;
     private Storage storage;
-    private BalanceHandler handler;
     private ReturnHandler returnHandler;
 
     @BeforeEach
     void setUp() {
         storage = new Storage();
-        handler = new BalanceHandler(storage);
         returnHandler = new ReturnHandler(storage);
+        storage.getData().clear();
     }
 
     @Test
     void put_changedInformationToStorage_Ok() {
-        assertNull(storage.getData().get(FRUIT),
-                "Fruit should not exist in storage before operation.");
-        handler.operate(FRUIT, QUANTITY);
+        storage.getData().put(FRUIT, QUANTITY);
         int actualQuantity = QUANTITY + ADD_QUANTITY;
         returnHandler.operate(FRUIT, ADD_QUANTITY);
 

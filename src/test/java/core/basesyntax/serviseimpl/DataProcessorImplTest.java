@@ -10,10 +10,6 @@ import core.basesyntax.handlers.SupplyHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import java.util.Arrays;
-<<<<<<< HEAD
-=======
-import java.util.HashMap;
->>>>>>> b1ba0f15adc0cb3d923444ff62d9ee1bcae63315
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +30,6 @@ class DataProcessorImplTest {
     }
 
     @Test
-<<<<<<< HEAD
     void processTransactions_ValidInput_ReturnsCorrectResult_Ok() {
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(Operation.BALANCE, "apple", 2),
@@ -44,16 +39,6 @@ class DataProcessorImplTest {
                 "apple", 2,
                 "banana", 1
         );
-=======
-    void processTransactions_ValidInput_ShouldReturnCorrectResult() {
-        List<FruitTransaction> transactions = Arrays.asList(
-            new FruitTransaction(Operation.BALANCE, "apple", 2),
-            new FruitTransaction(Operation.BALANCE, "banana", 1)
-        );
-        Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 2);
-        expected.put("banana", 1);
->>>>>>> b1ba0f15adc0cb3d923444ff62d9ee1bcae63315
 
         Map<String, Integer> actual = dataProcessor.processTransactions(transactions);
 

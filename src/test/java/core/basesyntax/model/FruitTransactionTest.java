@@ -17,4 +17,18 @@ public class FruitTransactionTest {
         Assert.assertEquals(expectedFruit, fruitTransaction.getFruit());
         Assert.assertEquals(expectedQuantity, fruitTransaction.getQuantity());
     }
+
+    @Test
+    public void constructor_NullOperation_ShouldThrowException() {
+        String expectedFruit = "banana";
+        int expectedQuantity = 50;
+
+        try {
+            FruitTransaction fruitTransaction = new FruitTransaction(null,
+                    expectedFruit, expectedQuantity);
+            Assert.fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals("Operation cannot be null", e.getMessage());
+        }
+    }
 }

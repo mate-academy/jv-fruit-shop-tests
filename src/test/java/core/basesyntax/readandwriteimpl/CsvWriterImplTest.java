@@ -12,15 +12,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvWriterImplTest {
+    private static final CsvWriterImpl CSV_WRITER = new CsvWriterImpl();
+    private static final List<String> LINES = Arrays.asList("apple,100", "banana,50");
+    private static final String FILE_PATH = "output.csv";
+
     private CsvWriterImpl csvWriter;
     private List<String> lines;
     private String filePath;
 
     @BeforeEach
     void setUp() {
-        csvWriter = new CsvWriterImpl();
-        lines = Arrays.asList("apple,100", "banana,50");
-        filePath = "output.csv";
+        csvWriter = CSV_WRITER;
+        lines = LINES;
+        filePath = FILE_PATH;
     }
 
     @AfterEach

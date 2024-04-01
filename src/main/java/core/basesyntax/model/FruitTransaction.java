@@ -33,6 +33,9 @@ public class FruitTransaction {
     }
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        if (operation == null) {
+            throw new IllegalArgumentException("Operation cannot be null");
+        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

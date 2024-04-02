@@ -8,8 +8,6 @@ import core.basesyntax.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +15,7 @@ class FileWriterServiceImplTest {
     private static final String VALID_CONTENT = "content";
     private static final String EMPTY_FILE_PATH = "";
     private static final String TEST_FILE_PATH = "testFile.txt";
+    private static final String SEPARATOR = System.lineSeparator();
     private FileWriterService fileWriterService;
 
     @BeforeEach
@@ -24,22 +23,20 @@ class FileWriterServiceImplTest {
         fileWriterService = new FileWriterServiceImpl();
     }
 
-    @BeforeEach
-    public void tearDown() throws IOException {
-        Files.deleteIfExists(Path.of(TEST_FILE_PATH));
-    }
-
     @Test
     public void writeToFile_SuccessfulWrite() throws IOException {
-        fileWriterService.writeToFile(TEST_FILE_PATH, VALID_CONTENT);
+        String additionalContent = "additional content";
+        String expectedContent = VALID_CONTENT + SEPARATOR + additionalContent;
+
+        fileWriterService.writeToFile(TEST_FILE_PATH, expectedContent);
         StringBuilder actualContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                actualContent.append(line);
+                actualContent.append(line).append(SEPARATOR);
             }
         }
-        assertEquals(VALID_CONTENT, actualContent.toString());
+        assertEquals(expectedContent, actualContent.toString().trim());
     }
 
     @Test

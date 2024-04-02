@@ -1,21 +1,22 @@
 package core.basesyntax.strategy.impl;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class BalanceOperationTest {
     private BalanceOperation balanceOperation;
+    @Mock
     private StorageService storageService;
 
     @BeforeEach
     public void setUp() {
-        storageService = mock(StorageService.class);
+        MockitoAnnotations.openMocks(this);
         balanceOperation = new BalanceOperation(storageService);
     }
 
@@ -23,6 +24,6 @@ public class BalanceOperationTest {
     public void testHandle() {
         FruitsTransaction transaction = new FruitsTransaction("b", "Apple", 10);
         balanceOperation.handle(transaction);
-        Mockito.verify(storageService, times(1)).add("Apple", 10);
+        verify(storageService).add("Apple", 10);
     }
 }

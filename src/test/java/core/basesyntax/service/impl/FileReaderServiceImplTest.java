@@ -27,11 +27,6 @@ class FileReaderServiceImplTest {
         fileReaderService = new FileReaderServiceImpl();
     }
 
-    @BeforeEach
-    void tearDown() {
-        fileReaderService = null;
-    }
-
     @Test
     void readFileValid_Ok() {
         List<String> actualResult = fileReaderService.readFile(VALID_PATH_WAY);

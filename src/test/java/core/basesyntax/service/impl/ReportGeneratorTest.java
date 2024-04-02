@@ -17,7 +17,7 @@ public class ReportGeneratorTest {
     @Test
     void generateReport_validData_ok() {
         Storage.fruits.put("banana", 20);
-        String expected = "fruit,quantity\r\nbanana,20\r\n";
+        String expected = "fruit,quantity" + System.lineSeparator() + "banana,20";
         String actual = reportGenerator.generateReport(Storage.fruits);
         assertEquals(expected.trim(), actual.trim());
     }

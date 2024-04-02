@@ -16,28 +16,24 @@ public class CsvWriterImplTest {
     private static final List<String> LINES = Arrays.asList("apple,100", "banana,50");
     private static final String FILE_PATH = "output.csv";
 
-    private CsvWriterImpl csvWriter;
     private List<String> lines;
-    private String filePath;
 
     @BeforeEach
     void setUp() {
-        csvWriter = CSV_WRITER;
         lines = LINES;
-        filePath = FILE_PATH;
     }
 
     @AfterEach
-    public void cleanUp() throws IOException {
-        Files.deleteIfExists(Paths.get(filePath));
+    void cleanUp() throws IOException {
+        Files.deleteIfExists(Paths.get(FILE_PATH));
     }
 
     @Test
-    void writeLinesToFile_ValidLines_WritesToFile_Ok() throws IOException {
-        csvWriter.writeLinesToFile(lines, filePath);
+    public void writeLinesToFile_ValidLines_WritesToFile_Ok() throws IOException {
+        CSV_WRITER.writeLinesToFile(lines, FILE_PATH);
         String expectedContent = String
                 .join(System.lineSeparator(), lines) + System.lineSeparator();
-        String actualContent = Files.readString(Paths.get(filePath));
+        String actualContent = Files.readString(Paths.get(FILE_PATH));
         assertEquals(expectedContent, actualContent);
     }
 }

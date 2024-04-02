@@ -19,7 +19,7 @@ class FruitTransactionParserTest {
     }
 
     @Test
-    void parse_ValidInput_ReturnsCorrectTransactions_Ok() {
+    public void parse_ValidInput_ReturnsCorrectTransactions_Ok() {
         List<String> lines = Arrays.asList("b,banana,50", "s,apple,20");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 50),
@@ -32,7 +32,7 @@ class FruitTransactionParserTest {
     }
 
     @Test
-    void parse_InvalidOperationCode_ShouldThrowException() {
+    public void parse_InvalidOperationCode_ShouldThrowException() {
         List<String> lines = Collections.singletonList("x,banana,50");
 
         assertThrows(IllegalArgumentException.class, () -> parser.parse(lines));

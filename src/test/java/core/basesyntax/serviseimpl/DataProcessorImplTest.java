@@ -30,7 +30,7 @@ class DataProcessorImplTest {
     }
 
     @Test
-    void processTransactions_ValidInput_ReturnsCorrectResult_Ok() {
+    public void processTransactions_ValidInput_ReturnsCorrectResult_Ok() {
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(Operation.BALANCE, "apple", 2),
                 new FruitTransaction(Operation.BALANCE, "banana", 1)

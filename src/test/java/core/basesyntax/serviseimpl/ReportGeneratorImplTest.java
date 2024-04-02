@@ -21,7 +21,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void generateReport_ValidInput_ReturnsCorrectReport_Ok() {
+    public void generateReport_ValidInput_ReturnsCorrectReport_Ok() {
         String expected = "fruit,quantity\napple,10\nbanana,20\n";
         String actual = reportGenerator.generateReport();
         assertEquals(expected, actual);

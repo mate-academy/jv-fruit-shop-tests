@@ -11,7 +11,7 @@ public class PurchaseHandlerTest {
     private static final String BANANA_TO_OPERATION = "banana";
 
     @Test
-    public void handle_ValidTransaction_UpdatesPurchase_Ok() {
+    public void handle_ValidTransaction_UpdatesPurchase() {
         PurchaseStrategy purchaseStrategy = new PurchaseStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, BANANA_TO_OPERATION, 30);

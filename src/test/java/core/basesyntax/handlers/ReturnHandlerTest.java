@@ -21,6 +21,5 @@ public class ReturnHandlerTest {
         int actualQuantity = fruitStore.get("banana");
 
         assertEquals(expectedQuantity, actualQuantity);
-
     }
 }

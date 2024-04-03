@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,6 +7,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionConverter;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TransactionConverterImplTest {
@@ -32,7 +32,7 @@ class TransactionConverterImplTest {
     void convert_correctData_ok() {
         List<FruitTransaction> actual = TRANSACTION_CONVERTER.convert(CORRECT_INPUT_DATA);
         if (actual.size() != CORRECT_OUTPUT_DATA.size()) {
-            fail();
+            Assertions.fail();
         }
         FruitTransaction actualFruitTransaction;
         FruitTransaction correctFruitTransaction;

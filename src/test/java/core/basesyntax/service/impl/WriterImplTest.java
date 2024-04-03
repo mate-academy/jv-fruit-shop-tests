@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
@@ -34,7 +34,7 @@ class WriterImplTest {
             System.out.printf("Can't read from file %s", FINAL_FILE_PASS);
         }
         if (correctDataFromFile.size() != actual.size()) {
-            fail();
+            Assertions.fail();
         }
         for (int i = 0; i < actual.size(); i++) {
             assertEquals(correctDataFromFile.get(i),actual.get(i));
@@ -51,7 +51,7 @@ class WriterImplTest {
     void write_incorrectFileName_notOk() {
         String dataToWrite = "fruit,quantity\nbanana,10\napple,20";
         assertThrows(RuntimeException.class,
-                () -> WRITER.write(dataToWrite, "src/test/resources/incorrect#\nincorrect!"));
+                () -> WRITER.write(dataToWrite, "src/resources/incorrect#\nincorrect!"));
     }
 
     @AfterEach

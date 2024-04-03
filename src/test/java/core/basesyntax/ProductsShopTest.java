@@ -1,11 +1,10 @@
 package core.basesyntax;
 
-import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import db.Storage;
 import model.FruitTransaction;
 import service.handler.BalanceHandler;
 import service.handler.OperationHandler;
@@ -16,9 +15,12 @@ import service.impl.DataReaderServiceImpl;
 import service.impl.DataWriterServiceImpl;
 import service.impl.ProcessorServiceImpl;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProductsShopTest {
 
@@ -93,12 +95,15 @@ class ProductsShopTest {
         );
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 123));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 23));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 123));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 23));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
 
-        assertEquals(correctResult, Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
+        assertEquals(correctResult,
+                Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
     }
 
     @Test
@@ -112,12 +117,15 @@ class ProductsShopTest {
         );
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 80));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 20));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", 80));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
 
-        assertEquals(correctResult, Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
+        assertEquals(correctResult,
+                Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
     }
 
     @Test
@@ -131,12 +139,15 @@ class ProductsShopTest {
         );
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 130));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 70));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 130));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "banana", 70));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 200;
 
-        assertEquals(correctResult, Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
+        assertEquals(correctResult,
+                Storage.getQuantity(fruitTransactionList.get(0).getFruit()));
     }
 
     @Test

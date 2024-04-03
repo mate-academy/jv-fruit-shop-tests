@@ -1,11 +1,12 @@
 package core.basesyntax;
 
+import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import db.Storage;
 import model.FruitTransaction;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import service.handler.BalanceHandler;
 import service.handler.OperationHandler;
 import service.handler.PurchaseHandler;
@@ -14,9 +15,6 @@ import service.handler.SupplyHandler;
 import service.impl.DataReaderServiceImpl;
 import service.impl.DataWriterServiceImpl;
 import service.impl.ProcessorServiceImpl;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

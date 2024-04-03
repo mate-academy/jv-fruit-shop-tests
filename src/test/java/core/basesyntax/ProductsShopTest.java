@@ -1,5 +1,9 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +11,6 @@ import java.util.Map;
 import model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import service.handler.BalanceHandler;
 import service.handler.OperationHandler;
 import service.handler.PurchaseHandler;

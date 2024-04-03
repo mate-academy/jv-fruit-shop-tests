@@ -51,7 +51,7 @@ class WriterImplTest {
     void write_incorrectFileName_notOk() {
         String dataToWrite = "fruit,quantity\nbanana,10\napple,20";
         assertThrows(RuntimeException.class,
-                () -> WRITER.write(dataToWrite, "src/test/resources/incorrect\nincorrect"));
+                () -> WRITER.write(dataToWrite, "src/test/resources/incorrect#\nincorrect!"));
     }
 
     @AfterEach

@@ -5,10 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import db.Storage;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.handler.BalanceHandler;
@@ -25,6 +32,26 @@ class ProductsShopTest {
     private static DataReaderServiceImpl dataReaderService;
     private static DataWriterServiceImpl dataWriterService;
     private static ProcessorServiceImpl processorService;
+    private static final String EMPTY_FILE = "src/main/java/resources/empty.txt";
+    private static final String PATH_FILE_TO_READ = "src/main/java/resources/input.txt";
+    private static final String PATH_FILE_TO_WRIGHT = "src/main/java/resources/output.txt";
+    private static final String PATH_TO_INCORRECT_FILE = "src/main/java/resources/file.txt";
+    private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
+    private static final String SEPARATOR = "\n";
+
+    @BeforeAll
+    public static void setHandlerMap() {
+        handlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE,
+                new BalanceHandler(),
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseHandler(),
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyHandler(),
+                FruitTransaction.Operation.RETURN,
+                new ReturnHandler()
+        );
+    }
 
     @BeforeEach
       public void setObjects() {
@@ -33,30 +60,32 @@ class ProductsShopTest {
         processorService = new ProcessorServiceImpl();
     }
 
+    @AfterEach
+    public void clearStorage() {
+        Storage.getFruitStorage().clear();
+    }
+
     @Test
       public void checkReadFileWithIncorectPath() {
 
         String path = "file.txt";
-        String path2 = "src/main/java/resources/file.txt";
-        String path3 = null;
 
         assertThrows(RuntimeException.class,
                 () -> dataReaderService.readDataInFile(path),
                 "Was correct file path!");
         assertThrows(RuntimeException.class,
-                () -> dataReaderService.readDataInFile(path2),
+                () -> dataReaderService.readDataInFile(PATH_TO_INCORRECT_FILE),
                 "File was in resources of file");
         assertThrows(RuntimeException.class,
-                () -> dataReaderService.readDataInFile(path3),
+                () -> dataReaderService.readDataInFile(null),
                 "File was in resources of file");
     }
 
     @Test
       public void checkCorrectReadingData() {
 
-        String filepath = "src/main/java/resources/input.txt";
         List<FruitTransaction> fruitTransactionList
-                = dataReaderService.readDataInFile(filepath);
+                = dataReaderService.readDataInFile(PATH_FILE_TO_READ);
         String fruitFirstPosition = "apple";
         int quantityFirstPosition = 100;
         FruitTransaction.Operation thirdPosition
@@ -75,27 +104,44 @@ class ProductsShopTest {
     @Test
     public void checkEmptyFileForReading() {
 
-        String filePath = "src/main/java/resources/empty.txt";
         List<FruitTransaction> fruitTransactionList =
-                dataReaderService.readDataInFile(filePath);
+                dataReaderService.readDataInFile(EMPTY_FILE);
 
         assertTrue(fruitTransactionList.isEmpty());
     }
 
     @Test
-    public void checkPurchaseOperation() {
-
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnHandler()
+    public void checkProcessorServiceCorrectWork() {
+        Map<String, Integer> correct = Map.of(
+                "banana",152,
+                "apple",90
         );
 
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        processorService.processOnData(dataReaderService
+                .readDataInFile(PATH_FILE_TO_READ), handlerMap);
+
+        assertEquals(correct, Storage.getFruitStorage());
+    }
+
+    @Test
+    public void checkEmptyProcessorServiceReport() {
+        Map<String, Integer> correct = new HashMap<>();
+        processorService.processOnData(dataReaderService
+                .readDataInFile(EMPTY_FILE), handlerMap);
+
+        assertEquals(correct, Storage.getFruitStorage());
+    }
+
+    @Test
+    public void checkPurchaseOperation() {
+
+        List<FruitTransaction> fruitTransactionList =
+                new ArrayList<>();
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.BALANCE,
                 "banana", 123));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE,
                 "banana", 23));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
@@ -107,17 +153,13 @@ class ProductsShopTest {
     @Test
     public void checkSupplyOperation() {
 
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnHandler()
-        );
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.BALANCE,
                 "banana", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.SUPPLY,
                 "banana", 80));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
@@ -129,17 +171,12 @@ class ProductsShopTest {
     @Test
     public void checkReturnOperation() {
 
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnHandler()
-        );
-
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.BALANCE,
                 "banana", 130));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.RETURN,
                 "banana", 70));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 200;
@@ -150,9 +187,26 @@ class ProductsShopTest {
 
     @Test
     public void checkNullInPathToWriteFile() {
-        String path = null;
 
         assertThrows(RuntimeException.class,
-                () -> dataWriterService.writeProcessedDataToFile(path));
+                () -> dataWriterService.writeProcessedDataToFile(null));
     }
+
+    @Test
+    public void correctWriteDataToFile() {
+        String correct = "fruit,quantity" + SEPARATOR
+                + "banana,152" + SEPARATOR
+                + "apple,90" + SEPARATOR;
+        processorService.processOnData(dataReaderService.readDataInFile(PATH_FILE_TO_READ), handlerMap);
+        dataWriterService.writeProcessedDataToFile(PATH_FILE_TO_WRIGHT);
+        try {
+            String actual = new String(Files.readAllBytes(Path.of(PATH_FILE_TO_WRIGHT)));
+            assertEquals(actual,correct);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import db.Storage;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -153,7 +152,6 @@ class ProductsShopTest {
     @Test
     public void checkSupplyOperation() {
 
-
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE,
@@ -197,7 +195,9 @@ class ProductsShopTest {
         String correct = "fruit,quantity" + SEPARATOR
                 + "banana,152" + SEPARATOR
                 + "apple,90" + SEPARATOR;
-        processorService.processOnData(dataReaderService.readDataInFile(PATH_FILE_TO_READ), handlerMap);
+        processorService.processOnData(dataReaderService
+                        .readDataInFile(PATH_FILE_TO_READ),
+                handlerMap);
         dataWriterService.writeProcessedDataToFile(PATH_FILE_TO_WRIGHT);
         try {
             String actual = new String(Files.readAllBytes(Path.of(PATH_FILE_TO_WRIGHT)));

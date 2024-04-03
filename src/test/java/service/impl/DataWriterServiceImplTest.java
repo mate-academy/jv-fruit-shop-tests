@@ -56,7 +56,8 @@ class DataWriterServiceImplTest {
 
     @Test
     public void checkNullInFilePath() {
-        assertThrows(RuntimeException.class, () -> dataWriterService.writeProcessedDataToFile(null));
+        assertThrows(RuntimeException.class,
+                () -> dataWriterService.writeProcessedDataToFile(null));
     }
 
     @Test

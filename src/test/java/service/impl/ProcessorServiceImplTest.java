@@ -52,14 +52,22 @@ class ProcessorServiceImplTest {
     @Test
     public void checkProcessorServiceCorrectWork() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,"banana", 13));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.BALANCE, "banana", 20));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.BALANCE, "apple", 100));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.SUPPLY, "banana", 100));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE,"banana", 13));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.RETURN, "apple", 10));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE, "apple", 20));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE, "banana", 5));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction
+                .Operation.SUPPLY, "banana", 50));
 
         Map<String, Integer> correct = Map.of(
                 "banana",152,
@@ -79,6 +87,7 @@ class ProcessorServiceImplTest {
 
         assertEquals(correct, Storage.getFruitStorage());
     }
+
     @Test
     public void checkPurchaseOperation() {
 

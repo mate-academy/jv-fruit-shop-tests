@@ -21,6 +21,8 @@ import service.handler.SupplyHandler;
 class ProcessorServiceImplTest {
     private static DataReaderServiceImpl dataReaderService;
     private static ProcessorServiceImpl processorService;
+    private static final String PATH_FILE_TO_READ
+            = "src/test/java/resources/testinput.txt";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
     private static final String EMPTY_FILE = "src/test/java/resources/empty.txt";
@@ -42,34 +44,15 @@ class ProcessorServiceImplTest {
 
     @BeforeEach
     public void setObjects() {
+        Storage.getFruitStorage().clear();
         dataReaderService = new DataReaderServiceImpl();
         processorService = new ProcessorServiceImpl();
     }
 
-    @AfterEach
-    public void clearStorage() {
-        Storage.getFruitStorage().clear();
-    }
-
     @Test
     public void workProcessorService_Ok() {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, BANANA, 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, APPLE, 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.SUPPLY, BANANA, 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE,BANANA, 13));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.RETURN, APPLE, 10));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE, APPLE, 20));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE, BANANA, 5));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.SUPPLY, BANANA, 50));
+        List<FruitTransaction> fruitTransactionList =
+                dataReaderService.readDataInFile(PATH_FILE_TO_READ);
 
         Map<String, Integer> correct = Map.of(
                 BANANA,152,

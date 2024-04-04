@@ -21,8 +21,8 @@ class DataWriterServiceImplTest {
     private static DataReaderServiceImpl dataReaderService;
     private static DataWriterServiceImpl dataWriterService;
     private static ProcessorServiceImpl processorService;
-    private static final String PATH_FILE_TO_READ = "src/main/java/resources/input.txt";
-    private static final String PATH_FILE_TO_WRIGHT = "src/main/java/resources/output.txt";
+    private static final String PATH_FILE_TO_READ = "src/test/java/resources/testinput.txt";
+    private static final String PATH_FILE_TO_WRIGHT = "src/test/java/resources/testoutput.txt";
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
     private static final String SEPARATOR = "\n";
 
@@ -48,20 +48,14 @@ class DataWriterServiceImplTest {
     }
 
     @Test
-    public void checkNullInPathToWriteFile() {
+    public void nullInPathToWrite_NotOk() {
 
         assertThrows(RuntimeException.class,
                 () -> dataWriterService.writeProcessedDataToFile(null));
     }
 
     @Test
-    public void checkNullInFilePath() {
-        assertThrows(RuntimeException.class,
-                () -> dataWriterService.writeProcessedDataToFile(null));
-    }
-
-    @Test
-    public void correctWriteDataToFile() {
+    public void writeDataToFile_Ok() {
         String correct = "fruit,quantity" + SEPARATOR
                 + "banana,152" + SEPARATOR
                 + "apple,90" + SEPARATOR;

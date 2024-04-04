@@ -14,13 +14,13 @@ class StorageTest {
     }
 
     @Test
-    public void checkAdedToStorage() {
+    public void addData_Ok() {
         Storage.of("banana", 100);
         assertFalse(Storage.getFruitStorage().isEmpty());
     }
 
     @Test
-    public void checkGettingQuantity() {
+    public void getQuantity_Ok() {
         int correctQuantity = 100;
         Storage.of("banana", 100);
         assertEquals(correctQuantity, Storage.getQuantity("banana"));

@@ -21,7 +21,7 @@ import service.handler.SupplyHandler;
 class ProcessorServiceImplTest {
     private static DataReaderServiceImpl dataReaderService;
     private static ProcessorServiceImpl processorService;
-    private static final String EMPTY_FILE = "src/main/java/resources/empty.txt";
+    private static final String EMPTY_FILE = "src/test/java/resources/empty.txt";
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
 
     @BeforeAll
@@ -50,7 +50,7 @@ class ProcessorServiceImplTest {
     }
 
     @Test
-    public void checkProcessorServiceCorrectWork() {
+    public void workProcessorService_Ok() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, "banana", 20));
@@ -80,7 +80,7 @@ class ProcessorServiceImplTest {
     }
 
     @Test
-    public void checkEmptyProcessorServiceReport() {
+    public void emptyDataToProcessorService_Ok() {
         Map<String, Integer> correct = new HashMap<>();
         processorService.processOnData(dataReaderService
                 .readDataInFile(EMPTY_FILE), handlerMap);
@@ -89,7 +89,7 @@ class ProcessorServiceImplTest {
     }
 
     @Test
-    public void checkPurchaseOperation() {
+    public void purchaseOperation_Ok() {
 
         List<FruitTransaction> fruitTransactionList =
                 new ArrayList<>();
@@ -107,7 +107,7 @@ class ProcessorServiceImplTest {
     }
 
     @Test
-    public void checkSupplyOperation() {
+    public void supplyOperation_Ok() {
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
@@ -124,7 +124,7 @@ class ProcessorServiceImplTest {
     }
 
     @Test
-    public void checkReturnOperation() {
+    public void returnOperation_Ok() {
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction

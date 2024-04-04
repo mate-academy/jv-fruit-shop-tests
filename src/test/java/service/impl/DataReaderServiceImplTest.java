@@ -12,38 +12,38 @@ import org.junit.jupiter.api.Test;
 class DataReaderServiceImplTest {
     private static DataReaderServiceImpl dataReaderService;
     private static final String EMPTY_FILE
-            = "src/main/java/resources/empty.txt";
+            = "src/test/java/resources/empty.txt";
     private static final String PATH_FILE_TO_READ
-            = "src/main/java/resources/input.txt";
+            = "src/test/java/resources/testinput.txt";
     private static final String PATH_TO_INCORRECT_FILE
-            = "src/main/java/resources/file.txt";
+            = "src/test/java/resources/file.txt";
 
     @BeforeEach
-    public void setDataReaderService() {
+    public void setDataReaderService()  {
         dataReaderService = new DataReaderServiceImpl();
     }
 
     @Test
-    public void checkNotExistsFilePath() {
+    public void IncorrectPath_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> dataReaderService.readDataInFile(PATH_TO_INCORRECT_FILE));
     }
 
     @Test
-    public void checkReadEmptyFile() {
+    public void readEmptyFile_Ok() {
         List<FruitTransaction> actual =
                 dataReaderService.readDataInFile(EMPTY_FILE);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    public void checkNullInFilePath() {
+    public void nullInFilePath_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> dataReaderService.readDataInFile(null));
     }
 
     @Test
-    public void checkDataReaderWorkCorrect() {
+    public void readData_Ok() {
         List<FruitTransaction> fruitTransactionList
                 = dataReaderService.readDataInFile(PATH_FILE_TO_READ);
         String fruitFirstPosition = "apple";

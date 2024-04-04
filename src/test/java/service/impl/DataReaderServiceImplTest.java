@@ -19,12 +19,12 @@ class DataReaderServiceImplTest {
             = "src/test/java/resources/file.txt";
 
     @BeforeEach
-    public void setDataReaderService()  {
+    public void setDataReaderService() {
         dataReaderService = new DataReaderServiceImpl();
     }
 
     @Test
-    public void IncorrectPath_NotOk() {
+    public void incorrectPath_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> dataReaderService.readDataInFile(PATH_TO_INCORRECT_FILE));
     }

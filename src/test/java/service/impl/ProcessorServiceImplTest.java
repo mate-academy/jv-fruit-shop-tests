@@ -21,6 +21,8 @@ import service.handler.SupplyHandler;
 class ProcessorServiceImplTest {
     private static DataReaderServiceImpl dataReaderService;
     private static ProcessorServiceImpl processorService;
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private static final String EMPTY_FILE = "src/test/java/resources/empty.txt";
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
 
@@ -53,25 +55,25 @@ class ProcessorServiceImplTest {
     public void workProcessorService_Ok() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, "banana", 20));
+                .Operation.BALANCE, BANANA, 20));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, "apple", 100));
+                .Operation.BALANCE, APPLE, 100));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.SUPPLY, "banana", 100));
+                .Operation.SUPPLY, BANANA, 100));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE,"banana", 13));
+                .Operation.PURCHASE,BANANA, 13));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.RETURN, "apple", 10));
+                .Operation.RETURN, APPLE, 10));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE, "apple", 20));
+                .Operation.PURCHASE, APPLE, 20));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.PURCHASE, "banana", 5));
+                .Operation.PURCHASE, BANANA, 5));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
-                .Operation.SUPPLY, "banana", 50));
+                .Operation.SUPPLY, BANANA, 50));
 
         Map<String, Integer> correct = Map.of(
-                "banana",152,
-                "apple",90
+                BANANA,152,
+                APPLE,90
         );
 
         processorService.processOnData(fruitTransactionList, handlerMap);
@@ -95,10 +97,10 @@ class ProcessorServiceImplTest {
                 new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE,
-                "banana", 123));
+                BANANA, 123));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE,
-                "banana", 23));
+                BANANA, 23));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
 
@@ -112,10 +114,10 @@ class ProcessorServiceImplTest {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE,
-                "banana", 20));
+                BANANA, 20));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.SUPPLY,
-                "banana", 80));
+                BANANA, 80));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 100;
 
@@ -129,10 +131,10 @@ class ProcessorServiceImplTest {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE,
-                "banana", 130));
+                BANANA, 130));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction
                 .Operation.RETURN,
-                "banana", 70));
+                BANANA, 70));
         processorService.processOnData(fruitTransactionList, handlerMap);
         int correctResult = 200;
 

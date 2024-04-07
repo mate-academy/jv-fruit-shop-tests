@@ -11,7 +11,9 @@ class FileReaderTest {
     private static FileReader fileReader;
     private static final String FILENAME = "src/test/resources/input.csv";
     private static final String NONEXISTED_FILENAME = "nonexistedfile.csv";
-    private static final String INVALID_FORMAT_FILENAME = "src/test/resources/text.txt";
+    private static final String INVALID_FORMAT_FILENAME = "image.png";
+    private static final String INVALID_STRUCTURE_FILENAME = "src/test/"
+            + "resources/invalidstructure.csv";
 
     @BeforeAll
     public static void setUp() {
@@ -26,12 +28,21 @@ class FileReaderTest {
 
     @Test
     void read_FileNotFound_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read(NONEXISTED_FILENAME));
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileReader.read(NONEXISTED_FILENAME);
+        });
     }
 
     @Test
-    void read_InvalidFileFormat() {
-        assertThrows(RuntimeException.class, () -> {
+    void read_InvalidStructureFile_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileReader.read(INVALID_STRUCTURE_FILENAME);
+        });
+    }
+
+    @Test
+    public void write_FileNotTextFormat_NotOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
             fileReader.read(INVALID_FORMAT_FILENAME);
         });
     }

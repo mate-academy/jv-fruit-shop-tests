@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
     private static FileReader fileReader;
-    private static final String FILENAME = "src/test/resources/input.csv";
+    private static final String FILENAME = "input.csv";
     private static final String NONEXISTED_FILENAME = "nonexistedfile.csv";
     private static final String INVALID_FORMAT_FILENAME = "image.png";
-    private static final String INVALID_STRUCTURE_FILENAME = "src/test/"
-            + "resources/invalidstructure.csv";
+    private static final String INVALID_STRUCTURE_FILENAME = "invalidstructure.csv";
 
     @BeforeAll
     public static void setUp() {

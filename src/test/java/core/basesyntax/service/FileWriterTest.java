@@ -10,11 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
-    private static final String CSV_FILE_PATH = "src/test/resources/test.csv";
-    private static final String INVALID_FORMAT_FILENAME = "src/test/resources/image.jpg";
+    private static final String CSV_FILE_PATH = "test.csv";
+    private static final String INVALID_FORMAT_FILENAME = "image.jpg";
     private static final String NON_EXISTENT_DIRPATH = "nonexistent-directory/test.txt";
     private static final String REPORT = "some text...";
-    private static final String TEXT_FILE_PATH = "src/test/resources/test.txt";
+    private static final String TEXT_FILE_PATH = "test.txt";
     private FileWriter fileWriter;
 
     @BeforeEach

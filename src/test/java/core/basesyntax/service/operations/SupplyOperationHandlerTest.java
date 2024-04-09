@@ -1,16 +1,19 @@
 package core.basesyntax.service.operations;
 
+import static core.basesyntax.service.operations.TetsObjects.INVALID_SUPPLY_DTO;
+import static core.basesyntax.service.operations.TetsObjects.VALID_SUPPLY_DTO;
+import static core.basesyntax.service.operations.TetsObjects.fruit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SupplyOperationHandlerTest {
+    public static final int INITIAL_QUANTITY = 0;
+    public static final int EXPECTED_QUANTITY = 20;
 
     private SupplyOperationHandler supplyOperationHandler;
 
@@ -22,21 +25,18 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void apply_validTransaction_Ok() {
-        Storage.fruits.put(new Fruit("apple"), 0);
-        FruitTransactionDto validDto = new FruitTransactionDto("s", "apple", 10);
-        supplyOperationHandler.apply(validDto);
-        assertEquals(10, Storage.fruits.get(new Fruit("apple")));
+        Storage.fruits.put(fruit, INITIAL_QUANTITY);
+        supplyOperationHandler.apply(VALID_SUPPLY_DTO);
+        assertEquals(EXPECTED_QUANTITY, Storage.fruits.get(fruit));
     }
 
     @Test
     public void isApplicable_validDto_Ok() {
-        FruitTransactionDto validDto = new FruitTransactionDto("s", "apple", 10);
-        assertTrue(supplyOperationHandler.isApplicable(validDto));
+        assertTrue(supplyOperationHandler.isApplicable(VALID_SUPPLY_DTO));
     }
 
     @Test
     public void isApplicable_invalidDto_NotOk() {
-        FruitTransactionDto invalidDto = new FruitTransactionDto("b", "banana", 5);
-        assertFalse(supplyOperationHandler.isApplicable(invalidDto));
+        assertFalse(supplyOperationHandler.isApplicable(INVALID_SUPPLY_DTO));
     }
 }

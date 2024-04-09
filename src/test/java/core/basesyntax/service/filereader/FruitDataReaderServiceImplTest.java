@@ -7,7 +7,6 @@ import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exeptions.DataReaderExeption;
 import core.basesyntax.service.FruitDataParser;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitDataReaderServiceImplTest {
@@ -19,10 +18,6 @@ public class FruitDataReaderServiceImplTest {
             new FruitTransactionDto("s", "banana", 30);
     private FruitDataReaderServiceImpl fruitDataReaderService =
             new FruitDataReaderServiceImpl(new FruitDataParser());
-
-    @BeforeEach
-    public void setUp() {
-    }
 
     @Test
     public void testReadData_Ok() {

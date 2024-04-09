@@ -14,10 +14,10 @@ public class FileWriterImplTest {
 
     @Test
     public void testWriteToFile_Ok() throws IOException {
-        List<String> report = List.of("fruit,quantity", "banana,20", "apple,30");
-        fileWriter.writeToFile(report, filePath);
+        List<String> expected = List.of("fruit,quantity", "banana,20", "apple,30");
+        fileWriter.writeToFile(expected, filePath);
 
-        List<String> outputTest = Files.readAllLines(Path.of(filePath));
-        assertEquals(report, outputTest);
+        List<String> actual = Files.readAllLines(Path.of(filePath));
+        assertEquals(expected, actual);
     }
 }

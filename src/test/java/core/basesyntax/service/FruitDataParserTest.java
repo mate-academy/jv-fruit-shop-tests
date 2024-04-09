@@ -8,7 +8,6 @@ import core.basesyntax.exeptions.IncorrectDataFileExeption;
 import core.basesyntax.exeptions.NegativeNumberExeption;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitDataParserTest {
@@ -20,10 +19,6 @@ public class FruitDataParserTest {
     public static final int FIRST_ELEMENT_INDEX = 0;
     public static final int SECOND_ELEMENT_INDEX = 1;
     private FruitDataParser fruitDataParser = new FruitDataParser();
-
-    @BeforeEach
-    public void setUp() {
-    }
 
     @Test
     public void parse_ValidData_ReturnsListOfDto() {

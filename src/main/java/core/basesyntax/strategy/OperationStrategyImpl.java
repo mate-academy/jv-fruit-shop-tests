@@ -4,10 +4,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
-public class OperationStrategyImp implements OperationStrategy {
+public class OperationStrategyImpl implements OperationStrategy {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImp(
+    public OperationStrategyImpl(
             Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
     ) {
         this.operationHandlerMap = operationHandlerMap;

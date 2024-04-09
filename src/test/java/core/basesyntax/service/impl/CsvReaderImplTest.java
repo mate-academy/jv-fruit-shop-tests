@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,13 +8,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class CsvReaderImpTest {
+class CsvReaderImplTest {
     private static CsvReader csvReader;
     private static List<String> checkTransactionsStrings;
 
     @BeforeAll
     static void beforeAll() {
-        csvReader = new CsvReaderImp();
+        csvReader = new CsvReaderImpl();
         checkTransactionsStrings = List.of(
                 "type;fruit;quantity",
                 "b;banana;20",

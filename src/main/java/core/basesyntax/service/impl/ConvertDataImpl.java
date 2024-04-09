@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConvertData;
@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConvertDataImp implements ConvertData {
+public class ConvertDataImpl implements ConvertData {
     private final String csvSplitBy = ";";
     private final List<FruitTransaction> fruitTransactions;
     private String[] tempArrayString;
     private FruitTransaction.Operation operation;
 
-    public ConvertDataImp() {
+    public ConvertDataImpl() {
         this.fruitTransactions = new ArrayList<>();
     }
 

@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,12 +11,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class CsvWriterImpTest {
+class CsvWriterImplTest {
     private static CsvWriter csvWriter;
 
     @BeforeAll
     static void beforeAll() {
-        csvWriter = new CsvWriterImp();
+        csvWriter = new CsvWriterImpl();
     }
 
     @Test

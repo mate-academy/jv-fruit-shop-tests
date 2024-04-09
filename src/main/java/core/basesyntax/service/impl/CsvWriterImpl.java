@@ -1,11 +1,11 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CsvWriterImp implements CsvWriter {
+public class CsvWriterImpl implements CsvWriter {
     @Override
     public void write(String text, String filePath) {
         try {

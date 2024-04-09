@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class CsvReaderImp implements CsvReader {
+public class CsvReaderImpl implements CsvReader {
     @Override
     public List<String> read(String filePath) {
         if (filePath == null) {

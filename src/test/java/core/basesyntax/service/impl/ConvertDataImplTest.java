@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ConvertDataImpTest {
+class ConvertDataImplTest {
     private static ConvertData convertData;
     private static List<FruitTransaction> checkTransactionsList;
     private static List<String> checkTransactionsStrings;
@@ -18,7 +18,7 @@ class ConvertDataImpTest {
 
     @BeforeAll
     static void beforeALl() {
-        convertData = new ConvertDataImp();
+        convertData = new ConvertDataImpl();
         checkTransactionsList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 102),

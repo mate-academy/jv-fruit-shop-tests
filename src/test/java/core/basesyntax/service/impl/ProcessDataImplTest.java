@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,7 +12,7 @@ import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
 import core.basesyntax.service.ProcessData;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImp;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ProcessDataImpTest {
+class ProcessDataImplTest {
     private static ProcessData processData;
     private static BalanceOperationHandler balanceOperationHandler;
     private static PurchaseOperationHandler purchaseOperationHandler;
@@ -47,8 +47,8 @@ class ProcessDataImpTest {
                 FruitTransaction.Operation.PURCHASE, purchaseOperationHandler,
                 FruitTransaction.Operation.RETURN, returnOperationHandler,
                 FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
-        operationStrategy = new OperationStrategyImp(operationHandlerMap);
-        processData = new ProcessDataImp(operationStrategy);
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        processData = new ProcessDataImpl(operationStrategy);
         bananaBalance = new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 100);
         checkTransactionsList = new ArrayList<>(List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),

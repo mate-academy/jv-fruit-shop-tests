@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,13 +7,13 @@ import core.basesyntax.service.ReportGenerate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ReportGenerateImpTest {
+class ReportGenerateImplTest {
     private static ReportGenerate reportGenerate;
     private static final String BANANA = "banana";
 
     @BeforeAll
     static void beforeAll() {
-        reportGenerate = new ReportGenerateImp();
+        reportGenerate = new ReportGenerateImpl();
     }
 
     @Test

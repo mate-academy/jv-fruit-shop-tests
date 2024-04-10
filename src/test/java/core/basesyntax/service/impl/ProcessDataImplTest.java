@@ -32,13 +32,26 @@ class ProcessDataImplTest {
     private static List<FruitTransaction> checkTransactionsList;
     private static Map<String, Integer> checkStorage1;
     private static Map<String, Integer> checkStorage2;
-    private static FruitTransaction bananaBalance;
     private static List<FruitTransaction> fruitTransactions;
     private static final String BANANA = "banana";
     private static final int NEGATIVE_QUANTITY = -20;
+    private static final FruitTransaction BALANCE_OPERATION =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20);
+    private static final FruitTransaction SUPPLY_OPERATION =
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 102);
+    private static final FruitTransaction PURCHASE_OPERATION1 =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 20);
+    private static final FruitTransaction RETURN_OPERATION =
+            new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 30);
+    private static final FruitTransaction PURCHASE_OPERATION2 =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 0);
+    private static final FruitTransaction PURCHASE_OPERATION3 =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 132);
+    private static final int FINAL_BALANCE1 = 0;
+    private static final int FINAL_BALANCE2 = 102;
 
     @BeforeEach
-    void beforeAll() {
+    void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
         supplyOperationHandler = new SupplyOperationHandler();
         purchaseOperationHandler = new PurchaseOperationHandler();
@@ -49,17 +62,16 @@ class ProcessDataImplTest {
                 FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         processData = new ProcessDataImpl(operationStrategy);
-        bananaBalance = new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 100);
         checkTransactionsList = new ArrayList<>(List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 102),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 40),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 30),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 0),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 112)
+                BALANCE_OPERATION,
+                SUPPLY_OPERATION,
+                PURCHASE_OPERATION1,
+                RETURN_OPERATION,
+                PURCHASE_OPERATION2,
+                PURCHASE_OPERATION3
         ));
-        checkStorage1 = new HashMap<>(Map.of(BANANA, 0));
-        checkStorage2 = new HashMap<>(Map.of(BANANA, 20));
+        checkStorage1 = new HashMap<>(Map.of(BANANA, FINAL_BALANCE1));
+        checkStorage2 = new HashMap<>(Map.of(BANANA, FINAL_BALANCE2));
         fruitTransactions = new ArrayList<>();
     }
 
@@ -70,12 +82,10 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void operation_negativeAfterPurchase_trowException() {
+    void operation_negativeAfterPurchase_throwsException() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        fruitTransactions.add(bananaBalance);
-        fruitTransactions.add(new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, BANANA, 110
-        ));
+        fruitTransactions.add(BALANCE_OPERATION);
+        fruitTransactions.add(PURCHASE_OPERATION3);
         assertThrows(
                 RuntimeException.class, () -> processData.operation(
                         fruitTransactions
@@ -83,7 +93,7 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void operation_negativeQuantity_trowException() {
+    void operation_negativeQuantity_throwsException() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(
                 new FruitTransaction(
@@ -119,9 +129,7 @@ class ProcessDataImplTest {
         processData.operation(checkTransactionsList);
         assertEquals(checkStorage1, Storage.getFruitBalance());
         Storage.clear();
-        checkTransactionsList.add(new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, BANANA, 20
-        ));
+        checkTransactionsList.add(SUPPLY_OPERATION);
         processData.operation(checkTransactionsList);
         assertEquals(checkStorage2, Storage.getFruitBalance());
     }

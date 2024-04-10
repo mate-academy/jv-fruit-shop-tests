@@ -15,7 +15,7 @@ class CsvWriterImplTest {
     private static CsvWriter csvWriter;
 
     @BeforeEach
-    void beforeEach() {
+    void setUp() {
         csvWriter = new CsvWriterImpl();
     }
 

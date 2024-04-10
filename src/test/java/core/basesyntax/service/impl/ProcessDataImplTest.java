@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProcessDataImplTest {
@@ -37,8 +37,8 @@ class ProcessDataImplTest {
     private static final String BANANA = "banana";
     private static final int NEGATIVE_QUANTITY = -20;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void beforeAll() {
         balanceOperationHandler = new BalanceOperationHandler();
         supplyOperationHandler = new SupplyOperationHandler();
         purchaseOperationHandler = new PurchaseOperationHandler();
@@ -70,7 +70,7 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void operation_negativeAfterPurchase_notOk() {
+    void operation_negativeAfterPurchase_trowException() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(bananaBalance);
         fruitTransactions.add(new FruitTransaction(
@@ -83,7 +83,7 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void operation_negativeQuantity_notOk() {
+    void operation_negativeQuantity_trowException() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(
                 new FruitTransaction(
@@ -115,7 +115,7 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void operation_Ok() {
+    void operation_validFile_Ok() {
         processData.operation(checkTransactionsList);
         assertEquals(checkStorage1, Storage.getFruitBalance());
         Storage.clear();

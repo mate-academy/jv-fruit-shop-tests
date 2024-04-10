@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConvertData;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ConvertDataImplTest {
@@ -16,8 +16,8 @@ class ConvertDataImplTest {
     private static List<String> checkTransactionsStrings;
     private static final String BANANA = "banana";
 
-    @BeforeAll
-    static void beforeALl() {
+    @BeforeEach
+    void setUp() {
         convertData = new ConvertDataImpl();
         checkTransactionsList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),
@@ -35,15 +35,15 @@ class ConvertDataImplTest {
     }
 
     @Test
-    void convertToTransaction_emptyFile_notOk() {
+    void convertToTransaction_emptyFile_throwException() {
         assertThrows(
                 RuntimeException.class, () -> convertData.convertToTransaction(
-                        new ArrayList<>()
+                        Collections.emptyList()
                 ));
     }
 
     @Test
-    void convertToTransaction_illegalTextFormat_notOk() {
+    void convertToTransaction_illegalTextFormat_throwException() {
         List<String> transactionList = List.of("type", "fruit", "quantity");
         assertThrows(
                 IllegalArgumentException.class, () -> convertData.convertToTransaction(
@@ -52,7 +52,7 @@ class ConvertDataImplTest {
     }
 
     @Test
-    void convertToTransaction_Ok() {
+    void convertToTransaction_validFile_Ok() {
         assertEquals(
                 checkTransactionsList,
                 convertData.convertToTransaction(checkTransactionsStrings)

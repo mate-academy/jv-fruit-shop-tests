@@ -8,19 +8,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvWriterImplTest {
     private static CsvWriter csvWriter;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void beforeEach() {
         csvWriter = new CsvWriterImpl();
     }
 
     @Test
-    void write_Ok() {
+    void write_validFile_Ok() {
         csvWriter.write(
                 "fruit;quantity\nbanana;30\napple;0",
                 "src/test/resources/test_output");

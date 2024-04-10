@@ -39,6 +39,6 @@ public class Main {
                 "src/main/resources/reportToRead.csv")));
         ReportGenerate reportGenerate = new ReportGenerateImpl();
         CsvWriter csvWriter = new CsvWriterImpl();
-        csvWriter.write(reportGenerate.report(), "src/main/resource/myReport");
+        csvWriter.write(reportGenerate.generate(), "src/main/resource/myReport");
     }
 }

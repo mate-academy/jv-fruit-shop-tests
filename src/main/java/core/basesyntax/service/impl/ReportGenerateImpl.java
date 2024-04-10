@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class ReportGenerateImpl implements ReportGenerate {
     @Override
-    public String report() {
+    public String generate() {
         return Storage.getFruitBalance()
                 .entrySet()
                 .stream()

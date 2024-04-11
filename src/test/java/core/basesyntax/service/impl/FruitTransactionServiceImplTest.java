@@ -81,13 +81,13 @@ class FruitTransactionServiceImplTest {
     }
 
     @Test
-    void process_NullTransactions_NotOk() {
+    void process_NullTransactions_throwsException() {
         assertThrows(NullPointerException.class, () ->
                 fruitTransactionService.process(null));
     }
 
     @Test
-    void process_InvalidTransactions_NotOk() {
+    void process_InvalidTransactions_throwsException() {
         List<FruitTransaction> transactions = List.of(balance_transaction_apple,
                 purchase_transaction_apple);
         assertThrows(RuntimeException.class, () -> fruitTransactionService.process(transactions));

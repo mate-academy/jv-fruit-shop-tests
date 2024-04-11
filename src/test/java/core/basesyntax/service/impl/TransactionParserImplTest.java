@@ -36,7 +36,7 @@ class TransactionParserImplTest {
     }
 
     @Test
-    void parse_InvalidData_notOk() {
+    void parse_InvalidData_throwsException() {
         List<String> fruits = List.of("b,apple,r", "b,banana,15", "r,apple,s");
         assertThrows(IllegalArgumentException.class, () ->
                 transactionParser.parse(fruits));

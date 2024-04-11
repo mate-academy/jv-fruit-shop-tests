@@ -33,7 +33,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void process_NullData_notOk() {
+    void process_NullData_throwsException() {
         assertThrows(NullPointerException.class, () ->
                 balanceOperationHandler.process(null));
     }

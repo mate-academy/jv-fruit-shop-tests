@@ -43,7 +43,7 @@ class FruitDaoImplTest {
     }
 
     @Test
-    void update_InvalidData_NotOk() {
+    void update_InvalidData_throwsException() {
         Storage.fruitStorage.put("apple",7);
         assertThrows(NoSuchElementException.class, () ->
                 fruitDao.update("banana", 10));

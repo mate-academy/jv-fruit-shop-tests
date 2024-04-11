@@ -34,7 +34,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void process_NullData_notOk() {
+    void process_NullData_throwsException() {
         assertThrows(NullPointerException.class, () ->
                 supplyOperationHandler.process(null));
     }

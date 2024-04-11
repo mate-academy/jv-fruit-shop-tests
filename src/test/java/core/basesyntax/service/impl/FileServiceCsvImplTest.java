@@ -36,12 +36,12 @@ class FileServiceCsvImplTest {
     }
 
     @Test
-    void readFromFile_NullFileName_notOk() {
+    void readFromFile_NullFileName_throwsException() {
         assertThrows(NullPointerException.class, () -> fileServiceCsv.read(NULL_FILE_NAME));
     }
 
     @Test
-    void readFromFile_invalidFileName_notOk() {
+    void readFromFile_invalidFileName_throwsException() {
         assertThrows(RuntimeException.class, () -> fileServiceCsv.read(INVALID_FILE_NAME));
     }
 
@@ -60,14 +60,14 @@ class FileServiceCsvImplTest {
     }
 
     @Test
-    void writeToFile_nullFileName_notOk() {
+    void writeToFile_nullFileName_throwsException() {
         List<String> report = new ArrayList<>();
         assertThrows(NullPointerException.class, () ->
                  fileServiceCsv.write(NULL_FILE_NAME, report));
     }
 
     @Test
-    void writeToFile_InvalidFileName_notOk() {
+    void writeToFile_InvalidFileName_throwsException() {
         List<String> report = new ArrayList<>();
         assertThrows(RuntimeException.class, () ->
                  fileServiceCsv.write(INVALID_FILE_NAME, report));

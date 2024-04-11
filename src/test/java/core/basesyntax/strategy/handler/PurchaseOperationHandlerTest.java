@@ -34,7 +34,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void process_NullData_notOk() {
+    void process_NullData_throwsException() {
         assertThrows(NullPointerException.class, () ->
                 purchaseOperationHandler.process(null));
     }

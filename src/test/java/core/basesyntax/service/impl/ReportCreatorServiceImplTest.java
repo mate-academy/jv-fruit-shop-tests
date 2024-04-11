@@ -25,7 +25,9 @@ class ReportCreatorServiceImplTest {
     void createReport_validData_ok() {
         Storage.fruitStorage.put("apple", 10);
         Storage.fruitStorage.put("banana", 20);
-        List<String> expected = List.of("fruit,quantity", "\r\nbanana,20", "\r\napple,10");
+        List<String> expected = List.of("fruit,quantity", System.lineSeparator()
+                        + "banana,20",
+                System.lineSeparator() + "apple,10");
         List<String> actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }

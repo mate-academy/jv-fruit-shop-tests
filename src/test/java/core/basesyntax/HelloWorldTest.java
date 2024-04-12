@@ -30,6 +30,7 @@ public class HelloWorldTest {
     private static final String PATH1 = "./src/test/resources/testData";
     private static final String PATH2 = "./src/test/resources/testData2";
     private static final String PATH3 = "./src/test/resources/testData3";
+    private static final String PATH4 = "./src/test/resources/testData4";
     private static final String DATA_FILE_PATH = "./src/main/resources/beginningData";
     private static final String REPORT_FILE_PATH = "./src/main/resources/report";
     private static final String INVALID_PATH = "./src/main/user/data/content/file";
@@ -42,7 +43,7 @@ public class HelloWorldTest {
     private final FruitshopService fruitshopService = new FruitshopServiceImpl(handlerMap);
 
     @Test
-    void parseDataOk() {
+    void parseData_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,100");
         expected.add("b,apple,100");
@@ -51,7 +52,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void convertDataOk() {
+    void convertData_Ok() {
         List<String> strings = fileService.readDataFromFile(PATH1);
         List<FruitTransaction> actual = transactionService.parseData(strings);
         List<FruitTransaction> expected = new ArrayList<>();
@@ -65,7 +66,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void processDataThrowsOk() {
+    void processDataThrows_Ok() {
         List<FruitTransaction> nullFruits = new ArrayList<>();
         nullFruits.add(new FruitTransaction(null, "banana", 100));
         nullFruits.add(new FruitTransaction(null, "apple", 100));
@@ -74,7 +75,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void processDataOk() {
+    void processData_Ok() {
         initializeMap();
         List<String> strings = fileService.readDataFromFile(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
@@ -84,7 +85,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void generateReportOk() {
+    void generateReport_Ok() {
         initializeMap();
         List<String> strings = fileService.readDataFromFile(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
@@ -96,7 +97,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void writeToFileOk() {
+    void writeToFile_Ok() {
         initializeMap();
         List<String> strings = fileService.readDataFromFile(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
@@ -115,7 +116,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void checkResultOneOk() {
+    void checkResultOne_Ok() {
         initializeMap();
         List<String> strings = fileService.readDataFromFile(PATH1);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
@@ -127,7 +128,7 @@ public class HelloWorldTest {
     }
 
     @Test
-    void checkResultTwoOk() {
+    void checkResultTwo_Ok() {
         initializeMap();
         List<String> strings = fileService.readDataFromFile(PATH2);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
@@ -139,12 +140,19 @@ public class HelloWorldTest {
     }
 
     @Test
-    void fileServiceThrowsOk() {
+    void fileServiceThrows_Ok() {
         String content = null;
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileService.readDataFromFile(INVALID_PATH));
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileService.write(INVALID_PATH, content));
+    }
+
+    @Test
+    void fruitShopServiceInvalidDataThrows_OK() {
+        List<String> strings = fileService.readDataFromFile(PATH4);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> transactionService.parseData(strings));
     }
 
     private static void initializeMap() {

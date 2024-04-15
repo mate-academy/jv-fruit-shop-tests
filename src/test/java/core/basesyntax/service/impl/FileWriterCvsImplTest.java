@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.AfterAll;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,18 +20,11 @@ class FileWriterCvsImplTest {
 
     @BeforeAll
     public static void initAll() {
-        File tempFile = new File(TEMP_TEST_FILE_PATH);
         try {
-            tempFile.createNewFile();
+            Files.writeString(Paths.get(TEMP_TEST_FILE_PATH), "");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error cleaning data in file: " + TEMP_TEST_FILE_PATH);
         }
-    }
-
-    @AfterAll
-    public static void clearAll() {
-        File tempFile = new File(TEMP_TEST_FILE_PATH);
-        tempFile.delete();
     }
 
     private String readFromFile(String path) {

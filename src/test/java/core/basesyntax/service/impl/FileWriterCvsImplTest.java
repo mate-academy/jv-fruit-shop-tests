@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterCvsImplTest {
     private static final String TEMP_TEST_FILE_PATH =
-            "src/test/java/core/basesyntax/resources/test_report.csv";
+            "src/test/resources/test_report.csv";
     private final FileWriter fileWriter = new FileWriterCvsImpl();
 
     @BeforeAll
@@ -25,16 +25,6 @@ class FileWriterCvsImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Error cleaning data in file: " + TEMP_TEST_FILE_PATH);
         }
-    }
-
-    private String readFromFile(String path) {
-        String text;
-        try {
-            text = Files.readString(Path.of(path));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file by path: " + path, e);
-        }
-        return text;
     }
 
     @Test
@@ -69,7 +59,7 @@ class FileWriterCvsImplTest {
 
     @Test
     public void read_wrongPath_notOk() {
-        String wrongPath = "src/test/java/core/basesyntax/resources/unExistTestFile.csv";
+        String wrongPath = "src/test/resources/unExistTestFile.csv";
         File wrongFile = new File(wrongPath);
 
         String expect = "sadfads fasdfas \n"
@@ -89,5 +79,15 @@ class FileWriterCvsImplTest {
         assertThrows(RuntimeException.class, () -> {
             fileWriter.write(wrongPath, "");
         });
+    }
+
+    private String readFromFile(String path) {
+        String text;
+        try {
+            text = Files.readString(Path.of(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file by path: " + path, e);
+        }
+        return text;
     }
 }

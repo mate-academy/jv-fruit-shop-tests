@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderCvsImplTest {
     private static final String TEMP_TEST_FILE_PATH =
-            "src/test/java/core/basesyntax/resources/test_activities.csv";
+            "src/test/resources/test_activities.csv";
     private final FileReader fileReader = new FileReaderCvsImpl();
 
     @BeforeAll
@@ -25,19 +25,6 @@ class FileReaderCvsImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Error cleaning data in file: " + TEMP_TEST_FILE_PATH);
         }
-    }
-
-    private void writeDataInFile(String text) {
-        try (BufferedWriter buf = new BufferedWriter(
-                new java.io.FileWriter(TEMP_TEST_FILE_PATH, false))) {
-            buf.write(text);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file by path: " + TEMP_TEST_FILE_PATH, e);
-        }
-    }
-
-    private String convertListToString(List<String> list) {
-        return list.stream().reduce((a, b) -> a + "\n" + b).orElse("");
     }
 
     @Test
@@ -97,5 +84,18 @@ class FileReaderCvsImplTest {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(null);
         });
+    }
+
+    private void writeDataInFile(String text) {
+        try (BufferedWriter buf = new BufferedWriter(
+                new java.io.FileWriter(TEMP_TEST_FILE_PATH, false))) {
+            buf.write(text);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file by path: " + TEMP_TEST_FILE_PATH, e);
+        }
+    }
+
+    private String convertListToString(List<String> list) {
+        return list.stream().reduce((a, b) -> a + "\n" + b).orElse("");
     }
 }

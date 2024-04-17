@@ -23,7 +23,7 @@ class ReportCreatorImplTest {
         Storage.fruits.put("apple", 5);
         Storage.fruits.put("something", 10);
 
-        String expected  = "fruit,quantity\n"
+        String expected = "fruit,quantity\n"
                 + "banana,10\n"
                 + "apple,5\n"
                 + "something,10";
@@ -65,7 +65,7 @@ class ReportCreatorImplTest {
         Storage.fruits.put(null, 20);
         Storage.fruits.put("strawberry", 30);
 
-        String expected  = "fruit,quantity\n"
+        String expected = "fruit,quantity\n"
                 + "banana,10\n"
                 + "apple,20\n"
                 + "strawberry,30";

@@ -32,7 +32,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void performOperation_negativeResult_notOk() {
+    public void performOperation_negativeResult_throwsException() {
         Storage.fruits.put("banana", 5);
 
         assertThrows(RuntimeException.class, () -> {
@@ -41,14 +41,14 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void performOperation_negativeQuantity_ok() {
+    public void performOperation_negativeQuantity_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.performOperation("banana", -20);
         });
     }
 
     @Test
-    public void performOperation_purchaseDefunctFruit_notOk() {
+    public void performOperation_purchaseDefunctFruit_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.performOperation("banana", 10);
         });

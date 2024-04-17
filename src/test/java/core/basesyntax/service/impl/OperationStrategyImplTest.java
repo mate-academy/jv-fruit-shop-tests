@@ -57,7 +57,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_null_notOk() {
+    public void get_null_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationStrategy.get(null);
         });

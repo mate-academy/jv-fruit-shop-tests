@@ -36,19 +36,19 @@ class FruitTransactionParsingImplTest {
         list.add("r,apple,10");
         list.add("p,apple,20");
 
-        List<FruitTransaction> expect = new ArrayList<>();
-        expect.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
-        expect.add(new FruitTransaction(Operation.SUPPLY, "banana", 100));
-        expect.add(new FruitTransaction(Operation.RETURN, "apple", 10));
-        expect.add(new FruitTransaction(Operation.PURCHASE, "apple", 20));
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
+        expected.add(new FruitTransaction(Operation.SUPPLY, "banana", 100));
+        expected.add(new FruitTransaction(Operation.RETURN, "apple", 10));
+        expected.add(new FruitTransaction(Operation.PURCHASE, "apple", 20));
 
         List<FruitTransaction> actual = fruitTransactionParsing.parse(list);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void parse_negativeQuantity_notOk() {
+    public void parse_negativeQuantity_throwsException() {
         List<String> list = new ArrayList<>();
         list.add("type,fruit,quantity");
         list.add("b,banana,20");
@@ -62,7 +62,7 @@ class FruitTransactionParsingImplTest {
     }
 
     @Test
-    public void parse_wrongType_notOk() {
+    public void parse_wrongType_throwsException() {
         List<String> list = new ArrayList<>();
         list.add("type,fruit,quantity");
         list.add("g,banana,20");
@@ -76,7 +76,7 @@ class FruitTransactionParsingImplTest {
     }
 
     @Test
-    public void parse_wrongQuantity_notOk() {
+    public void parse_wrongQuantity_throwsException() {
         List<String> list = new ArrayList<>();
         list.add("type,fruit,quantity");
         list.add("b,banana,20");
@@ -90,7 +90,7 @@ class FruitTransactionParsingImplTest {
     }
 
     @Test
-    public void parse_wrongDataForm_notOk() {
+    public void parse_wrongDataForm_throwsException() {
         List<String> list = new ArrayList<>();
         list.add("type,fruit,quantity");
         list.add("b,banana,20");
@@ -104,7 +104,7 @@ class FruitTransactionParsingImplTest {
     }
 
     @Test
-    public void parse_null_notOk() {
+    public void parse_null_throwsException() {
         List<String> list = new ArrayList<>();
         list.add("type,fruit,quantity");
         list.add(null);

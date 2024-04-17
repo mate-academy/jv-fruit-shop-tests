@@ -29,49 +29,49 @@ class FileReaderCvsImplTest {
 
     @Test
     public void read_generalData_ok() {
-        List<String> expect = new ArrayList<>();
-        expect.add("sfas");
-        expect.add("adffas");
-        expect.add("dfas");
-        expect.add("fwas");
-        expect.add("fawf");
+        List<String> expected = new ArrayList<>();
+        expected.add("sfas");
+        expected.add("adffas");
+        expected.add("dfas");
+        expected.add("fwas");
+        expected.add("fawf");
 
-        writeDataInFile(convertListToString(expect));
+        writeDataInFile(convertListToString(expected));
 
         List<String> actual = fileReader.read(TEMP_TEST_FILE_PATH);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void read_generalDataWithEmptyLine_ok() {
-        List<String> expect = new ArrayList<>();
-        expect.add("sfas");
-        expect.add("");
-        expect.add("dfas");
-        expect.add("");
-        expect.add("fawf");
+        List<String> expected = new ArrayList<>();
+        expected.add("sfas");
+        expected.add("");
+        expected.add("dfas");
+        expected.add("");
+        expected.add("fawf");
 
-        writeDataInFile(convertListToString(expect));
+        writeDataInFile(convertListToString(expected));
 
         List<String> actual = fileReader.read(TEMP_TEST_FILE_PATH);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void read_empty_ok() {
-        List<String> expect = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
 
-        writeDataInFile(convertListToString(expect));
+        writeDataInFile(convertListToString(expected));
 
         List<String> actual = fileReader.read(TEMP_TEST_FILE_PATH);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void read_wrongPath_notOk() {
+    public void read_wrongPath_throwsException() {
         String wrongPath = "src/test/java/core/basesyntax/resources/unExistTestFile.csv";
 
         assertThrows(RuntimeException.class, () -> {
@@ -80,7 +80,7 @@ class FileReaderCvsImplTest {
     }
 
     @Test
-    public void read_nullPath_notOk() {
+    public void read_nullPath_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(null);
         });

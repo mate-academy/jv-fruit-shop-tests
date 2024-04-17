@@ -72,7 +72,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    public void process_null_ok() {
+    public void process_null_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             fruitTransactionProcessor.process(null);
         });

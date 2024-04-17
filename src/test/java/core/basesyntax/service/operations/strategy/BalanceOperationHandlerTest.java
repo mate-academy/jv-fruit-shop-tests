@@ -36,14 +36,14 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void performOperation_negativeQuantity_ok() {
+    public void performOperation_negativeQuantity_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.performOperation("banana", -20);
         });
     }
 
     @Test
-    public void performOperation_nullKey_ok() {
+    public void performOperation_nullKey_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.performOperation(null, 5);
         });

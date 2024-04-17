@@ -46,7 +46,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    public void update_nullField_ok() {
+    public void update_nullField_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             fruitTransactionDao.update(null, 10);
         });
@@ -95,7 +95,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    public void add_nullFields_ok() {
+    public void add_nullFields_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             fruitTransactionDao.add(null, 10);
         });
@@ -122,7 +122,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    public void getByName_nullFields_ok() {
+    public void getByName_nullFields_throwsException() {
         Storage.fruits.put(null, 10);
         assertThrows(RuntimeException.class, () -> {
             fruitTransactionDao.getByName(null);
@@ -130,7 +130,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    public void getByName_notExistField() {
+    public void getByName_notExist_throwsException() {
         Storage.fruits.put("banana", 10);
         Storage.fruits.put("appdle", 10);
 

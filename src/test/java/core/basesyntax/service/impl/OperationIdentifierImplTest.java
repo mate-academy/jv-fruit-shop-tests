@@ -34,14 +34,14 @@ class OperationIdentifierImplTest {
     }
 
     @Test
-    public void get_wrongCode_notOk() {
+    public void get_wrongCode_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationIdentifier.get("g");
         });
     }
 
     @Test
-    public void get_null_notOk() {
+    public void get_null_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             operationIdentifier.get(null);
         });

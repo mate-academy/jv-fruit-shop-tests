@@ -29,23 +29,23 @@ class FileWriterCvsImplTest {
 
     @Test
     public void write_generalData_ok() {
-        String expect = "sadfads fasdfas \n"
+        String expected = "sadfads fasdfas \n"
                 + "sadfasdf adfa.234f";
-        fileWriter.write(TEMP_TEST_FILE_PATH, expect);
+        fileWriter.write(TEMP_TEST_FILE_PATH, expected);
 
         String actual = readFromFile(TEMP_TEST_FILE_PATH);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void write_empty_ok() {
-        String expect = "";
-        fileWriter.write(TEMP_TEST_FILE_PATH, expect);
+        String expected = "";
+        fileWriter.write(TEMP_TEST_FILE_PATH, expected);
 
         String actual = readFromFile(TEMP_TEST_FILE_PATH);
 
-        assertEquals(expect, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -62,18 +62,18 @@ class FileWriterCvsImplTest {
         String wrongPath = "src/test/resources/unExistTestFile.csv";
         File wrongFile = new File(wrongPath);
 
-        String expect = "sadfads fasdfas \n"
+        String expected = "sadfads fasdfas \n"
                 + "sadfasdf adfa.234f";
-        fileWriter.write(wrongPath, expect);
+        fileWriter.write(wrongPath, expected);
 
         assertTrue(wrongFile.exists());
-        assertEquals(expect, readFromFile(wrongPath));
+        assertEquals(expected, readFromFile(wrongPath));
 
         wrongFile.delete();
     }
 
     @Test
-    public void read_nullPath_notOk() {
+    public void read_nullPath_throwsException() {
         String wrongPath = null;
 
         assertThrows(RuntimeException.class, () -> {

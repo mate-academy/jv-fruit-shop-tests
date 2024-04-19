@@ -22,7 +22,7 @@ class PurchaseServiceTest {
     }
 
     @Test
-    void fruitsInDatabaseLessThanOperation_isOk() {
+    void fruitsInDatabaseLessThanOperation_notOk() {
         assertThrows(RuntimeException.class,
                 () -> purchaseService.processTransaction(fruitTransaction));
     }

@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileDataReaderImplTest {
-    private final String inputFile = new String("src/main/resources/data.csv");
+    private final String inputFile = "src/test/resources/data.csv";
     private final String nonExistentFile = "nonExistentFile.txt";
     private FileDataReader fileDataReader = new FileDataReaderImpl();
 
@@ -28,7 +28,7 @@ class FileDataReaderImplTest {
     }
 
     @Test
-    void testFileReaderWithNonExistentFile_isOk() {
+    void testFileReader_NonExistentFile_notOk() {
         assertThrows(RuntimeException.class, () -> fileDataReader.readFromFile(nonExistentFile));
     }
 }

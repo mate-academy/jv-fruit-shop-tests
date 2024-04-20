@@ -57,7 +57,7 @@ public class FruitTransaction {
                     return operationType;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation type: " + codeLetter);
+            throw new IllegalArgumentException("Unknown operation type:" + codeLetter);
         }
     }
 

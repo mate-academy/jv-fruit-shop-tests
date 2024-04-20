@@ -48,4 +48,16 @@ class ParseServiceImplTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void parseFromString_unrecognizedOperationType() {
+        List<String> transactionLine = List.of("x,banana,10");
+        Exception exception =
+                assertThrows(IllegalArgumentException.class,
+                        () -> parseService.parseFromString(transactionLine));
+
+        String expectedMessage = "Unknown operation type:" + "x";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

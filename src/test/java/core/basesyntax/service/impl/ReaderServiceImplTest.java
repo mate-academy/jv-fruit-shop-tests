@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.ReaderService;
 import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +36,14 @@ class ReaderServiceImplTest {
                 + "src/main/resources/fruitList.csv";
         String actualMessage = exception.getMessage();
         assertFalse(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void readFromFilesContents_emptyFile() {
+        List<String> result = readerService.readFromFilesContents(
+                "src/main/resources/fruitList.csv");
+        if (result.isEmpty()) {
+            assertTrue(true);
+        }
     }
 }

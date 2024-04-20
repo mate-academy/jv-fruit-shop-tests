@@ -10,11 +10,16 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<String> generateReport(Map<String, Integer> fruitCounts) {
-        List<String> report = new ArrayList<>();
-        report.add(CATEGORIES);
-        for (Map.Entry<String, Integer> entry : fruitCounts.entrySet()) {
-            report.add(entry.getKey() + "," + entry.getValue());
+        if (fruitCounts == null) {
+            throw new NullPointerException("Can't generate report for null data");
+        } else {
+            List<String> report = new ArrayList<>();
+            report.add(CATEGORIES);
+            for (Map.Entry<String, Integer> entry : fruitCounts.entrySet()) {
+                report.add(entry.getKey() + "," + entry.getValue());
+            }
+            return report;
         }
-        return report;
     }
 }
+

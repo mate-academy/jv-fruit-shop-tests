@@ -1,7 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionProcessorService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,15 +15,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorServiceImplTest {
+    private Map<String, Integer> fruitCounts;
     private List<FruitTransaction> transactions = new ArrayList<>();
-    private TransactionProcessorServiceImpl transactionProcessorServiceImpl;
+    private TransactionProcessorService transactionProcessorService;
+    private TransactionProcessorServiceImpl singleTransaction;
+
     private Map<FruitTransaction.Operation, OperationStrategy> strategies;
-    private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
+        fruitCounts = new HashMap<>();
         strategies = new HashMap<>();
-        transactionProcessorServiceImpl = new TransactionProcessorServiceImpl(strategies);
+        singleTransaction = new TransactionProcessorServiceImpl(strategies);
+        transactionProcessorService = new TransactionProcessorServiceImpl(strategies);
         FruitTransaction transaction1 =
                 new FruitTransaction(
                         FruitTransaction.Operation.PURCHASE,
@@ -36,9 +43,9 @@ class TransactionProcessorServiceImplTest {
     @Test
     void processTransaction_validInput_success() {
         Map<String, Integer> expected =
-                transactionProcessorServiceImpl.processTransaction(transactions);
+                transactionProcessorService.processTransaction(transactions);
         Map<String, Integer> actual = Storage.getFruits();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -47,7 +54,8 @@ class TransactionProcessorServiceImplTest {
         String fruit = "apple";
         int quantity = 10;
         FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-        transactionProcessorServiceImpl.processSingleTransaction(transaction);
+
+        singleTransaction.processSingleTransaction(transaction);
         Assertions.assertNull(Storage.getFruits().get(fruit));
     }
 
@@ -56,8 +64,8 @@ class TransactionProcessorServiceImplTest {
         List<FruitTransaction> transactionList = new ArrayList<>();
         Map<String, Integer> initialStorageState = new HashMap<>(Storage.getFruits());
         Map<String, Integer> result =
-                transactionProcessorServiceImpl.processTransaction(transactionList);
-        Assertions.assertEquals(initialStorageState,
+                transactionProcessorService.processTransaction(transactionList);
+        assertEquals(initialStorageState,
                 result, "Expected the returned map to be equal to the "
                         + "initial state of the Storage");
     }
@@ -65,7 +73,7 @@ class TransactionProcessorServiceImplTest {
     @Test
     void processTransaction_nullTransactionList_noException() {
         Assertions.assertDoesNotThrow(() ->
-                        transactionProcessorServiceImpl.processTransaction(null),
+                        transactionProcessorService.processTransaction(null),
                 "Expected processTransaction to not throw an exception "
                         + "when transactions list is null");
     }
@@ -76,8 +84,29 @@ class TransactionProcessorServiceImplTest {
                 "apple",
                 10);
         Assertions.assertDoesNotThrow(() ->
-                        transactionProcessorServiceImpl.processSingleTransaction(transaction),
+                        singleTransaction.processSingleTransaction(transaction),
                 "Expected processSingleTransaction to not throw "
                         + "an exception when operation strategy is null");
+    }
+
+    @Test
+    void processSingleTransaction_strategyApplyCalledWithCorrectParameters() {
+        FruitTransaction.Operation operation = FruitTransaction.Operation.PURCHASE;
+        String fruit = "apple";
+        int quantity = 10;
+        FruitTransaction transaction = new FruitTransaction(operation, fruit,
+                quantity);
+        OperationStrategy testStrategy = new OperationStrategy() {
+            @Override
+        public void apply(Map<String, Integer> fruitCountsDifferent,
+                                  String fruit, int quantity) {
+                    fruitCounts.put(transaction.getFruit(), transaction.getQuantity());
+                }
+            };
+        strategies.put(operation, testStrategy);
+
+        singleTransaction.processSingleTransaction(transaction);
+
+        assertEquals(quantity, fruitCounts.get(fruit));
     }
 }

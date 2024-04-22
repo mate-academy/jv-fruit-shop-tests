@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
 
@@ -49,7 +50,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void emptyFile_NotOK(){
+    void emptyFile_NotOK() {
         assertThrows(
                 RuntimeException.class, () -> dataConverter.convertToTransaction(
                         Collections.emptyList()

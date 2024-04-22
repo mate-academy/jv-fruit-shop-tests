@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.FileReader;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FileReaderImplTest {
     private static FileReader fileReader;
@@ -30,19 +30,19 @@ class FileReaderImplTest {
     }
 
     @Test
-    void NullFileName_NotOK() {
+    void nullFileName_NotOK() {
         assertThrows(NullPointerException.class, () ->
                 fileReader.read(null));
     }
 
     @Test
-    void IllegalFileFormat_NotOk() {
+    void illegalFileFormat_NotOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 fileReader.read("report.txt"));
     }
 
     @Test
-    void NotExistingFile_NotOK() {
+    void notExistingFile_NotOK() {
         assertThrows(RuntimeException.class, () ->
                 fileReader.read("noSuchFile.csv"));
     }

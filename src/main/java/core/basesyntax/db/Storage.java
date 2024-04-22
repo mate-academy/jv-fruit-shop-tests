@@ -13,4 +13,8 @@ public class Storage {
     public static void setFruitBalance(String fruit, int quantity) {
         Storage.fruitBalance.put(fruit, quantity);
     }
+
+    public static void clear() {
+        fruitBalance.clear();
+    }
 }

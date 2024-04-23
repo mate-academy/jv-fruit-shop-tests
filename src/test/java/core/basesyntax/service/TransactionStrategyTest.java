@@ -34,7 +34,7 @@ class TransactionStrategyTest {
     }
 
     @Test
-    void incorrectOperation_notOk() {
+    void nullOperation_notOk() {
         assertThrows(RuntimeException.class, () -> transactionStrategy.getOperationHandler(null));
     }
 }

@@ -22,14 +22,14 @@ class ConverterDataToObjImplTest {
             "s,banana,gdsds");
 
     @Test
-    void fruitTransactionInList_isOk() {
+    void convertAll_ok() {
         assertSame(converterDataToObj.convertAll(fileData)
                 .get(0).getClass(), FruitTransaction.class);
 
     }
 
     @Test
-    void incorrectDataPattern_notOk() {
+    void convertAll_incorrectDataPattern_notOk() {
         assertThrows(RuntimeException.class, () ->
                 converterDataToObj.convertAll(incorrectFileData));
     }

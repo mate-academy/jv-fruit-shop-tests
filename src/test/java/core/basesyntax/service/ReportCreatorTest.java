@@ -21,7 +21,7 @@ class ReportCreatorTest {
     }
 
     @Test
-    void quantityStringsEqualsQuantityElements_isOk() {
+    void quantityStringsEqualsWithElements_isOk() {
         String[] lines = REPORT_CREATOR.createReport(FULL_MAP).split("\n");
         int expected = FULL_MAP.size();
         int actual = lines.length;

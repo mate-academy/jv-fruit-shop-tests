@@ -32,7 +32,6 @@ class FruittDaoImplTest {
 
     @Test
     void testGetExistingFruit() {
-        // Предположим, что 'apple' уже добавлен в Storage с количеством 10
         Storage.fruits.put("apple", 10);
         int quantity = fruitDao.get("apple");
         assertEquals(10, quantity, "Should return the correct quantity of apples");

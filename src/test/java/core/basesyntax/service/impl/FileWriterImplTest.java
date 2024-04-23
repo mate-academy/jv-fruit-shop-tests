@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileWriter;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String TEST_FILE = "src/test/java/core/basesyntax/resources/testFile.csv";
@@ -42,6 +42,6 @@ class FileWriterImplTest {
     public void writeToFile_invalidPath_notOk() {
         report = "report";
         fileWriter.writeToFile(WRONG_PATH, report);
-        assertThrows(RuntimeException.class, () -> fileWriter.writeToFile(WRONG_PATH, report));
+        assertThrows(RuntimeException.class, () -> fileWriter.writeToFile(report, WRONG_PATH));
     }
 }

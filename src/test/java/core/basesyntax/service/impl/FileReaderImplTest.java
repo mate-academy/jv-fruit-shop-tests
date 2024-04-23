@@ -1,17 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReader;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
+import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String DATA_BASE = "src/test/java/core/basesyntax/resources/database.csv";
     private static final String WRONG_PATH = "wrongPath/database.csv";
-    private static final String EMPTY_FILE = "src/test/java/core/basesyntax/resources/emptyFile.csv";
+    private static final String EMPTY_FILE =
+            "src/test/java/core/basesyntax/resources/emptyFile.csv";
     private FileReader fileReader = new FileReaderImpl();
 
     @Test
@@ -40,5 +41,4 @@ class FileReaderImplTest {
         List<String> emptyList = fileReader.readData(EMPTY_FILE);
         assertEquals(0, emptyList.size());
     }
-
 }

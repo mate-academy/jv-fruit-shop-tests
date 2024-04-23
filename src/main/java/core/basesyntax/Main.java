@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.db.ReportServiceImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.db.service.ReportService;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;

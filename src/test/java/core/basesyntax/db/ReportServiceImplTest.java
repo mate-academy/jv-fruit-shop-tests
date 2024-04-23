@@ -1,13 +1,11 @@
 package core.basesyntax.db;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.service.ReportService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportServiceImplTest {
     private ReportService reportService;
@@ -38,5 +36,10 @@ class ReportServiceImplTest {
         String expectedData = "fruit, quantity" + System.lineSeparator();
         String actualData = reportService.generate();
         assertEquals(expectedData, actualData);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
     }
 }

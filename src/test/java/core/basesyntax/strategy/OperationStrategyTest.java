@@ -1,21 +1,21 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.impl.BalanceTransactionHandler;
 import core.basesyntax.service.impl.PurchaseTransactionHandler;
 import core.basesyntax.service.impl.ReturnTransactionHandler;
 import core.basesyntax.service.impl.SupplyTransactionHandler;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class OperationStrategyTest {
     private static final String UNKNOWN_OPERATION = "n";
+    private static final String NULL_OPERATION = null;
     private OperationStrategy strategy;
     private Map<String, TransactionHandler> operationMap;
 
@@ -37,6 +37,13 @@ class OperationStrategyTest {
 
     @Test
     void unknownOperation_notOk() {
-        assertThrows(RuntimeException.class, () -> strategy.getOperationHandler(Operation.getOperationFromCode(UNKNOWN_OPERATION)));
+        assertThrows(RuntimeException.class, () -> strategy
+                .getOperationHandler(Operation.getOperationFromCode(UNKNOWN_OPERATION)));
+    }
+
+    @Test
+    void nullOperation_notOk() {
+        assertThrows(RuntimeException.class, () -> strategy
+                .getOperationHandler(Operation.getOperationFromCode(NULL_OPERATION)));
     }
 }

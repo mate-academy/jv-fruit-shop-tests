@@ -1,14 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionParser;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 class ParserImplTest {
     private TransactionParser parser = new ParserImpl();
@@ -46,5 +48,10 @@ class ParserImplTest {
         dataFromFile.add("e,banana,13");
         dataFromFile.add("h,apple,10");
         assertThrows(RuntimeException.class, () -> parser.parseAll(dataFromFile));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
     }
 }

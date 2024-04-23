@@ -4,8 +4,8 @@ import core.basesyntax.db.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private final String FRUIT_QUANTITY = "fruit, quantity";
-    private final String COMMA = ",";
+    private static final String FRUIT_QUANTITY = "fruit, quantity";
+    private static final String COMMA = ",";
 
     @Override
     public String generate() {

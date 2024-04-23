@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileDataReaderImplTest {
-    private final String inputFile = "src/test/resources/data.csv";
-    private final String nonExistentFile = "nonExistentFile.txt";
+    private static final String INPUT_FILE = "src/test/resources/data.csv";
+    private static final String NON_EXISTENT_FILE = "nonExistentFile.txt";
     private FileDataReader fileDataReader = new FileDataReaderImpl();
 
     @Test
@@ -22,13 +22,13 @@ class FileDataReaderImplTest {
                 "p,banana,5",
                 "s,banana,50");
 
-        List<String> actual = fileDataReader.readFromFile(inputFile);
+        List<String> actual = fileDataReader.readFromFile(INPUT_FILE);
         assertEquals(expected, actual);
 
     }
 
     @Test
     void testFileReader_NonExistentFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileDataReader.readFromFile(nonExistentFile));
+        assertThrows(RuntimeException.class, () -> fileDataReader.readFromFile(NON_EXISTENT_FILE));
     }
 }

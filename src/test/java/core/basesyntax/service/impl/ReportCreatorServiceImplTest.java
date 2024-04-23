@@ -15,10 +15,9 @@ public class ReportCreatorServiceImplTest {
         Storage.fruits.put("banana", 10);
         Storage.fruits.put("apple", 20);
         String actual = reportCreatorService.create();
-        String expected = """
-                fruit,quantity\r
-                banana,10\r
-                apple,20""";
+        String expected = "fruit,quantity" + System.lineSeparator()
+                          + "banana,10" + System.lineSeparator()
+                          + "apple,20";
         assertEquals(expected,actual);
     }
 

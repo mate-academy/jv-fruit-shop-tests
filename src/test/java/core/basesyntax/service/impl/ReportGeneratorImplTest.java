@@ -18,7 +18,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void validReport_OK() {
+    void reportGenerator_validReport_Ok() {
         Storage.setFruitBalance(BANANA, 90);
         assertEquals(reportGenerator.report(), "fruit,quantity\nbanana,90");
         Storage.clear();

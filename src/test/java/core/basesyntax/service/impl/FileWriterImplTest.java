@@ -20,7 +20,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void validFile_OK() {
+    void fileWriter_validFile_Ok() {
         fileWriter.write(
                 "fruit,quantity\nbanana,117\napple,30",
                 "test_OutPut"

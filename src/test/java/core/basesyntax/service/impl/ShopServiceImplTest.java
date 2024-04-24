@@ -82,7 +82,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void shopService_negativeAfterPurchase_notOk() {
+    void operation_negativeAfterPurchase_notOk() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(BALANCE_OPERATION);
         fruitTransactions.add(PURCHASE_OPERATION2);
@@ -93,7 +93,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void shopService_operationWithNegativeQuantity_notOk() {
+    void operation_WithNegativeQuantity_notOk() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,BANANA,NEGATIVE_QUANTITY)
@@ -125,7 +125,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void shopService_validFileData_Ok() {
+    void operation_validFileData_Ok() {
         shopService.operation(checkFruitTransactionList);
         assertEquals(checkStorage1,Storage.getFruitBalance());
         Storage.clear();

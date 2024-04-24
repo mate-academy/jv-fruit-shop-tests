@@ -50,7 +50,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void dataConverter_emptyFile_notOk() {
+    void convertToTransaction_emptyFile_notOk() {
         assertThrows(
                 RuntimeException.class, () -> dataConverter.convertToTransaction(
                         Collections.emptyList()
@@ -58,7 +58,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void dataConverter_wrongTextFormat_notOk() {
+    void convertToTransaction_wrongTextFormat_notOk() {
         List<String> transList = List.of("type","fruit", "quantity");
         assertThrows(
                 IllegalArgumentException.class, () -> dataConverter.convertToTransaction(transList
@@ -66,7 +66,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void dataConverter_validFile_Ok() {
+    void convertToTransaction_validFile_Ok() {
         assertEquals(
                 checkTransList,
                 dataConverter.convertToTransaction(checkTransStrings)

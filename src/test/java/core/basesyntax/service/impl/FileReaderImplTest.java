@@ -30,25 +30,25 @@ class FileReaderImplTest {
     }
 
     @Test
-    void fileReader_nullFileName_notOK() {
+    void read_nullFileName_notOK() {
         assertThrows(NullPointerException.class, () ->
                 fileReader.read(null));
     }
 
     @Test
-    void fileReader_illegalFileFormat_notOk() {
+    void read_illegalFileFormat_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 fileReader.read("report.txt"));
     }
 
     @Test
-    void fileReader_notExistingFile_notOk() {
+    void read_notExistingFile_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fileReader.read("noSuchFile.csv"));
     }
 
     @Test
-    void fileReader_validFile_Ok() {
+    void read_validFile_Ok() {
         List<String> fruitTransSting = fileReader.read("src/test/resources/reportToRead.csv");
         assertEquals(checkTransStrings, fruitTransSting);
     }

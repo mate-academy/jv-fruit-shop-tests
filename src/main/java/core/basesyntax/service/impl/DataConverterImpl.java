@@ -22,9 +22,6 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> transactionData) {
-        if (transactionData.isEmpty()) {
-            throw new RuntimeException("CSV file is empty!" + transactionData);
-        }
         if (!transactionData.get(0).equals("type,fruit,quantity")) {
             throw new IllegalArgumentException("Incorrect data format!" + transactionData);
         }

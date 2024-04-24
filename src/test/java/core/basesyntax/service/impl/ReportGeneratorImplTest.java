@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +18,13 @@ class ReportGeneratorImplTest {
         reportGenerator = new ReportGeneratorImpl();
     }
 
+    @AfterEach
+    void afterEach() {
+        Storage.clear();
+    }
+
     @Test
-    void reportGenerator_validReport_Ok() {
+    void report_validReport_Ok() {
         Storage.setFruitBalance(BANANA, 90);
         assertEquals(reportGenerator.report(), "fruit,quantity\nbanana,90");
         Storage.clear();

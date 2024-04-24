@@ -1,5 +1,8 @@
 package core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import core.basesyntax.db.ReportServiceImpl;
 import core.basesyntax.db.service.ReportService;
 import core.basesyntax.model.FruitTransaction;
@@ -20,14 +23,18 @@ import core.basesyntax.service.impl.SupplyTransactionHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
-public class Main {
+class MainTest {
     private static final String DATA_SOURCE_PATH =
             "src/main/java/core/basesyntax/resources/data.csv";
     private static final String REPORT_PATH =
             "src/main/java/core/basesyntax/resources/report.csv";
+    private static final String EXPECTED_PATH =
+            "src/test/resources/expected.csv";
 
-    public static void main(String[] args) {
+    @Test
+    void mainTest_ok() {
         Map<String, TransactionHandler> operationMap = Map.of(
                 Operation.BALANCE.getCode(), new BalanceTransactionHandler(),
                 Operation.SUPPLY.getCode(), new SupplyTransactionHandler(),
@@ -45,5 +52,16 @@ public class Main {
         fruitShopService.processTransaction(parsedTransactions);
         String report = reportService.generate();
         writer.writeToFile(report, REPORT_PATH);
+        assertNotNull(reader);
+        assertNotNull(writer);
+        assertNotNull(parser);
+        assertNotNull(operationStrategy);
+        assertNotNull(fruitShopService);
+        assertNotNull(reportService);
+        List<String> expected = reader.readData(EXPECTED_PATH);
+        List<String> actual = reader.readData(REPORT_PATH);
+        assertNotNull(expected);
+        assertNotNull(actual);
+        assertEquals(expected, actual);
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String TEST_FILE = "src/test/java/core/basesyntax/resources/testFile.csv";
-    private static final String FILE_REPORT = "src/main/java/core/basesyntax/db/report.csv";
+    private static final String TEST_FILE = "src/test/resources/testFile.csv";
+    private static final String FILE_REPORT = "src/main/java/core/basesyntax/resources/report.csv";
     private static final String WRONG_PATH = "wrong/testFile.csv";
     private FileWriter fileWriter = new FileWriterImpl();
     private String report;

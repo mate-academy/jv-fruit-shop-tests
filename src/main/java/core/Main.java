@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core;
 
 import core.basesyntax.db.ReportServiceImpl;
 import core.basesyntax.db.service.ReportService;

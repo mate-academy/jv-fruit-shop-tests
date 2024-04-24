@@ -36,6 +36,24 @@ class OperationStrategyTest {
     }
 
     @Test
+    void supplyOperation_ok() {
+        TransactionHandler actual = strategy.getOperationHandler(Operation.SUPPLY);
+        assertEquals(SupplyTransactionHandler.class, actual.getClass());
+    }
+
+    @Test
+    void purchaseOperation_ok() {
+        TransactionHandler actual = strategy.getOperationHandler(Operation.PURCHASE);
+        assertEquals(PurchaseTransactionHandler.class, actual.getClass());
+    }
+
+    @Test
+    void returnOperation_ok() {
+        TransactionHandler actual = strategy.getOperationHandler(Operation.RETURN);
+        assertEquals(ReturnTransactionHandler.class, actual.getClass());
+    }
+
+    @Test
     void unknownOperation_notOk() {
         assertThrows(RuntimeException.class, () -> strategy
                 .getOperationHandler(Operation.getOperationFromCode(UNKNOWN_OPERATION)));

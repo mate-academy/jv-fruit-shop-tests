@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 class FileDataReaderImplTest {
     private static final String INPUT_FILE = "src/test/resources/data.csv";
     private static final String NON_EXISTENT_FILE = "nonExistentFile.txt";
-    private FileDataReader fileDataReader = new FileDataReaderImpl();
+    private final FileDataReader fileDataReader = new FileDataReaderImpl();
 
     @Test
-    void testFileReader_isOk() {
+    void testFileReader_convertingToString_isOk() {
         List<String> expected = List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -24,7 +24,6 @@ class FileDataReaderImplTest {
 
         List<String> actual = fileDataReader.readFromFile(INPUT_FILE);
         assertEquals(expected, actual);
-
     }
 
     @Test

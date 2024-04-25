@@ -1,9 +1,10 @@
-package core;
+package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import core.basesyntax.db.ReportServiceImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.db.service.ReportService;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -23,6 +24,7 @@ import core.basesyntax.service.impl.SupplyTransactionHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class MainTest {
@@ -63,5 +65,10 @@ class MainTest {
         assertNotNull(expected);
         assertNotNull(actual);
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -18,6 +18,9 @@ public class FruitTransaction {
     }
 
     public String getFruit() {
+        if (fruit == null) {
+            throw new RuntimeException("fruit is null!");
+        }
         return fruit;
     }
 
@@ -26,6 +29,9 @@ public class FruitTransaction {
     }
 
     public int getQuantity() {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity can't be less than 0");
+        }
         return quantity;
     }
 

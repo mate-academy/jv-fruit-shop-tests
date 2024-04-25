@@ -8,12 +8,12 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.TransactionHandler;
-import core.basesyntax.service.impl.*;
-
+import core.basesyntax.service.impl.BalanceTransactionHandler;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ReturnTransactionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,14 +46,16 @@ public class BalanceOperationHandlerTest {
     void processTransaction_valueLessThanZero_notOk() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, APPLE, -10);
         List<FruitTransaction> transactions = List.of(transaction);
-        assertThrows(RuntimeException.class, () -> fruitShopService.processTransaction(transactions));
+        assertThrows(RuntimeException.class, () ->
+                fruitShopService.processTransaction(transactions));
     }
 
     @Test
     void processTransaction_fruitIsNull_notOk() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, null, 10);
         List<FruitTransaction> transactions = List.of(transaction);
-        assertThrows(RuntimeException.class, () -> fruitShopService.processTransaction(transactions));
+        assertThrows(RuntimeException.class, () ->
+                fruitShopService.processTransaction(transactions));
     }
 
     @AfterEach

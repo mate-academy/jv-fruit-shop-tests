@@ -52,7 +52,6 @@ class FruitServiceImplTest {
 
         int expected = TEST_DATA.get(BANANA_FRUIT);
         int actual = storage.getValue(BANANA_FRUIT);
-
         assertEquals(expected, actual);
     }
 

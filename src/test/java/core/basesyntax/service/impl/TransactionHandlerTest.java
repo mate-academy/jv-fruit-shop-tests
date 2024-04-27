@@ -19,7 +19,7 @@ class TransactionHandlerTest {
     }
 
     @Test
-    void balanceTransactionValid() {
+    void balanceTransaction_valid_ok() {
         int appleForBalance = 10;
         int expectedForBalance = 10;
         FruitTransaction transaction = new FruitTransaction(
@@ -30,7 +30,7 @@ class TransactionHandlerTest {
     }
 
     @Test
-    void purchaseTransactionValid() {
+    void purchaseTransaction_valid_ok() {
         int appleForPurchase = 5;
         int expectedForPurchase = 15;
         FruitTransaction transaction = new FruitTransaction(
@@ -41,7 +41,7 @@ class TransactionHandlerTest {
     }
 
     @Test
-    void supplyTransactionValid() {
+    void supplyTransaction_valid_ok() {
         int appleForSupply = 5;
         int expectedForSupply = 25;
         FruitTransaction transaction = new FruitTransaction(
@@ -52,7 +52,7 @@ class TransactionHandlerTest {
     }
 
     @Test
-    void returnTransactionValid() {
+    void returnTransaction_valid_ok() {
         int appleForReturn = 10;
         int expectedForReturn = 30;
         FruitTransaction transaction = new FruitTransaction(

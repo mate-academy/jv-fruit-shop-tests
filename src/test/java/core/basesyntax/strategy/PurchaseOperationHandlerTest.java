@@ -31,7 +31,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void processTransaction_SupplyTransaction_ok() {
+    public void processTransaction_purchaseTransaction_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, APPLE, 10);
         List<FruitTransaction> transactions = List.of(transaction);
         fruitShopService.processTransaction(transactions);

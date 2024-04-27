@@ -31,7 +31,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void processTransaction_BalanceTransaction_ok() {
+    public void processTransaction_balanceTransaction_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, APPLE, 10);
         List<FruitTransaction> transactions = List.of(transaction);
         fruitShopService.processTransaction(transactions);

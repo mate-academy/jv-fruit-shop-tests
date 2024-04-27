@@ -31,7 +31,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void processTransaction_SupplyTransaction_ok() {
+    public void processTransaction_returnTransaction_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.RETURN, APPLE, 10);
         List<FruitTransaction> transactions = List.of(transaction);
         fruitShopService.processTransaction(transactions);

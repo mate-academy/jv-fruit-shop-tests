@@ -16,7 +16,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void returnsCorrectData_Ok() {
+    void generate_correctData_Ok() {
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 100);
         StringBuilder builder = new StringBuilder();
@@ -32,7 +32,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void returnsCorrectData_emptyStorage_Ok() {
+    void generate_emptyStorage_Ok() {
         String expectedData = "fruit, quantity" + System.lineSeparator();
         String actualData = reportService.generate();
         assertEquals(expectedData, actualData);

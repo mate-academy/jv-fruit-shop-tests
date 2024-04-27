@@ -9,8 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private static final String DATA_BASE = "src/test/resources/database.csv";
-    private static final String WRONG_PATH = "wrongPath/database.csv";
+    private static final String DATA_BASE =
+            "src/test/resources/database.csv";
+    private static final String WRONG_PATH =
+            "wrongPath/database.csv";
     private static final String EMPTY_FILE =
             "src/test/resources/emptyFile.csv";
     private FileReader fileReader = new FileReaderImpl();

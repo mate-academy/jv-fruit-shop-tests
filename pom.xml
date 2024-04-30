@@ -17,6 +17,8 @@
         </maven.checkstyle.plugin.configLocation>
         <jacoco.version>0.8.10</jacoco.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencies>

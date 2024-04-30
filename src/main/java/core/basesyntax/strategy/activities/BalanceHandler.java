@@ -12,6 +12,9 @@ public class BalanceHandler implements OperationHandler {
     @Override
     public void executeTransaction(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
+        if (fruit == null) {
+            throw new RuntimeException("Fruit is null.");
+        }
         int quantity = transaction.getQuantity();
 
         Integer currentValue = storage.getValue(fruit);

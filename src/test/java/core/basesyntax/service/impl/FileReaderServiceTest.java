@@ -34,7 +34,7 @@ class FileReaderServiceTest {
 
     @Test
     public void readNonExistingFile_Test() {
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IOException.class, () ->
                 reader.read(WRONG_FILE_PATH));
     }
 }

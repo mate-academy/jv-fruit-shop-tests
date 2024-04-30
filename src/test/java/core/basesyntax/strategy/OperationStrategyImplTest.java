@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.activities.BalanceHandler;
@@ -23,12 +24,28 @@ class OperationStrategyImplTest {
             new OperationStrategyImpl(operationHandlerMap);
 
     @Test
-    void getOperation_Test() {
+    void getOperation_Ok() {
         for (FruitTransaction.Operation operation : operationHandlerMap.keySet()) {
             OperationHandler expected = operationHandlerMap.get(operation);
             OperationHandler actual = operationStrategy.get(operation);
 
             assertEquals(expected, actual);
         }
+    }
+
+    @Test
+    void getOperation_Null_InvalidOperation() {
+        FruitTransaction.Operation invalidOperation;
+        try {
+            invalidOperation = FruitTransaction.Operation.valueOf("INVALID");
+        } catch (IllegalArgumentException e) {
+            invalidOperation = null;
+        }
+        OperationHandler handler = null;
+        if (invalidOperation != null) {
+            handler = operationStrategy.get(invalidOperation);
+        }
+
+        assertNull(handler);
     }
 }

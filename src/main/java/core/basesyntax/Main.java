@@ -17,6 +17,7 @@ import core.basesyntax.strategy.activities.OperationHandler;
 import core.basesyntax.strategy.activities.PurchaseHandler;
 import core.basesyntax.strategy.activities.ReturnHandler;
 import core.basesyntax.strategy.activities.SupplyHandler;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,12 @@ public class Main {
             new TransactionMapperService();
 
     public static void main(String[] args) {
-        String inputFileLines = readFile.read(FILE_PATH);
+        String inputFileLines;
+        try {
+            inputFileLines = readFile.read(FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         List<FruitTransaction> transactions =
                 transactionMapperService.stringToFruitTransaction(inputFileLines);

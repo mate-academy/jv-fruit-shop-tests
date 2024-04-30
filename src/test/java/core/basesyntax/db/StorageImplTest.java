@@ -1,8 +1,11 @@
 package core.basesyntax.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
+import java.util.Set;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,17 +20,34 @@ class StorageImplTest {
     }
 
     @Test
-    public void setGetValue_Test() {
-        storage.setValue(APPLE_FRUIT, APPLE_TEST_AMOUNT);
+    void getValue_NonExistingKey() {
+        String key = APPLE_FRUIT;
+        Integer retrievedValue = storage.getValue(key);
 
-        int expected = APPLE_TEST_AMOUNT;
-        int actual = storage.getValue(APPLE_FRUIT);
-
-        assertEquals(expected, actual);
+        assertNull(retrievedValue);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @Test
+    void setAndGetValue() {
+        String key = APPLE_FRUIT;
+        Integer value = APPLE_TEST_AMOUNT;
+        storage.setValue(key, value);
+
+        assertEquals(value, storage.getValue(key));
+    }
+
+    @Test
+    void getKeys() {
+        String key1 = APPLE_FRUIT;
+        storage.setValue(key1, APPLE_TEST_AMOUNT);
+
+        Set<String> keys = storage.getKeys();
+
+        assertTrue(keys.contains(key1));
+    }
+
+    @AfterEach
+    void afterEach() {
         new StorageImpl().clear();
     }
 }

@@ -13,7 +13,11 @@ public class ReportServiceImpl implements ReportService {
     public String generateReport() {
         StringJoiner joiner = new StringJoiner(",\n");
         for (String fruit : storage.getKeys()) {
-            joiner.add(fruit + "=" + storage.getValue(fruit));
+            if (fruit == null) {
+                throw new RuntimeException("Fruit can't be null.");
+            } else {
+                joiner.add(fruit + "=" + storage.getValue(fruit));
+            }
         }
         return TITLE + joiner;
     }

@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageImpl;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class ReportServiceTest {
     }
 
     @Test
-    public void generateReport_Test() {
+    public void generateReport_Ok() {
         storage.setValue("orange", 50);
 
         String expected = "fruit,quantity\norange=50";
@@ -27,8 +28,16 @@ class ReportServiceTest {
         assertEquals(expected, actual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @Test
+    public void generateReport_NullFruit_NotOk() {
+        storage.setValue(null, 90);
+
+        assertThrows(RuntimeException.class, () ->
+                reportService.generateReport());
+    }
+
+    @AfterEach
+    void afterEach() {
         new StorageImpl().clear();
     }
 }

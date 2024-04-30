@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriterService;
 import java.io.File;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterServiceTest {
     private static final String TEST_CONTENT = "This is a test file.";
+    private static final String WRONG_FILE_PATH = "non-existing-file.txt";
     private FileWriterService writer;
 
     @BeforeEach
@@ -29,5 +31,11 @@ class FileWriterServiceTest {
         assertEquals(expectedContent, actualContent);
 
         Files.delete(tempFile);
+    }
+
+    @Test
+    void writeToFile_IncorrectPath_NotOk() {
+        assertThrows(RuntimeException.class, () ->
+                writer.writeToFile(TEST_CONTENT, WRONG_FILE_PATH));
     }
 }

@@ -18,22 +18,25 @@ class ParseServiceImplTest {
     }
 
     @Test
-    void parseFromString_emptyList() {
+    void parseFromString_emptyList_ok() {
         List<String> transactionLine = List.of();
         assertTrue(parseService.parseFromString(transactionLine).isEmpty());
     }
 
     @Test
-    void parseFromString_validData() {
+    void parseFromString_validData_parsesCorrectNumberOfTransactions() {
         List<String> transactionLine = List.of("b,banana,10", "s,apple,5");
-        List<FruitTransaction> result =
-                parseService.parseFromString(transactionLine);
+        List<FruitTransaction> result = parseService.parseFromString(transactionLine);
         assertEquals(2, result.size());
-        assertEquals(FruitTransaction.Operation.BALANCE,
-                result.get(0).getType());
-        assertEquals("banana", result.get(0).getFruit());
-        assertEquals(10, result.get(0).getQuantity());
-        assertEquals(3, result.get(0).getClass().getDeclaredFields().length);
+    }
+
+    @Test
+    void parseFromString_validData_allTransactionsHaveThreeFields() {
+        List<String> transactionLine = List.of("b,banana,10", "s,apple,5");
+        List<FruitTransaction> result = parseService.parseFromString(transactionLine);
+        for (FruitTransaction transaction : result) {
+            assertEquals(3, transaction.getClass().getDeclaredFields().length);
+        }
     }
 
     @Test

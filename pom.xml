@@ -96,7 +96,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/strategy/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

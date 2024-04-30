@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface TransactionProcessorService {
-    Map<String, Integer> processTransaction(List<FruitTransaction> transactions);
+    Map<String, Integer> processTransactions(List<FruitTransaction> transactions);
 }

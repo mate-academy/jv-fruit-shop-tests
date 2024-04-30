@@ -44,7 +44,7 @@ public class Main {
         List<FruitTransaction> parsedFromString =
                 parseService.parseFromString(fileContent);
 
-        Map<String, Integer> fruitCounts = processorService.processTransaction(parsedFromString);
+        Map<String, Integer> fruitCounts = processorService.processTransactions(parsedFromString);
 
         List<String> report = reportService.generateReport(fruitCounts);
 

@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private WriterService writerService;
-    private String filePath;
     private List<String> originalContent;
+
+    private final String filePath = "src/main/resources/output.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         writerService = new WriterServiceImpl();
-        filePath = "src/main/resources/output.csv";
         originalContent = Files.readAllLines(Path.of(filePath));
     }
 

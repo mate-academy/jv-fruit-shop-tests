@@ -17,7 +17,7 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
     }
 
     @Override
-    public Map<String, Integer> processTransaction(List<FruitTransaction> transactions) {
+    public Map<String, Integer> processTransactions(List<FruitTransaction> transactions) {
         fruitCounts = Storage.getFruits();
         if (transactions != null) {
             for (FruitTransaction transaction : transactions) {
@@ -25,6 +25,10 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
             }
         }
         return fruitCounts;
+    }
+
+    public void setFruitCounts(Map<String, Integer> fruitCounts) {
+        this.fruitCounts = fruitCounts;
     }
 
     public void processSingleTransaction(FruitTransaction transaction) {
@@ -35,9 +39,8 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
         OperationStrategy strategy = strategies.get(typeOfOperation);
         if (strategy != null) {
             strategy.apply(fruitCounts, fruit, quantity);
-
         } else {
-            System.out.println("Invalid operation type: " + typeOfOperation);
+            throw new RuntimeException("Unknown operation type: " + typeOfOperation.getCode());
         }
     }
 }

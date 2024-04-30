@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class SupplyHandlerTest {
     private static final String APPLE_FRUIT = "apple";
     private static final int APPLE_VALID_AMOUNT = 30;
-    OperationHandler supplyHandler;
+    private OperationHandler supplyHandler;
     private Storage storage;
 
     @BeforeEach

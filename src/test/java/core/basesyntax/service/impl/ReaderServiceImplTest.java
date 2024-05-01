@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private final String inputFilePath = "src/main/resources/fruitList.csv";
-    private final String filePathTxtType = "src/main/resources/fruitList"
-            + ".txt";
+    private final String filePathTxtType = "src/main/resources/fruitList.txt";
     private final String missinigFile = "src/main/resources/missing_file.txt";
     private ReaderService readerService;
 

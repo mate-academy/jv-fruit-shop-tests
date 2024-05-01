@@ -15,12 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
+    private final String filePath = "src/main/resources/output.csv";
     private WriterService writerService;
     private List<String> originalContent;
 
-    private final String filePath = "src/main/resources/output.csv";
-
-    @BeforeEach
+    @BeforeEach   
     void setUp() throws IOException {
         writerService = new WriterServiceImpl();
         originalContent = Files.readAllLines(Path.of(filePath));

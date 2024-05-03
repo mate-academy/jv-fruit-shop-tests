@@ -67,6 +67,6 @@ class FruitServiceImplTest {
 
     @AfterEach
     void afterEach() {
-        new StorageImpl().clear();
+        storage.clear();
     }
 }

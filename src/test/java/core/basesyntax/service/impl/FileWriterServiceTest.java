@@ -22,7 +22,7 @@ class FileWriterServiceTest {
     }
 
     @Test
-    void writeToFile_Test() throws IOException {
+    void writeToFile_NotThrows_Ok() throws IOException {
         Path tempFile = Files.createTempFile("test", ".txt");
         writer.writeToFile(TEST_CONTENT, tempFile.toString());
 

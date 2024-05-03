@@ -38,6 +38,6 @@ class ReportServiceTest {
 
     @AfterEach
     void afterEach() {
-        new StorageImpl().clear();
+        storage.clear();
     }
 }

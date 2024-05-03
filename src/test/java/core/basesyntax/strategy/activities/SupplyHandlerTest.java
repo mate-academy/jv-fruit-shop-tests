@@ -34,7 +34,7 @@ class SupplyHandlerTest {
     }
 
     @Test
-    public void executeTransaction_withNullValue() {
+    public void executeTransaction_NullValue_NotOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 APPLE_FRUIT,
@@ -48,6 +48,6 @@ class SupplyHandlerTest {
 
     @AfterEach
     void afterEach() {
-        new StorageImpl().clear();
+        storage.clear();
     }
 }

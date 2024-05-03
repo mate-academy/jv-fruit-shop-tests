@@ -21,7 +21,7 @@ class FileReaderServiceTest {
     }
 
     @Test
-    public void read_Test() throws IOException {
+    public void read_NotThrows_Ok() throws IOException {
         Path tempFile = Files.createTempFile("test", ".txt");
         Files.write(tempFile, TEST_CONTENT.getBytes());
 

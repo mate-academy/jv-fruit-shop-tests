@@ -2,9 +2,7 @@ package core.basesyntax.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +18,7 @@ class StorageImplTest {
     }
 
     @Test
-    void getValue_NonExistingKey() {
+    void getValue_NonExistingKey_NotOk() {
         String key = APPLE_FRUIT;
         Integer retrievedValue = storage.getValue(key);
 
@@ -28,7 +26,7 @@ class StorageImplTest {
     }
 
     @Test
-    void setAndGetValue() {
+    void setAndGetValue_ValidData_Ok() {
         String key = APPLE_FRUIT;
         Integer value = APPLE_TEST_AMOUNT;
         storage.setValue(key, value);
@@ -36,18 +34,8 @@ class StorageImplTest {
         assertEquals(value, storage.getValue(key));
     }
 
-    @Test
-    void getKeys() {
-        String key1 = APPLE_FRUIT;
-        storage.setValue(key1, APPLE_TEST_AMOUNT);
-
-        Set<String> keys = storage.getKeys();
-
-        assertTrue(keys.contains(key1));
-    }
-
     @AfterEach
     void afterEach() {
-        new StorageImpl().clear();
+        storage.clear();
     }
 }

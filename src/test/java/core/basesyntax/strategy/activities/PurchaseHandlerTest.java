@@ -22,7 +22,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    public void balanceNegative_NotOk() {
+    public void executeTransaction_BalanceNegative_NotOk() {
         FruitTransaction transaction1 = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 APPLE_FRUIT,
@@ -48,6 +48,6 @@ class PurchaseHandlerTest {
 
     @AfterEach
     void afterEach() {
-        new StorageImpl().clear();
+        storage.clear();
     }
 }

@@ -24,7 +24,7 @@ class OperationStrategyImplTest {
             new OperationStrategyImpl(operationHandlerMap);
 
     @Test
-    void getOperation_Ok() {
+    void getOperation_ValidData_Ok() {
         for (FruitTransaction.Operation operation : operationHandlerMap.keySet()) {
             OperationHandler expected = operationHandlerMap.get(operation);
             OperationHandler actual = operationStrategy.get(operation);

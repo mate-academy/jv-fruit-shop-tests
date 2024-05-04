@@ -15,26 +15,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private final String filePath = "src/main/resources/output.csv";
+    private static final String FILE_PATH = "src/main/resources/output.csv";
     private WriterService writerService;
     private List<String> originalContent;
 
     @BeforeEach   
     void setUp() throws IOException {
         writerService = new WriterServiceImpl();
-        originalContent = Files.readAllLines(Path.of(filePath));
+        originalContent = Files.readAllLines(Path.of(FILE_PATH));
     }
 
     @AfterEach
     void tearDown() throws IOException {
-        Files.write(Paths.get(filePath), originalContent);
+        Files.write(Paths.get(FILE_PATH), originalContent);
     }
 
     @Test
     void writeToFile_validInput_writesToFile() throws IOException {
         List<String> report = Arrays.asList("line1", "line2", "line3");
-        writerService.writeToFile(filePath, report);
-        List<String> lines = Files.readAllLines(Paths.get(filePath));
+        writerService.writeToFile(FILE_PATH, report);
+        List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
         assertEquals(report, lines);
     }
 
@@ -46,6 +46,6 @@ class WriterServiceImplTest {
 
     @Test
     void writeToFile_nullReport_throwsException() {
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(filePath, null));
+        assertThrows(RuntimeException.class, () -> writerService.writeToFile(FILE_PATH, null));
     }
 }

@@ -10,9 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private final String inputFilePath = "src/main/resources/fruitList.csv";
-    private final String filePathTxtType = "src/main/resources/fruitList.txt";
-    private final String missinigFile = "src/main/resources/missing_file.txt";
+    private static final String INPUT_FILE_PATH =
+            "src/main/resources/fruitList.csv";
+    private static final String FILE_PATH_TXT_TYPE =
+            "src/main/resources/fruitList.txt";
+    private static final String MISSING_FILE =
+            "src/main/resources/missing_file.txt";
     private ReaderService readerService;
 
     @BeforeEach
@@ -26,7 +29,7 @@ class ReaderServiceImplTest {
         String line2 = "b,apple,100";
         List<String> expected = List.of(line1, line2); // exclude the header as the method skips it
 
-        List<String> actual = readerService.readFromFilesContents(inputFilePath);
+        List<String> actual = readerService.readFromFilesContents(INPUT_FILE_PATH);
 
         assertTrue(actual.containsAll(expected));
     }
@@ -34,8 +37,8 @@ class ReaderServiceImplTest {
     @Test
     void fileNotFound() {
         Exception exception = assertThrows(RuntimeException.class,
-                () -> readerService.readFromFilesContents(missinigFile));
-        String expectedMessage = "Can't read from the file " + missinigFile;
+                () -> readerService.readFromFilesContents(MISSING_FILE));
+        String expectedMessage = "Can't read from the file " + MISSING_FILE;
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -43,9 +46,9 @@ class ReaderServiceImplTest {
     @Test
     void notValidFile() {
         Exception exception = assertThrows(RuntimeException.class,
-                () -> readerService.readFromFilesContents(filePathTxtType));
+                () -> readerService.readFromFilesContents(FILE_PATH_TXT_TYPE));
         String expectedMessage = "Can't read from the file: "
-                + filePathTxtType + ". File type is not valid";
+                + FILE_PATH_TXT_TYPE + ". File type is not valid";
         String actualMessage = exception.getMessage();
         assertFalse(actualMessage.contains(expectedMessage));
     }
@@ -53,7 +56,7 @@ class ReaderServiceImplTest {
     @Test
     void readFromFilesContents_emptyFile() {
         List<String> result = readerService.readFromFilesContents(
-                inputFilePath);
+                INPUT_FILE_PATH);
         if (result.isEmpty()) {
             assertTrue(true);
         }

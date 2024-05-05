@@ -57,8 +57,6 @@ class ReaderServiceImplTest {
     void readFromFilesContents_emptyFile() {
         List<String> result = readerService.readFromFilesContents(
                 INPUT_FILE_PATH);
-        if (result.isEmpty()) {
-            assertTrue(true);
-        }
+        assertFalse(result.isEmpty());
     }
 }

@@ -22,7 +22,7 @@ class ReportServiceImplTest {
 
     @Test
     void generateReport_nullMap() {
-        Exception exception = assertThrows(NullPointerException.class,
+        Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> reportService.generateReport(null));
         String expectedMessage = "Can't generate report for null data";
         String actualMessage = exception.getMessage();

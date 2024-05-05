@@ -21,7 +21,7 @@ class SupplyStrategyTest {
     }
 
     @Test
-    void apply() {
+    void testSupplyStrategyForCorrectFruitCounting() {
         supplyStrategy.apply(fruitCounts, "banana", 5);
         assertEquals(25, fruitCounts.get("banana"));
         supplyStrategy.apply(fruitCounts, "apple", 5);

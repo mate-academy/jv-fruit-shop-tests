@@ -1,7 +1,10 @@
 package core.basesyntax.servise.impl;
 
 import core.basesyntax.dao.DaoStorage;
+import core.basesyntax.exception.ReportMakerServiceException;
 import core.basesyntax.servise.ReportMakerService;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
@@ -12,14 +15,18 @@ public class ReportMakerServiceImpl implements ReportMakerService {
 
     public ReportMakerServiceImpl(DaoStorage daoStorage) {
         if (daoStorage == null) {
-            throw new IllegalArgumentException("The argument daoStorage is null");
+            throw new ReportMakerServiceException("The argument daoStorage is null");
         }
         this.daoStorage = daoStorage;
     }
 
     @Override
     public String generateReport() {
-        return daoStorage.getStatistic().stream()
+        Set<Map.Entry<String, Integer>> statistic = daoStorage.getStatistic();
+        if (statistic.isEmpty()) {
+            throw new ReportMakerServiceException("The Storage is empty");
+        }
+        return statistic.stream()
                 .map(entry -> new StringBuilder()
                             .append(entry.getKey())
                             .append(SEPARATOR)

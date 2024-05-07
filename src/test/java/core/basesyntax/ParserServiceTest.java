@@ -57,6 +57,18 @@ public class ParserServiceTest {
     }
 
     @Test
+    public void parserService_invalidFormatData_notOk() {
+        inputList.set(3, "s,banana,100,b,apple,20");
+        assertThrows(ParserServiceException.class, () -> parserService.parsingData(inputList));
+        inputList.set(3, "sbanana100");
+        assertThrows(ParserServiceException.class, () -> parserService.parsingData(inputList));
+        inputList.set(3, "s banana 100");
+        assertThrows(ParserServiceException.class, () -> parserService.parsingData(inputList));
+        inputList.set(3, "s-banana-100");
+        assertThrows(ParserServiceException.class, () -> parserService.parsingData(inputList));
+    }
+
+    @Test
     public void parserService_invalidNumber_notOk() {
         inputList.set(3, "s,banana, 7");
         assertThrows(ParserServiceException.class, () -> parserService.parsingData(inputList));

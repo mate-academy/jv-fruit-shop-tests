@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.exception.ReportMakerServiceException;
 import core.basesyntax.servise.ReportMakerService;
 import core.basesyntax.servise.impl.ReportMakerServiceImpl;
 import core.basesyntax.testclasses.DaoStorageForTest;
 import core.basesyntax.testclasses.StorageForTest;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportMakerServiceTest {
@@ -24,9 +26,15 @@ public class ReportMakerServiceTest {
         reportMakerService = new ReportMakerServiceImpl(new DaoStorageForTest());
     }
 
+    @BeforeEach
+    public void beforeTest() {
+        StorageForTest.getTestStorage().clear();
+    }
+
     @Test
     public void reportMakerService_daoStorageNull_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> new ReportMakerServiceImpl(null));
+        assertThrows(ReportMakerServiceException.class,
+                () -> new ReportMakerServiceImpl(null));
     }
 
     @Test
@@ -37,5 +45,11 @@ public class ReportMakerServiceTest {
                 () -> assertTrue(actual.startsWith(TITLE)),
                 () -> assertTrue(actual.contains(FRUIT + SEPARATOR + QUANTITY))
         );
+    }
+
+    @Test
+    public void reportMakerService_storageNull_notOk() {
+        assertThrows(ReportMakerServiceException.class,
+                () -> reportMakerService.generateReport());
     }
 }

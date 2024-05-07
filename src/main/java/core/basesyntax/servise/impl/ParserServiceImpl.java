@@ -13,13 +13,15 @@ public class ParserServiceImpl implements ParserService {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String EMPTY_LINE = "";
+    private static final int ARRAY_SIZE = 3;
     private final Predicate<String[]> predicateMissingData;
     private final Function<String, Integer> functionCheckQuantity;
 
     public ParserServiceImpl() {
-        predicateMissingData = array -> array.length < 3
-                || array[FRUIT_INDEX].equals("")
-                || array[TYPE_INDEX].equals("");
+        predicateMissingData = array -> array.length != ARRAY_SIZE
+                || array[FRUIT_INDEX].equals(EMPTY_LINE)
+                || array[TYPE_INDEX].equals(EMPTY_LINE);
         functionCheckQuantity = quantity -> {
             try {
                 return Integer.parseInt(quantity);

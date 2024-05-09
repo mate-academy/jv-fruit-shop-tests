@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static core.basesyntax.servise.impl.FruitTransaction.Operation.BALANCE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,9 +9,8 @@ import core.basesyntax.strategy.MapOfHandlersForStrategy;
 import core.basesyntax.strategy.OperationService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.testclasses.EmptyMapOfHandlersForTest;
-import core.basesyntax.testclasses.MapOfHandlersForTest;
-import core.basesyntax.testclasses.OperationServiceForTest;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,49 @@ import org.junit.jupiter.api.Test;
 public class OperationStrategyTest {
     private static MapOfHandlersForStrategy emptyMapForStrategy;
     private static OperationStrategy operationStrategy;
+    private static OperationService operationServiceForTest;
     private FruitTransaction testTransaction;
 
     @BeforeAll
     public static void setUp() {
-        emptyMapForStrategy = new EmptyMapOfHandlersForTest();
-        operationStrategy = new OperationStrategyImpl(new MapOfHandlersForTest());
+        operationServiceForTest = fruitTransaction -> {};
+
+        emptyMapForStrategy = new MapOfHandlersForStrategy() {
+            @Override
+            public Map<FruitTransaction.Operation, OperationService> getHandlers() {
+                return new HashMap<>();
+            }
+
+            @Override
+            public void putHandler(FruitTransaction.Operation operation,
+                                   OperationService operationService) {
+            }
+
+            @Override
+            public void removeHandler(FruitTransaction.Operation operation) {
+            }
+        };
+
+        MapOfHandlersForStrategy mapOfHandlersForTest = new MapOfHandlersForStrategy() {
+            private final Map<FruitTransaction.Operation, OperationService> mapOfHandlersForTest =
+                    Map.of(BALANCE, operationServiceForTest);
+
+            @Override
+            public Map<FruitTransaction.Operation, OperationService> getHandlers() {
+                return mapOfHandlersForTest;
+            }
+
+            @Override
+            public void putHandler(FruitTransaction.Operation operation,
+                                   OperationService operationService) {
+            }
+
+            @Override
+            public void removeHandler(FruitTransaction.Operation operation) {
+            }
+        };
+
+        operationStrategy = new OperationStrategyImpl(mapOfHandlersForTest);
     }
 
     @BeforeEach
@@ -51,6 +88,6 @@ public class OperationStrategyTest {
     @Test
     public void operationStrategy_GetHandler_Ok() {
         OperationService actual = operationStrategy.getOperationHandler(testTransaction);
-        assertEquals(OperationServiceForTest.class, actual.getClass());
+        assertEquals(operationServiceForTest, actual);
     }
 }

@@ -26,7 +26,7 @@ public class DaoStorageTest {
 
     @AfterEach
     public void clear() {
-        daoStorage.clear();
+        StorageImpl.getStorage().clear();
     }
 
     @Test
@@ -61,7 +61,7 @@ public class DaoStorageTest {
         assertTrue(StorageImpl.getStorage().containsKey(FRUIT));
         assertEquals(QUANTITY, StorageImpl.getStorage().get(FRUIT));
 
-        int expected = QUANTITY * 2;
+        int expected = QUANTITY + QUANTITY;
         daoStorage.concatenateValue(FRUIT, QUANTITY);
         assertEquals(expected, StorageImpl.getStorage().get(FRUIT));
     }
@@ -73,8 +73,8 @@ public class DaoStorageTest {
         assertTrue(StorageImpl.getStorage().containsKey(FRUIT));
         assertEquals(QUANTITY, StorageImpl.getStorage().get(FRUIT));
 
-        int expected = QUANTITY * 2;
-        daoStorage.setNewValue(FRUIT, QUANTITY * 2);
+        int expected = QUANTITY + QUANTITY;
+        daoStorage.setNewValue(FRUIT, QUANTITY + QUANTITY);
         assertEquals(expected, StorageImpl.getStorage().get(FRUIT));
     }
 

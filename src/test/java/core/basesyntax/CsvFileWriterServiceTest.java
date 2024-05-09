@@ -3,10 +3,15 @@ package core.basesyntax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.servise.ReaderService;
 import core.basesyntax.servise.WriterService;
 import core.basesyntax.servise.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.testclasses.CsvFileReaderServiceForTest;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +23,20 @@ public class CsvFileWriterServiceTest {
             + LINE_SEPARATOR + "apple,90";
     private static final String EMPTY_REPORT = "";
     private static WriterService writerService;
+    private static ReaderService readerServicesForTest;
     private String pathOutFile;
 
     @BeforeAll
     public static void setUp() {
         writerService = new CsvFileWriterServiceImpl();
+
+        readerServicesForTest = pathInnFile -> {
+            try (Stream<String> streamFromFile = Files.lines(Paths.get(pathInnFile))) {
+                return streamFromFile.collect(Collectors.toList());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     @BeforeEach
@@ -57,7 +71,7 @@ public class CsvFileWriterServiceTest {
     @Test
     public void csvFileWriterService_writeToFile_Ok() {
         writerService.writeToFile(pathOutFile, REPORT);
-        List<String> actual = new CsvFileReaderServiceForTest().readFromFile(pathOutFile);
+        List<String> actual = readerServicesForTest.readFromFile(pathOutFile);
         assertEquals(List.of(REPORT.split(LINE_SEPARATOR)), actual);
     }
 }

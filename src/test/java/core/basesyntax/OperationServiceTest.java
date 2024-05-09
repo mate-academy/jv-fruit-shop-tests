@@ -9,16 +9,18 @@ import core.basesyntax.strategy.OperationService;
 import core.basesyntax.strategy.impl.BalanceOperationService;
 import core.basesyntax.strategy.impl.IncomingOperationService;
 import core.basesyntax.strategy.impl.OutgoingOperationService;
-import core.basesyntax.testclasses.DaoStorageForTest;
-import core.basesyntax.testclasses.StorageForTest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationServiceTest {
-    static final String TEST_FRUIT = "banana";
-    static final int DEFAULT_BALANCE = 100;
+    private static final String TEST_FRUIT = "banana";
+    private static final int DEFAULT_BALANCE = 100;
+    private static Map<String, Integer> storageForTest;
     private static OperationService balanceOperationService;
     private static IncomingOperationService incomingOperationService;
     private static OutgoingOperationService outgoingOperationService;
@@ -29,7 +31,34 @@ public class OperationServiceTest {
 
     @BeforeAll
     public static void setUp() {
-        DaoStorage daoStorageForTest = new DaoStorageForTest();
+        storageForTest = new HashMap<>();
+
+        DaoStorage daoStorageForTest = new DaoStorage() {
+            @Override
+            public void setNewValue(String fruit, Integer quantity) {
+                storageForTest.put(fruit, quantity);
+            }
+
+            @Override
+            public void concatenateValue(String fruit, Integer quantity) {
+                storageForTest.merge(fruit, quantity, Integer::sum);
+            }
+
+            @Override
+            public int getValue(String fruit) {
+                return storageForTest.get(fruit);
+            }
+
+            @Override
+            public Set<Map.Entry<String, Integer>> getStatistic() {
+                return storageForTest.entrySet();
+            }
+
+            @Override
+            public void clear() {
+                storageForTest.clear();
+            }
+        };
         balanceOperationService = new BalanceOperationService(daoStorageForTest);
         incomingOperationService = new IncomingOperationService(daoStorageForTest);
         outgoingOperationService = new OutgoingOperationService(daoStorageForTest);
@@ -37,7 +66,7 @@ public class OperationServiceTest {
 
     @BeforeEach
     public void beforeTest() {
-        StorageForTest.getTestStorage().put(TEST_FRUIT, DEFAULT_BALANCE);
+        storageForTest.put(TEST_FRUIT, DEFAULT_BALANCE);
         testTransactionB = new FruitTransaction("b", TEST_FRUIT, 90);
         testTransactionS = new FruitTransaction("s", TEST_FRUIT, 50);
         testTransactionR = new FruitTransaction("r", TEST_FRUIT, 10);
@@ -46,7 +75,7 @@ public class OperationServiceTest {
 
     @AfterEach
     public void clear() {
-        StorageForTest.getTestStorage().clear();
+        storageForTest.clear();
     }
 
     @Test
@@ -72,22 +101,22 @@ public class OperationServiceTest {
     @Test
     public void operationService_calculation_Ok() {
         balanceOperationService.calculation(testTransactionB);
-        int actual = StorageForTest.getTestStorage().get(TEST_FRUIT);
+        int actual = storageForTest.get(TEST_FRUIT);
         assertEquals(testTransactionB.getQuantity(), actual);
 
         incomingOperationService.calculation(testTransactionS);
         int expected = actual + testTransactionS.getQuantity();
-        actual = StorageForTest.getTestStorage().get(TEST_FRUIT);
+        actual = storageForTest.get(TEST_FRUIT);
         assertEquals(expected, actual);
 
         incomingOperationService.calculation(testTransactionR);
         expected = actual + testTransactionR.getQuantity();
-        actual = StorageForTest.getTestStorage().get(TEST_FRUIT);
+        actual = storageForTest.get(TEST_FRUIT);
         assertEquals(expected, actual);
 
         outgoingOperationService.calculation(testTransactionP);
         expected = actual - testTransactionP.getQuantity();
-        actual = StorageForTest.getTestStorage().get(TEST_FRUIT);
+        actual = storageForTest.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 }

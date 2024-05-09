@@ -7,6 +7,14 @@ import java.util.Objects;
 import java.util.Set;
 
 public class DaoStorageImpl implements DaoStorage {
+    private final Map<String, Integer> storage;
+
+    public DaoStorageImpl() {
+        storage = StorageImpl.getStorage();
+        if (storage == null) {
+            throw new DaoStorageException("The Storage is null");
+        }
+    }
 
     @Override
     public void setNewValue(String fruit, Integer quantity) {
@@ -14,7 +22,7 @@ public class DaoStorageImpl implements DaoStorage {
             throw new DaoStorageException("The arguments fruit "
                     + "or/and quantity is NULL or negative");
         }
-        StorageImpl.getStorage().put(fruit, quantity);
+        storage.put(fruit, quantity);
     }
 
     @Override
@@ -23,12 +31,12 @@ public class DaoStorageImpl implements DaoStorage {
             throw new DaoStorageException("The arguments fruit "
                     + "or/and quantity is NULL or negative");
         }
-        StorageImpl.getStorage().merge(fruit, quantity, Integer::sum);
+        storage.merge(fruit, quantity, Integer::sum);
     }
 
     @Override
     public int getValue(String fruit) {
-        return StorageImpl.getStorage().entrySet().stream()
+        return storage.entrySet().stream()
                 .filter(entry -> Objects.equals(entry.getKey(), fruit))
                 .findAny()
                 .orElseThrow(() -> new DaoStorageException("The fruit is null or not found"))
@@ -37,14 +45,14 @@ public class DaoStorageImpl implements DaoStorage {
 
     @Override
     public Set<Map.Entry<String, Integer>> getStatistic() {
-        if (StorageImpl.getStorage().entrySet().isEmpty()) {
+        if (storage.entrySet().isEmpty()) {
             throw new DaoStorageException("The storage is empty.");
         }
-        return StorageImpl.getStorage().entrySet();
+        return storage.entrySet();
     }
 
     @Override
     public void clear() {
-        StorageImpl.getStorage().clear();
+        storage.clear();
     }
 }

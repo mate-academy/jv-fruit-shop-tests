@@ -18,31 +18,58 @@ import core.basesyntax.strategy.impl.BalanceOperationService;
 import core.basesyntax.strategy.impl.IncomingOperationService;
 import core.basesyntax.strategy.impl.MapOfHandlersForStrategyImpl;
 import core.basesyntax.strategy.impl.OutgoingOperationService;
-import core.basesyntax.testclasses.DaoStorageForTest;
-import core.basesyntax.testclasses.OperationServiceForTest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MapOfHandlersForStrategyTest {
+    private static Map<String, Integer> storageForTest;
+    private static Map<FruitTransaction.Operation, OperationService> alternativeMapOfHandlers;
     private static DaoStorage daoStorageForTest;
     private static OperationService operationServiceForTest;
-    private static Map<FruitTransaction.Operation, OperationService> alternativeMap;
     private MapOfHandlersForStrategy mapForStrategy;
     private int defaultSizeHandlers;
 
     @BeforeAll
     public static void setUp() {
-        daoStorageForTest = new DaoStorageForTest();
-        operationServiceForTest = new OperationServiceForTest();
+        storageForTest = new HashMap<>();
+
+        daoStorageForTest = new DaoStorage() {
+            @Override
+            public void setNewValue(String fruit, Integer quantity) {
+                storageForTest.put(fruit, quantity);
+            }
+
+            @Override
+            public void concatenateValue(String fruit, Integer quantity) {
+                storageForTest.merge(fruit, quantity, Integer::sum);
+            }
+
+            @Override
+            public int getValue(String fruit) {
+                return storageForTest.get(fruit);
+            }
+
+            @Override
+            public Set<Map.Entry<String, Integer>> getStatistic() {
+                return storageForTest.entrySet();
+            }
+
+            @Override
+            public void clear() {
+                storageForTest.clear();
+            }
+        };
+
+        operationServiceForTest = fruitTransaction -> {};
     }
 
     @BeforeEach
     public void beforeTest() {
-        alternativeMap = Map.of(BALANCE,
-                new OperationServiceForTest());
+        alternativeMapOfHandlers = Map.of(BALANCE, operationServiceForTest);
         mapForStrategy = new MapOfHandlersForStrategyImpl(daoStorageForTest);
         defaultSizeHandlers = mapForStrategy.getHandlers().size();
     }
@@ -64,7 +91,7 @@ public class MapOfHandlersForStrategyTest {
         assertThrows(MapOfHandlersForStrategyException.class,
                 () -> new MapOfHandlersForStrategyImpl(null));
         assertThrows(MapOfHandlersForStrategyException.class,
-                () -> new MapOfHandlersForStrategyImpl(alternativeMap,null));
+                () -> new MapOfHandlersForStrategyImpl(alternativeMapOfHandlers,null));
     }
 
     @Test
@@ -127,8 +154,8 @@ public class MapOfHandlersForStrategyTest {
 
     @Test
     public void mapOfHandlersForStrategy_alternativeMap_Ok() {
-        OperationService actual = new MapOfHandlersForStrategyImpl(alternativeMap,
+        OperationService actual = new MapOfHandlersForStrategyImpl(alternativeMapOfHandlers,
                 daoStorageForTest).getHandlers().get(BALANCE);
-        assertEquals(actual.getClass(), OperationServiceForTest.class);
+        assertEquals(operationServiceForTest, actual);
     }
 }

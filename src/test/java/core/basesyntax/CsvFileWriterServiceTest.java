@@ -71,7 +71,8 @@ public class CsvFileWriterServiceTest {
     @Test
     public void csvFileWriterService_writeToFile_Ok() {
         writerService.writeToFile(pathOutFile, REPORT);
-        List<String> actual = readerServicesForTest.readFromFile(pathOutFile);
-        assertEquals(List.of(REPORT.split(LINE_SEPARATOR)), actual);
+
+        assertEquals(List.of(REPORT.split(LINE_SEPARATOR)),
+                readerServicesForTest.readFromFile(pathOutFile));
     }
 }

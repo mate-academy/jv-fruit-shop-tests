@@ -28,15 +28,13 @@ public class ReportMakerServiceTest {
     public static void setUp() {
         storageForTest = new HashMap<>();
 
-        DaoStorage daoStorageForTest = new DaoStorage() {
+        reportMakerService = new ReportMakerServiceImpl(new DaoStorage() {
             @Override
             public void setNewValue(String fruit, Integer quantity) {
-                storageForTest.put(fruit, quantity);
             }
 
             @Override
             public void concatenateValue(String fruit, Integer quantity) {
-                storageForTest.merge(fruit, quantity, Integer::sum);
             }
 
             @Override
@@ -51,11 +49,8 @@ public class ReportMakerServiceTest {
 
             @Override
             public void clear() {
-                storageForTest.clear();
             }
-        };
-
-        reportMakerService = new ReportMakerServiceImpl(daoStorageForTest);
+        });
     }
 
     @BeforeEach
@@ -73,6 +68,7 @@ public class ReportMakerServiceTest {
     public void reportMakerService_generateReport_Ok() {
         storageForTest.put(FRUIT, QUANTITY);
         String actual = reportMakerService.generateReport();
+
         assertAll("Test failed! Report format isn`t correct",
                 () -> assertTrue(actual.startsWith(TITLE)),
                 () -> assertTrue(actual.contains(FRUIT + SEPARATOR + QUANTITY))
@@ -80,7 +76,7 @@ public class ReportMakerServiceTest {
     }
 
     @Test
-    public void reportMakerService_storageNull_notOk() {
+    public void reportMakerService_storageEmpty_notOk() {
         assertThrows(ReportMakerServiceException.class,
                 () -> reportMakerService.generateReport());
     }

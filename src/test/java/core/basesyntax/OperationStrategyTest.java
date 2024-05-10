@@ -41,10 +41,9 @@ public class OperationStrategyTest {
             }
         };
 
-        MapOfHandlersForStrategy mapOfHandlersForTest = new MapOfHandlersForStrategy() {
+        operationStrategy = new OperationStrategyImpl(new MapOfHandlersForStrategy() {
             private final Map<FruitTransaction.Operation, OperationService> mapOfHandlersForTest =
                     Map.of(BALANCE, operationServiceForTest);
-
             @Override
             public Map<FruitTransaction.Operation, OperationService> getHandlers() {
                 return mapOfHandlersForTest;
@@ -58,9 +57,7 @@ public class OperationStrategyTest {
             @Override
             public void removeHandler(FruitTransaction.Operation operation) {
             }
-        };
-
-        operationStrategy = new OperationStrategyImpl(mapOfHandlersForTest);
+        });
     }
 
     @BeforeEach
@@ -87,7 +84,7 @@ public class OperationStrategyTest {
 
     @Test
     public void operationStrategy_GetHandler_Ok() {
-        OperationService actual = operationStrategy.getOperationHandler(testTransaction);
-        assertEquals(operationServiceForTest, actual);
+        assertEquals(operationServiceForTest,
+                operationStrategy.getOperationHandler(testTransaction));
     }
 }

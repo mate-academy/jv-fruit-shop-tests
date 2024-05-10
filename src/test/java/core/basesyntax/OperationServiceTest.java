@@ -19,21 +19,15 @@ import org.junit.jupiter.api.Test;
 
 public class OperationServiceTest {
     private static final String TEST_FRUIT = "banana";
-    private static final int DEFAULT_BALANCE = 100;
+    private static DaoStorage daoStorageForTest;
     private static Map<String, Integer> storageForTest;
-    private static OperationService balanceOperationService;
-    private static IncomingOperationService incomingOperationService;
-    private static OutgoingOperationService outgoingOperationService;
-    private FruitTransaction testTransactionB;
-    private FruitTransaction testTransactionS;
-    private FruitTransaction testTransactionR;
-    private FruitTransaction testTransactionP;
+    private Map<OperationService, FruitTransaction> testMapTransactions;
 
     @BeforeAll
     public static void setUp() {
         storageForTest = new HashMap<>();
 
-        DaoStorage daoStorageForTest = new DaoStorage() {
+        daoStorageForTest = new DaoStorage() {
             @Override
             public void setNewValue(String fruit, Integer quantity) {
                 storageForTest.put(fruit, quantity);
@@ -56,21 +50,21 @@ public class OperationServiceTest {
 
             @Override
             public void clear() {
-                storageForTest.clear();
             }
         };
-        balanceOperationService = new BalanceOperationService(daoStorageForTest);
-        incomingOperationService = new IncomingOperationService(daoStorageForTest);
-        outgoingOperationService = new OutgoingOperationService(daoStorageForTest);
     }
 
     @BeforeEach
     public void beforeTest() {
-        storageForTest.put(TEST_FRUIT, DEFAULT_BALANCE);
-        testTransactionB = new FruitTransaction("b", TEST_FRUIT, 90);
-        testTransactionS = new FruitTransaction("s", TEST_FRUIT, 50);
-        testTransactionR = new FruitTransaction("r", TEST_FRUIT, 10);
-        testTransactionP = new FruitTransaction("p", TEST_FRUIT, 30);
+        testMapTransactions = Map.of(
+                new BalanceOperationService(daoStorageForTest),
+                new FruitTransaction("b", TEST_FRUIT, 90),
+                new IncomingOperationService(daoStorageForTest),
+                new FruitTransaction("s", TEST_FRUIT, 50),
+                new IncomingOperationService(daoStorageForTest),
+                new FruitTransaction("r", TEST_FRUIT, 10),
+                new OutgoingOperationService(daoStorageForTest),
+                new FruitTransaction("p", TEST_FRUIT, 30));
     }
 
     @AfterEach
@@ -90,33 +84,22 @@ public class OperationServiceTest {
 
     @Test
     public void operationService_FruitTransactionNull_notOk() {
-        assertThrows(IllegalArgumentException.class,
-                () -> balanceOperationService.calculation(null));
-        assertThrows(IllegalArgumentException.class,
-                () -> incomingOperationService.calculation(null));
-        assertThrows(IllegalArgumentException.class,
-                () -> outgoingOperationService.calculation(null));
+        testMapTransactions.keySet().forEach(service ->
+                assertThrows(IllegalArgumentException.class, () -> service.calculation(null)));
     }
 
     @Test
     public void operationService_calculation_Ok() {
-        balanceOperationService.calculation(testTransactionB);
-        int actual = storageForTest.get(TEST_FRUIT);
-        assertEquals(testTransactionB.getQuantity(), actual);
+        testMapTransactions.forEach((service, transaction) -> {
+            int expected = transaction.getQuantity();
 
-        incomingOperationService.calculation(testTransactionS);
-        int expected = actual + testTransactionS.getQuantity();
-        actual = storageForTest.get(TEST_FRUIT);
-        assertEquals(expected, actual);
+            storageForTest.clear();
+            if (OutgoingOperationService.class.equals(service.getClass())) {
+                storageForTest.put(TEST_FRUIT, expected + expected);
+            }
+            service.calculation(transaction);
 
-        incomingOperationService.calculation(testTransactionR);
-        expected = actual + testTransactionR.getQuantity();
-        actual = storageForTest.get(TEST_FRUIT);
-        assertEquals(expected, actual);
-
-        outgoingOperationService.calculation(testTransactionP);
-        expected = actual - testTransactionP.getQuantity();
-        actual = storageForTest.get(TEST_FRUIT);
-        assertEquals(expected, actual);
+            assertEquals(expected, storageForTest.get(TEST_FRUIT));
+        });
     }
 }

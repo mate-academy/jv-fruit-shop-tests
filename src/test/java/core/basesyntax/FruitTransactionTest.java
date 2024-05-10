@@ -5,14 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.servise.impl.FruitTransaction;
+import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitTransactionTest {
-    static final String FRUIT = "banana";
-    static final int QUANTITY = 100;
-    static final String CODE = "s";
+    private static final String FRUIT = "banana";
+    private static final int QUANTITY = 100;
+    private static final int NEGATIVE_NUMBER = -10;
+    private static final String CODE = "s";
+    private static List<String> invalidCode;
+    private static List<String> invalidFruit;
     private FruitTransaction actual;
+
+    @BeforeAll
+    public static void setUp() {
+        invalidCode = List.of("q", "ss", "s7", " s", "s ", " ", "PURCHASE", "7");
+        invalidFruit = List.of(" ", "77", "!#", "банан", " banana", "banana ", "BANANA",
+                "Banana", "banana10", "b_a_n_a_n_a", "b a n a n a");
+    }
 
     @BeforeEach
     public void beforeTest() {
@@ -29,40 +41,20 @@ public class FruitTransactionTest {
 
     @Test
     public void fruitTransaction_invalidCode_notOk() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction("q",FRUIT,QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction("ss",FRUIT,QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction("s7",FRUIT,QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(" s",FRUIT,QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction("s ",FRUIT,QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(" ",FRUIT,QUANTITY));
+        invalidCode.forEach(code -> assertThrows(IllegalArgumentException.class,
+                () -> new FruitTransaction(code,FRUIT,QUANTITY)));
     }
 
     @Test
     public void fruitTransaction_negativeNumber_notOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE,FRUIT,-10));
+                () -> new FruitTransaction(CODE,FRUIT,NEGATIVE_NUMBER));
     }
 
     @Test
     public void fruitTransaction_invalidFruit_notOk() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE," ",QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE,"77",QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE,"!#",QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE,"банан",QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE," banana",QUANTITY));
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction(CODE,"banana ",QUANTITY));
+        invalidFruit.forEach(fruit -> assertThrows(IllegalArgumentException.class,
+                () -> new FruitTransaction(CODE,fruit,QUANTITY)));
     }
 
     @Test

@@ -15,11 +15,16 @@ import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderServiceTest {
     private static ReaderService readerService;
+    private static List<String> incorrectPath;
     private String pathFile;
 
     @BeforeAll
     public static void setUp() {
         readerService = new CsvFileReaderServiceImpl();
+        incorrectPath = List.of("invalid path",
+                "src/test/resources/",
+                "src/test/resources/.csv",
+                "src/test/resources/file");
     }
 
     @BeforeEach
@@ -30,43 +35,41 @@ public class CsvFileReaderServiceTest {
     @Test
     public void readerService_EmptyFile_notOk() {
         pathFile = "src/test/resources/empty.csv";
+
         assertThrows(FileReaderException.class, () -> readerService.readFromFile(pathFile));
     }
 
     @Test
     public void readerService_fileMissing_notOk() {
         pathFile = "src/test/resources/missing.csv";
+
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
     }
 
     @Test
     public void readerService_fileNameNull_notOk() {
         pathFile = null;
+
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
     }
 
     @Test
     public void readerService_invalidPathFile_notOk() {
-        pathFile = "invalid path";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
-        pathFile = "src/test/resources/";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
-        pathFile = "src/test/resources/.csv";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
-        pathFile = "src/test/resources/file";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
-
+        incorrectPath.forEach(pathFile -> assertThrows(RuntimeException.class,
+                    () -> readerService.readFromFile(pathFile)));
     }
 
     @Test
     public void readerService_invalidFileFormat_notOk() {
         pathFile = "src/test/resources/invalid_format.csv";
+
         assertThrows(FileReaderException.class, () -> readerService.readFromFile(pathFile));
     }
 
     @Test
     public void readerService_readFromFile_Ok() {
         List<String> actual = readerService.readFromFile(pathFile);
+
         assertAll("Test failed! List shouldn't be empty after read file",
                 () -> assertNotNull(actual,"Test failed! List not be null "
                     + "after read file"),

@@ -1,7 +1,7 @@
 package core.basesyntax.servise.impl;
 
 public class FruitTransaction {
-    private static final String PATTERN = "[a-zA-Z]+";
+    private static final String PATTERN = "[a-z]+";
     private final Operation operation;
     private final String fruit;
     private final int quantity;

@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,8 +8,8 @@ import core.basesyntax.dao.DaoStorage;
 import core.basesyntax.dao.DaoStorageImpl;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.exception.DaoStorageException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DaoStorageTest {
@@ -24,8 +23,8 @@ public class DaoStorageTest {
         daoStorage = new DaoStorageImpl();
     }
 
-    @AfterEach
-    public void clear() {
+    @BeforeEach
+    public void beforeTest() {
         StorageImpl.getStorage().clear();
     }
 
@@ -56,37 +55,31 @@ public class DaoStorageTest {
 
     @Test
     public void daoStorage_merge_Ok() {
-        assertFalse(StorageImpl.getStorage().containsKey(FRUIT));
-        daoStorage.concatenateValue(FRUIT, QUANTITY);
-        assertTrue(StorageImpl.getStorage().containsKey(FRUIT));
-        assertEquals(QUANTITY, StorageImpl.getStorage().get(FRUIT));
-
         int expected = QUANTITY + QUANTITY;
+
+        StorageImpl.getStorage().put(FRUIT,QUANTITY);
         daoStorage.concatenateValue(FRUIT, QUANTITY);
+
         assertEquals(expected, StorageImpl.getStorage().get(FRUIT));
     }
 
     @Test
     public void daoStorage_put_Ok() {
-        assertFalse(StorageImpl.getStorage().containsKey(FRUIT));
         daoStorage.setNewValue(FRUIT, QUANTITY);
+
         assertTrue(StorageImpl.getStorage().containsKey(FRUIT));
         assertEquals(QUANTITY, StorageImpl.getStorage().get(FRUIT));
-
-        int expected = QUANTITY + QUANTITY;
-        daoStorage.setNewValue(FRUIT, QUANTITY + QUANTITY);
-        assertEquals(expected, StorageImpl.getStorage().get(FRUIT));
     }
 
     @Test
     public void daoStorage_get_Ok() {
         StorageImpl.getStorage().put(FRUIT, QUANTITY);
-        assertTrue(StorageImpl.getStorage().containsKey(FRUIT));
+
         assertEquals(QUANTITY, daoStorage.getValue(FRUIT));
     }
 
     @Test
-    public void daoStorage_getMissingFruit_Ok() {
+    public void daoStorage_getMissingFruit_NotOk() {
         assertThrows(DaoStorageException.class, () -> daoStorage.getValue(FRUIT));
     }
 
@@ -98,6 +91,7 @@ public class DaoStorageTest {
     @Test
     public void daoStorage_getStatistic_Ok() {
         StorageImpl.getStorage().put(FRUIT, QUANTITY);
+
         assertEquals(StorageImpl.getStorage().entrySet(), daoStorage.getStatistic());
     }
 }

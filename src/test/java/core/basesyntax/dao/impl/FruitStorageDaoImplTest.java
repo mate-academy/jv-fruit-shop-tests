@@ -13,6 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStorageDaoImplTest {
+    private static final int MOCK_APPLE_QUANTITY = 200;
+    private static final int MOCK_BANANA_QUANTITY = 300;
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
     private FruitStorageDao fruitStorageDao;
 
     @BeforeEach
@@ -29,10 +33,10 @@ class FruitStorageDaoImplTest {
     void addFruit_ValidTransaction_Ok() {
         FruitTransaction balanceApple =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple", 200);
+                        FRUIT_APPLE, 200);
         FruitTransaction balanceBanana =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana", 300);
+                        FRUIT_BANANA, 300);
         fruitStorageDao.addFruit(balanceApple);
         fruitStorageDao.addFruit(balanceBanana);
         assertTrue(FruitStorage.fruitStorage.containsKey(balanceApple.getFruit()),
@@ -49,23 +53,23 @@ class FruitStorageDaoImplTest {
     void increaseQuantity_ValidTransactions_Ok() {
         FruitTransaction balanceApple =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple", 200);
+                        FRUIT_APPLE, 200);
         FruitTransaction balanceBanana =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana", 300);
+                        FRUIT_BANANA, 300);
         FruitTransaction supplyApple =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                        "apple", 100);
+                        FRUIT_APPLE, 100);
         FruitTransaction returnBanana =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,
-                        "banana", 200);
+                        FRUIT_BANANA, 200);
         fruitStorageDao.addFruit(balanceApple);
         fruitStorageDao.addFruit(balanceBanana);
         fruitStorageDao.increaseQuantity(supplyApple);
         fruitStorageDao.increaseQuantity(returnBanana);
-        assertEquals(300, FruitStorage.fruitStorage.get("apple"),
+        assertEquals(300, FruitStorage.fruitStorage.get(FRUIT_APPLE),
                 "Expected value should be 300");
-        assertEquals(500, FruitStorage.fruitStorage.get("banana"),
+        assertEquals(500, FruitStorage.fruitStorage.get(FRUIT_BANANA),
                 "Expected value should be 500");
     }
 
@@ -73,42 +77,42 @@ class FruitStorageDaoImplTest {
     void decreaseQuantity_ValidTransaction_Ok() {
         FruitTransaction balanceApple =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple", 200);
+                        FRUIT_APPLE, 200);
         FruitTransaction balanceBanana =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana", 300);
+                        FRUIT_BANANA, 300);
         FruitTransaction purchaseApple =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                        "apple", 100);
+                        FRUIT_APPLE, 100);
         FruitTransaction purchaseBanana =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                        "banana", 150);
+                        FRUIT_BANANA, 150);
         fruitStorageDao.addFruit(balanceApple);
         fruitStorageDao.addFruit(balanceBanana);
         fruitStorageDao.decreaseQuantity(purchaseApple);
         fruitStorageDao.decreaseQuantity(purchaseBanana);
-        assertEquals(100, FruitStorage.fruitStorage.get("apple"),
+        assertEquals(100, FruitStorage.fruitStorage.get(FRUIT_APPLE),
                 "Expected value should be 100");
-        assertEquals(150, FruitStorage.fruitStorage.get("banana"),
+        assertEquals(150, FruitStorage.fruitStorage.get(FRUIT_BANANA),
                 "Expected value should be 150");
     }
 
     @Test
     void getAllAsMap_ValidMap_Ok() {
         Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("apple", 200);
-        expectedMap.put("banana", 300);
-        FruitStorage.fruitStorage.put("apple", 200);
-        FruitStorage.fruitStorage.put("banana", 300);
+        expectedMap.put(FRUIT_APPLE, MOCK_APPLE_QUANTITY);
+        expectedMap.put(FRUIT_BANANA, MOCK_BANANA_QUANTITY);
+        FruitStorage.fruitStorage.put(FRUIT_APPLE, MOCK_APPLE_QUANTITY);
+        FruitStorage.fruitStorage.put(FRUIT_BANANA, MOCK_BANANA_QUANTITY);
         Map<String, Integer> actualMap = fruitStorageDao.getAllAsMap();
         assertEquals(expectedMap, actualMap, "Maps should be equal");
     }
 
     @Test
     void getQuantity_FruitIsInStorage_Ok() {
-        FruitStorage.fruitStorage.put("apple", 200);
-        int expectedQuantity = 200;
-        int actualQuantity = fruitStorageDao.getQuantity("apple");
+        FruitStorage.fruitStorage.put(FRUIT_APPLE, MOCK_APPLE_QUANTITY);
+        int expectedQuantity = MOCK_APPLE_QUANTITY;
+        int actualQuantity = fruitStorageDao.getQuantity(FRUIT_APPLE);
         assertEquals(expectedQuantity, actualQuantity,
                 "Expected quantity is 200");
     }

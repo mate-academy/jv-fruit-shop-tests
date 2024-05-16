@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,7 +17,6 @@ import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -24,19 +24,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStorageServiceImplTest {
-
+    private static final String FRUIT_APPLE = "apple";
     private FruitStorageService fruitStorageService;
     private OperationStrategy operationStrategy;
     private FruitStorageDao fruitStorageDao;
 
     @BeforeEach
     void setUp() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        Map<Operation, OperationHandler> operationHandlerMap;
+        operationHandlerMap = Map.of(Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.SUPPLY, new SupplyOperationHandler(),
+                Operation.PURCHASE, new PurchaseOperationHandler(),
+                Operation.RETURN, new ReturnOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitStorageDao = new FruitStorageDaoImpl();
         fruitStorageService = new FruitStorageServiceImpl(fruitStorageDao, operationStrategy);
@@ -49,30 +48,28 @@ class FruitStorageServiceImplTest {
 
     @Test
     void processTransactions_validTransactions_Ok() {
-        FruitTransaction transaction1 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 80);
-        FruitTransaction transaction2 = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 50);
+        FruitTransaction transaction1 = new FruitTransaction(Operation.BALANCE,
+                FRUIT_APPLE, 80);
+        FruitTransaction transaction2 = new FruitTransaction(Operation.PURCHASE,
+                FRUIT_APPLE, 50);
         List<FruitTransaction> input = new ArrayList<>();
         input.add(transaction1);
         input.add(transaction2);
         fruitStorageService.processTransactions(input);
-        assertEquals(30, FruitStorage.fruitStorage.get("apple"),
+        assertEquals(30, FruitStorage.fruitStorage.get(FRUIT_APPLE),
                 "Fruit quantity is expected to be 30, but was:"
                         + FruitStorage.fruitStorage.get("apple"));
     }
 
     @Test
     void processTransactions_negativeStorage_NotOk() {
-        FruitTransaction transaction1 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 80);
-        FruitTransaction transaction2 = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 100);
-        List<FruitTransaction> input = new ArrayList<>();
-        input.add(transaction1);
-        input.add(transaction2);
+        FruitTransaction transaction1 = new FruitTransaction(Operation.BALANCE,
+                FRUIT_APPLE, 80);
+        FruitTransaction transaction2 = new FruitTransaction(Operation.PURCHASE,
+                FRUIT_APPLE, 100);
+        List<FruitTransaction> input = List.of(transaction1, transaction2);
         assertThrows(IllegalArgumentException.class,
                 () -> fruitStorageService.processTransactions(input),
-                "IlleagalArgumentException is expected");
+                "IllegalArgumentException is expected");
     }
 }

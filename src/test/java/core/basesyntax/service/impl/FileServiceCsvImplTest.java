@@ -60,18 +60,28 @@ class FileServiceCsvImplTest {
         }
         assertThrows(RuntimeException.class,
                 () -> fileService.readFile(testTransactionsFileName),
-                "RuntimeException is expected");
+                "File containing transactions is expected, but was empty");
     }
 
     @Test
-    void writeFile_validReportAndFileName_Ok() {
+    void writeFile_FileNotEmpty_Ok() {
         fileService.writeFile(reportString, testReportFileName);
-        assertTrue(Files.exists(reportFile.toPath()),"Report should be created");
         try {
             assertTrue(Files.size(reportFile.toPath()) > 0, "File should not be empty");
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file", e);
         }
+        try {
+            Files.deleteIfExists(Path.of(testReportFileName));
+        } catch (IOException e) {
+            throw new RuntimeException("File not found", e);
+        }
+    }
+
+    @Test
+    void writeFile_FileCreated_Ok() {
+        fileService.writeFile(reportString, testReportFileName);
+        assertTrue(Files.exists(reportFile.toPath()), "Report should be created");
         try {
             Files.deleteIfExists(Path.of(testReportFileName));
         } catch (IOException e) {

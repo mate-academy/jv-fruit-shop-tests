@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
+    private static final String FRUIT_APPLE = "apple";
     private ReturnOperationHandler returnOperationHandler;
     private FruitStorageDao fruitStorageDao;
 
@@ -27,14 +28,14 @@ class ReturnOperationHandlerTest {
 
     @Test
     void updateFruitStorage_ValidReturnOperation_Ok() {
-        FruitStorage.fruitStorage.put("apple", 100);
+        FruitStorage.fruitStorage.put(FRUIT_APPLE, 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN,
-                "apple",
+                FRUIT_APPLE,
                 50
         );
         returnOperationHandler.updateFruitStorage(fruitTransaction, fruitStorageDao);
-        int actual = FruitStorage.fruitStorage.get("apple");
+        int actual = FruitStorage.fruitStorage.get(FRUIT_APPLE);
         assertEquals(150, actual, "Quantity is expected to be 150");
     }
 }

@@ -37,23 +37,27 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void createFruitsFromList(List<String> fruitRecords) {
         for (var record : fruitRecords) {
-            String[] splitRecord = record.split(SEPARATOR);
+            try {
+                String[] splitRecord = record.split(SEPARATOR);
 
-            Operation operation = Operation.getOperation(splitRecord[OPERATION_INDEX]);
-            String fruitName = splitRecord[FRUIT_INDEX];
-            int quantity = Integer.parseInt(splitRecord[QUANTITY_INDEX]);
+                Operation operation = Operation.getOperation(splitRecord[OPERATION_INDEX]);
+                String fruitName = splitRecord[FRUIT_INDEX];
+                int quantity = Integer.parseInt(splitRecord[QUANTITY_INDEX]);
 
-            Fruit newFruit = new Fruit(fruitName, quantity);
-            Optional<Fruit> optionalFruitFromDb = fruitDao.getFruitIfPresent(fruitName);
+                Fruit newFruit = new Fruit(fruitName, quantity);
+                Optional<Fruit> optionalFruitFromDb = fruitDao.getFruitIfPresent(fruitName);
 
-            if (optionalFruitFromDb.isPresent()) {
-                newFruit.setQuantity(getOperatedCount(optionalFruitFromDb.get().getQuantity(),
-                        newFruit.getQuantity(), operation));
-            } else {
-                newFruit.setQuantity(
-                        getOperatedCount(DEFAULT_QUANTITY, newFruit.getQuantity(), operation));
+                if (optionalFruitFromDb.isPresent()) {
+                    newFruit.setQuantity(getOperatedCount(optionalFruitFromDb.get().getQuantity(),
+                            newFruit.getQuantity(), operation));
+                } else {
+                    newFruit.setQuantity(
+                            getOperatedCount(DEFAULT_QUANTITY, newFruit.getQuantity(), operation));
+                }
+                fruitDao.add(newFruit);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Wrong file format");
             }
-            fruitDao.add(newFruit);
         }
     }
 }

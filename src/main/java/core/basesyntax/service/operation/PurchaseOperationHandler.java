@@ -10,6 +10,9 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public int getOperationResult(int result, int quantity) {
+        if (result < quantity) {
+            throw new RuntimeException("there is no needed fruit quantity in storage");
+        }
         return result - quantity;
     }
 }

@@ -45,7 +45,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void get_operationCountWithNullOperation_ok() {
+    void get_operationCountWithNullOperation_notOk() {
         assertThrows(NullPointerException.class, () -> service.getOperatedCount(2, 4, null));
     }
 
@@ -69,14 +69,25 @@ public class FruitServiceImplTest {
     }
 
     @Test
+    void create_fromListWithWrongFormat_notOk() {
+        List<String> expectedRows = new ArrayList<>();
+        expectedRows.add("b,banana,20");
+        expectedRows.add("b,apple,100");
+        expectedRows.add("s_banana_100");
+
+        assertThrows(RuntimeException.class, () -> service.createFruitsFromList(expectedRows));
+    }
+
+    @Test
     void get_count_ok() {
         List<String> expectedRows = new ArrayList<>();
         expectedRows.add("b,banana,20");
         expectedRows.add("b,apple,100");
         expectedRows.add("s,banana,100");
 
+        int expectedBananaCount = 120; // 20(balance) + 100(supply)
         service.createFruitsFromList(expectedRows);
         int bananaIndex = 1;
-        assertEquals(120, Storage.fruits.get(bananaIndex).getQuantity());
+        assertEquals(expectedBananaCount, Storage.fruits.get(bananaIndex).getQuantity());
     }
 }

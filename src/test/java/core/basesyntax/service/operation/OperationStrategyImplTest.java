@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.Main;
 import core.basesyntax.model.Operation;
 import java.util.EnumMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,37 +22,40 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    void get_balanceHandlerByBalanceOperation_ok() {
-        OperationHandler handler = strategy.get(Operation.BALANCE);
-        assertEquals(BalanceOperationHandler.class, handler.getClass());
+    void get_handlerByOperation_ok() {
+        Map<Operation, Class<? extends OperationHandler>> operationHandlerMap = Map.of(
+                Operation.BALANCE, BalanceOperationHandler.class,
+                Operation.PURCHASE, PurchaseOperationHandler.class,
+                Operation.RETURN, ReturnOperationHandler.class,
+                Operation.SUPPLY, SupplyOperationHandler.class
+        );
+
+        for (Map.Entry<Operation, Class<? extends OperationHandler>> entry
+                : operationHandlerMap.entrySet()) {
+            Operation operation = entry.getKey();
+            Class<? extends OperationHandler> expectedHandlerClass = entry.getValue();
+
+            OperationHandler handler = strategy.get(operation);
+            assertEquals(expectedHandlerClass, handler.getClass());
+        }
     }
 
     @Test
-    void get_purchaseHandlerByPurchaseOperation_ok() {
-        OperationHandler handler = strategy.get(Operation.PURCHASE);
-        assertEquals(PurchaseOperationHandler.class, handler.getClass());
-    }
+    void get_operationFromHandler_ok() {
+        Map<Operation, OperationHandler> operationHandlerMap = Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.SUPPLY, new SupplyOperationHandler(),
+                Operation.PURCHASE, new PurchaseOperationHandler(),
+                Operation.RETURN, new ReturnOperationHandler()
+        );
 
-    @Test
-    void get_returnHandlerByReturnOperation_ok() {
-        OperationHandler handler = strategy.get(Operation.RETURN);
-        assertEquals(ReturnOperationHandler.class, handler.getClass());
-    }
+        for (Map.Entry<Operation, OperationHandler> entry : operationHandlerMap.entrySet()) {
+            Operation expectedOperation = entry.getKey();
+            Operation operation = entry.getValue().getOperation();
 
-    @Test
-    void get_supplyHandlerBySupplyOperation_ok() {
-        OperationHandler handler = strategy.get(Operation.SUPPLY);
-        assertEquals(SupplyOperationHandler.class, handler.getClass());
-    }
+            assertEquals(operation, expectedOperation);
+        }
 
-    @Test
-    void get_exceptionByNull_notOk() {
-        OperationHandler handler = strategy.get(null);
-        assertThrows(NullPointerException.class, () -> handler.getOperation());
-    }
-
-    @Test
-    void get_supplyOperationFromSupplyHandler_ok() {
         SupplyOperationHandler handler = new SupplyOperationHandler();
         assertEquals(Operation.SUPPLY, handler.getOperation());
     }
@@ -75,15 +79,21 @@ public class OperationStrategyImplTest {
     }
 
     @Test
+    void get_exceptionByNull_notOk() {
+        OperationHandler handler = strategy.get(null);
+        assertThrows(NullPointerException.class, () -> handler.getOperation());
+    }
+
+    @Test
     void get_operationResultFromPurchaseHandler_ok() {
         PurchaseOperationHandler handler = new PurchaseOperationHandler();
         assertEquals(3, handler.getOperationResult(5, 2));
     }
 
     @Test
-    void get_negativeOperationResultFromPurchaseHandler_ok() {
+    void get_negativeOperationResultFromPurchaseHandler_notOk() {
         PurchaseOperationHandler handler = new PurchaseOperationHandler();
-        assertEquals(-1, handler.getOperationResult(1, 2));
+        assertThrows(RuntimeException.class, () -> handler.getOperationResult(1, 2));
     }
 
     @Test

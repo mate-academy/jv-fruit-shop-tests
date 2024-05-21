@@ -74,7 +74,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    void write_ok() throws IOException {
+    void write_validData_ok() throws IOException {
         Storage.fruits.clear();
         Storage.fruits.add(new Fruit("banana", 152));
         Storage.fruits.add(new Fruit("apple", 90));

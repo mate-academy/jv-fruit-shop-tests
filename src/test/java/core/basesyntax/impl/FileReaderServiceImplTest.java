@@ -15,14 +15,14 @@ class FileReaderServiceImplTest {
 
     @Test
     void readFile_fileIsNotCsvExpansion_NotOk() {
-        String fileName = "/Users/macbook/IdeaProjects/jv-fruit-shop-tests/src/test/resources/"
+        String fileName = "src/test/resources/"
                 + "notCsvFile.txt";
         assertThrows(ReadingException.class,() -> fileReaderService.readFile(fileName));
     }
 
     @Test
     void readFile_fileIsCsvExpansion_Ok() {
-        String fileName = "/Users/macbook/IdeaProjects/jv-fruit-shop-tests/src/test/resources/"
+        String fileName = "src/test/resources/"
                 + "InputFile.csv";
         List<String> actual = fileReaderService.readFile(fileName);
         assertSame(actual.getClass(), ArrayList.class);

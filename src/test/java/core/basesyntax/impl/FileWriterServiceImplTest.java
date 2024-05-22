@@ -25,7 +25,7 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_okData_Ok() {
-        String fileName = "/Users/macbook/IdeaProjects/jv-fruit-shop-tests/src/test/resources/name";
+        String fileName = "src/test/resources/name";
         String data = "onetwo";
         Path path = Paths.get(fileName);
         List<String> stringList = null;

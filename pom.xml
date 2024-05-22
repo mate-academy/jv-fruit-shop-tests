@@ -95,7 +95,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>src/main/java/core/basesyntax/main/Main.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -115,6 +115,11 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.0</version>
+                    <configuration>
+                        <excludes>
+                            <excludedFile>src/main/java/core/basesyntax/main/Main.java</excludedFile>
+                        </excludes>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

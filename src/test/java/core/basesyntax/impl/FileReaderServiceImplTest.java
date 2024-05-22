@@ -15,16 +15,15 @@ class FileReaderServiceImplTest {
 
     @Test
     void readFile_fileIsNotCsvExpansion_NotOk() {
-        String fileName = "src/test/resources/"
-                + "notCsvFile.txt";
+        String fileName = "src/test/resources/notCsvFile.txt";
         assertThrows(ReadingException.class,() -> fileReaderService.readFile(fileName));
     }
 
     @Test
     void readFile_fileIsCsvExpansion_Ok() {
-        String fileName = "src/test/resources/"
-                + "InputFile.csv";
-        List<String> actual = fileReaderService.readFile(fileName);
-        assertSame(actual.getClass(), ArrayList.class);
+        String fileName = "src/test/resources/InputFile.csv";
+        Class<? extends List> actualClass = fileReaderService.readFile(fileName).getClass();
+        Class<ArrayList> expectedClass = ArrayList.class;
+        assertSame(expectedClass, actualClass);
     }
 }

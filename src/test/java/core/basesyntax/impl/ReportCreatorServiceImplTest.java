@@ -22,13 +22,15 @@ class ReportCreatorServiceImplTest {
     void createReport_emptyMap_NotOK() {
         Map<String, Integer> map = new HashMap<>();
         String report = reportCreatorService.createReport(map);
-        assertSame(15, report.length());
+        int expectedLength = 15;
+        assertSame(expectedLength, report.length());
     }
 
     @Test
     void createReport_validData_tOK() {
         Map<String, Integer> map = Map.of("apple", 1);
         String report = reportCreatorService.createReport(map);
-        assertTrue(report.contains("apple,1"));
+        String expectedString = "apple,1";
+        assertTrue(report.contains(expectedString));
     }
 }

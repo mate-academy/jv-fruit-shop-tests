@@ -18,8 +18,9 @@ class SupplyStrategyHandlerImplTest {
         fruitDao.getFruitMap().put("apple", 1);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 1);
         supplyStrategyHandler.handle(fruitTransaction);
+        int expected = 2;
         int actual = fruitDao.getFruitMap().get("apple");
-        assertEquals(2, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

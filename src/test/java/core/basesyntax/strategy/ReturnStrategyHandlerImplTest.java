@@ -18,8 +18,9 @@ class ReturnStrategyHandlerImplTest {
         fruitDao.getFruitMap().put("apple", 1);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 1);
         returnStrategyHandler.handle(fruitTransaction);
+        int expected = 2;
         int actual = fruitDao.getFruitMap().get("apple");
-        assertEquals(2, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

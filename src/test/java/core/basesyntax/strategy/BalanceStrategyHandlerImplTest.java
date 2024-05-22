@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.FruitDao;
@@ -21,9 +22,7 @@ class BalanceStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_invalidData_NotOk() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1);
-        balanceStrategyHandler.handle(fruitTransaction);
-        assertTrue(fruitDao.getFruitMap().size() > 0);
+    void handle_nullData_NotOk() {
+        assertThrows(RuntimeException.class, () -> balanceStrategyHandler.handle(null));
     }
 }

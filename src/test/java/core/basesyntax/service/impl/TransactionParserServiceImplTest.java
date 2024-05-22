@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.Constants;
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
@@ -11,12 +12,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserServiceImplTest {
+    private static final String APPLE = Constants.APPLE;
+    private static final String BANANA = Constants.BANANA;
     private final FruitTransaction expectedfruitTransaction =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
-    private final List<String> inputDataList = List.of("b, apple, 10", "s,apple,4");
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 15);
+    private final List<String> inputDataList = List.of("b , apple , 10", "s,apple,4");
     private final List<FruitTransaction> expectedTransactionList = List.of(
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 4));
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 10),
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, 4));
     private TransactionParserService transactionParser;
 
     @BeforeEach

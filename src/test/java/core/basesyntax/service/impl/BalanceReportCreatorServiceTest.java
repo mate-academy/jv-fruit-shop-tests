@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.Constants;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.ArrayList;
@@ -14,31 +15,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceReportCreatorServiceTest {
-    private static final String REPORT_ANNOTATION = "fruit,quantity";
-    private static final String SEPARATOR = ",";
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
-    private static final String ORANGE = "orange";
+    private static final String REPORT_ANNOTATION = Constants.REPORT_ANNOTATION;
+    private static final String SEPARATOR = Constants.SEPARATOR;
+    private static final String APPLE = Constants.APPLE;
+    private static final String BANANA = Constants.BANANA;
+    private static final String ORANGE = Constants.ORANGE;
     private ReportCreatorService report;
     private final Map<String, Integer> testFruitStatisticGood = new LinkedHashMap<>();
-
-    {
-        testFruitStatisticGood.put(APPLE, 100);
-        testFruitStatisticGood.put(BANANA, 200);
-        testFruitStatisticGood.put(ORANGE, 300);
-    }
-
     private final Map<String, Integer> testFruitStatisticBad = new LinkedHashMap<>();
-
-    {
-        testFruitStatisticBad.put(APPLE, 100);
-        testFruitStatisticBad.put(BANANA, 200);
-        testFruitStatisticBad.put(ORANGE, -300);
-    }
 
     @BeforeEach
     void setUp() {
         report = new BalanceReportCreatorService();
+        testFruitStatisticGood.put(APPLE, 100);
+        testFruitStatisticGood.put(BANANA, 200);
+        testFruitStatisticGood.put(ORANGE, 300);
+        testFruitStatisticBad.put(APPLE, 100);
+        testFruitStatisticBad.put(BANANA, 200);
+        testFruitStatisticBad.put(ORANGE, -300);
     }
 
     @Test

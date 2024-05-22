@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 class FileReaderServiceImplTest {
     private static final String FILE_PATH = "src/test/resources/test_file.csv";
     private static final String FAKE_FILE_PATH = "src/test/test_file.csv";
-    private FileReaderService fileReader;
     private final List<String> expectedFileContent = List.of(
             "banana,5",
             "apple,4",
             "orange,3"
     );
+    private FileReaderService fileReader;
 
     @BeforeEach
     void setUp() {

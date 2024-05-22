@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.Constants;
 import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopDaoImplTest {
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
-    private static final String ORANGE = "orange";
+    private static final String APPLE = Constants.APPLE;
+    private static final String BANANA = Constants.BANANA;
+    private static final String ORANGE = Constants.ORANGE;
     private FruitShopDao fruitShopDao;
     private final Map<String, Integer> testFruitStatistic = Map.of(
             APPLE, 100,
@@ -64,11 +65,11 @@ class FruitShopDaoImplTest {
     void putBalanceStatistic_Ok() {
         int initialQuantityApple = 10;
         fruitShopDao.putBalanceStatistic(APPLE, initialQuantityApple);
-        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         int actualQuantityApple = Storage.balanceStatistic.get(APPLE);
-        assertEquals(initialQuantityApple, actualQuantityApple);
         int newQuantityApple = 30;
         fruitShopDao.putBalanceStatistic(APPLE, newQuantityApple);
+        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
+        assertEquals(initialQuantityApple, actualQuantityApple);
         assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         int newActualQuantityApple = Storage.balanceStatistic.get(APPLE);
         assertEquals(newQuantityApple, newActualQuantityApple);

@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 class FileWriterServiceImplTest {
     private static final String TRUE_FILE_PATH = "src/test/resources/test_write_fie.csv";
     private static final String EMPTY_FILE_PATH = "";
-    private FileWriterService fileWriter;
     private final List<String> content = List.of("banana,10", "apple,5");
+    private FileWriterService fileWriter;
 
     @BeforeEach
     void setUp() {

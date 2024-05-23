@@ -31,7 +31,7 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    void read_invalidPath_notOk() {
+    void read_invalidPath_throwFruitShopException() {
         assertThrows(FruitShopException.class,
                 () -> fileReader.read(FAKE_FILE_PATH));
     }

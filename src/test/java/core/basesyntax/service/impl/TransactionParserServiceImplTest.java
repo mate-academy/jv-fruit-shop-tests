@@ -42,7 +42,7 @@ class TransactionParserServiceImplTest {
     }
 
     @Test
-    void parseFromString_incorrectString_notOk() {
+    void parseFromString_incorrectString_throwFruitShopException() {
         String invalidInputData = "b, banana, 15, cat";
         assertThrows(FruitShopException.class,
                 () -> transactionParser.parseFromString(invalidInputData));

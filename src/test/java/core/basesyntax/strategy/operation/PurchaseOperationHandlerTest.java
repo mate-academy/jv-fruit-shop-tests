@@ -37,7 +37,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void execute_negativeBalance_notOk() {
+    void execute_negativeBalance_throwFruitShopException() {
         assertThrows(FruitShopException.class,
                 () -> operation.execute(invalidTransaction1));
         assertThrows(FruitShopException.class,

@@ -49,7 +49,7 @@ class BalanceReportCreatorServiceTest {
     }
 
     @Test
-    void createReport_negativeValue_notOk() {
+    void createReport_negativeValue_throwsIllegalState() {
         Storage.balanceStatistic.putAll(testFruitStatisticBad);
         assertThrows(IllegalStateException.class,
                 () -> report.createReport());

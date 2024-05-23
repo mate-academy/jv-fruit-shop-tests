@@ -26,18 +26,18 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void write_invalidPath_notOk() {
+    void write_invalidPath_false() {
         assertFalse(fileWriter.write(content, EMPTY_FILE_PATH));
     }
 
     @Test
-    void write_nullPath_notOk() {
+    void write_nullPath_throwNullPointer() {
         assertThrows(NullPointerException.class,
                 () -> fileWriter.write(content, null));
     }
 
     @Test
-    void write_nullFileContent_notOk() {
+    void write_nullFileContent_throwNullPointer() {
         assertThrows(NullPointerException.class,
                 () -> fileWriter.write(null, TRUE_FILE_PATH));
     }

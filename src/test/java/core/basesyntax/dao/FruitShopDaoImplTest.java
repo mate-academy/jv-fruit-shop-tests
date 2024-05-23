@@ -40,7 +40,7 @@ class FruitShopDaoImplTest {
     }
 
     @Test
-    void getBalanceByFruit_invalidKey_notOk() {
+    void getBalanceByFruit_invalidKey_throwsNullPointer() {
         int expectedBanana = 30;
         Storage.balanceStatistic.put(BANANA, expectedBanana);
         assertThrows(NullPointerException.class,
@@ -55,7 +55,7 @@ class FruitShopDaoImplTest {
     }
 
     @Test
-    void getBalance_emptyDao_notOk() {
+    void getBalance_emptyDao_returnEmptyDao() {
         Map<String, Integer> emptyBalanceMap = new HashMap<>();
         Map<String, Integer> actualTestBalance = fruitShopDao.getBalance();
         assertEquals(emptyBalanceMap, actualTestBalance);
@@ -66,12 +66,12 @@ class FruitShopDaoImplTest {
         int initialQuantityApple = 10;
         fruitShopDao.putBalanceStatistic(APPLE, initialQuantityApple);
         int actualQuantityApple = Storage.balanceStatistic.get(APPLE);
-        int newQuantityApple = 30;
-        fruitShopDao.putBalanceStatistic(APPLE, newQuantityApple);
         assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         assertEquals(initialQuantityApple, actualQuantityApple);
-        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
+        int newQuantityApple = 30;
+        fruitShopDao.putBalanceStatistic(APPLE, newQuantityApple);
         int newActualQuantityApple = Storage.balanceStatistic.get(APPLE);
+        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         assertEquals(newQuantityApple, newActualQuantityApple);
     }
 

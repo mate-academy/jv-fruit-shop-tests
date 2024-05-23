@@ -34,7 +34,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void getHandler_absentHandler_notOk() {
+    void getHandler_absentHandler_assertNullOperationHandler() {
         OperationHandler actualHandler = strategy.getHandler(transactionNotOk);
         assertNull(actualHandler);
     }

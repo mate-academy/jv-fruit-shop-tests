@@ -21,6 +21,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorImplTest {
+    private static final FruitTransaction.Operation STRATEGY_BALANCE =
+            FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation STRATEGY_SUPPLY =
+            FruitTransaction.Operation.SUPPLY;
+    private static final FruitTransaction.Operation STRATEGY_PURCHASE =
+            FruitTransaction.Operation.PURCHASE;
+    private static final FruitTransaction.Operation STRATEGY_RETURN =
+            FruitTransaction.Operation.RETURN;
     private static Map<FruitTransaction.Operation, StrategyHandler> strategyHandlerMap;
     private static StrategyService strategyService;
     private static FruitTransactionProcessor fruitTransactionProcessor;
@@ -29,21 +37,24 @@ class FruitTransactionProcessorImplTest {
     @BeforeAll
     static void beforeAll() {
         strategyHandlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceStrategyHandlerImpl(fruitDao),
-                FruitTransaction.Operation.SUPPLY, new SupplyStrategyHandlerImpl(fruitDao),
-                FruitTransaction.Operation.PURCHASE, new PurchaseStrategyHandlerImpl(fruitDao),
-                FruitTransaction.Operation.RETURN, new ReturnStrategyHandlerImpl(fruitDao));
+                STRATEGY_BALANCE, new BalanceStrategyHandlerImpl(fruitDao),
+                STRATEGY_SUPPLY, new SupplyStrategyHandlerImpl(fruitDao),
+                STRATEGY_PURCHASE, new PurchaseStrategyHandlerImpl(fruitDao),
+                STRATEGY_RETURN, new ReturnStrategyHandlerImpl(fruitDao));
         strategyService = new StrategyServiceImpl(strategyHandlerMap);
         fruitTransactionProcessor = new FruitTransactionProcessorImpl(strategyService);
     }
 
     @Test
     void fillStorage_validData_Ok() {
+        final String fruitName = "apple";
+        final int fruitQuantity = 1;
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1);
+                new FruitTransaction(STRATEGY_BALANCE, fruitName, fruitQuantity);
         List<FruitTransaction> fruitTransactionList = List.of(fruitTransaction);
         fruitTransactionProcessor.fillStorage(fruitTransactionList);
-        assertTrue(fruitDao.getFruitMap().size() > 0);
+        final int zeroSizeThreshold = 0;
+        assertTrue(fruitDao.getFruitMap().size() > zeroSizeThreshold);
     }
 
     @Test

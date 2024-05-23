@@ -9,17 +9,21 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class ReturnStrategyHandlerImplTest {
+    private static final String FRUIT_NAME = "apple";
+    private static final int FRUIT_QUANTITY = 1;
+    private static final FruitTransaction.Operation STRATEGY_RETURN =
+            FruitTransaction.Operation.RETURN;
     private FruitTransaction fruitTransaction;
     private FruitDao fruitDao = new FruitDaoImpl();
     private StrategyHandler returnStrategyHandler = new ReturnStrategyHandlerImpl(fruitDao);
 
     @Test
     void handle_validData_Ok() {
-        fruitDao.getFruitMap().put("apple", 1);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 1);
+        fruitDao.getFruitMap().put(FRUIT_NAME, FRUIT_QUANTITY);
+        fruitTransaction = new FruitTransaction(STRATEGY_RETURN, FRUIT_NAME, FRUIT_QUANTITY);
         returnStrategyHandler.handle(fruitTransaction);
         int expected = 2;
-        int actual = fruitDao.getFruitMap().get("apple");
+        int actual = fruitDao.getFruitMap().get(FRUIT_NAME);
         assertEquals(expected, actual);
     }
 

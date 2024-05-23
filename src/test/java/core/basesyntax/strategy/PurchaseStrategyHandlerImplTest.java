@@ -7,27 +7,36 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.exception.PurchasingException;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseStrategyHandlerImplTest {
+    private static FruitDao fruitDao = new FruitDaoImpl();
+    private static final String FRUIT_NAME = "apple";
+    private static final int FRUIT_QUANTITY = 1;
+    private static final FruitTransaction.Operation STRATEGY_PURCHASE =
+            FruitTransaction.Operation.PURCHASE;
     private FruitTransaction fruitTransaction;
-    private FruitDao fruitDao = new FruitDaoImpl();
     private StrategyHandler purchaseStrategyHandler = new PurchaseStrategyHandlerImpl(fruitDao);
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitDao.getFruitMap().put(FRUIT_NAME, FRUIT_QUANTITY);
+    }
 
     @Test
     void handle_validData_Ok() {
-        fruitDao.getFruitMap().put("apple", 1);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 1);
+        fruitTransaction = new FruitTransaction(STRATEGY_PURCHASE, FRUIT_NAME, FRUIT_QUANTITY);
         purchaseStrategyHandler.handle(fruitTransaction);
         int expected = 0;
-        int actual = fruitDao.getFruitMap().get("apple");
+        int actual = fruitDao.getFruitMap().get(FRUIT_NAME);
         assertEquals(expected, actual);
     }
 
     @Test
     void handle_quantityBiggerThenAmountInStorage_NotOk() {
-        fruitDao.getFruitMap().put("apple", 1);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 2);
+        int diffQuantity = 2;
+        fruitTransaction = new FruitTransaction(STRATEGY_PURCHASE, FRUIT_NAME, diffQuantity);
         PurchasingException exception = assertThrows(PurchasingException.class,
                 () -> purchaseStrategyHandler.handle(fruitTransaction));
         String expectedMessage = exception.getMessage();

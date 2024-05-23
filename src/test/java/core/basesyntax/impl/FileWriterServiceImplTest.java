@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.exception.WritingException;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,16 +21,11 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void write_okData_Ok() {
+    void write_okData_Ok() throws Exception {
         String fileName = "src/test/resources/testFile";
         String expectedString = "onetwo";
         Path path = Paths.get(fileName);
-        List<String> stringList = null;
-        try {
-            stringList = Files.readAllLines(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        List<String> stringList = Files.readAllLines(path);
         StringBuilder stringBuilder = new StringBuilder();
         stringList.forEach(stringBuilder::append);
         String actualString = stringBuilder.toString();

@@ -28,7 +28,9 @@ class ReportCreatorServiceImplTest {
 
     @Test
     void createReport_validData_tOK() {
-        Map<String, Integer> map = Map.of("apple", 1);
+        final String fruitName = "apple";
+        final Integer quantity = 1;
+        Map<String, Integer> map = Map.of(fruitName, quantity);
         String report = reportCreatorService.createReport(map);
         String expectedString = "apple,1";
         assertTrue(report.contains(expectedString));

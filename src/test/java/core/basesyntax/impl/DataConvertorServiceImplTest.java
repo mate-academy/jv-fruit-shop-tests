@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataConvertorServiceImplTest {
+    private static final String FIRST_STRING = "first,line,one";
     private DataConvertorService dataConvertorService = new DataConvertorServiceImpl();
 
     @Test
@@ -24,19 +25,19 @@ class DataConvertorServiceImplTest {
 
     @Test
     void convertData_incorrectStrategy_NotOk() {
-        List<String> list = List.of("first,line,one", "wrongStrategy,line,2");
+        List<String> list = List.of(FIRST_STRING, "wrongStrategy,line,2");
         assertThrows(ConvertationException.class, () -> dataConvertorService.convertData(list));
     }
 
     @Test
     void convertData_incorrectQuantity_NotOk() {
-        List<String> list = List.of("first,line,one", "b,line,wrongQuantity");
+        List<String> list = List.of(FIRST_STRING, "b,line,wrongQuantity");
         assertThrows(NumberFormatException.class, () -> dataConvertorService.convertData(list));
     }
 
     @Test
     void convertData_incorrectQuantityColumn_NotOk() {
-        List<String> list = List.of("first,line,one", "b,2");
+        List<String> list = List.of(FIRST_STRING, "b,2");
         assertThrows(ArrayIndexOutOfBoundsException.class,
                 () -> dataConvertorService.convertData(list));
     }

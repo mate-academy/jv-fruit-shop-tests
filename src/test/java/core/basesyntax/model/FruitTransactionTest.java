@@ -49,9 +49,8 @@ class FruitTransactionTest {
 
     @Test
     void operation_getOperationByValueInvalid_notOk() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-            FruitTransaction.Operation.getOperationByValue("x")
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> FruitTransaction.Operation.getOperationByValue("x"));
         assertEquals("Invalid value of Operation x", exception.getMessage());
     }
 

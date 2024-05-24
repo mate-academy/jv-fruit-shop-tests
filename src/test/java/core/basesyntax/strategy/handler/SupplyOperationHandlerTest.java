@@ -15,7 +15,7 @@ class SupplyOperationHandlerTest {
     private static final int DEFAULT_QUANTITY = 10;
     private static final int NEGATIVE_QUANTITY = -1;
     private static final int QUANTITY = 5;
-    private static final int ZERO = 0;
+    private static final int ZERO_VALUE = 0;
     private static OperationHandler handler;
 
     @BeforeAll
@@ -47,7 +47,7 @@ class SupplyOperationHandlerTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, APPLE, DEFAULT_QUANTITY);
         handler.process(transaction);
-        Integer actualQuantity = Storage.fruits.getOrDefault(APPLE, ZERO);
+        Integer actualQuantity = Storage.fruits.getOrDefault(APPLE, ZERO_VALUE);
         assertEquals(DEFAULT_QUANTITY, actualQuantity);
     }
 
@@ -60,8 +60,8 @@ class SupplyOperationHandlerTest {
 
         handler.process(transaction1);
         handler.process(transaction2);
-        Integer actualAppleQuantity = Storage.fruits.getOrDefault(APPLE, ZERO);
-        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO);
+        Integer actualAppleQuantity = Storage.fruits.getOrDefault(APPLE, ZERO_VALUE);
+        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO_VALUE);
 
         assertEquals(DEFAULT_QUANTITY, actualAppleQuantity);
         assertEquals(QUANTITY, actualBananaQuantity);

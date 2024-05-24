@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportWriter;
 import java.io.File;
-import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ class ReportWriterImplTest {
     }
 
     @Test
-    public void writeData_toReport_Ok() throws IOException {
+    public void writeData_toReport_Ok() {
         String expectedReport = TITLE + System.lineSeparator() + BANANA_WITH_QUANTITY
                 + System.lineSeparator() + APPLE_WITH_QUANTITY;
         reportWriter.write(expectedReport, FINAL_REPORT);

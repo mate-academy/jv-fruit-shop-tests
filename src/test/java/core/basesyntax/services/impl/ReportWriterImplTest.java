@@ -7,12 +7,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.rules.TemporaryFolder;
 
 class ReportWriterImplTest {
     private static final String TITLE = "fruit,quantity";
@@ -20,17 +16,10 @@ class ReportWriterImplTest {
     private static final String BANANA = "banana";
     private static final String APPLE_WITH_QUANTITY = "apple,20";
     private static final String BANANA_WITH_QUANTITY = "banana,50";
-    private static final String REPORT = "";
     private static final File FINAL_REPORT
             = new File("src/main/resources/reports/final-report.csv");
     private static final String NO_VALID_PATH = "/src/resource/img/report.csv";
     private static ReportWriter reportWriter;
-
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
-
-    @TempDir
-    private Path tempDir;
 
     @BeforeEach
     void setUp() {

@@ -66,11 +66,11 @@ class FruitShopDaoImplTest {
         int initialQuantityApple = 10;
         fruitShopDao.putBalanceStatistic(APPLE, initialQuantityApple);
         int actualQuantityApple = Storage.balanceStatistic.get(APPLE);
-        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
-        assertEquals(initialQuantityApple, actualQuantityApple);
         int newQuantityApple = 30;
         fruitShopDao.putBalanceStatistic(APPLE, newQuantityApple);
+        assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         int newActualQuantityApple = Storage.balanceStatistic.get(APPLE);
+        assertEquals(initialQuantityApple, actualQuantityApple);
         assertTrue(Storage.balanceStatistic.containsKey(APPLE));
         assertEquals(newQuantityApple, newActualQuantityApple);
     }

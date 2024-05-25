@@ -5,38 +5,36 @@ import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.PurchasingException;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseStrategyHandlerImplTest {
-    private static FruitDao fruitDao = new FruitDaoImpl();
-    private static final String FRUIT_NAME = "apple";
-    private static final int FRUIT_QUANTITY = 1;
-    private static final FruitTransaction.Operation STRATEGY_PURCHASE =
-            FruitTransaction.Operation.PURCHASE;
+    private static FruitDao fruitDao;
+    private static StrategyHandler purchaseStrategyHandler;
     private FruitTransaction fruitTransaction;
-    private StrategyHandler purchaseStrategyHandler = new PurchaseStrategyHandlerImpl(fruitDao);
 
-    @BeforeAll
-    static void beforeAll() {
-        fruitDao.getFruitMap().put(FRUIT_NAME, FRUIT_QUANTITY);
+    @BeforeEach
+    void setUp() {
+        Storage.FRUITS.put("apple", 1);
+        fruitDao = new FruitDaoImpl();
+        purchaseStrategyHandler = new PurchaseStrategyHandlerImpl(fruitDao);
     }
 
     @Test
     void handle_validData_Ok() {
-        fruitTransaction = new FruitTransaction(STRATEGY_PURCHASE, FRUIT_NAME, FRUIT_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 1);
         purchaseStrategyHandler.handle(fruitTransaction);
         int expected = 0;
-        int actual = fruitDao.getFruitMap().get(FRUIT_NAME);
+        int actual = Storage.FRUITS.get("apple");
         assertEquals(expected, actual);
     }
 
     @Test
     void handle_quantityBiggerThenAmountInStorage_NotOk() {
-        int diffQuantity = 2;
-        fruitTransaction = new FruitTransaction(STRATEGY_PURCHASE, FRUIT_NAME, diffQuantity);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 2);
         PurchasingException exception = assertThrows(PurchasingException.class,
                 () -> purchaseStrategyHandler.handle(fruitTransaction));
         String expectedMessage = exception.getMessage();

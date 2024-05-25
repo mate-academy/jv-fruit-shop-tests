@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.StrategyService;
@@ -21,40 +22,30 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorImplTest {
-    private static final FruitTransaction.Operation STRATEGY_BALANCE =
-            FruitTransaction.Operation.BALANCE;
-    private static final FruitTransaction.Operation STRATEGY_SUPPLY =
-            FruitTransaction.Operation.SUPPLY;
-    private static final FruitTransaction.Operation STRATEGY_PURCHASE =
-            FruitTransaction.Operation.PURCHASE;
-    private static final FruitTransaction.Operation STRATEGY_RETURN =
-            FruitTransaction.Operation.RETURN;
     private static Map<FruitTransaction.Operation, StrategyHandler> strategyHandlerMap;
     private static StrategyService strategyService;
     private static FruitTransactionProcessor fruitTransactionProcessor;
-    private static FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
 
     @BeforeAll
     static void beforeAll() {
+        fruitDao = new FruitDaoImpl();
         strategyHandlerMap = Map.of(
-                STRATEGY_BALANCE, new BalanceStrategyHandlerImpl(fruitDao),
-                STRATEGY_SUPPLY, new SupplyStrategyHandlerImpl(fruitDao),
-                STRATEGY_PURCHASE, new PurchaseStrategyHandlerImpl(fruitDao),
-                STRATEGY_RETURN, new ReturnStrategyHandlerImpl(fruitDao));
+                FruitTransaction.Operation.BALANCE, new BalanceStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.SUPPLY, new SupplyStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.RETURN, new ReturnStrategyHandlerImpl(fruitDao));
         strategyService = new StrategyServiceImpl(strategyHandlerMap);
         fruitTransactionProcessor = new FruitTransactionProcessorImpl(strategyService);
     }
 
     @Test
     void fillStorage_validData_Ok() {
-        final String fruitName = "apple";
-        final int fruitQuantity = 1;
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(STRATEGY_BALANCE, fruitName, fruitQuantity);
-        List<FruitTransaction> fruitTransactionList = List.of(fruitTransaction);
+        List<FruitTransaction> fruitTransactionList
+                = List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1));
         fruitTransactionProcessor.fillStorage(fruitTransactionList);
         final int zeroSizeThreshold = 0;
-        assertTrue(fruitDao.getFruitMap().size() > zeroSizeThreshold);
+        assertTrue(Storage.FRUITS.size() > zeroSizeThreshold);
     }
 
     @Test

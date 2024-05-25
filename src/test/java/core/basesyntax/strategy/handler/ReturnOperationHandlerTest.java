@@ -24,7 +24,7 @@ class ReturnOperationHandlerTest {
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         Storage.fruits.clear();
     }
 
@@ -46,7 +46,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnHandle_notEmptyFruitStorage_ok() {
+    void returnHandle_notEmptyFruitStorage_ok() {
         Storage.fruits.put(BANANA, DEFAULT_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, BANANA, QUANTITY);
@@ -57,7 +57,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnHandle_addToExistingFruitStorageNegativeQuantity_ok() {
+    void returnHandle_addToExistingFruitStorageNegativeQuantity_ok() {
         Storage.fruits.put(BANANA, NEGATIVE_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, BANANA, DEFAULT_QUANTITY);
@@ -67,5 +67,4 @@ class ReturnOperationHandlerTest {
         Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO_QUANTITY);
         assertEquals(expectedBananaQuantity, actualBananaQuantity);
     }
-
 }

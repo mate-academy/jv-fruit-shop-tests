@@ -24,7 +24,7 @@ class SupplyOperationHandlerTest {
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         Storage.fruits.clear();
     }
 

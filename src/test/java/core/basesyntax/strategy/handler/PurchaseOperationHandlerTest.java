@@ -27,7 +27,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseHandle_normalQuantity_ok() {
+    void purchaseHandle_normalQuantity_ok() {
         Storage.fruits.put(BANANA, DEFAULT_QUANTITY);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, BANANA, DEFAULT_QUANTITY);
@@ -36,7 +36,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseHandle_illegalQuantity_ok() {
+    void purchaseHandle_illegalQuantity_ok() {
         Storage.fruits.put(BANANA, DEFAULT_QUANTITY);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, BANANA, ZERO_QUANTITY);

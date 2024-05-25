@@ -31,7 +31,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void reportInfo_ValidData_ok() {
+    void reportInfo_validData_ok() {
         Storage.fruits.put(APPLE, 10);
         Storage.fruits.put(BANANA, 10);
         String actual = reportGenerator.getReport();

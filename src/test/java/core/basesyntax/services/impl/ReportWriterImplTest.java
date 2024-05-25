@@ -16,9 +16,9 @@ class ReportWriterImplTest {
     private static final String BANANA = "banana";
     private static final String APPLE_WITH_QUANTITY = "apple,20";
     private static final String BANANA_WITH_QUANTITY = "banana,50";
+    private static final String NO_VALID_PATH = "/src/resource/img/report.csv";
     private static final File FINAL_REPORT
             = new File("src/main/resources/reports/final-report.csv");
-    private static final String NO_VALID_PATH = "/src/resource/img/report.csv";
     private static ReportWriter reportWriter;
 
     @BeforeEach
@@ -27,7 +27,7 @@ class ReportWriterImplTest {
     }
 
     @Test
-    public void writeData_toReport_Ok() {
+    void writeData_toReport_Ok() {
         String expectedReport = new StringJoiner(System.lineSeparator(),"",System.lineSeparator())
                 .add(TITLE).add(BANANA_WITH_QUANTITY).add(APPLE_WITH_QUANTITY).toString();
         reportWriter.write(expectedReport, FINAL_REPORT);

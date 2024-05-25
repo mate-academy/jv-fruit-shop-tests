@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class FileReaderServiceImplTest {
     private static final String EXISTING_REPORT = "src/main/resources/reports/report.csv";
     private static final String EMPTY_FILE = "src/main/resources/reports/empty-report.csv";
-    private static final String NOT_EXISTING_REPORT = "src/main/resources/reports/no_exist.csv";
+    private static final String NONEXISTING_REPORT = "src/main/resources/reports/noexist.csv";
     private static final String CSV_SEPARATOR = ",";
     private static FileReaderServiceImpl fileReaderService;
     private static List<String> fruitReport;
@@ -36,7 +36,7 @@ class FileReaderServiceImplTest {
     @Test
     void readReport_noExistingReport_notOk() {
         assertThrows(RuntimeException.class,
-                () -> fileReaderService.read(new File(NOT_EXISTING_REPORT)));
+                () -> fileReaderService.read(new File(NONEXISTING_REPORT)));
     }
 
     @Test

@@ -14,13 +14,13 @@ class FileWriterServiceImplTest {
     private static final FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
 
     @Test
-    void write_nullData_NotOk() {
+    void write_nullData_notOk() {
         String fileName = "testFile";
         assertThrows(WritingException.class, () -> fileWriterService.write(fileName, null));
     }
 
     @Test
-    void write_okData_Ok() throws Exception {
+    void write_okData_ok() throws Exception {
         Path path = Path.of("src/test/resources/testFile");
         List<String> stringList = Files.readAllLines(path);
         String actualString = String.join("", stringList);

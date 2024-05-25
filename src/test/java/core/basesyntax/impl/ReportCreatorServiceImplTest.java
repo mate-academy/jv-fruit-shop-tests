@@ -14,12 +14,12 @@ class ReportCreatorServiceImplTest {
     private ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
 
     @Test
-    void createReport_nullMap_NotOK() {
+    void createReport_nullMap_notOk() {
         assertThrows(RuntimeException.class, () -> reportCreatorService.createReport(null));
     }
 
     @Test
-    void createReport_emptyMap_NotOK() {
+    void createReport_emptyMap_notOk() {
         Map<String, Integer> map = new HashMap<>();
         String report = reportCreatorService.createReport(map);
         int expectedLength = 15;
@@ -27,7 +27,7 @@ class ReportCreatorServiceImplTest {
     }
 
     @Test
-    void createReport_validData_tOK() {
+    void createReport_validData_ok() {
         Map<String, Integer> map = Map.of("apple", 1);
         String report = reportCreatorService.createReport(map);
         String expectedString = "apple,1";

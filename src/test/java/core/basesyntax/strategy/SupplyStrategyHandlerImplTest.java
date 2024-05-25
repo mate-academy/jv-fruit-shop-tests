@@ -14,7 +14,7 @@ class SupplyStrategyHandlerImplTest {
     private final StrategyHandler supplyStrategyHandler = new SupplyStrategyHandlerImpl(fruitDao);
 
     @Test
-    void handle_validData_Ok() {
+    void handle_validData_ok() {
         Storage.FRUITS.put("apple", 1);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 1);
@@ -25,8 +25,7 @@ class SupplyStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_nullData_NotOk() {
+    void handle_nullData_notOk() {
         assertThrows(RuntimeException.class, () -> supplyStrategyHandler.handle(null));
     }
-
 }

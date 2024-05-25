@@ -13,30 +13,30 @@ class DataConvertorServiceImplTest {
     private DataConvertorService dataConvertorService = new DataConvertorServiceImpl();
 
     @Test
-    void convertData_nullList_NotOk() {
+    void convertData_nullList_notOk() {
         assertThrows(NullPointerException.class, () -> dataConvertorService.convertData(null));
     }
 
     @Test
-    void convertData_emptyList_NotOk() {
+    void convertData_emptyList_notOk() {
         List<String> list = List.of();
         assertThrows(ConvertationException.class, () -> dataConvertorService.convertData(list));
     }
 
     @Test
-    void convertData_incorrectStrategy_NotOk() {
+    void convertData_incorrectStrategy_notOk() {
         List<String> list = List.of(FIRST_STRING, "wrongStrategy,line,2");
         assertThrows(ConvertationException.class, () -> dataConvertorService.convertData(list));
     }
 
     @Test
-    void convertData_incorrectQuantity_NotOk() {
+    void convertData_incorrectQuantity_notOk() {
         List<String> list = List.of(FIRST_STRING, "b,line,wrongQuantity");
         assertThrows(NumberFormatException.class, () -> dataConvertorService.convertData(list));
     }
 
     @Test
-    void convertData_incorrectQuantityColumn_NotOk() {
+    void convertData_incorrectQuantityColumn_notOk() {
         List<String> list = List.of(FIRST_STRING, "b,2");
         assertThrows(ArrayIndexOutOfBoundsException.class,
                 () -> dataConvertorService.convertData(list));

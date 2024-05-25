@@ -21,7 +21,7 @@ class BalanceStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_validData_Ok() {
+    void handle_validData_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1);
         balanceStrategyHandler.handle(fruitTransaction);
@@ -29,7 +29,7 @@ class BalanceStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_nullData_NotOk() {
+    void handle_nullData_notOk() {
         assertThrows(RuntimeException.class, () -> balanceStrategyHandler.handle(null));
     }
 }

@@ -40,7 +40,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void fillStorage_validData_Ok() {
+    void fillStorage_validData_ok() {
         List<FruitTransaction> fruitTransactionList
                 = List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1));
         fruitTransactionProcessor.fillStorage(fruitTransactionList);
@@ -49,7 +49,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void fillStorage_nullArgument_NotOk() {
+    void fillStorage_nullArgument_notOk() {
         assertThrows(RuntimeException.class, () -> fruitTransactionProcessor.fillStorage(null));
     }
 }

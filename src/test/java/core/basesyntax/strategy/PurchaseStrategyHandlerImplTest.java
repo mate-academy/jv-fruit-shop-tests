@@ -24,7 +24,7 @@ class PurchaseStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_validData_Ok() {
+    void handle_validData_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 1);
         purchaseStrategyHandler.handle(fruitTransaction);
         int expected = 0;
@@ -33,7 +33,7 @@ class PurchaseStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_quantityBiggerThenAmountInStorage_NotOk() {
+    void handle_quantityBiggerThenAmountInStorage_notOk() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 2);
         PurchasingException exception = assertThrows(PurchasingException.class,
                 () -> purchaseStrategyHandler.handle(fruitTransaction));
@@ -43,7 +43,7 @@ class PurchaseStrategyHandlerImplTest {
     }
 
     @Test
-    void handle_nullData_NotOk() {
+    void handle_nullData_notOk() {
         assertThrows(RuntimeException.class, () -> purchaseStrategyHandler.handle(null));
     }
 }

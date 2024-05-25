@@ -23,7 +23,7 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    void readFile_readFileSuccessfully_Ok() throws IOException {
+    void readFile_readFileSuccessfully_ok() throws IOException {
         List<String> expectedList = List.of("one", "two");
         String fileName = "src/test/resources/InputFile.csv";
         Path path = Path.of(fileName);
@@ -33,7 +33,7 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    void readFile_fileNotFound_NotOk() {
+    void readFile_fileNotFound_notOk() {
         String fileName = "src/test/resources/nonFile.csv";
         RuntimeException exception
                 = assertThrows(RuntimeException.class, () -> fileReaderService.readFile(fileName));
@@ -43,14 +43,14 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    void readFile_fileIsEmpty_Ok() throws IOException {
+    void readFile_fileIsEmpty_ok() throws IOException {
         Path path = Path.of("src/test/resources/emptyFile.csv");
         List<String> actualLines = Files.readAllLines(path);
         assertTrue(actualLines.isEmpty());
     }
 
     @Test
-    void readFile_fileIsNotCsvExpansion_NotOk() {
+    void readFile_fileIsNotCsvExpansion_notOk() {
         String fileName = "src/test/resources/notCsvFile.txt";
         ReadingException readingException
                 = assertThrows(ReadingException.class, () -> fileReaderService.readFile(fileName));

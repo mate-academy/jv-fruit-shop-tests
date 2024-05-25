@@ -19,11 +19,10 @@ import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class App {
+public class Main {
     private static final File REPORT
             = new File("src/main/resources/reports/report.csv");
     private static final File FINAL_REPORT
@@ -33,11 +32,11 @@ public class App {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> inputReport = fileReaderService.read(REPORT);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverterService dataConverter = new DataConverterServiceImpl();

@@ -13,7 +13,6 @@ import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,11 +39,11 @@ class ShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
         fruitEmptyTransaction = Collections.emptyList();
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
         fruits = Storage.fruits;

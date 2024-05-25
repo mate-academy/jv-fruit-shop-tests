@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportWriter;
 import java.io.File;
+import java.util.StringJoiner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +28,8 @@ class ReportWriterImplTest {
 
     @Test
     public void writeData_toReport_Ok() {
-        String expectedReport = TITLE + System.lineSeparator() + BANANA_WITH_QUANTITY
-                + System.lineSeparator() + APPLE_WITH_QUANTITY;
+        String expectedReport = new StringJoiner(System.lineSeparator(),"",System.lineSeparator())
+                .add(TITLE).add(BANANA_WITH_QUANTITY).add(APPLE_WITH_QUANTITY).toString();
         reportWriter.write(expectedReport, FINAL_REPORT);
         Storage.fruits.put(APPLE, 20);
         Storage.fruits.put(BANANA, 50);
@@ -39,7 +40,8 @@ class ReportWriterImplTest {
 
     @Test
     void writeData_toNonWritableLocation_notOk() {
-        String report = TITLE + APPLE_WITH_QUANTITY + BANANA_WITH_QUANTITY;
+        String report = new StringBuilder().append(TITLE)
+                .append(APPLE_WITH_QUANTITY).append(BANANA_WITH_QUANTITY).toString();
         File nonWritableFile = new File(NO_VALID_PATH);
         assertThrows(RuntimeException.class,
                 () -> reportWriter.write(report, nonWritableFile));

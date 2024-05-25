@@ -15,7 +15,7 @@ class ReturnOperationHandlerTest {
     private static final int DEFAULT_QUANTITY = 10;
     private static final int NEGATIVE_QUANTITY = -1;
     private static final int QUANTITY = 5;
-    private static final int ZERO = 0;
+    private static final int ZERO_QUANTITY = 0;
     private static OperationHandler handler;
 
     @BeforeAll
@@ -41,7 +41,7 @@ class ReturnOperationHandlerTest {
                 FruitTransaction.Operation.RETURN, APPLE, DEFAULT_QUANTITY);
         handler.process(fruitTransaction);
 
-        Integer actualQuantity = Storage.fruits.getOrDefault(APPLE, ZERO);
+        Integer actualQuantity = Storage.fruits.getOrDefault(APPLE, ZERO_QUANTITY);
         assertEquals(DEFAULT_QUANTITY, actualQuantity);
     }
 
@@ -52,7 +52,7 @@ class ReturnOperationHandlerTest {
                 FruitTransaction.Operation.RETURN, BANANA, QUANTITY);
         handler.process(transaction);
         int expectedBananaQuantity = DEFAULT_QUANTITY + QUANTITY;
-        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO);
+        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO_QUANTITY);
         assertEquals(expectedBananaQuantity, actualBananaQuantity);
     }
 
@@ -64,7 +64,7 @@ class ReturnOperationHandlerTest {
         handler.process(transaction);
 
         int expectedBananaQuantity = NEGATIVE_QUANTITY + DEFAULT_QUANTITY;
-        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO);
+        Integer actualBananaQuantity = Storage.fruits.getOrDefault(BANANA, ZERO_QUANTITY);
         assertEquals(expectedBananaQuantity, actualBananaQuantity);
     }
 

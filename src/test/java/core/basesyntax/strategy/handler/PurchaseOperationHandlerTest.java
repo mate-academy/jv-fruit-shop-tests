@@ -13,7 +13,7 @@ class PurchaseOperationHandlerTest {
     private static final String BANANA = "banana";
     private static final int DEFAULT_QUANTITY = 10;
     private static final int NEGATIVE_QUANTITY = -1;
-    private static final int ZERO = 0;
+    private static final int ZERO_QUANTITY = 0;
     private static OperationHandler handler;
 
     @BeforeAll
@@ -32,15 +32,14 @@ class PurchaseOperationHandlerTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, BANANA, DEFAULT_QUANTITY);
         handler.process(fruitTransaction);
-        Integer expected = ZERO;
-        assertEquals(expected, Storage.fruits.get(BANANA));
+        assertEquals(0, Storage.fruits.get(BANANA));
     }
 
     @Test
     public void purchaseHandle_illegalQuantity_ok() {
         Storage.fruits.put(BANANA, DEFAULT_QUANTITY);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, BANANA, ZERO);
+                FruitTransaction.Operation.PURCHASE, BANANA, ZERO_QUANTITY);
 
         assertThrows(IllegalArgumentException.class, () -> handler.process(fruitTransaction));
         assertEquals(DEFAULT_QUANTITY, Storage.fruits.get(BANANA));

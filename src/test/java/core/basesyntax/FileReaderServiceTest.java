@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderServiceTest {
-    private static final String INPUT_FILE = "src/main/resources/input.csv";
+    private static final String INPUT_FILE = "src/test/resources/input.csv";
 
     private static FileReaderService readFromFile;
 

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-public class FileWriterServiceTest {
+class FileWriterServiceTest {
     private static FileWriterService writeToFile;
     private static Path outputPath;
     private static Path testPath;
@@ -23,7 +23,7 @@ public class FileWriterServiceTest {
     private static Path tempDir;
 
     @AfterEach
-    public void clearStorage() {
+    void clearStorage() {
         Storage.Storage.clear();
     }
 
@@ -35,7 +35,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void write_validInput_ok() throws IOException {
+    void write_validInput_ok() throws IOException {
         String separator = System.lineSeparator();
         String data = "fruit,quantity" + separator
                 + "banana,152" + separator

@@ -8,11 +8,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class FileParserServiceTest {
+class FileParserServiceTest {
     private static FileParserService fileParser;
 
     @AfterEach
-    public void clearStorage() {
+    void clearStorage() {
         Storage.Storage.clear();
     }
 
@@ -22,7 +22,7 @@ public class FileParserServiceTest {
     }
 
     @Test
-    public void parse_validInput_ok() {
+    void parse_validInput_ok() {
         String data = "type,fruit,quantityb,banana,20b,apple,100s,"
                 + "banana,100p,banana,13r,apple,10p,apple,20p,banana,5s,banana,50";
         String[] expectedResult = {"b,banana,20", "b,apple,100", "s,banana,100",

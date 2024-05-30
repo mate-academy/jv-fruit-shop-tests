@@ -17,12 +17,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class TransactionProcessServiceTest {
+class TransactionProcessServiceTest {
     private static OperationStrategy operationStrategy;
     private static TransactionProcessService dataProcess;
 
     @AfterEach
-    public void clearStorage() {
+    void clearStorage() {
         Storage.Storage.clear();
     }
 
@@ -37,7 +37,7 @@ public class TransactionProcessServiceTest {
     }
 
     @Test
-    public void process_validInput_ok() {
+    void process_validInput_ok() {
         String[] data = {"b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50"};
         Map<String, Integer> expectedResult = new HashMap<>();

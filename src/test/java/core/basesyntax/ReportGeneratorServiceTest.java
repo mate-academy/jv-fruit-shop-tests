@@ -17,13 +17,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ReportGeneratorServiceTest {
+class ReportGeneratorServiceTest {
     private static OperationStrategy operationStrategy;
     private static TransactionProcessService dataProcess;
     private static ReportGeneratorService reportGenerator;
 
     @AfterEach
-    public void clearStorage() {
+    void clearStorage() {
         Storage.Storage.clear();
     }
 
@@ -39,7 +39,7 @@ public class ReportGeneratorServiceTest {
     }
 
     @Test
-    public void createReport_validInput_ok() {
+    void createReport_validInput_ok() {
         String[] data = {"b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50"};
         dataProcess.process(data);

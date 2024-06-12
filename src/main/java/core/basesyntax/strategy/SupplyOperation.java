@@ -6,6 +6,9 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new RuntimeException("Can't supply with negative value...");
+        }
         Integer currentQuantity = Storage.getFruitQuantity(fruitTransaction.getFruit());
         Storage.setFruitQuantity(fruitTransaction.getFruit(),
                 currentQuantity + fruitTransaction.getQuantity());

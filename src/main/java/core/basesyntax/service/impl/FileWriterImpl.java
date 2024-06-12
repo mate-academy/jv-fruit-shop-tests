@@ -1,25 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class FileWriterImpl implements FileWriter {
+public class FileWriterImpl implements FileWriterService {
     @Override
     public void write(String content, String filePath) {
-        Path path = Paths.get(filePath);
-
-        if (content.isEmpty() || !Files.exists(path)) {
-            throw new RuntimeException("Can't write to file by path - " + filePath);
-        }
-
-        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            writer.write(content);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            bw.write(content);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file by path - " + filePath, e);
+            throw new RuntimeException("Can't write into the file " + filePath);
         }
     }
 }

@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
@@ -28,7 +28,7 @@ public class Main {
 
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
+        FileReaderService fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
         // 2. Convert the incoming data into FruitTransactions list
@@ -47,7 +47,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriterService fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }
 

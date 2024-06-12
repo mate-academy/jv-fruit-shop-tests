@@ -16,7 +16,7 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         if (transactions == null || transactions.isEmpty()) {
-            throw new RuntimeException("Transactions can't be null...");
+            throw new RuntimeException("Transactions can't be null");
         }
         for (FruitTransaction transaction : transactions) {
             if (transaction == null) {

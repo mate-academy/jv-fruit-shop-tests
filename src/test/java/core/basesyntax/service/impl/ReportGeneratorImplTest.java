@@ -20,10 +20,15 @@ public class ReportGeneratorImplTest {
     @Test
     public void test_getReport_singleFruit() {
         Storage.setFruitQuantity("apple", 10);
-        String expectedReport = HEADER_OF_REPORT + System.lineSeparator() + "apple,10";
+
+        StringBuilder expectedReport = new StringBuilder();
+        expectedReport.append(HEADER_OF_REPORT)
+                .append(System.lineSeparator())
+                .append("apple,10");
+
         String actualReport = reportGenerator.getReport();
 
-        assertEquals(expectedReport, actualReport);
+        assertEquals(expectedReport.toString(), actualReport);
     }
 
     @Test
@@ -31,12 +36,15 @@ public class ReportGeneratorImplTest {
         Storage.setFruitQuantity("apple", 10);
         Storage.setFruitQuantity("banana", 20);
 
-        String expectedReport = HEADER_OF_REPORT
-                + System.lineSeparator() + "apple,10"
-                + System.lineSeparator() + "banana,20";
+        StringBuilder expectedReport = new StringBuilder();
+        expectedReport.append(HEADER_OF_REPORT)
+                .append(System.lineSeparator())
+                .append("apple,10")
+                .append(System.lineSeparator())
+                .append("banana,20");
 
         String actualReport = reportGenerator.getReport();
 
-        assertEquals(expectedReport, actualReport);
+        assertEquals(expectedReport.toString(), actualReport);
     }
 }

@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitsFromFileImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int NUMBER = 123;
     private FruitsFromFile fruitsFromFile;
 
     @BeforeEach
@@ -31,25 +34,25 @@ class FruitsFromFileImplTest {
     void getFruitsFromFile_CorrectInputOk() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(
-                Operation.BALANCE,"banana", 20));
+                Operation.BALANCE,BANANA, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.BALANCE,"apple", 100));
+                Operation.BALANCE,APPLE, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.SUPPLY,"banana", 100));
+                Operation.SUPPLY,BANANA, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"banana", 13));
+                Operation.PURCHASE,BANANA, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.RETURN,"apple", 10));
+                Operation.RETURN,APPLE, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"apple", 20));
+                Operation.PURCHASE,APPLE, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"banana", 5));
+                Operation.PURCHASE,BANANA, NUMBER));
         fruitTransactions.add(new FruitTransaction(
-                Operation.SUPPLY,"banana", 50));
+                Operation.SUPPLY,BANANA, NUMBER));
 
         List<String> expected = new ArrayList<>();
-        expected.add("banana");
-        expected.add("apple");
+        expected.add(BANANA);
+        expected.add(APPLE);
         List<String> result = fruitsFromFile.getFruitsFromFile(fruitTransactions);
         for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i), result.get(i));

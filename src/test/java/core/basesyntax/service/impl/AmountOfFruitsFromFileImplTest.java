@@ -20,6 +20,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AmountOfFruitsFromFileImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int NUMBER = 123;
     private AmountOfFruitsFromFile amount = null;
 
     public static OperationStrategy fillingConstructorWithOperationStrategy() {
@@ -41,13 +44,13 @@ class AmountOfFruitsFromFileImplTest {
     void getAmountOfFruitsFromFile_EmptyFruitsList_NotOk() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(Operation.BALANCE,
-                "apple", 45));
+                APPLE, NUMBER));
         fruitTransactions.add(new FruitTransaction(Operation.PURCHASE,
-                "banana", 143));
+                BANANA, NUMBER));
         fruitTransactions.add(new FruitTransaction(Operation.RETURN,
-                "apple", 12));
+                APPLE, NUMBER));
         fruitTransactions.add(new FruitTransaction(Operation.SUPPLY,
-                "banana", 67));
+                BANANA, NUMBER));
         assertThrows(CantWorkWithThisFileException.class,
                 () -> amount.getAmountOfFruitsFromFile(null, fruitTransactions),
                 "Fruit List can't be null when FT is full");
@@ -56,8 +59,8 @@ class AmountOfFruitsFromFileImplTest {
     @Test
     void getAmountOfFruitsFromFile_EmptyFruitTransactionList_NotOk() {
         List<String> fruits = new ArrayList<>();
-        fruits.add("banana");
-        fruits.add("apple");
+        fruits.add(BANANA);
+        fruits.add(APPLE);
         assertThrows(CantWorkWithThisFileException.class,
                 () -> amount.getAmountOfFruitsFromFile(fruits, null),
                 "Fruit List can't be null when FT is full");

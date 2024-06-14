@@ -1,5 +1,6 @@
 package core.basesyntax.db;
 
+import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.storage.Storage;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,9 @@ public class FruitShopDaoImpl implements FruitShopDao {
         List<String> lines = new ArrayList<>();
         for (String key : Storage.fruitStorage.keySet()) {
             Integer value = Storage.fruitStorage.get(key);
+            if (key == null || value == null) {
+                throw new CantWorkWithThisFileException("Key or value are null!");
+            }
             lines.add(key + ", " + value);
         }
         return lines;

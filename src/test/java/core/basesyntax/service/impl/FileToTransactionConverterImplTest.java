@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileToTransactionConverterImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int NUMBER = 123;
     private FileToTransactionConverter converter;
 
     @BeforeEach
@@ -43,21 +46,21 @@ class FileToTransactionConverterImplTest {
 
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(
-                Operation.BALANCE,"banana", 20));
+                Operation.BALANCE,BANANA, 20));
         fruitTransactions.add(new FruitTransaction(
-                Operation.BALANCE,"apple", 100));
+                Operation.BALANCE,APPLE, 100));
         fruitTransactions.add(new FruitTransaction(
-                Operation.SUPPLY,"banana", 100));
+                Operation.SUPPLY,BANANA, 100));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"banana", 13));
+                Operation.PURCHASE,BANANA, 13));
         fruitTransactions.add(new FruitTransaction(
-                Operation.RETURN,"apple", 10));
+                Operation.RETURN,APPLE, 10));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"apple", 20));
+                Operation.PURCHASE,APPLE, 20));
         fruitTransactions.add(new FruitTransaction(
-                Operation.PURCHASE,"banana", 5));
+                Operation.PURCHASE,BANANA, 5));
         fruitTransactions.add(new FruitTransaction(
-                Operation.SUPPLY,"banana", 50));
+                Operation.SUPPLY,BANANA, 50));
 
         List<FruitTransaction> result = converter.convert(lines);
 

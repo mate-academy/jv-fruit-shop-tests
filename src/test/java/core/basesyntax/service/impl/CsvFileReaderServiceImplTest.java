@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceImplTest {
+
+    private static final String NULL_PATH = null;
     private CsvFileReaderService readerService;
 
     @BeforeEach
@@ -30,9 +32,8 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readFromFile_NullPath_NotOk() {
-        String nullPath = null;
         assertThrows(CantWorkWithThisFileException.class,
-                () -> readerService.readFromFile(nullPath),
+                () -> readerService.readFromFile(NULL_PATH),
                 "Null path");
     }
 }

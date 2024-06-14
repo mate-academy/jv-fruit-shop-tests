@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.operations.OperationHandler;
 import java.util.Map;
@@ -15,6 +16,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(Operation operation) {
-        return operationHandlerMap.get(operation);
+        if (operationHandlerMap.containsKey(operation)) {
+            return operationHandlerMap.get(operation);
+        }
+        throw new CantWorkWithThisFileException(
+                "No handler found for operation " + operation);
     }
 }

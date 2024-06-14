@@ -1,19 +1,21 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.operations.*;
+import core.basesyntax.service.operations.BalanceHandler;
+import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.ReturnHandler;
+import core.basesyntax.service.operations.SupplyHandler;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class OperationStrategyImplTest {
-    OperationStrategy operationStrategy;
+    private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {

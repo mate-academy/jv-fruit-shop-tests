@@ -1,16 +1,16 @@
 package core.basesyntax.db;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitShopDaoImplTest {
     private static final String APPLE = "apple";
@@ -42,8 +42,7 @@ class FruitShopDaoImplTest {
         expected.add(APPLE + ", 1");
 
         List<String> result = fruitShopDao.getAllFruitsWithQuantities();
-            assertEquals(expected,result);
-
+        assertEquals(expected,result);
     }
 
     @Test

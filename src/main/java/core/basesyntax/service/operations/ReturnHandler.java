@@ -9,6 +9,9 @@ public class ReturnHandler implements OperationHandler {
         if (fruitTransaction == null) {
             throw new CantWorkWithThisFileException("fruitTransaction is null");
         }
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new CantWorkWithThisFileException("How quantity can be < 0?");
+        }
         return fruitTransaction.getQuantity();
     }
 }

@@ -31,7 +31,7 @@ class FruitsFromFileImplTest {
     }
 
     @Test
-    void getFruitsFromFile_CorrectInputOk() {
+    void getFruitsFromFile_CorrectInput_Ok() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(
                 Operation.BALANCE,BANANA, NUMBER));

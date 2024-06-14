@@ -6,16 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.CantWorkWithThisFileException;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnHandlerTest {
     private static final String APPLE = "apple";
     private static final int NUMBER = 10;
-    private OperationHandler operationHandler;
+    private static final int WRONG_NUMBER = -10;
+    private static OperationHandler operationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         operationHandler = new ReturnHandler();
     }
 
@@ -25,6 +26,15 @@ class ReturnHandlerTest {
                 Operation.BALANCE, APPLE, NUMBER);
         int expectedResult = NUMBER;
         assertEquals(expectedResult, operationHandler.getOperation(fruitTransaction),
+                "Operation returned wrong result");
+    }
+
+    @Test
+    void getOperation_QuantityUnderZero_NotOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                Operation.BALANCE, APPLE, WRONG_NUMBER);
+        assertThrows(CantWorkWithThisFileException.class,
+                () -> operationHandler.getOperation(fruitTransaction),
                 "Operation returned wrong result");
     }
 

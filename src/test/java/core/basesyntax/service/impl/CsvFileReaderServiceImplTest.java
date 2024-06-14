@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.service.CsvFileReaderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CsvFileReaderServiceImplTest {
-    CsvFileReaderService readerService;
+    private CsvFileReaderService readerService;
 
     @BeforeEach
     void setUp() {
@@ -27,6 +27,7 @@ class CsvFileReaderServiceImplTest {
                 () -> readerService.readFromFile(wrongPath2),
                 "Wrong path");
     }
+
     @Test
     void readFromFile_NullPath_NotOk() {
         String nullPath = null;

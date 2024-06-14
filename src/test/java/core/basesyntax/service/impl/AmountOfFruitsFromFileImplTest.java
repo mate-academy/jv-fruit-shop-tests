@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
@@ -64,5 +65,37 @@ class AmountOfFruitsFromFileImplTest {
         assertThrows(CantWorkWithThisFileException.class,
                 () -> amount.getAmountOfFruitsFromFile(fruits, null),
                 "Fruit List can't be null when FT is full");
+    }
+
+    @Test
+    void getAmountOfFruitsFromFile_OutputMakeQuantityList_Ok() {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitTransactions.add(new FruitTransaction(
+                Operation.BALANCE,BANANA, 20));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.BALANCE,APPLE, 100));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.SUPPLY,BANANA, 100));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.PURCHASE,BANANA, 13));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.RETURN,APPLE, 10));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.PURCHASE,APPLE, 20));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.PURCHASE,BANANA, 5));
+        fruitTransactions.add(new FruitTransaction(
+                Operation.SUPPLY,BANANA, 50));
+
+        List<String> fruits = new ArrayList<>();
+        fruits.add(APPLE);
+        fruits.add(BANANA);
+
+        List<Integer> expectedQuantityList = new ArrayList<>();
+        expectedQuantityList.add(90);
+        expectedQuantityList.add(152);
+        List<Integer> actual = amount.getAmountOfFruitsFromFile(
+                fruits, fruitTransactions);
+        assertEquals(expectedQuantityList, actual);
     }
 }

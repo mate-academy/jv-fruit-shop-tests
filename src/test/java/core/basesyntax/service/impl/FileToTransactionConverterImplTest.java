@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 class FileToTransactionConverterImplTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
-    private static final int NUMBER = 123;
     private FileToTransactionConverter converter;
 
     @BeforeEach

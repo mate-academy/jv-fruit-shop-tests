@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -88,7 +89,7 @@ class CsvFileReaderServiceImplTest {
         }
 
         assertFalse(lines.isEmpty());
-        assertTrue(lines.size() == 2, "Expected two lines in the file"); // header + one data line
+        assertEquals(2, lines.size(), "Expected two lines in the file"); // header + one data line
     }
 
     @Test

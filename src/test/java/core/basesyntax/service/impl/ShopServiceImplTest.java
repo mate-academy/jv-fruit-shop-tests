@@ -41,9 +41,10 @@ class ShopServiceImplTest {
 
     @Test
     void processTransactions_invalidOperation_throwsException() {
-        List<FruitTransaction> transactions = Arrays.asList(
+        List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(null, "apple", 10)
         );
-        assertThrows(RuntimeException.class, () -> shopService.processTransactions(transactions, inventory));
+        assertThrows(RuntimeException.class, ()
+                -> shopService.processTransactions(transactions, inventory));
     }
 }

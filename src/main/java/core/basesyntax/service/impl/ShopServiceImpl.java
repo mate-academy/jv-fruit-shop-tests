@@ -14,15 +14,22 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void processTransactions(
-            List<FruitTransaction> transactions, Map<String, Integer> inventory) {
+    public void processTransactions(List<FruitTransaction> transactions,
+                                    Map<String, Integer> inventory) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationHandlers.get(transaction.getOperation());
-            if (handler != null) {
-                handler.handle(transaction, inventory);
-            } else {
-                throw new RuntimeException("Unknown operation: " + transaction.getOperation());
+            if (transaction.getQuantity() < 0) {
+                throw new RuntimeException("Quantity cannot be negative");
             }
+            if (transaction.getQuantity() == 0) {
+                inventory.putIfAbsent(transaction.getFruit(), 0);
+                continue;
+            }
+            OperationHandler handler = operationHandlers.get(transaction.getOperation());
+            if (handler == null) {
+                throw new RuntimeException("Invalid operation: "
+                        + transaction.getOperation());
+            }
+            handler.handle(transaction, inventory);
         }
     }
 }

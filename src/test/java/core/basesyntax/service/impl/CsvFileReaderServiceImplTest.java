@@ -62,12 +62,28 @@ class CsvFileReaderServiceImplTest {
         long fileSize = Files.size(path);
         System.out.println("File size: " + fileSize + " bytes");
 
-        List<String> lines = Files.readAllLines(path);
+        List<String> lines = csvFileReaderService.readFromFile(filePath);
         System.out.println("Read " + lines.size() + " lines from " + filePath);
         for (String line : lines) {
             System.out.println(line);
         }
 
         assertFalse(lines.isEmpty(), "Expected non-empty list but got empty.");
+    }
+
+    @Test
+    void readFromFile_singleLineFile_success() throws IOException {
+        List<String> lines = csvFileReaderService.readFromFile(
+                "src/test/resources/single_line_input.csv");
+        assertFalse(lines.isEmpty());
+        assertTrue(lines.size() == 2, "Expected two lines in the file"); // header + one data line
+    }
+
+    @Test
+    void readFromFile_fileWithEmptyLines_success() throws IOException {
+        List<String> lines = csvFileReaderService.readFromFile(
+                "src/test/resources/file_with_empty_lines.csv");
+        assertFalse(lines.isEmpty());
+        assertTrue(lines.contains(""), "Expected empty lines in the file");
     }
 }

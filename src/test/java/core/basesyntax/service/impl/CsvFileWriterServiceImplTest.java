@@ -22,7 +22,8 @@ class CsvFileWriterServiceImplTest {
 
     @Test
     void writeToFile_invalidPath_throwsException() {
-        assertThrows(IOException.class, () -> csvFileWriterService.writeToFile("data", "invalid/path/to/file.csv"));
+        assertThrows(IOException.class, ()
+                -> csvFileWriterService.writeToFile("data", "invalid/path/to/file.csv"));
     }
 
     @Test

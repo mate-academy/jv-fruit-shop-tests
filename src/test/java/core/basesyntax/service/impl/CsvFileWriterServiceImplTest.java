@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.exception.FileOperationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,8 +23,8 @@ class CsvFileWriterServiceImplTest {
 
     @Test
     void writeToFile_invalidPath_throwsException() {
-        assertThrows(IOException.class, ()
-                -> csvFileWriterService.writeToFile("data", "invalid/path/to/file.csv"));
+        assertThrows(FileOperationException.class, () ->
+                csvFileWriterService.writeToFile("data", "invalid/path/to/file.csv"));
     }
 
     @Test

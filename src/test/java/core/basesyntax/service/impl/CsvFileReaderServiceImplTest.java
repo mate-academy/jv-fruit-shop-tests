@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.exception.FileOperationException;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -26,7 +26,7 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readFromFile_fileNotFound_throwsException() {
-        assertThrows(NoSuchFileException.class, () ->
+        assertThrows(FileOperationException.class, () ->
                 csvFileReaderService.readFromFile("invalid/path/to/file.csv"));
     }
 
@@ -39,7 +39,7 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readFromFile_malformedFile_throwsException() {
-        assertThrows(IOException.class, () ->
+        assertThrows(FileOperationException.class, () ->
                 csvFileReaderService.readFromFile("src/test/resources/malformed_input.csv"));
     }
 

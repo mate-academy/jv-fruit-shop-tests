@@ -6,16 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationTest {
-    private PurchaseOperation purchaseOperation;
+    private static PurchaseOperation purchaseOperation;
     private Map<String, Integer> inventory;
+
+    @BeforeAll
+    public static void beforeAll() {
+        purchaseOperation = new PurchaseOperation();
+    }
 
     @BeforeEach
     public void setUp() {
-        purchaseOperation = new PurchaseOperation();
         inventory = new HashMap<>();
         inventory.put("apple", 100);
     }

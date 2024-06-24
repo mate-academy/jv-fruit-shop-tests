@@ -1,21 +1,26 @@
 package core.basesyntax.strategy;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
-    private ReturnOperation returnOperation;
+    private static ReturnOperation returnOperation;
     private Map<String, Integer> inventory;
+
+    @BeforeAll
+    public static void beforeAll() {
+        returnOperation = new ReturnOperation();
+    }
 
     @BeforeEach
     public void setUp() {
-        returnOperation = new ReturnOperation();
         inventory = new HashMap<>();
         inventory.put("banana", 30);
     }

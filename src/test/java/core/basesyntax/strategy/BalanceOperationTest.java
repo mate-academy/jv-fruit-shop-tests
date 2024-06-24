@@ -5,16 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
-    private BalanceOperation balanceOperation;
+    private static BalanceOperation balanceOperation;
     private Map<String, Integer> inventory;
+
+    @BeforeAll
+    public static void beforeAll() {
+        balanceOperation = new BalanceOperation();
+    }
 
     @BeforeEach
     public void setUp() {
-        balanceOperation = new BalanceOperation();
         inventory = new HashMap<>();
     }
 

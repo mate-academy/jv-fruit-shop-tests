@@ -18,7 +18,7 @@ class CsvFileReaderServiceImplTest {
     private final CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
 
     @Test
-    void readFromFile_validFile_success() throws IOException {
+    void readFromFile_validFile_success()  {
         List<String> lines = csvFileReaderService.readFromFile(
                 "src/test/resources/test_input.csv");
         assertFalse(lines.isEmpty());
@@ -31,7 +31,7 @@ class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_emptyFile_success() throws IOException {
+    void readFromFile_emptyFile_success() {
         List<String> lines = csvFileReaderService.readFromFile(
                 "src/test/resources/empty_input.csv");
         assertTrue(lines.isEmpty());

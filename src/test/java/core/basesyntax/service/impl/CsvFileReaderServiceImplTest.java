@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.exception.FileOperationException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -44,51 +40,24 @@ class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_largeFile_success() throws IOException {
-        String filePath = "src/test/resources/large_input.csv";
-        Path path = Paths.get(filePath);
-
-        if (!Files.exists(path)) {
-            throw new IOException("File does not exist: " + filePath);
-        }
-
-        if (!Files.isReadable(path)) {
-            throw new IOException("File is not readable: " + filePath);
-        }
-
-        Files.size(path);
-
-        List<String> lines = csvFileReaderService.readFromFile(filePath);
-
+    void readFromFile_largeFile_success() {
+        List<String> lines = csvFileReaderService.readFromFile(
+                "src/test/resources/large_input.csv");
         assertFalse(lines.isEmpty(), "Expected non-empty list but got empty.");
     }
 
     @Test
-    void readFromFile_singleLineFile_success() throws IOException {
-        String filePath = "src/test/resources/single_line_input.csv";
-        Path path = Paths.get(filePath);
-
-        if (!Files.exists(path)) {
-            throw new IOException("File does not exist: " + filePath);
-        }
-
-        List<String> lines = csvFileReaderService.readFromFile(filePath);
-
+    void readFromFile_singleLineFile_success() {
+        List<String> lines = csvFileReaderService.readFromFile(
+                "src/test/resources/single_line_input.csv");
         assertFalse(lines.isEmpty());
         assertEquals(2, lines.size(), "Expected two lines in the file"); // header + one data line
     }
 
     @Test
-    void readFromFile_fileWithEmptyLines_success() throws IOException {
-        String filePath = "src/test/resources/file_with_empty_lines.csv";
-        Path path = Paths.get(filePath);
-
-        if (!Files.exists(path)) {
-            throw new IOException("File does not exist: " + filePath);
-        }
-
-        List<String> lines = csvFileReaderService.readFromFile(filePath);
-
+    void readFromFile_fileWithEmptyLines_success() {
+        List<String> lines = csvFileReaderService.readFromFile(
+                "src/test/resources/file_with_empty_lines.csv");
         assertFalse(lines.isEmpty());
         assertTrue(lines.contains(""), "Expected empty lines in the file");
     }

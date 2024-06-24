@@ -11,19 +11,24 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private ShopService shopService;
+    private static ShopService shopService;
     private Map<String, Integer> inventory;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         AppConfig appConfig = new AppConfig();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
                 appConfig.getOperationHandlers();
         shopService = new ShopServiceImpl(operationHandlers);
+    }
+
+    @BeforeEach
+    void setUp() {
         inventory = new HashMap<>();
     }
 
@@ -106,7 +111,6 @@ class ShopServiceImplTest {
                 shopService.processTransactions(transactions, inventory));
     }
 
-    // New test cases
     @Test
     void processTransactions_emptyTransactions_success() {
         List<FruitTransaction> transactions = List.of();

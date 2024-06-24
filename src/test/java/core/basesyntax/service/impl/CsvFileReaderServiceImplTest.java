@@ -18,7 +18,7 @@ class CsvFileReaderServiceImplTest {
     private final CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
 
     @Test
-    void readFromFile_validFile_success()  {
+    void readFromFile_validFile_success() {
         List<String> lines = csvFileReaderService.readFromFile(
                 "src/test/resources/test_input.csv");
         assertFalse(lines.isEmpty());
@@ -48,26 +48,17 @@ class CsvFileReaderServiceImplTest {
         String filePath = "src/test/resources/large_input.csv";
         Path path = Paths.get(filePath);
 
-        System.out.println("Checking file: " + filePath);
-
         if (!Files.exists(path)) {
-            System.out.println("File does not exist: " + filePath);
             throw new IOException("File does not exist: " + filePath);
         }
 
         if (!Files.isReadable(path)) {
-            System.out.println("File is not readable: " + filePath);
             throw new IOException("File is not readable: " + filePath);
         }
 
-        long fileSize = Files.size(path);
-        System.out.println("File size: " + fileSize + " bytes");
+        Files.size(path);
 
         List<String> lines = csvFileReaderService.readFromFile(filePath);
-        System.out.println("Read " + lines.size() + " lines from " + filePath);
-        for (String line : lines) {
-            System.out.println(line);
-        }
 
         assertFalse(lines.isEmpty(), "Expected non-empty list but got empty.");
     }
@@ -78,15 +69,10 @@ class CsvFileReaderServiceImplTest {
         Path path = Paths.get(filePath);
 
         if (!Files.exists(path)) {
-            System.out.println("File does not exist: " + filePath);
             throw new IOException("File does not exist: " + filePath);
         }
 
         List<String> lines = csvFileReaderService.readFromFile(filePath);
-        System.out.println("Read " + lines.size() + " lines from " + filePath);
-        for (String line : lines) {
-            System.out.println(line);
-        }
 
         assertFalse(lines.isEmpty());
         assertEquals(2, lines.size(), "Expected two lines in the file"); // header + one data line
@@ -98,15 +84,10 @@ class CsvFileReaderServiceImplTest {
         Path path = Paths.get(filePath);
 
         if (!Files.exists(path)) {
-            System.out.println("File does not exist: " + filePath);
             throw new IOException("File does not exist: " + filePath);
         }
 
         List<String> lines = csvFileReaderService.readFromFile(filePath);
-        System.out.println("Read " + lines.size() + " lines from " + filePath);
-        for (String line : lines) {
-            System.out.println(line);
-        }
 
         assertFalse(lines.isEmpty());
         assertTrue(lines.contains(""), "Expected empty lines in the file");

@@ -14,7 +14,6 @@ import core.basesyntax.service.impl.CsvParserServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,19 +36,15 @@ public class FruitShopApplication {
     }
 
     public void run(String inputFilePath, String outputFilePath) {
-        try {
-            List<String> inputReport = csvFileReaderService.readFromFile(inputFilePath);
+        List<String> inputReport = csvFileReaderService.readFromFile(inputFilePath);
 
-            // Parse the CSV lines into FruitTransaction objects
-            List<FruitTransaction> transactions = csvParserService.parse(inputReport);
+        // Parse the CSV lines into FruitTransaction objects
+        List<FruitTransaction> transactions = csvParserService.parse(inputReport);
 
-            shopService.processTransactions(transactions, Storage.getInventory());
+        shopService.processTransactions(transactions, Storage.getInventory());
 
-            String resultingReport = reportGeneratorService.generateReport(Storage.getInventory());
+        String resultingReport = reportGeneratorService.generateReport(Storage.getInventory());
 
-            csvFileWriterService.writeToFile(resultingReport, outputFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading or writing files", e);
-        }
+        csvFileWriterService.writeToFile(resultingReport, outputFilePath);
     }
 }

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import service.DataConverter;
 
 class DataConverterImplTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private static DataConverter dataConverter;
 
     @BeforeAll
@@ -54,10 +56,10 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_Ok() {
         List<FruitTransaction> expectedList = List.of(
-                new FruitTransaction(Operation.BALANCE, "banana", 20),
-                new FruitTransaction(Operation.SUPPLY, "banana", 100),
-                new FruitTransaction(Operation.PURCHASE, "banana", 15),
-                new FruitTransaction(Operation.RETURN, "apple", 10)
+                new FruitTransaction(Operation.BALANCE, BANANA, 20),
+                new FruitTransaction(Operation.SUPPLY, BANANA, 100),
+                new FruitTransaction(Operation.PURCHASE, BANANA, 15),
+                new FruitTransaction(Operation.RETURN, APPLE, 10)
         );
         List<String> inputLines = List.of(
                 "type,fruit,quantity",
@@ -73,7 +75,6 @@ class DataConverterImplTest {
                     dataConverter.convertToTransaction(inputLines).get(i).getFruit());
             assertEquals(expectedList.get(i).getQuantity(),
                     dataConverter.convertToTransaction(inputLines).get(i).getQuantity());
-
         }
     }
 }

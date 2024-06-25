@@ -8,6 +8,7 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
@@ -16,6 +17,11 @@ class SupplyOperationTest {
     @BeforeAll
     static void beforeAll() {
         supplyOperation = new SupplyOperation();
+    }
+
+    @BeforeEach
+    void setUp() {
+        Storage.reports.clear();
     }
 
     @Test

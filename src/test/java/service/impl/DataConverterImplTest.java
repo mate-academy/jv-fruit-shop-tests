@@ -68,13 +68,11 @@ class DataConverterImplTest {
                 "p,banana,15",
                 "r,apple,10"
         );
+        List<FruitTransaction> resultList = dataConverter.convertToTransaction(inputLines);
         for (int i = 0; i < expectedList.size(); i++) {
-            assertEquals(expectedList.get(i).getOperation(),
-                    dataConverter.convertToTransaction(inputLines).get(i).getOperation());
-            assertEquals(expectedList.get(i).getFruit(),
-                    dataConverter.convertToTransaction(inputLines).get(i).getFruit());
-            assertEquals(expectedList.get(i).getQuantity(),
-                    dataConverter.convertToTransaction(inputLines).get(i).getQuantity());
+            assertEquals(expectedList.get(i).getOperation(), resultList.get(i).getOperation());
+            assertEquals(expectedList.get(i).getFruit(), resultList.get(i).getFruit());
+            assertEquals(expectedList.get(i).getQuantity(), resultList.get(i).getQuantity());
         }
     }
 }

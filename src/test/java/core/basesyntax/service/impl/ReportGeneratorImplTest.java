@@ -16,6 +16,10 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Testing ReportGeneratorImpl")
 class ReportGeneratorImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int QUANTITY_5 = 5;
+    private static final int QUANTITY_10 = 10;
     private static final String HEAD = "fruit,quantity";
     private static final String DATA_DELIMITER = ",";
     private ReportGeneratorImpl reportGenerator;
@@ -28,10 +32,7 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_validData_ok() {
-        Map<String, Integer> testDataFruits = Map.of(
-                "apple", 5,
-                "banana", 10
-        );
+        Map<String, Integer> testDataFruits = Map.of(APPLE, QUANTITY_5, BANANA, QUANTITY_10);
         fillStorageWithTestData(testDataFruits);
         String expected = getExpectedData(testDataFruits);
         String actual = reportGenerator.getReport();

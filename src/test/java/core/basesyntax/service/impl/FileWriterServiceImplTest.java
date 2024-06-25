@@ -7,10 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.errors.ErrorMessages;
 import core.basesyntax.service.FileWriterService;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Testing FileWriterServiceImpl")
 class FileWriterServiceImplTest {
-    private static final String ERROR_READING_FILE = "Error reading file";
     private static final String FILE_DOESNT_EXIST = "File doesn't create";
     private static final String TEST_FILE_NAME = "testFilename.csv";
     private static final String FAILED_TO_DELETE_TEST_FILE = "Failed to delete test file: ";
@@ -34,11 +30,22 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_validData_ok() {
+        String expectedData = """
+                type,fruit,quantity
+                b,banana,20
+                b,apple,100
+                s,banana,100
+                p,banana,13
+                r,apple,10
+                p,apple,20
+                p,banana,5
+                s,banana,50
+                """;
         String dataToWrite = getDataForWriteToFile();
         fileWriterService.write(dataToWrite);
         File file = new File(TEST_FILE_NAME);
         assertTrue(file.exists(), FILE_DOESNT_EXIST);
-        verifyWrittenContent(file, dataToWrite);
+        assertEquals(expectedData, dataToWrite);
     }
 
     @Test
@@ -83,18 +90,6 @@ class FileWriterServiceImplTest {
                 "p,banana,5",
                 "s,banana,50"
         );
-    }
-
-    private void verifyWrittenContent(File file, String dataToWrite) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String lines = bufferedReader
-                    .lines()
-                    .map(line -> line + System.lineSeparator())
-                    .collect(Collectors.joining());
-            assertEquals(dataToWrite, lines);
-        } catch (IOException e) {
-            fail(ERROR_READING_FILE);
-        }
     }
 
     private void deleteTestFile() {

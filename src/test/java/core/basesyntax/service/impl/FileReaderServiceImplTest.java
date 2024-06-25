@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Testing FileReaderServiceImpl")
 class FileReaderServiceImplTest {
-    private static final String CAN_T_CREATE_TEST_FILE = "Can't create test file";
     private static final String TEST_FILE_NAME = "testFilename.csv";
     private static final String FAILED_TO_DELETE_TEST_FILE = "Failed to delete test file: ";
     private FileReaderService fileReaderService;
@@ -58,7 +57,7 @@ class FileReaderServiceImplTest {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(TEST_FILE_NAME))) {
             bufferedWriter.write(testData);
         } catch (IOException e) {
-            fail(CAN_T_CREATE_TEST_FILE + TEST_FILE_NAME);
+            throw new RuntimeException(e);
         }
     }
 

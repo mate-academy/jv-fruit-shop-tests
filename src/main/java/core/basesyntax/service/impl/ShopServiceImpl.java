@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.errors.ErrorMessages;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
@@ -19,8 +20,16 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
+        validateTransaction(transactions);
         for (FruitTransaction transaction : transactions) {
             processTransaction(transaction);
+        }
+    }
+
+    private void validateTransaction(List<FruitTransaction> transactions) {
+        if (transactions == null || transactions.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessages
+                    .TRANSACTION_LIST_CANNOT_BE_NULL_OR_EMPTY);
         }
     }
 

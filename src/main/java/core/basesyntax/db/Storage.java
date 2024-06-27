@@ -18,4 +18,8 @@ public class Storage {
     public static synchronized void removeFruit(Fruit fruit) {
         fruits.remove(fruit);
     }
+
+    public static synchronized void clear() {
+        fruits.clear();
+    }
 }

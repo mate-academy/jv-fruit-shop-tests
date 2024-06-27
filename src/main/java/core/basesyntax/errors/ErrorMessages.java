@@ -8,8 +8,12 @@ public class ErrorMessages {
     public static final String FRUIT_NOT_FOUND = "Fruit not found: ";
     public static final String FRUIT_NAME_CANNOT_BE_NULL_OR_EMPTY =
             "Fruit name cannot be null or empty.";
+    public static final String FRUIT_CANNOT_BE_NULL_OR_EMPTY =
+            "Fruit cannot be null or empty.";
     public static final String INPUT_REPORT_CANNOT_BE_NULL_OR_EMPTY =
             "Input report cannot be null or empty.";
+    public static final String TRANSACTION_LIST_CANNOT_BE_NULL_OR_EMPTY =
+            "Transaction list cannot be null or empty.";
     public static final String STRING_CANNOT_BE_NULL_OR_EMPTY =
             "Input string cannot be null or empty.";
     public static final String INVALID_INPUT = "Malformed input string. Expected 3 parts.";

@@ -10,7 +10,6 @@ import core.basesyntax.service.FileWriterService;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +29,11 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_validData_ok() {
+        String dataToWrite = getDataForWriteToFile();
+        fileWriterService.write(dataToWrite);
+        File file = new File(TEST_FILE_NAME);
+        boolean isFileExists = file.exists();
+        deleteTestFile();
         String expectedData = """
                 type,fruit,quantity
                 b,banana,20
@@ -41,11 +45,8 @@ class FileWriterServiceImplTest {
                 p,banana,5
                 s,banana,50
                 """;
-        String dataToWrite = getDataForWriteToFile();
-        fileWriterService.write(dataToWrite);
-        File file = new File(TEST_FILE_NAME);
-        assertTrue(file.exists(), FILE_DOESNT_EXIST);
         assertEquals(expectedData, dataToWrite);
+        assertTrue(isFileExists, FILE_DOESNT_EXIST);
     }
 
     @Test
@@ -64,11 +65,6 @@ class FileWriterServiceImplTest {
                 fileWriterService.write(dataToWrite));
         assertEquals(ErrorMessages.CAN_T_WRITE_DATA_TO_THE_FILE + FILE_PATH,
                 exception.getMessage());
-    }
-
-    @AfterEach
-    void tearDown() {
-        deleteTestFile();
     }
 
     private String getDataForWriteToFile() {

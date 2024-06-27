@@ -12,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,6 +32,7 @@ class FileReaderServiceImplTest {
         createTestFile();
         List<String> expected = getTestData();
         List<String> actual = fileReaderService.read(TEST_FILE_NAME);
+        deleteTestFile();
         assertEquals(expected, actual);
     }
 
@@ -45,11 +45,6 @@ class FileReaderServiceImplTest {
         assertEquals(expectedMessage,actualErrorMessage,
                 getInfoMessage(expectedMessage, actualErrorMessage)
         );
-    }
-
-    @AfterEach
-    void tearDown() {
-        deleteTestFile();
     }
 
     private void createTestFile() {

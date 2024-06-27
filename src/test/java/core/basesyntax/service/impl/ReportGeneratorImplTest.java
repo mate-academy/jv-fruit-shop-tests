@@ -1,10 +1,12 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.errors.ErrorMessages;
 import core.basesyntax.model.Fruit;
 import java.util.Collections;
 import java.util.Map;
@@ -48,9 +50,20 @@ class ReportGeneratorImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void getReport_nullData_notOk() {
+        Storage.addFruit(null);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                reportGenerator.getReport());
+        String expectedMessage = ErrorMessages.FRUIT_CANNOT_BE_NULL_OR_EMPTY;
+        assertEquals(expectedMessage, exception.getMessage(),
+                getInfoMessage(expectedMessage, exception.getMessage())
+        );
+    }
+
     @AfterEach
     void tearDown() {
-        Storage.getFruits().forEach(Storage::removeFruit);
+        Storage.clear();
     }
 
     private void fillStorageWithTestData(Map<String, Integer> dataFruits) {
@@ -65,5 +78,9 @@ class ReportGeneratorImplTest {
         return HEAD + System.lineSeparator() + dataFruits.entrySet().stream()
                 .map(dataFruit -> dataFruit.getKey() + DATA_DELIMITER + dataFruit.getValue())
                 .collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    private String getInfoMessage(String expectedMessage, String actualMessage) {
+        return "Test failed, expected: " + expectedMessage + " but actual " + actualMessage;
     }
 }

@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
@@ -20,10 +20,10 @@ class OperationStrategyImplTest {
 
     @Test
     void get_correctGetData_ok() {
-        assertTrue(operationStrategy.get(Operation.BALANCE) instanceof BalanceOperationImpl);
-        assertTrue(operationStrategy.get(Operation.PURCHASE) instanceof PurchaseOperationImpl);
-        assertTrue(operationStrategy.get(Operation.RETURN) instanceof ReturnOperationImpl);
-        assertTrue(operationStrategy.get(Operation.SUPPLY) instanceof SupplyOperationImpl);
+        assertInstanceOf(BalanceOperationImpl.class, operationStrategy.get(Operation.BALANCE));
+        assertInstanceOf(PurchaseOperationImpl.class, operationStrategy.get(Operation.PURCHASE));
+        assertInstanceOf(ReturnOperationImpl.class, operationStrategy.get(Operation.RETURN));
+        assertInstanceOf(SupplyOperationImpl.class, operationStrategy.get(Operation.SUPPLY));
     }
 
     @Test

@@ -1,8 +1,9 @@
 package core.basesyntax.model;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class OperationTest {
     private static final String INVALID_CODE = "invalid";
@@ -24,7 +25,7 @@ class OperationTest {
     }
 
     @Test
-    public void GetValueFromCode_invalidCode_notOk() {
+    public void getValueFromCode_invalidCode_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 Operation.getValueFromCode(INVALID_CODE));
     }

@@ -1,12 +1,10 @@
 package core.basesyntax.db;
 
-import junit.extensions.TestSetup;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class StorageTest {
     private static final String BANANA = "banana";
@@ -21,7 +19,7 @@ class StorageTest {
     }
 
     @Test
-    public void UpdateDb_getQuantity_correct_ok() {
+    public void updateDb_getQuantity_correct_ok() {
         Storage.updateDb(APPLE, TEST_QUANTITY);
         Storage.updateDb(BANANA, TEST_QUANTITY);
         assertEquals(TEST_QUANTITY, Storage.getQuantity(APPLE));
@@ -29,7 +27,7 @@ class StorageTest {
     }
 
     @Test
-    public void UpdateDb_isCopyOfMapReturned_ok() {
+    public void updateDb_isCopyOfMapReturned_ok() {
         Storage.updateDb(APPLE, TEST_QUANTITY);
         Map<String, Integer> testMap = Storage.readDb();
         testMap.put(CHERRY, TEST_QUANTITY);

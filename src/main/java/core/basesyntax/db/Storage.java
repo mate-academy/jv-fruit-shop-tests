@@ -17,4 +17,8 @@ public class Storage {
     public static Integer getQuantity(String fruitName) {
         return fruitsStock.get(fruitName);
     }
+
+    public static void clearDb() {
+        fruitsStock.clear();
+    }
 }

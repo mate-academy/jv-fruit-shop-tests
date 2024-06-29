@@ -21,17 +21,13 @@ class ReaderServiceImplTest {
     private Path tempDir;
 
     @Test
-    void read_validFile_ok() {
+    void read_validFile_ok() throws IOException {
         Path filePath = tempDir.resolve(CORRECT_PATH_TO_READ);
         List<String> expectedContent = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,1",
                 "b,apple,1");
-        try {
-            Files.write(filePath, expectedContent);
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write temp file", e);
-        }
+        Files.write(filePath, expectedContent);
         assertEquals(expectedContent, fileReader.read(filePath.toString()));
     }
 

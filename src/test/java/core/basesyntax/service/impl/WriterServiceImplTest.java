@@ -22,14 +22,11 @@ class WriterServiceImplTest {
     private Path tempDir;
 
     @Test
-    void write_validData_ok() {
+    void write_validData_ok() throws IOException {
         File tempFile = tempDir.resolve(VALID_PATH).toFile();
         writerService.write(DATA_TO_WRITE, tempFile.getAbsolutePath());
-        try (BufferedReader reader = new BufferedReader(new FileReader(tempFile))) {
-            assertEquals(DATA_TO_WRITE, reader.readLine());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
+        assertEquals(DATA_TO_WRITE, reader.readLine());
     }
 
     @Test

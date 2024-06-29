@@ -14,6 +14,7 @@ class DataConverterImplTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
     private static final int TEST_QUANTITY = 1;
+    private final DataConverter converter = new DataConverterImpl();
 
     @Test
     void convertToTransaction_validInputData_ok() {
@@ -31,7 +32,6 @@ class DataConverterImplTest {
                         Operation.BALANCE,
                         APPLE,
                         TEST_QUANTITY));
-        DataConverter converter = new DataConverterImpl();
         assertEquals(expected, converter.convertToTransaction(inputReport));
     }
 
@@ -42,7 +42,6 @@ class DataConverterImplTest {
                 "b,banana1",
                 "bapple,1"
         );
-        DataConverter converter = new DataConverterImpl();
         assertThrows(RuntimeException.class, () ->
                 converter.convertToTransaction(inputReport));
     }
@@ -54,7 +53,6 @@ class DataConverterImplTest {
                 "b,banana,1",
                 "b,apple,o"
         );
-        DataConverter converter = new DataConverterImpl();
         assertThrows(RuntimeException.class, () ->
                 converter.convertToTransaction(inputReport));
     }

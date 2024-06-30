@@ -25,8 +25,9 @@ class WriterServiceImplTest {
     void write_validData_ok() throws IOException {
         File tempFile = tempDir.resolve(VALID_PATH).toFile();
         writerService.write(DATA_TO_WRITE, tempFile.getAbsolutePath());
-        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
-        assertEquals(DATA_TO_WRITE, reader.readLine());
+        try (BufferedReader reader = new BufferedReader(new FileReader(tempFile))) {
+            assertEquals(DATA_TO_WRITE, reader.readLine());
+        }
     }
 
     @Test

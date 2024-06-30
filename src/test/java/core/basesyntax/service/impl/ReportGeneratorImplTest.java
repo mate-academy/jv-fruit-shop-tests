@@ -33,19 +33,16 @@ class ReportGeneratorImplTest {
     @Test
     void getReport_singleEntryDb_ok() {
         Storage.updateDb(APPLE, TEST_QUANTITY);
-        String report = reportGenerator.getReport();
-        assertEquals(
-                String.format("fruit,quantity%sapple,10",System.lineSeparator()),
-                report);
+        String actualReport = reportGenerator.getReport();
+        String expectedReport = String.format("fruit,quantity%sapple,10", System.lineSeparator());
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test
     void getReport_multipleEntriesDb_ok() {
         Storage.updateDb(APPLE, TEST_QUANTITY);
         Storage.updateDb(BANANA, TEST_QUANTITY);
-
         String report = reportGenerator.getReport();
-
         List<String> reportLines = Arrays.asList(report.split(System.lineSeparator()));
         assertTrue(reportLines.contains("apple,10"));
         assertTrue(reportLines.contains("banana,10"));
@@ -55,11 +52,8 @@ class ReportGeneratorImplTest {
     void getReport_updatesQuantity_ok() {
         Storage.updateDb(APPLE, TEST_QUANTITY);
         Storage.updateDb(APPLE, UPDATE_TEST_QUANTITY);
-
-        String report = reportGenerator.getReport();
-
-        assertEquals(
-                String.format("fruit,quantity%sapple,15",System.lineSeparator()),
-                report);
+        String expectedReport = String.format("fruit,quantity%sapple,15", System.lineSeparator());
+        String actualReport = reportGenerator.getReport();
+        assertEquals(expectedReport, actualReport);
     }
 }

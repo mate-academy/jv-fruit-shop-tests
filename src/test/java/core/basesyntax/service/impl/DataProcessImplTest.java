@@ -1,9 +1,11 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcess;
+import core.basesyntax.strategy.NegativeBalanceException;
 import core.basesyntax.strategy.Operation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,10 +65,6 @@ class DataProcessImplTest {
         transactionList.add(new FruitTransaction(Operation.BALANCE, "apple", 20));
         transactionList.add(new FruitTransaction(Operation.PURCHASE, "apple", 30));
 
-        Map<String, Integer> expectedData = new HashMap<>();
-        expectedData.put("apple", 0);
-
-        Map<String, Integer> actual = dataProcess.process(transactionList);
-        assertEquals(expectedData, actual);
+        assertThrows(NegativeBalanceException.class, () -> dataProcess.process(transactionList));
     }
 }

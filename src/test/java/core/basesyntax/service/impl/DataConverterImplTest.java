@@ -28,14 +28,7 @@ class DataConverterImplTest {
 
         List<FruitTransaction> actual = converter.convert(correctList);
 
-        for (int i = 0; i < expectedFruitTransactionList.size(); i++) {
-            assertEquals(expectedFruitTransactionList.get(i).getFruit(),
-                    actual.get(i).getFruit());
-            assertEquals(expectedFruitTransactionList.get(i).getOperation(),
-                    actual.get(i).getOperation());
-            assertEquals(expectedFruitTransactionList.get(i).getQuantity(),
-                    actual.get(i).getQuantity());
-        }
+        assertEquals(expectedFruitTransactionList, actual);
     }
 
     @Test

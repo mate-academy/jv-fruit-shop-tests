@@ -1,5 +1,11 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.constants.Constants.BALANCE_QUANTITY;
+import static core.basesyntax.constants.Constants.BANANA;
+import static core.basesyntax.constants.Constants.NEGATIVE_QUANTITY;
+import static core.basesyntax.constants.Constants.PURCHASE_QUANTITY;
+import static core.basesyntax.constants.Constants.PURCHASE_RESULT_QUANTITY;
+import static core.basesyntax.constants.Constants.TOO_MUCH_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,12 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationImplTest {
-    private static final int BALANCE_QUANTITY = 1;
-    private static final int PURCHASE_QUANTITY = 1;
-    private static final int TOO_MUCH_QUANTITY = 2;
-    private static final int RESULT_QUANTITY = 0;
-    private static final int NEGATIVE_QUANTITY = -1;
-    private static final String BANANA = "banana";
     private final OperationHandler purchaseOperation = new PurchaseOperationImpl();
 
     @BeforeEach
@@ -43,7 +43,7 @@ class PurchaseOperationImplTest {
                 BANANA,
                 PURCHASE_QUANTITY);
         purchaseOperation.applyOperation(transaction);
-        assertEquals(RESULT_QUANTITY, Storage.getQuantity(BANANA));
+        assertEquals(PURCHASE_RESULT_QUANTITY, Storage.getQuantity(BANANA));
     }
 
     @Test

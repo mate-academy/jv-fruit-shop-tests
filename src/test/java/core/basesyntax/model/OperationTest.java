@@ -1,12 +1,12 @@
 package core.basesyntax.model;
 
+import static core.basesyntax.constants.Constants.INVALID_CODE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class OperationTest {
-    private static final String INVALID_CODE = "invalid";
 
     @Test
     void getCode_correctCodes_ok() {

@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.constants.Constants.APPLE;
+import static core.basesyntax.constants.Constants.BANANA;
+import static core.basesyntax.constants.Constants.NORMAL_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,9 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private static final int TEST_QUANTITY = 1;
     private final DataConverter converter = new DataConverterImpl();
 
     @Test
@@ -27,11 +27,11 @@ class DataConverterImplTest {
                 new FruitTransaction(
                         Operation.BALANCE,
                         BANANA,
-                        TEST_QUANTITY),
+                        NORMAL_QUANTITY),
                 new FruitTransaction(
                         Operation.BALANCE,
                         APPLE,
-                        TEST_QUANTITY));
+                        NORMAL_QUANTITY));
         assertEquals(expected, converter.convertToTransaction(inputReport));
     }
 

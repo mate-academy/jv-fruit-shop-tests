@@ -1,5 +1,8 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.constants.Constants.BANANA;
+import static core.basesyntax.constants.Constants.NEGATIVE_QUANTITY;
+import static core.basesyntax.constants.Constants.NORMAL_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,9 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationImplTest {
-    private static final int NORMAL_QUANTITY = 1;
-    private static final int NEGATIVE_QUANTITY = -1;
-    private static final String BANANA = "banana";
     private final OperationHandler balanceOperation = new BalanceOperationImpl();
 
     @BeforeEach

@@ -1,5 +1,10 @@
 package core.basesyntax.db;
 
+import static core.basesyntax.constants.Constants.APPLE;
+import static core.basesyntax.constants.Constants.BANANA;
+import static core.basesyntax.constants.Constants.CHERRY;
+import static core.basesyntax.constants.Constants.NORMAL_QUANTITY;
+import static core.basesyntax.constants.Constants.ZERO_ELEMENTS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -7,11 +12,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private static final String CHERRY = "chery";
-    private static final int ZERO_ELEMENTS = 0;
-    private static final int TEST_QUANTITY = 1;
 
     public void setUp() {
         Storage.updateDb(APPLE, ZERO_ELEMENTS);
@@ -20,26 +20,26 @@ class StorageTest {
 
     @Test
     public void updateDb_getQuantity_correct_ok() {
-        Storage.updateDb(APPLE, TEST_QUANTITY);
-        Storage.updateDb(BANANA, TEST_QUANTITY);
-        assertEquals(TEST_QUANTITY, Storage.getQuantity(APPLE));
-        assertEquals(TEST_QUANTITY, Storage.getQuantity(BANANA));
+        Storage.updateDb(APPLE, NORMAL_QUANTITY);
+        Storage.updateDb(BANANA, NORMAL_QUANTITY);
+        assertEquals(NORMAL_QUANTITY, Storage.getQuantity(APPLE));
+        assertEquals(NORMAL_QUANTITY, Storage.getQuantity(BANANA));
     }
 
     @Test
     public void updateDb_isCopyOfMapReturned_ok() {
-        Storage.updateDb(APPLE, TEST_QUANTITY);
+        Storage.updateDb(APPLE, NORMAL_QUANTITY);
         Map<String, Integer> testMap = Storage.readDb();
-        testMap.put(CHERRY, TEST_QUANTITY);
+        testMap.put(CHERRY, NORMAL_QUANTITY);
         assertNull(Storage.getQuantity(CHERRY));
     }
 
     @Test
     void readDb_correctReadDb_ok() {
-        Storage.updateDb(APPLE, TEST_QUANTITY);
-        Storage.updateDb(BANANA, TEST_QUANTITY);
+        Storage.updateDb(APPLE, NORMAL_QUANTITY);
+        Storage.updateDb(BANANA, NORMAL_QUANTITY);
         Map<String, Integer> testMap = Storage.readDb();
-        assertEquals(TEST_QUANTITY, testMap.get(APPLE));
-        assertEquals(TEST_QUANTITY, testMap.get(BANANA));
+        assertEquals(NORMAL_QUANTITY, testMap.get(APPLE));
+        assertEquals(NORMAL_QUANTITY, testMap.get(BANANA));
     }
 }

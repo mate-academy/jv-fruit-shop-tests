@@ -1,5 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.constants.Constants.APPLE;
+import static core.basesyntax.constants.Constants.BALANCE_QUANTITY;
+import static core.basesyntax.constants.Constants.BANANA;
+import static core.basesyntax.constants.Constants.EXPECTED_APPLE_QUANTITY;
+import static core.basesyntax.constants.Constants.EXPECTED_BANANA_QUANTITY;
+import static core.basesyntax.constants.Constants.PURCHASE_QUANTITY;
+import static core.basesyntax.constants.Constants.RETURN_QUANTITY;
+import static core.basesyntax.constants.Constants.SUPPLY_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
@@ -18,14 +26,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private static final int BALANCE_QUANTITY = 1;
-    private static final int SUPPLY_QUANTITY = 10;
-    private static final int PURCHASE_QUANTITY = 5;
-    private static final int RETURN_QUANTITY = 2;
-    private static final int EXPECTED_BANANA_QUANTITY = 8;
-    private static final int EXPECTED_APPLE_QUANTITY = 1;
 
     @Test
     void process_validData_ok() {

@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.constants.Constants.DATA_TO_WRITE;
+import static core.basesyntax.constants.Constants.INVALID_PATH;
+import static core.basesyntax.constants.Constants.VALID_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,9 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class WriterServiceImplTest {
-    private static final String DATA_TO_WRITE = "fruit,quantity";
-    private static final String VALID_PATH = "testFile.csv";
-    private static final String INVALID_PATH = "\0invalid:path";
     private final WriterService writerService = new WriterServiceImpl();
 
     @TempDir

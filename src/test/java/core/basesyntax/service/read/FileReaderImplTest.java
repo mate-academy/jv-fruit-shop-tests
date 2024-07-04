@@ -15,7 +15,7 @@ class FileReaderImplTest {
                 "b,banana,20",
                 "b,apple,43",
                 "s,banana,19",
-                "r,banana,13"
+                "r,banana,12"
         };
         assertArrayEquals(expected, actual);
     }

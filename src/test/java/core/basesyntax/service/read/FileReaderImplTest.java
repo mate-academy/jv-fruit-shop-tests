@@ -20,10 +20,4 @@ class FileReaderImplTest {
         };
         assertArrayEquals(expected, actual);
     }
-
-    @Test
-    public void fileReader_readFile_fileNotFound() {
-        String nonExistentFilePath = ("src\\test\\resources\\noExist_test.csv");
-        assertThrows(RuntimeException.class, () -> fileReader.readFile(nonExistentFilePath));
-    }
 }

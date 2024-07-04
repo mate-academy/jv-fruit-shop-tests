@@ -6,6 +6,16 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        if (operation == null) {
+            throw new IllegalArgumentException("Operation cannot be null");
+        }
+        if (fruit == null || fruit.trim().isEmpty()) {
+            throw new IllegalArgumentException("Fruit cannot be null or empty");
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity must be a positive number");
+        }
+
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

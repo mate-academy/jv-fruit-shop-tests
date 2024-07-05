@@ -9,7 +9,7 @@ class FileReaderImplTest {
 
     @Test
     public void fileReader_readFile_Ok() {
-        String[] actual = fileReader.readFile("src\\test\\resources\\testing.csv");
+        String[] actual = fileReader.readFile("src/test/resources/fruits.csv");
         String[] expected = {
                 "type,fruit,quantity",
                 "b,banana,20",

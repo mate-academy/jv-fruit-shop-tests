@@ -1,13 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.FruitTransactionParserImpl;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class FruitTransactionParserImplTest {
     private final FruitTransactionParserImpl parser = new FruitTransactionParserImpl();

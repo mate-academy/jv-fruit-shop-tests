@@ -1,8 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {

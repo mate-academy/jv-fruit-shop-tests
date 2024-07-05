@@ -1,12 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.service.impl.ReportGeneratorImpl;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReportGeneratorImplTest {
 

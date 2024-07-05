@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.util.TransactionValidator;
 import org.junit.jupiter.api.Test;

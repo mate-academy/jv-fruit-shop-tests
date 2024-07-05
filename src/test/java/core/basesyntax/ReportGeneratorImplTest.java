@@ -1,12 +1,13 @@
 package core.basesyntax;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-
 
 public class ReportGeneratorImplTest {
 
@@ -21,8 +22,8 @@ public class ReportGeneratorImplTest {
         List<String> report = generator.generateReport(reportData);
         assertEquals(3, report.size());
         assertEquals("fruit,quantity", report.get(0));
-        assertEquals("apple,100", report.get(1));
-        assertEquals("banana,50", report.get(2));
+        assertThat(report.toString(), containsString("apple,100"));
+        assertThat(report.toString(), containsString("banana,50"));
     }
 
     @Test

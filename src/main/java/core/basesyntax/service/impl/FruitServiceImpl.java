@@ -17,10 +17,6 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void applyTransaction(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
-        if (handler == null) {
-            throw new IllegalArgumentException("No handler found for operation: "
-                    + transaction.getOperation());
-        }
         handler.apply(transaction);
     }
 

@@ -31,6 +31,12 @@ class StorageTest {
     }
 
     @Test
+    void addFruit_addNewFruit_ok() {
+        Storage.addFruit("orange", 10);
+        assertEquals(10, Storage.getFruitQuantity("orange"));
+    }
+
+    @Test
     void getFruitStorage_notEmpty() {
         Storage.addFruit("apple", 10);
         Storage.addFruit("banana", 20);
@@ -38,12 +44,6 @@ class StorageTest {
         assertEquals(2, fruitStorage.size());
         assertEquals(10, fruitStorage.get("apple"));
         assertEquals(20, fruitStorage.get("banana"));
-    }
-
-    @Test
-    void addFruit_addNewFruit_ok() {
-        Storage.addFruit("orange", 10);
-        assertEquals(10, Storage.getFruitQuantity("orange"));
     }
 
     @Test

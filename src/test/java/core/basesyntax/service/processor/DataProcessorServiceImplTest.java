@@ -12,8 +12,8 @@ import core.basesyntax.service.strategy.strategyimpl.ReturnStrategy;
 import core.basesyntax.service.strategy.strategyimpl.SupplyStrategy;
 import core.basesyntax.service.strategy.strategyimpl.TypeService;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,11 +23,12 @@ class DataProcessorServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        HashMap<FruitRecord.Operation, TypeService> strategyMap = new HashMap<>();
-        strategyMap.put(FruitRecord.Operation.BALANCE, new BalanceStrategy());
-        strategyMap.put(FruitRecord.Operation.SUPPLY, new SupplyStrategy());
-        strategyMap.put(FruitRecord.Operation.PURCHASE, new PurchaseStrategy());
-        strategyMap.put(FruitRecord.Operation.RETURN, new ReturnStrategy());
+        Map<FruitRecord.Operation, TypeService> strategyMap = Map.of(
+                FruitRecord.Operation.BALANCE, new BalanceStrategy(),
+                FruitRecord.Operation.SUPPLY, new SupplyStrategy(),
+                FruitRecord.Operation.PURCHASE, new PurchaseStrategy(),
+                FruitRecord.Operation.RETURN, new ReturnStrategy()
+        );
         typeStrategy = new TypeStrategyImpl(strategyMap);
         dataProcessorService = new DataProcessorServiceImpl(typeStrategy);
         storage.clear();

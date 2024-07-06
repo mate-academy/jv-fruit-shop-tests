@@ -7,6 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
+    private static final String NEW_LINE = System.lineSeparator();
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final int BANANA_QUANTITY = 30;
+    private static final int APPLE_QUANTITY = 69;
+    private static final int BANANA_QUANTITY2 = 96;
+    private static final String COMMA = ",";
+    private static final String FRUIT = "fruit";
+    private static final String QUANTITY = "quantity";
+
     private ReportService reportService = new ReportServiceImpl();
 
     @BeforeEach
@@ -16,28 +26,33 @@ class ReportServiceImplTest {
 
     @Test
     void reportService_correctInput_isOk() {
-        Storage.storage.put("banana", 30);
-        StringBuilder str = new StringBuilder();
-        str.append("fruit").append(",").append("quantity").append(System.lineSeparator())
-                .append("banana").append(",").append(30).append(System.lineSeparator());
-
-        String expected = str.toString();
+        Storage.storage.put(BANANA, BANANA_QUANTITY);
+        String expected = buildRep(BANANA, BANANA_QUANTITY);
         String actual = reportService.getReport();
         assertEquals(expected, actual);
     }
 
     @Test
     public void reportService_multipleItems_isOk() {
-        Storage.storage.put("apple", 69);
-        Storage.storage.put("banana", 96);
-
-        StringBuilder str = new StringBuilder();
-        str.append("fruit").append(",").append("quantity").append(System.lineSeparator())
-                .append("banana").append(",").append(96).append(System.lineSeparator());
-        str.append("apple").append(",").append(69).append(System.lineSeparator());
-
-        String expected = str.toString();
+        Storage.storage.put(APPLE, APPLE_QUANTITY);
+        Storage.storage.put(BANANA, BANANA_QUANTITY2);
+        String expected = buildMultiple(APPLE, APPLE_QUANTITY, BANANA, BANANA_QUANTITY2);
         String actual = reportService.getReport();
         assertEquals(expected, actual);
+    }
+
+    private String buildRep(String fruit, int quantity) {
+        StringBuilder str = new StringBuilder();
+        str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
+                .append(BANANA).append(COMMA).append(BANANA_QUANTITY).append(NEW_LINE);
+        return str.toString();
+    }
+
+    private String buildMultiple(String fruit1, int quantity1, String fruit2, int quantity2) {
+        StringBuilder str = new StringBuilder();
+        str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
+                .append(BANANA).append(COMMA).append(BANANA_QUANTITY2).append(NEW_LINE);
+        str.append(APPLE).append(COMMA).append(APPLE_QUANTITY).append(NEW_LINE);
+        return str.toString();
     }
 }

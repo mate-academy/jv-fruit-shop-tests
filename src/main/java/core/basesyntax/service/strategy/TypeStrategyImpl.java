@@ -2,17 +2,17 @@ package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.strategy.strategyimpl.TypeService;
-import java.util.HashMap;
+import java.util.Map;
 
 public class TypeStrategyImpl implements TypeStrategy {
-    private HashMap<FruitRecord.Operation, TypeService> typeServiceHashMap;
+    private Map<FruitRecord.Operation, TypeService> typeServiceMap;
 
-    public TypeStrategyImpl(HashMap<FruitRecord.Operation, TypeService> typeServiceHashMap) {
-        this.typeServiceHashMap = typeServiceHashMap;
+    public TypeStrategyImpl(Map<FruitRecord.Operation, TypeService> typeServiceMap) {
+        this.typeServiceMap = typeServiceMap;
     }
 
     @Override
     public TypeService getType(FruitRecord.Operation operation) {
-        return typeServiceHashMap.get(operation);
+        return typeServiceMap.get(operation);
     }
 }

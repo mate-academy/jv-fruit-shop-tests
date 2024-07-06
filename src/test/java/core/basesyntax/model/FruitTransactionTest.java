@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 public class FruitTransactionTest {
     private static final String CORRECT_OPERATION = "s";
     private static final String INCORRECT_OPERATION = "x";
+    private static final String EMPTY_OPERATION = "";
 
     @Test
     void getOperation_ValidArgument_Ok() {
@@ -26,7 +27,7 @@ public class FruitTransactionTest {
     @Test
     void getOperation_EmptyArgument_NotOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.Operation.getOperationByValue(""));
+                () -> FruitTransaction.Operation.getOperationByValue(EMPTY_OPERATION));
     }
 
     @Test

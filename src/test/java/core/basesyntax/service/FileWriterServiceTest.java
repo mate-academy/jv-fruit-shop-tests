@@ -28,14 +28,12 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    void writeToFile_ValidData_Ok() {
+    void writeToFile_ValidData_Ok() throws IOException {
         String report = "fruit,quantity";
         fileWriterService.write(report, STRING_PATH);
         try (BufferedReader reader = Files.newBufferedReader(FILE_PATH)) {
             String line = reader.readLine();
             assertEquals(report, line);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file", e);
         }
     }
 

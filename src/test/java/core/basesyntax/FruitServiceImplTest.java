@@ -18,7 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitServiceImplTest {
-
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private FruitServiceImpl fruitService;
 
     @BeforeEach
@@ -36,34 +37,34 @@ public class FruitServiceImplTest {
     @Test
     void applyTransaction_balanceOperation() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 100);
+                FruitTransaction.Operation.BALANCE, APPLE, 100);
         fruitService.applyTransaction(transaction);
-        assertEquals(100, Storage.getFruitQuantity("apple"));
+        assertEquals(100, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void applyTransaction_supplyOperation() {
-        Storage.addFruit("apple", 50);
+        Storage.addFruit(APPLE, 50);
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "apple", 30);
+                FruitTransaction.Operation.SUPPLY, APPLE, 30);
         fruitService.applyTransaction(transaction);
-        assertEquals(80, Storage.getFruitQuantity("apple"));
+        assertEquals(80, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void applyTransaction_purchaseOperation() {
-        Storage.addFruit("apple", 50);
+        Storage.addFruit(APPLE, 50);
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "apple", 20);
+                FruitTransaction.Operation.PURCHASE, APPLE, 20);
         fruitService.applyTransaction(transaction);
-        assertEquals(30, Storage.getFruitQuantity("apple"));
+        assertEquals(30, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void applyTransaction_purchaseOperation_insufficientStock() {
-        Storage.addFruit("apple", 10);
+        Storage.addFruit(APPLE, 10);
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "apple", 20);
+                FruitTransaction.Operation.PURCHASE, APPLE, 20);
         assertThrows(IllegalArgumentException.class, () ->
                 fruitService.applyTransaction(transaction));
     }
@@ -71,21 +72,21 @@ public class FruitServiceImplTest {
     @Test
     void applyTransaction_returnOperation() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "apple", 20);
+                FruitTransaction.Operation.RETURN, APPLE, 20);
         fruitService.applyTransaction(transaction);
-        assertEquals(20, Storage.getFruitQuantity("apple"));
+        assertEquals(20, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void applyTransactions_multipleOperations() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 20)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 20)
         );
         fruitService.applyTransactions(transactions);
-        assertEquals(140, Storage.getFruitQuantity("apple"));
+        assertEquals(140, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
@@ -96,11 +97,11 @@ public class FruitServiceImplTest {
 
     @Test
     void getReportData_nonEmptyStorage() {
-        Storage.addFruit("apple", 50);
-        Storage.addFruit("banana", 30);
+        Storage.addFruit(APPLE, 50);
+        Storage.addFruit(BANANA, 30);
         Map<String, Integer> reportData = fruitService.getReportData();
         assertEquals(2, reportData.size());
-        assertEquals(50, reportData.get("apple"));
-        assertEquals(30, reportData.get("banana"));
+        assertEquals(50, reportData.get(APPLE));
+        assertEquals(30, reportData.get(BANANA));
     }
 }

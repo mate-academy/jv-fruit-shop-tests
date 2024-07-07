@@ -13,24 +13,22 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderServiceImplTest {
-
+    private static final String FRUIT_NAME_STRING = "fruit_name";
+    private static final String QUANTITY_STRING = "quantity";
+    private static final String QUALITY_STRING = "quality";
     private final CsvFileReaderServiceImpl readerService = new CsvFileReaderServiceImpl();
 
     @Test
-    void readFromFile_valideFile() {
-        try {
-            Path tempPath = File.createTempFile("test", ".csv").toPath();
-            Files.write(tempPath, List.of("fruit_name", "quantity", "quality"));
+    void readFromFile_valideFile() throws IOException {
+        Path tempPath = File.createTempFile("test", ".csv").toPath();
+        Files.write(tempPath, List.of(FRUIT_NAME_STRING, QUANTITY_STRING, QUALITY_STRING));
 
-            List<String> readedLines = readerService.readFromFile(tempPath.toString());
-            assertEquals(2, readedLines.size());
-            assertTrue(readedLines.contains("quantity"));
-            assertTrue(readedLines.contains("quality"));
+        List<String> readedLines = readerService.readFromFile(tempPath.toString());
+        assertEquals(2, readedLines.size());
+        assertTrue(readedLines.contains("quantity"));
+        assertTrue(readedLines.contains("quality"));
 
-            Files.deleteIfExists(tempPath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Files.deleteIfExists(tempPath);
     }
 
     @Test

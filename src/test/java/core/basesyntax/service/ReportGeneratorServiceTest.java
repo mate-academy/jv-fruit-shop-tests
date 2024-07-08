@@ -10,6 +10,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceTest {
+    private static final String BANANA_FRUIT = "banana";
+    private static final Integer BANANA_FRUIT_QUANTITY = 20;
+    private static final String APPLE_FRUIT = "apple";
+    private static final Integer APPLE_FRUIT_QUANTITY = 50;
+    private static final String REPORT_FIRST_LINE = "fruit,quantity";
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static ReportGeneratorService reportGeneratorService;
 
@@ -25,8 +30,8 @@ public class ReportGeneratorServiceTest {
 
     @Test
     void createReport_Ok() {
-        fruitDao.add("banana", 20);
-        fruitDao.add("apple", 50);
+        fruitDao.add(BANANA_FRUIT, BANANA_FRUIT_QUANTITY);
+        fruitDao.add(APPLE_FRUIT, APPLE_FRUIT_QUANTITY);
         String report = reportGeneratorService.getReport();
         assertTrue(report.contains("banana,20"));
         assertTrue(report.contains("apple,50"));
@@ -35,6 +40,6 @@ public class ReportGeneratorServiceTest {
     @Test
     void createReport_ContainFirstLine() {
         String report = reportGeneratorService.getReport();
-        assertTrue(report.contains("fruit,quantity"));
+        assertTrue(report.contains(REPORT_FIRST_LINE));
     }
 }

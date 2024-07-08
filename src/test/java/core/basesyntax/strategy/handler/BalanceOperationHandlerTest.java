@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
+    private static final String BANANA_FRUIT = "banana";
+    private static final Integer BANANA_FRUIT_QUANTITY = 30;
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final OperationHandler operation = new BalanceOperationHandler(fruitDao);
 
@@ -23,9 +25,9 @@ public class BalanceOperationHandlerTest {
     @Test
     void process_ValidData_Ok() {
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("banana", 30);
+        expected.put(BANANA_FRUIT, BANANA_FRUIT_QUANTITY);
         operation.process(new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", 30));
+                FruitTransaction.Operation.BALANCE, BANANA_FRUIT, BANANA_FRUIT_QUANTITY));
         assertEquals(expected, fruitDao.getStorage());
     }
 

@@ -8,7 +8,7 @@ import core.basesyntax.service.strategy.strategyimpl.PurchaseStrategy;
 import core.basesyntax.service.strategy.strategyimpl.ReturnStrategy;
 import core.basesyntax.service.strategy.strategyimpl.SupplyStrategy;
 import core.basesyntax.service.strategy.strategyimpl.TypeService;
-import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +18,13 @@ class TypeStrategyImplTest {
 
     @BeforeEach
     void setUp() {
-        HashMap<FruitRecord.Operation, TypeService> typeServiceHashMap = new HashMap<>();
-        typeServiceHashMap.put(FruitRecord.Operation.SUPPLY, new SupplyStrategy());
-        typeServiceHashMap.put(FruitRecord.Operation.BALANCE, new BalanceStrategy());
-        typeServiceHashMap.put(FruitRecord.Operation.RETURN, new ReturnStrategy());
-        typeServiceHashMap.put(FruitRecord.Operation.PURCHASE, new PurchaseStrategy());
+        Map<FruitRecord.Operation, TypeService> typeServiceHashMap = Map.of(
+                FruitRecord.Operation.SUPPLY, new SupplyStrategy(),
+                FruitRecord.Operation.BALANCE, new BalanceStrategy(),
+                FruitRecord.Operation.RETURN, new ReturnStrategy(),
+                FruitRecord.Operation.PURCHASE, new PurchaseStrategy()
+        );
+
         typeStrategy = new TypeStrategyImpl(typeServiceHashMap);
     }
 

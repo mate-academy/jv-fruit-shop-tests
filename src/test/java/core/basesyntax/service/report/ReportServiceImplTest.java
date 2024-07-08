@@ -3,6 +3,7 @@ package core.basesyntax.service.report;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.database.Storage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,31 +25,38 @@ class ReportServiceImplTest {
         Storage.storage.clear();
     }
 
+    @AfterAll
+    static void afterAll() {
+        Storage.storage.clear();
+    }
+
     @Test
     void reportService_correctInput_isOk() {
         Storage.storage.put(BANANA, BANANA_QUANTITY);
-        String expected = buildRep(BANANA, BANANA_QUANTITY);
+        String expected = createSingleFruitReport(BANANA, BANANA_QUANTITY);
         String actual = reportService.getReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void reportService_multipleItems_isOk() {
+    void reportService_multipleItems_isOk() {
         Storage.storage.put(APPLE, APPLE_QUANTITY);
         Storage.storage.put(BANANA, BANANA_QUANTITY2);
-        String expected = buildMultiple(APPLE, APPLE_QUANTITY, BANANA, BANANA_QUANTITY2);
+        String expected = createMultipleFruitsSummary(APPLE, APPLE_QUANTITY,
+                BANANA, BANANA_QUANTITY2);
         String actual = reportService.getReport();
         assertEquals(expected, actual);
     }
 
-    private String buildRep(String fruit, int quantity) {
+    private String createSingleFruitReport(String fruit, int quantity) {
         StringBuilder str = new StringBuilder();
         str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
                 .append(BANANA).append(COMMA).append(BANANA_QUANTITY).append(NEW_LINE);
         return str.toString();
     }
 
-    private String buildMultiple(String fruit1, int quantity1, String fruit2, int quantity2) {
+    private String createMultipleFruitsSummary(String fruit1, int quantity1,
+                                               String fruit2, int quantity2) {
         StringBuilder str = new StringBuilder();
         str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
                 .append(BANANA).append(COMMA).append(BANANA_QUANTITY2).append(NEW_LINE);

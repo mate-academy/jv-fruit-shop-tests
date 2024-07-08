@@ -17,7 +17,7 @@ class ReturnStrategyTest {
     }
 
     @Test
-    public void returnStrategy__CorrectInputApple_testOk() {
+    void returnStrategy__CorrectInputApple_testOk() {
         FruitRecord record = new FruitRecord(FruitRecord.Operation.RETURN, "banana", 55);
         returnStrategy.calculation(record);
         assertEquals(155, Storage.storage.get("banana"));

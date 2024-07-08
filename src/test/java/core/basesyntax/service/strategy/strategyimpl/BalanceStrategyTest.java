@@ -16,7 +16,7 @@ class BalanceStrategyTest {
     }
 
     @Test
-    public void balanceStrategy_CorrectInputBanana_isOk() {
+    void balanceStrategy_CorrectInputBanana_isOk() {
         FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, "banana", 46);
         balanceStrategy.calculation(record);
         Integer actual = Storage.storage.get("banana");
@@ -25,7 +25,7 @@ class BalanceStrategyTest {
     }
 
     @Test
-    public void balanceStrategy_CorrectInputApple_isOk() {
+    void balanceStrategy_CorrectInputApple_isOk() {
         FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, "apple", 20);
         balanceStrategy.calculation(record);
         Integer actual = Storage.storage.get("apple");

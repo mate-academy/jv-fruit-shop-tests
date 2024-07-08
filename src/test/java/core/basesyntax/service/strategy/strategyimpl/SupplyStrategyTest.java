@@ -17,7 +17,7 @@ class SupplyStrategyTest {
     }
 
     @Test
-    public void supplyApple_CorrectInputApple_isOk() {
+    void supplyApple_CorrectInputApple_isOk() {
         FruitRecord record = new FruitRecord(FruitRecord.Operation.SUPPLY, "apple", 23);
         strategy.calculation(record);
         Integer actual = Storage.storage.get("apple");

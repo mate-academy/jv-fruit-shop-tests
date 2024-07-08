@@ -17,7 +17,7 @@ class FruitRecordParserImplTest {
     }
 
     @Test
-    public void parseFruitRecords_CorrectInput_ReturnsCorrectList() {
+    void parseFruitRecords_CorrectInput_ReturnsCorrectList() {
         String[] lines = {
                 "type,fruit,quantity",
                 "b,apple,23",
@@ -35,13 +35,11 @@ class FruitRecordParserImplTest {
                 new FruitRecord(FruitRecord.Operation.SUPPLY, "apple", 17)
         );
         List<FruitRecord> actual = fruitRecordParser.parseFruitRecords(lines);
-        List<FruitRecord> actualArrayList = List.copyOf(actual);
-
-        assertEquals(expected, actualArrayList);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void parseFruitRecords_EmptyArray_ReturnsEmptyList() {
+    void parseFruitRecords_EmptyArray_ReturnsEmptyList() {
         String[] lines = {
                 "type,fruit,quantity"
         };

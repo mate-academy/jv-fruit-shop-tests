@@ -1,5 +1,6 @@
 package core.basesyntax.service.read;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ class FileReaderImplTest {
     private FileReader fileReader = new FileReaderImpl();
 
     @Test
-    public void fileReader_readFile_Ok() {
+    void fileReader_readFile_Ok() {
         String[] actual = fileReader.readFile("src/test/resources/fruits.csv");
         String[] expected = {
                 "type,fruit,quantity",
@@ -18,5 +19,18 @@ class FileReaderImplTest {
                 "r,banana,12"
         };
         assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void fileReader_readFile_EmptyFile() {
+        String[] actual = fileReader.readFile("src/test/resources/empty.csv");
+        String[] expected = {};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void fileReader_readFile_fileNotFound() {
+        String nonExistentFilePath = ("src/test/resources/noExist_test.csv");
+        assertThrows(RuntimeException.class, () -> fileReader.readFile(nonExistentFilePath));
     }
 }

@@ -27,7 +27,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_Purchase_Ok() {
+    void apply_purchase_Ok() {
         purchaseOperationHandler.apply(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 25));
         Integer actual = Storage.fruitStorage.get("banana");
@@ -35,10 +35,26 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_PurchaseMoreThanInStock_notOk() {
+    void apply_purchaseMoreThanInStock_notOk() {
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.apply(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                     "banana", 60));
         });
+    }
+
+    @Test
+    void apply_purchaseNonExistingFruit_notOk() {
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "orange", 10);
+        assertThrows(RuntimeException.class, () -> purchaseOperationHandler.apply(transaction),
+                "Cannot purchase." + transaction.getFruit() + " is not in the storage");
+    }
+
+    @Test
+    void apply_purchaseNegativeQuantity_notOk() {
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", -10);
+        assertThrows(RuntimeException.class, () -> purchaseOperationHandler.apply(transaction),
+                "Quantity to purchase must be positive: " + transaction.getQuantity());
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.serviceimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
@@ -15,8 +16,8 @@ class ReportGeneratorImplTest {
     @BeforeEach
     void setUp() {
         reportGenerator = new ReportGeneratorImpl();
-        Storage.fruitStorage.put("banana",125);
-        Storage.fruitStorage.put("apple",90);
+        Storage.fruitStorage.put("banana", 125);
+        Storage.fruitStorage.put("apple", 90);
     }
 
     @AfterEach
@@ -25,9 +26,17 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void getReport() {
-        List<String> expected = List.of("banana,125","apple,90");
+    void getReport_correct_ok() {
+        List<String> expected = List.of("banana,125", "apple,90");
         List<String> actual = reportGenerator.getReport();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getReport_emptyStorage_notOk() {
+        Storage.fruitStorage.clear();
+        assertThrows(IllegalStateException.class, () -> {
+            reportGenerator.getReport();
+        });
     }
 }

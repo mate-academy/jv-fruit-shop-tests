@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static final int expected = 25;
-    private Map<FruitTransaction.Operation,OperationHandler> operationHandlers;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
     private OperationStrategy operationStrategy;
     private ShopServiceImpl shopService;
     private List<FruitTransaction> transactions;
@@ -34,13 +34,13 @@ class ShopServiceImplTest {
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         transactions = List
                 .of(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",50),
+                                "banana", 50),
                         new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                                "apple",50),
+                                "apple", 50),
                         new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                                "banana",30),
+                                "banana", 30),
                         new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                                "apple",25));
+                                "apple", 25));
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
@@ -50,9 +50,9 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_CorrectlyUpdatesStorage_Ok() {
+    void process_correctlyUpdatesStorage_ok() {
         shopService.process(transactions);
         Integer actual = Storage.fruitStorage.get("apple");
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

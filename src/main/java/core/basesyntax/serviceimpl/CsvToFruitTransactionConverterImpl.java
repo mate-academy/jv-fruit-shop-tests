@@ -16,6 +16,9 @@ public class CsvToFruitTransactionConverterImpl implements DataConverter<List<St
         return inputReport.stream()
                 .map(line -> {
                     String[] parts = line.split(",");
+                    if (parts.length < 3) {
+                        throw new ArrayIndexOutOfBoundsException("Invalid input format: " + line);
+                    }
                     return new FruitTransaction(
                             FruitTransaction.Operation.fromCode(parts[TYPE]),
                             parts[FRUIT],

@@ -17,15 +17,15 @@ class WriterServiceImplTest {
     @BeforeEach
     void setUp() {
         writerService = new WriterServiceImpl();
-        lines = List.of("banana,125","apple,90");
+        lines = List.of("banana,125", "apple,90");
     }
 
     @Test
     void writeToFile() throws IOException {
-        writerService.writeToFile(filePath,lines);
+        writerService.writeToFile(filePath, lines);
         List<String> actual = Files.readAllLines(Paths.get(filePath));
         List<String> expected = List.of("fruit,quantity",
-                "banana,125","apple,90");
-        assertEquals(expected,actual);
+                "banana,125", "apple,90");
+        assertEquals(expected, actual);
     }
 }

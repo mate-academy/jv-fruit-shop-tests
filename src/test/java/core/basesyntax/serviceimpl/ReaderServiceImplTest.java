@@ -16,7 +16,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_Correct_Ok() {
+    void readFromFile_correct_ok() {
         List<String> expected = List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -26,6 +26,6 @@ class ReaderServiceImplTest {
                 "p,banana,5",
                 "s,banana,50");
         List<String> actual = readerService.readFromFile(filePath);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

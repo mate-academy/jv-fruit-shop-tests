@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -30,5 +31,21 @@ class SupplyOperationHandlerTest {
                 "banana",30));
         Integer amountAfterSupply = Storage.fruitStorage.get("banana");
         assertEquals(80,amountAfterSupply);
+    }
+
+    @Test
+    void apply_supplyNonExistingFruit_ok() {
+        supplyOperationHandler.apply(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "orange", 20));
+        Integer amountAfterSupply = Storage.fruitStorage.get("orange");
+        assertEquals(20, amountAfterSupply);
+    }
+
+    @Test
+    void apply_supplyNegativeQuantity_notOk() {
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", -10);
+        assertThrows(RuntimeException.class, () -> supplyOperationHandler.apply(transaction),
+                "Quantity to supply must be positive: " + transaction.getQuantity());
     }
 }

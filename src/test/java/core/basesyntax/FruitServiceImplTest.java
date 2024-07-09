@@ -35,7 +35,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void applyTransaction_balanceOperation() {
+    void applyTransaction_balanceOperation_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, APPLE, 100);
         fruitService.applyTransaction(transaction);
@@ -43,7 +43,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void applyTransaction_supplyOperation() {
+    void applyTransaction_supplyOperation_ok() {
         Storage.addFruit(APPLE, 50);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, APPLE, 30);
@@ -52,7 +52,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void applyTransaction_purchaseOperation() {
+    void applyTransaction_purchaseOperation_ok() {
         Storage.addFruit(APPLE, 50);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, APPLE, 20);
@@ -70,7 +70,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void applyTransaction_returnOperation() {
+    void applyTransaction_returnOperation_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, APPLE, 20);
         fruitService.applyTransaction(transaction);
@@ -78,7 +78,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void applyTransactions_multipleOperations() {
+    void applyTransactions_multipleOperations_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, 50),
@@ -90,13 +90,13 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    void getReportData_emptyStorage() {
+    void getReportData_emptyStorage_ok() {
         Map<String, Integer> reportData = fruitService.getReportData();
         assertTrue(reportData.isEmpty());
     }
 
     @Test
-    void getReportData_nonEmptyStorage() {
+    void getReportData_nonEmptyStorage_ok() {
         Storage.addFruit(APPLE, 50);
         Storage.addFruit(BANANA, 30);
         Map<String, Integer> reportData = fruitService.getReportData();

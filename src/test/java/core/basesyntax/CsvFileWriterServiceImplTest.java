@@ -17,7 +17,7 @@ public class CsvFileWriterServiceImplTest {
     private final CsvFileWriterServiceImpl writerServise = new CsvFileWriterServiceImpl();
 
     @Test
-    void writeToFile_valideFile() {
+    void writeToFile_valideFile_ok() {
         try {
             Path tempPath = File.createTempFile("test", ".csv").toPath();
             writerServise.writeToFile(tempPath.toString(),
@@ -37,20 +37,16 @@ public class CsvFileWriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_invalidFile() {
+    void writeToFile_invalidFil_throwsException() {
         assertThrows(RuntimeException.class, ()
                 -> writerServise.writeToFile("/non-exist/file.path",
                 List.of("head")));
     }
 
     @Test
-    void writeToFile_invalidLines() {
-        try {
-            Path tempPath = File.createTempFile("test", ".csv").toPath();
-            assertThrows(RuntimeException.class, ()
-                    -> writerServise.writeToFile(tempPath.toString(), null));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void writeToFile_invalidLines_throwsException() throws IOException {
+        Path tempPath = File.createTempFile("test", ".csv").toPath();
+        assertThrows(RuntimeException.class, ()
+                -> writerServise.writeToFile(tempPath.toString(), null));
     }
 }

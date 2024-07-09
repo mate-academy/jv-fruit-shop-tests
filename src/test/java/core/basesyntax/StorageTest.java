@@ -15,7 +15,7 @@ class StorageTest {
     }
 
     @Test
-    void addFruit_positiveQuantity() {
+    void addFruit_positiveQuantity_ok() {
         Storage.addFruit("apple", 10);
         assertEquals(10, Storage.getFruitQuantity("apple"));
 
@@ -25,7 +25,7 @@ class StorageTest {
     }
 
     @Test
-    void addFruit_existingFruit() {
+    void addFruit_existingFruit_ok() {
         Storage.addFruit("apple", 10);
         Storage.addFruit("apple", 5);
         assertEquals(15, Storage.getFruitQuantity("apple"));
@@ -38,7 +38,7 @@ class StorageTest {
     }
 
     @Test
-    void getFruitStorage_notEmpty() {
+    void getFruitStorage_notEmpty_ok() {
         Storage.addFruit("apple", 10);
         Storage.addFruit("banana", 20);
         Map<String, Integer> fruitStorage = Storage.getFruitStorage();

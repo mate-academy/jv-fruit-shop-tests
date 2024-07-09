@@ -19,7 +19,7 @@ public class CsvFileReaderServiceImplTest {
     private final CsvFileReaderServiceImpl readerService = new CsvFileReaderServiceImpl();
 
     @Test
-    void readFromFile_valideFile() throws IOException {
+    void readFromFile_valideFile_throwsException() throws IOException {
         Path tempPath = File.createTempFile("test", ".csv").toPath();
         Files.write(tempPath, List.of(FRUIT_NAME_STRING, QUANTITY_STRING, QUALITY_STRING));
 
@@ -32,7 +32,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_invalidFile() {
+    void readFromFile_invalidFile_throwsException() {
         assertThrows(RuntimeException.class, () ->
                 readerService.readFromFile("non-existed.file"));
     }

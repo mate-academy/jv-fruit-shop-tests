@@ -12,7 +12,7 @@ public class FruitTransactionParserImplTest {
     private final FruitTransactionParserImpl parser = new FruitTransactionParserImpl();
 
     @Test
-    void parse_validLine() {
+    void parse_validLine_ok() {
         FruitTransaction transaction = parser.parse("s,apple,10");
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
         assertEquals("apple", transaction.getFruit());
@@ -20,25 +20,25 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    void parse_invalidLine() {
+    void parse_invalidLine_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
                 parser.parse("invalid_line"));
     }
 
     @Test
-    void parse_invalidOperation() {
+    void parse_invalidOperation_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
                 parser.parse("x,apple,10"));
     }
 
     @Test
-    void parse_invalidQuantity() {
+    void parse_invalidQuantity_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
                 parser.parse("s,apple,ten"));
     }
 
     @Test
-    void parseLines_validLines() {
+    void parseLines_validLines_ok() {
         List<String> lines = List.of(
                 "operation,fruit,quantity",
                 "b,banana,20",
@@ -58,4 +58,3 @@ public class FruitTransactionParserImplTest {
         assertEquals(3, transactions.get(2).getQuantity());
     }
 }
-

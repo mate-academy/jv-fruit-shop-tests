@@ -10,11 +10,10 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
-
     private final ReportGeneratorImpl generator = new ReportGeneratorImpl();
 
     @Test
-    void generateReport_validData() {
+    void generateReport_validData_ok() {
         Map<String, Integer> reportData = Map.of(
                 "apple", 100,
                 "banana", 50
@@ -27,7 +26,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    void generateReport_emptyData() {
+    void generateReport_emptyData_ok() {
         Map<String, Integer> reportData = Map.of();
         List<String> report = generator.generateReport(reportData);
         assertEquals(1, report.size());

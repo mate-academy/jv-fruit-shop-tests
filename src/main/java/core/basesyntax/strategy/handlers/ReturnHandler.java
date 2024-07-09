@@ -6,7 +6,6 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.util.TransactionValidator;
 
 public class ReturnHandler implements OperationHandler {
-
     private final TransactionValidator transactionValidator = new TransactionValidator();
 
     @Override
@@ -15,4 +14,3 @@ public class ReturnHandler implements OperationHandler {
         Storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }
-

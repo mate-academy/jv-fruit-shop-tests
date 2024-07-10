@@ -25,8 +25,8 @@ public class CsvFileReaderServiceImplTest {
 
         List<String> readedLines = readerService.readFromFile(tempPath.toString());
         assertEquals(2, readedLines.size());
-        assertTrue(readedLines.contains("quantity"));
-        assertTrue(readedLines.contains("quality"));
+        assertTrue(readedLines.contains(QUANTITY_STRING));
+        assertTrue(readedLines.contains(QUALITY_STRING));
 
         Files.deleteIfExists(tempPath);
     }

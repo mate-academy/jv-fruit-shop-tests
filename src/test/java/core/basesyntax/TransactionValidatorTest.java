@@ -7,7 +7,7 @@ import core.basesyntax.util.TransactionValidator;
 import org.junit.jupiter.api.Test;
 
 class TransactionValidatorTest {
-
+    private static final String APPLE = "apple";
     private final TransactionValidator validator = new TransactionValidator();
 
     @Test
@@ -19,7 +19,7 @@ class TransactionValidatorTest {
     @Test
     void validate_zeroQuantity_throwsException() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "apple", 0);
+                FruitTransaction.Operation.SUPPLY, APPLE, 0);
         assertThrows(IllegalArgumentException.class, () ->
                 validator.validate(transaction));
     }
@@ -27,7 +27,7 @@ class TransactionValidatorTest {
     @Test
     void validate_validTransaction_noException() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "apple", 10);
-        validator.validate(transaction); // Should not throw any exception
+                FruitTransaction.Operation.SUPPLY, APPLE, 10);
+        validator.validate(transaction);
     }
 }

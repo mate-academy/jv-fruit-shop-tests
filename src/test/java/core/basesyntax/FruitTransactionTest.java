@@ -7,19 +7,24 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
+    private static final String GRAPE = "grape";
+
     @Test
     void constructor_validTransaction_ok() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "banana", 15);
+                FruitTransaction.Operation.SUPPLY, BANANA, 15);
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
-        assertEquals("banana", transaction.getFruit());
+        assertEquals(BANANA, transaction.getFruit());
         assertEquals(15, transaction.getQuantity());
     }
 
     @Test
     void constructor_nullOperation_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction(null, "apple", 10));
+                new FruitTransaction(null, APPLE, 10));
     }
 
     @Test
@@ -31,15 +36,15 @@ class FruitTransactionTest {
     @Test
     void constructor_negativeQuantity_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "orange", -3));
+                new FruitTransaction(FruitTransaction.Operation.RETURN, ORANGE, -3));
     }
 
     @Test
     void constructor_zeroQuantity_ok() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "grape", 0);
+                FruitTransaction.Operation.BALANCE, GRAPE, 0);
         assertEquals(FruitTransaction.Operation.BALANCE, transaction.getOperation());
-        assertEquals("grape", transaction.getFruit());
+        assertEquals(GRAPE, transaction.getFruit());
         assertEquals(0, transaction.getQuantity());
     }
 

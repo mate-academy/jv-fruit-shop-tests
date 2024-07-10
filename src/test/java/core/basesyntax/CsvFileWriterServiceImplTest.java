@@ -13,34 +13,32 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterServiceImplTest {
-
+    private static final String HEAD = "head";
+    private static final String FIRST_LINE = "firstLine";
+    private static final String SECOND_LINE = "secondLine";
     private final CsvFileWriterServiceImpl writerServise = new CsvFileWriterServiceImpl();
 
     @Test
-    void writeToFile_valideFile_ok() {
-        try {
-            Path tempPath = File.createTempFile("test", ".csv").toPath();
-            writerServise.writeToFile(tempPath.toString(),
-                    List.of("head", "firstLine", "secondLine"));
+    void writeToFile_valideFile_ok() throws IOException {
+        Path tempPath = File.createTempFile("test", ".csv").toPath();
+        writerServise.writeToFile(tempPath.toString(),
+                List.of(HEAD, FIRST_LINE, SECOND_LINE));
 
-            List<String> readedLines = Files.readAllLines(tempPath);
+        List<String> readedLines = Files.readAllLines(tempPath);
 
-            assertEquals(3, readedLines.size());
-            assertTrue(readedLines.contains("head"));
-            assertTrue(readedLines.contains("firstLine"));
-            assertTrue(readedLines.contains("secondLine"));
+        assertEquals(3, readedLines.size());
+        assertTrue(readedLines.contains(HEAD));
+        assertTrue(readedLines.contains(FIRST_LINE));
+        assertTrue(readedLines.contains(SECOND_LINE));
 
-            Files.deleteIfExists(tempPath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Files.deleteIfExists(tempPath);
     }
 
     @Test
     void writeToFile_invalidFil_throwsException() {
         assertThrows(RuntimeException.class, ()
                 -> writerServise.writeToFile("/non-exist/file.path",
-                List.of("head")));
+                List.of(HEAD)));
     }
 
     @Test

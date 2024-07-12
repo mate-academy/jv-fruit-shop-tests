@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.DataBase;
-
 import java.util.Map;
 
 public class FruitTransactionDaoImpl implements FruitTransactionDao {

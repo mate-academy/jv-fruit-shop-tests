@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitTransactionDao;
-
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {

@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class FruitTransaction {
@@ -61,5 +62,23 @@ public class FruitTransaction {
             }
             return Optional.empty();
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 }

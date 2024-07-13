@@ -16,11 +16,14 @@ public class CsvFileReaderServiceImplTest {
     private static final String FRUIT_NAME_STRING = "fruit_name";
     private static final String QUANTITY_STRING = "quantity";
     private static final String QUALITY_STRING = "quality";
+    private static final String EXISTED_FILE = "existed";
+    private static final String EXISTED_FILE_EXTENSION = ".csv";
+    private static final String NON_EXISTED_FILE = "non-existed.file";
     private final CsvFileReaderServiceImpl readerService = new CsvFileReaderServiceImpl();
 
     @Test
     void readFromFile_valideFile_throwsException() throws IOException {
-        Path tempPath = File.createTempFile("test", ".csv").toPath();
+        Path tempPath = File.createTempFile(EXISTED_FILE, EXISTED_FILE_EXTENSION).toPath();
         Files.write(tempPath, List.of(FRUIT_NAME_STRING, QUANTITY_STRING, QUALITY_STRING));
 
         List<String> readedLines = readerService.readFromFile(tempPath.toString());
@@ -34,6 +37,6 @@ public class CsvFileReaderServiceImplTest {
     @Test
     void readFromFile_invalidFile_throwsException() {
         assertThrows(RuntimeException.class, () ->
-                readerService.readFromFile("non-existed.file"));
+                readerService.readFromFile(NON_EXISTED_FILE));
     }
 }

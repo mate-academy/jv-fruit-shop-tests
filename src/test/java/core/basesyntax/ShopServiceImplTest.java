@@ -36,7 +36,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_Ok() {
+    void process_checkWork_Ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),

@@ -25,7 +25,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
-    private static final String FILE_TO_READ = "src/test/reportToRead.csv";
+    private static final String FILE_TO_READ = "src/test/resources/reportToRead.csv";
     private static ReportGenerator generator;
     private static FileReader reader;
     private static ShopService service;
@@ -47,7 +47,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    void generateReport_Ok() {
+    void generateReport_existentFile_Ok() {
         String expectedReport = "fruit, quantity\n"
                 + "banana,152\n"
                 + "apple,90";

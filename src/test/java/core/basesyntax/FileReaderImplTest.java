@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private static final String FILE_TO_READ = "src/test/reportToRead.csv";
-    private static final String EMPTY_FILE = "src/test/empty.csv";
+    private static final String FILE_TO_READ = "src/test/resources/reportToRead.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private static final String NOT_EXISTENT_FILE = "";
     private static FileReader fileReader;
 

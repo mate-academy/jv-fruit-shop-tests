@@ -8,18 +8,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnStrategyTest {
+    private static final String BANANA = "banana";
+    private static final int EXPECTED = 155;
+    private static final int FIFTY_FIVE = 55;
+    private static final int HUNDRED = 100;
     private static ReturnStrategy returnStrategy;
 
     @BeforeAll
     public static void setUp() {
         returnStrategy = new ReturnStrategy();
-        Storage.storage.put("banana", 100);
+        Storage.storage.put(BANANA, HUNDRED);
     }
 
     @Test
-    void returnStrategy__CorrectInputApple_testOk() {
-        FruitRecord record = new FruitRecord(FruitRecord.Operation.RETURN, "banana", 55);
+    void returnStrategy_CorrectInputApple_testOk() {
+        FruitRecord record = new FruitRecord(FruitRecord.Operation.RETURN, BANANA, FIFTY_FIVE);
         returnStrategy.calculation(record);
-        assertEquals(155, Storage.storage.get("banana"));
+        assertEquals(EXPECTED, Storage.storage.get(BANANA));
     }
 }

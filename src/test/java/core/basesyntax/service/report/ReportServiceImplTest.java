@@ -42,7 +42,7 @@ class ReportServiceImplTest {
     void reportService_multipleItems_isOk() {
         Storage.storage.put(APPLE, APPLE_QUANTITY);
         Storage.storage.put(BANANA, BANANA_QUANTITY2);
-        String expected = createMultipleFruitsSummary(APPLE, APPLE_QUANTITY,
+        String expected = generateFruitSummary(APPLE, APPLE_QUANTITY,
                 BANANA, BANANA_QUANTITY2);
         String actual = reportService.getReport();
         assertEquals(expected, actual);
@@ -50,17 +50,32 @@ class ReportServiceImplTest {
 
     private String createSingleFruitReport(String fruit, int quantity) {
         StringBuilder str = new StringBuilder();
-        str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
-                .append(BANANA).append(COMMA).append(BANANA_QUANTITY).append(NEW_LINE);
+        str.append(FRUIT)
+                .append(COMMA)
+                .append(QUANTITY)
+                .append(NEW_LINE)
+                .append(BANANA)
+                .append(COMMA)
+                .append(BANANA_QUANTITY)
+                .append(NEW_LINE);
         return str.toString();
     }
 
-    private String createMultipleFruitsSummary(String fruit1, int quantity1,
-                                               String fruit2, int quantity2) {
+    private String generateFruitSummary(String fruit1, int quantity1,
+                                        String fruit2, int quantity2) {
         StringBuilder str = new StringBuilder();
-        str.append(FRUIT).append(COMMA).append(QUANTITY).append(NEW_LINE)
-                .append(BANANA).append(COMMA).append(BANANA_QUANTITY2).append(NEW_LINE);
-        str.append(APPLE).append(COMMA).append(APPLE_QUANTITY).append(NEW_LINE);
+        str.append(FRUIT)
+                .append(COMMA)
+                .append(QUANTITY)
+                .append(NEW_LINE)
+                .append(BANANA)
+                .append(COMMA)
+                .append(BANANA_QUANTITY2)
+                .append(NEW_LINE);
+        str.append(APPLE)
+                .append(COMMA)
+                .append(APPLE_QUANTITY)
+                .append(NEW_LINE);
         return str.toString();
     }
 }

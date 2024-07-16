@@ -8,6 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceStrategyTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+
+    private static final int TWENTY = 20;
+    private static final int FORTY_SIX = 46;
     private static BalanceStrategy balanceStrategy;
 
     @BeforeAll
@@ -17,19 +22,19 @@ class BalanceStrategyTest {
 
     @Test
     void balanceStrategy_CorrectInputBanana_isOk() {
-        FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, "banana", 46);
+        FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, BANANA, FORTY_SIX);
         balanceStrategy.calculation(record);
-        Integer actual = Storage.storage.get("banana");
-        Integer expected = 46;
+        Integer actual = Storage.storage.get(BANANA);
+        Integer expected = FORTY_SIX;
         assertEquals(expected, actual);
     }
 
     @Test
     void balanceStrategy_CorrectInputApple_isOk() {
-        FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, "apple", 20);
+        FruitRecord record = new FruitRecord(FruitRecord.Operation.BALANCE, APPLE, TWENTY);
         balanceStrategy.calculation(record);
-        Integer actual = Storage.storage.get("apple");
-        Integer expected = 20;
+        Integer actual = Storage.storage.get(APPLE);
+        Integer expected = TWENTY;
         assertEquals(expected, actual);
     }
 }

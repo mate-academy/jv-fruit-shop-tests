@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.strategy.TypeStrategy;
 import core.basesyntax.service.strategy.TypeStrategyImpl;
@@ -21,6 +22,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataProcessorServiceImplTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final int TEN = 10;
+    private static final int FIFTEEN = 15;
+    private static final int ELEVEN = 11;
+    private static final int FIFTY = 50;
+    private static final int NINE = 9;
     private DataProcessorService dataProcessorService;
     private TypeStrategy typeStrategy;
 
@@ -39,16 +47,17 @@ class DataProcessorServiceImplTest {
 
     @AfterAll
     static void afterAll() {
-        storage.clear();
+        Storage.storage.clear();
     }
 
     @Test
     void processData_validInput_Success() {
-        List<FruitRecord> fruitRecordList = new ArrayList<>();
-        fruitRecordList.add(new FruitRecord(FruitRecord.Operation.BALANCE, "banana", 10));
-        fruitRecordList.add(new FruitRecord(FruitRecord.Operation.SUPPLY, "banana", 15));
-        fruitRecordList.add(new FruitRecord(FruitRecord.Operation.PURCHASE, "banana", 15));
-        fruitRecordList.add(new FruitRecord(FruitRecord.Operation.RETURN, "banana", 10));
+        List<FruitRecord> fruitRecordList = List.of(
+                new FruitRecord(FruitRecord.Operation.BALANCE, BANANA, TEN),
+                new FruitRecord(FruitRecord.Operation.SUPPLY, BANANA, FIFTEEN),
+                new FruitRecord(FruitRecord.Operation.PURCHASE, BANANA, FIFTEEN),
+                new FruitRecord(FruitRecord.Operation.RETURN, BANANA, TEN)
+        );
 
         dataProcessorService.processData(fruitRecordList);
         int actualBananaQuantity = storage.get("banana");
@@ -57,17 +66,17 @@ class DataProcessorServiceImplTest {
 
     @Test
     void processData_negativeResult_Failure() {
-        List<FruitRecord> fruitRecords = new ArrayList<>();
-        fruitRecords.add(new FruitRecord(FruitRecord.Operation.BALANCE, "apple", 10));
-        fruitRecords.add(new FruitRecord(FruitRecord.Operation.SUPPLY, "apple", 11));
-        fruitRecords.add(new FruitRecord(FruitRecord.Operation.PURCHASE, "apple", 50));
-        fruitRecords.add(new FruitRecord(FruitRecord.Operation.RETURN, "apple", 9));
+        List<FruitRecord> fruitRecords = List.of(
+                new FruitRecord(FruitRecord.Operation.BALANCE, APPLE, TEN),
+                new FruitRecord(FruitRecord.Operation.SUPPLY, APPLE, ELEVEN),
+                new FruitRecord(FruitRecord.Operation.PURCHASE, APPLE, FIFTY),
+                new FruitRecord(FruitRecord.Operation.RETURN, APPLE, NINE)
+        );
 
         dataProcessorService.processData(fruitRecords);
         int result = storage.get("apple");
-        assertTrue(result < 0, "The result should be negative");
         int expectedNegativeValue = - 20;
-
+        assertTrue(result < 0, "The result should be negative");
         assertEquals(expectedNegativeValue, result);
     }
 
@@ -83,7 +92,6 @@ class DataProcessorServiceImplTest {
     void processData_emptyValue_emptyResult() {
         List<FruitRecord> empty = new ArrayList<>();
         dataProcessorService.processData(empty);
-        int expectedSize = 0;
-        assertEquals(expectedSize, storage.size());
+        assertTrue(storage.isEmpty());
     }
 }

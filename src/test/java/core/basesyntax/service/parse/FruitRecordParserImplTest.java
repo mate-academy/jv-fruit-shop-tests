@@ -9,6 +9,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitRecordParserImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int TWENTY_THREE = 23;
+    private static final int FOUR = 4;
+    private static final int TWELVE = 12;
+    private static final int NINE = 9;
+    private static final int SEVENTEEN = 17;
+
     private static FruitRecordParser fruitRecordParser;
 
     @BeforeAll
@@ -28,11 +36,11 @@ class FruitRecordParserImplTest {
         };
 
         List<FruitRecord> expected = List.of(
-                new FruitRecord(FruitRecord.Operation.BALANCE, "apple", 23),
-                new FruitRecord(FruitRecord.Operation.SUPPLY, "banana", 12),
-                new FruitRecord(FruitRecord.Operation.PURCHASE, "banana", 4),
-                new FruitRecord(FruitRecord.Operation.RETURN, "apple", 9),
-                new FruitRecord(FruitRecord.Operation.SUPPLY, "apple", 17)
+                new FruitRecord(FruitRecord.Operation.BALANCE, APPLE, TWENTY_THREE),
+                new FruitRecord(FruitRecord.Operation.SUPPLY, BANANA, TWELVE),
+                new FruitRecord(FruitRecord.Operation.PURCHASE, BANANA, FOUR),
+                new FruitRecord(FruitRecord.Operation.RETURN, APPLE, NINE),
+                new FruitRecord(FruitRecord.Operation.SUPPLY, APPLE, SEVENTEEN)
         );
         List<FruitRecord> actual = fruitRecordParser.parseFruitRecords(lines);
         assertEquals(expected, actual);

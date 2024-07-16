@@ -1,6 +1,7 @@
 package core.basesyntax.service.read;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ class FileReaderImplTest {
         String[] actual = fileReader.readFile("src/test/resources/empty.csv");
         String[] expected = {};
         assertArrayEquals(expected, actual);
+        assertTrue(actual.length == 0);
     }
 
     @Test

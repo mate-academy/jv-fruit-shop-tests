@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
@@ -19,6 +21,6 @@ public class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20);
         new BalanceOperation().handle(transaction, storage);
-        assertEquals((Integer) 20, storage.getFruitQuantities().get("banana"));
+        assertEquals(20, storage.getFruitQuantities().get("banana"));
     }
 }

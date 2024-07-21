@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
@@ -8,6 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterImplTest {
+    private static final String HEADER = "type,fruit,quantity";
+    private static final String TRANSACTION_1 = "b,banana,20";
+    private static final String TRANSACTION_2 = "s,apple,100";
+    private static final String TRANSACTION_3 = "p,banana,10";
+
     private DataConverterImpl dataConverter;
 
     @BeforeEach
@@ -18,10 +25,10 @@ public class DataConverterImplTest {
     @Test
     public void testConvertToTransaction() {
         List<String> data = Arrays.asList(
-                "type,fruit,quantity",
-                "b,banana,20",
-                "s,apple,100",
-                "p,banana,10"
+                HEADER,
+                TRANSACTION_1,
+                TRANSACTION_2,
+                TRANSACTION_3
         );
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(data);

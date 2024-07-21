@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;

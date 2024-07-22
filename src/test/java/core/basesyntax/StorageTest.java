@@ -7,6 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
+    private static final String APPLE = "apple";
+    private static final int INITIAL_QUANTITY = 10;
+    private static final int REMOVED_QUANTITY = 5;
+    private static final int REMOVED_BEYOND_ZERO_QUANTITY = 10;
     private Storage storage;
 
     @BeforeEach
@@ -16,21 +20,23 @@ public class StorageTest {
 
     @Test
     public void testAddFruit() {
-        storage.addFruit("apple", 10);
-        assertEquals((Integer) 10, storage.getFruitQuantities().get("apple"));
+        storage.addFruit(APPLE, INITIAL_QUANTITY);
+        assertEquals(Integer.valueOf(INITIAL_QUANTITY), storage.getFruitQuantities().get(APPLE));
     }
 
     @Test
     public void testRemoveFruit() {
-        storage.addFruit("apple", 10);
-        storage.removeFruit("apple", 5);
-        assertEquals((Integer) 5, storage.getFruitQuantities().get("apple"));
+        storage.addFruit(APPLE, INITIAL_QUANTITY);
+        storage.removeFruit(APPLE, REMOVED_QUANTITY);
+        assertEquals(Integer.valueOf(INITIAL_QUANTITY - REMOVED_QUANTITY),
+                storage.getFruitQuantities().get(APPLE));
     }
 
     @Test
     public void testRemoveFruitBeyondZero() {
-        storage.addFruit("apple", 5);
-        storage.removeFruit("apple", 10);
-        assertEquals(Integer.valueOf(-5), storage.getFruitQuantities().get("apple"));
+        storage.addFruit(APPLE, REMOVED_QUANTITY);
+        storage.removeFruit(APPLE, REMOVED_BEYOND_ZERO_QUANTITY);
+        assertEquals(Integer.valueOf(REMOVED_QUANTITY - REMOVED_BEYOND_ZERO_QUANTITY),
+                storage.getFruitQuantities().get(APPLE));
     }
 }

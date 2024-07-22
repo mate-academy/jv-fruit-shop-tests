@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
+    private static final String BANANA = "banana";
+    private static final int BALANCE_QUANTITY = 20;
+
     private Storage storage;
 
     @BeforeEach
@@ -19,8 +22,8 @@ public class BalanceOperationTest {
     @Test
     public void testBalanceOperation() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 20);
+                BANANA, BALANCE_QUANTITY);
         new BalanceOperation().handle(transaction, storage);
-        assertEquals(20, storage.getFruitQuantities().get("banana"));
+        assertEquals(BALANCE_QUANTITY, storage.getFruitQuantities().get(BANANA));
     }
 }

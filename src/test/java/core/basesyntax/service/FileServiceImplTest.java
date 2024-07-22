@@ -1,21 +1,18 @@
 package core.basesyntax.service;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
 
     @Test
     @DisplayName("Read from file test")
     void readFile_ok() {
-        FileService fileService = new FileServiceImpl();
-        List<String> actualReadLines = fileService.read("fruits.csv");
         List<String> expectedReadLines = new ArrayList<>();
         expectedReadLines.add("type,fruit,quantity");
         expectedReadLines.add("b,banana,20");
@@ -26,6 +23,8 @@ class FileServiceImplTest {
         expectedReadLines.add("p,apple,20");
         expectedReadLines.add("p,banana,5");
         expectedReadLines.add("s,banana,50");
+        FileService fileService = new FileServiceImpl();
+        List<String> actualReadLines = fileService.read("fruits.csv");
         assertEquals(actualReadLines, expectedReadLines);
     }
 
@@ -60,5 +59,4 @@ class FileServiceImplTest {
         FileService fileService = new FileServiceImpl();
         assertThrows(NullPointerException.class, () -> fileService.writeToFile("fruit,10", null));
     }
-
 }

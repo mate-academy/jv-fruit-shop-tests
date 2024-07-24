@@ -23,12 +23,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
-        operationHandlers = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());

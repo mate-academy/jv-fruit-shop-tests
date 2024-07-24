@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
 
+    private static final String ACTUAL_FILE_FOR_WRITE = "resultTest.csv";
+
     @Test
     @DisplayName("Read from file test")
     void readFile_ok() {
@@ -47,8 +49,8 @@ class FileServiceImplTest {
     void writeToFile_ok() {
         FileService fileService = new FileServiceImpl();
         String expectedContent = "apple,10";
-        fileService.writeToFile(expectedContent, "resultTest.csv");
-        List<String> readContent = fileService.read("resultTest.csv");
+        fileService.writeToFile(expectedContent, ACTUAL_FILE_FOR_WRITE);
+        List<String> readContent = fileService.read(ACTUAL_FILE_FOR_WRITE);
         String actualContent = String.join("", readContent);
         assertEquals(expectedContent, actualContent);
     }

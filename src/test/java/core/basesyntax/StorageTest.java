@@ -7,10 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
-    private static final String APPLE = "apple";
-    private static final int INITIAL_QUANTITY = 10;
-    private static final int REMOVED_QUANTITY = 5;
-    private static final int REMOVED_BEYOND_ZERO_QUANTITY = 10;
+    public static final String APPLE = "apple";
+    public static final int INITIAL_QUANTITY = 10;
+    public static final int REMOVED_QUANTITY = 5;
+    public static final int REMOVED_BEYOND_ZERO_QUANTITY = 10;
     private Storage storage;
 
     @BeforeEach

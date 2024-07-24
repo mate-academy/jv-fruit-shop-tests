@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
-    private static final String BANANA = "banana";
-    private static final int BALANCE_QUANTITY = 20;
+    public static final String BANANA = "banana";
+    public static final int BALANCE_QUANTITY = 20;
 
     private Storage storage;
 

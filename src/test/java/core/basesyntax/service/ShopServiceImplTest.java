@@ -64,4 +64,5 @@ class ShopServiceImplTest {
         ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
         assertThrows(NullPointerException.class, () -> shopService.process(null));
     }
+
 }

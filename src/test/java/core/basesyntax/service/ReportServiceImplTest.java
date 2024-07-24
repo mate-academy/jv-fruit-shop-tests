@@ -37,4 +37,5 @@ class ReportServiceImplTest {
         String actualReport = reportService.generateReport();
         assertEquals(expectedReport, actualReport);
     }
+
 }

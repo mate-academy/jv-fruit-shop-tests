@@ -61,4 +61,12 @@ class FileServiceImplTest {
         FileService fileService = new FileServiceImpl();
         assertThrows(NullPointerException.class, () -> fileService.writeToFile("fruit,10", null));
     }
+
+    @Test
+    @DisplayName("Write empty content test")
+    void writeEmptyContent_notOk() {
+        FileService fileService = new FileServiceImpl();
+        assertThrows(RuntimeException.class,
+                () -> fileService.writeToFile("", ACTUAL_FILE_FOR_WRITE));
+    }
 }

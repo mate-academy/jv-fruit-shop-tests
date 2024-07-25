@@ -9,9 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SupplyOperationTest {
-    private Storage storage;
     private static final String APPLE = "apple";
     private static final int INITIAL_APPLE_BALANCE = 100;
+    private Storage storage;
 
     @BeforeEach
     public void setUp() {

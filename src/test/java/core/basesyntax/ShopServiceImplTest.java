@@ -19,6 +19,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int INITIAL_APPLE_BALANCE = 100;
+    private static final int APPLE_PURCHASE_QUANTITY = 20;
+    private static final int EXPECTED_APPLE_QUANTITY = INITIAL_APPLE_BALANCE - APPLE_PURCHASE_QUANTITY;
+    private static final int INITIAL_BANANA_SUPPLY = 50;
+    private static final int BANANA_RETURN_QUANTITY = 10;
+    private static final int EXPECTED_BANANA_QUANTITY = INITIAL_BANANA_SUPPLY + BANANA_RETURN_QUANTITY;
+
     private Storage storage;
     private ShopServiceImpl shopService;
 
@@ -38,15 +47,15 @@ public class ShopServiceImplTest {
     @Test
     public void testProcessTransactions() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, INITIAL_APPLE_BALANCE),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, INITIAL_BANANA_SUPPLY),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, APPLE_PURCHASE_QUANTITY),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, BANANA_RETURN_QUANTITY)
         );
 
         shopService.process(transactions);
 
-        assertEquals((Integer) 80, storage.getFruitQuantities().get("apple"));
-        assertEquals((Integer) 60, storage.getFruitQuantities().get("banana"));
+        assertEquals(EXPECTED_APPLE_QUANTITY, storage.getFruitQuantities().get(APPLE));
+        assertEquals(EXPECTED_BANANA_QUANTITY, storage.getFruitQuantities().get(BANANA));
     }
 }

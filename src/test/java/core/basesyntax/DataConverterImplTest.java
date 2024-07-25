@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static core.basesyntax.BalanceOperationTest.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
@@ -35,7 +36,7 @@ public class DataConverterImplTest {
 
         assertEquals(3, transactions.size());
         assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0).getOperation());
-        assertEquals("banana", transactions.get(0).getFruit());
+        assertEquals(BANANA, transactions.get(0).getFruit());
         assertEquals(20, transactions.get(0).getQuantity());
     }
 }

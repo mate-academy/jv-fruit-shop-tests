@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
-
     private static final String FRUIT_NAME = "apple";
     private static final int INITIAL_QUANTITY = 30;
     private static final int RETURN_QUANTITY = 20;

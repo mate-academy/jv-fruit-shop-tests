@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class SupplyOperationTest {
     private Storage storage;
+    private static final String APPLE = "apple";
+    private static final int INITIAL_APPLE_BALANCE = 100;
 
     @BeforeEach
     public void setUp() {
@@ -19,8 +21,8 @@ public class SupplyOperationTest {
     @Test
     public void testSupplyOperation() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 100);
+                APPLE, INITIAL_APPLE_BALANCE);
         new SupplyOperation().handle(transaction, storage);
-        assertEquals((Integer) 100, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) INITIAL_APPLE_BALANCE, storage.getFruitQuantities().get(APPLE));
     }
 }

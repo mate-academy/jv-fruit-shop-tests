@@ -8,15 +8,6 @@ public class FruitTransaction {
     private FruitName name;
     private int quantity;
 
-    @Override
-    public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", name=" + name +
-                ", quantity=" + quantity +
-                '}';
-    }
-
     public FruitTransaction(FruitName name, int quantity) {
         this.name = name;
         this.quantity = quantity;
@@ -57,6 +48,18 @@ public class FruitTransaction {
     @Override
     public int hashCode() {
         return Objects.hash(operation, name, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation="
+                + operation
+                + ", name="
+                + name
+                + ", quantity="
+                + quantity
+                + '}';
     }
 
     public enum Operation {

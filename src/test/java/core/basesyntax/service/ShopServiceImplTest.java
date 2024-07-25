@@ -1,22 +1,28 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.domain.FruitTransaction;
-import core.basesyntax.service.operation.*;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.ReturnOperation;
+import core.basesyntax.service.operation.SupplyOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
+
     private OperationStrategy operationStrategy;
 
     @BeforeEach
@@ -43,7 +49,8 @@ class ShopServiceImplTest {
         shopService.process(transactions);
         int expectedStorageSizeAfterProcessTransactions = 2;
         int actualStorageSizeAfterProcessTransactions = Storage.getFruits().size();
-        assertEquals(expectedStorageSizeAfterProcessTransactions, actualStorageSizeAfterProcessTransactions);
+        assertEquals(expectedStorageSizeAfterProcessTransactions,
+                     actualStorageSizeAfterProcessTransactions);
     }
 
     @Test

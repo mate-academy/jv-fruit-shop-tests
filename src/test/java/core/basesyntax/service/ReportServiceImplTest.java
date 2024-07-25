@@ -1,24 +1,25 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.domain.FruitTransaction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportServiceImplTest {
 
     private static final String HEADER_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_REPORT = "apple,10";
     private static final String EXPECTED_BANANA_REPORT = "banana,20";
+
     @Test
     @DisplayName("Report generating test")
     void reportGenerating_ok() {
-        Storage.fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        Storage.getFruits().add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                                                            FruitTransaction.FruitName.APPLE,
                                                            10));
-        Storage.fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        Storage.getFruits().add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                                                            FruitTransaction.FruitName.BANANA,
                                                            20));
         String expectedReport = HEADER_LINE
@@ -30,6 +31,6 @@ class ReportServiceImplTest {
         ReportService reportService = new ReportServiceImpl();
         String actualReport = reportService.generateReport();
         assertEquals(expectedReport, actualReport);
+        Storage.getFruits().clear();
     }
-
 }

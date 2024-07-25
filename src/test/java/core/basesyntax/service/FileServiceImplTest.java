@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
 
@@ -23,11 +23,11 @@ class FileServiceImplTest {
     private static final String ACTUAL_CSV_FILE_NAME = "fruits.csv";
     private static final String RESULT_TEST_CSV_FILE_NAME = "resultTest.csv";
     private static final String INVALID_CSV_FILE_NAME = "invalidFile.csv";
+    private static final String JOIN_DELIMITER = "";
+
     @Test
     @DisplayName("Read from file test")
     void readFile_ok() {
-        FileService fileService = new FileServiceImpl();
-        List<String> actualReadLines = fileService.read(ACTUAL_CSV_FILE_NAME);
         List<String> expectedReadLines = new ArrayList<>();
         expectedReadLines.add(HEADER_LINE);
         expectedReadLines.add(FIRST_BANANA_EXPECTED_LINE);
@@ -38,6 +38,8 @@ class FileServiceImplTest {
         expectedReadLines.add(THIRD_APPLE_EXPECTED_LINE);
         expectedReadLines.add(FOURTH_BANANA_EXPECTED_LINE);
         expectedReadLines.add(FIFTH_BANANA_EXPECTED_LINE);
+        FileService fileService = new FileServiceImpl();
+        List<String> actualReadLines = fileService.read(ACTUAL_CSV_FILE_NAME);
         assertEquals(actualReadLines, expectedReadLines);
     }
 
@@ -61,7 +63,7 @@ class FileServiceImplTest {
         FileService fileService = new FileServiceImpl();
         fileService.writeToFile(EXPECTED_WRITE_CONTENT, RESULT_TEST_CSV_FILE_NAME);
         List<String> readContent = fileService.read(RESULT_TEST_CSV_FILE_NAME);
-        String actualContent = String.join("", readContent);
+        String actualContent = String.join(JOIN_DELIMITER, readContent);
         assertEquals(EXPECTED_WRITE_CONTENT, actualContent);
     }
 
@@ -69,7 +71,7 @@ class FileServiceImplTest {
     @DisplayName("Write to null file test")
     void writeToNullFile_notOk() {
         FileService fileService = new FileServiceImpl();
-        assertThrows(NullPointerException.class, () -> fileService.writeToFile(EXPECTED_WRITE_CONTENT, null));
+        assertThrows(NullPointerException.class,
+                     () -> fileService.writeToFile(EXPECTED_WRITE_CONTENT, null));
     }
-
 }

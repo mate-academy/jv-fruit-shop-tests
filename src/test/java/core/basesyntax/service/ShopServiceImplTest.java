@@ -6,11 +6,9 @@ import core.basesyntax.domain.FruitTransaction;
 import core.basesyntax.service.operation.*;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +17,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopServiceImplTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
-        operationHandlers = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
@@ -51,7 +48,7 @@ class ShopServiceImplTest {
 
     @Test
     @DisplayName("Process null fruits transactions test")
-    void processNullFruitTranstactions_notOk() {
+    void processNullFruitTransactions_notOk() {
         ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
         assertThrows(NullPointerException.class, () -> shopService.process(null));
     }

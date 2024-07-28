@@ -7,23 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
+    private static final String FRUIT_APPLE = "apple";
+    private static final int QUANTITY_INITIAL_APPLE = 100;
+    private static final String FRUIT_BANANA = "banana";
+    private static final int QUANTITY_UPDATED = 200;
 
     @Test
     void testConstructorAndGetters() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
+                FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
         assertEquals(FruitTransaction.Operation.BALANCE, transaction.getOperation(),
                 "Operation should be BALANCE");
         assertEquals("apple", transaction.getFruit(),
                 "Fruit should be apple");
-        assertEquals(100, transaction.getQuantity(),
+        assertEquals(QUANTITY_INITIAL_APPLE, transaction.getQuantity(),
                 "Quantity should be 100");
     }
 
     @Test
     void testSetOperation() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
+                FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
         transaction.setOperation(FruitTransaction.Operation.SUPPLY);
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation(),
                 "Operation should be SUPPLY");
@@ -32,27 +36,27 @@ class FruitTransactionTest {
     @Test
     void testSetFruit() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
-        transaction.setFruit("banana");
+                FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
+        transaction.setFruit(FRUIT_BANANA);
 
-        assertEquals("banana", transaction.getFruit(),
+        assertEquals(FRUIT_BANANA, transaction.getFruit(),
                 "Fruit should be banana");
     }
 
     @Test
     void testSetQuantity() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
-        transaction.setQuantity(200);
+                FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
+        transaction.setQuantity(QUANTITY_UPDATED);
 
-        assertEquals(200, transaction.getQuantity(),
-                "Quantity should be 200");
+        assertEquals(QUANTITY_UPDATED, transaction.getQuantity(),
+                "Quantity should be " + QUANTITY_UPDATED);
     }
 
     @Test
     void testToString() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation
-                .BALANCE, "apple", 100);
+                .BALANCE, FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
         String expectedString = "FruitTransaction{operation=BALANCE, "
                 + "fruit='apple', quantity=100}";
 

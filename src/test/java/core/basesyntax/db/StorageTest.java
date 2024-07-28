@@ -9,60 +9,62 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
+    private static final int INITIAL_APPLE_QUANTITY = 10;
+    private static final int UPDATED_APPLE_QUANTITY = 50;
+    private static final int INITIAL_BANANA_QUANTITY = 20;
+    private static final int REMOVE_BANANA_QUANTITY = 5;
+    private static final int ORANGE_QUANTITY = 10;
+    private static final int REMOVE_ORANGE_QUANTITY = 15;
 
     @BeforeEach
     void setUp() {
-        Storage.getAllFruits().forEach((fruit, quantity) -> {
-            try {
-                Storage.removeFruit(fruit, quantity);
-            } catch (RuntimeException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        Storage.getAllFruits().forEach(Storage::removeFruit);
     }
 
     @Test
     void addFruit_shouldAddFruitToStorage() {
-        Storage.addFruit("Apple", 10);
+        Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(10, fruits.get("Apple"), "Expected 10 apples in storage");
-
-        Storage.addFruit("Apple", 5);
-        fruits = Storage.getAllFruits();
-        assertEquals(15, fruits.get("Apple"), "Expected 15 apples in storage after adding 5 more");
+        assertEquals(INITIAL_APPLE_QUANTITY, fruits.get(APPLE),
+                "Expected " + INITIAL_APPLE_QUANTITY + " apples in storage");
     }
 
     @Test
     void removeFruit_shouldDecreaseFruitQuantity() {
-        Storage.addFruit("banana", 20);
-        Storage.removeFruit("banana",5);
+        Storage.addFruit(BANANA, INITIAL_BANANA_QUANTITY);
+        Storage.removeFruit(BANANA,REMOVE_BANANA_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(15, (int) fruits.get("banana"),
-                "The quantity of bananas should be 15 after removing");
+        assertEquals(Integer.valueOf(INITIAL_BANANA_QUANTITY - REMOVE_BANANA_QUANTITY),
+                fruits.get(BANANA),
+                "The quantity of bananas should be "
+                        + (INITIAL_BANANA_QUANTITY - REMOVE_BANANA_QUANTITY) + " after removing");
     }
 
     @Test
     void testRemoveFruitThrowsExceptionWhenNotEnough() {
-        Storage.addFruit("orange", 10);
+        Storage.addFruit(ORANGE, ORANGE_QUANTITY);
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            Storage.removeFruit("orange", 15);
+            Storage.removeFruit(ORANGE, REMOVE_ORANGE_QUANTITY);
         });
-        assertEquals("Not enough orange in storage", exception.getMessage());
+        assertEquals("Not enough " + ORANGE + " in storage", exception.getMessage());
     }
 
     @Test
     void testSetFruitShouldOverrideQuantity() {
-        Storage.addFruit("apple", 10);
-        Storage.setFruit("apple", 50);
+        Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
+        Storage.setFruit(APPLE, UPDATED_APPLE_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(50, (int) fruits.get("apple"),
-                "The quantity of apples should be 50 after setting it");
+        assertEquals(UPDATED_APPLE_QUANTITY, (int) fruits.get(APPLE),
+                "The quantity of apples should be " + UPDATED_APPLE_QUANTITY + " after setting it");
     }
 
     @Test
     void testClearShouldRemoveAllFruits() {
-        Storage.addFruit("apple", 10);
-        Storage.addFruit("banana", 20);
+        Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
+        Storage.addFruit(BANANA, INITIAL_BANANA_QUANTITY);
         Storage.clear();
         Map<String, Integer> fruits = Storage.getAllFruits();
         assertTrue(fruits.isEmpty(), "Storage should be empty after calling clear");
@@ -70,11 +72,13 @@ class StorageTest {
 
     @Test
     void testGetAllFruitsReturnsCorrectQuantities() {
-        Storage.addFruit("apple", 10);
-        Storage.addFruit("banana", 20);
+        Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
+        Storage.addFruit(BANANA, INITIAL_BANANA_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(10, (int) fruits.get("apple"), "The quantity of apples should be 10");
-        assertEquals(20, (int) fruits.get("banana"), "The quantity of bananas should be 20");
+        assertEquals(INITIAL_APPLE_QUANTITY, (int) fruits.get(APPLE),
+                "The quantity of apples should be " + INITIAL_APPLE_QUANTITY);
+        assertEquals(INITIAL_BANANA_QUANTITY, (int) fruits.get(BANANA),
+                "The quantity of bananas should be " + INITIAL_BANANA_QUANTITY);
     }
 }
 

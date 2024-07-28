@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private static final String FRUIT_APPLE = "apple";
+    private static final int QUANTITY_INITIAL_APPLE = 100;
+    private static final String FRUIT_BANANA = "banana";
+    private static final int QUANTITY_INITIAL_BANANA = 50;
     private ReportGenerator reportGenerator;
 
     @BeforeEach
@@ -20,8 +24,8 @@ class ReportGeneratorImplTest {
 
     @Test
     void testGetReportWithFruits() {
-        Storage.addFruit("apple", 100);
-        Storage.addFruit("banana", 50);
+        Storage.addFruit(FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
+        Storage.addFruit(FRUIT_BANANA, QUANTITY_INITIAL_BANANA);
 
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator()
@@ -29,7 +33,6 @@ class ReportGeneratorImplTest {
 
         String actualReport = reportGenerator.getReport();
 
-        // Сортируем строки отчета перед сравнением
         String sortedExpectedReport = Arrays.stream(expectedReport.split(System.lineSeparator()))
                 .sorted()
                 .collect(Collectors.joining(System.lineSeparator()));
@@ -37,9 +40,6 @@ class ReportGeneratorImplTest {
         String sortedActualReport = Arrays.stream(actualReport.split(System.lineSeparator()))
                 .sorted()
                 .collect(Collectors.joining(System.lineSeparator()));
-
-        System.out.println("Sorted Expected Report:\n" + sortedExpectedReport);
-        System.out.println("Sorted Actual Report:\n" + sortedActualReport);
 
         assertEquals(sortedExpectedReport, sortedActualReport,
                 "The report should match the expected output");
@@ -51,25 +51,18 @@ class ReportGeneratorImplTest {
 
         String actualReport = reportGenerator.getReport();
 
-        System.out.println("Expected Report:\n" + expectedReport);
-        System.out.println("Actual Report:\n" + actualReport);
-
         assertEquals(expectedReport, actualReport,
                 "The report for empty storage should only contain the header");
     }
 
     @Test
     void testGetReportWithSingleFruit() {
-        Storage.addFruit("apple", 100);
+        Storage.addFruit(FRUIT_APPLE, QUANTITY_INITIAL_APPLE);
 
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "apple,100";
 
         String actualReport = reportGenerator.getReport();
-
-        // Выводим фактический и ожидаемый отчеты для отладки
-        System.out.println("Expected Report:\n" + expectedReport);
-        System.out.println("Actual Report:\n" + actualReport);
 
         assertEquals(expectedReport, actualReport,
                 "The report should match the expected output for a single fruit");

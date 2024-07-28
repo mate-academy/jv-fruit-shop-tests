@@ -34,7 +34,7 @@ public class FileServiceImplTest {
     @Test
     void read_Ok() {
         List<String> expectedRows = new ArrayList<>();
-        expectedRows.add("s,apple,100");
+        expectedRows.add("s,banana,100");
         expectedRows.add("b,apple,100");
         expectedRows.add("b,banana,20");
 

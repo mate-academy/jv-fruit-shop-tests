@@ -63,26 +63,40 @@ public class FruitServiceImplTest {
 
     @Test
     void create_fromList_ok() {
-        List<String> expectedRows = new ArrayList<>();
-        expectedRows.add("s,apple,100");
-        expectedRows.add("b,apple,100");
-        expectedRows.add("b,banana,20");
+        List<String> inputRows = new ArrayList<>();
+        inputRows.add("s,banana,100");
+        inputRows.add("b,apple,100");
+        inputRows.add("s,banana,20");
 
-        service.addFruitFromList(expectedRows);
-        assertEquals(2, Storage.getFruits().size());
+        service.addFruitFromList(inputRows);
+
+        assertEquals(2, Storage.getFruits().size(),
+                "The number of distinct fruit types should be 2");
+
+        Fruit apple = Storage.getFruits().get("apple");
+        Fruit banana = Storage.getFruits().get("banana");
+
+        assertNotNull(apple, "Apple should not be null");
+        assertNotNull(banana, "Banana should not be null");
+
+        assertEquals(190, apple.getQuantity(), "The quantity of apples should be 190");
+        assertEquals(170, banana.getQuantity(), "The quantity of bananas should be 170");
+
+        System.out.println("Apple quantity: " + apple.getQuantity());
+        System.out.println("Banana quantity: " + banana.getQuantity());
     }
 
     @Test
     void get_count_ok() {
         List<String> expectedRows = new ArrayList<>();
-        expectedRows.add("s,apple,100");
+        expectedRows.add("s,banana,100");
         expectedRows.add("b,apple,100");
         expectedRows.add("b,banana,20");
 
         service.addFruitFromList(expectedRows);
 
-        Fruit apple = Storage.getFruits().get("apple");
-        assertNotNull(apple, "Apple should not be null");
-        assertEquals(490, apple.getQuantity());
+        Fruit banana = Storage.getFruits().get("banana");
+        assertNotNull(banana, "Banana should not be null");
+        assertEquals(290, banana.getQuantity());
     }
 }

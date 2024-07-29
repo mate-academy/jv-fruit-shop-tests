@@ -11,6 +11,9 @@ class FruitTransactionTest {
     private static final int QUANTITY_INITIAL_APPLE = 100;
     private static final String FRUIT_BANANA = "banana";
     private static final int QUANTITY_UPDATED = 200;
+    private static final String INVALID_OPERATION_CODE = "x";
+    private static final String UNKNOWN_OPERATION_MESSAGE = "Unknown operation: "
+            + INVALID_OPERATION_CODE;
 
     @Test
     void testConstructorAndGetters() {
@@ -79,10 +82,10 @@ class FruitTransactionTest {
     @Test
     void testOperationFromCodeInvalid() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            FruitTransaction.Operation.fromCode("x");
+            FruitTransaction.Operation.fromCode(INVALID_OPERATION_CODE);
         });
 
-        String expectedMessage = "Unknown operation: x";
+        String expectedMessage = UNKNOWN_OPERATION_MESSAGE;
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage),
                 "Exception message should contain 'Unknown operation: x'");

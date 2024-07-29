@@ -37,9 +37,8 @@ class FileReaderImplTest {
 
     @Test
     void testReadNonExistentFile() {
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            fileReader.read("non_existent_file.txt");
-        });
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileReader.read("non_existent_file.txt"));
 
         String expectedMessage = "Can't read file by path:";
         String actualMessage = exception.getMessage();

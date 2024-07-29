@@ -57,7 +57,7 @@ class StorageTest {
         Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
         Storage.setFruit(APPLE, UPDATED_APPLE_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(UPDATED_APPLE_QUANTITY, (int) fruits.get(APPLE),
+        assertEquals(UPDATED_APPLE_QUANTITY, fruits.get(APPLE),
                 "The quantity of apples should be " + UPDATED_APPLE_QUANTITY + " after setting it");
     }
 
@@ -75,9 +75,9 @@ class StorageTest {
         Storage.addFruit(APPLE, INITIAL_APPLE_QUANTITY);
         Storage.addFruit(BANANA, INITIAL_BANANA_QUANTITY);
         Map<String, Integer> fruits = Storage.getAllFruits();
-        assertEquals(INITIAL_APPLE_QUANTITY, (int) fruits.get(APPLE),
+        assertEquals(INITIAL_APPLE_QUANTITY, fruits.get(APPLE),
                 "The quantity of apples should be " + INITIAL_APPLE_QUANTITY);
-        assertEquals(INITIAL_BANANA_QUANTITY, (int) fruits.get(BANANA),
+        assertEquals(INITIAL_BANANA_QUANTITY, fruits.get(BANANA),
                 "The quantity of bananas should be " + INITIAL_BANANA_QUANTITY);
     }
 }

@@ -12,6 +12,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int QUANTITY_100 = 100;
+    private static final int QUANTITY_50 = 50;
+    private static final int QUANTITY_20 = 20;
+    private static final int QUANTITY_10 = 10;
+    private static final int TRANSACTION_SIZE = 4;
+    private static final String INVALID_INPUT_LINE = "invalid,input,line";
+    private static final String UNKNOWN_OPERATION_MESSAGE = "Unknown operation:";
     private DataConverter dataConverter;
 
     @BeforeEach
@@ -22,42 +31,43 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_shouldConvertCorrectly() {
         List<String> input = Arrays.asList(
-                "b,apple,100",
-                "s,banana,50",
-                "p,apple,20",
-                "r,banana,10"
+                "b," + APPLE + "," + QUANTITY_100,
+                "s," + BANANA + "," + QUANTITY_50,
+                "p," + APPLE + "," + QUANTITY_20,
+                "r," + BANANA + "," + QUANTITY_10
         );
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(input);
 
-        assertEquals(4, transactions.size(), "The number of transactions should be 4");
+        assertEquals(TRANSACTION_SIZE, transactions.size(),
+                "The number of transactions should be 4");
 
         assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0)
                 .getOperation(), "The first operation should be BALANCE");
-        assertEquals("apple", transactions.get(0)
+        assertEquals(APPLE, transactions.get(0)
                 .getFruit(), "The first fruit should be apple");
-        assertEquals(100, transactions.get(0)
+        assertEquals(QUANTITY_100, transactions.get(0)
                 .getQuantity(), "The first quantity should be 100");
 
         assertEquals(FruitTransaction.Operation.SUPPLY, transactions.get(1)
                 .getOperation(), "The second operation should be SUPPLY");
-        assertEquals("banana", transactions.get(1)
+        assertEquals(BANANA, transactions.get(1)
                 .getFruit(), "The second fruit should be banana");
-        assertEquals(50, transactions.get(1)
+        assertEquals(QUANTITY_50, transactions.get(1)
                 .getQuantity(), "The second quantity should be 50");
 
         assertEquals(FruitTransaction.Operation.PURCHASE, transactions.get(2)
                 .getOperation(), "The third operation should be PURCHASE");
-        assertEquals("apple", transactions.get(2)
+        assertEquals(APPLE, transactions.get(2)
                 .getFruit(), "The third fruit should be apple");
-        assertEquals(20, transactions.get(2)
+        assertEquals(QUANTITY_20, transactions.get(2)
                 .getQuantity(), "The third quantity should be 20");
 
         assertEquals(FruitTransaction.Operation.RETURN, transactions.get(3)
                 .getOperation(), "The fourth operation should be RETURN");
-        assertEquals("banana", transactions.get(3)
+        assertEquals(BANANA, transactions.get(3)
                 .getFruit(), "The fourth fruit should be banana");
-        assertEquals(10, transactions.get(3)
+        assertEquals(QUANTITY_10, transactions.get(3)
                 .getQuantity(), "The fourth quantity should be 10");
     }
 
@@ -73,14 +83,14 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_shouldThrowExceptionForInvalidInput() {
         List<String> input = Arrays.asList(
-                "invalid,input,line"
+                INVALID_INPUT_LINE
         );
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             dataConverter.convertToTransaction(input);
         });
 
-        String expectedMessage = "Unknown operation:";
+        String expectedMessage = UNKNOWN_OPERATION_MESSAGE;
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage),
                 "Exception message should contain 'Unknown operation:'");

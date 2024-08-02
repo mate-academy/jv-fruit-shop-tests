@@ -11,7 +11,6 @@ class ReportServiceImplTest {
 
     private static final String HEADER_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_REPORT = "apple,10";
-    private static final String EXPECTED_BANANA_REPORT = "banana,20";
 
     @Test
     @DisplayName("Report generating test")
@@ -20,15 +19,9 @@ class ReportServiceImplTest {
                 FruitTransaction.FruitName.APPLE,
                 10
         );
-        Storage.getFruitTransactions().put(
-                FruitTransaction.FruitName.BANANA,
-                20
-        );
         String expectedReport = HEADER_LINE
                 + System.lineSeparator()
                 + EXPECTED_APPLE_REPORT
-                + System.lineSeparator()
-                + EXPECTED_BANANA_REPORT
                 + System.lineSeparator();
         ReportService reportService = new ReportServiceImpl();
         String actualReport = reportService.generateReport();

@@ -12,9 +12,8 @@ public class DataConverterImpl implements DataConverterService {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> convertToFruit(List<String> inputLines) {
-        checkInputLinesOnEmpty(inputLines);
-        return inputLines.stream()
+    public List<FruitTransaction> convertToFruit(List<String> inputReport) {
+        return inputReport.stream()
                 .skip(COUNT_HEADER_LINES_TO_SKIP)
                 .map(this::convertToFruitTransaction)
                 .collect(Collectors.toList());
@@ -24,15 +23,10 @@ public class DataConverterImpl implements DataConverterService {
         String[] splitFruits = line.split(COMMA_DELIMITER);
         FruitTransaction.Operation fruitOperation =
                 FruitTransaction.Operation.getByCode(splitFruits[FRUIT_OPERATION_INDEX]);
+
         FruitTransaction.FruitName fruitName =
                 FruitTransaction.FruitName.getByFruitName(splitFruits[FRUIT_NAME_INDEX]);
         int fruitQuantity = Integer.parseInt(splitFruits[FRUIT_QUANTITY_INDEX]);
         return new FruitTransaction(fruitOperation, fruitName, fruitQuantity);
-    }
-
-    private void checkInputLinesOnEmpty(List<String> inputLines) {
-        if (inputLines.isEmpty()) {
-            throw new RuntimeException("Input lines is empty, can't convert");
-        }
     }
 }

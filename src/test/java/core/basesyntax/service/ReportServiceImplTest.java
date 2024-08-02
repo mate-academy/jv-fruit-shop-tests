@@ -16,12 +16,14 @@ class ReportServiceImplTest {
     @Test
     @DisplayName("Report generating test")
     void reportGenerating_ok() {
-        Storage.getFruits().add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                                                           FruitTransaction.FruitName.APPLE,
-                                                           10));
-        Storage.getFruits().add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                                                           FruitTransaction.FruitName.BANANA,
-                                                           20));
+        Storage.getFruitTransactions().put(
+                FruitTransaction.FruitName.APPLE,
+                10
+        );
+        Storage.getFruitTransactions().put(
+                FruitTransaction.FruitName.BANANA,
+                20
+        );
         String expectedReport = HEADER_LINE
                 + System.lineSeparator()
                 + EXPECTED_APPLE_REPORT
@@ -31,6 +33,6 @@ class ReportServiceImplTest {
         ReportService reportService = new ReportServiceImpl();
         String actualReport = reportService.generateReport();
         assertEquals(expectedReport, actualReport);
-        Storage.getFruits().clear();
+        Storage.getFruitTransactions().clear();
     }
 }

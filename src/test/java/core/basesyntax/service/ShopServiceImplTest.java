@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.domain.FruitTransaction;
 import core.basesyntax.service.operation.BalanceOperation;
@@ -38,7 +37,7 @@ class ShopServiceImplTest {
     @Test
     @DisplayName("Process fruit transactions test")
     void processFruitTransactions_ok() {
-        ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                                                  FruitTransaction.FruitName.APPLE,
@@ -48,7 +47,7 @@ class ShopServiceImplTest {
                                                  20));
         shopService.process(transactions);
         int expectedStorageSizeAfterProcessTransactions = 2;
-        int actualStorageSizeAfterProcessTransactions = Storage.getFruits().size();
+        int actualStorageSizeAfterProcessTransactions = Storage.getFruitTransactions().size();
         assertEquals(expectedStorageSizeAfterProcessTransactions,
                      actualStorageSizeAfterProcessTransactions);
     }
@@ -56,7 +55,7 @@ class ShopServiceImplTest {
     @Test
     @DisplayName("Process null fruits transactions test")
     void processNullFruitTransactions_notOk() {
-        ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         assertThrows(NullPointerException.class, () -> shopService.process(null));
     }
 }

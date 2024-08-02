@@ -1,6 +1,7 @@
 package core.basesyntax.domain;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -50,18 +51,6 @@ public class FruitTransaction {
         return Objects.hash(operation, name, quantity);
     }
 
-    @Override
-    public String toString() {
-        return "FruitTransaction{"
-                + "operation="
-                + operation
-                + ", name="
-                + name
-                + ", quantity="
-                + quantity
-                + '}';
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -78,7 +67,7 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(operation -> operation.code.equals(code))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Invalid code" + code));
+                    .orElseThrow(() -> new NoSuchElementException("Invalid code" + code));
         }
     }
 
@@ -96,8 +85,7 @@ public class FruitTransaction {
             return Arrays.stream(FruitName.values())
                     .filter(fruitName -> fruitName.name.equals(name))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Invalid fruit name: " + name));
+                    .orElseThrow(() -> new NoSuchElementException("Invalid fruit name: " + name));
         }
     }
 }
-

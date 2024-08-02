@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
     private static ReportGenerator reportGenerator;
-    private Storage storage;
 
     @BeforeAll
     static void beforeAll() {
@@ -20,13 +19,13 @@ public class ReportGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        storage = new Storage();
+        Storage.getStorage().clear();
     }
 
     @Test
     void getReport_getReportFromCorrectData_ok() {
-        storage.addFruit("apple", 50);
-        storage.addFruit("banana", 15);
+        Storage.addFruit("apple", 50);
+        Storage.addFruit("banana", 15);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,50" + System.lineSeparator() + "banana,15";
         assertEquals(expected, reportGenerator.getReport());

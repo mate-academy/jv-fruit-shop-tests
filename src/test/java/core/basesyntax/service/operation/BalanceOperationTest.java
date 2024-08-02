@@ -10,6 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
+    private static final FruitTransaction.FruitName ACTUAL_FRUIT_NAME =
+            FruitTransaction.FruitName.BANANA;
+    private static final int ACTUAL_FRUIT_QUANTITY = 10;
 
     @AfterEach
     void afterEach_setUp() {
@@ -20,7 +23,7 @@ class BalanceOperationTest {
     @DisplayName("Balance operation test")
     void calculateQuantityBalanceOperation_ok() {
         BalanceOperation balanceOperation = new BalanceOperation();
-        balanceOperation.calculateQuantity(FruitTransaction.FruitName.BANANA, 10);
+        balanceOperation.calculateQuantity(ACTUAL_FRUIT_NAME, ACTUAL_FRUIT_QUANTITY);
         int expectedStorageSizeAfterBalanceOperation = 1;
         int actualStorageSizeAfterBalanceOperation = Storage.getFruitTransactions().size();
         assertEquals(expectedStorageSizeAfterBalanceOperation,

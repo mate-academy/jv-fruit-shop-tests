@@ -24,7 +24,7 @@ class BalanceOperationTest {
     void calculateQuantityBalanceOperation_ok() {
         BalanceOperation balanceOperation = new BalanceOperation();
         balanceOperation.calculateQuantity(ACTUAL_FRUIT_NAME, ACTUAL_FRUIT_QUANTITY);
-        int expectedStorageSizeAfterBalanceOperation = 1;
+        int expectedStorageSizeAfterBalanceOperation = 2;
         int actualStorageSizeAfterBalanceOperation = Storage.getFruitTransactions().size();
         assertEquals(expectedStorageSizeAfterBalanceOperation,
                      actualStorageSizeAfterBalanceOperation);

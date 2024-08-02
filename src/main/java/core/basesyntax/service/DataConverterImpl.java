@@ -13,6 +13,9 @@ public class DataConverterImpl implements DataConverterService {
 
     @Override
     public List<FruitTransaction> convertToFruit(List<String> inputReport) {
+        if (inputReport.isEmpty()) {
+            throw new RuntimeException("Can't convert input lines, it's empty");
+        }
         return inputReport.stream()
                 .skip(COUNT_HEADER_LINES_TO_SKIP)
                 .map(this::convertToFruitTransaction)

@@ -9,6 +9,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String generateReport() {
+        if (Storage.getFruitTransactions().isEmpty()) {
+            throw new RuntimeException("Cannot generating report, size of storage is 0");
+        }
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(HEADER_LINE)
                 .append(SYSTEM_LINE_SEPARATOR);

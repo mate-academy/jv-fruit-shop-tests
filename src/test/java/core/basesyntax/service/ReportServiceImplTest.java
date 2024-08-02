@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.domain.FruitTransaction;
@@ -27,5 +28,12 @@ class ReportServiceImplTest {
         String actualReport = reportService.generateReport();
         assertEquals(expectedReport, actualReport);
         Storage.getFruitTransactions().clear();
+    }
+
+    @Test
+    @DisplayName("Report generating test empty storage")
+    void reportGeneratingEmptyStorage_notOk() {
+        ReportService reportService = new ReportServiceImpl();
+        assertThrows(RuntimeException.class, reportService::generateReport);
     }
 }

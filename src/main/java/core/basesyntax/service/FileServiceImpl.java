@@ -19,6 +19,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void writeToFile(String content, String toFileName) {
+        if (content.isEmpty() || content.isBlank()) {
+            throw new RuntimeException("Can't write empty content to file");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFileName))) {
             bufferedWriter.write(content);
         } catch (IOException e) {

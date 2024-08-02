@@ -74,4 +74,12 @@ class FileServiceImplTest {
         assertThrows(NullPointerException.class,
                      () -> fileService.writeToFile(EXPECTED_WRITE_CONTENT, null));
     }
+
+    @Test
+    @DisplayName("Write empty content to file")
+    void writeEmptyContent_notOk() {
+        FileService fileService = new FileServiceImpl();
+        assertThrows(RuntimeException.class,
+                     () -> fileService.writeToFile("", ACTUAL_CSV_FILE_NAME));
+    }
 }

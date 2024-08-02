@@ -40,4 +40,12 @@ class DataConverterImplTest {
         DataConverterService dataConverterService = new DataConverterImpl();
         assertThrows(NullPointerException.class, () -> dataConverterService.convertToFruit(null));
     }
+
+    @Test
+    @DisplayName("Convert empty input lines")
+    void convertEmptyLines_notOk() {
+        DataConverterService dataConverterService = new DataConverterImpl();
+        assertThrows(RuntimeException.class,
+                     () -> dataConverterService.convertToFruit(new ArrayList<>()));
+    }
 }

@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private static ReportGenerator reportGenerator;
 
     @BeforeAll
@@ -24,10 +27,9 @@ public class ReportGeneratorTest {
 
     @Test
     void getReport_getReportFromCorrectData_ok() {
-        Storage.addFruit("apple", 50);
-        Storage.addFruit("banana", 15);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,50" + System.lineSeparator() + "banana,15";
+        Storage.addFruit(APPLE, 50);
+        Storage.addFruit(BANANA, 15);
+        String expected = HEADER + "apple,50" + System.lineSeparator() + "banana,15";
         assertEquals(expected, reportGenerator.getReport());
     }
 

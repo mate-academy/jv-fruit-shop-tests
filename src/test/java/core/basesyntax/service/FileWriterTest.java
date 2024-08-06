@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
     private static final String FILE_PATH = "src/test/resources/finalReport.csv";
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static Writer writer;
 
     @BeforeAll
@@ -24,8 +25,7 @@ public class FileWriterTest {
 
     @Test
     void writeToFile_writeCorrectDataToFile_ok() throws IOException {
-        String content = "fruit,quantity" + System.lineSeparator()
-                + "banana,107" + System.lineSeparator() + "apple,425";
+        String content = HEADER + "banana,107" + System.lineSeparator() + "apple,425";
         writer.writeToFile(content, FILE_PATH);
         List<String> expected = Arrays.asList(
                 "fruit,quantity",
@@ -44,8 +44,7 @@ public class FileWriterTest {
 
     @Test
     void writeToFile_writeDataToNullFile_notOk() {
-        String content = "fruit,quantity" + System.lineSeparator()
-                + "banana,107" + System.lineSeparator() + "b,apple,425";
+        String content = HEADER + "banana,107" + System.lineSeparator() + "b,apple,425";
         assertThrows(RuntimeException.class,
                 () -> writer.writeToFile(content, null));
     }

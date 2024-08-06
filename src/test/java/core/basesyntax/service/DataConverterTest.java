@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private DataConverter dataConverter;
 
     @BeforeEach
@@ -29,10 +31,10 @@ public class DataConverterTest {
                 "r,apple,10"
         );
         List<FruitTransaction> expectedList = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 10)
         );
         List<FruitTransaction> actualList = dataConverter.convertToTransaction(inputList);
         assertEquals(expectedList, actualList);

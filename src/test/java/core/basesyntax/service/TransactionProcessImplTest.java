@@ -22,6 +22,17 @@ public class TransactionProcessImplTest {
             Map.of(Operation.SUPPLY, new SupplyHandler(),
                     Operation.PURCHASE, new PurchaseHandler(),
                     Operation.RETURN, new ReturnHandler());
+    private static final String BANANA_FRUIT = "banana";
+    private static final String APPLE_FRUIT = "apple";
+    private static final String ORANGE_FRUIT = "orange";
+    private static final int BANANA_BALANCE = 100;
+    private static final int BANANA_QUANTITY_50 = 50;
+    private static final int BANANA_QUANTITY_30 = 30;
+    private static final int APPLE_QUANTITY_50 = 50;
+    private static final int APPLE_QUANTITY_30 = 30;
+    private static final int ORANGE_QUANTITY_50 = 50;
+    private static final int ORANGE_QUANTITY_30 = 30;
+
     private ReportDao reportDao;
     private StrategyFruitTransaction strategyFruitTransaction;
     private TransactionProcess transactionProcess;
@@ -38,8 +49,8 @@ public class TransactionProcessImplTest {
     public void process_balanceTransaction_ok() {
         FruitTransaction balanceTransaction = new FruitTransaction();
         balanceTransaction.setOperation(Operation.BALANCE);
-        balanceTransaction.setFruit("banana");
-        balanceTransaction.setQuantity(100);
+        balanceTransaction.setFruit(BANANA_FRUIT);
+        balanceTransaction.setQuantity(BANANA_BALANCE);
         assertDoesNotThrow(() -> transactionProcess.process(balanceTransaction));
     }
 
@@ -47,14 +58,14 @@ public class TransactionProcessImplTest {
     public void process_purchaseTransaction_ok() {
         FruitTransaction applePurchase = new FruitTransaction();
         applePurchase.setOperation(Operation.PURCHASE);
-        applePurchase.setFruit("applePurchase");
-        applePurchase.setQuantity(50);
+        applePurchase.setFruit(APPLE_FRUIT);
+        applePurchase.setQuantity(APPLE_QUANTITY_50);
         reportDao.updateReport(applePurchase);
 
         FruitTransaction apple = new FruitTransaction();
         apple.setOperation(Operation.PURCHASE);
-        apple.setFruit("applePurchase");
-        apple.setQuantity(30);
+        apple.setFruit(APPLE_FRUIT);
+        apple.setQuantity(APPLE_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(apple));
     }
 
@@ -62,14 +73,14 @@ public class TransactionProcessImplTest {
     public void process_returnTransaction_ok() {
         FruitTransaction orangeReturn = new FruitTransaction();
         orangeReturn.setOperation(Operation.RETURN);
-        orangeReturn.setFruit("orangeReturn");
-        orangeReturn.setQuantity(50);
+        orangeReturn.setFruit(ORANGE_FRUIT);
+        orangeReturn.setQuantity(ORANGE_QUANTITY_50);
         reportDao.updateReport(orangeReturn);
 
         FruitTransaction orange = new FruitTransaction();
         orange.setOperation(Operation.RETURN);
-        orange.setFruit("orangeReturn");
-        orange.setQuantity(30);
+        orange.setFruit(ORANGE_FRUIT);
+        orange.setQuantity(ORANGE_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(orange));
     }
 
@@ -77,14 +88,14 @@ public class TransactionProcessImplTest {
     public void process_supplyTransaction_ok() {
         FruitTransaction bananaBalance = new FruitTransaction();
         bananaBalance.setOperation(Operation.BALANCE);
-        bananaBalance.setFruit("banana");
-        bananaBalance.setQuantity(50);
+        bananaBalance.setFruit(BANANA_FRUIT);
+        bananaBalance.setQuantity(BANANA_QUANTITY_50);
         reportDao.updateReport(bananaBalance);
 
         FruitTransaction banana = new FruitTransaction();
         banana.setOperation(Operation.BALANCE);
-        banana.setFruit("banana");
-        banana.setQuantity(30);
+        banana.setFruit(BANANA_FRUIT);
+        banana.setQuantity(BANANA_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(banana));
     }
 }

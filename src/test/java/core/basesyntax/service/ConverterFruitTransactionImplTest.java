@@ -12,38 +12,36 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ConverterFruitTransactionImplTest {
-    private static final List<String> readFruitTransaction;
-
-    static {
-        readFruitTransaction = new ArrayList<>();
-        readFruitTransaction.add("b,banana,20");
-        readFruitTransaction.add("b,apple,100");
-    }
-
-    private static final List<FruitTransaction> fruitTransactions;
-
-    static {
-        fruitTransactions = new ArrayList<>();
-        FruitTransaction banana = new FruitTransaction();
-        banana.setOperation(Operation.BALANCE);
-        banana.setFruit("banana");
-        banana.setQuantity(20);
-        fruitTransactions.add(banana);
-        FruitTransaction apple = new FruitTransaction();
-        apple.setOperation(Operation.BALANCE);
-        apple.setFruit("apple");
-        apple.setQuantity(100);
-        fruitTransactions.add(apple);
-    }
-
     private static final int FIRST_FRUIT_TRANSACTION_INDEX = 0;
     private static final int SECOND_FRUIT_TRANSACTION_INDEX = 1;
+    private static final String READ_BANANA_TRANSACTION = "b,banana,20";
+    private static final String READ_APPLE_TRANSACTION = "b,apple,100";
+    private static final String BANANA_FRUIT = "banana";
+    private static final String APPLE_FRUIT = "apple";
+    private static final int QUANTITY_BANANA = 20;
+    private static final int QUANTITY_APPLE = 100;
 
     private ConverterFruitTransaction converterFruitTransaction;
+    private List<String> readFruitTransaction;
+    private  List<FruitTransaction> fruitTransactions;
 
     @BeforeEach
     void setUp() {
         converterFruitTransaction = new ConverterFruitTransactionImpl();
+        readFruitTransaction = new ArrayList<>();
+        readFruitTransaction.add(READ_BANANA_TRANSACTION);
+        readFruitTransaction.add(READ_APPLE_TRANSACTION);
+        fruitTransactions = new ArrayList<>();
+        FruitTransaction banana = new FruitTransaction();
+        banana.setOperation(Operation.BALANCE);
+        banana.setFruit(BANANA_FRUIT);
+        banana.setQuantity(QUANTITY_BANANA);
+        fruitTransactions.add(banana);
+        FruitTransaction apple = new FruitTransaction();
+        apple.setOperation(Operation.BALANCE);
+        apple.setFruit(APPLE_FRUIT);
+        apple.setQuantity(QUANTITY_APPLE);
+        fruitTransactions.add(apple);
     }
 
     @Test

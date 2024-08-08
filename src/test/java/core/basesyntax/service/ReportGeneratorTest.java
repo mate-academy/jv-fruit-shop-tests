@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.util.FruitConstants.APPLE;
+import static core.basesyntax.util.FruitConstants.BANANA;
+import static core.basesyntax.util.FruitConstants.HEADER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -10,9 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
     private static ReportGenerator reportGenerator;
 
     @BeforeAll

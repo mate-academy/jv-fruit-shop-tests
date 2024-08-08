@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.util.FruitConstants.HEADER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
     private static final String FILE_PATH = "src/test/resources/finalReport.csv";
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static Writer writer;
 
     @BeforeAll

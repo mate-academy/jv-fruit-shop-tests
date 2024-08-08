@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.util.FruitConstants.APPLE;
+import static core.basesyntax.util.FruitConstants.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -43,14 +45,14 @@ public class ShopServiceTest {
     @Test
     void process_processValidTransactions_ok() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 10)
         );
         Map<String, Integer> expected = Map.of(
-                "apple", 110,
-                "banana", 20
+                APPLE, 110,
+                BANANA, 20
         );
         shopService.process(transactions);
         assertEquals(expected, Storage.getStorage());
@@ -59,10 +61,10 @@ public class ShopServiceTest {
     @Test
     void process_processTransactionsWithNullOperation() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(null, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 100),
+                new FruitTransaction(null, BANANA, 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 10)
         );
         assertThrows(RuntimeException.class,
                 () -> shopService.process(transactions));

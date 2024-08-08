@@ -1,5 +1,7 @@
 package core.basesyntax.db;
 
+import static core.basesyntax.util.FruitConstants.APPLE;
+import static core.basesyntax.util.FruitConstants.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,8 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
 
     @BeforeEach
     void setUp() {

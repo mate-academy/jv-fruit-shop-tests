@@ -32,8 +32,16 @@ class ReportGeneratorImplTest {
 
     @Test
     public void generateReport_withTransactions_ok() {
-        reportDao.updateReport(new FruitTransaction(Operation.PURCHASE, BANANA_FRUIT, BANANA_QUANTITY));
-        reportDao.updateReport(new FruitTransaction(Operation.PURCHASE, APPLE_FRUIT, APPLE_QUANTITY));
+        reportDao.updateReport(new FruitTransaction(
+                Operation.PURCHASE,
+                BANANA_FRUIT,
+                BANANA_QUANTITY)
+        );
+        reportDao.updateReport(new FruitTransaction(
+                Operation.PURCHASE,
+                APPLE_FRUIT,
+                APPLE_QUANTITY)
+        );
         String actual = reportGenerator.generateReport();
         assertEquals(REPORT, actual);
     }

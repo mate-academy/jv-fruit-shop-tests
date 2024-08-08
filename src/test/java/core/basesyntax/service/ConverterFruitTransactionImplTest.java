@@ -23,7 +23,7 @@ public class ConverterFruitTransactionImplTest {
 
     private ConverterFruitTransaction converterFruitTransaction;
     private List<String> readFruitTransaction;
-    private  List<FruitTransaction> fruitTransactions;
+    private List<FruitTransaction> fruitTransactions;
 
     @BeforeEach
     void setUp() {

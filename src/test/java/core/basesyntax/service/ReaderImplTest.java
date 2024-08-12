@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 public class ReaderImplTest {
     private static final String CORRECT_TRANSACTIONS_FILE_PATH =
-            "src/main/resources/transactions.csv";
+            "src/test/resources/transactions.csv";
     private static final String INCORRECT_TRANSACTIONS_FILE_PATH =
-            "src/main/resources/incorrect-transactions.csv";
+            "src/test/resources/incorrect-transactions.csv";
 
     private Reader reader;
 

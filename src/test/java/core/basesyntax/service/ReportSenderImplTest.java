@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 public class ReportSenderImplTest {
     private static final String CORRECT_REPORT_FILE_PATH =
-            "src/main/resources/report.csv";
+            "src/test/resources/transactions.csv";
     private static final String INCORRECT_REPORT_FILE_PATH =
             "incorrect-directory/report.csv";
     private static final String REPORT =
-            "fruit,quantity\n"
-            + "banana,152\n"
-            + "apple,90\n";
+            "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
 
     private ReportSender reportSender;
 
@@ -32,9 +32,12 @@ public class ReportSenderImplTest {
         Path path = Path.of(CORRECT_REPORT_FILE_PATH);
         Files.createDirectories(path.getParent());
         reportSender.send(CORRECT_REPORT_FILE_PATH, REPORT);
-        String actual = Files.readString(path);
-        assertTrue(actual.contains(REPORT));
-        Files.delete(path);
+        try {
+            String actual = Files.readString(path);
+            assertTrue(actual.contains(REPORT));
+        } finally {
+            Files.delete(path);
+        }
     }
 
     @Test

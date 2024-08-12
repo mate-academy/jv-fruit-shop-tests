@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReportSenderImplTest {
     private static final String CORRECT_REPORT_FILE_PATH =
-            "src/test/resources/transactions.csv";
+            "src/test/resources/report.csv";
     private static final String INCORRECT_REPORT_FILE_PATH =
             "incorrect-directory/report.csv";
     private static final String REPORT =
@@ -32,11 +32,11 @@ public class ReportSenderImplTest {
         Path path = Path.of(CORRECT_REPORT_FILE_PATH);
         Files.createDirectories(path.getParent());
         reportSender.send(CORRECT_REPORT_FILE_PATH, REPORT);
+        String actual = Files.readString(path);
         try {
-            String actual = Files.readString(path);
             assertTrue(actual.contains(REPORT));
         } finally {
-            Files.delete(path);
+            Files.deleteIfExists(path);
         }
     }
 

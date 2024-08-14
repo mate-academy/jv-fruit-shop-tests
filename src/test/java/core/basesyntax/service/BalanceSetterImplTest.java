@@ -27,12 +27,12 @@ public class BalanceSetterImplTest {
         balanceSetter = new BalanceSetterImpl(reportDao);
         fruitsTransactions = new ArrayList<>();
         FruitTransaction firstBalance = new FruitTransaction();
-        firstBalance.setFruit(BANANA_FRUIT);
+        firstBalance.setFruit(FruitConstants.BANANA);
         firstBalance.setQuantity(BANANA_QUANTITY_20);
         firstBalance.setOperation(Operation.BALANCE);
         fruitsTransactions.add(firstBalance);
         FruitTransaction secondBalance = new FruitTransaction();
-        secondBalance.setFruit(BANANA_FRUIT);
+        secondBalance.setFruit(FruitConstants.BANANA);
         secondBalance.setQuantity(BANANA_QUANTITY_21);
         secondBalance.setOperation(Operation.BALANCE);
         fruitsTransactions.add(secondBalance);

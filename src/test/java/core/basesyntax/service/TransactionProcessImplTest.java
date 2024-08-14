@@ -49,7 +49,7 @@ public class TransactionProcessImplTest {
     public void process_balanceTransaction_ok() {
         FruitTransaction balanceTransaction = new FruitTransaction();
         balanceTransaction.setOperation(Operation.BALANCE);
-        balanceTransaction.setFruit(BANANA_FRUIT);
+        balanceTransaction.setFruit(FruitConstants.BANANA);
         balanceTransaction.setQuantity(BANANA_BALANCE);
         assertDoesNotThrow(() -> transactionProcess.process(balanceTransaction));
     }
@@ -58,13 +58,13 @@ public class TransactionProcessImplTest {
     public void process_purchaseTransaction_ok() {
         FruitTransaction applePurchase = new FruitTransaction();
         applePurchase.setOperation(Operation.PURCHASE);
-        applePurchase.setFruit(APPLE_FRUIT);
+        applePurchase.setFruit(FruitConstants.APPLE);
         applePurchase.setQuantity(APPLE_QUANTITY_50);
         reportDao.updateReport(applePurchase);
 
         FruitTransaction apple = new FruitTransaction();
         apple.setOperation(Operation.PURCHASE);
-        apple.setFruit(APPLE_FRUIT);
+        apple.setFruit(FruitConstants.APPLE);
         apple.setQuantity(APPLE_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(apple));
     }
@@ -73,13 +73,13 @@ public class TransactionProcessImplTest {
     public void process_returnTransaction_ok() {
         FruitTransaction orangeReturn = new FruitTransaction();
         orangeReturn.setOperation(Operation.RETURN);
-        orangeReturn.setFruit(ORANGE_FRUIT);
+        orangeReturn.setFruit(FruitConstants.ORANGE);
         orangeReturn.setQuantity(ORANGE_QUANTITY_50);
         reportDao.updateReport(orangeReturn);
 
         FruitTransaction orange = new FruitTransaction();
         orange.setOperation(Operation.RETURN);
-        orange.setFruit(ORANGE_FRUIT);
+        orange.setFruit(FruitConstants.ORANGE);
         orange.setQuantity(ORANGE_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(orange));
     }
@@ -88,13 +88,13 @@ public class TransactionProcessImplTest {
     public void process_supplyTransaction_ok() {
         FruitTransaction bananaBalance = new FruitTransaction();
         bananaBalance.setOperation(Operation.BALANCE);
-        bananaBalance.setFruit(BANANA_FRUIT);
+        bananaBalance.setFruit(FruitConstants.BANANA);
         bananaBalance.setQuantity(BANANA_QUANTITY_50);
         reportDao.updateReport(bananaBalance);
 
         FruitTransaction banana = new FruitTransaction();
         banana.setOperation(Operation.BALANCE);
-        banana.setFruit(BANANA_FRUIT);
+        banana.setFruit(FruitConstants.BANANA);
         banana.setQuantity(BANANA_QUANTITY_30);
         assertDoesNotThrow(() -> transactionProcess.process(banana));
     }

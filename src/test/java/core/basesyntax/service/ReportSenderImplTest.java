@@ -33,11 +33,8 @@ public class ReportSenderImplTest {
         Files.createDirectories(path.getParent());
         reportSender.send(CORRECT_REPORT_FILE_PATH, REPORT);
         String actual = Files.readString(path);
-        try {
-            assertTrue(actual.contains(REPORT));
-        } finally {
-            Files.deleteIfExists(path);
-        }
+        Files.deleteIfExists(path);
+        assertTrue(actual.contains(REPORT));
     }
 
     @Test

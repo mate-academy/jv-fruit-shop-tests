@@ -34,12 +34,12 @@ class ReportGeneratorImplTest {
     public void generateReport_withTransactions_ok() {
         reportDao.updateReport(new FruitTransaction(
                 Operation.PURCHASE,
-                BANANA_FRUIT,
+                FruitConstants.BANANA,
                 BANANA_QUANTITY)
         );
         reportDao.updateReport(new FruitTransaction(
                 Operation.PURCHASE,
-                APPLE_FRUIT,
+                FruitConstants.APPLE,
                 APPLE_QUANTITY)
         );
         String actual = reportGenerator.generateReport();

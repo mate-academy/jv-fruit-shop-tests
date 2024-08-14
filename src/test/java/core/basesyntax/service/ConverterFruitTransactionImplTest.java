@@ -34,12 +34,12 @@ public class ConverterFruitTransactionImplTest {
         fruitTransactions = new ArrayList<>();
         FruitTransaction banana = new FruitTransaction();
         banana.setOperation(Operation.BALANCE);
-        banana.setFruit(BANANA_FRUIT);
+        banana.setFruit(FruitConstants.BANANA);
         banana.setQuantity(QUANTITY_BANANA);
         fruitTransactions.add(banana);
         FruitTransaction apple = new FruitTransaction();
         apple.setOperation(Operation.BALANCE);
-        apple.setFruit(APPLE_FRUIT);
+        apple.setFruit(FruitConstants.APPLE);
         apple.setQuantity(QUANTITY_APPLE);
         fruitTransactions.add(apple);
     }

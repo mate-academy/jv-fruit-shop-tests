@@ -14,6 +14,10 @@ public class ReturnOperation implements Operation {
 
     @Override
     public void proceed(Instruction instruction) {
+        if (instruction.getQuantity() < 0) {
+            throw new OperationException("Return can't work with negative value: "
+                    + instruction.getQuantity());
+        }
         if (!storageDao.contains(instruction.getFruitName())) {
             throw new OperationException("Fruit " + instruction.getFruitName()
                     + " doesn't exist");

@@ -18,6 +18,10 @@ public class BalanceOperation implements Operation {
             throw new OperationException("Fruit " + instruction.getFruitName()
                     + " already exist");
         }
+        if (instruction.getQuantity() < 0) {
+            throw new OperationException("Can't add " + instruction.getFruitName()
+                    + " with negative quantity");
+        }
         storageDao.add(instruction.getFruitName(), instruction.getQuantity());
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportGenerator;
+import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -16,7 +17,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String generateReport() {
         StringBuilder reportText = new StringBuilder(REPORT_HEAD_LINE);
-        for (Map.Entry<String, Integer> fruit : storageDao.getAll()) {
+        List<Map.Entry<String, Integer>> sortedFruits = storageDao.getAll()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .toList();
+        for (Map.Entry<String, Integer> fruit : sortedFruits) {
             String fruitName = fruit.getKey();
             int quantity = fruit.getValue();
             reportText.append(System.lineSeparator()).append(fruitName)

@@ -9,10 +9,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MyFileReaderImplTest {
-
     public static final String REPORT_FILE_PATH_TO_READ
-            = "src/main/resources/reportToRead.csv";
-    public static final String WRONG_PATH = "src/main/resources/fi/reportToRead.csv";
+            = "src/test/resources/reportToRead.csv";
+    public static final String WRONG_PATH
+            = "src/test/resources/fi/reportToRead.csv";
     private static List<String> report;
     private static MyFileReader fileReader;
 

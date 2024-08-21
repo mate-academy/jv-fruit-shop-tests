@@ -47,7 +47,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_ShouldThrowException_WhenLineHaveMoreThanThreeParameters() {
+    void convertReport_inputMoreThanThreeParameters_notOk() {
         List<String> wrong = List.of("1,2,3,4", "1,2,3,4");
         assertThrows(IllegalArgumentException.class, () -> dataConverter
                 .convertToTransaction(wrong));

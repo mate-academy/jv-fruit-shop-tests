@@ -14,6 +14,7 @@ import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -48,12 +49,16 @@ class ShopServiceImplTest {
         fruits = Storage.getFruits();
     }
 
+    @AfterEach
+    void afterEach() {
+        Storage.clear();
+    }
+
     @Test
     void process_withNoEmptyTransactions_ok() {
         assertEquals(fruits.size(), 0);
         shopService.process(fruitTransaction);
         assertEquals(fruits.size(), 2);
-        Storage.clear();
     }
 
     @Test

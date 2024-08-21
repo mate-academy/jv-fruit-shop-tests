@@ -9,12 +9,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MyFileWriterImplTest {
-
     private static final String REPORT_HEADER = "fruit,quantity" + System.lineSeparator();
-    private static final String REPORT_FILE_PATH_TO_WRITE
-            = ("src/main/resources/finalReport.csv");
-    private static final String WRONG_PATH
-            = ("src/main/resoces/fi/reportToWrite.csv");
+    private static final String REPORT_FILE_PATH_TO_WRITE = "src/test/resources/finalReport.csv";
+    private static final String WRONG_PATH = "src/test/resources/fi/reportToWrite.csv";
     private static final int DEFAULT_QUANTITY = 10;
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";

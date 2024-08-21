@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class StringTransactionConverterImplTest {
     private List<String> stringTransactions;
-    private final StringTransactionConverter stringTransactionConverter = new StringTransactionConverterImpl();;
+    private final StringTransactionConverter stringTransactionConverter =
+            new StringTransactionConverterImpl();
 
     @BeforeEach
     void init() {

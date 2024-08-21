@@ -1,14 +1,14 @@
 package core.basesyntax.transactionsservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpL;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OperationPurchaseTest {
     private Transaction transaction;

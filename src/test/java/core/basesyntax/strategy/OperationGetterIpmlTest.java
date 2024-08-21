@@ -6,11 +6,11 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpL;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.transactionsservice.OperationHandler;
 import core.basesyntax.transactionsservice.OperationBalance;
-import core.basesyntax.transactionsservice.OperationSupply;
-import core.basesyntax.transactionsservice.OperationReturn;
+import core.basesyntax.transactionsservice.OperationHandler;
 import core.basesyntax.transactionsservice.OperationPurchase;
+import core.basesyntax.transactionsservice.OperationReturn;
+import core.basesyntax.transactionsservice.OperationSupply;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 class OperationGetterIpmlTest {
     private static FruitStorageDao fruitStorageDao = new FruitStorageDaoImpL();
-    Transaction transaction;
     private static OperationGetter operationGetter;
-    OperationHandler operationHandler;
+    private Transaction transaction;
+    private OperationHandler operationHandler;
 
     @BeforeAll
     static void init() {
@@ -41,6 +41,7 @@ class OperationGetterIpmlTest {
         transaction = new Transaction(Transaction.TransactionType.BALANCE,
                 new Fruit("apple"),100);
         operationHandler = new OperationBalance(fruitStorageDao);
-        assertEquals(operationHandler.getClass(), operationGetter.getOperation(transaction).getClass());
+        assertEquals(operationHandler.getClass(),
+                operationGetter.getOperation(transaction).getClass());
     }
 }

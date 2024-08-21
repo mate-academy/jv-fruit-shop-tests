@@ -59,5 +59,6 @@ public class FruitShop {
 
         CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
         csvFileWriter.writeToFile(report, reportFileName);
+
     }
 }

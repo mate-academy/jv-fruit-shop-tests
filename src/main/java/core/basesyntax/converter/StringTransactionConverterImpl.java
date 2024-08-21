@@ -2,7 +2,6 @@ package core.basesyntax.converter;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +34,6 @@ public class StringTransactionConverterImpl implements StringTransactionConverte
                 throw new RuntimeException("transaction amount can not be less than 0");
             }
             transaction.setAmount(Integer.parseInt(fields[2]));
-//            Transaction transaction = new Transaction(Transaction.TransactionType
-//                    .getTransactionTypeByCode(fields[0]), fruit, Integer.parseInt(fields[2]));
             transactions.add(transaction);
         }
         return transactions;

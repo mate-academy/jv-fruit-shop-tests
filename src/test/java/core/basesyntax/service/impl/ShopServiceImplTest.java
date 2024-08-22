@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
@@ -19,8 +21,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
     private static List<FruitTransaction> fruitTransaction;
     private static List<FruitTransaction> fruitEmptyTransaction;
     private static ShopService shopService;

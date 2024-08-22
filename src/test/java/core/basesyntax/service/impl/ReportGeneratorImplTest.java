@@ -1,5 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.BANANA;
+import static core.basesyntax.TestConstants.DEFAULT_QUANTITY;
+import static core.basesyntax.TestConstants.REPORT_HEADER;
+import static core.basesyntax.TestConstants.ZERO_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
@@ -10,11 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static final String REPORT_HEADER = "fruit,quantity" + System.lineSeparator();
-    private static final int DEFAULT_QUANTITY = 10;
-    private static final int ZERO_QUANTITY = 0;
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
     private static ReportGenerator reportGenerator;
     private StringBuilder stringBuilder;
 

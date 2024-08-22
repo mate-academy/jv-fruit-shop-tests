@@ -1,5 +1,9 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.DEFAULT_QUANTITY;
+import static core.basesyntax.TestConstants.NEGATIVE_QUANTITY;
+import static core.basesyntax.TestConstants.ZERO_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,10 +15,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private static final String APPLE = "apple";
-    private static final int DEFAULT_QUANTITY = 10;
-    private static final int ZERO_QUANTITY = 0;
-    private static final int NEGATIVE_QUANTITY = -1;
     private static OperationHandler operationHandler;
 
     @BeforeAll

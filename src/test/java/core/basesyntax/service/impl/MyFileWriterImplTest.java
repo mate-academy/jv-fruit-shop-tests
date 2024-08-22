@@ -1,5 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.BANANA;
+import static core.basesyntax.TestConstants.DEFAULT_QUANTITY;
+import static core.basesyntax.TestConstants.REPORT_FILE_PATH_TO_WRITE;
+import static core.basesyntax.TestConstants.REPORT_HEADER;
+import static core.basesyntax.TestConstants.WRONG_PATH;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -9,12 +15,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MyFileWriterImplTest {
-    private static final String REPORT_HEADER = "fruit,quantity" + System.lineSeparator();
-    private static final String REPORT_FILE_PATH_TO_WRITE = "src/test/resources/finalReport.csv";
-    private static final String WRONG_PATH = "src/test/resources/fi/reportToWrite.csv";
-    private static final int DEFAULT_QUANTITY = 10;
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
     private static MyFileWriter fileWriter;
 
     @BeforeAll

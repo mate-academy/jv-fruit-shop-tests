@@ -27,6 +27,6 @@ class DataConverterImplTest {
     void convertToTransaction_invalidData_throwsException() {
         List<String> data = List.of("invalid,data");
         assertThrows(IllegalArgumentException.class, () -> 
-            dataConverter.convertToTransaction(data));
+                dataConverter.convertToTransaction(data));
     }
 }

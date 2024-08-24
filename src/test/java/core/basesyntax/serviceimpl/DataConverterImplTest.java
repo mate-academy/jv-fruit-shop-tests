@@ -21,6 +21,7 @@ public class DataConverterImplTest {
             FruitTransaction.Operation.BALANCE,
             "banana",
             20);
+    private static final int FIRST_TRANSACTION_INDEX = 0;
     private static final List<String> EMPTY_INPUT = List.of();
     private static DataConverterImpl dataConverter;
 
@@ -33,9 +34,12 @@ public class DataConverterImplTest {
     void convert_validInput_Ok() {
         List<FruitTransaction> actual = dataConverter.convert(FILE_DATA);
         assertEquals(FILE_DATA.size(), actual.size());
-        assertEquals(FIRST_TRANSACTION.getFruit(), actual.getFirst().getFruit());
-        assertEquals(FIRST_TRANSACTION.getQuantity(), actual.getFirst().getQuantity());
-        assertEquals(FIRST_TRANSACTION.getOperation(), actual.getFirst().getOperation());
+        assertEquals(FIRST_TRANSACTION.getFruit(),
+                actual.get(FIRST_TRANSACTION_INDEX).getFruit());
+        assertEquals(FIRST_TRANSACTION.getQuantity(),
+                actual.get(FIRST_TRANSACTION_INDEX).getQuantity());
+        assertEquals(FIRST_TRANSACTION.getOperation(),
+                actual.get(FIRST_TRANSACTION_INDEX).getOperation());
     }
 
     @Test

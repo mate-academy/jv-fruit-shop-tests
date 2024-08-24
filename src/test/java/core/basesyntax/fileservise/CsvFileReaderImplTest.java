@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
-    private static CsvFileReader csvFileReader = new CsvFileReaderImpl();
+    private static final CsvFileReader csvFileReader = new CsvFileReaderImpl();
     private static String fileName = "src/main/java/core/basesyntax/csvFiles/data.csv";
-    private static List<String> expectedResult = new ArrayList<>();
+    private static final List<String> expectedResult = new ArrayList<>();
 
     @Test
     void wrongFileName() {

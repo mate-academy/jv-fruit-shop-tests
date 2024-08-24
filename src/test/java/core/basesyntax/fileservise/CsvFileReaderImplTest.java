@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
     private static final CsvFileReader csvFileReader = new CsvFileReaderImpl();
-    private static String fileName = "src/test/java/core/basesyntax/csvFiles/data.csv";
+    private static String fileName = "src/test/java/core/basesyntax/csvfiles/data.csv";
     private static final List<String> expectedResult = new ArrayList<>();
 
     @Test

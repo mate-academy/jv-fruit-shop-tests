@@ -28,7 +28,6 @@ class CsvFileReaderImplTest {
 
     @Test
     void readValidInputFileNamePath() {
-        expectedResult.add("type,fruit,quantity");
         expectedResult.add("b,banana,20");
         expectedResult.add("b,apple,100");
         expectedResult.add("s,banana,100");

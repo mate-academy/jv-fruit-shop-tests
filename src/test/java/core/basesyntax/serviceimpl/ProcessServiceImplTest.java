@@ -62,7 +62,7 @@ public class ProcessServiceImplTest {
     }
 
     @Test
-    void process_validInputAddedToStorage_Ok() {
+    void process_validInputAddedToStorage_ok() {
         processService.process(TRANSACTIONS_TO_PROCESS);
         assertEquals(EXPECTED_BANANA_RESULT, storage.get(BANANA_TRANSACTION_NAME));
         assertEquals(EXPECTED_APPLE_RESULT, storage.get(APPLE_TRANSACTION_NAME));

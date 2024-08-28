@@ -17,11 +17,32 @@ public class DataConverterImplTest {
             "p,apple,20",
             "p,banana,5",
             "s,banana,50");
-    private static final FruitTransaction FIRST_TRANSACTION = new FruitTransaction(
-            FruitTransaction.Operation.BALANCE,
-            "banana",
-            20);
-    private static final int FIRST_TRANSACTION_INDEX = 0;
+    private static final List<FruitTransaction> EXPECTED_CONVERTER_RESULTS = List.of(
+            new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                    "banana",
+                    20),
+            new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                    "apple",
+                    100),
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                    "banana",
+                    100),
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                    "banana",
+                    13),
+            new FruitTransaction(FruitTransaction.Operation.RETURN,
+                    "apple",
+                    10),
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                    "apple",
+                    20),
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                    "banana",
+                    5),
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                    "banana",
+                    50)
+    );
     private static final List<String> EMPTY_INPUT = List.of();
     private static DataConverterImpl dataConverter;
 
@@ -31,19 +52,20 @@ public class DataConverterImplTest {
     }
 
     @Test
-    void convert_validInput_Ok() {
-        List<FruitTransaction> actual = dataConverter.convert(FILE_DATA);
-        assertEquals(FILE_DATA.size(), actual.size());
-        assertEquals(FIRST_TRANSACTION.getFruit(),
-                actual.get(FIRST_TRANSACTION_INDEX).getFruit());
-        assertEquals(FIRST_TRANSACTION.getQuantity(),
-                actual.get(FIRST_TRANSACTION_INDEX).getQuantity());
-        assertEquals(FIRST_TRANSACTION.getOperation(),
-                actual.get(FIRST_TRANSACTION_INDEX).getOperation());
+    void convert_validInput_ok() {
+        List<FruitTransaction> actualConverterResults = dataConverter.convert(FILE_DATA);
+        assertEquals(FILE_DATA.size(), actualConverterResults.size());
+        for (int i = 0; i < actualConverterResults.size(); i++) {
+            FruitTransaction expected = EXPECTED_CONVERTER_RESULTS.get(i);
+            FruitTransaction actual = actualConverterResults.get(i);
+            assertEquals(expected.getOperation(), actual.getOperation());
+            assertEquals(expected.getQuantity(), actual.getQuantity());
+            assertEquals(expected.getFruit(), actual.getFruit());
+        }
     }
 
     @Test
-    void convert_emptyInput_NotOk() {
+    void convert_emptyInput_notOk() {
         List<FruitTransaction> actual = dataConverter.convert(EMPTY_INPUT);
         assertEquals(EMPTY_INPUT.size(), actual.size());
         assertTrue(actual.isEmpty());

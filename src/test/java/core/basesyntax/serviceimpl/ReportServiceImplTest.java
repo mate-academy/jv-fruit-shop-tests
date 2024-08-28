@@ -18,7 +18,6 @@ public class ReportServiceImplTest {
                     "apple",
                     100)
     );
-    // Do not change, fails when using text blocks due to line separator differences
     private static final String FILLED_REPORT = "fruit,quantity"
             + System.lineSeparator()
             + "banana,20"
@@ -38,13 +37,13 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_emptyStorage_Ok() {
+    void createReport_emptyStorage_ok() {
         String actual = reportService.createReport();
         assertEquals(EMPTY_REPORT, actual);
     }
 
     @Test
-    void createReport_filledStorage_Ok() {
+    void createReport_filledStorage_ok() {
         for (FruitTransaction transaction : TRANSACTIONS_TO_ADD) {
             Storage.storage.put(transaction.getFruit(), transaction.getQuantity());
         }

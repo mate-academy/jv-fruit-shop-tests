@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,21 +30,26 @@ public class FileReaderImplTest {
         fileReader = new FileReaderImpl();
     }
 
+    @AfterAll
+    static void afterAll() throws IOException {
+        Files.delete(Path.of(FILE_PATH));
+    }
+
     @Test
-    void read_validInput_Ok() {
+    void read_validInput_ok() {
         List<String> actual = fileReader.read(FILE_PATH);
         assertEquals(EXPECTED_FILE_CONTENT, actual);
     }
 
     @Test
-    void read_invalidInput_NotOk() {
+    void read_invalidInput_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(INVALID_FILE_PATH);
         });
     }
 
     @Test
-    void read_nullInput_NotOk() {
+    void read_nullInput_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(null);
         });

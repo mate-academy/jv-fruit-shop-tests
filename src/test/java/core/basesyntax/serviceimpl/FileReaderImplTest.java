@@ -22,11 +22,21 @@ public class FileReaderImplTest {
             "p,apple,20",
             "p,banana,5",
             "s,banana,50");
+    private static final String FILE_CONTENT_SETUP = """
+            b,banana,20
+            b,apple,100
+            s,banana,100
+            p,banana,13
+            r,apple,10
+            p,apple,20
+            p,banana,5
+            s,banana,50
+            """;
     private static FileReaderImpl fileReader;
 
     @BeforeAll
     static void beforeAll() throws IOException {
-        Files.write(Path.of(FILE_PATH), EXPECTED_FILE_CONTENT);
+        Files.write(Path.of(FILE_PATH), FILE_CONTENT_SETUP.getBytes());
         fileReader = new FileReaderImpl();
     }
 

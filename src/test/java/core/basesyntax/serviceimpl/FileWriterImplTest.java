@@ -31,7 +31,7 @@ public class FileWriterImplTest {
 
     @AfterAll
     static void afterAll() throws IOException {
-        Files.delete(Path.of(FILE_PATH));
+        Files.deleteIfExists(Path.of(FILE_PATH));
     }
 
     @Test

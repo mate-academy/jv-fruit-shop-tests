@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private static final String FILE_PATH = "src/test/resources/input.csv";
+    private static final String FILE_PATH = "jv-fruit-shop-tests/src/test/resources/input.csv";
     private static final String INVALID_FILE_PATH = "input.csv";
     private static final List<String> EXPECTED_FILE_CONTENT = List.of("b,banana,20",
             "b,apple,100",

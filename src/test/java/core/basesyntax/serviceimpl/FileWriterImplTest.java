@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
     private static final String FILE_PATH =
-            "jv-fruit-shop-tests/src/test/resources/output.csv";
+            "src/test/resources/output.csv";
     private static final String WRITE_INPUT = """
             fruit,quantity
             banana,152

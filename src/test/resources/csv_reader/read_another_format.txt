@@ -1,0 +1,7 @@
+this is a file, that is used
+to test the CsvReaderImpl ability in
+reading another types of files.
+Yes, it will skip the first line too.
+As for all, it is meant to open .csv
+and it's behaviour is unpredictable
+for another file types.

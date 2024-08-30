@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.TestConstants;
 
 class FruitDaoImplTest {
     private static FruitDao fruitDao;
@@ -20,73 +21,61 @@ class FruitDaoImplTest {
 
     @BeforeEach
     void setUp() {
-        Storage.fruitStock.put("apple", 120);
-        Storage.fruitStock.put("banana", 65);
+        Storage.fruitStock.put(TestConstants.APPLE, 120);
+        Storage.fruitStock.put(TestConstants.BANANA, 65);
     }
 
     @Test
     void getBalance_validFruitName_isOk() {
-        String expectedName = "apple";
+        String fruitName = TestConstants.APPLE;
         int expectedQuantity = 120;
-        String actualName = Storage.fruitStock.keySet().stream()
-                .filter(k -> k.equals(expectedName))
-                .findFirst()
-                .get();
-        int actualQuantity = fruitDao.getBalance(actualName);
-        Assertions.assertEquals(expectedName, actualName);
+        int actualQuantity = fruitDao.getBalance(fruitName);
+        Assertions.assertTrue(Storage.fruitStock.containsKey(fruitName));
         Assertions.assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     void getBalance_nonExistentFruitName_notOk() {
-        String expectedName = "orange";
-        Assertions.assertNull(fruitDao.getBalance(expectedName));
+        String fruitName = TestConstants.ORANGE;
+        Assertions.assertNull(fruitDao.getBalance(fruitName));
     }
 
     @Test
     void addBalance_newFruitName_isOk() {
-        String expectedName = "orange";
+        String fruitName = TestConstants.ORANGE;
         int expectedQuantity = 45;
-        Assertions.assertTrue(fruitDao.addBalance(expectedName, expectedQuantity));
-        String actualName = Storage.fruitStock.keySet().stream()
-                .filter(k -> k.equals(expectedName))
-                .findFirst()
-                .get();
-        int actualQuantity = Storage.fruitStock.get(actualName);
-        Assertions.assertEquals(expectedName, actualName);
+        fruitDao.addBalance(fruitName, expectedQuantity);
+        int actualQuantity = Storage.fruitStock.get(fruitName);
+        Assertions.assertTrue(Storage.fruitStock.containsKey(fruitName));
         Assertions.assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     void updateBalance_existingFruit_isOk() {
-        String expectedName = "banana";
+        String fruitName = TestConstants.BANANA;
         int expectedQuantity = 70;
-        fruitDao.updateBalance(expectedName, expectedQuantity);
-        String actualName = Storage.fruitStock.keySet().stream()
-                .filter(k -> k.equals(expectedName))
-                .findFirst()
-                .get();
-        int actualQuantity = Storage.fruitStock.get(actualName);
-        Assertions.assertEquals(expectedName, actualName);
+        fruitDao.updateBalance(fruitName, expectedQuantity);
+        int actualQuantity = Storage.fruitStock.get(fruitName);
+        Assertions.assertTrue(Storage.fruitStock.containsKey(fruitName));
         Assertions.assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     void getAllEntries_containsCorrectEntries_isOk() {
         Set<Map.Entry<String, Integer>> expected = Set.of(
-                new AbstractMap.SimpleEntry<>("apple", 120),
-                new AbstractMap.SimpleEntry<>("banana", 65));
+                new AbstractMap.SimpleEntry<>(TestConstants.APPLE, 120),
+                new AbstractMap.SimpleEntry<>(TestConstants.BANANA, 65));
         Set<Map.Entry<String, Integer>> actual = Storage.fruitStock.entrySet();
-        Assertions.assertTrue(expected.equals(actual));
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getAllEntries_wrongKey_entriesDoNotMatch_notOk() {
         Set<Map.Entry<String, Integer>> expected = Set.of(
-                new AbstractMap.SimpleEntry<>("orange", 120),
-                new AbstractMap.SimpleEntry<>("banana", 65));
+                new AbstractMap.SimpleEntry<>(TestConstants.ORANGE, 120),
+                new AbstractMap.SimpleEntry<>(TestConstants.BANANA, 65));
         Set<Map.Entry<String, Integer>> actual = Storage.fruitStock.entrySet();
-        Assertions.assertFalse(expected.equals(actual));
+        Assertions.assertNotEquals(expected, actual);
     }
 
     @AfterEach

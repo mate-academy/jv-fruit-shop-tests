@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.DataConverter;
+import util.TestConstants;
 
 class DataConverterImplTest {
     private static DataConverter dataConverter;
@@ -21,12 +22,12 @@ class DataConverterImplTest {
 
     @BeforeEach
     void setUp() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13",
-                "r,apple,4");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_3,
+                TestConstants.REPORT_LINE_4,
+                TestConstants.REPORT_LINE_5);
     }
 
     @Test
@@ -45,71 +46,71 @@ class DataConverterImplTest {
 
     @Test
     void convertToTransaction_reportOnlyWithHeaders_notOk() {
-        inputReport = List.of("type,fruit,quantity");
+        inputReport = List.of(TestConstants.HEADER);
         Assertions.assertThrows(ValidationException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_incorrectDataLength_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,20",
-                "b,apple");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.INVALID_REPORT_LINE_LENGTH,
+                TestConstants.REPORT_LINE_2);
         Assertions.assertThrows(ValidationException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_nullFruitName_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,null,100",
-                "s,banana,100",
-                "p,banana,13");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_NULL_FRUIT,
+                TestConstants.REPORT_LINE_3,
+                TestConstants.REPORT_LINE_4);
         Assertions.assertThrows(ValidationException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_nullOperationName_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "null,banana,100",
-                "p,banana,13");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_NULL_OPERATION,
+                TestConstants.REPORT_LINE_4);
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_invalidOperationName_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "BALANCE,banana,13");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_3,
+                TestConstants.REPORT_LINE_INVALID_OPERATION);
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_nullQuantity_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,null");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_3,
+                TestConstants.REPORT_LINE_NULL_QUANTITY);
         Assertions.assertThrows(ValidationException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
 
     @Test
     void convertToTransaction_negativeQuantity_notOk() {
-        inputReport = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,-100",
-                "p,banana,13");
+        inputReport = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_NEGATIVE_QUANTITY,
+                TestConstants.REPORT_LINE_4);
         Assertions.assertThrows(ValidationException.class,
                 () -> dataConverter.convertToTransaction(inputReport));
     }
@@ -117,11 +118,11 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_validInput_isOk() {
         List<FruitTransaction> expected = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 4)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, TestConstants.BANANA, 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, TestConstants.APPLE, 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, TestConstants.BANANA, 100),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, TestConstants.BANANA, 20),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, TestConstants.APPLE, 4)
         );
         Assertions.assertEquals(expected, dataConverter.convertToTransaction(inputReport));
     }

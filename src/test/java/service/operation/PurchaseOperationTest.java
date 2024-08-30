@@ -1,55 +1,32 @@
 package service.operation;
 
-import dao.FruitDao;
+import dao.FruitDaoImpl;
 import db.Storage;
 import exception.ValidationException;
-import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.TestConstants;
 
 class PurchaseOperationTest {
     private static OperationHandler operationHandler;
 
     @BeforeAll
     static void beforeAll() {
-        operationHandler = new PurchaseOperation(new FruitDao() {
-            @Override
-            public Integer getBalance(String fruit) {
-                return Storage.fruitStock.get(fruit);
-            }
-
-            @Override
-            public boolean addBalance(String fruit, int quantity) {
-                Storage.fruitStock.put(fruit, quantity);
-                return Storage.fruitStock.containsKey(fruit)
-                        && Storage.fruitStock.get(fruit) == quantity;
-            }
-
-            @Override
-            public void updateBalance(String fruit, int quantity) {
-                Storage.fruitStock.put(fruit, quantity);
-            }
-
-            @Override
-            public Set<Map.Entry<String, Integer>> getAllEntries() {
-                return Storage.fruitStock.entrySet();
-            }
-        });
+        operationHandler = new PurchaseOperation(new FruitDaoImpl());
     }
 
     @BeforeEach
     void setUp() {
-        Storage.fruitStock.put("apple", 120);
-        Storage.fruitStock.put("banana", 120);
+        Storage.fruitStock.put(TestConstants.APPLE, 120);
+        Storage.fruitStock.put(TestConstants.BANANA, 120);
     }
 
     @Test
     void handle_validDataPurchase_isOk() {
-        String fruitName = "apple";
+        String fruitName = TestConstants.APPLE;
         int buyerWantsToPurchase = 50;
         operationHandler.handle(fruitName, buyerWantsToPurchase);
         int expectedFruitQuantity = 70;
@@ -59,19 +36,17 @@ class PurchaseOperationTest {
 
     @Test
     void handle_purchaseMoreThanAvailable_notOk() {
-        String fruitName = "apple";
         int quantityToPurchase = 200;
         Assertions.assertThrows(ValidationException.class,
-                () -> operationHandler.handle(fruitName, quantityToPurchase));
+                () -> operationHandler.handle(TestConstants.APPLE, quantityToPurchase));
     }
 
     @Test
     void handle_wrongFruitName_isOk() {
-        String validFruitName = "banana";
         int quantityToPurchase = 30;
-        operationHandler.handle("apple", quantityToPurchase);
+        operationHandler.handle(TestConstants.APPLE, quantityToPurchase);
         int expectedQuantity = 120;
-        int actualQuantity = Storage.fruitStock.get(validFruitName);
+        int actualQuantity = Storage.fruitStock.get(TestConstants.BANANA);
         Assertions.assertEquals(expectedQuantity, actualQuantity);
     }
 

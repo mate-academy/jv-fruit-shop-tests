@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.ValidatorService;
+import util.TestConstants;
 
 class DataValidatorServiceImplTest {
     private static ValidatorService validatorService;
@@ -19,12 +20,15 @@ class DataValidatorServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        data = new String[]{"b", "banana", "20"};
+        data = new String[]{TestConstants.BALANCE_OPERATION_COD,
+                TestConstants.BANANA,
+                TestConstants.QUANTITY_20
+        };
     }
 
     @Test
     void validate_incompleteData_notOk() {
-        data = new String[]{"b", "banana"};
+        data = new String[]{TestConstants.BALANCE_OPERATION_COD, TestConstants.BANANA};
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 
@@ -35,31 +39,46 @@ class DataValidatorServiceImplTest {
 
     @Test
     void validate_blankFruitName_notOk() {
-        data = new String[]{"b", "   ", "20"};
+        data = new String[]{TestConstants.BALANCE_OPERATION_COD,
+                TestConstants.EMPTY_VALUE,
+                TestConstants.QUANTITY_20
+        };
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 
     @Test
     void validate_nullFruitName_notOk() {
-        data = new String[]{"b", "null", "35"};
+        data = new String[]{TestConstants.BALANCE_OPERATION_COD,
+                TestConstants.NULL_FRUIT_NAME,
+                TestConstants.QUANTITY_35
+        };
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 
     @Test
     void validate_blankQuantity_notOk() {
-        data = new String[]{"b", "apple", "  "};
+        data = new String[]{TestConstants.BALANCE_OPERATION_COD,
+                TestConstants.APPLE,
+                TestConstants.EMPTY_VALUE
+        };
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 
     @Test
     void validate_nonNumericQuantity_notOk() {
-        data = new String[]{"p", "apple", "juice"};
+        data = new String[]{TestConstants.PURCHASE_OPERATION_COD,
+                TestConstants.APPLE,
+                TestConstants.WRONG_NUMBER_FORMAT
+        };
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 
     @Test
     void validate_negativeQuantity_notOk() {
-        data = new String[]{"s", "apple", "-100"};
+        data = new String[]{TestConstants.SUPPLY_OPERATION_COD,
+                TestConstants.APPLE,
+                TestConstants.NEGATIVE_QUANTITY
+        };
         Assertions.assertThrows(ValidationException.class, () -> validatorService.validate(data));
     }
 

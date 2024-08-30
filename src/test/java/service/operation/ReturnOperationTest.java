@@ -1,54 +1,31 @@
 package service.operation;
 
-import dao.FruitDao;
+import dao.FruitDaoImpl;
 import db.Storage;
-import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.TestConstants;
 
 class ReturnOperationTest {
     private static OperationHandler operationHandler;
 
     @BeforeAll
     static void beforeAll() {
-        operationHandler = new ReturnOperation(new FruitDao() {
-            @Override
-            public Integer getBalance(String fruit) {
-                return Storage.fruitStock.get(fruit);
-            }
-
-            @Override
-            public boolean addBalance(String fruit, int quantity) {
-                Storage.fruitStock.put(fruit, quantity);
-                return Storage.fruitStock.containsKey(fruit)
-                        && Storage.fruitStock.get(fruit) == quantity;
-            }
-
-            @Override
-            public void updateBalance(String fruit, int quantity) {
-                Storage.fruitStock.put(fruit, quantity);
-            }
-
-            @Override
-            public Set<Map.Entry<String, Integer>> getAllEntries() {
-                return Storage.fruitStock.entrySet();
-            }
-        });
+        operationHandler = new ReturnOperation(new FruitDaoImpl());
     }
 
     @BeforeEach
     void setUp() {
-        Storage.fruitStock.put("apple", 120);
-        Storage.fruitStock.put("banana", 120);
+        Storage.fruitStock.put(TestConstants.APPLE, 120);
+        Storage.fruitStock.put(TestConstants.BANANA, 120);
     }
 
     @Test
     void handle_validReturn_isOk() {
-        String fruitName = "banana";
+        String fruitName = TestConstants.BANANA;
         int quantityToReturn = 50;
         operationHandler.handle(fruitName, quantityToReturn);
         int expectedQuantity = 170;
@@ -58,7 +35,7 @@ class ReturnOperationTest {
 
     @Test
     void handle_invalidQuantityReturn_notOk() {
-        String fruitName = "apple";
+        String fruitName = TestConstants.APPLE;
         int quantityToReturn = 70;
         operationHandler.handle(fruitName, quantityToReturn);
         int expectedFruitQuantity = 70;

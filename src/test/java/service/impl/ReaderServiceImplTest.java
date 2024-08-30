@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.ReaderService;
+import util.TestConstants;
 
 class ReaderServiceImplTest {
     private static ReaderService readerService;
@@ -20,17 +21,17 @@ class ReaderServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        expectedData = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13");
+        expectedData = List.of(TestConstants.HEADER,
+                TestConstants.REPORT_LINE_1,
+                TestConstants.REPORT_LINE_2,
+                TestConstants.REPORT_LINE_3,
+                TestConstants.REPORT_LINE_4);
     }
 
     @Test
     void read_invalidPath_notOk() {
-        String wrongPath = "src/test/resources/ToRead.csv";
-        Assertions.assertThrows(ValidationException.class, () -> readerService.read(wrongPath));
+        Assertions.assertThrows(ValidationException.class,
+                () -> readerService.read(TestConstants.WRONG_PATH_TO_READ));
     }
 
     @Test
@@ -40,14 +41,13 @@ class ReaderServiceImplTest {
 
     @Test
     void read_validPath_isOk() {
-        String rightPath = "src/test/resources/validReportToRead.csv";
-        Assertions.assertDoesNotThrow(() -> readerService.read(rightPath));
+        Assertions.assertDoesNotThrow(() -> readerService.read(TestConstants.RIGHT_PATH_TO_READ));
     }
 
     @Test
     void read_validData_isOk() {
-        String rightPath = "src/test/resources/validReportToRead.csv";
-        Assertions.assertLinesMatch(expectedData, readerService.read(rightPath));
+        Assertions.assertLinesMatch(expectedData,
+                readerService.read(TestConstants.RIGHT_PATH_TO_READ));
     }
 
     @AfterEach

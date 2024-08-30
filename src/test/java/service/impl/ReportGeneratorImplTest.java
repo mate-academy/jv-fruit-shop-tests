@@ -1,58 +1,38 @@
 package service.impl;
 
 import dao.FruitDao;
+import dao.FruitDaoImpl;
 import db.Storage;
-import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.ReportGenerator;
+import util.TestConstants;
 
 class ReportGeneratorImplTest {
-    private static ReportGenerator reportGenerator;
     private static FruitDao fruitDao;
+    private static ReportGenerator reportGenerator;
 
     @BeforeAll
     static void beforeAll() {
-        fruitDao = new FruitDao() {
-            @Override
-            public Integer getBalance(String fruit) {
-                return 0;
-            }
-
-            @Override
-            public boolean addBalance(String fruit, int quantity) {
-                return false;
-            }
-
-            @Override
-            public void updateBalance(String fruit, int quantity) {
-
-            }
-
-            @Override
-            public Set<Map.Entry<String, Integer>> getAllEntries() {
-                return Storage.fruitStock.entrySet();
-            }
-        };
+        fruitDao = new FruitDaoImpl();
         reportGenerator = new ReportGeneratorImpl(fruitDao);
     }
 
     @BeforeEach
     void setUp() {
-        Storage.fruitStock.put("banana", 20);
-        Storage.fruitStock.put("apple", 100);
+        Storage.fruitStock.put(TestConstants.BANANA, 20);
+        Storage.fruitStock.put(TestConstants.APPLE, 100);
     }
 
     @Test
     void getReport_validData_isOk() {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator())
-                .append("banana,20").append(System.lineSeparator())
-                .append("apple,100");
+        report.append(TestConstants.REPORT_HEADER).append(System.lineSeparator())
+                .append(TestConstants.BANANA_BALANCE).append(System.lineSeparator())
+                .append(TestConstants.APPLE_BALANCE);
         String expected = report.toString();
         String actual = reportGenerator.getReport();
         Assertions.assertEquals(expected, actual);
@@ -60,11 +40,11 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_incorrectData_isOk() {
-        Storage.fruitStock.put("", 20);
+        Storage.fruitStock.put(TestConstants.EMPTY_VALUE, 20);
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator())
-                .append("banana,20").append(System.lineSeparator())
-                .append("apple,100");
+        report.append(TestConstants.HEADER).append(System.lineSeparator())
+                .append(TestConstants.BANANA_BALANCE).append(System.lineSeparator())
+                .append(TestConstants.APPLE_BALANCE);
         String expected = report.toString();
         String actual = reportGenerator.getReport();
         Assertions.assertNotEquals(expected, actual);

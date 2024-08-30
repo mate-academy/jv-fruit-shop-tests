@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.WriterService;
+import util.TestConstants;
 
 class WriterServiceImplTest {
     private static WriterService writerService;
@@ -20,9 +21,9 @@ class WriterServiceImplTest {
     @BeforeEach
     void setUp() {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator())
-                .append("banana,20").append(System.lineSeparator())
-                .append("apple,100");
+        report.append(TestConstants.HEADER).append(System.lineSeparator())
+                .append(TestConstants.BANANA_BALANCE).append(System.lineSeparator())
+                .append(TestConstants.APPLE_BALANCE);
         dataToWrite = report.toString();
     }
 
@@ -34,15 +35,14 @@ class WriterServiceImplTest {
 
     @Test
     void write_nullDataToWrite_notOk() {
-        String rightPath = "src/test/resources/validReportToWrite.csv";
         Assertions.assertThrows(ValidationException.class,
-                () -> writerService.write(null, rightPath));
+                () -> writerService.write(null, TestConstants.RIGHT_PATH_TO_WRITE));
     }
 
     @Test
     void write_validParameters_isOk() {
-        String rightPath = "src/test/resources/validReportToWrite.csv";
-        Assertions.assertDoesNotThrow(() -> writerService.write(dataToWrite, rightPath));
+        Assertions.assertDoesNotThrow(() -> writerService.write(dataToWrite,
+                TestConstants.RIGHT_PATH_TO_WRITE));
     }
 
     @AfterEach

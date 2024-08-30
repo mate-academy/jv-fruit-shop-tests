@@ -14,6 +14,7 @@ import service.ShopService;
 import service.operation.BalanceOperation;
 import service.operation.OperationHandler;
 import strategy.OperationStrategyImpl;
+import util.TestConstants;
 
 class ShopServiceImplTest {
     private static ShopService shopService;
@@ -33,11 +34,11 @@ class ShopServiceImplTest {
 
     @Test
     void process_validTransaction_isOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 20);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, TestConstants.BANANA, 20);
         List<FruitTransaction> input = List.of(fruitTransaction);
         shopService.process(input);
-        String expectedFruit = "banana";
+        String expectedFruit = TestConstants.BANANA;
         int expectedQuantity = 20;
         int actualQuantity = Storage.fruitStock.get(expectedFruit);
         Assertions.assertTrue(Storage.fruitStock.containsKey(expectedFruit));

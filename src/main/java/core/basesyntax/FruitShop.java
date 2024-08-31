@@ -36,8 +36,8 @@ public class FruitShop {
         transactionMap.put(Transaction.TransactionType.SUPPLY,
                 new OperationSupply(fruitStorageDao));
 
-        String fileName = "src/main/java/core/basesyntax/csvFiles/data.csv";
-        String reportFileName = "src/main/java/core/basesyntax/csvFiles/report.csv";
+        String fileName = "src/main/resources/data.csv";
+        String reportFileName = "src/main/resources/report.csv";
 
         CsvFileReader csvReader = new CsvFileReaderImpl();
         List<String> stringTransactions = csvReader.getTransactionsFromFile(fileName);

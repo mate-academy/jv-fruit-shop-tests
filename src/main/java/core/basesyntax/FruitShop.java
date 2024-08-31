@@ -44,7 +44,8 @@ public class FruitShop {
 
         StringToTransactionConverterImpl stringToTransactionConverter
                 = new StringToTransactionConverterImpl();
-        List<Transaction> transactions = stringToTransactionConverter.convertStringRecordToTransaction(stringTransactions);
+        List<Transaction> transactions =
+                stringToTransactionConverter.convertStringRecordToTransaction(stringTransactions);
 
         OperationGetter operationGetter = new OperationGetterIpml(transactionMap);
 

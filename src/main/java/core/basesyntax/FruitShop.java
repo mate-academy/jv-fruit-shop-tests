@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.converter.StringTransactionConverterImpl;
+import core.basesyntax.converter.StringToTransactionConverterImpl;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpL;
 import core.basesyntax.fileservise.CsvFileReader;
@@ -42,9 +42,9 @@ public class FruitShop {
         CsvFileReader csvReader = new CsvFileReaderImpl();
         List<String> stringTransactions = csvReader.getTransactionsFromFile(fileName);
 
-        StringTransactionConverterImpl stringToTransactionConverter
-                = new StringTransactionConverterImpl();
-        List<Transaction> transactions = stringToTransactionConverter.convert(stringTransactions);
+        StringToTransactionConverterImpl stringToTransactionConverter
+                = new StringToTransactionConverterImpl();
+        List<Transaction> transactions = stringToTransactionConverter.convertStringRecordToTransaction(stringTransactions);
 
         OperationGetter operationGetter = new OperationGetterIpml(transactionMap);
 

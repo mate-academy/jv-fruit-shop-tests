@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class StringTransactionConverterImplTest {
+class StringToTransactionConverterImplTest {
     private List<String> stringTransactions;
     private final StringTransactionConverter stringTransactionConverter =
-            new StringTransactionConverterImpl();
+            new StringToTransactionConverterImpl();
 
     @BeforeEach
     void init() {
@@ -29,22 +29,23 @@ class StringTransactionConverterImplTest {
     }
 
     @Test
-    void convertNullListThrowsException() {
-        assertThrows(RuntimeException.class, () -> stringTransactionConverter.convert(null));
+    void convertStringRecordToTransactionNullListThrowsException() {
+        assertThrows(RuntimeException.class, () ->
+                stringTransactionConverter.convertStringRecordToTransaction(null));
     }
 
     @Test
     void invalidTransactionRecordTypeOfTransaction() {
         stringTransactions.add("1,apple,10");
         assertThrows(RuntimeException.class, () ->
-                stringTransactionConverter.convert(stringTransactions));
+                stringTransactionConverter.convertStringRecordToTransaction(stringTransactions));
     }
 
     @Test
     void invalidTransactionRecordNoTransactionAmount() {
         stringTransactions.add("2,banana");
         assertThrows(RuntimeException.class, () ->
-                stringTransactionConverter.convert(stringTransactions));
+                stringTransactionConverter.convertStringRecordToTransaction(stringTransactions));
     }
 
     @Test
@@ -52,14 +53,14 @@ class StringTransactionConverterImplTest {
         stringTransactions.add("b,apple,-200");
         stringTransactions.add("b,banana,100");
         assertThrows(RuntimeException.class, () ->
-                stringTransactionConverter.convert(stringTransactions));
+                stringTransactionConverter.convertStringRecordToTransaction(stringTransactions));
     }
 
     @Test
-    void convertValidInputReturnsListOfTransactions() {
+    void convertStringRecordToTransactionValidInputReturnsListOfTransactions() {
         List<Transaction> transactionList;
         transactionList = stringTransactionConverter
-                .convert(stringTransactions);
+                .convertStringRecordToTransaction(stringTransactions);
         assertEquals(8, transactionList.size());
     }
 
@@ -67,7 +68,7 @@ class StringTransactionConverterImplTest {
     void noSuchTransactionType() {
         stringTransactions.add(0, "k,banana,manana");
         assertThrows(RuntimeException.class, () -> {
-            stringTransactionConverter.convert(stringTransactions);
+            stringTransactionConverter.convertStringRecordToTransaction(stringTransactions);
         });
     }
 
@@ -75,15 +76,15 @@ class StringTransactionConverterImplTest {
     void noSuchTransactionTypeInteger() {
         stringTransactions.add(0, "1,banana,manana");
         assertThrows(RuntimeException.class, () -> {
-            stringTransactionConverter.convert(stringTransactions);
+            stringTransactionConverter.convertStringRecordToTransaction(stringTransactions);
         });
     }
 
     @Test
-    void noComaInCsvecords() {
+    void noComaInCsvRecords() {
         stringTransactions.add(0, "!!!!!");
         assertThrows(RuntimeException.class, () -> {
-            stringTransactionConverter.convert(stringTransactions);
+            stringTransactionConverter.convertStringRecordToTransaction(stringTransactions);
         });
     }
 
@@ -91,7 +92,7 @@ class StringTransactionConverterImplTest {
     void onlyComasInCsvFileTransactionRecord() {
         stringTransactions.add(0, ",,,,,,");
         assertThrows(RuntimeException.class, () -> {
-            stringTransactionConverter.convert(stringTransactions);
+            stringTransactionConverter.convertStringRecordToTransaction(stringTransactions);
         });
     }
 
@@ -99,7 +100,7 @@ class StringTransactionConverterImplTest {
     void noTransactionTypeIndicated() {
         stringTransactions.add(0, ",banana,20, 50, 888,iiiiiiiiiiiiiii;;;");
         assertThrows(RuntimeException.class, () -> {
-            stringTransactionConverter.convert(stringTransactions);
+            stringTransactionConverter.convertStringRecordToTransaction(stringTransactions);
         });
     }
 }

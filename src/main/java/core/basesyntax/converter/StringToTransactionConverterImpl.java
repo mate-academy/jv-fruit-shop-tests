@@ -5,11 +5,11 @@ import core.basesyntax.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringTransactionConverterImpl implements StringTransactionConverter {
+public class StringToTransactionConverterImpl implements StringTransactionConverter {
     private static final String COMA = ",";
 
     @Override
-    public List<Transaction> convert(List<String> stringTransactions) {
+    public List<Transaction> convertStringRecordToTransaction(List<String> stringTransactions) {
         if (stringTransactions == null) {
             throw new RuntimeException("List " + stringTransactions + " can not be null");
         }

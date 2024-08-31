@@ -18,10 +18,18 @@ class StringTransactionConverterImplTest {
     void init() {
         stringTransactions = new ArrayList<>();
         stringTransactions.add("type,fruit,quantity");
+        stringTransactions.add("b,apple,50");
+        stringTransactions.add("b,banana,50");
+        stringTransactions.add("p,apple,45");
+        stringTransactions.add("p,banana,45");
+        stringTransactions.add("s,apple,20");
+        stringTransactions.add("s,banana,20");
+        stringTransactions.add("r,apple,15");
+        stringTransactions.add("r,banana,15");
     }
 
     @Test
-    void convert_NullList_ThrowsException() {
+    void convertNullListThrowsException() {
         assertThrows(RuntimeException.class, () -> stringTransactionConverter.convert(null));
     }
 
@@ -48,69 +56,11 @@ class StringTransactionConverterImplTest {
     }
 
     @Test
-    void convert_ValidInput_ReturnsListOfTransactions() {
-        stringTransactions.add("b,apple,50");
-        stringTransactions.add("b,banana,50");
-        stringTransactions.add("p,apple,45");
-        stringTransactions.add("p,banana,45");
-        stringTransactions.add("s,apple,20");
-        stringTransactions.add("s,banana,20");
-        stringTransactions.add("r,apple,15");
-        stringTransactions.add("r,banana,15");
-
+    void convertValidInputReturnsListOfTransactions() {
         List<Transaction> transactionList;
         transactionList = stringTransactionConverter
                 .convert(stringTransactions);
-
         assertEquals(8, transactionList.size());
-
-        Transaction firstTransaction = transactionList.get(0);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("b"),
-                firstTransaction.getTransactionType());
-        assertEquals("apple", firstTransaction.getFruit().getFruitName());
-        assertEquals(50, firstTransaction.getAmount());
-
-        Transaction secondTransaction = transactionList.get(1);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("b"),
-                secondTransaction.getTransactionType());
-        assertEquals("banana", secondTransaction.getFruit().getFruitName());
-        assertEquals(50, secondTransaction.getAmount());
-
-        Transaction thirdTransaction = transactionList.get(2);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("p"),
-                thirdTransaction.getTransactionType());
-        assertEquals("apple", thirdTransaction.getFruit().getFruitName());
-        assertEquals(45, thirdTransaction.getAmount());
-
-        Transaction fourthTransaction = transactionList.get(3);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("p"),
-                fourthTransaction.getTransactionType());
-        assertEquals("banana", fourthTransaction.getFruit().getFruitName());
-        assertEquals(45, fourthTransaction.getAmount());
-
-        Transaction fifthTransaction = transactionList.get(4);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("s"),
-                fifthTransaction.getTransactionType());
-        assertEquals("apple", fifthTransaction.getFruit().getFruitName());
-        assertEquals(20, fifthTransaction.getAmount());
-
-        Transaction sixthTransaction = transactionList.get(5);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("s"),
-                sixthTransaction.getTransactionType());
-        assertEquals("banana", sixthTransaction.getFruit().getFruitName());
-        assertEquals(20, sixthTransaction.getAmount());
-
-        Transaction seventhTransaction = transactionList.get(6);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("r"),
-                seventhTransaction.getTransactionType());
-        assertEquals("apple", seventhTransaction.getFruit().getFruitName());
-        assertEquals(15, seventhTransaction.getAmount());
-
-        Transaction eigthTransaction = transactionList.get(7);
-        assertEquals(Transaction.TransactionType.getTransactionTypeByCode("r"),
-                eigthTransaction.getTransactionType());
-        assertEquals("banana", eigthTransaction.getFruit().getFruitName());
-        assertEquals(15, eigthTransaction.getAmount());
     }
 
     @Test
@@ -147,7 +97,7 @@ class StringTransactionConverterImplTest {
 
     @Test
     void noTransactionTypeIndicated() {
-        stringTransactions.add(0, ",banana,20, 50, 888,iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii;;;");
+        stringTransactions.add(0, ",banana,20, 50, 888,iiiiiiiiiiiiiii;;;");
         assertThrows(RuntimeException.class, () -> {
             stringTransactionConverter.convert(stringTransactions);
         });

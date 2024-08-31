@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class CsvFileWriterImplTest {
     private CsvFileReader csvFileReader;
     private CsvFileWriter csvFileWriter;
-    private String toFileName = "src/test/java/core/basesyntax/csvfiles/report.csv";
+    private String toFileName = "src/test/resources/report.csv";
     private List<String> report;
 
     @BeforeEach

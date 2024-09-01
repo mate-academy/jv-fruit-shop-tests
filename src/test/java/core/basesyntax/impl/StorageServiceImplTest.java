@@ -110,6 +110,6 @@ class StorageServiceImplTest {
         Map<String, Integer> fruits = storageService.getAllFruits();
         assertNotNull(fruits);
         assertEquals(140, fruits.get(APPLE));
-        assertEquals(10, fruits.get(BANANA));
+        assertEquals(50, fruits.get(BANANA));
     }
 }

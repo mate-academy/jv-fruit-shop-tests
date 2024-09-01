@@ -23,6 +23,7 @@ class DataConverterImplTest {
 
     @BeforeEach
     void setUp() {
+
         dataConverter = new DataConverterImpl();
     }
 

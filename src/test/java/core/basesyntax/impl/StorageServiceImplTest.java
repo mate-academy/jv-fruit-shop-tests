@@ -112,7 +112,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void testGetAllFruits_ok() {
+    void testGetAllFruits_valid_ok() {
         storageService.addFruit(APPLE, APPLE_QUANTITY);
         Map<String, Integer> fruits = storageService.getAllFruits();
         assertNotNull(fruits);

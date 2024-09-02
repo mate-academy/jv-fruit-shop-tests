@@ -39,7 +39,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_singleBalanceTransaction_storageUpdatedCorrectly() {
+    void process_singleBalanceTransaction_storageUpdatedCorrectly_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 50);
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(transaction);
@@ -48,7 +48,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_emptyTransactionList_storageUnchanged() {
+    void process_emptyTransactionList_storageUnchanged_ok() {
         List<FruitTransaction> transactions = new ArrayList<>();
         shopService.process(transactions);
         assertTrue(Storage.getAll().isEmpty(),
@@ -56,7 +56,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_multipleTransactions_storageUpdatedCorrectly() {
+    void process_multipleTransactions_storageUpdatedCorrectly_ok() {
         FruitTransaction balanceTransaction1 =
                 new FruitTransaction(Operation.BALANCE, "apple", 50);
         FruitTransaction balanceTransaction2 =

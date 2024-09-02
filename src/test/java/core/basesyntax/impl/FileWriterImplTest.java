@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,9 +34,8 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writeToFile_invalidFile_notOK() {
+    void writeToFile_invalidFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileWriter.writeToFile(DATA, INVALID_FILE_PATH));
     }
-
 }

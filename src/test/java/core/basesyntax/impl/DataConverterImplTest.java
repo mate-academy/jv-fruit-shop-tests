@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,6 @@ class DataConverterImplTest {
 
     @BeforeEach
     void setUp() {
-
         dataConverter = new DataConverterImpl();
     }
 
@@ -55,5 +55,4 @@ class DataConverterImplTest {
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(data);
         assertEquals(ACTUAL_SIZE, transactions.size());
     }
-
 }

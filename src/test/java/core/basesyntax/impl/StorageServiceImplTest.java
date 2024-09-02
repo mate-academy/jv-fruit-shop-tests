@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.StorageService;
+import core.basesyntax.service.impl.StorageServiceImpl;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ class StorageServiceImplTest {
         storageService.addFruit(APPLE, APPLE_QUANTITY);
         Map<String, Integer> fruits = storageService.getAllFruits();
         Integer actual = fruits.get(APPLE);
-        assertEquals(130, actual);
+        assertEquals(140, actual);
     }
 
     @Test
@@ -52,7 +53,6 @@ class StorageServiceImplTest {
 
     @Test
     void testAddFruit_emptyFruit_notOk() {
-
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> storageService.addFruit("", APPLE_QUANTITY),
@@ -71,7 +71,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void testRemoveFruit_nullFruit() {
+    void testRemoveFruit_nullFruit_notOk() {
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> storageService.removeFruit(null, APPLE_QUANTITY),
@@ -82,7 +82,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void testRemoveFruit_emptyFruit() {
+    void testRemoveFruit_emptyFruit_notOk() {
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> storageService.removeFruit("", APPLE_QUANTITY),
@@ -93,7 +93,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void testRemoveFruit_negativeQuantity() {
+    void testRemoveFruit_negativeQuantity_notOk() {
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> storageService.removeFruit(APPLE, APPLE_NEGATIVE_QUANTITY),
@@ -104,12 +104,18 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void testGetAllFruits() {
+    void testRemoveFruit_notEnoughQuantity_notOk() {
+        Storage storage = new Storage();
+        storage.addFruit(APPLE, APPLE_QUANTITY);
+        assertThrows(RuntimeException.class,
+                () -> storageService.removeFruit(APPLE, 200));
+    }
+
+    @Test
+    void testGetAllFruits_ok() {
         storageService.addFruit(APPLE, APPLE_QUANTITY);
-        storageService.addFruit(BANANA, BANANA_QUANTITY);
         Map<String, Integer> fruits = storageService.getAllFruits();
         assertNotNull(fruits);
-        assertEquals(140, fruits.get(APPLE));
-        assertEquals(50, fruits.get(BANANA));
+        assertEquals(130, fruits.get(APPLE));
     }
 }

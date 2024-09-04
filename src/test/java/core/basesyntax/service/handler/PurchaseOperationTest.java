@@ -27,6 +27,7 @@ public class PurchaseOperationTest {
         initialFruits.put("banana", 5);
         storage.setFruits(initialFruits);
     }
+
     @Test
     public void transaction_existingFruit_decreasesQuantity() {
         FruitTransaction fruitTransaction = new FruitTransaction(

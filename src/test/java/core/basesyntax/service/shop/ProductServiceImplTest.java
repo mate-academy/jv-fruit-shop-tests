@@ -41,8 +41,8 @@ public class ProductServiceImplTest {
         Map<String, Integer> actualFruits = storage.getFruits();
 
         Assertions.assertEquals(EXPECTED_FRUITS_RESULT, actualFruits,
-                "The fruits in storage do not match the expected fruits. " +
-                        "Verify that the fillProducts method initializes the storage correctly.");
+                "The fruits in storage do not match the expected fruits. "
+                        + "Verify that the fillProducts method initializes the storage correctly.");
     }
 
     @Test

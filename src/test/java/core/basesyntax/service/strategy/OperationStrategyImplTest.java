@@ -7,7 +7,9 @@ import core.basesyntax.service.handler.PurchaseOperation;
 import core.basesyntax.service.handler.ReturnOperation;
 import core.basesyntax.service.handler.SupplyOperation;
 import org.junit.jupiter.api.Assertions;
+
 import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -30,30 +32,34 @@ public class OperationStrategyImplTest {
     public void getOperationHandler_validOperation_ok() {
         Assertions.assertEquals(BalanceOperation.class,
                 operationStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE).getClass(),
-                "Expected the handler for BALANCE operation to be BalanceOperation.");
+                "Expected the handler for "
+                        + "BALANCE operation to be BalanceOperation.");
 
-        Assertions. assertEquals(ReturnOperation.class,
+        Assertions.assertEquals(ReturnOperation.class,
                 operationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN).getClass(),
-                "Expected the handler for RETURN operation to be ReturnOperation.");
+                "Expected the handler for "
+                        + "RETURN operation to be ReturnOperation.");
 
         Assertions.assertEquals(PurchaseOperation.class,
                 operationStrategy.getOperationHandler(FruitTransaction.Operation.PURCHASE).getClass(),
-                "Expected the handler for PURCHASE operation to be PurchaseOperation.");
+                "Expected the handler for "
+                        + "PURCHASE operation to be PurchaseOperation.");
 
         Assertions.assertEquals(SupplyOperation.class,
                 operationStrategy.getOperationHandler(FruitTransaction.Operation.SUPPLY).getClass(),
-                "Expected the handler for SUPPLY operation to be SupplyOperation.");
+                "Expected the handler for "
+                        + "SUPPLY operation to be SupplyOperation.");
     }
 
     @Test
     public void getOperationHandler_nullOperation_notOk() {
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                        operationStrategy.getOperationHandler(null));
+                operationStrategy.getOperationHandler(null));
     }
 
     @Test
     public void getOperationHandler_unknownOperation_notOk() {
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                        operationStrategy.getOperationHandler(FruitTransaction.Operation.valueOf("UNKNOWN")));
+                operationStrategy.getOperationHandler(FruitTransaction.Operation.valueOf("UNKNOWN")));
     }
 }

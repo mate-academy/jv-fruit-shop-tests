@@ -9,11 +9,10 @@ import core.basesyntax.service.handler.SupplyOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.Assertions;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

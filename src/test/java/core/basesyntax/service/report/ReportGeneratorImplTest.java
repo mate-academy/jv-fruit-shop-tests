@@ -1,9 +1,9 @@
 package core.basesyntax.service.report;
 
-import org.junit.jupiter.api.Assertions;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -2,10 +2,10 @@ package core.basesyntax.service.shop;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.Assertions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -9,7 +9,6 @@ import core.basesyntax.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.basesyntax.db.Storage;
 import core.basesyntax.basesyntax.model.Fruit;
 import core.basesyntax.basesyntax.model.Operations;
-import core.basesyntax.basesyntax.service.FruitService;
 import core.basesyntax.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.basesyntax.service.operations.BalanceOperationsHandler;
 import core.basesyntax.basesyntax.service.operations.PurchaseOperationsHandler;
@@ -18,7 +17,6 @@ import core.basesyntax.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.basesyntax.service.strategy.OperationsStrategy;
 import core.basesyntax.basesyntax.service.strategy.OperationsStrategyImpl;
 import core.basesyntax.basesyntax.service.strategy.ReturnOperationHandler;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +24,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FruitServiceImplTest {
-    private static FruitService service;
+    private static FruitServiceImpl service;
     private static EnumMap<Operations, OperationHandler> operationHandlerMap;
     private static FruitDao fruitDao;
     private static OperationsStrategy operationsStrategy;
@@ -41,7 +39,6 @@ public class FruitServiceImplTest {
 
         operationsStrategy = new OperationsStrategyImpl(operationHandlerMap);
         fruitDao = new FruitDaoImpl();
-
         service = new FruitServiceImpl(fruitDao, operationsStrategy);
     }
 
@@ -58,31 +55,45 @@ public class FruitServiceImplTest {
     @Test
     void performOperationWhenIsNullOperation_Ok() {
         assertThrows(UnsupportedOperationException.class,
-                    () -> service.performOperation(6, 8, null));
+                () -> service.performOperation(6, 8, null));
     }
 
     @Test
-    void create_fromList_ok() {
-        List<String> expectedRows = new ArrayList<>();
-        expectedRows.add("s,apple,100");
-        expectedRows.add("b,apple,100");
-        expectedRows.add("b,banana,20");
+    void addFruitFromList_shouldAddAndUpdateFruitsCorrectly() {
+        String separator = ",";
+        String[] splitRecord1 = {"s", "apple", "5"};
+        String[] splitRecord2 = {"p", "banana", "3"};
 
-        service.addFruitFromList(expectedRows);
-        assertEquals(2, Storage.getFruits().size());
+        Fruit apple = new Fruit("apple", 10);
+        Fruit banana = new Fruit("banana", 8);
+
+        Storage.addOrUpdateFruit(apple.getName(), apple);
+        Storage.addOrUpdateFruit(banana.getName(), banana);
+
+        List<String> fruitsDocumentation = List.of(
+                String.join(separator, splitRecord1),
+                String.join(separator, splitRecord2)
+        );
+
+        service.addFruitFromList(fruitsDocumentation);
+
+        assertEquals(new Fruit("apple", 15), Storage.getFruit("apple"));
+        assertEquals(new Fruit("banana", 5), Storage.getFruit("banana"));
     }
 
     @Test
     void get_count_ok() {
-        List<String> expectedRows = new ArrayList<>();
-        expectedRows.add("s,apple,100");
-        expectedRows.add("b,apple,100");
-        expectedRows.add("b,banana,20");
+        List<String> expectedRows = List.of(
+                "s,apple,100",
+                "b,apple,100",
+                "r,banana,20"
+        );
 
         service.addFruitFromList(expectedRows);
 
         Fruit apple = Storage.getFruits().get("apple");
         assertNotNull(apple, "Apple should not be null");
-        assertEquals(490, apple.getQuantity());
+
+        assertEquals(235, apple.getQuantity(), "Apple quantity should be 235");
     }
 }

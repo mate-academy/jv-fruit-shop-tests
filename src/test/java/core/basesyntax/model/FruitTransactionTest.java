@@ -17,42 +17,42 @@ public class FruitTransactionTest {
     }
 
     @Test
-    void setOperation_validCode_setsOperation() {
+    void setOperation_ValidCode_Ok() {
         transaction.setOperation("b");
         assertEquals(FruitTransaction.Operation.BALANCE, transaction.getOperation());
     }
 
     @Test
-    void setOperation_invalidCode_throwsException() {
+    void setOperation_InvalidCode_NotOk() {
         Exception exception = assertThrows(IllegalArgumentException.class, ()
                 -> transaction.setOperation("x"));
         assertNotNull(exception);
     }
 
     @Test
-    void setFruit_validFruit_setsFruit() {
+    void setFruit_ValidFruit_Ok() {
         transaction.setFruit("apple");
         assertEquals("apple", transaction.getFruit());
     }
 
     @Test
-    void setQuantity_validQuantity_setsQuantity() {
+    void setQuantity_ValidQuantity_Ok() {
         transaction.setQuantity(10);
         assertEquals(10, transaction.getQuantity());
     }
 
     @Test
-    void getOperation_initialState_returnsNull() {
+    void getOperation_InitialState_Ok() {
         assertNull(transaction.getOperation());
     }
 
     @Test
-    void getFruit_initialState_returnsNull() {
+    void getFruit_InitialState_Ok() {
         assertNull(transaction.getFruit());
     }
 
     @Test
-    void getQuantity_initialState_returnsZero() {
+    void getQuantity_InitialState_Ok() {
         assertEquals(0, transaction.getQuantity());
     }
 }

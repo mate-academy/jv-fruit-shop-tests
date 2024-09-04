@@ -19,14 +19,14 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    void updateFruitQuantity_newFruit_addsFruit() {
+    void updateFruitQuantity_AddNewFruit_Ok() {
         Integer result = fruitDao.updateFruitQuantity("apple", 10);
         assertNull(result);
         assertEquals(10, fruitDao.getAllFruits().get("apple"));
     }
 
     @Test
-    void updateFruitQuantity_existingFruit_updatesQuantity() {
+    void updateFruitQuantity_AddExistingFruit_Ok() {
         fruitDao.updateFruitQuantity("apple", 10);
         Integer result = fruitDao.updateFruitQuantity("apple", 5);
         assertEquals(10, result);
@@ -34,14 +34,14 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    void updateFruitQuantity_negativeQuantity_throwsException() {
+    void updateFruitQuantity_NegativeQuantity_NotOk() {
         Exception exception = assertThrows(FruitDaoException.class, ()
                 -> fruitDao.updateFruitQuantity("apple", -10));
         assertNotNull(exception);
     }
 
     @Test
-    void updateFruitQuantity_insufficientQuantity_throwsException() {
+    void updateFruitQuantity_InsufficientQuantity_NotOk() {
         fruitDao.updateFruitQuantity("apple", 5);
         Exception exception = assertThrows(FruitDaoException.class, ()
                 -> fruitDao.updateFruitQuantity("apple", -10));
@@ -49,13 +49,13 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    void getAllFruits_noFruits_returnsEmptyMap() {
+    void getAllFruits_NoFruits_Ok() {
         Map<String, Integer> fruits = fruitDao.getAllFruits();
         assertTrue(fruits.isEmpty());
     }
 
     @Test
-    void getAllFruits_withFruits_returnsAllFruits() {
+    void getAllFruits_withFruits_Ok() {
         fruitDao.updateFruitQuantity("apple", 10);
         fruitDao.updateFruitQuantity("banana", 20);
         Map<String, Integer> fruits = fruitDao.getAllFruits();

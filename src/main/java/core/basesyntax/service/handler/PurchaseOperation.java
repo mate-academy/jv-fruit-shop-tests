@@ -2,7 +2,6 @@ package core.basesyntax.service.handler;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
-
 import java.util.Map;
 
 public class PurchaseOperation implements OperationHandler {

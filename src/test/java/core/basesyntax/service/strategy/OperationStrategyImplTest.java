@@ -1,11 +1,15 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.handler.*;
+import core.basesyntax.service.handler.BalanceOperation;
+import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.PurchaseOperation;
+import core.basesyntax.service.handler.ReturnOperation;
+import core.basesyntax.service.handler.SupplyOperation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {
     private static OperationStrategyImpl operationStrategy;

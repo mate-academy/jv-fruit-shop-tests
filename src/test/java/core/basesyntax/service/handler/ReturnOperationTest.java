@@ -5,9 +5,9 @@ import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
     private static OperationHandler operationHandler;
@@ -60,6 +60,7 @@ public class ReturnOperationTest {
         Assertions.assertThrows(NullPointerException.class, () ->
                 operationHandler.transaction(fruitTransaction, storage));
     }
+
     @Test
     public void transaction_emptyFruitName_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
@@ -68,6 +69,7 @@ public class ReturnOperationTest {
         Assertions.assertThrows(NullPointerException.class, () ->
                 operationHandler.transaction(fruitTransaction, storage));
     }
+
     @Test
     public void transaction_nullFruitName_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
@@ -76,6 +78,7 @@ public class ReturnOperationTest {
         Assertions.assertThrows(NullPointerException.class, () ->
                 operationHandler.transaction(fruitTransaction, storage));
     }
+
     @Test
     public void transaction_nullFruitTransaction_notOk() {
         FruitTransaction fruitTransaction = null;

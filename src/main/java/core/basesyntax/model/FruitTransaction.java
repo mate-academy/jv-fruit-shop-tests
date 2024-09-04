@@ -63,14 +63,19 @@ public class FruitTransaction {
     public void setProduct(String product) {
         this.fruitName = product;
     }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) o;
-        return transactionQuantity == that.transactionQuantity &&
-                operation == that.operation &&
-                Objects.equals(fruitName, that.fruitName);
+        return transactionQuantity == that.transactionQuantity
+                && operation == that.operation
+                && Objects.equals(fruitName, that.fruitName);
     }
 
     @Override

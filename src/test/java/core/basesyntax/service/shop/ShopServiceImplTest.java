@@ -1,17 +1,21 @@
 package core.basesyntax.service.shop;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.handler.*;
+import core.basesyntax.service.handler.BalanceOperation;
+import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.PurchaseOperation;
+import core.basesyntax.service.handler.ReturnOperation;
+import core.basesyntax.service.handler.SupplyOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
     private static final List<FruitTransaction> FRUIT_TRANSACTIONS = List.of(

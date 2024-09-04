@@ -7,8 +7,8 @@ import core.basesyntax.service.handler.PurchaseOperation;
 import core.basesyntax.service.handler.ReturnOperation;
 import core.basesyntax.service.handler.SupplyOperation;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {

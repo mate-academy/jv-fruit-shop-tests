@@ -1,10 +1,9 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

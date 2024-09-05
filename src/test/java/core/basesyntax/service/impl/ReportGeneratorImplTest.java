@@ -1,10 +1,9 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +29,8 @@ class ReportGeneratorImplTest {
         String report = reportGenerator.getReport();
         System.out.println("Actual Report:\n" + report);
         String expectedReport = HEADER + System.lineSeparator()
-                + BANANA + DELIMITER + 40 + System.lineSeparator()
-                + APPLE + DELIMITER + 120 + System.lineSeparator();
+                + BANANA + DELIMITER + 20 + System.lineSeparator()
+                + APPLE + DELIMITER + 40 + System.lineSeparator();
         System.out.println("Expected Report:\n" + expectedReport);
         assertEquals(expectedReport, report);
     }

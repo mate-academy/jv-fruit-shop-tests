@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
-    private String fruitName;
-    private int transactionQuantity;
+    private final String fruitName;
+    private final int transactionQuantity;
 
     public FruitTransaction(Operation operation, String fruitName, int transactionQuantity) {
         this.operation = operation;
@@ -52,16 +52,8 @@ public class FruitTransaction {
         return transactionQuantity;
     }
 
-    public void setTransactionQuantity(int transactionQuantity) {
-        this.transactionQuantity = transactionQuantity;
-    }
-
     public String getFruitName() {
         return fruitName;
-    }
-
-    public void setProduct(String product) {
-        this.fruitName = product;
     }
 
     @Override

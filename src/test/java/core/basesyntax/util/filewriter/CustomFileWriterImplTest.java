@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 
 public class CustomFileWriterImplTest {
     private static final String TEST_FILE_PATH = "testReport.csv";
+    private static final String INVALID_TEST_FILE_PATH = "/invalidPath/testReport.csv";
+    private static final String REPORT = "fruit,quantity" + System.lineSeparator()
+            + "apple,100" + System.lineSeparator();
+
     private static CustomFileWriter customFileWriter;
 
     @BeforeAll
@@ -27,17 +31,14 @@ public class CustomFileWriterImplTest {
 
     @Test
     public void write_validContent_ok() throws IOException {
-        String report = "fruit,quantity" + System.lineSeparator()
-                + "apple,100" + System.lineSeparator();
-
-        customFileWriter.write(report, TEST_FILE_PATH);
+        customFileWriter.write(REPORT, TEST_FILE_PATH);
 
         Path filePath = Path.of(TEST_FILE_PATH);
         assertTrue(Files.exists(filePath),
                 "File should be created at the specified path.");
 
         String fileContent = Files.readString(filePath);
-        assertEquals(report, fileContent,
+        assertEquals(REPORT, fileContent,
                 "The content written to the file should match the expected content.");
     }
 
@@ -46,5 +47,21 @@ public class CustomFileWriterImplTest {
         String report = null;
         assertThrows(NullPointerException.class, () ->
                 customFileWriter.write(report, TEST_FILE_PATH));
+    }
+
+    @Test
+    public void write_nullFilePath_notOk() {
+        String filePath = null;
+        assertThrows(NullPointerException.class, () ->
+                customFileWriter.write(REPORT, filePath));
+    }
+
+    @Test
+    public void write_invalidFilePath_notOk() {
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                customFileWriter.write(REPORT, INVALID_TEST_FILE_PATH));
+
+        assertTrue(exception.getMessage()
+                .contains("Cannot write to file: " + INVALID_TEST_FILE_PATH));
     }
 }

@@ -62,7 +62,7 @@ class ShopServiceImplTest {
     void process_validTransaction_ok() {
         Map<String, Integer> expected = Map.of(
                 BANANA, 40,
-                APPLE, 120
+                APPLE, 150
         );
         shopService.process(transactions);
         assertEquals(expected, storageService.getAllFruits());

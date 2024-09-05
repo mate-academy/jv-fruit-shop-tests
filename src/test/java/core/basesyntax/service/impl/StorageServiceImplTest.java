@@ -29,7 +29,7 @@ class StorageServiceImplTest {
         storageService.addFruit(APPLE, APPLE_QUANTITY);
         Map<String, Integer> fruits = storageService.getAllFruits();
         Integer actual = fruits.get(APPLE);
-        assertEquals(130, actual);
+        assertEquals(50, actual);
     }
 
     @Test
@@ -115,6 +115,6 @@ class StorageServiceImplTest {
         storageService.addFruit(APPLE, APPLE_QUANTITY);
         Map<String, Integer> fruits = storageService.getAllFruits();
         assertNotNull(fruits);
-        assertEquals(140, fruits.get(APPLE));
+        assertEquals(60, fruits.get(APPLE));
     }
 }

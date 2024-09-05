@@ -41,7 +41,8 @@ class DataConverterImplTest {
 
     @Test
     public void convertToTransaction_validInput_ok() {
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(VALID_INPUT_REPORT);
+        List<FruitTransaction> transactions = dataConverter
+                .convertToTransaction(VALID_INPUT_REPORT);
 
         Assertions.assertEquals(EXPECTED_RESULTS.size(), transactions.size(),
                 "Expected the size of the transaction list to be "

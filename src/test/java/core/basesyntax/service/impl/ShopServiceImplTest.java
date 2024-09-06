@@ -2,7 +2,12 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
@@ -16,89 +21,64 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
-    private ShopServiceImpl shopService;
+    private OperationStrategy operationStrategy;
     private FruitDao fruitDao;
+    private ShopServiceImpl shopService;
     private final FruitTransaction firstTransaction = new FruitTransaction();
     private final FruitTransaction secondTransaction = new FruitTransaction();
 
     @BeforeEach
     public void setUp() {
-        fruitDao = new InMemoryFruitDao();
-        OperationStrategy operationStrategy = new SimpleOperationStrategy();
+        operationStrategy = mock(OperationStrategy.class);
+        fruitDao = mock(FruitDao.class);
         shopService = new ShopServiceImpl(operationStrategy, fruitDao);
 
-        firstTransaction.setFruit("Apple");
-        firstTransaction.setQuantity(15);
+        firstTransaction.setFruit("apple");
+        firstTransaction.setQuantity(10);
         firstTransaction.setOperation("b");
 
-        secondTransaction.setFruit("Banana");
-        secondTransaction.setQuantity(17);
+        secondTransaction.setFruit("banana");
+        secondTransaction.setQuantity(5);
         secondTransaction.setOperation("b");
     }
 
     @Test
-    public void getFruitMap_ValidData_Ok() {
+    public void get_FruitMap_Ok() {
         Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("Apple", 15);
-        expectedMap.put("Banana", 17);
-
-        List<FruitTransaction> transactions = Arrays.asList(firstTransaction, secondTransaction);
-        shopService.proceedAll(transactions);
+        expectedMap.put("apple", 10);
+        when(fruitDao.getAllFruits()).thenReturn(expectedMap);
 
         Map<String, Integer> actualMap = shopService.getFruitMap();
         assertEquals(expectedMap, actualMap);
     }
 
     @Test
-    public void proceedAll_ValidData_Ok() {
+    public void proceedAll_WithValidTransactions_Ok() {
         List<FruitTransaction> transactions = Arrays.asList(firstTransaction, secondTransaction);
+
+        OperationHandler handler = mock(OperationHandler.class);
+        when(operationStrategy.choseOperationHandler(any())).thenReturn(handler);
+
         shopService.proceedAll(transactions);
 
-        assertEquals(15, fruitDao.getAllFruits().get("Apple"));
-        assertEquals(17, fruitDao.getAllFruits().get("Banana"));
+        verify(operationStrategy, times(2)).choseOperationHandler(any());
+        verify(handler, times(2)).executeOperation(eq(fruitDao), any(FruitTransaction.class));
     }
 
     @Test
     public void proceedAll_WithNullTransaction_NotOk() {
-        List<FruitTransaction> transactions = Arrays.asList(firstTransaction, null);
+        List<FruitTransaction> transactions = Arrays.asList(
+                firstTransaction,
+                null
+        );
 
-        RuntimeException exception = assertThrows(RuntimeException.class, ()
-                -> shopService.proceedAll(transactions));
+        OperationHandler handler = mock(OperationHandler.class);
+        when(operationStrategy.choseOperationHandler(any())).thenReturn(handler);
 
-        assertTrue(exception.getMessage().contains("Transaction is null"));
-    }
-
-    private static class InMemoryFruitDao implements FruitDao {
-        private final Map<String, Integer> fruitStorage = new HashMap<>();
-
-        @Override
-        public Integer updateFruitQuantity(String key, Integer value) {
-            Integer numberOfFruits = fruitStorage.get(key);
-
-            if (numberOfFruits == null) {
-                return fruitStorage.put(key, value);
-            }
-            return fruitStorage.put(key, numberOfFruits + value);
-        }
-
-        @Override
-        public Map<String, Integer> getAllFruits() {
-            return new HashMap<>(fruitStorage);
-        }
-    }
-
-    private static class SimpleOperationStrategy implements OperationStrategy {
-        @Override
-        public OperationHandler choseOperationHandler(FruitTransaction.Operation operation) {
-            return new SimpleBalanceHandler();
-        }
-    }
-
-    private static class SimpleBalanceHandler implements OperationHandler {
-        @Override
-        public Integer executeOperation(FruitDao fruitDao, FruitTransaction fruitTransaction) {
-            return fruitDao.updateFruitQuantity(fruitTransaction.getFruit(),
-                    fruitTransaction.getQuantity());
-        }
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.proceedAll(transactions));
+        assertEquals("Transaction is null: [FruitTransaction{fruit='apple'"
+                        + ", quantity=10, operation=BALANCE}, null]",
+                exception.getMessage());
     }
 }

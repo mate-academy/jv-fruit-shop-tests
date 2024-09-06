@@ -31,6 +31,14 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + ", operation=" + operation + '}';
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

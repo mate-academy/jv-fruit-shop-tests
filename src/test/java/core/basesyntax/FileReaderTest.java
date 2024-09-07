@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderTest {
-    private static final String TEST_FILE = "src\\test\\resources\\testFile.csv";
-    private static final String UNEXISTING_FILE = "src\\test\\resources\\unexistingFile.csv";
+    private static final String TEST_FILE = "src/test/resources/testFile.csv";
+    private static final String UNEXISTING_FILE = "src/test/resources/unexistingFile.csv";
     private final FileReaderImpl fileReader = new FileReaderImpl();
 
     @Test

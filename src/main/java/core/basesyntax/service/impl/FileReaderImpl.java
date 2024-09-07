@@ -21,7 +21,7 @@ public class FileReaderImpl implements FileReader {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("C" + filePath);
+            throw new RuntimeException("Can't read file" + filePath, e);
         }
         return lines;
     }

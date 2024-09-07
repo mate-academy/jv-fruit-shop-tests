@@ -1,4 +1,4 @@
-package core.basesyntax.basesyntax;
+package core.basesyntax;
 
 import core.basesyntax.basesyntax.dao.FruitDao;
 import core.basesyntax.basesyntax.dao.FruitDaoImpl;

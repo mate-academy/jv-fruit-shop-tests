@@ -27,7 +27,7 @@ public class Main {
 
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/resources");
+        List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);

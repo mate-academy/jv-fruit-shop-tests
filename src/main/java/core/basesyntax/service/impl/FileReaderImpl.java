@@ -3,6 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +15,13 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("File path cannot be null");
         }
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
-            StringBuilder builder = new StringBuilder();
-            String line = reader.readLine();
-            while (line != null) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 lines.add(line);
-                line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + filePath, e);
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
         return lines;
     }

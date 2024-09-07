@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
-    private DataConverterImpl dataConverter = new DataConverterImpl();
+    private final DataConverterImpl dataConverter = new DataConverterImpl();
 
     @Test
     void valid_data_ok() {

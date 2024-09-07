@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperation(),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
             FruitTransaction.Operation.RETURN, new ReturnOperation(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperation()
     );
-    private OperationStrategyImpl operationStrategy = new OperationStrategyImpl(
+    private final OperationStrategyImpl operationStrategy = new OperationStrategyImpl(
             operationHandlerMap);
 
     @Test

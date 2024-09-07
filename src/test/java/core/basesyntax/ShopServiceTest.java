@@ -18,14 +18,15 @@ import org.junit.jupiter.api.Test;
 
 public class ShopServiceTest {
 
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperation(),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
             FruitTransaction.Operation.RETURN, new ReturnOperation(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperation()
     );
-    private OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-    private ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl(
+            operationHandlers);
+    private final ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
 
     @AfterEach
     public void afterEachTest() {

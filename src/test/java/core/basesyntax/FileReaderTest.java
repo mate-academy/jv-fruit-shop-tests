@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class FileReaderTest {
     private static final String TEST_FILE = "src\\test\\resources\\testFile.csv";
     private static final String UNEXISTING_FILE = "src\\test\\resources\\unexistingFile.csv";
-    private FileReaderImpl fileReader = new FileReaderImpl();
+    private final FileReaderImpl fileReader = new FileReaderImpl();
 
     @Test
     void fileReader_read_ok() {

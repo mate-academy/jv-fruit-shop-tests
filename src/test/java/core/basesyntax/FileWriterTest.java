@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class FileWriterTest {
     private static final String TEST_REPORT = "src\\test\\resources\\testReport.csv";
     private static final String UNEXISTING_FILE = "src\\test\\resources\\unexistingFile.csv";
-    private FileWriterImpl fileWriter = new FileWriterImpl();
+    private final FileWriterImpl fileWriter = new FileWriterImpl();
 
     @BeforeEach
     void setUp() throws IOException {

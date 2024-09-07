@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
-    private ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
+    private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
 
     @Test
     void valid_value_ok() {

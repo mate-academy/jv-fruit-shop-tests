@@ -61,4 +61,3 @@ public class OperationsStrategyImplTest {
         assertEquals(ReturnOperationHandler.class, handler.getClass());
     }
 }
-

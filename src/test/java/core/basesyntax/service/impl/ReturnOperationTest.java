@@ -17,7 +17,6 @@ class ReturnOperationTest {
 
     @Test
     public void handle() {
-        // Given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "Apple", 5);
         Storage.quantities.put("Apple", 15);
@@ -36,7 +35,6 @@ class ReturnOperationTest {
 
     @Test
     public void handle_quantityBecomesZero() {
-        // Given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "Banana", 5);
         Storage.quantities.put("Banana", 0);

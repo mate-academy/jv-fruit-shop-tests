@@ -36,7 +36,6 @@ class BalanceOperationTest {
 
     @Test
     public void handle_newFruit() {
-        // Given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "Orange", 7);
         Storage.quantities.put("Orange",7);
@@ -46,7 +45,6 @@ class BalanceOperationTest {
 
     @Test
     public void handle_zeroQuantity() {
-        // Given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "Grapes", 0);
         Storage.quantities.put("Grapes", 0);

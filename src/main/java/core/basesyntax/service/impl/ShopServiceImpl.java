@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
-    private Map<String, Integer> fruitQuantities = new HashMap<>();
+    private final Map<String, Integer> fruitQuantities = new HashMap<>();
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -26,4 +26,3 @@ public class ShopServiceImpl implements ShopService {
         }
     }
 }
-

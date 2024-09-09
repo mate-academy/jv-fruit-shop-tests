@@ -34,7 +34,6 @@ class DataConverterImplTest {
 
     @Test
     public void convertToTransaction_invalidData() {
-        // Arrange
         DataConverterImpl dataConverter = new DataConverterImpl();
         List<String> data = Arrays.asList(
                 "INVALID,Apple,10",

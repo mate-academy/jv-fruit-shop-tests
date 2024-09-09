@@ -1,5 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_APPLE_STRING;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_APPLE_TRANSACTION;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_BANANA_STRING;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_BANANA_TRANSACTION;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_ORANGE_STRING;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_ORANGE_TRANSACTION;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_STRAWBERRY_STRING;
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_STRAWBERRY_TRANSACTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -17,18 +25,12 @@ class DataParserImplTest {
     private List<FruitTransaction> expected;
 
     static {
-        DEFAULT_FRUITS = new ArrayList<>(List.of(
-                new FruitTransaction("apple", 20,
-                        FruitTransaction.Operation.BALANCE),
-                new FruitTransaction("banana", 15,
-                        FruitTransaction.Operation.SUPPLY),
-                new FruitTransaction("strawberry", 70,
-                        FruitTransaction.Operation.PURCHASE),
-                new FruitTransaction("orange", 42,
-                        FruitTransaction.Operation.RETURN)));
+        DEFAULT_FRUITS = new ArrayList<>(List.of(DEFAULT_APPLE_TRANSACTION,
+                DEFAULT_BANANA_TRANSACTION, DEFAULT_STRAWBERRY_TRANSACTION,
+                DEFAULT_ORANGE_TRANSACTION));
         DEFAULT_TEST_STRINGS = new ArrayList<>(List.of(
-                "type,fruit,quantity","b,apple,20", "s,banana,15",
-                "p,strawberry,70", "r,orange,42"));
+                "type,fruit,quantity", DEFAULT_APPLE_STRING, DEFAULT_BANANA_STRING,
+                DEFAULT_STRAWBERRY_STRING, DEFAULT_ORANGE_STRING));
         dataParser = new DataParserImpl();
     }
 

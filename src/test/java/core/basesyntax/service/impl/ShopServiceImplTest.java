@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.service.impl.TestConstants.DEFAULT_APPLE_TRANSACTION;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitStrategy;
@@ -10,7 +12,6 @@ import core.basesyntax.strategy.operation.PurchaseOperation;
 import core.basesyntax.strategy.operation.ReturnOperation;
 import core.basesyntax.strategy.operation.SupplyOperation;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,17 +19,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private static final FruitTransaction DEFAULT_APPLE = new FruitTransaction("apple",
-            20, FruitTransaction.Operation.BALANCE);
     private static final ShopServiceImpl shopServiceImpl;
     private static List<FruitTransaction> fruitTransactions;
 
     static {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         FruitStrategy operationStrategy = new FruitStrategyImpl(operationHandlers);
         shopServiceImpl = new ShopServiceImpl(operationStrategy);
     }
@@ -36,7 +35,7 @@ class ShopServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         fruitTransactions = new ArrayList<>();
-        fruitTransactions.add(DEFAULT_APPLE);
+        fruitTransactions.add(DEFAULT_APPLE_TRANSACTION);
     }
 
     @BeforeEach
@@ -48,7 +47,7 @@ class ShopServiceImplTest {
     void read_validInput_ok() {
         shopServiceImpl.process(fruitTransactions);
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
-            assert (compareTransaction(DEFAULT_APPLE, entry));
+            assert (compareTransaction(DEFAULT_APPLE_TRANSACTION, entry));
         }
     }
 

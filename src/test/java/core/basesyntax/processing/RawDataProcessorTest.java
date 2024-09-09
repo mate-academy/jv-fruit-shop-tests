@@ -17,15 +17,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RawDataProcessorTest {
-    public static final int ZERO_INDEX_POSITION = 0;
-    public static final int FIRST_INDEX_POSITION = 1;
-    public static final int SECOND_INDEX_POSITION = 2;
-    public static final int THIRD_INDEX_POSITION = 3;
-    public static final int FOURTH_INDEX_POSITION = 4;
-    public static final int SEVENTH_INDEX_POSITION = 7;
-    public static final int QUANTITY_EXAMPLE = 20;
-    public static final String FRUIT_BANANA = "banana";
-    public static final String FRUIT_APPLE = "apple";
+    private static final int ZERO_INDEX_POSITION = 0;
+    private static final int FIRST_INDEX_POSITION = 1;
+    private static final int SECOND_INDEX_POSITION = 2;
+    private static final int THIRD_INDEX_POSITION = 3;
+    private static final int FOURTH_INDEX_POSITION = 4;
+    private static final int SEVENTH_INDEX_POSITION = 7;
+    private static final int QUANTITY_EXAMPLE = 20;
+    private static final String FRUIT_BANANA = "banana";
+    private static final String FRUIT_APPLE = "apple";
     private static final String FILE_TO_READ =
             "src/test/resources/db/ReadTransactionTest";
     private static final String FILE_WITH_NEGATIVE_BALANCE =

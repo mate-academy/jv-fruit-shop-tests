@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
-    public static final String FRUIT_QUANTITY = "fruit,quantity";
-    public static final String FRUIT_BANANA = "banana";
-    public static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_QUANTITY = "fruit,quantity";
+    private static final String FRUIT_BANANA = "banana";
+    private static final String FRUIT_APPLE = "apple";
     private static final String FILE_TO_READ = "src/test/resources/db/ReadTransactionTest";
     private static final String FILE_TO_WRITE = "src/test/resources/db/FileToWrite";
     private static final String NOT_EXISTENT_FILE = "";

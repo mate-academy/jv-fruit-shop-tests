@@ -10,10 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
-    public static final int ZERO_INDEX_POSITION = 0;
-    public static final String TYPE_B = "b";
-    public static final String FRUIT_TYPE_BANANA = "banana";
-    public static final String QUANTITY_EXAMPLE = "20";
+    private static final int ZERO_INDEX_POSITION = 0;
+    private static final String TYPE_B = "b";
+    private static final String FRUIT_TYPE_BANANA = "banana";
+    private static final String QUANTITY_EXAMPLE = "20";
     private static final String FILE_TO_READ = "src/test/resources/db/ReadTransactionTest";
     private static final String EMPTY_FILE = "src/test/resources/db/empty.csv";
     private static final String NOT_EXISTENT_FILE = "";

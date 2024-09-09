@@ -10,7 +10,7 @@ public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) {
         if (filePath == null) {
-            throw new RuntimeException("File path cannot be null");
+            throw new RuntimeException("File path can't be null");
         }
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {

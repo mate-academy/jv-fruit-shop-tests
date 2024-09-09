@@ -25,8 +25,5 @@ public class ShopServiceImpl implements ShopService {
             fruitQuantities.put(transaction.getFruit(), transaction.getQuantity());
         }
     }
-
-    public Map<String, Integer> getFruitQuantities() {
-        return fruitQuantities;
-    }
 }
+

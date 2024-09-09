@@ -12,3 +12,4 @@ public class SupplyOperation implements OperationHandler {
                         .merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum));
     }
 }
+

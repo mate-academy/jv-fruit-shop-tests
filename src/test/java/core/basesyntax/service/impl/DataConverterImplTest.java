@@ -31,12 +31,14 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_invalidDataFormat_notOk() {
         List<String> data = List.of("b,banana");
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(data));
+        assertThrows(IllegalArgumentException.class, () -> 
+            dataConverter.convertToTransaction(data));
     }
 
     @Test
     void convertToTransaction_invalidQuantity_notOk() {
         List<String> data = List.of("b,banana,abc");
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(data));
+        assertThrows(IllegalArgumentException.class, () -> 
+            dataConverter.convertToTransaction(data));
     }
 }

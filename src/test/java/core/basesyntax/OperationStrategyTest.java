@@ -9,17 +9,23 @@ import core.basesyntax.strategy.SupplyOperation;
 import core.basesyntax.strategy.imlp.OperationStrategyImpl;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyTest {
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceOperation(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
-            FruitTransaction.Operation.RETURN, new ReturnOperation(),
-            FruitTransaction.Operation.SUPPLY, new SupplyOperation()
-    );
-    private final OperationStrategyImpl operationStrategy = new OperationStrategyImpl(
-            operationHandlerMap);
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private OperationStrategyImpl operationStrategy;
+
+    @BeforeEach
+    public void setUp() {
+        operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        );
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    }
 
     @Test
     void getHandler_returnOperation_ok() {
@@ -50,7 +56,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    void getHandler_null_not_ok() {
+    void getHandler_nullValue_notOk() {
         Assertions.assertThrows(RuntimeException.class,() -> {
             operationStrategy.getHandler(null);
         });

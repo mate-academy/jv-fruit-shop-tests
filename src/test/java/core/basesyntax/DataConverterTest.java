@@ -5,13 +5,19 @@ import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
-    private final DataConverterImpl dataConverter = new DataConverterImpl();
+    private DataConverterImpl dataConverter;
+
+    @BeforeEach
+    void setUp() {
+        dataConverter = new DataConverterImpl();
+    }
 
     @Test
-    void valid_data_ok() {
+    void convertToTransaction_validData_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 50));
         expected.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100));
@@ -27,7 +33,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void null_data_not_ok() {
+    void convertToTransaction_nullData_notOk() {
         List<String> invalidData = new ArrayList<>();
         invalidData.add(null);
         Assertions.assertThrows(RuntimeException.class,() -> {
@@ -36,7 +42,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void empty_data_ok() {
+    void convertToTransaction_emptyData_ok() {
         List<String> emptyData = new ArrayList<>();
         Assertions.assertDoesNotThrow(() -> {
             dataConverter.convertToTransaction(emptyData);
@@ -44,7 +50,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void invalid_data_not_ok() {
+    void convertToTransaction_invalidData_notOk() {
         List<String> invalidData = new ArrayList<>();
         invalidData.add("any , worlds , :) ");
         Assertions.assertThrows(RuntimeException.class,() -> {
@@ -53,7 +59,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void unknown_operation_not_ok() {
+    void convertToTransaction_unknownOperation_notOk() {
         List<String> invalidData = new ArrayList<>();
         invalidData.add("???,banana,50");
         Assertions.assertThrows(RuntimeException.class,() -> {
@@ -62,7 +68,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void invalid_quantity_not_ok() {
+    void convertToTransaction_invalidQuantity_notOk() {
         List<String> invalidData = new ArrayList<>();
         invalidData.add("b,banana,");
         invalidData.add("s,apple,???");
@@ -73,7 +79,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void negative_quantity_not_ok() {
+    void convertToTransaction_negativeQuantity_notOk() {
         List<String> negativeData = new ArrayList<>();
         negativeData.add("s,banana,-10");
         negativeData.add("p,apple,-15");

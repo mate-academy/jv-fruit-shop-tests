@@ -4,13 +4,19 @@ import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.Arrays;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
-    private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
+    private ReportGeneratorImpl reportGenerator;
+
+    @BeforeEach
+    void setUp() {
+        reportGenerator = new ReportGeneratorImpl(); // Ініціалізація перед кожним тестом
+    }
 
     @Test
-    void valid_value_ok() {
+    void getReport_validValue_ok() {
         Map<String, Integer> validData = Map.of(
                 "apple", 64,
                 "banana", 45
@@ -30,7 +36,7 @@ public class ReportGeneratorTest {
     }
 
     @Test
-    void empty_value_ok() {
+    void getReport_emptyValue_ok() {
         Map<String, Integer> emptyData = Map.of();
         String actual = reportGenerator.getReport(emptyData);
         String expected = "fruit,quantity" + System.lineSeparator();

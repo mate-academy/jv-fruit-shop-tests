@@ -11,15 +11,16 @@ import org.junit.jupiter.api.Test;
 public class FileWriterTest {
     private static final String TEST_REPORT = "src\\test\\resources\\testReport.csv";
     private static final String UNEXISTING_FILE = "src\\test\\resources\\unexistingFile.csv";
-    private final FileWriterImpl fileWriter = new FileWriterImpl();
+    private FileWriterImpl fileWriter;
 
     @BeforeEach
     void setUp() throws IOException {
+        fileWriter = new FileWriterImpl();
         Files.write(Paths.get(TEST_REPORT), "".getBytes());
     }
 
     @Test
-    void fileReader_read_ok() throws IOException {
+    void write_validValue_ok() throws IOException {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,64" + System.lineSeparator()
                 + "banana,45" + System.lineSeparator();
@@ -29,7 +30,7 @@ public class FileWriterTest {
     }
 
     @Test
-    void write_unexist_file_not_ok() {
+    void write_unexistFile_notOk() {
         String data = "";
         Assertions.assertThrows(RuntimeException.class,() -> {
             fileWriter.write(data, UNEXISTING_FILE);
@@ -37,7 +38,7 @@ public class FileWriterTest {
     }
 
     @Test
-    void write_null_not_ok() {
+    void write_nullValue_notOk() {
         Assertions.assertThrows(RuntimeException.class, () -> {
             fileWriter.write(null, null);
         });

@@ -14,19 +14,26 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceTest {
 
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceOperation(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
-            FruitTransaction.Operation.RETURN, new ReturnOperation(),
-            FruitTransaction.Operation.SUPPLY, new SupplyOperation()
-    );
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(
-            operationHandlers);
-    private final ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
+    private OperationStrategy operationStrategy;
+    private ShopServiceImpl shopService;
+
+    @BeforeEach
+    public void setUp() {
+        operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        );
+        operationStrategy = new OperationStrategyImpl(operationHandlers);
+        shopService = new ShopServiceImpl(operationStrategy);
+    }
 
     @AfterEach
     public void afterEachTest() {
@@ -34,7 +41,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    void valid_value() {
+    void process_validValue_ok() {
         List<FruitTransaction> actual = List.of(
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10),
@@ -48,7 +55,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    void empty_value() {
+    void process_emptyValue_Ok() {
         List<FruitTransaction> emptyList = Collections.emptyList();
         shopService.process(emptyList);
         Assertions.assertTrue(shopService.getStorage().isEmpty());
@@ -66,7 +73,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    void null_value_notOk() {
+    void process_nullValue_notOk() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(null, null, 5)
         );

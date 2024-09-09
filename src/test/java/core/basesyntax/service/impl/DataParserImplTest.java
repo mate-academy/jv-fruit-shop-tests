@@ -14,23 +14,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataParserImplTest {
-    private static final List<FruitTransaction> DEFAULT_FRUITS;
-    private static final List<String> DEFAULT_TEST_STRINGS;
-    private static final DataParserImpl dataParser;
+    private static final List<FruitTransaction> DEFAULT_FRUITS = new ArrayList<>(
+            List.of(DEFAULT_APPLE_TRANSACTION, DEFAULT_BANANA_TRANSACTION,
+                    DEFAULT_STRAWBERRY_TRANSACTION, DEFAULT_ORANGE_TRANSACTION));
+    private static final List<String> DEFAULT_TEST_STRINGS = new ArrayList<>(List.of(
+            "type,fruit,quantity", DEFAULT_APPLE_STRING, DEFAULT_BANANA_STRING,
+            DEFAULT_STRAWBERRY_STRING, DEFAULT_ORANGE_STRING));
+    private static DataParserImpl dataParser;
     private List<String> fruits;
     private List<FruitTransaction> expected;
 
-    static {
-        DEFAULT_FRUITS = new ArrayList<>(List.of(DEFAULT_APPLE_TRANSACTION,
-                DEFAULT_BANANA_TRANSACTION, DEFAULT_STRAWBERRY_TRANSACTION,
-                DEFAULT_ORANGE_TRANSACTION));
-        DEFAULT_TEST_STRINGS = new ArrayList<>(List.of(
-                "type,fruit,quantity", DEFAULT_APPLE_STRING, DEFAULT_BANANA_STRING,
-                DEFAULT_STRAWBERRY_STRING, DEFAULT_ORANGE_STRING));
+    @BeforeAll
+    static void beforeAll() {
         dataParser = new DataParserImpl();
     }
 

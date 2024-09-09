@@ -20,7 +20,11 @@ public class FruitDaoImplTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void add() {
+=======
+    public void testAdd() {
+>>>>>>> origin/main
         assertNotNull(fruitDao);
 
         Fruit banana = new Fruit("banana", 50);
@@ -33,7 +37,11 @@ public class FruitDaoImplTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void getFruitIfPresent_NotPresent() {
+=======
+    public void testGetFruitIfPresent_NotPresent() {
+>>>>>>> origin/main
         assertNotNull(fruitDao);
 
         Optional<Fruit> retrievedFruit = fruitDao.getFruitIfPresent("peach");

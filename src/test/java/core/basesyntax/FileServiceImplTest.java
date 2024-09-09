@@ -23,7 +23,11 @@ public class FileServiceImplTest {
     private static final String WRONG_INPUT_FORMAT = "wrongInputDataFormat.csv";
     private static final String OK_INPUT = "inputDataOk.csv";
     private static final String OK_RESULT = "report.csv";
+<<<<<<< HEAD
     private static final String WRONG_FILE_NAME = "fdgjhdj";
+=======
+
+>>>>>>> origin/main
     private static FileServiceImpl service;
 
     @BeforeAll
@@ -62,7 +66,11 @@ public class FileServiceImplTest {
 
     @Test
     void read_wrongFileName_notOk() {
+<<<<<<< HEAD
         assertThrows(RuntimeException.class, () -> service.readFile(WRONG_FILE_NAME));
+=======
+        assertThrows(RuntimeException.class, () -> service.readFile("fdgjhdj"));
+>>>>>>> origin/main
     }
 
     @Test
@@ -82,16 +90,35 @@ public class FileServiceImplTest {
 
         File tempFile = File.createTempFile("testResult", ".csv");
         String tempFilePath = tempFile.getAbsolutePath();
+<<<<<<< HEAD
 
         service.writeToFile(tempFilePath);
 
         String generatedContent = readFileContent(tempFilePath);
         String expectedContent = readResourceContent(OK_RESULT);
+=======
+        service.writeToFile(tempFilePath);
+        Path pathTest = Paths.get(tempFilePath);
+
+        String generatedContent = new String(Files.readAllBytes(pathTest), StandardCharsets.UTF_8)
+                .trim();
+        System.out.println("Generated file content:\n" + generatedContent);
+
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(OK_RESULT);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("Resource not found: " + OK_RESULT);
+        }
+        String expectedContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8)
+                .trim();
+
+        System.out.println("Expected file content:\n" + expectedContent);
+>>>>>>> origin/main
 
         assertEquals(expectedContent, generatedContent);
 
         tempFile.delete();
     }
+<<<<<<< HEAD
 
     private String readFileContent(String filePath) throws IOException {
         Path path = Paths.get(filePath);
@@ -106,4 +133,6 @@ public class FileServiceImplTest {
         }
         return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8).trim();
     }
+=======
+>>>>>>> origin/main
 }

@@ -4,11 +4,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DataConverterImplTest {
     private DataConverter dataConverter;
@@ -29,9 +26,14 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_invalidData_throwsException() {
-        List<String> data = List.of("invalid,data");
-        assertThrows(IllegalArgumentException.class, () -> 
-                dataConverter.convertToTransaction(data));
+    void convertToTransaction_invalidDataFormat_notOk() {
+        List<String> data = List.of("b,banana");
+        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(data));
+    }
+
+    @Test
+    void convertToTransaction_invalidQuantity_notOk() {
+        List<String> data = List.of("b,banana,abc");
+        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(data));
     }
 }

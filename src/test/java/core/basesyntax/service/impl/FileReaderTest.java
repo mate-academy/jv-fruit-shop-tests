@@ -1,7 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.impl.FileReaderImpl;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +17,13 @@ public class FileReaderTest {
 
     @Test
     void read_validValue_ok() {
-        List<String> expected = new ArrayList<>();
-        expected.add("type,fruit,quantity");
-        expected.add("b,banana,50");
-        expected.add("s,apple,20");
-        expected.add("p,banana,10");
-        expected.add("r,banana,13");
+        List<String> expected = List.of(
+                "type,fruit,quantity",
+                "b,banana,50",
+                "s,apple,20",
+                "p,banana,10",
+                "r,banana,13"
+        );
         List<String> actual = fileReader.read(TEST_FILE);
         Assertions.assertEquals(actual, expected);
     }

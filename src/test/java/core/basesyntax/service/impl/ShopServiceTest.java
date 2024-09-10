@@ -1,7 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -19,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 public class ShopServiceTest {
 
+    private static final String FRUIT = "banana";
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
     private OperationStrategy operationStrategy;
     private ShopServiceImpl shopService;
@@ -43,12 +43,12 @@ public class ShopServiceTest {
     @Test
     void process_validValue_ok() {
         List<FruitTransaction> actual = List.of(
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10),
-            new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 5)
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, 50),
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, 10),
+            new FruitTransaction(FruitTransaction.Operation.RETURN, FRUIT, 5)
         );
         Map<String, Integer> expected = Map.of(
-                "banana", 45
+                FRUIT, 45
         );
         shopService.process(actual);
         Assertions.assertEquals(shopService.getStorage(), expected);
@@ -64,8 +64,8 @@ public class ShopServiceTest {
     @Test
     void process_negativeQuantity_notOk() {
         List<FruitTransaction> negativeQuantity = List.of(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 15)
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, 15)
         );
         Assertions.assertThrows(RuntimeException.class, () -> {
             shopService.process(negativeQuantity);

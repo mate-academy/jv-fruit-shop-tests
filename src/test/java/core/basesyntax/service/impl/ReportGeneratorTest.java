@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.Arrays;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +11,7 @@ public class ReportGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        reportGenerator = new ReportGeneratorImpl(); // Ініціалізація перед кожним тестом
+        reportGenerator = new ReportGeneratorImpl();
     }
 
     @Test

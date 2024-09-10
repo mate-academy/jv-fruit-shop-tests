@@ -1,7 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -18,16 +17,18 @@ public class DataConverterTest {
 
     @Test
     void convertToTransaction_validData_ok() {
-        List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 50));
-        expected.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100));
-        expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10));
-        expected.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20));
-        List<String> actualData = new ArrayList<>();
-        actualData.add("b,banana,50");
-        actualData.add("s,apple,100");
-        actualData.add("r,banana,10");
-        actualData.add("p,apple,20");
+        List<FruitTransaction> expected = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 50),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20)
+        );
+        List<String> actualData = List.of(
+                "b,banana,50",
+                "s,apple,100",
+                "r,banana,10",
+                "p,apple,20"
+        );
         List<FruitTransaction> actual = dataConverter.convertToTransaction(actualData);
         Assertions.assertEquals(actual,expected);
     }
@@ -69,10 +70,11 @@ public class DataConverterTest {
 
     @Test
     void convertToTransaction_invalidQuantity_notOk() {
-        List<String> invalidData = new ArrayList<>();
-        invalidData.add("b,banana,");
-        invalidData.add("s,apple,???");
-        invalidData.add("r,banana,13");
+        List<String> invalidData = List.of(
+                "b,banana,",
+                "s,apple,???",
+                "r,banana,13"
+        );
         Assertions.assertThrows(RuntimeException.class,() -> {
             dataConverter.convertToTransaction(invalidData);
         });

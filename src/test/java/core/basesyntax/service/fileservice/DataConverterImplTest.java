@@ -52,4 +52,12 @@ class DataConverterImplTest {
             assertEquals(EXPECTED_QUANTITY[i], actual.get(i).getQuantity());
         }
     }
+
+    @Test
+    void convertDataNegativeQuantity_notOk() {
+        testInputData.add("b,banana,-30");
+        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(testInputData));
+    }
+
+
 }

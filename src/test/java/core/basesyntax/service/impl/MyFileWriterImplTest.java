@@ -19,9 +19,9 @@ class MyFileWriterImplTest {
         String expected = "test";
         myFileWriter.write(expected, DEFAULT_FILE_NAME_TO_WRITE);
         File file = new File(DEFAULT_FILE_NAME_TO_WRITE);
-        assertTrue(file.exists(), "File should be created");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
+        assertTrue(file.exists(), "File should be created");
         assertEquals(expected, line, "File content should match the written string");
     }
 

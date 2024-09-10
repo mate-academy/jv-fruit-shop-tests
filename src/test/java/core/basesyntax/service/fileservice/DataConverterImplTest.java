@@ -1,5 +1,6 @@
 package core.basesyntax.service.fileservice;
 
+import core.basesyntax.exception.UnsupportedOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,8 +57,15 @@ class DataConverterImplTest {
     @Test
     void convertDataNegativeQuantity_notOk() {
         testInputData.add("b,banana,-30");
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(testInputData));
+        assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(testInputData));
     }
 
+    @Test
+    void convertDataInvalidOperation_notOk() {
+        testInputData.add("e,orange,30");
+        assertThrows(UnsupportedOperationException.class, ()
+                -> dataConverter.convertToTransaction(testInputData));
+    }
 
 }

@@ -12,7 +12,7 @@ public class PurchaseOperation implements OperationHandler {
     }
 
     @Override
-    public void handle(FruitTransaction transaction) {
+    public int handle(FruitTransaction transaction) {
         int currentFruitQuantity = storageDao.getFruitQuantity(transaction.getFruit());
         int purchaseResult = currentFruitQuantity - transaction.getQuantity();
         if (purchaseResult < 0) {
@@ -23,6 +23,6 @@ public class PurchaseOperation implements OperationHandler {
                         + " available: "
                         + currentFruitQuantity);
         }
-        storageDao.update(transaction.getFruit(), purchaseResult);
+        return storageDao.add(transaction.getFruit(), purchaseResult);
     }
 }

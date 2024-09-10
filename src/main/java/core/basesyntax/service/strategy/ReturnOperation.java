@@ -11,8 +11,8 @@ public class ReturnOperation implements OperationHandler {
     }
 
     @Override
-    public void handle(FruitTransaction transaction) {
-        storageDao.getAllFruits()
+    public int handle(FruitTransaction transaction) {
+        return storageDao.getAllFruits()
                 .merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
     }
 }

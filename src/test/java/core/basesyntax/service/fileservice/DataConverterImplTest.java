@@ -68,4 +68,24 @@ class DataConverterImplTest {
                 -> dataConverter.convertToTransaction(testInputData));
     }
 
+    @Test
+    void convertDataFruitNameContainsNumbers_notOk() {
+        testInputData.add("b,0range,15");
+        assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(testInputData));
+    }
+
+    @Test
+    void convertDataFruitsContainsOnlyNumbers_notOk() {
+        testInputData.add("b,2412,2");
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverter.convertToTransaction(testInputData));
+    }
+
+    @Test
+    void convertDataWithWhiteSpace_notOk() {
+        testInputData.add("b , banana, 30");
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverter.convertToTransaction(testInputData));
+    }
 }

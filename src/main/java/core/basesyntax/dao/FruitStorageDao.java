@@ -7,5 +7,7 @@ public interface FruitStorageDao {
 
     int getFruitQuantity(String fruit);
 
-    void update(String fruit, int quantity);
+    int add(String fruit, int quantity);
+
+    int calculateTotalQuantity();
 }

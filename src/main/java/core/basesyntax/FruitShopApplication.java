@@ -46,7 +46,7 @@ public class FruitShopApplication {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, fruitStorageDao);
         shopService.process(transactions);
 
         ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl(fruitStorageDao);

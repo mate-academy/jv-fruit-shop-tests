@@ -11,7 +11,7 @@ public class BalanceOperation implements OperationHandler {
     }
 
     @Override
-    public void handle(FruitTransaction transaction) {
-        storageDao.update(transaction.getFruit(), transaction.getQuantity());
+    public int handle(FruitTransaction transaction) {
+        return storageDao.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

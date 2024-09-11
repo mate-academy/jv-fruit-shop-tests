@@ -16,7 +16,18 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public void update(String fruit, int quantity) {
-        FruitStorage.fruitStorage.put(fruit, quantity);
+    public int add(String fruit, int quantity) {
+        if (!FruitStorage.fruitStorage.containsKey(fruit)) {
+            getAllFruits().put(fruit, quantity);
+            return quantity;
+        }
+        int oldValue = getAllFruits().get(fruit);
+        getAllFruits().put(fruit, quantity);
+        return oldValue;
+    }
+
+    @Override
+    public int calculateTotalQuantity() {
+        return getAllFruits().values().stream().mapToInt(Integer::intValue).sum();
     }
 }

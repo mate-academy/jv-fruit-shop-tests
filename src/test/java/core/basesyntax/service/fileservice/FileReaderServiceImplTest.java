@@ -11,7 +11,13 @@ class FileReaderServiceImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/fileToReadTest.csv";
     private static final String INVALID_PATH_TO_FILE = "src/test/name.csv";
     private static final String SEPARATOR = "\n";
-
+    private static final String EXPECTED = """
+                type,fruit,quantity
+                r,apple,10
+                p,apple,20
+                p,banana,5
+                s,banana,50
+                """;
     private FileReaderService fileReaderService;
 
     @BeforeEach
@@ -21,16 +27,9 @@ class FileReaderServiceImplTest {
 
     @Test
     void readValidFile_ok() {
-        String expected = """
-                type,fruit,quantity
-                r,apple,10
-                p,apple,20
-                p,banana,5
-                s,banana,50
-                """;
         List<String> actual = fileReaderService.readFromFile(PATH_TO_FILE);
         for (int i = 0; i < actual.size(); i++) {
-            assertEquals(expected.split(SEPARATOR)[i], actual.get(i));
+            assertEquals(EXPECTED.split(SEPARATOR)[i], actual.get(i));
         }
     }
 

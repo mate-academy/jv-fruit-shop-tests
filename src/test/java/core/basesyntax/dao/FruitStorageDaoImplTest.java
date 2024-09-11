@@ -5,54 +5,55 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FruitStorageDaoImplTest {
+    private static final Map<String, Integer> TEST_FRUITS = Map.of(
+            "apple", 50,
+            "orange", 40,
+            "lemon", 15);
+    private static final String INVALID_NAME = "noName";
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_LEMON = "lemon";
+    private static final int APPLE_QUANTITY = 50;
+    private static final int LEMON_QUANTITY = 15;
+    private static final int TOTAL_FRUIT_QUANTITY = 105;
     private FruitStorageDao storageDao;
 
     @BeforeEach
     void setUp() {
         storageDao = new FruitStorageDaoImpl();
-        storageDao.add("apple", 50);
-        storageDao.add("orange", 40);
-        storageDao.add("lemon", 15);
+        FruitStorage.fruitStorage.putAll(TEST_FRUITS);
     }
 
     @Test
     void getFruitByValidName_ok() {
-        int expectedFruitApple = 50;
-        int expectedFruitLemon = 15;
-        int actualFruitApple = storageDao.getFruitQuantity("apple");
-        int actualFruitLemon = storageDao.getFruitQuantity("lemon");
-        assertEquals(expectedFruitApple, actualFruitApple);
-        assertEquals(expectedFruitLemon, actualFruitLemon);
+        int actualFruitApple = storageDao.getFruitQuantity(FRUIT_APPLE);
+        int actualFruitLemon = storageDao.getFruitQuantity(FRUIT_LEMON);
+        assertEquals(APPLE_QUANTITY, actualFruitApple);
+        assertEquals(LEMON_QUANTITY, actualFruitLemon);
     }
 
     @Test
     void getFruitByInvalidName_notOk() {
         assertThrows(NoSuchElementException.class, ()
-                -> storageDao.getFruitQuantity("noName"));
+                -> storageDao.getFruitQuantity(INVALID_NAME));
     }
 
     @Test
     void getAllFruits_ok() {
-        Map<String, Integer> expected = Map.of(
-                "apple", 50,
-                "orange", 40,
-                "lemon", 15);
         Map<String, Integer> actual = storageDao.getAllFruits();
-        assertEquals(expected, actual);
+        assertEquals(TEST_FRUITS, actual);
     }
 
     @Test
     void getTotalFruitQuantity_ok() {
-        int expected = 105;
         int actual = storageDao.calculateTotalQuantity();
-        assertEquals(expected, actual);
+        assertEquals(TOTAL_FRUIT_QUANTITY, actual);
     }
 
     @AfterEach

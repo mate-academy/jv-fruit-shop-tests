@@ -1,9 +1,9 @@
 package core.basesyntax.service.fileservice;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileWriterServiceImplTest {
     private static final String REPORT = """
@@ -27,6 +27,7 @@ class FileWriterServiceImplTest {
 
     @Test
     void writeToInvalidFileName_notOk() {
-        assertThrows(RuntimeException.class, () -> fileWriterService.writeReportToFile(REPORT, INVALID_PATH_TO_FILE));
+        assertThrows(RuntimeException.class, () ->
+                fileWriterService.writeReportToFile(REPORT, INVALID_PATH_TO_FILE));
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax.service.shopservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.TransactionSupplier;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
@@ -11,13 +13,10 @@ import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.service.strategy.PurchaseOperation;
 import core.basesyntax.service.strategy.ReturnOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static final String FRUIT_APPLE = "apple";

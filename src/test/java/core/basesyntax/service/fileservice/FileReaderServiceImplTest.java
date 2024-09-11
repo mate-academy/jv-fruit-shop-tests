@@ -1,11 +1,11 @@
 package core.basesyntax.service.fileservice;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/fileToReadTest.csv";
@@ -35,6 +35,7 @@ class FileReaderServiceImplTest {
 
     @Test
     void readInvalidFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.readFromFile(INVALID_PATH_TO_FILE));
+        assertThrows(RuntimeException.class, () ->
+                fileReaderService.readFromFile(INVALID_PATH_TO_FILE));
     }
 }

@@ -1,16 +1,16 @@
 package core.basesyntax.service.fileservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exception.UnsupportedOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private static final String NAME_WITH_NUMBER = "b,0range,15";

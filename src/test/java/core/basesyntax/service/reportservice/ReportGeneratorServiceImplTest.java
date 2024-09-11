@@ -1,14 +1,13 @@
 package core.basesyntax.service.reportservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportGeneratorServiceImplTest {
     private static final String SEPARATOR = "\n";

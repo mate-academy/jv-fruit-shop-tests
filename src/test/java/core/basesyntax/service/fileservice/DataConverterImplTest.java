@@ -13,6 +13,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataConverterImplTest {
+    private static final String NAME_WITH_NUMBER = "b,0range,15";
+    private static final String NAME_ONLY_NUMBER = "b,2412,2";
+    private static final String CAMEL_CASE_NAME = "b,Apple,30";
+    private static final String NEGATIVE_QUANTITY = "b,banana,-30";
+    private static final String UNSUPPORTED_OPERATION = "e,orange,30";
+    private static final String WHITESPACE_DATA = "b , banana, 30";
+
+    private static final List<String> TEST_INPUT_DATA = List.of(
+            "type,fruit,quantity",
+            "b,banana,15",
+            "p,apple,20",
+            "r,lemon,25",
+            "s,orange,30"
+    );
+
     private static final Operation[] EXPECTED_OPERATIONS = {
             Operation.BALANCE,
             Operation.PURCHASE,
@@ -38,11 +53,7 @@ class DataConverterImplTest {
     void setUp() {
         dataConverter = new DataConverterImpl();
         testInputData = new ArrayList<>();
-        testInputData.add("type,fruit,quantity");
-        testInputData.add("b,banana,15");
-        testInputData.add("p,apple,20");
-        testInputData.add("r,lemon,25");
-        testInputData.add("s,orange,30");
+        testInputData.addAll(TEST_INPUT_DATA);
     }
 
     @Test
@@ -57,42 +68,42 @@ class DataConverterImplTest {
 
     @Test
     void covertDataCamelCase_notOk() {
-        testInputData.add("b,Apple,30");
+        testInputData.add(CAMEL_CASE_NAME);
         assertThrows(IllegalFormatException.class, ()
                 -> dataConverter.convertToTransaction(testInputData));
     }
 
     @Test
     void convertDataNegativeQuantity_notOk() {
-        testInputData.add("b,banana,-30");
+        testInputData.add(NEGATIVE_QUANTITY);
         assertThrows(IllegalArgumentException.class, ()
                 -> dataConverter.convertToTransaction(testInputData));
     }
 
     @Test
     void convertDataInvalidOperation_notOk() {
-        testInputData.add("e,orange,30");
+        testInputData.add(UNSUPPORTED_OPERATION);
         assertThrows(UnsupportedOperationException.class, ()
                 -> dataConverter.convertToTransaction(testInputData));
     }
 
     @Test
     void convertDataFruitNameContainsNumbers_notOk() {
-        testInputData.add("b,0range,15");
+        testInputData.add(NAME_WITH_NUMBER);
         assertThrows(IllegalArgumentException.class, ()
                 -> dataConverter.convertToTransaction(testInputData));
     }
 
     @Test
     void convertDataFruitsContainsOnlyNumbers_notOk() {
-        testInputData.add("b,2412,2");
+        testInputData.add(NAME_ONLY_NUMBER);
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverter.convertToTransaction(testInputData));
     }
 
     @Test
     void convertDataWithWhiteSpace_notOk() {
-        testInputData.add("b , banana, 30");
+        testInputData.add(WHITESPACE_DATA);
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverter.convertToTransaction(testInputData));
     }

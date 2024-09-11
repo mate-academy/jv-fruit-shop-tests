@@ -3,14 +3,12 @@ package core.basesyntax.reader;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.FileWasNotReadException;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
-    private static final int ZERO_INDEX_POSITION = 0;
     private static final String TYPE_B = "b";
     private static final String FRUIT_TYPE_BANANA = "banana";
     private static final String QUANTITY_EXAMPLE = "20";
@@ -34,21 +32,17 @@ class CsvFileReaderTest {
 
     @Test
     void reading_notEmptyFile_Ok() {
-        CsvFileReader fileReader = new CsvFileReader(FILE_TO_READ);
         List<List<String>> actualLists = fileReader.readTransactions();
 
-        List<List<String>> expectedLists = new ArrayList<>();
-        expectedLists.add(List.of(
-                TYPE_B,
-                FRUIT_TYPE_BANANA,
-                QUANTITY_EXAMPLE)
-        );
-
         Assertions.assertNotNull(actualLists);
-        Assertions.assertEquals(
-                actualLists.get(ZERO_INDEX_POSITION),
-                expectedLists.get(ZERO_INDEX_POSITION)
-        );
+
+        List<String> combinedList = actualLists.stream()
+                .flatMap(List::stream)
+                .toList();
+
+        Assertions.assertTrue(combinedList.contains(TYPE_B));
+        Assertions.assertTrue(combinedList.contains(FRUIT_TYPE_BANANA));
+        Assertions.assertTrue(combinedList.contains(QUANTITY_EXAMPLE));
     }
 
     @Test

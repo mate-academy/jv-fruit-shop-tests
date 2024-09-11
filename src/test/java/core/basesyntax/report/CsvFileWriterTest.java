@@ -22,8 +22,9 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
     private static final String FRUIT_QUANTITY = "fruit,quantity";
-    private static final String FRUIT_BANANA = "banana";
     private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
+    private static final String COMMA = ",";
     private static final String FILE_TO_READ = "src/test/resources/db/ReadTransactionTest";
     private static final String FILE_TO_WRITE = "src/test/resources/db/FileToWrite";
     private static final String NOT_EXISTENT_FILE = "";
@@ -42,9 +43,13 @@ class CsvFileWriterTest {
         String expectedResult =
                 FRUIT_QUANTITY
                         + System.lineSeparator()
-                        + "banana,45"
+                        + FRUIT_BANANA
+                        + COMMA
+                        + "45"
                         + System.lineSeparator()
-                        + "apple,64"
+                        + FRUIT_APPLE
+                        + COMMA
+                        + "64"
                         + System.lineSeparator();
 
         Assertions.assertEquals(expectedResult, actual);

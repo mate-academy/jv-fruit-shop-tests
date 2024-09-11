@@ -22,12 +22,12 @@ public class DataConverterImpl implements DataConverter {
                     FruitTransaction fruitTransaction = new FruitTransaction();
                     Operation operation = Operation.getOperationByCode(parts[INDEX_OF_OPERATION]);
                     String fruitName = parts[INDEX_OF_FRUIT];
-                    int fruitQuantity = Integer.parseInt(parts[INDEX_OF_QUANTITY]);
                     fruitTransaction.setOperation(operation);
                     if (containsDigits(fruitName)) {
                         throw new IllegalArgumentException("Invalid data");
                     }
-                    fruitTransaction.setFruit(parts[INDEX_OF_FRUIT].toLowerCase());
+                    fruitTransaction.setFruit(fruitName.toLowerCase());
+                    int fruitQuantity = Integer.parseInt(parts[INDEX_OF_QUANTITY]);
                     if (fruitQuantity < 0) {
                         throw new IllegalArgumentException("Quantity can't be less than " + 0);
                     }
@@ -36,6 +36,7 @@ public class DataConverterImpl implements DataConverter {
                 })
                 .toList();
     }
+
     private boolean containsDigits(String fruitName) {
         return fruitName.matches(ONLY_NUMBERS) || fruitName.matches(NUMBERS);
     }

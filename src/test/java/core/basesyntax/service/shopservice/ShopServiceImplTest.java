@@ -15,6 +15,7 @@ import core.basesyntax.service.strategy.PurchaseOperation;
 import core.basesyntax.service.strategy.ReturnOperation;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,5 +58,10 @@ class ShopServiceImplTest {
     void totalQuantityAfterOperationBalance_ok() {
         int totalQuantityAfter = shopService.process(testTransactions);
         assertEquals(totalQuantityAfter, EXPECTED_QUANTITY);
+    }
+
+    @AfterEach
+    void tearDown() {
+        storageDao.getAllFruits().clear();
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.exception.NotEnoughProductsException;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.NoSuchElementException;
 
 public class PurchaseOperation implements OperationHandler {

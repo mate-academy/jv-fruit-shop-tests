@@ -7,7 +7,6 @@ import core.basesyntax.exception.UnsupportedOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +14,8 @@ import org.junit.jupiter.api.Test;
 class DataConverterImplTest {
     private static final String NAME_WITH_NUMBER = "b,0range,15";
     private static final String NAME_ONLY_NUMBER = "b,2412,2";
-    private static final String CAMEL_CASE_NAME = "b,Apple,30";
     private static final String NEGATIVE_QUANTITY = "b,banana,-30";
     private static final String UNSUPPORTED_OPERATION = "e,orange,30";
-    private static final String WHITESPACE_DATA = "b , banana, 30";
 
     private static final List<String> TEST_INPUT_DATA = List.of(
             "type,fruit,quantity",

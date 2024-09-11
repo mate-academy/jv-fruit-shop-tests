@@ -2,6 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitStorage;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
 
@@ -12,6 +13,9 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public int getFruitQuantity(String fruit) {
+        if (!FruitStorage.fruitStorage.containsKey(fruit)) {
+            throw new NoSuchElementException("Element not found " + fruit);
+        }
         return FruitStorage.fruitStorage.get(fruit);
     }
 

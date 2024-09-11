@@ -8,4 +8,6 @@ public interface FruitStorageDao {
     int getFruitQuantity(String fruit);
 
     int add(String fruit, int quantity);
+
+    int calculateTotalQuantity();
 }

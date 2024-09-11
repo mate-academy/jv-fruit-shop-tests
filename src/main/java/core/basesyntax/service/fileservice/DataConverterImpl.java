@@ -37,6 +37,6 @@ public class DataConverterImpl implements DataConverter {
                 .toList();
     }
     private boolean containsDigits(String fruitName) {
-        return fruitName.matches(".*\\u0020.*") || fruitName.matches(ONLY_NUMBERS) || fruitName.matches(NUMBERS);
+        return fruitName.matches(ONLY_NUMBERS) || fruitName.matches(NUMBERS);
     }
 }

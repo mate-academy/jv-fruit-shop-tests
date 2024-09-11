@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,5 +53,10 @@ class FruitStorageDaoImplTest {
         int expected = 105;
         int actual = storageDao.calculateTotalQuantity();
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void clearStorage() {
+        storageDao.getAllFruits().clear();
     }
 }

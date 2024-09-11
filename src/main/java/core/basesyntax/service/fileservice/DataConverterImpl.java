@@ -5,6 +5,8 @@ import core.basesyntax.model.Operation;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String ONLY_NUMBERS = ".*\\d.*";
+    private static final String NUMBERS = "\\d+";
     private static final String COMMA = ",";
     private static final int HEADER = 1;
     private static final int INDEX_OF_OPERATION = 0;
@@ -18,10 +20,14 @@ public class DataConverterImpl implements DataConverter {
                 .map(s -> s.split(COMMA))
                 .map(parts -> {
                     FruitTransaction fruitTransaction = new FruitTransaction();
-                    fruitTransaction.setOperation(
-                            Operation.getOperationByCode(parts[INDEX_OF_OPERATION]));
-                    fruitTransaction.setFruit(parts[INDEX_OF_FRUIT]);
+                    Operation operation = Operation.getOperationByCode(parts[INDEX_OF_OPERATION]);
+                    String fruitName = parts[INDEX_OF_FRUIT];
                     int fruitQuantity = Integer.parseInt(parts[INDEX_OF_QUANTITY]);
+                    fruitTransaction.setOperation(operation);
+                    if (containsDigits(fruitName)) {
+                        throw new IllegalArgumentException("Invalid data");
+                    }
+                    fruitTransaction.setFruit(parts[INDEX_OF_FRUIT].toLowerCase());
                     if (fruitQuantity < 0) {
                         throw new IllegalArgumentException("Quantity can't be less than " + 0);
                     }
@@ -29,5 +35,8 @@ public class DataConverterImpl implements DataConverter {
                     return fruitTransaction;
                 })
                 .toList();
+    }
+    private boolean containsDigits(String fruitName) {
+        return fruitName.matches(".*\\u0020.*") || fruitName.matches(ONLY_NUMBERS) || fruitName.matches(NUMBERS);
     }
 }

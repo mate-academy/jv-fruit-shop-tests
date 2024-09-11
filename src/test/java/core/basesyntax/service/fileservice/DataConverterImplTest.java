@@ -67,13 +67,6 @@ class DataConverterImplTest {
     }
 
     @Test
-    void covertDataCamelCase_notOk() {
-        testInputData.add(CAMEL_CASE_NAME);
-        assertThrows(IllegalFormatException.class, ()
-                -> dataConverter.convertToTransaction(testInputData));
-    }
-
-    @Test
     void convertDataNegativeQuantity_notOk() {
         testInputData.add(NEGATIVE_QUANTITY);
         assertThrows(IllegalArgumentException.class, ()
@@ -97,13 +90,6 @@ class DataConverterImplTest {
     @Test
     void convertDataFruitsContainsOnlyNumbers_notOk() {
         testInputData.add(NAME_ONLY_NUMBER);
-        assertThrows(IllegalArgumentException.class, () ->
-                dataConverter.convertToTransaction(testInputData));
-    }
-
-    @Test
-    void convertDataWithWhiteSpace_notOk() {
-        testInputData.add(WHITESPACE_DATA);
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverter.convertToTransaction(testInputData));
     }

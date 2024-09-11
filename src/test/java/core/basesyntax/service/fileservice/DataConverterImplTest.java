@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,6 +53,13 @@ class DataConverterImplTest {
             assertEquals(EXPECTED_FRUITS[i], actual.get(i).getFruit());
             assertEquals(EXPECTED_QUANTITY[i], actual.get(i).getQuantity());
         }
+    }
+
+    @Test
+    void covertDataCamelCase_notOk() {
+        testInputData.add("b,Apple,30");
+        assertThrows(IllegalFormatException.class, ()
+                -> dataConverter.convertToTransaction(testInputData));
     }
 
     @Test

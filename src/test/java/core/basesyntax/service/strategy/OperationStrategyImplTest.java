@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OperationStrategyImplTest {
+    private static final String FRUIT_ORANGE = "orange";
     private static final String FRUIT_APPLE = "apple";
     private static final int APPLE_QUANTITY = 15;
     private static final int NEW_APPLE_QUANTITY = 10;
@@ -89,6 +91,13 @@ class OperationStrategyImplTest {
         FruitTransaction transactionPurchase = TransactionSupplier.of(Operation.PURCHASE, FRUIT_APPLE, OVER_LIMIT_QUANTITY);
         OperationHandler operationPurchase = operationStrategy.getOperation(transactionPurchase.getOperation());
         assertThrows(NotEnoughProductsException.class, () -> operationPurchase.handle(transactionPurchase));
+    }
+
+    @Test
+    void operationPurchaseWithNonExistElement_notOk() {
+        FruitTransaction transactionPurchase = TransactionSupplier.of(Operation.PURCHASE, FRUIT_ORANGE, OVER_LIMIT_QUANTITY);
+        OperationHandler operationPurchase = operationStrategy.getOperation(transactionPurchase.getOperation());
+        assertThrows(NoSuchElementException.class, () -> operationPurchase.handle(transactionPurchase));
     }
 
     @AfterEach

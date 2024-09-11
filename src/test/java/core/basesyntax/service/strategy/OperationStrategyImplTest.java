@@ -1,5 +1,6 @@
 package core.basesyntax.service.strategy;
 
+import core.basesyntax.TransactionSupplier;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.exception.NotEnoughProductsException;
@@ -43,7 +44,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationBalance_ok() {
-        FruitTransaction transactionBalance = transactionOf(Operation.BALANCE, FRUIT_APPLE, NEW_APPLE_QUANTITY);
+        FruitTransaction transactionBalance = TransactionSupplier.of(Operation.BALANCE, FRUIT_APPLE, NEW_APPLE_QUANTITY);
         int beforeOperation = storageDao.getFruitQuantity(FRUIT_APPLE);
         OperationHandler operationBalance = operationHandlers.get(transactionBalance.getOperation());
         operationBalance.handle(transactionBalance);
@@ -54,7 +55,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationReturn_ok() {
-        FruitTransaction transactionReturn = transactionOf(Operation.RETURN, FRUIT_APPLE, RETURN_APPLE);
+        FruitTransaction transactionReturn = TransactionSupplier.of(Operation.RETURN, FRUIT_APPLE, RETURN_APPLE);
         OperationHandler operationReturn = operationStrategy.getOperation(transactionReturn.getOperation());
         int expectedQuantity = APPLE_QUANTITY + RETURN_APPLE;
         operationReturn.handle(transactionReturn);
@@ -64,8 +65,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationSupply_ok() {
-        FruitTransaction transactionSupply =
-                transactionOf(Operation.SUPPLY, FRUIT_APPLE, SUPPLY_APPLE);
+        FruitTransaction transactionSupply = TransactionSupplier.of(Operation.SUPPLY, FRUIT_APPLE, SUPPLY_APPLE);
         OperationHandler operationSupply =
                 operationStrategy.getOperation(transactionSupply.getOperation());
         int expectedQuantity = SUPPLY_APPLE + APPLE_QUANTITY;
@@ -76,7 +76,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationPurchase_ok() {
-        FruitTransaction transactionPurchase = transactionOf(Operation.PURCHASE, FRUIT_APPLE, PURCHASE_APPLE);
+        FruitTransaction transactionPurchase = TransactionSupplier.of(Operation.PURCHASE, FRUIT_APPLE, PURCHASE_APPLE);
         OperationHandler operationPurchase = operationStrategy.getOperation(transactionPurchase.getOperation());
         int expected = APPLE_QUANTITY - PURCHASE_APPLE;
         operationPurchase.handle(transactionPurchase);
@@ -86,7 +86,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationPurchaseWithOverLimitNumber_notOk() {
-        FruitTransaction transactionPurchase = transactionOf(Operation.PURCHASE, FRUIT_APPLE, OVER_LIMIT_QUANTITY);
+        FruitTransaction transactionPurchase = TransactionSupplier.of(Operation.PURCHASE, FRUIT_APPLE, OVER_LIMIT_QUANTITY);
         OperationHandler operationPurchase = operationStrategy.getOperation(transactionPurchase.getOperation());
         assertThrows(NotEnoughProductsException.class, () -> operationPurchase.handle(transactionPurchase));
     }
@@ -94,13 +94,5 @@ class OperationStrategyImplTest {
     @AfterEach
     void tearDown() {
         storageDao.getAllFruits().clear();
-    }
-
-    private FruitTransaction transactionOf(Operation operation, String fruit, int quantity) {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(operation);
-        transaction.setFruit(fruit);
-        transaction.setQuantity(quantity);
-        return transaction;
     }
 }

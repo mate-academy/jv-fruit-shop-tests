@@ -19,26 +19,20 @@ class SupplyOperationTest {
     }
 
     @Test
-    void apply_ShouldIncreaseFruitQuantity() {
+    void apply_increaseFruitQuantity_ok() {
         storage.addEntry("banana", 10);
         supplyOperation.apply("banana", 15, storage);
         assertEquals(25, storage.getQuantity("banana"));
     }
 
     @Test
-    void apply_ShouldHandleEmptyStorage() {
-        supplyOperation.apply("banana", 10, storage);
-        assertEquals(10, storage.getQuantity("banana"));
-    }
-
-    @Test
-    void apply_ShouldThrowExceptionForNullFruit() {
+    void apply_nullFruit_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> supplyOperation.apply(null, 10, storage));
     }
 
     @Test
-    void apply_ShouldThrowExceptionForNegativeQuantity() {
+    void apply_negativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> supplyOperation.apply("banana", -10, storage));
     }

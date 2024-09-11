@@ -18,7 +18,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void getReport_ShouldGenerateCorrectReport() {
+    void getReport_generateCorrectReport_ok() {
         storage.addEntry("banana", 20);
         storage.addEntry("apple", 100);
         storage.addEntry("orange", 5);

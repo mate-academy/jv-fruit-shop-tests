@@ -20,31 +20,7 @@ class CustomFileWriterImplTest {
     }
 
     @Test
-    void write_ShouldThrowExceptionForNullData() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileWriter.write(null, "valid/path.csv"), "Data can't be null or empty.");
-    }
-
-    @Test
-    void write_ShouldThrowExceptionForEmptyData() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileWriter.write("", "valid/path.csv"), "Data can't be null or empty.");
-    }
-
-    @Test
-    void write_ShouldThrowExceptionForNullPath() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileWriter.write("some data", null), "Path can't be null or empty.");
-    }
-
-    @Test
-    void write_ShouldThrowExceptionForEmptyPath() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileWriter.write("some data", ""), "Path can't be null or empty.");
-    }
-
-    @Test
-    void write_ShouldWriteDataToFile() throws IOException {
+    void write_writeDataToFile_ok() throws IOException {
         Path tempFile = Files.createTempFile("testFile", ".csv");
         String data = "type,fruit,quantity\nb,banana,20\ns,banana,100";
 
@@ -57,7 +33,31 @@ class CustomFileWriterImplTest {
     }
 
     @Test
-    void write_ShouldThrowIoExceptionForInvalidPath() {
+    void write_nullData_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileWriter.write(null, "valid/path.csv"), "Data can't be null or empty.");
+    }
+
+    @Test
+    void write_emptyData_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileWriter.write("", "valid/path.csv"), "Data can't be null or empty.");
+    }
+
+    @Test
+    void write_nullPath_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileWriter.write("some data", null), "Path can't be null or empty.");
+    }
+
+    @Test
+    void write_emptyPath_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileWriter.write("some data", ""), "Path can't be null or empty.");
+    }
+
+    @Test
+    void write_invalidPath_notOk() {
         Path invalidPath = Paths.get("/invalid/path/testFile.csv");
         String data = "type,fruit,quantity\nb,banana,20\ns,banana,100";
 

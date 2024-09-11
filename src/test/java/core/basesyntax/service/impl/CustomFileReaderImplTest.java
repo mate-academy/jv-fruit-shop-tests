@@ -21,25 +21,7 @@ class CustomFileReaderImplTest {
     }
 
     @Test
-    void read_ShouldThrowExceptionForNullPath() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileReader.read(null), "Path can't be null or empty.");
-    }
-
-    @Test
-    void read_ShouldThrowExceptionForEmptyPath() {
-        assertThrows(IllegalArgumentException.class,
-                () -> fileReader.read(""), "Path can't be null or empty.");
-    }
-
-    @Test
-    void read_ShouldThrowIoExceptionForInvalidPath() {
-        assertThrows(IOException.class,
-                () -> fileReader.read("invalid/path.csv"));
-    }
-
-    @Test
-    void read_ShouldReturnEmptyListForSingleLineFile() throws IOException {
+    void read_returnEmptyListForSingleLineFile_ok() throws IOException {
         Path filePath = Files.createTempFile("single_line_file", ".csv");
         Files.write(filePath, Collections.singletonList("type,fruit,quantity"));
 
@@ -50,7 +32,7 @@ class CustomFileReaderImplTest {
     }
 
     @Test
-    void read_ShouldReturnCorrectContentForValidFile() throws IOException {
+    void read_returnCorrectContentForValidFile_okk() throws IOException {
         Path filePath = Files.createTempFile("valid_file", ".csv");
         Files.write(filePath, List.of(
                 "type,fruit,quantity",
@@ -67,5 +49,23 @@ class CustomFileReaderImplTest {
         assertEquals("p,banana,13", result.get(2));
 
         Files.delete(filePath);
+    }
+
+    @Test
+    void read_nullPath_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileReader.read(null), "Path can't be null or empty.");
+    }
+
+    @Test
+    void read_emptyPath_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> fileReader.read(""), "Path can't be null or empty.");
+    }
+
+    @Test
+    void read_invalidPath_notOk() {
+        assertThrows(IOException.class,
+                () -> fileReader.read("invalid/path.csv"));
     }
 }

@@ -40,7 +40,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_ShouldHandleBalanceOperation() {
+    void process_performBalanceOperation_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 20);
         shopService.process(List.of(transaction));
 
@@ -48,7 +48,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_ShouldHandleSupplyOperation() {
+    void process_performSupplyOperation_ok() {
         storage.addEntry("banana", 10);
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 15);
         shopService.process(List.of(transaction));
@@ -57,7 +57,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_ShouldHandlePurchaseOperation() {
+    void process_performPurchaseOperation_ok() {
         storage.addEntry("banana", 20);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 5);
         shopService.process(List.of(transaction));
@@ -66,7 +66,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_ShouldHandleReturnOperation() {
+    void process_performReturnOperation_ok() {
         storage.addEntry("banana", 10);
         FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "banana", 5);
         shopService.process(List.of(transaction));
@@ -75,7 +75,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_ShouldThrowExceptionForInsufficientQuantity() {
+    void process_insufficientQuantity_notOk() {
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 5);
 
         assertThrows(InsufficientQuantityException.class,

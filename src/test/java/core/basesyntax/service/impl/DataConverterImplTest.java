@@ -18,13 +18,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_ShouldThrowExceptionForNullInput() {
-        assertThrows(IllegalArgumentException.class,
-                () -> dataConverter.convert(null), "Input list can't be null");
-    }
-
-    @Test
-    void convert_ShouldConvertValidLines() {
+    void convert_convertValidLines_ok() {
         List<String> lines = List.of(
                 "b,banana,20",
                 "s,apple,100",
@@ -40,7 +34,13 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_ShouldThrowExceptionForInvalidLineFormat() {
+    void convert_mullInput_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convert(null), "Input list can't be null");
+    }
+
+    @Test
+    void convert_invalidLineFormat_notOk() {
         List<String> lines = List.of(
                 "b,banana,20",
                 "invalid_line",
@@ -52,7 +52,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_ShouldThrowExceptionForInvalidQuantityFormat() {
+    void convert_invalidQuantityFormat_notOk() {
         List<String> lines = List.of(
                 "b,banana,20",
                 "s,apple,invalid_quantity",
@@ -65,7 +65,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_ShouldThrowExceptionForInvalidOperationCode() {
+    void convert_invalidOperationCode_notOk() {
         List<String> lines = List.of(
                 "b,banana,20",
                 "x,apple,100",

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class InsufficientQuantityExceptionTest {
     @Test
-    void exception_ShouldHaveCorrectMessage() {
+    void exception_printCorrectMessage_ok() {
         String message = "Insufficient quantity available";
 
         InsufficientQuantityException exception = assertThrows(

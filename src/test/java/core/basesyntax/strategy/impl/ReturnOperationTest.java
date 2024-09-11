@@ -20,27 +20,27 @@ class ReturnOperationTest {
     }
 
     @Test
-    void apply_ShouldIncreaseFruitQuantity() {
+    void apply_increaseFruitQuantity_ok() {
         storage.addEntry("banana", 10);
         returnOperation.apply("banana", 5, storage);
         assertEquals(15, storage.getQuantity("banana"));
     }
 
     @Test
-    void apply_ShouldThrowExceptionForNotEnoughQuantity() {
+    void apply_notEnoughQuantity_notOk() {
         storage.addEntry("banana", 5);
         assertThrows(InsufficientQuantityException.class,
                 () -> returnOperation.apply("banana", 10, storage));
     }
 
     @Test
-    void apply_ShouldThrowExceptionForNullFruit() {
+    void apply_nullFruit_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> returnOperation.apply(null, 5, storage));
     }
 
     @Test
-    void apply_ShouldThrowExceptionForNegativeQuantity() {
+    void apply_negativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> returnOperation.apply("banana", -5, storage));
     }

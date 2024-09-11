@@ -39,7 +39,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void applyOperation_ShouldDelegateToCorrectHandler() {
+    void applyOperation_delegateToCorrectHandler_ok() {
         operationStrategy.applyOperation(Operation.BALANCE, "banana", 20, storage);
         assertEquals(20, storage.getQuantity("banana"));
 
@@ -54,7 +54,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void applyOperation_ShouldThrowExceptionForUnsupportedOperation() {
+    void applyOperation_unsupportedOperation_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.applyOperation(Operation.valueOf("UNSUPPORTED_OPERATION"),
                         "banana", 20, storage));

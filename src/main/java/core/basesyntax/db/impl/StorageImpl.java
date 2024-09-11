@@ -21,6 +21,8 @@ public class StorageImpl implements Storage {
     public void addEntry(String key, Integer value) {
         if (key == null) {
             throw new NullPointerException("Key can't be null");
+        } else if (value == null) {
+            throw new NullPointerException("Value can't be null");
         }
         storage.put(key, value);
     }

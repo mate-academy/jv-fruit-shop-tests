@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import static core.basesyntax.service.TestConstants.DEFAULT_APPLE_TRANSACTION;
 import static core.basesyntax.service.TestConstants.DEFAULT_BANANA_TRANSACTION;
 import static core.basesyntax.service.TestConstants.DEFAULT_ORANGE_TRANSACTION;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -58,7 +59,7 @@ public class ShopServiceImplTest {
         fruitTransactions.add(DEFAULT_BANANA_TRANSACTION);
         shopServiceImpl.process(fruitTransactions);
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-            assert (compareTransctions(DEFAULT_BANANA_TRANSACTION, entry));
+            assertTrue(compareTransctions(DEFAULT_BANANA_TRANSACTION, entry));
         }
     }
 

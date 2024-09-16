@@ -11,11 +11,18 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : data) {
             String[] parts = line.split(",");
+            if (parts.length != 3) {
+                throw new RuntimeException("Invalid data format: " + line);
+            }
             FruitTransaction.Operation operation = FruitTransaction.Operation
-                    .valueOf(parts[0].toUpperCase());
+                        .valueOf(parts[0].trim().toUpperCase());
             String fruit = parts[1];
             int quantity = Integer.parseInt(parts[2]);
-            transactions.add(new FruitTransaction(operation, fruit, quantity));
+            if (quantity > 0) {
+                transactions.add(new FruitTransaction(operation, fruit, quantity));
+            } else {
+                throw new RuntimeException("Invalid quantity: " + quantity);
+            }
         }
         return transactions;
     }

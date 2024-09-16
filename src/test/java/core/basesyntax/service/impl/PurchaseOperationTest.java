@@ -21,7 +21,7 @@ class PurchaseOperationTest {
                 "Apple", 5);
         Storage.quantities.put("Apple", 5);
         purchaseOperation.handle(transaction);
-        assertEquals(5, Storage.quantities.get("Apple"));
+        assertEquals(0, Storage.quantities.get("Apple"));
     }
 
     @Test
@@ -30,24 +30,24 @@ class PurchaseOperationTest {
                 "Orange", 3);
         Storage.quantities.put("Orange", -3);
         purchaseOperation.handle(transaction);
-        assertEquals(-3, Storage.quantities.get("Orange"));
+        assertEquals(-6, Storage.quantities.get("Orange"));
     }
 
     @Test
-    public void handle_quantityBecomesZero() {
+    public void handle_quantityIsZero() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "Banana", 5);
         Storage.quantities.put("Banana", 0);
         purchaseOperation.handle(transaction);
-        assertEquals(0, Storage.quantities.get("Banana"));
+        assertEquals(-5, Storage.quantities.get("Banana"));
     }
 
     @Test
-    public void handle_quantityBecomesNegative() {
+    public void handle_quantityIsNegative() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "Grapes", 10);
         Storage.quantities.put("Grapes", -5);
         purchaseOperation.handle(transaction);
-        assertEquals(-5, Storage.quantities.get("Grapes"));
+        assertEquals(-15, Storage.quantities.get("Grapes"));
     }
 }

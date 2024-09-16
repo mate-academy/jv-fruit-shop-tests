@@ -3,6 +3,7 @@ package core.basesyntax.model;
 import static core.basesyntax.model.FruitTransaction.getOperationFromCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
@@ -37,5 +38,11 @@ class FruitTransactionTest {
                 "apple", 10);
         transaction.setQuantity(100);
         assertEquals(100, transaction.getQuantity());
+    }
+
+    @Test
+    void getOperationFromCode_unknownCode() {
+        Assertions.assertThrows(RuntimeException.class,
+                () -> FruitTransaction.getOperationFromCode("x"));
     }
 }

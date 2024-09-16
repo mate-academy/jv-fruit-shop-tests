@@ -6,6 +6,9 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
     public Operation getOperation() {
@@ -55,6 +58,6 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        throw new RuntimeException("Unknown code " + code);
+        throw new RuntimeException("Unknown operation code " + code);
     }
 }

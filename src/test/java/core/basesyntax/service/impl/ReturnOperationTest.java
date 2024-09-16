@@ -34,7 +34,7 @@ class ReturnOperationTest {
     }
 
     @Test
-    public void handle_quantityBecomesZero() {
+    public void handle_quantityIsZero() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "Banana", 5);
         Storage.quantities.put("Banana", 0);
@@ -43,7 +43,7 @@ class ReturnOperationTest {
     }
 
     @Test
-    public void handle_quantityBecomesPositive() {
+    public void handle_quantityIsPositive() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "Grapes", 10);
         Storage.quantities.put("Grapes", 5);

@@ -22,10 +22,8 @@ public class OperationStrategyImpl implements OperationStrategy {
                 return new SupplyOperation();
             case PURCHASE:
                 return new PurchaseOperation();
-            case RETURN:
-                return new ReturnOperation();
             default:
-                throw new UnsupportedOperationException("Unsupported operation");
+                return new ReturnOperation();
         }
     }
 }

@@ -21,7 +21,7 @@ class SupplyOperationTest {
                 "Apple", 5);
         Storage.quantities.put("Apple", 5);
         supplyOperation.handle(transaction);
-        assertEquals(5, Storage.quantities.get("Apple"));
+        assertEquals(10, Storage.quantities.get("Apple"));
     }
 
     @Test
@@ -30,7 +30,7 @@ class SupplyOperationTest {
                 "Kiwi", 3);
         Storage.quantities.put("Kiwi", 3);
         supplyOperation.handle(transaction);
-        assertEquals(3, Storage.quantities.get("Kiwi"));
+        assertEquals(6, Storage.quantities.get("Kiwi"));
     }
 
     @Test
@@ -39,6 +39,6 @@ class SupplyOperationTest {
                 "Grapes", -10);
         Storage.quantities.put("Grapes", -10);
         supplyOperation.handle(transaction);
-        assertEquals(-10, Storage.quantities.get("Grapes"));
+        assertEquals(-20, Storage.quantities.get("Grapes"));
     }
 }

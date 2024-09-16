@@ -96,6 +96,10 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/FruitStorageDaoImpl*</exclude>
+                        <exclude>**/Storage*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/FruitTransaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

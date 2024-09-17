@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.dao.TestFruitStorageDaoImpl;
-import core.basesyntax.db.TestStorage;
+import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,24 +15,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
-    private static TestFruitStorageDaoImpl fruitStorageDao;
+    private static Storage storage;
+    private static FruitStorageDaoImpl fruitStorageDao;
     private static PurchaseOperation purchaseOperation;
 
     @BeforeAll
     static void beforeAll() {
-        fruitStorageDao = new TestFruitStorageDaoImpl();
+        storage = new Storage(new HashMap<>());
+        fruitStorageDao = new FruitStorageDaoImpl(storage);
         purchaseOperation = new PurchaseOperation(fruitStorageDao);
     }
 
     @BeforeEach
     void setUp() {
-        TestStorage.fruits.put(new Fruit("apple"), 10);
-        TestStorage.fruits.put(new Fruit("peach"), 50);
+        storage.getFruits().put(new Fruit("apple"), 10);
+        storage.getFruits().put(new Fruit("peach"), 50);
     }
 
     @AfterEach
     void tearDown() {
-        TestStorage.fruits.clear();
+        storage.getFruits().clear();
     }
 
     @Test
@@ -42,7 +45,7 @@ class PurchaseOperationTest {
         );
         assertTrue(purchaseOperation.applyOperation(new Fruit("apple"), 10));
         assertTrue(purchaseOperation.applyOperation(new Fruit("peach"), 30));
-        Map<Fruit, Integer> actual = TestStorage.fruits;
+        Map<Fruit, Integer> actual = storage.getFruits();
         assertEquals(expected, actual);
     }
 

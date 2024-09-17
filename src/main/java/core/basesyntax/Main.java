@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.FileReaderService;
@@ -20,13 +21,15 @@ import core.basesyntax.service.impl.operation.ReturnOperation;
 import core.basesyntax.service.impl.operation.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/reportToRead.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
-    private static final FruitStorageDao FRUIT_STORAGE_DAO = new FruitStorageDaoImpl();
+    private static final Storage storage = new Storage(new HashMap<>());
+    private static final FruitStorageDao FRUIT_STORAGE_DAO = new FruitStorageDaoImpl(storage);
 
     private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLERS
             = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperation(FRUIT_STORAGE_DAO),

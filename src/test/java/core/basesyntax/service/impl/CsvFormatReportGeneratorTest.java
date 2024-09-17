@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.dao.TestFruitStorageDaoImpl;
-import core.basesyntax.db.TestStorage;
+import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.FileReaderService;
@@ -16,6 +16,7 @@ import core.basesyntax.service.impl.operation.ReturnOperation;
 import core.basesyntax.service.impl.operation.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +25,8 @@ import org.junit.jupiter.api.Test;
 
 class CsvFormatReportGeneratorTest {
     private static final String INPUT_FILE_PATH = "src/test/resources/reportToRead.csv";
-    private static TestFruitStorageDaoImpl fruitStorageDao;
+    private static Storage storage;
+    private static FruitStorageDaoImpl fruitStorageDao;
     private static ReportGenerator csvFormatReportGenerator;
     private static FileReaderService fileReader;
     private static DataConverterService dataConverter;
@@ -34,7 +36,8 @@ class CsvFormatReportGeneratorTest {
 
     @BeforeAll
     static void beforeAll() {
-        fruitStorageDao = new TestFruitStorageDaoImpl();
+        storage = new Storage(new HashMap<>());
+        fruitStorageDao = new FruitStorageDaoImpl(storage);
         csvFormatReportGenerator = new CsvFormatReportGenerator(fruitStorageDao);
         fileReader = new FileReaderServiceImpl();
         dataConverter = new DataConverterServiceImpl();
@@ -49,7 +52,7 @@ class CsvFormatReportGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        TestStorage.fruits.clear();
+        storage.getFruits().clear();
     }
 
     @Test

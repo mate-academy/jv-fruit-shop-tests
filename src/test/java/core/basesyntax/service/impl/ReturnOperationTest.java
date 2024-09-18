@@ -8,6 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
+    private static final String APPLE = "Apple";
+    private static final String BANANA = "Banana";
+    private static final String ORANGE = "Orange";
+    private static final String GRAPES = "Grapes";
     private ReturnOperation returnOperation;
 
     @BeforeEach
@@ -18,36 +22,36 @@ class ReturnOperationTest {
     @Test
     public void handle() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "Apple", 5);
-        Storage.quantities.put("Apple", 15);
+                APPLE, 5);
+        Storage.quantities.put(APPLE, 15);
         returnOperation.handle(transaction);
-        assertEquals(15, Storage.quantities.get("Apple"));
+        assertEquals(15, Storage.quantities.get(APPLE));
     }
 
     @Test
     public void handle_newFruit() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "Orange", 3);
-        Storage.quantities.put("Orange", 3);
+                ORANGE, 3);
+        Storage.quantities.put(ORANGE, 3);
         returnOperation.handle(transaction);
-        assertEquals(3, Storage.quantities.get("Orange"));
+        assertEquals(3, Storage.quantities.get(ORANGE));
     }
 
     @Test
     public void handle_quantityIsZero() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "Banana", 5);
-        Storage.quantities.put("Banana", 0);
+                BANANA, 5);
+        Storage.quantities.put(BANANA, 0);
         returnOperation.handle(transaction);
-        assertEquals(0, Storage.quantities.get("Banana"));
+        assertEquals(0, Storage.quantities.get(BANANA));
     }
 
     @Test
     public void handle_quantityIsPositive() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "Grapes", 10);
-        Storage.quantities.put("Grapes", 5);
+                GRAPES, 10);
+        Storage.quantities.put(GRAPES, 5);
         returnOperation.handle(transaction);
-        assertEquals(5, Storage.quantities.get("Grapes"));
+        assertEquals(5, Storage.quantities.get(GRAPES));
     }
 }

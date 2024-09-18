@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
+    private static final String APPLE = "Apple";
+    private static final String KIWI = "Kiwi";
+    private static final String GRAPES = "Grapes";
     private SupplyOperation supplyOperation;
 
     @BeforeEach
@@ -18,27 +21,27 @@ class SupplyOperationTest {
     @Test
     public void handle() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "Apple", 5);
-        Storage.quantities.put("Apple", 5);
+                APPLE, 5);
+        Storage.quantities.put(APPLE, 5);
         supplyOperation.handle(transaction);
-        assertEquals(10, Storage.quantities.get("Apple"));
+        assertEquals(10, Storage.quantities.get(APPLE));
     }
 
     @Test
     public void handle_newFruit() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "Kiwi", 3);
-        Storage.quantities.put("Kiwi", 3);
+                KIWI, 3);
+        Storage.quantities.put(KIWI, 3);
         supplyOperation.handle(transaction);
-        assertEquals(6, Storage.quantities.get("Kiwi"));
+        assertEquals(6, Storage.quantities.get(KIWI));
     }
 
     @Test
     public void handle_quantityBecomesNegative_notOk() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "Grapes", -10);
-        Storage.quantities.put("Grapes", -10);
+                GRAPES, -10);
+        Storage.quantities.put(GRAPES, -10);
         supplyOperation.handle(transaction);
-        assertEquals(-20, Storage.quantities.get("Grapes"));
+        assertEquals(-20, Storage.quantities.get(GRAPES));
     }
 }

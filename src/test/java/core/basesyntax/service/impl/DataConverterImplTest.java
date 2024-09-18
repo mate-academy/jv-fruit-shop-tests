@@ -14,6 +14,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
+    private static final String APPLE = "Apple";
+    private static final String BANANA = "Banana";
+    private static final String ORANGE = "Orange";
+    private static final String GRAPES = "Grapes";
     private DataConverter dataConverter;
 
     @BeforeEach
@@ -66,19 +70,19 @@ class DataConverterImplTest {
         assertEquals(4, transactions.size());
         FruitTransaction transaction1 = transactions.get(0);
         assertEquals(FruitTransaction.Operation.BALANCE, transaction1.getOperation());
-        assertEquals("Apple", transaction1.getFruit());
+        assertEquals(APPLE, transaction1.getFruit());
         assertEquals(10, transaction1.getQuantity());
         FruitTransaction transaction2 = transactions.get(1);
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction2.getOperation());
-        assertEquals("Banana", transaction2.getFruit());
+        assertEquals(BANANA, transaction2.getFruit());
         assertEquals(5, transaction2.getQuantity());
         FruitTransaction transaction3 = transactions.get(2);
         assertEquals(FruitTransaction.Operation.PURCHASE, transaction3.getOperation());
-        assertEquals("Orange", transaction3.getFruit());
+        assertEquals(ORANGE, transaction3.getFruit());
         assertEquals(20, transaction3.getQuantity());
         FruitTransaction transaction4 = transactions.get(3);
         assertEquals(FruitTransaction.Operation.RETURN, transaction4.getOperation());
-        assertEquals("Grapes", transaction4.getFruit());
+        assertEquals(GRAPES, transaction4.getFruit());
         assertEquals(15, transaction4.getQuantity());
     }
 

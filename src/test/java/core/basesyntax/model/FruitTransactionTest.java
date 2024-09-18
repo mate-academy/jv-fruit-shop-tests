@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
+    private static final String APPLE = "Apple";
+    private static final String BANANA = "Banana";
 
     @Test
     public void get_operation_from_code() {
@@ -19,7 +21,7 @@ class FruitTransactionTest {
     @Test
     public void set_operation() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 10);
+                APPLE, 10);
         transaction.setOperation(FruitTransaction.Operation.SUPPLY);
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
     }
@@ -27,15 +29,15 @@ class FruitTransactionTest {
     @Test
     public void set_fruit() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 10);
-        transaction.setFruit("banana");
-        assertEquals("banana", transaction.getFruit());
+                APPLE, 10);
+        transaction.setFruit(BANANA);
+        assertEquals(BANANA, transaction.getFruit());
     }
 
     @Test
     public void set_quantity() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 10);
+                APPLE, 10);
         transaction.setQuantity(100);
         assertEquals(100, transaction.getQuantity());
     }

@@ -9,11 +9,9 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.operation.BalanceOperation;
-import core.basesyntax.service.impl.operation.OperationHandler;
 import core.basesyntax.service.impl.operation.PurchaseOperation;
 import core.basesyntax.service.impl.operation.ReturnOperation;
 import core.basesyntax.service.impl.operation.SupplyOperation;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -24,22 +22,18 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static Storage storage;
-    private static FruitStorageDaoImpl fruitStorageDao;
-    private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
-    private static OperationStrategy operationStrategy;
     private static ShopService shopService;
 
     @BeforeAll
     static void beforeAll() {
         storage = new Storage(new HashMap<>());
-        fruitStorageDao = new FruitStorageDaoImpl(storage);
-        handlerMap = Map.of(
+        FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl(storage);
+        shopService = new ShopServiceImpl(new OperationStrategyImpl(Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitStorageDao),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorageDao),
                 FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorageDao),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorageDao));
-        operationStrategy = new OperationStrategyImpl(handlerMap);
-        shopService = new ShopServiceImpl(operationStrategy);
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorageDao))
+        ));
     }
 
     @BeforeEach

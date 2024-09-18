@@ -4,50 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataConverterService;
-import core.basesyntax.service.FileReaderService;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.service.impl.operation.BalanceOperation;
-import core.basesyntax.service.impl.operation.OperationHandler;
-import core.basesyntax.service.impl.operation.PurchaseOperation;
-import core.basesyntax.service.impl.operation.ReturnOperation;
-import core.basesyntax.service.impl.operation.SupplyOperation;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFormatReportGeneratorTest {
-    private static final String INPUT_FILE_PATH = "src/test/resources/reportToRead.csv";
     private static Storage storage;
-    private static FruitStorageDaoImpl fruitStorageDao;
     private static ReportGenerator csvFormatReportGenerator;
-    private static FileReaderService fileReader;
-    private static DataConverterService dataConverter;
-    private static OperationStrategy operationStrategy;
-    private static Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLERS;
-    private static ShopService shopService;
 
     @BeforeAll
     static void beforeAll() {
         storage = new Storage(new HashMap<>());
-        fruitStorageDao = new FruitStorageDaoImpl(storage);
+        FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl(storage);
         csvFormatReportGenerator = new CsvFormatReportGenerator(fruitStorageDao);
-        fileReader = new FileReaderServiceImpl();
-        dataConverter = new DataConverterServiceImpl();
-        OPERATION_HANDLERS = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitStorageDao),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorageDao),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorageDao),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorageDao));
-        operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS);
-        shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @BeforeEach
@@ -56,14 +28,12 @@ class CsvFormatReportGeneratorTest {
     }
 
     @Test
-    void getReport_ok() {
-        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-        shopService.process(transactions);
-
-        String expected = "fruit,quantity\n" + "banana,152\n" + "apple,90";
+    void getReport_validData_ok() {
+        storage.getFruits().put(new Fruit("banana"), 152);
+        storage.getFruits().put(new Fruit("apple"), 90);
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator() + "apple,90";
         String actual = csvFormatReportGenerator.getReport();
-
         assertEquals(expected, actual);
     }
 }

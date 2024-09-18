@@ -21,23 +21,36 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_validPath_ok() {
+        Path tempFile = createTempFile();
+        String expectedContent = "type,fruit,quantity b,banana,20 b,apple,100";
+        fileWriterService.write(expectedContent, tempFile.toString());
+        String actualContent = readTempFile(tempFile);
+        assertEquals(expectedContent, actualContent);
+        assertTrue(Files.exists(tempFile));
+        deleteTempFile(tempFile);
+    }
+
+    private Path createTempFile() {
         Path tempFile;
         try {
             tempFile = Files.createTempFile("test", ".csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String filePath = tempFile.toString();
-        String expectedContent = "type,fruit,quantity b,banana,20 b,apple,100";
-        fileWriterService.write(expectedContent, filePath);
+        return tempFile;
+    }
+
+    private String readTempFile(Path tempFile) {
         String actualContent;
         try {
             actualContent = Files.readString(tempFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expectedContent, actualContent);
-        assertTrue(Files.exists(tempFile));
+        return actualContent;
+    }
+
+    private void deleteTempFile(Path tempFile) {
         try {
             Files.delete(tempFile);
         } catch (IOException e) {

@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT = "D:/java/jv-fruit-shop/src/main/java/resources/input.csv";
-    private static final String REPORT = "D:/java/jv-fruit-shop/src/main/java/resources/report.csv";
+    private static final String INPUT = "src/main/java/resources/input.csv";
+    private static final String REPORT = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
         Reader reader = new ReaderImpl();

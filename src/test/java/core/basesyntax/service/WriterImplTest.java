@@ -12,8 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
-    private static final String TEST_FILE_PATH =
-            "D:/java/jv-fruit-shop-tests/src/main/java/resources/report.csv";
+    private static final String TEST_FILE_PATH = "src/main/java/resources/report.csv";
     private WriterImpl writer;
 
     @BeforeEach
@@ -23,7 +22,7 @@ class WriterImplTest {
 
     @Test
     void writeReport_validFilePath_success() throws IOException {
-        String testData = "fruit,quantity\nbanana,100\napple,50";
+        String report = "fruit,quantity\nbanana,100\napple,50";
 
         writer.writeReport(TEST_FILE_PATH);
 

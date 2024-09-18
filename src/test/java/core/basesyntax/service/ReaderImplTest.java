@@ -7,10 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ReaderImplTest {
-    private static final String VALID_FILE_PATH =
-            "D:/java/jv-fruit-shop-tests/src/main/java/resources/input.csv";
-    private static final String INVALID_FILE_PATH =
-            "D:/java/jv-fruit-shop-tests/src/main/java/resources/report.csv";
+    private static final String VALID_FILE_PATH = "src/main/java/resources/input.csv";
+    private static final String INVALID_FILE_PATH = "src/main/java/resources/report.csv";
     private final Reader reader = new ReaderImpl();
 
     @Test

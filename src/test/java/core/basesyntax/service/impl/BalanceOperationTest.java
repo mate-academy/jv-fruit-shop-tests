@@ -17,6 +17,7 @@ class BalanceOperationTest {
     @BeforeEach
     public void setUp() {
         balanceOperation = new BalanceOperation();
+        Storage.quantities.clear();
     }
 
     @Test

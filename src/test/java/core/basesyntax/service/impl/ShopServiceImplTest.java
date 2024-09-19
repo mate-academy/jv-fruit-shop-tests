@@ -63,7 +63,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void process_transactionsAreValid() {
+    public void process_transactionsAreValid_ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),

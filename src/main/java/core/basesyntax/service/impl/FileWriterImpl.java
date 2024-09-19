@@ -1,5 +1,6 @@
-package core.basesyntax.dao;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 

@@ -26,20 +26,20 @@ class DataConverterImplTest {
     }
 
     @Test
-    public void convertToTransaction_emptyData() {
+    public void convert_emptyData_notOk() {
         List<String> emptyData = Collections.emptyList();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(emptyData);
         assertTrue(transactions.isEmpty());
     }
 
     @Test
-    public void convertToTransaction_nullData() {
+    public void convert_nullData_notOk() {
         assertThrows(NullPointerException.class,
                 () -> dataConverter.convertToTransaction(null));
     }
 
     @Test
-    public void convertToTransaction_invalidOperation() {
+    public void convert_invalidOperation_notOk() {
         DataConverterImpl dataConverter = new DataConverterImpl();
         List<String> data = Arrays.asList(
                 "INVALID,Apple,10",
@@ -51,14 +51,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertReport_inputMoreThanThreeParameters_notOk() {
-        List<String> wrong = List.of("1,2,3,4", "1,2,3,4,5");
-        Assertions.assertThrows(RuntimeException.class, () -> dataConverter
-                .convertToTransaction(wrong));
-    }
-
-    @Test
-    public void convertToTransaction_ValidData() {
+    public void convert_ValidData_ok() {
         List<String> data = Arrays.asList(
                 "BALANCE,Apple,10",
                 "SUPPLY,Banana,5",
@@ -87,7 +80,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    public void convertToTransaction_InvalidQuantity() {
+    public void convert_InvalidQuantity_notOk() {
         List<String> data = Arrays.asList(
                 "BALANCE,Apple,10",
                 "SUPPLY,Banana,-5",

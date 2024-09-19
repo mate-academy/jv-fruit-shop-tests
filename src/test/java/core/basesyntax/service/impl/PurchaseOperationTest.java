@@ -47,7 +47,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    public void handle_quantityIsNegative() {
+    public void handle_quantityIsNegative_notOk() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 GRAPES, 10);
         Storage.quantities.put(GRAPES, -5);

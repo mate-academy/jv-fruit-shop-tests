@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String CSV_INPUT
-            = "src/main/java/core/basesyntax/resources/reportToRead.csv";
+            = "src/test/java/core/basesyntax/resources/reportToRead.csv";
     private static final String WRONG_FILE_PATH
-            = "src/test/java/core/basesyntax/resources/badHeader.cs";
+            = "src/test/java/core/basesyntax/resources/invalidHeader.cs";
     private static FileReader fileReader;
 
     @BeforeAll
@@ -24,25 +24,25 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_FileName_Format_NotOk() {
+    void read_FileNameFormat_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReader.read(WRONG_FILE_PATH),
-                "Wrong file name format");
+                "Invalid file name format");
     }
 
     @Test
-    void read_InputIsNull_NotOk() {
+    void read_InputIsNull_Ok() {
         assertNotNull(fileReader.read(CSV_INPUT));
     }
 
     @Test
-    void read_Input_IsEmptyList_NotOk() {
+    void read_InputIsEmptyList_Ok() {
         List<String> emptyList = new ArrayList<>();
         assertNotEquals(emptyList, fileReader.read(CSV_INPUT));
     }
 
     @Test
-    void read_HeaderIsSeparated_NotOk() {
+    void read_HeaderIsSeparated_Ok() {
         List<String> notExpectedOutput = new ArrayList<>();
         notExpectedOutput.add("type;fruit;quantity");
         notExpectedOutput.add("b;banana;20");

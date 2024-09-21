@@ -24,7 +24,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_Null_Input_NotOk() {
+    void convertToTransaction_NullInput_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(null),
                 "Input data is null");

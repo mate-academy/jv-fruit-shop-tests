@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.FileReader;
 import core.basesyntax.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,14 +14,12 @@ class FileWriterImplTest {
     private static final String CSV_OUTPUT
             = "src/test/java/core/basesyntax/resources/finalReportTest.csv";
     private static final String CSV_OUTPUT_EXPECTED
-            = "src/main/java/core/basesyntax/resources/finalReport.csv";
+            = "src/test/java/core/basesyntax/resources/finalReportExpected.csv";
     private static FileWriter fileWriter;
-    private static FileReader fileReader;
 
     @BeforeAll
     static void beforeAll() {
         fileWriter = new FileWriterImpl();
-        fileReader = new FileReaderImpl();
     }
 
     @Test

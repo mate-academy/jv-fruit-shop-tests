@@ -11,10 +11,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String CSV_OUTPUT
+    private static final String CSV_OUTPUT_TO_TEST
             = "src/test/java/core/basesyntax/resources/finalReportTest.csv";
-    private static final String CSV_OUTPUT_EXPECTED
-            = "src/test/java/core/basesyntax/resources/finalReportExpected.csv";
     private static FileWriter fileWriter;
 
     @BeforeAll
@@ -24,11 +22,11 @@ class FileWriterImplTest {
 
     @Test
     void write_ValidData_FileCreatedAndContainsCorrectData() throws IOException {
-        String testData = "This is a test string";
-        fileWriter.write(testData, CSV_OUTPUT);
-        String fileContent = Files.readString(Path.of(CSV_OUTPUT));
+        String testDataExpected = "This is a test string";
+        fileWriter.write(testDataExpected, CSV_OUTPUT_TO_TEST);
+        String fileContent = Files.readString(Path.of(CSV_OUTPUT_TO_TEST));
 
-        assertTrue(Files.exists(Path.of(CSV_OUTPUT)));
-        assertEquals(testData, fileContent);
+        assertTrue(Files.exists(Path.of(CSV_OUTPUT_TO_TEST)));
+        assertEquals(testDataExpected, fileContent);
     }
 }

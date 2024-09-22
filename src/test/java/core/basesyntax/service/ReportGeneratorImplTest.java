@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.ReportGenerator;
 import core.basesyntax.Storage;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +27,6 @@ class ReportGeneratorImplTest {
                 .append(System.lineSeparator());
         storage.addFruit("apple", 5);
         storage.addFruit("banana", 5);
-        Map<String, Integer> fruits = storage.getAllFruits();
 
         assertEquals(builder.toString(), reportGenerator.getReport(storage));
     }

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.FileReader;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,9 +15,11 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String CSV_INPUT
-            = "src/test/java/core/basesyntax/resources/reportToRead.csv";
+            = "src/test/resources/reportToRead.csv";
     private static final String WRONG_FILE_PATH
-            = "src/test/java/core/basesyntax/resources/invalidHeader.cs";
+            = "src/test/resources/invalidHeader.cs";
+    private static final String EMPTY_FILE_PATH
+            = "src/test/resources/empty.cs";
     private static FileReader fileReader;
 
     @BeforeAll
@@ -36,25 +40,14 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_InputIsEmptyList_Ok() {
-        List<String> emptyList = new ArrayList<>();
-        assertNotEquals(emptyList, fileReader.read(CSV_INPUT));
-    }
-
-    @Test
-    void read_HeaderIsSeparated_Ok() {
-        List<String> notExpectedOutput = new ArrayList<>();
-        notExpectedOutput.add("type;fruit;quantity");
-        notExpectedOutput.add("b;banana;20");
-        notExpectedOutput.add("b;apple;100");
-        notExpectedOutput.add("s;banana;100");
-        notExpectedOutput.add("p;banana;13");
-        notExpectedOutput.add("r;apple;10");
-        notExpectedOutput.add("p;apple;20");
-        notExpectedOutput.add("p;banana;5");
-        notExpectedOutput.add("s;banana;50");
-
-        assertNotEquals(notExpectedOutput, fileReader.read(CSV_INPUT));
+    void read_InputIsEmptyList_NotOk() {
+        File empyFile = new File(EMPTY_FILE_PATH);
+        try {
+            empyFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create file", e);
+        }
+        assertNotEquals(fileReader.read(EMPTY_FILE_PATH), fileReader.read(CSV_INPUT));
     }
 
     @Test

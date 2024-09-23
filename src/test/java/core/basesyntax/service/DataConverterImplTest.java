@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private static final String CSV_INPUT
-            = "src/test/java/core/basesyntax/resources/reportToRead.csv";
+            = "src/test/resources/reportToRead.csv";
     private static DataConverter dataConverter;
     private static FileReader fileReader;
 

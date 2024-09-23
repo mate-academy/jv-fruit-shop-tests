@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String CSV_OUTPUT_TO_TEST
-            = "src/test/java/core/basesyntax/resources/finalReportTest.csv";
+            = "src/test/resources/finalReportTest.csv";
     private static FileWriter fileWriter;
 
     @BeforeAll

@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class Main {
     private static final String CSV_INPUT
-            = "src/main/java/core/basesyntax/resources/reportToRead.csv";
+            = "src/main/reportToRead.csv";
     private static final String CSV_OUTPUT
-            = "src/main/java/core/basesyntax/finalReport/finalReport.csv";
+            = "src/main/resources/finalReport/finalReport.csv";
 
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file

@@ -11,10 +11,12 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShopServiceImplTest {
     private ShopService shopService;

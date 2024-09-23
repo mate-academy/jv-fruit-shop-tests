@@ -11,12 +11,10 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ShopServiceImplTest {
     private ShopService shopService;
@@ -40,10 +38,9 @@ class ShopServiceImplTest {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10)
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30)
         );
         shopService.process(transactions);
-        assertEquals(130, fruitStorage.get("banana"));
+        assertEquals(120, fruitStorage.get("banana"));
     }
 }

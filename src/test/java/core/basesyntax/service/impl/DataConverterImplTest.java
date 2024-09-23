@@ -31,7 +31,7 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_invalidData_throwsException() {
         List<String> data = List.of("invalid,data");
-        assertThrows(IllegalArgumentException.class, 
-            () -> dataConverter.convertToTransaction(data));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(data));
     }
 }

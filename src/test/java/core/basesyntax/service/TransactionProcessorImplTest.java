@@ -3,8 +3,6 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -15,22 +13,27 @@ import core.basesyntax.strategy.impl.Return;
 import core.basesyntax.strategy.impl.Supply;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
+    private static OperationStrategy operationStrategy;
     private TransactionProcessorImpl processor;
 
-    @BeforeEach
-    void setUp() {
-        Storage.fruits.clear();
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationStrategy operationStrategy = new OperationStrategy(Map.of(
+    @BeforeAll
+    static void beforeAll() {
+        operationStrategy = new OperationStrategy(Map.of(
                 Operation.BALANCE, new Balance(),
                 Operation.SUPPLY, new Supply(),
                 Operation.PURCHASE, new Purchase(),
                 Operation.RETURN, new Return()
         ));
+    }
+
+    @BeforeEach
+    void setUp() {
+        Storage.fruits.clear();
         processor = new TransactionProcessorImpl(operationStrategy);
     }
 

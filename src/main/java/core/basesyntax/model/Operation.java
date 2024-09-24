@@ -17,11 +17,11 @@ public enum Operation {
     }
 
     public static Operation operationCode(String code) {
-        for (Operation operation : values()) {
+        for (Operation operation : Operation.values()) {
             if (operation.getCode().equals(code)) {
                 return operation;
             }
         }
-        throw new RuntimeException("Invalid Operation code: " + code);
+        throw new RuntimeException("Invalid operation: " + code);
     }
 }

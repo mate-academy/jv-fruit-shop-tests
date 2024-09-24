@@ -35,7 +35,8 @@ class TransactionParserImplTest {
         List<String> lines = List.of(
                 "x,banana,20"
         );
-
-        assertThrows(RuntimeException.class, () -> parser.parse(lines));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> parser.parse(lines));
+        assertEquals("Invalid operation: x", exception.getMessage());
     }
 }

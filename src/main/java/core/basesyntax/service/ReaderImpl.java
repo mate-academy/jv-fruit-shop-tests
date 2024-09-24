@@ -11,17 +11,14 @@ public class ReaderImpl implements Reader {
     @Override
     public List<String> readFile(String filePath) {
         List<String> lines = new ArrayList<>();
-        //System.out.println("Reading file from path: " + filePath);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-            //System.out.println("File found, starting to read...");
             bufferedReader.readLine();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            //System.out.println("Error reading file: " +e.getMessage());
-            throw new RuntimeException("Can't read data: " + filePath);
+            throw new RuntimeException("Can't read data: " + filePath, e);
         }
         return lines;
     }

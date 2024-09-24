@@ -4,12 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderImplTest {
     private static final String VALID_FILE_PATH = "src/main/java/resources/input.csv";
-    private static final String INVALID_FILE_PATH = "src/main/java/resources/report.csv";
-    private final Reader reader = new ReaderImpl();
+    private static final String INVALID_FILE_PATH = "D:/java/fruit-shop-tests "
+            + "/src/main/java/resources/report.csv";
+    private static Reader reader;
+
+    @BeforeAll
+     static void beforeAll() {
+        reader = new ReaderImpl();
+    }
 
     @Test
     void readFile_ValidPath_Ok() {
@@ -28,6 +35,7 @@ class ReaderImplTest {
 
     @Test
     void readFile_InvalidPath_ThrowsException() {
-        assertThrows(RuntimeException.class, () -> reader.readFile(INVALID_FILE_PATH));
+        assertThrows(RuntimeException.class, () -> reader.readFile(INVALID_FILE_PATH),
+                "Expected a RuntimeException due to file not found");
     }
 }

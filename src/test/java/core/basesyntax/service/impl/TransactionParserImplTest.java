@@ -5,11 +5,12 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 class TransactionParserImplTest {
     private static final int NUMBER_OF_ARGUMENTS = 3;

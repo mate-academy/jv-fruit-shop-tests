@@ -3,10 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ShopService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReportGeneratorImplTest {
     private static final String SEPARATOR = System.lineSeparator();

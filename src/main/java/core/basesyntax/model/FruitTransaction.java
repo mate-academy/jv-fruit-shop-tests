@@ -7,20 +7,6 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o.getClass() != this.getClass()) {
-            return false;
-        }
-        FruitTransaction object = (FruitTransaction) o;
-        return quantity == object.quantity
-                && operation == object.operation
-                && Objects.equals(fruit, object.fruit);
-    }
-
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
@@ -49,5 +35,19 @@ public class FruitTransaction {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        FruitTransaction object = (FruitTransaction) o;
+        return quantity == object.quantity
+                && operation == object.operation
+                && Objects.equals(fruit, object.fruit);
     }
 }

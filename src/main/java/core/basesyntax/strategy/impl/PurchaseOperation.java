@@ -18,9 +18,9 @@ public class PurchaseOperation implements OperationHandler {
         }
         if (transaction.getQuantity() < 0) {
             throw new RuntimeException(String.format(
-                    "Error purchasing fruits. Trying to purchase negative" +
-                            "amount of fruits: " +
-                    transaction.getQuantity()));
+                    "Error purchasing fruits. Trying to purchase negative"
+                            + "amount of fruits: "
+                            + transaction.getQuantity()));
         }
         storage.put(fruitName, newQuantity);
     }

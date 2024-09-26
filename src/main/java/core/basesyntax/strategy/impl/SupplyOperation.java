@@ -13,9 +13,9 @@ public class SupplyOperation implements OperationHandler {
             throw new RuntimeException(String.format("Error supplying "
                     + "fruit %s: quantity %d of supply is less than zero", fruit, quantity));
         }
-        int newQuantity = (storage.get(fruit) == null) ?
-            quantity
-            : storage.get(fruit) + quantity;
+        int newQuantity = (storage.get(fruit) == null)
+                ? quantity
+                : storage.get(fruit) + quantity;
         storage.put(fruit, newQuantity);
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class ShopServiceImplTest {
     @Test
     public void processTransactions_validTransactions_ok() {
         List<FruitTransaction> transactions = buildTransactions();
-        shopService.processTransactions(transactions);
+        shopService.process(transactions);
     }
 
     private List<FruitTransaction> buildTransactions() {

@@ -113,5 +113,4 @@ class FileWriterImplTest {
             throw new RuntimeException(e);
         }
     }
-
 }

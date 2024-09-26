@@ -1,12 +1,12 @@
 package core.basesyntax.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OperationStrategyImplTest {
     private OperationStrategy strategy;

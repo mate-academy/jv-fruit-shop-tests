@@ -12,7 +12,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 class ShopServiceImplTest {
     private ShopServiceImpl shopService;
 
@@ -83,7 +82,7 @@ class ShopServiceImplTest {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(Operation.SUPPLY, "apple", -10));
         assertThrows(RuntimeException.class, () ->
-            shopService.process(transactions));
+                shopService.process(transactions));
     }
 
     @Test

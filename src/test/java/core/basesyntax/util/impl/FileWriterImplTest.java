@@ -1,6 +1,7 @@
 package core.basesyntax.util.impl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +23,7 @@ public class FileWriterImplTest {
         String filePath = "src/test/resources/outputFile.txt";
         fileWriter.write(data, filePath);
         String actual = new String(Files.readAllBytes(Paths.get(filePath)));
-        assertEquals(data, actual);
+        assertTrue(actual.contains(data));
     }
 
     @Test

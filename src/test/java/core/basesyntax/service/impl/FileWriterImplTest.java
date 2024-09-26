@@ -22,7 +22,7 @@ class FileWriterImplTest {
     private static final String FILE_PATH = "fileToWrite.csv";
     private static File fileToWrite;
     private BufferedReader reader;
-    java.io.FileWriter cleaner;
+    private java.io.FileWriter cleaner;
 
     @BeforeEach
     public void setUp() {
@@ -70,7 +70,6 @@ class FileWriterImplTest {
         }
         assertEquals(expected, actual);
     }
-
 
     @Test
     public void writeMultiline_Ok() {

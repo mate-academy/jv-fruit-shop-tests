@@ -3,7 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.impl.BalanceOperation;
+import core.basesyntax.handler.impl.PurchaseOperation;
+import core.basesyntax.handler.impl.SupplyOperation;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +23,11 @@ public class ShopServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(Storage.fruitStorage));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(Storage.fruitStorage));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(Storage.fruitStorage));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         shopService = new ShopServiceImpl(operationStrategy);
     }
 

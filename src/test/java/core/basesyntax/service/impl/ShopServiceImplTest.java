@@ -36,11 +36,22 @@ class ShopServiceImplTest {
 
     @Test
     void process_validTransactions_ok() {
-        List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30)
-        );
+        FruitTransaction transaction1 = new FruitTransaction();
+        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
+        transaction1.setFruit("banana");
+        transaction1.setQuantity(100);
+
+        FruitTransaction transaction2 = new FruitTransaction();
+        transaction2.setOperation(FruitTransaction.Operation.SUPPLY);
+        transaction2.setFruit("banana");
+        transaction2.setQuantity(50);
+
+        FruitTransaction transaction3 = new FruitTransaction();
+        transaction3.setOperation(FruitTransaction.Operation.PURCHASE);
+        transaction3.setFruit("banana");
+        transaction3.setQuantity(30);
+
+        List<FruitTransaction> transactions = List.of(transaction1, transaction2, transaction3);
         shopService.process(transactions);
         assertEquals(120, fruitStorage.get("banana"));
     }

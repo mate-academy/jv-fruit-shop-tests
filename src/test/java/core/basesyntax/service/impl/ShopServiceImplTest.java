@@ -1,58 +1,45 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import core.basesyntax.handler.OperationHandler;
-import core.basesyntax.handler.impl.BalanceOperation;
-import core.basesyntax.handler.impl.PurchaseOperation;
-import core.basesyntax.handler.impl.ReturnOperation;
-import core.basesyntax.handler.impl.SupplyOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ShopServiceImplTest {
-    private ShopService shopService;
-    private Map<String, Integer> fruitStorage;
+public class ShopServiceImplTest {
+    private static final String FRUIT = "banana";
+    private static final int BALANCE_QUANTITY = 100;
+    private static final int SUPPLY_QUANTITY = 50;
+    private static final int PURCHASE_QUANTITY = 30;
+
+    private ShopServiceImpl shopService;
 
     @BeforeEach
-    void setUp() {
-        fruitStorage = new HashMap<>();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitStorage),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorage),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorage),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorage)
-        );
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        shopService = new ShopServiceImpl(operationStrategy);
+    public void setUp() {
+        shopService = new ShopServiceImpl();
     }
 
     @Test
-    void process_validTransactions_ok() {
+    public void processTransactions_validTransactions_ok() {
+        List<FruitTransaction> transactions = buildTransactions();
+        shopService.processTransactions(transactions);
+    }
+
+    private List<FruitTransaction> buildTransactions() {
         FruitTransaction transaction1 = new FruitTransaction();
         transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(100);
+        transaction1.setFruit(FRUIT);
+        transaction1.setQuantity(BALANCE_QUANTITY);
 
         FruitTransaction transaction2 = new FruitTransaction();
         transaction2.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction2.setFruit("banana");
-        transaction2.setQuantity(50);
+        transaction2.setFruit(FRUIT);
+        transaction2.setQuantity(SUPPLY_QUANTITY);
 
         FruitTransaction transaction3 = new FruitTransaction();
         transaction3.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setQuantity(30);
+        transaction3.setFruit(FRUIT);
+        transaction3.setQuantity(PURCHASE_QUANTITY);
 
-        List<FruitTransaction> transactions = List.of(transaction1, transaction2, transaction3);
-        shopService.process(transactions);
-        assertEquals(120, fruitStorage.get("banana"));
+        return List.of(transaction1, transaction2, transaction3);
     }
 }

@@ -2,10 +2,12 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 class DataConverterImplTest {

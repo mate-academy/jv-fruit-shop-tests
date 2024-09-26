@@ -2,28 +2,29 @@ package core.basesyntax.handler.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BalanceOperationTest {
+public class BalanceOperationTest {
+    private static final String FRUIT = "banana";
+    private static final int QUANTITY = 100;
     private BalanceOperation balanceOperation;
-    private Map<String, Integer> fruitStorage;
+    private FruitStorage fruitStorage;
 
     @BeforeEach
-    void setUp() {
-        fruitStorage = new HashMap<>();
-        balanceOperation = new BalanceOperation(fruitStorage);
+    public void setUp() {
+        balanceOperation = new BalanceOperation();
+        fruitStorage = new FruitStorage();
     }
 
     @Test
-    void apply_validTransaction_ok() {
+    public void apply_validTransaction_ok() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("banana");
-        transaction.setQuantity(100);
+        transaction.setFruit(FRUIT);
+        transaction.setQuantity(QUANTITY);
         balanceOperation.apply(transaction);
-        assertEquals(100, fruitStorage.get("banana"));
+        assertEquals(QUANTITY, fruitStorage.get(FRUIT));
     }
 }

@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.ShopService;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,9 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ReportGeneratorImplTest {
     private static final String SEPARATOR = System.lineSeparator();
@@ -40,11 +40,11 @@ class ReportGeneratorImplTest {
 
     @Test
     void multipleFruits_OK() {
-        Map<String, Integer> storage = new HashMap<>();
         Set<String> expectedSet = new HashSet<>();
         expectedSet.add("apple, 10");
         expectedSet.add("banana, 20");
         expectedSet.add("orange, 30");
+        Map<String, Integer> storage = new HashMap<>();
         storage.put("apple", 10);
         storage.put("banana", 20);
         storage.put("orange", 30);

@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.impl.BalanceOperation;
 import core.basesyntax.handler.impl.PurchaseOperation;
@@ -25,11 +26,11 @@ public class ShopServiceImplTest {
     public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, 
-                new BalanceOperation(Storage.fruitStorage));
+                new BalanceOperation(Storage.getFruitStorage()));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, 
-                new SupplyOperation(Storage.fruitStorage));
+                new SupplyOperation(Storage.getFruitStorage()));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, 
-                new PurchaseOperation(Storage.fruitStorage));
+                new PurchaseOperation(Storage.getFruitStorage()));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         shopService = new ShopServiceImpl(operationStrategy);
     }

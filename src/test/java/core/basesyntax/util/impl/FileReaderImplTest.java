@@ -13,18 +13,20 @@ import org.junit.jupiter.api.Test;
 public class FileReaderImplTest {
     private static final String VALID_FILE_PATH = "src/test/resources/testFile.txt";
     private static final String INVALID_FILE_PATH = "invalid/path.txt";
+    private static final String TEST_CONTENT = "test content";
+    private static final String TEST_DIRECTORY = "src/test/resources";
     private FileReaderImpl fileReader;
 
     @BeforeEach
     public void setUp() throws IOException {
         fileReader = new FileReaderImpl();
-        Files.createDirectories(Paths.get("src/test/resources"));
-        Files.write(Paths.get(VALID_FILE_PATH), List.of("test content"));
+        Files.createDirectories(Paths.get(TEST_DIRECTORY));
+        Files.write(Paths.get(VALID_FILE_PATH), List.of(TEST_CONTENT));
     }
 
     @Test
     public void readFile_validFilePath_ok() throws IOException {
-        List<String> expected = List.of("test content");
+        List<String> expected = List.of(TEST_CONTENT);
         List<String> actual = fileReader.read(VALID_FILE_PATH);
         assertEquals(expected, actual);
     }

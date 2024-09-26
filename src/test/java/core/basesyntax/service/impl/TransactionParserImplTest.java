@@ -17,7 +17,7 @@ class TransactionParserImplTest {
     private static final int OPERATION_POS = 0;
     private static final int FRUIT_NAME_POS = 1;
     private static final int QUANTITY_POS = 2;
-    TransactionParser parser;
+    private TransactionParser parser;
 
     @BeforeEach
     void setUp() {

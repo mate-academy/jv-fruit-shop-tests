@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,8 @@ public class ShopServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        shopService = new ShopServiceImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @Test

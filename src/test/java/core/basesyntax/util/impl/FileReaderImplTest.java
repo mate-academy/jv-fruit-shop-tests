@@ -5,16 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private FileReaderImpl fileReader;
     private static final String VALID_FILE_PATH = "src/test/resources/testFile.txt";
     private static final String INVALID_FILE_PATH = "invalid/path.txt";
+    private FileReaderImpl fileReader;
 
     @BeforeEach
     public void setUp() throws IOException {

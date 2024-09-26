@@ -58,6 +58,6 @@ class SupplyOperationTest {
         Operation operation = Operation.SUPPLY;
         FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
         SupplyOperation supplyOperation = new SupplyOperation();
-        assertThrows(RuntimeException.class, () ->  supplyOperation.handle(storage, transaction));
+        assertThrows(RuntimeException.class, () -> supplyOperation.handle(storage, transaction));
     }
 }

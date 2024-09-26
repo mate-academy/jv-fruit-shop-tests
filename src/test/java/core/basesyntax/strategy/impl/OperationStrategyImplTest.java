@@ -5,6 +5,7 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OperationStrategyImplTest {

@@ -1,32 +1,20 @@
 package core.basesyntax.util.impl;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import core.basesyntax.util.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class FileWriterImplTest {
-    private FileWriterImpl fileWriter;
+public class FileWriterImpl implements FileWriter {
+    private static final Logger LOGGER = Logger.getLogger(FileWriterImpl.class.getName());
 
-    @BeforeEach
-    public void setUp() {
-        fileWriter = new FileWriterImpl();
-    }
-
-    @Test
-    public void writeFile_validData_ok() throws IOException {
-        String data = "test content";
-        String filePath = "src/test/resources/outputFile.txt";
-        fileWriter.write(data, filePath);
-        String actual = new String(Files.readAllBytes(Paths.get(filePath)));
-        assertEquals(data, actual);
-    }
-
-    @Test
-    public void writeFile_invalidFilePath_throwsException() {
-        assertThrows(IOException.class, () -> fileWriter.write("data", "invalid/path.txt"));
+    @Override
+    public void write(String data, String filePath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(filePath))) {
+            bufferedWriter.write(data);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error writing to file: " + filePath, e);
+        }
     }
 }

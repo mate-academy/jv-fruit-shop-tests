@@ -30,6 +30,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(" ")
                     .append(quantity);
         }
-        return sb.substring(2);
+        return sb.substring(1);
     }
 }

@@ -2,8 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
+
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final char SEPARATOR = ',';
@@ -14,22 +15,29 @@ public class ReportGeneratorImpl implements ReportGenerator {
         if (fruitMap.isEmpty()) {
             return "";
         }
-        Set<String> fruits = fruitMap.keySet();
+        List<String> fruits = fruitMap
+                .keySet()
+                .stream()
+                .toList();
         StringBuilder sb = new StringBuilder();
         Integer quantity;
-        for (String fruit : fruits) {
-            quantity = fruitMap.get(fruit);
+        String fruit;
+        for (int i = 0; i < fruits.size(); ++i) {
+            fruit = fruits.get(i);
+            quantity = fruitMap.get(fruits.get(i));
             if (quantity == null) {
                 throw new IllegalArgumentException(
                         "For some reason the quantity of fruit "
                                 + fruit + "was set as null in the storage");
             }
-            sb.append(System.lineSeparator())
-                    .append(fruit)
+            sb.append(fruit)
                     .append(SEPARATOR)
                     .append(" ")
                     .append(quantity);
+            if (i != fruits.size() - 1) {
+                sb.append(System.lineSeparator());
+            }
         }
-        return sb.substring(1);
+        return sb.toString();
     }
 }

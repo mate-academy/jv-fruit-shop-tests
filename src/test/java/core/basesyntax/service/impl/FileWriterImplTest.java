@@ -22,28 +22,25 @@ class FileWriterImplTest {
     private static final String FILE_PATH = "fileToWrite.csv";
     private static File fileToWrite;
     private BufferedReader reader;
-    private java.io.FileWriter cleaner;
 
     @BeforeEach
-    public void setUp() {
-        try {
-            fileToWrite = new File(FILE_PATH);
-            fileToWrite.createNewFile();
-            reader = new BufferedReader(new FileReader(FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void setUp() throws IOException {
+        fileToWrite = new File(FILE_PATH);
+        if (fileToWrite.exists()) {
+            fileToWrite.delete();
         }
+        fileToWrite.createNewFile();
+        reader = new BufferedReader(new FileReader(FILE_PATH));
     }
 
     @AfterEach
-    public void cleanUp() {
-        try {
-            cleaner = new java.io.FileWriter(fileToWrite, false);
-            cleaner.write("");
-            cleaner.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void cleanUp() throws IOException {
+        if (reader != null) {
+            reader.close();
         }
+        fileToWrite.delete();
+        fileToWrite.createNewFile();
+        reader = new BufferedReader(new FileReader(FILE_PATH));
     }
 
     @AfterAll
@@ -58,21 +55,17 @@ class FileWriterImplTest {
     }
 
     @Test
-    public void write_Ok() {
+    public void write_Ok() throws IOException {
         String expected = "Some text";
         String actual;
         FileWriter writer = new FileWriterImpl(FILE_PATH);
         writer.write(expected);
-        try {
-            actual = reader.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        actual = reader.readLine();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void writeMultiline_Ok() {
+    public void writeMultiline_Ok() throws IOException {
         FileWriter writer = new FileWriterImpl(FILE_PATH);
         List<String> texts = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
@@ -82,34 +75,22 @@ class FileWriterImplTest {
             writer.write(text + "\n");
         }
         for (String text : texts) {
-            try {
-                assertEquals(text, reader.readLine());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            assertEquals(text, reader.readLine());
         }
     }
 
     @Test
-    public void writeEmpty_Ok() {
-        try {
-            FileWriter writer = new FileWriterImpl(FILE_PATH);
-            writer.write("");
-            assertTrue(reader.readLine() == null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void writeEmpty_Ok() throws IOException {
+        FileWriter writer = new FileWriterImpl(FILE_PATH);
+        writer.write("");
+        assertTrue(reader.readLine() == null);
     }
 
     @Test
-    public void writeCreatesFile_Ok() {
-        try {
-            FileWriter writer = new FileWriterImpl("newFile.csv");
-            writer.write("SomeText");
-            assertTrue(Files.exists(Paths.get("newFile.csv")));
-            Files.delete(Paths.get("newFile.csv"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void writeCreatesFile_Ok() throws IOException {
+        FileWriter writer = new FileWriterImpl("newFile.csv");
+        writer.write("SomeText");
+        assertTrue(Files.exists(Paths.get("newFile.csv")));
+        Files.delete(Paths.get("newFile.csv"));
     }
 }

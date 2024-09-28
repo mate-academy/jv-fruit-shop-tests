@@ -18,27 +18,17 @@ import org.junit.jupiter.api.Test;
 class FileReaderImplTest {
     private static final String FILE_PATH = "fileToRead.csv";
     private static File fileToRead;
-    private FileWriter cleaner;
 
     @BeforeEach
-    public void initialize() {
-        try {
-            fileToRead = new File(FILE_PATH);
-            fileToRead.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void initialize() throws IOException {
+        fileToRead = new File(FILE_PATH);
+        fileToRead.createNewFile();
     }
 
     @AfterEach
-    public void cleanUp() {
-        try {
-            cleaner = new FileWriter(fileToRead, false);
-            cleaner.write("");
-            cleaner.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void cleanUp() throws IOException {
+        fileToRead.delete();
+        fileToRead.createNewFile();
     }
 
     @AfterAll
@@ -101,7 +91,7 @@ class FileReaderImplTest {
         }
     }
 
-    private static void javaIoWrite(String text, String filePath) {
+    private void javaIoWrite(String text, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) {
             writer.write(text);
         } catch (IOException e) {

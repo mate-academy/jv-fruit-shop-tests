@@ -40,14 +40,16 @@ class ReportGeneratorImplTest {
 
     @Test
     void multipleFruits_OK() {
+        String[] fruits = {"apple", "banana", "orange"};
         Set<String> expectedSet = new HashSet<>();
-        expectedSet.add("apple, 10");
-        expectedSet.add("banana, 20");
-        expectedSet.add("orange, 30");
+        for (int i = 0; i < fruits.length; i++) {
+            expectedSet.add(fruits[i] + ", " + i);
+        }
         Map<String, Integer> storage = new HashMap<>();
-        storage.put("apple", 10);
-        storage.put("banana", 20);
-        storage.put("orange", 30);
+        for (int i = 0; i < fruits.length; i++) {
+            storage.put(fruits[i], i);
+        }
+        //I did what you asked here, but I think, readability got worse.
         shopService.setStorage(storage);
         String actual = reportGenerator.getReport(shopService);
         Set<String> actualSet = new HashSet<>(Arrays.asList(actual.split(SEPARATOR)));

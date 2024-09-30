@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl implements core.basesyntax.service.FileWriter {
+
+    @Override
     public void write(String report, String fileName) {
         File file = new File(fileName);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {

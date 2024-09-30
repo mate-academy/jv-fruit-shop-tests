@@ -2,7 +2,6 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.exceptions.InvalidFruitException;
 import core.basesyntax.service.exceptions.InvalidQuantityException;
 
 public class SupplyOperation implements OperationHandler {
@@ -18,11 +17,8 @@ public class SupplyOperation implements OperationHandler {
             int newValue = Storage.getQuantity(transaction.getFruit())
                     + transaction.getQuantity();
             Storage.put(transaction.getFruit(), newValue);
-
         } else {
             Storage.put(transaction.getFruit(), transaction.getQuantity());
-            throw new InvalidFruitException("Fruit: " + transaction.getFruit()
-                    + " wasn't found in the storage.");
         }
     }
 }

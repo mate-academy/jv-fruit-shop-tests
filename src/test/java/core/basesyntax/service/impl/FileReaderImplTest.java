@@ -1,12 +1,37 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private FileReader reader = new FileReaderImpl();
+    private Path tempFile;
+
+    @BeforeEach
+    void beforeEach() {
+        try {
+            tempFile = Files.createTempFile("test", ".csv");
+            Files.write(tempFile, List.of("type,fruit,quantity", "b,apple,4"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AfterEach
+    void afterEach() {
+        try {
+            Files.delete(tempFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     void read_nullFile_notOk() {
@@ -22,15 +47,15 @@ class FileReaderImplTest {
 
     @Test
     void read_correctFile_Ok() {
-        List<String> expectedList = List.of("    b,banana,20",
-                 "    b,apple,100",
-                 "    s,banana,100",
-                 "    p,banana,13",
-                 "    r,apple,10",
-                 "    p,apple,20",
-                 "    p,banana,5",
-                 "    s,banana,50");
-        List<String> actualList = reader.read("input.csv");
+        try {
+            Files.write(tempFile, List.of("type,fruit,quantity", "b,apple,4"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<String> expectedList = List.of("type,fruit,quantity",
+                "b,apple,4");
+
+        List<String> actualList = reader.read(String.valueOf(tempFile));
         Assertions.assertEquals(expectedList, actualList);
     }
 }

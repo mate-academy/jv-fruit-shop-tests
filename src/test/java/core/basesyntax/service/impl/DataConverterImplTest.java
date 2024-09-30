@@ -25,6 +25,8 @@ class DataConverterImplTest {
                 FruitConverter.convertToFruit("banana"),20));
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputData);
 
-        Assertions.assertEquals(expected.toString(),actual.toString());
+        Assertions.assertEquals(expected.get(0).getOperation(),actual.get(0).getOperation());
+        Assertions.assertEquals(expected.get(0).getFruit(),actual.get(0).getFruit());
+        Assertions.assertEquals(expected.get(0).getQuantity(),actual.get(0).getQuantity());
     }
 }

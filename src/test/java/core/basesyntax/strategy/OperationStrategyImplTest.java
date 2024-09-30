@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.exceptions.InvalidOperationException;
 import core.basesyntax.service.operations.BalanceOperation;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
@@ -40,5 +41,11 @@ class OperationStrategyImplTest {
         Assertions.assertInstanceOf(BalanceOperation.class, balanceHandler);
         Assertions.assertInstanceOf(PurchaseOperation.class,purchaseHandler);
         Assertions.assertInstanceOf(ReturnOperation.class, returnHandler);
+    }
+
+    @Test
+    void getOperationHandler_nullOperation_NotOk() {
+        Assertions.assertThrows(InvalidOperationException.class, ()
+                -> operationStrategy.getOperationHandler(null));
     }
 }

@@ -26,11 +26,11 @@ public class ShopServiceImplTest {
     public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, 
-                new BalanceOperation(Storage.fruitStorage));
+                new BalanceOperation(Storage.storage));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, 
-                new SupplyOperation(Storage.fruitStorage));
+                new SupplyOperation(Storage.storage));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, 
-                new PurchaseOperation(Storage.fruitStorage));
+                new PurchaseOperation(Storage.storage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         shopService = new ShopServiceImpl(operationStrategy);
     }

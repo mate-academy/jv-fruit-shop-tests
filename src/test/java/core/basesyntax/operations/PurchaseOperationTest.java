@@ -1,11 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.PurchaseOperation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

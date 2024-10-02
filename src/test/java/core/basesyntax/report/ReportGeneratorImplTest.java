@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.report;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.report.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,9 +50,6 @@ public class ReportGeneratorImplTest {
 
         String actualReport = reportGenerator.getReport(storage);
 
-        System.out.println("Expected report: [" + expectedReport + "]");
-        System.out.println("Actual report: [" + actualReport + "]");
-
         assertEquals(expectedReport, actualReport);
     }
 
@@ -63,12 +59,12 @@ public class ReportGeneratorImplTest {
         storage.put("kiwi", 0);
         storage.put("grape", 0);
 
-        String report = reportGenerator.getReport(storage);
-
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "grape,0" + System.lineSeparator()
                 + "kiwi,0" + System.lineSeparator();
 
-        assertEquals(expectedReport.trim(), report.trim());
+        String actualReport = reportGenerator.getReport(storage);
+
+        assertEquals(expectedReport, actualReport);
     }
 }

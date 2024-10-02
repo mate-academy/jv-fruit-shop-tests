@@ -1,18 +1,24 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.BalanceOperation;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
 
-    private final Storage storage = new Storage();
-    private final BalanceOperation balanceOperation = new BalanceOperation(storage);
+    private static Storage storage;
+    private static BalanceOperation balanceOperation;
+
+    @BeforeAll
+    public static void setUp() {
+        storage = new Storage();
+        balanceOperation = new BalanceOperation(storage);
+    }
 
     @AfterEach
     public void clearStorage() {

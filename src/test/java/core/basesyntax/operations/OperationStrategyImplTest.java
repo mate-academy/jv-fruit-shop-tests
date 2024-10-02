@@ -1,10 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.OperationHandler;
-import core.basesyntax.operations.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +19,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getHandler_invalidOperation_throwsException() {
+    public void getHandler_invalidOperation() {
         assertThrows(RuntimeException.class, ()
                 -> strategy.getHandler(FruitTransaction.Operation.RETURN));
     }

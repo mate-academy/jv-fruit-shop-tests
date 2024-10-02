@@ -14,7 +14,7 @@ public class BalanceOperationTest {
 
     @BeforeEach
     public void setUp() {
-        balanceOperation = new BalanceOperation;
+        balanceOperation = new BalanceOperation(Storage.fruitStorage);
     }
 
     @Test
@@ -23,5 +23,6 @@ public class BalanceOperationTest {
         transaction.setFruit(FRUIT);
         transaction.setQuantity(QUANTITY);
         balanceOperation.apply(transaction);
+        assertEquals(QUANTITY, Storage.fruitStorage.get(FRUIT));
     }
 }

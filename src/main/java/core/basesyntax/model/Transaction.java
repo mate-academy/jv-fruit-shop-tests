@@ -11,6 +11,10 @@ public class Transaction {
     public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity should contain positive number."
+                    + " Quantity: " + quantity);
+        }
         this.quantity = quantity;
     }
 

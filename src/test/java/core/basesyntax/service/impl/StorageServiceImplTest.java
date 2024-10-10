@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StorageServiceImplTest {
-
     private StorageServiceImpl storageService;
     private Fruit apple;
 
@@ -28,14 +27,14 @@ class StorageServiceImplTest {
     @Test
     void addFruit_validStorageUpdating_ok() {
         storageService.addFruit(apple, 50);
-        assertEquals(50, Storage.getFruitQuiantity(apple));
+        assertEquals(50, Storage.getFruitQuantity(apple));
     }
 
     @Test
     void removeFruit_validStorageUpdating_ok() {
         storageService.addFruit(apple, 50);
         storageService.removeFruit(apple, 20);
-        assertEquals(30, Storage.getFruitQuiantity(apple));
+        assertEquals(30, Storage.getFruitQuantity(apple));
     }
 
     @Test

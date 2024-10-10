@@ -11,6 +11,9 @@ public class TransactionProcessorImpl implements TransactionProcessor {
 
     public TransactionProcessorImpl(Map<Transaction.Operation,
             OperationHandler> operationHandlers) {
+        if (operationHandlers == null) {
+            throw new IllegalArgumentException("Handlers map cannot be null");
+        }
         this.operationHandlers = operationHandlers;
     }
 

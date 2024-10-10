@@ -16,7 +16,7 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<Transaction> parse(List<String> lines) {
         List<Transaction> transactions = new ArrayList<>();
-        for (String line: lines) {
+        for (String line : lines) {
             String[] parts = line.split(SEPARATOR);
             if (parts.length != EXPECTED_PARTS) {
                 throw new IllegalArgumentException("Invalid transaction format. "
@@ -25,11 +25,19 @@ public class TransactionParserImpl implements TransactionParser {
             }
             String type = parts[OPERATION_TYPE].trim();
             String fruitName = parts[FRUIT_NAME].trim();
+            if (type.isEmpty()) {
+                throw new IllegalArgumentException("Operation type cannot be empty. "
+                        + "Line: " + line);
+            }
+            if (fruitName.isEmpty()) {
+                throw new IllegalArgumentException("Fruit name cannot be empty. "
+                        + "Line: " + line);
+            }
             int quantity;
             try {
                 quantity = Integer.parseInt(parts[QUANTITY].trim());
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Unable to parse quantity: "
+                throw new NumberFormatException("Unable to parse quantity: "
                         + parts[QUANTITY]);
             }
             try {
@@ -37,7 +45,7 @@ public class TransactionParserImpl implements TransactionParser {
                 Fruit fruit = new Fruit(fruitName);
                 transactions.add(new Transaction(operation, fruit, quantity));
             } catch (IllegalArgumentException e) {
-                System.out.println(("Invalid operation in line: " + line));
+                throw new IllegalArgumentException("Invalid operation in line: " + line, e);
             }
         }
         return transactions;

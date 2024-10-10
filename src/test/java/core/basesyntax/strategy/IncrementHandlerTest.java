@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 class IncrementHandlerTest {
     private final StorageServiceImpl storageService = new StorageServiceImpl();
     private final IncrementHandler incrementHandler = new IncrementHandler(storageService);
+    private final Fruit orange = new Fruit("orange");
 
     @AfterEach
     void tearDown() {
@@ -19,9 +20,14 @@ class IncrementHandlerTest {
 
     @Test
     void handle_validIncrementData_ok() {
-        Fruit orange = new Fruit("orange");
-        storageService.addFruit(orange, 20);
+        Storage.updateFruitQuantity(orange, 20);
         incrementHandler.handle(orange, 30);
-        assertEquals(50, Storage.getFruitQuiantity(orange));
+        assertEquals(50, Storage.getFruitQuantity(orange));
+    }
+
+    @Test
+    void handle_addingFruitToEmptyStorage_ok() {
+        incrementHandler.handle(orange, 10);
+        assertEquals(10, Storage.getFruitQuantity(orange));
     }
 }

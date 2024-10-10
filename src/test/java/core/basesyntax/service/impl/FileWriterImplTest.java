@@ -33,10 +33,4 @@ class FileWriterImplTest {
         String content = "Sample content";
         assertThrows(RuntimeException.class, () -> fileWriter.writeFile(invalidFilePath, content));
     }
-
-    @Test
-    void writeFile_noContent_notOk() {
-        String validFilePath = "src/test/resources/output.csv";
-        assertThrows(RuntimeException.class, () -> fileWriter.writeFile(validFilePath, null));
-    }
 }

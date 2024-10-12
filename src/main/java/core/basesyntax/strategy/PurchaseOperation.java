@@ -15,7 +15,7 @@ public class PurchaseOperation implements OperationHandler {
     public void handleTransaction(FruitTransaction fruitTransaction) {
         int newQuantity = storage.getQuantity(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity();
-        if (newQuantity >= 0) {
+        if (fruitTransaction.getQuantity() > 0 && newQuantity >= 0) { //purchase operation cannot accept a negative balance as input and cannot be greater than the number of available fruits in storage
             storage.put(fruitTransaction.getFruit(), newQuantity);
         } else {
             throw new RuntimeException("negative balance " + newQuantity

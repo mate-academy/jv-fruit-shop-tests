@@ -15,7 +15,7 @@ public class ReturnOperation implements OperationHandler {
     public void handleTransaction(FruitTransaction fruitTransaction) {
         int newQuantity = fruitTransaction.getQuantity()
                 + storage.getQuantity(fruitTransaction.getFruit());
-        if (newQuantity >= 0) {
+        if (fruitTransaction.getQuantity() > 0) {
             storage.put(fruitTransaction.getFruit(), newQuantity);
         } else {
             throw new RuntimeException("negative balance " + newQuantity

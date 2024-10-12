@@ -21,7 +21,7 @@ public class TransactionParserImpl implements TransactionParser {
             if (parts.length != EXPECTED_PARTS) {
                 throw new IllegalArgumentException("Invalid transaction format. "
                         + "Each line should contain exactly 3 parts separated by commas: "
-                        + "operation, fruit name, and quantity." + line);
+                        + "operation, fruit name, and quantity: " + line);
             }
             String type = parts[OPERATION_TYPE].trim();
             String fruitName = parts[FRUIT_NAME].trim();

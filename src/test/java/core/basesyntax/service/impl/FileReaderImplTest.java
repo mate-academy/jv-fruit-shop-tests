@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -18,7 +18,7 @@ class FileReaderImplTest {
 
     @Test
     void readFile_validFilePath_ok() throws RuntimeException {
-        String validFilePath = "src/test/resources/validInput.csv";
+        String validFilePath = "src/test/resources/valid-input.csv";
         List<String> expectedContent = List.of("apple,10", "banana,20");
         List<String> actualContent = fileReader.readFile(validFilePath);
         assertEquals(expectedContent, actualContent);
@@ -26,7 +26,7 @@ class FileReaderImplTest {
 
     @Test
     void readFile_existingEmptyFile_ok() throws RuntimeException {
-        String emptyFilePath = "src/test/resources/emptyFile.csv";
+        String emptyFilePath = "src/test/resources/empty-file.csv";
         List<String> actualContent = fileReader.readFile(emptyFilePath);
         assertTrue(actualContent.isEmpty(), "The file should return an empty list"
                 + " when no content is present.");
@@ -35,6 +35,7 @@ class FileReaderImplTest {
     @Test
     void readFile_notExistingFile_notOk() {
         String invalidFilePath = "src/test/resources/nonexistent.csv";
-        assertThrows(RuntimeException.class, () -> fileReader.readFile(invalidFilePath));
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> fileReader.readFile(invalidFilePath));
     }
 }

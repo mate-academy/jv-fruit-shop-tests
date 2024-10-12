@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -40,8 +40,8 @@ class StorageServiceImplTest {
     @Test
     void removeFruit_NegativeQuantity_notOk() {
         storageService.addFruit(apple, 10);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                storageService.removeFruit(apple, 20));
-        assertEquals("Not enough apple in storage to remove", exception.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> storageService.removeFruit(apple, 20))
+                .withMessage("Not enough apple in storage to remove");
     }
 }

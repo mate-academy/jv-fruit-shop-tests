@@ -1,8 +1,7 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.Transaction;
 import java.util.List;
@@ -29,51 +28,53 @@ class TransactionParserImplTest {
     @Test
     void parse_invalidPartsCount_notOk() {
         List<String> invalidLines = List.of("b,apple");
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> transactionParser.parse(invalidLines));
-        assertEquals("Invalid transaction format. "
-                + "Each line should contain exactly 3 parts separated by commas:"
-                + " operation, fruit name, and quantity.b,apple", exception.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionParser.parse(invalidLines))
+                .withMessage("Invalid transaction format. "
+                        + "Each line should contain exactly 3 parts separated by commas:"
+                        + " operation, fruit name, and quantity: b,apple");
     }
 
     @Test
     void parse_invalidOperationAbbreviation_notOk() {
         List<String> invalidOperation = List.of("x,banana,15");
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
-                () -> transactionParser.parse(invalidOperation));
-        assertTrue(thrown.getMessage().contains("Invalid operation"));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionParser.parse(invalidOperation))
+                .withMessage("Invalid operation in line: x,banana,15");
     }
 
     @Test
     void parse_invalidNumberFormat_notOk() {
         List<String> invalidQuantity = List.of("b,orange,abc");
-        NumberFormatException thrown = assertThrows(NumberFormatException.class, () ->
-                transactionParser.parse(invalidQuantity));
-        assertTrue(thrown.getMessage().contains("Unable to parse quantity: "));
+        assertThatExceptionOfType(NumberFormatException.class)
+                .isThrownBy(() -> transactionParser.parse(invalidQuantity))
+                .withMessage("Unable to parse quantity: abc");
 
     }
 
     @Test
     void parse_missingQuantity_notOk() {
         List<String> missingQuantity = List.of("b,orange,");
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-                transactionParser.parse(missingQuantity));
-        assertTrue(thrown.getMessage().contains("Invalid transaction format. "));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionParser.parse(missingQuantity))
+                .withMessage("Invalid transaction format. "
+                        + "Each line should contain exactly 3 parts separated by commas:"
+                        + " operation, fruit name, and quantity: b,orange,");
     }
 
     @Test
     void parse_missingOperationType_notOk() {
         List<String> missingFruitName = List.of(",orange,10");
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-                transactionParser.parse(missingFruitName));
-        assertTrue(thrown.getMessage().contains("Operation type cannot be empty. "));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionParser.parse(missingFruitName))
+                .withMessage("Operation type cannot be empty. Line: ,orange,10");
     }
 
     @Test
     void parse_missingFruitName_notOk() {
         List<String> missingFruitName = List.of("b,,10");
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-                transactionParser.parse(missingFruitName));
-        assertTrue(thrown.getMessage().contains("Fruit name cannot be empty. "));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionParser.parse(missingFruitName))
+                        .withMessage("Fruit name cannot be empty. Line: b,,10");
     }
 }

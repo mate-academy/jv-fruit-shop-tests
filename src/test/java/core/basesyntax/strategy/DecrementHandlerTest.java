@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -36,8 +36,8 @@ class DecrementHandlerTest {
     @Test
     void handle_insufficientStock_notOk() {
         Storage.updateFruitQuantity(banana, 10);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> decrementHandler.handle(banana, 20));
-        assertEquals("Not enough banana in storage to remove", exception.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> decrementHandler.handle(banana, 20))
+                .withMessage("Not enough banana in storage to remove");
     }
 }

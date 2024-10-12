@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -38,7 +38,7 @@ class TransactionProcessorImplTest {
     }
 
     @Test
-    void process_validDataUpdating_ok() {
+    void process_validBalanceUpdating_ok() {
         List<Transaction> transactions = List.of(new Transaction(
                 Transaction.Operation.BALANCE, apple, 50));
         transactionProcessor.process(transactions);
@@ -46,11 +46,36 @@ class TransactionProcessorImplTest {
     }
 
     @Test
+    void process_validReturnUpdating_ok() {
+        List<Transaction> transactions = List.of(new Transaction(
+                Transaction.Operation.RETURN, apple, 50));
+        transactionProcessor.process(transactions);
+        assertEquals(50, Storage.getFruitQuantity(apple));
+    }
+
+    @Test
+    void process_validSupplyUpdating_ok() {
+        List<Transaction> transactions = List.of(new Transaction(
+                Transaction.Operation.SUPPLY, apple, 50));
+        transactionProcessor.process(transactions);
+        assertEquals(50, Storage.getFruitQuantity(apple));
+    }
+
+    @Test
+    void process_validPurchaseUpdating_ok() {
+        Storage.updateFruitQuantity(apple, 60);
+        List<Transaction> purchaseTransactions = List.of(new Transaction(
+                Transaction.Operation.PURCHASE, apple, 50));
+        transactionProcessor.process(purchaseTransactions);
+        assertEquals(10, Storage.getFruitQuantity(apple));
+    }
+
+    @Test
     void process_invalidOperation_notOk() {
         List<Transaction> transactions = List.of(new Transaction(
                 null, apple, 50));
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> transactionProcessor.process(transactions));
-        assertEquals("No handler found for operation: null", exception.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> transactionProcessor.process(transactions))
+                .withMessage("No handler found for operation: null");
     }
 }

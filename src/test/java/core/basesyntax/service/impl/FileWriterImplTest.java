@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,6 +31,7 @@ class FileWriterImplTest {
     void writeFile_invalidFilePath_notOk() {
         String invalidFilePath = "src/test/resources/invalidDir/output.csv";
         String content = "Sample content";
-        assertThrows(RuntimeException.class, () -> fileWriter.writeFile(invalidFilePath, content));
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> fileWriter.writeFile(invalidFilePath, content));
     }
 }

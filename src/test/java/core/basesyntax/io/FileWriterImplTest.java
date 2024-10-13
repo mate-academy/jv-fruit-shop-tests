@@ -2,14 +2,14 @@ package core.basesyntax.io;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,13 +23,11 @@ public class FileWriterImplTest {
         fileWriter = new FileWriterImpl();
     }
 
-
     @Test
     void testWriteDataSuccessfully() throws IOException {
         String data = "Hello, FileWriter!";
         fileWriter.write(data, filePath);
 
-        // Verify that data is written correctly
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             assertEquals(data, line, "The content written to the file should match the expected data");

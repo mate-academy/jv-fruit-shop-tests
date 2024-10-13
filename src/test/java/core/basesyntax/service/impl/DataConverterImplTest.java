@@ -29,7 +29,8 @@ class DataConverterImplTest {
             new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
+            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
+    );
     private static DataConverter dataConverter;
 
     @BeforeAll

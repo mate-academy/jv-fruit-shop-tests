@@ -13,9 +13,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public FruitTransaction() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

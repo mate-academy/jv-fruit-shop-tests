@@ -17,12 +17,12 @@ class FileReaderTest {
     private static final String VALID_FILE_PATH = "src/test/java/resources/testFile.txt";
     private static final String EMPTY_FILE_PATH = "src/test/java/resources/emptyFile.txt";
     private static final String NON_EXISTENT_FILE_PATH
-            = "src/test/java/resources/nonExistentFile.txt";
-    private FileReader fileReader;
+            = "invalid/path/to/file.txt";
+    private FileReading fileReader;
 
     @BeforeEach
     void setUp() throws IOException {
-        fileReader = new FileReaderImpl();
+        fileReader = new FileReadingImpl();
 
         Files.writeString(Path.of(VALID_FILE_PATH), "Hello\nWorld\nTest");
 

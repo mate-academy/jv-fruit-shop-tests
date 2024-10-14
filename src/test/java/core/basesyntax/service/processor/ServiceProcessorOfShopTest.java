@@ -6,9 +6,9 @@ import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.strategy.TypeStrategy;
 import core.basesyntax.service.strategy.TypeStrategyImpl;
-import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
-import core.basesyntax.service.strategy.strategyimpl.OperationHandler;
-import core.basesyntax.service.strategy.strategyimpl.PurchaseOperation;
+import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.service.strategy.impl.OperationHandler;
+import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +17,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ServiceProcessorOfShopTest {
-    private ServiceProcessorOfShop serviceProcessorOfShop;
+    private ShopProcessor serviceProcessorOfShop;
     private TypeStrategy typeStrategy;
 
     @BeforeEach
     void setUp() {
         Map<FruitRecord.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitRecord.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitRecord.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitRecord.Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlers.put(FruitRecord.Operation.PURCHASE, new PurchaseOperationHandler());
 
         typeStrategy = new TypeStrategyImpl(operationHandlers);
-        serviceProcessorOfShop = new ServiceProcessorOfShopImpl(typeStrategy);
+        serviceProcessorOfShop = new ShopProcessorImpl(typeStrategy);
     }
 
     @Test

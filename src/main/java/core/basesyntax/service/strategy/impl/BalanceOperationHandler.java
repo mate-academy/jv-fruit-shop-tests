@@ -1,9 +1,9 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 
-public class BalanceOperation implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitRecord transaction) {
         if (transaction == null) {

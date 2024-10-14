@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,12 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-    private SupplyOperation supplyOperation;
+    private SupplyOperationHandler supplyOperation;
     private FruitRecord fruitRecord;
 
     @BeforeEach
     void setUp() {
-        supplyOperation = new SupplyOperation();
+        supplyOperation = new SupplyOperationHandler();
         Storage.storage.clear();
     }
 
@@ -45,10 +45,9 @@ class SupplyOperationTest {
 
     @Test
     void apply_nullTransaction_throwsNullPointerException() {
-        // Given
         FruitRecord nullTransaction = null;
 
-        Exception exception = assertThrows(NullPointerException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             supplyOperation.apply(null);
         });
 

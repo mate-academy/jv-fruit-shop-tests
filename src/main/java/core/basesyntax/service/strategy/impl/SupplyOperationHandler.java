@@ -1,15 +1,15 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 
-public class SupplyOperation implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private static final int MIN_SUPPLY_QUANTITY = 1;
 
     @Override
     public void apply(FruitRecord transaction) {
         if (transaction == null) {
-            throw new NullPointerException("Transaction cannot be null");
+            throw new IllegalArgumentException("Transaction cannot be null");
         }
         int supplyQuantity = transaction.getQuantity();
         if (supplyQuantity < 0) {

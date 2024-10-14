@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,18 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
-    private ReturnOperation returnOperation;
+    private ReturnOperationHandler returnOperation;
     private FruitRecord fruitRecord;
 
     @BeforeEach
     void setUp() {
-        returnOperation = new ReturnOperation();
+        returnOperation = new ReturnOperationHandler();
         Storage.storage.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void apply_addFruitsToStorage_success() {
         fruitRecord = new FruitRecord(FruitRecord.Operation.RETURN, "apple", 50);
 
@@ -26,7 +27,7 @@ public class ReturnOperationTest {
         assertEquals(50, Storage.storage.get("apple"));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void apply_negativeResult_throwsRuntimeException() {
         fruitRecord = new FruitRecord(FruitRecord.Operation.RETURN, "apple", -100);
 
@@ -35,7 +36,7 @@ public class ReturnOperationTest {
         });
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void apply_nullTransaction_throwsNullPointerException() {
         NullPointerException exception = assertThrows(NullPointerException.class, () -> {
             returnOperation.apply(null);

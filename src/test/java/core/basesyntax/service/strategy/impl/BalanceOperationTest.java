@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,17 +9,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
-    private BalanceOperation balanceOperation;
+    private BalanceOperationHandler balanceOperation;
     private FruitRecord fruitRecord;
 
     @BeforeEach
     public void setUp() {
-        balanceOperation = new BalanceOperation();
+        balanceOperation = new BalanceOperationHandler();
         Storage.storage.clear();
     }
 
     @Test
-    void testApply_ShouldAddFruitToStorage() {
+    void testApply_shouldAddFruitToStorage_success() {
         String fruitName = "Apple";
         int quantity = 10;
         fruitRecord = new FruitRecord(FruitRecord.Operation.BALANCE, fruitName, quantity);
@@ -45,6 +45,5 @@ class BalanceOperationTest {
             balanceOperation.apply(null);
         });
         assertEquals("Transaction cannot be null", exception.getMessage());
-
     }
 }

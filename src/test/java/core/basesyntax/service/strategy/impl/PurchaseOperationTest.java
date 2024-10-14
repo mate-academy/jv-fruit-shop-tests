@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,12 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
-    private PurchaseOperation purchaseOperation;
+    private PurchaseOperationHandler purchaseOperation;
     private FruitRecord fruitRecord;
 
     @BeforeEach
     void setUp() {
-        purchaseOperation = new PurchaseOperation();
+        purchaseOperation = new PurchaseOperationHandler();
         Storage.storage.clear();
     }
 

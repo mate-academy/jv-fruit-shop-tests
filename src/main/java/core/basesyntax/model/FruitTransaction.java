@@ -26,34 +26,16 @@ public class FruitTransaction {
                 && Objects.equals(fruit, that.fruit);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(operation, fruit, quantity);
-    }
-
     public Operation getOperation() {
         return operation;
-    }
-
-    public FruitTransaction setOperation(Operation operation) {
-        this.operation = operation;
-        return this;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum Operation {

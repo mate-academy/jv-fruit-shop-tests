@@ -34,4 +34,51 @@ class ReturnOperationTest {
 
         Assertions.assertEquals(15, inventory.get("apple"));
     }
+
+    @Test
+    void returnZeroQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", 0);
+        returnOperation.executeOperation(transaction, inventory);
+
+        Assertions.assertEquals(0, inventory.getOrDefault("apple", 0));
+    }
+
+    @Test
+    void returnNegativeQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", -5);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                returnOperation.executeOperation(transaction, inventory));
+    }
+
+    @Test
+    void returnToNonExistentFruit_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "banana", 10);
+        returnOperation.executeOperation(transaction, inventory);
+
+        Assertions.assertEquals(10, inventory.get("banana"));
+    }
+
+    @Test
+    void returnExceedingQuantity_executeOperation_Ok() {
+        inventory.put("apple", 5);
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", 10);
+        returnOperation.executeOperation(transaction, inventory);
+
+        Assertions.assertEquals(15, inventory.get("apple"));
+    }
+
+    @Test
+    void returnWithNullTransaction_executeOperation_Ok() {
+        Assertions.assertThrows(NullPointerException.class, () ->
+                returnOperation.executeOperation(null, inventory));
+    }
+
+    @Test
+    void returnWithNullFruitName_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, null, 10);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                returnOperation.executeOperation(transaction, inventory));
+    }
 }

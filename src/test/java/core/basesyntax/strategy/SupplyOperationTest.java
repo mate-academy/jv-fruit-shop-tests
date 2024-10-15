@@ -34,13 +34,4 @@ class SupplyOperationTest {
 
         Assertions.assertEquals(15, inventory.get("apple"));
     }
-
-    @Test
-    void addQuantityToFruit_executeOperation_NotOk() {
-        inventory.put("orange", 5);
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "orange", 3);
-        supplyOperation.executeOperation(transaction, inventory);
-
-        Assertions.assertEquals(2, inventory.get("orange"));
-    }
 }

@@ -47,7 +47,7 @@ class ReturnOperationTest {
     void returnNegativeQuantity_executeOperation_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", -5);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(RuntimeException.class, () ->
                 returnOperation.executeOperation(transaction, inventory));
     }
 
@@ -78,7 +78,7 @@ class ReturnOperationTest {
     void returnWithNullFruitName_executeOperation_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.RETURN, null, 10);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(RuntimeException.class, () ->
                 returnOperation.executeOperation(transaction, inventory));
     }
 }

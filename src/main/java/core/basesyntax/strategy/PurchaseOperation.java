@@ -10,7 +10,7 @@ public class PurchaseOperation implements FruitOperationHandler {
         int newBalance = currentBalance - transaction.getQuantity();
 
         if (newBalance < 0) {
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "Cannot complete purchase: insufficient stock for " + transaction.getFruit());
         }
 

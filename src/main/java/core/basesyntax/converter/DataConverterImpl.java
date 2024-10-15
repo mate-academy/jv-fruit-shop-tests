@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final int EXPECTED_FIELDS_LENGTH = 3;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         if (data == null) {
@@ -17,26 +23,31 @@ public class DataConverterImpl implements DataConverter {
             if (line.isEmpty()) {
                 throw new RuntimeException("Empty line at position " + (i + 1));
             }
-            String[] fields = line.split(",");
-            if (fields.length != 3) {
+            String[] fields = line.split(COMMA);
+            if (fields.length != EXPECTED_FIELDS_LENGTH) {
                 throw new RuntimeException("Incorrect data format at line " + (i + 1));
             }
-            Operation operation = mapToOperation(fields[0]);
-            String fruit = fields[1];
-            int quantity;
-            try {
-                quantity = Integer.parseInt(fields[2]);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid quantity at line " + (i + 1));
-            }
-            if (quantity < 0) {
-                throw new IllegalArgumentException("Quantity cannot be negative at line "
-                        + (i + 1));
-            }
-            FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
+            Operation operation = mapToOperation(fields[OPERATION_INDEX]);
+            FruitTransaction transaction = getFruitTransaction(fields, i, operation);
             transactions.add(transaction);
         }
         return transactions;
+    }
+
+    private static FruitTransaction getFruitTransaction(String[] fields,
+                                                        int i, Operation operation) {
+        String fruit = fields[FRUIT_INDEX];
+        int quantity;
+        try {
+            quantity = Integer.parseInt(fields[QUANTITY_INDEX]);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid quantity at line " + (i + 1));
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative at line "
+                    + (i + 1));
+        }
+        return new FruitTransaction(operation, fruit, quantity);
     }
 
     private Operation mapToOperation(String code) {

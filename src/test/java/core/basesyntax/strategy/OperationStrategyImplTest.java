@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.handler.OperationHandler;
@@ -9,7 +10,6 @@ import core.basesyntax.handler.impl.PurchaseOperationHandler;
 import core.basesyntax.handler.impl.ReturnOperationHandler;
 import core.basesyntax.handler.impl.SupplyOperationHandler;
 import core.basesyntax.model.Operation;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,30 +19,28 @@ class OperationStrategyImplTest {
 
     @BeforeEach
     void setUp() {
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnOperationHandler());
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.SUPPLY, new SupplyOperationHandler(),
+                Operation.PURCHASE, new PurchaseOperationHandler(),
+                Operation.RETURN, new ReturnOperationHandler()
+        );
         operationStrategy = new OperationStrategyImpl(operationHandlers);
     }
 
     @Test
     void getHandler_existingOperation_ok() {
         OperationHandler handler = operationStrategy.getHandler(Operation.BALANCE);
-        assertTrue(handler instanceof BalanceOperationHandler);
+        assertInstanceOf(BalanceOperationHandler.class, handler);
 
         handler = operationStrategy.getHandler(Operation.PURCHASE);
-        assertTrue(handler instanceof PurchaseOperationHandler);
-    }
-
-    private void assertTrue(boolean b) {
+        assertInstanceOf(PurchaseOperationHandler.class, handler);
     }
 
     @Test
-    void getHandler_nonExistingOperation_notOk() {
-        RuntimeException exception = assertThrows(RuntimeException.class,
+    void getHandler_nullOperation_notOk() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> operationStrategy.getHandler(null));
-        assertEquals("No handler found for operation: null", exception.getMessage());
+        assertEquals("Operation cannot be null", exception.getMessage());
     }
 }

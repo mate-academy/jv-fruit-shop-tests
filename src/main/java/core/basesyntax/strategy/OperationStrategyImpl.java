@@ -13,6 +13,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(Operation operation) {
+        if (operation == null) {
+            throw new IllegalArgumentException("Operation cannot be null");
+        }
         OperationHandler handler = handlers.get(operation);
         if (handler == null) {
             throw new RuntimeException("No handler found for operation: " + operation);

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
+    private static final String HEADER = "type,fruit,quantity";
     private FileReader fileReader;
 
     @BeforeEach
@@ -22,13 +23,13 @@ class FileReaderImplTest {
     @Test
     void read_validFile_ok() throws IOException {
         Path tempFile = Files.createTempFile("test", ".csv");
-        Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,20"));
+        Files.write(tempFile, List.of(HEADER, "b,banana,20"));
 
         List<String> result = fileReader.read(tempFile.toString());
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals("type,fruit,quantity", result.get(0));
+        assertEquals(HEADER, result.get(0));
         assertEquals("b,banana,20", result.get(1));
 
         Files.delete(tempFile);

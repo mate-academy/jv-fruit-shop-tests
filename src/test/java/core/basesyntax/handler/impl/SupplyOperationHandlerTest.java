@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
+    private static final String APPLE = "apple";
     private OperationHandler handler;
 
     @BeforeEach
@@ -20,16 +21,16 @@ class SupplyOperationHandlerTest {
 
     @Test
     void apply_newFruit_ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 40);
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, APPLE, 40);
         handler.apply(transaction);
-        assertEquals(40, Storage.getFruitQuantity("apple"));
+        assertEquals(40, Storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void apply_existingFruit_ok() {
         Storage.setFruitQuantity("apple", 20);
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 40);
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, APPLE, 40);
         handler.apply(transaction);
-        assertEquals(60, Storage.getFruitQuantity("apple"));
+        assertEquals(60, Storage.getFruitQuantity(APPLE));
     }
 }

@@ -10,13 +10,12 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Map;
 
 class ShopServiceImplTest {
     private static final List<FruitTransaction> CORRECT_FRUIT_TRANSACTION_LIST = List.of(
@@ -30,8 +29,8 @@ class ShopServiceImplTest {
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
     );
     private static final Map<String, Integer> CORRECT_STORAGE = Map.of(
-            "banana",152,
-            "apple",90
+            "banana", 152,
+            "apple", 90
     );
     private static ShopService shopService;
     private static Storage storage;

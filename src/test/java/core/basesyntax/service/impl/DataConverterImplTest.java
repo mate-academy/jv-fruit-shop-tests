@@ -2,11 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 class DataConverterImplTest {
     private static final List<String> CORRECT_DATA_FROM_FILE = List.of(

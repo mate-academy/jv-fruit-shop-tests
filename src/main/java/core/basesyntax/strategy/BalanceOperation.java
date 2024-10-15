@@ -11,7 +11,6 @@ public class BalanceOperation implements OperationHandler {
         this.storage = storage;
     }
 
-
     @Override
     public void handleTransaction(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() >= 0) {

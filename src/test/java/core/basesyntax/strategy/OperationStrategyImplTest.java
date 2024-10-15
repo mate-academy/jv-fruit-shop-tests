@@ -2,12 +2,11 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Storage;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 class OperationStrategyImplTest {
     private static final FruitTransaction CORRECT_FRUIT =

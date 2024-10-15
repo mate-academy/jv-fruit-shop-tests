@@ -8,9 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static final String REPORT = "fruit,quantity" + System.lineSeparator() +
-            "banana,152" + System.lineSeparator() +
-            "apple,90" + System.lineSeparator();
+    private static final String REPORT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
 
     private static ReportGenerator reportGenerator;
     private static Storage storage;

@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 class FileReaderImplTest {
     private static final String CORRECT_FILE_PATH = "src/test/resources/reportToRead.csv";
@@ -26,7 +25,6 @@ class FileReaderImplTest {
     static void beforeAll() {
         fileReader = new FileReaderImpl();
     }
-
 
     @Test
     void read_correctFailRead_Ok() {

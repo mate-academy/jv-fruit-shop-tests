@@ -6,16 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
-    private static final String VALID_FILE_PATH = "src/test/java/resources/testFile.txt";
-    private static final String EMPTY_FILE_PATH = "src/test/java/resources/emptyFile.txt";
+    private static final String VALID_FILE_PATH = "src/test/java/resources/testFile.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/java/resources/emptyFile.csv";
     private static final String NON_EXISTENT_FILE_PATH
             = "invalid/path/to/file.txt";
     private FileReading fileReader;
@@ -23,10 +21,6 @@ class FileReaderTest {
     @BeforeEach
     void setUp() throws IOException {
         fileReader = new FileReadingImpl();
-
-        Files.writeString(Path.of(VALID_FILE_PATH), "Hello\nWorld\nTest");
-
-        Files.writeString(Path.of(EMPTY_FILE_PATH), "");
     }
 
     @Test
@@ -63,4 +57,3 @@ class FileReaderTest {
         assertEquals("File path cannot be null", exception.getMessage());
     }
 }
-

@@ -41,7 +41,7 @@ class BalanceOperationTest {
 
     @Test
     void testApply_NullOfBalance() {
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             balanceOperation.apply(null);
         });
         assertEquals("Transaction cannot be null", exception.getMessage());

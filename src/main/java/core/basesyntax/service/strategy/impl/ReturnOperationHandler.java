@@ -7,7 +7,7 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitRecord transaction) {
         if (transaction == null) {
-            throw new NullPointerException("Transaction cannot be null");
+            throw new IllegalArgumentException("Transaction cannot be null");
         }
         int returnFruits = transaction.getQuantity();
         if (returnFruits < 0) {

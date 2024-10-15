@@ -56,11 +56,12 @@ class DataParserTest {
     }
 
     @Test
-    void parseFruitRecords_nullInput_throwsNullPointerException() {
+    void parseFruitRecords_nullInput_throwsIllegalArgumentException() {
         List<String> lines = null;
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             dataParser.parseFruitRecords(lines);
         });
+        assertEquals("Input list cannot be null", exception.getMessage());
     }
 
     @Test
@@ -73,6 +74,7 @@ class DataParserTest {
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             dataParser.parseFruitRecords(lines);
         });
+        assertEquals("Invalid quantity format in line.", exception.getMessage());
     }
 
     @Test

@@ -24,4 +24,3 @@ public class PurchaseOperationHandler implements OperationHandler {
         Storage.storage.put(transaction.getFruit(), newQuantity);
     }
 }
-

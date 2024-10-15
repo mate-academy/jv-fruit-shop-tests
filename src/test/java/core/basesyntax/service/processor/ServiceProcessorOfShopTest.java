@@ -31,7 +31,7 @@ class ServiceProcessorOfShopTest {
     }
 
     @Test
-    void process_validTransactions_noExceptionsThrown() {
+    void process_validTransactions_ok() {
         Storage.storage.put("apple", 100);
         List<FruitRecord> transactions = new ArrayList<>();
         transactions.add(new FruitRecord(FruitRecord.Operation.BALANCE, "banana", 100));
@@ -41,7 +41,7 @@ class ServiceProcessorOfShopTest {
     }
 
     @Test
-    void process_emptyTransactions_noExceptionsThrown() {
+    void process_emptyTransactions_ok() {
         List<FruitRecord> emptyTransactions = new ArrayList<>();
 
         assertDoesNotThrow(() -> serviceProcessorOfShop.process(emptyTransactions));

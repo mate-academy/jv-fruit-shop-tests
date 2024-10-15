@@ -38,7 +38,7 @@ public class ReturnOperationTest {
 
     @Test
     public void apply_nullTransaction_throwsNullPointerException() {
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             returnOperation.apply(null);
         });
         assertEquals("Transaction cannot be null", exception.getMessage());

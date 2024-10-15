@@ -11,25 +11,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
+    private static final String BANANA = "banana";
     private OperationHandler handler;
 
     @BeforeEach
     void setUp() {
         handler = new PurchaseOperationHandler();
         Storage.clear();
-        Storage.setFruitQuantity("banana", 100);
+        Storage.setFruitQuantity(BANANA, 100);
     }
 
     @Test
     void apply_sufficientStock_ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 30);
+        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, BANANA, 30);
         handler.apply(transaction);
-        assertEquals(70, Storage.getFruitQuantity("banana"));
+        assertEquals(70, Storage.getFruitQuantity(BANANA));
     }
 
     @Test
     void apply_insufficientStock_notOk() {
-        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 150);
+        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, BANANA, 150);
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> handler.apply(transaction));
         assertEquals("Not enough stock for banana", exception.getMessage());

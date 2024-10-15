@@ -18,7 +18,6 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,12 +64,12 @@ class FruitShopServiceImplTest {
     }
 
     private Map<Operation, OperationHandler> createOperationHandlers() {
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnOperationHandler());
-        return operationHandlers;
+        return Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.SUPPLY, new SupplyOperationHandler(),
+                Operation.PURCHASE, new PurchaseOperationHandler(),
+                Operation.RETURN, new ReturnOperationHandler()
+        );
     }
 
     private static class TestFileReader implements FileReader {

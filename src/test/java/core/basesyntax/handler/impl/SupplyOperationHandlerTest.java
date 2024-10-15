@@ -28,7 +28,7 @@ class SupplyOperationHandlerTest {
 
     @Test
     void apply_existingFruit_ok() {
-        Storage.setFruitQuantity("apple", 20);
+        Storage.setFruitQuantity(APPLE, 20);
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, APPLE, 40);
         handler.apply(transaction);
         assertEquals(60, Storage.getFruitQuantity(APPLE));

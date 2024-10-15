@@ -20,4 +20,11 @@ class FruitTransactionTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new FruitTransaction(Operation.SUPPLY, "apple", -10));
     }
+
+    @Test
+    void setQuantity_validQuantity_ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 20);
+        transaction.setQuantity(30);
+        assertEquals(30, transaction.getQuantity());
+    }
 }

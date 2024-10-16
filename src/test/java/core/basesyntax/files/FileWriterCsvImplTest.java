@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThrows;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class FileWriterCsvImplTest {
     private final FileWriterCsv fileWriter = new FileWriterCsvImpl();

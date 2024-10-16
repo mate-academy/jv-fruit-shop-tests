@@ -3,7 +3,7 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     @Test

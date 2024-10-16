@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class FileReaderCsvImplTest {
     private final FileReaderCsv fileReader = new FileReaderCsvImpl();

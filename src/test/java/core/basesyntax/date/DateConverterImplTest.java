@@ -6,7 +6,7 @@ import core.basesyntax.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class DateConverterImplTest {
     private DateConverter converter;

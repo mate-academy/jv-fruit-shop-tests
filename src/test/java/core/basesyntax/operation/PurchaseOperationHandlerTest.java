@@ -8,7 +8,7 @@ import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
 import java.util.HashMap;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
     private StorageService storageService;

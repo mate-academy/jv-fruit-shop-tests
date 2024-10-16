@@ -1,20 +1,21 @@
 package core.basesyntax.operation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
     private StorageService storageService;
     private ReturnOperationHandler returnOperationHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
         returnOperationHandler = new ReturnOperationHandler(storageService);
@@ -35,14 +36,15 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_ReturnForNonExistentFruit_Ok() {
+    public void handle_NonExistentFruit_NotOk() {
+        // Arrange
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("avocado");
-        transaction.setAmount(5);
+        transaction.setFruit("orange");
+        transaction.setAmount(10);
 
-        Map<String, Integer> storage = new HashMap<>();
-        returnOperationHandler.handle(transaction, storage);
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> returnOperationHandler.handle(transaction, storageService.getStorage()));
 
-        assertEquals(5, storageService.getStorage().get("avocado").intValue());
+        assertEquals("Cannot return fruit that is not in stock.", exception.getMessage());
     }
 }

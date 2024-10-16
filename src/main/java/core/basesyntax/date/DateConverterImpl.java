@@ -54,6 +54,8 @@ public class DateConverterImpl implements DateConverter {
             transaction.setAmount(amount);
             transaction.setFruit(fruit);
             transaction.setOperation(operation);
+
+            transactions.add(transaction);
         }
 
         return transactions;

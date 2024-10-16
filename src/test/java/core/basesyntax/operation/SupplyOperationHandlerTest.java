@@ -7,14 +7,14 @@ import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
     private StorageService storageService;
     private SupplyOperationHandler supplyOperationHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
         supplyOperationHandler = new SupplyOperationHandler(storageService);

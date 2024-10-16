@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
@@ -23,7 +23,7 @@ class ShopServiceImplTest {
     private StorageService storageService;
     private OperationStrategy operationStrategy;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
 

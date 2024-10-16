@@ -25,6 +25,6 @@ class FruitTransactionTest {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             FruitTransaction.Operation.operationFromCode("x");
         });
-        assertEquals("can't find operation", exception.getMessage());
+        assertEquals("can't find operation for code", exception.getMessage());
     }
 }

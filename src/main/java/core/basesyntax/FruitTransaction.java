@@ -46,12 +46,12 @@ public class FruitTransaction {
         }
 
         public static Operation operationFromCode(String code) {
-            for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
+            for (Operation operation : values()) {
+                if (operation.code.equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("can't find operation");
+            throw new RuntimeException("can't find operation for code");
         }
     }
 }

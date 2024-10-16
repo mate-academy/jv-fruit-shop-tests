@@ -8,14 +8,14 @@ import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private OperationStrategyImpl operationStrategy;
     private StorageService storageService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();

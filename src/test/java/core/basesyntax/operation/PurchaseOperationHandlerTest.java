@@ -7,14 +7,14 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
 import java.util.HashMap;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
     private StorageService storageService;
     private PurchaseOperationHandler purchaseOperationHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
         purchaseOperationHandler = new PurchaseOperationHandler(storageService);

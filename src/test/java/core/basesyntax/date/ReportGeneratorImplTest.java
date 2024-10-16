@@ -4,42 +4,31 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        reportGenerator = new ReportGeneratorImpl();
+        Map<String, Integer> storage = new HashMap<>();
+        storage.put("apple", 10);
+        storage.put("banana", 5);
+        reportGenerator = new ReportGeneratorImpl(storage);
     }
 
     @Test
     public void getReport_Ok() {
-        Map<String, Integer> storage = new HashMap<>();
-
-        storage.put("banana", 20);
-        storage.put("apple", 3);
-        storage.put("avocado", 34);
-
-        String expected = "banana,20\napple,3\navocado,34";
+        String expected = "banana,5\napple,10";
         String actual = reportGenerator.getReport();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getReport_emptyStorage_NotOk() {
-        String expected = "";
-        String actual = reportGenerator.getReport();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getReport_nullStorage_NotOk() {
-        reportGenerator = new ReportGeneratorImpl(null);
+    public void getReport_EmptyStorage_NotOk() {
+        reportGenerator = new ReportGeneratorImpl(new HashMap<>());
 
         String expected = "";
         String actual = reportGenerator.getReport();
@@ -48,24 +37,14 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    public void getReport_singleEntry_Ok() {
-        Map<String, Integer> storage = new HashMap<>();
+    public void getReport_SingleTransaction_NotOk() {
+        Map<String, Integer> newStorage = new HashMap<>();
 
-        storage.put("apple", 12);
-        String expected = "apple,12";
-        String actual = reportGenerator.getReport();
+        newStorage.put("apple", 23);
 
-        assertEquals(expected, actual);
-    }
+        reportGenerator = new ReportGeneratorImpl(newStorage);
 
-    @Test
-    public void getReport_sameKey_multipleValue_Ok() {
-        Map<String, Integer> storage = new HashMap<>();
-
-        storage.put("apple", 12);
-        storage.put("apple", 10);
-
-        String expected = "apple,10";
+        String expected = "apple,23";
         String actual = reportGenerator.getReport();
 
         assertEquals(expected, actual);

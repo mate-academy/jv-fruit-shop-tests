@@ -34,4 +34,34 @@ class SupplyOperationTest {
 
         Assertions.assertEquals(15, inventory.get("apple"));
     }
+
+    @Test
+    void addNewFruit_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 20);
+        supplyOperation.executeOperation(transaction, inventory);
+
+        Assertions.assertEquals(20, inventory.get("banana"));
+    }
+
+    @Test
+    void supplyZeroQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 0);
+        supplyOperation.executeOperation(transaction, inventory);
+
+        Assertions.assertEquals(0, inventory.getOrDefault("apple", 0));
+    }
+
+    @Test
+    void supplyNegativeQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "orange", -5);
+        Assertions.assertThrows(RuntimeException.class, () ->
+                supplyOperation.executeOperation(transaction, inventory));
+    }
+
+    @Test
+    void supplyNullFruitName_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, null, 10);
+        Assertions.assertThrows(RuntimeException.class, () ->
+                supplyOperation.executeOperation(transaction, inventory));
+    }
 }

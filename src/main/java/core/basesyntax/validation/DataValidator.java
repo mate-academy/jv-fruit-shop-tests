@@ -18,6 +18,12 @@ public class DataValidator {
             if (partsOfData.length != 3) {
                 throw new IllegalArgumentException("Incorrect input data in line: " + line);
             }
+
+            if (partsOfData[1] == null || partsOfData[1].isEmpty()) {
+                throw new IllegalArgumentException("Fruit name cannot be null or empty in line: "
+                        + line);
+            }
+
             try {
                 Operation.getOperationByCode(partsOfData[0]);
                 Integer.parseInt(partsOfData[2]);

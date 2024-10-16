@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWrite;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,11 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriteImplTest {
-    private FileWriteImpl fileWrite;
+    private FileWrite fileWrite;
     private File tempFile;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         fileWrite = new FileWriteImpl();
         tempFile = File.createTempFile("testReport", ".txt");
         tempFile.deleteOnExit();

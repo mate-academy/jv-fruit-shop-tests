@@ -33,19 +33,11 @@ public class FruitShopApplication {
     private static final FileWrite fileWriter = new FileWriteImpl();
 
     public static void main(String[] arg) {
-        List<String> inputReport = readDataFromFile("reportToRead.csv");
-        List<FruitTransaction> transactions = convertToTransactions(inputReport);
+        List<String> inputReport = fileRead.readDataFromFile("reportToRead.csv");
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         processTransactions(transactions);
-        String resultingReport = generateReport();
-        writeReportToFile(resultingReport, "finalReport.csv");
-    }
-
-    private static List<String> readDataFromFile(String fileName) {
-        return fileRead.readDataFromFile(fileName);
-    }
-
-    private static List<FruitTransaction> convertToTransactions(List<String> inputReport) {
-        return dataConverter.convertToTransaction(inputReport);
+        String resultingReport = reportGenerator.getReport(inventory);
+        fileWriter.write(resultingReport, "finalReport.csv");
     }
 
     private static void processTransactions(List<FruitTransaction> transactions) {
@@ -58,13 +50,5 @@ public class FruitShopApplication {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.processFruitTransactions(transactions, inventory);
-    }
-
-    private static String generateReport() {
-        return reportGenerator.getReport(inventory);
-    }
-
-    private static void writeReportToFile(String report, String fileName) {
-        fileWriter.write(report, fileName);
     }
 }

@@ -17,22 +17,12 @@ import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        File testFile = File.createTempFile("testFile", ".csv");
-        try (FileWriter fileWriter = new FileWriter(testFile)) {
-            fileWriter.write("type,fruit,quantity\n");
-            fileWriter.write("supply,banana,4\n");
-            fileWriter.write("purchase,apple,8\n");
-        }
-        args[0] = testFile.getName();
+    public static void main(String[] args) {
         if (args.length < 2) {
             throw new RuntimeException("You must provide input and output file paths.");
         }
@@ -63,8 +53,6 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
 
-        File reportFile = File.createTempFile("report", ".csv");
-        args[1] = reportFile.getName();
         String outputFile = args[1];
 
         FileWriterCsv fileWriter = new FileWriterCsvImpl();

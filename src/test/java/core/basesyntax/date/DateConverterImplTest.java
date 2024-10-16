@@ -1,14 +1,14 @@
 package core.basesyntax.date;
 
-import core.basesyntax.FruitTransaction;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 class DateConverterImplTest {
     private DateConverter dateConverter;

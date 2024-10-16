@@ -5,12 +5,13 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
 import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ShopServiceImplTest {
 
@@ -44,8 +45,10 @@ class ShopServiceImplTest {
 
         shopService.process(transactions);
 
-        assertEquals(130, storage.get("apple"), "Apple quantity should be updated correctly after SUPPLY and PURCHASE");
-        assertEquals(50, storage.get("banana"), "Banana quantity should be updated correctly after RETURN");
+        assertEquals(130, storage.get("apple"),
+                "Apple quantity should be updated correctly after SUPPLY and PURCHASE");
+        assertEquals(50, storage.get("banana"),
+                "Banana quantity should be updated correctly after RETURN");
     }
 
     @Test
@@ -53,13 +56,17 @@ class ShopServiceImplTest {
         List<FruitTransaction> transactions = List.of();
         shopService.process(transactions);
 
-        assertTrue(transactions.isEmpty(), "Storage should remain empty after processing an empty list of transactions");
+        assertTrue(transactions.isEmpty(),
+                "Storage should remain empty after processing an empty list of transactions");
     }
 
     @Test
     void testProcessWithSingleTransaction() {
-        List<FruitTransaction> transactions = List.of(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 250));
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                        "banana", 250));
         shopService.process(transactions);
-        assertEquals(250, storage.get("banana"), "Storage should reflect the quantity after a single SUPPLY transaction");
+        assertEquals(250, storage.get("banana"),
+                "Storage should reflect the quantity after a single SUPPLY transaction");
     }
 }

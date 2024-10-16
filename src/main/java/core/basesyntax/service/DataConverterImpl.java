@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +19,11 @@ public class DataConverterImpl implements DataConverter {
             if (parts.length != REQUIRED_PARTS_LENGTH) {
                 throw new IllegalArgumentException("Invalid input format: " + line);
             }
-            FruitTransaction.Operation[] operation = FruitTransaction.Operation.values();
+            FruitTransaction.Operation operation = FruitTransaction.Operation.getByCode(
+                    parts[OPERATION_INDEX]);
             String fruit = parts[FRUIT_INDEX];
             int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return transactions;

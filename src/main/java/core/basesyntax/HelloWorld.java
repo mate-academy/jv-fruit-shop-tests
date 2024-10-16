@@ -12,24 +12,23 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
 import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-    FileReader fileReader = new FileReaderImpl();
-    List<String> inputReport = fileReader.read("reportToRead.csv");
+    private FileReader fileReader = new FileReaderImpl();
+    private List<String> inputReport = fileReader.read("reportToRead.csv");
 
-    DataConverter dataConverter = new DataConverterImpl();
-    List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+    private DataConverter dataConverter = new DataConverterImpl();
+    private List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-    Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperation(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
             FruitTransaction.Operation.RETURN, new ReturnOperation()
     );
-    OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-    Map<String, Integer> storage = new HashMap<>();
+    private OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+    private Map<String, Integer> storage = new HashMap<>();
 }

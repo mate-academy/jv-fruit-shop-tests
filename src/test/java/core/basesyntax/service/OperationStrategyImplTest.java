@@ -1,13 +1,19 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.ReturnOperation;
+import core.basesyntax.service.operation.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
 
@@ -30,33 +36,36 @@ class OperationStrategyImplTest {
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
-
     @Test
     void testGetHandlerForBalanceOperation() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertNotNull(handler, "Handler for BALANCE should not be null");
-        assertTrue(handler instanceof BalanceOperation, "Should return instance of BalanceHandler for BALANCE");
+        assertTrue(handler instanceof BalanceOperation,
+                "Should return instance of BalanceHandler for BALANCE");
     }
 
     @Test
     void testGetHandlerForSupplyOperation() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertNotNull(handler, "Handler for SUPPLY should not be null");
-        assertTrue(handler instanceof SupplyOperation, "Should return instance of SupplyHandler for SUPPLY");
+        assertTrue(handler instanceof SupplyOperation,
+                "Should return instance of SupplyHandler for SUPPLY");
     }
 
     @Test
     void testGetHandlerForPurchaseOperation() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
         assertNotNull(handler, "Handler for PURCHASE should not be null");
-        assertTrue(handler instanceof PurchaseOperation, "Should return instance of PurchaseHandler for PURCHASE");
+        assertTrue(handler instanceof PurchaseOperation,
+                "Should return instance of PurchaseHandler for PURCHASE");
     }
 
     @Test
     void testGetHandlerForReturnOperation() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.RETURN);
         assertNotNull(handler, "Handler for RETURN should not be null");
-        assertTrue(handler instanceof ReturnOperation, "Should return instance of ReturnHandler for RETURN");
+        assertTrue(handler instanceof ReturnOperation,
+                "Should return instance of ReturnHandler for RETURN");
     }
 
     @Test

@@ -1,11 +1,13 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private final DataConverterImpl dataConverter = new DataConverterImpl();
@@ -23,7 +25,8 @@ class DataConverterImplTest {
         assertEquals(transactions.get(0).getFruit(), "apple");
         assertEquals(transactions.get(1).getOperation(), FruitTransaction.Operation.SUPPLY);
         assertEquals(transactions.get(2).getQuantity(), 25);
-        assertEquals(4, transactions.size(), "Size of the transactions list should match the input size");
+        assertEquals(4, transactions.size(),
+                "Size of the transactions list should match the input size");
 
     }
 
@@ -41,7 +44,7 @@ class DataConverterImplTest {
     @Test
     void testConvertToTransactionWithInvalidQuantity() {
         List<String> inputData = new ArrayList<>();
-        inputData.add("b,apple,abc");  // Некорректное значение количества
+        inputData.add("b,apple,abc");
 
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             dataConverter.convertToTransaction(inputData);

@@ -1,16 +1,16 @@
 package core.basesyntax.io;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
 
@@ -29,7 +29,8 @@ public class FileWriterImplTest {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
-            assertEquals(data, line, "The content written to the file should match the expected data");
+            assertEquals(data, line,
+                    "The content written to the file should match the expected data");
         }
     }
 
@@ -43,7 +44,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void testIOExceptionHandling() {
+    void testIoExceptionHandling() {
         String data = "Data that won't be written";
         String invalidPath = "/invalid/path/to/file.txt";
 

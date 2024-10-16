@@ -1,19 +1,20 @@
 package core.basesyntax.io;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
     private static final String EXISTING_FILE_PATH = "src/test/resources/testInput.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
-    private static final String INVALID_FORMAT_FILE_PATH = "src/test/resources/invalidFormatFile.csv";
+    private static final String INVALID_FORMAT_FILE_PATH
+            = "src/test/resources/invalidFormatFile.csv";
     private FileReader fileReader;
 
     @BeforeEach
@@ -40,7 +41,8 @@ public class FileReaderImplTest {
 
     @Test
     public void shouldReadAllLinesWhenFileHasInvalidFormat() throws IOException {
-        Files.write(Path.of(INVALID_FORMAT_FILE_PATH), List.of("This is not CSV", "Neither is this"));
+        Files.write(Path.of(INVALID_FORMAT_FILE_PATH), List.of(
+                "This is not CSV", "Neither is this"));
 
         List<String> lines = fileReader.read(INVALID_FORMAT_FILE_PATH);
         assertEquals(2, lines.size());

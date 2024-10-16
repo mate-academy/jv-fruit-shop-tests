@@ -1,23 +1,23 @@
 package core.basesyntax.service;
 
-import org.junit.jupiter.api.Test;
-import java.util.HashMap;
+import static org.junit.Assert.assertEquals;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
     @Test
     void testGetReportWithMultipleFruits() {
-        Map<String, Integer> testMap = new HashMap<>();
+        Map<String, Integer> testMap = new LinkedHashMap<>();
         testMap.put("banana", 100);
         testMap.put("apple", 200);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl(testMap);
-        String expectedReport = "fruit,quantity" + System.lineSeparator() +
-                "banana,100" + System.lineSeparator() +
-                "apple,200" + System.lineSeparator();
-        assertEquals(expectedReport, reportGenerator.getReport(),
-                "The report should match the expected format with multiple fruits");
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "banana, 100" + System.lineSeparator()
+                + "apple, 200" + System.lineSeparator();
+        assertEquals(expectedReport, reportGenerator.getReport());
 
     }
 

@@ -37,7 +37,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void testProcessWithMultipleOperations() {
+    void shouldUpdateStorageCorrectly_whenMultipleOperationsAreProcessed() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
@@ -53,7 +53,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void testProcessWithEmptyTransactions() {
+    void shouldKeepStorageEmpty_whenNoTransactionsAreProcessed() {
         List<FruitTransaction> transactions = List.of();
         shopService.process(transactions);
 
@@ -62,7 +62,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void testProcessWithSingleTransaction() {
+    void shouldUpdateStorageCorrectly_whenSingleSupplyTransactionIsProcessed() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                         "banana", 250));

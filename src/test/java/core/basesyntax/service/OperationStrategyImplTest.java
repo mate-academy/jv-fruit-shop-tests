@@ -37,7 +37,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void testGetHandlerForBalanceOperation() {
+    void shouldReturnBalanceHandler_whenOperationIsBalance() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertNotNull(handler, "Handler for BALANCE should not be null");
         assertTrue(handler instanceof BalanceOperation,
@@ -45,7 +45,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void testGetHandlerForSupplyOperation() {
+    void shouldReturnSupplyHandler_whenOperationIsSupply() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertNotNull(handler, "Handler for SUPPLY should not be null");
         assertTrue(handler instanceof SupplyOperation,
@@ -53,7 +53,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void testGetHandlerForPurchaseOperation() {
+    void shouldReturnPurchaseHandler_whenOperationIsPurchase() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
         assertNotNull(handler, "Handler for PURCHASE should not be null");
         assertTrue(handler instanceof PurchaseOperation,
@@ -61,7 +61,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void testGetHandlerForReturnOperation() {
+    void shouldReturnReturnHandler_whenOperationIsReturn() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.RETURN);
         assertNotNull(handler, "Handler for RETURN should not be null");
         assertTrue(handler instanceof ReturnOperation,
@@ -69,7 +69,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void testGetHandlerForUnknownOperation() {
+    void shouldReturnNull_whenOperationIsUnknown() {
         OperationHandler handler = operationStrategy.get(null);
         assertNull(handler, "Handler for null operation should be null");
     }

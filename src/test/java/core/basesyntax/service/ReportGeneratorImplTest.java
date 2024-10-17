@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
     @Test
-    void testGetReportWithMultipleFruits() {
+    void shouldGenerateCorrectReport_whenMultipleFruitsAreInStorage() {
         Map<String, Integer> testMap = new LinkedHashMap<>();
         testMap.put("banana", 100);
         testMap.put("apple", 200);

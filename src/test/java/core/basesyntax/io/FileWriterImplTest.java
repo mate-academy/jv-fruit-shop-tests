@@ -23,7 +23,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void testWriteDataSuccessfully() throws IOException {
+    void shouldWriteDataCorrectly_whenFilePathIsValid() throws IOException {
         String data = "Hello, FileWriter!";
         fileWriter.write(data, filePath);
 
@@ -35,7 +35,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void testFileCreation() {
+    void shouldCreateFile_whenDataIsWritten() {
         String data = "Checking file creation";
         fileWriter.write(data, filePath);
 
@@ -44,7 +44,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void testIoExceptionHandling() {
+    void shouldThrowRuntimeException_whenFilePathIsInvalid() {
         String data = "Data that won't be written";
         String invalidPath = "/invalid/path/to/file.txt";
 

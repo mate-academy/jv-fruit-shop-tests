@@ -10,15 +10,22 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
+    private static final String BALANCE_APPLE_100 = "b,apple,100";
+    private static final String SUPPLY_BANANA_50 = "s,banana,50";
+    private static final String PURCHASE_ORANGE_25 = "p,orange,25";
+    private static final String RETURN_APPLE_10 = "r,apple,10";
+    private static final String INVALID_FORMAT_BANANA = "b,banana";
+    private static final String INVALID_QUANTITY_APPLE = "b,apple,abc";
+
     private final DataConverterImpl dataConverter = new DataConverterImpl();
 
     @Test
-    void testConvertToTransactionWithValidData() {
+    void shouldConvertToTransactions_whenDataIsValid() {
         List<String> inputData = new ArrayList<>();
-        inputData.add("b,apple,100");
-        inputData.add("s,banana,50");
-        inputData.add("p,orange,25");
-        inputData.add("r,apple,10");
+        inputData.add(BALANCE_APPLE_100);
+        inputData.add(SUPPLY_BANANA_50);
+        inputData.add(PURCHASE_ORANGE_25);
+        inputData.add(RETURN_APPLE_10);
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputData);
 
@@ -31,9 +38,9 @@ class DataConverterImplTest {
     }
 
     @Test
-    void testConvertToTransactionWithInvalidFormat() {
+    void shouldThrowException_whenDataHasInvalidFormat() {
         List<String> inputData = new ArrayList<>();
-        inputData.add("b,banana");
+        inputData.add(INVALID_FORMAT_BANANA);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(inputData);
         });
@@ -42,9 +49,9 @@ class DataConverterImplTest {
     }
 
     @Test
-    void testConvertToTransactionWithInvalidQuantity() {
+    void shouldThrowException_whenQuantityIsInvalid() {
         List<String> inputData = new ArrayList<>();
-        inputData.add("b,apple,abc");
+        inputData.add(INVALID_QUANTITY_APPLE);
 
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             dataConverter.convertToTransaction(inputData);

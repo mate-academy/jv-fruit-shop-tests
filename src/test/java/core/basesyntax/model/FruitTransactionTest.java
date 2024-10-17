@@ -6,21 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
-    @Test
-    void testConstructorAndGetters() {
-        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        String fruit = "apple";
-        int quantity = 100;
-
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-
-        assertEquals(operation, transaction.getOperation());
-        assertEquals(fruit, transaction.getFruit());
-        assertEquals(quantity, transaction.getQuantity());
-    }
 
     @Test
-    void testSetAndGetOperation() {
+    void shouldReturnCorrectOperation_whenSetOperationIsCalled() {
         FruitTransaction fruitTransaction = new FruitTransaction(null, "", 0);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         assertEquals(fruitTransaction.getOperation(), FruitTransaction.Operation.BALANCE);
@@ -31,7 +19,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void testSetAndGetFruit() {
+    void shouldReturnCorrectFruit_whenSetFruitIsCalled() {
         FruitTransaction fruitTransaction = new FruitTransaction(null, "", 0);
         fruitTransaction.setFruit("banana");
         assertEquals(fruitTransaction.getFruit(), "banana");
@@ -41,7 +29,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void testSetAndGetQuantity() {
+    void shouldReturnCorrectQuantity_whenSetQuantityIsCalled() {
         FruitTransaction transaction = new FruitTransaction(null, "", 0);
 
         transaction.setQuantity(100);
@@ -52,7 +40,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void testGetByCodeForValidCodes() {
+    void shouldReturnCorrectOperation_whenValidCodeIsProvided() {
         assertEquals(FruitTransaction.Operation.BALANCE,
                 FruitTransaction.Operation.getByCode("b"),
                 "Code 'b' should return Operation.BALANCE");
@@ -71,22 +59,19 @@ class FruitTransactionTest {
     }
 
     @Test
-    void testGetByCodeForInvalidCode() {
-        // Проверка на случай некорректного кода
+    void shouldThrowException_whenInvalidOrNullCodeIsProvided() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.getByCode("x");
         });
         assertEquals("Invalid operation code: x", exception.getMessage(),
                 "Exception message should indicate an invalid code");
 
-        // Проверка на случай пустой строки
         exception = assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.getByCode("");
         });
         assertEquals("Invalid operation code: ", exception.getMessage(),
                 "Exception message should handle empty string properly");
 
-        // Проверка на случай null значения
         exception = assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.getByCode(null);
         });

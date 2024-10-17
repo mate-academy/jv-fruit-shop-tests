@@ -1,6 +1,7 @@
 package core.basesyntax.operation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.db.StorageService;
@@ -41,10 +42,9 @@ class BalanceOperationHandlerTest {
         transaction.setFruit("apple");
         transaction.setAmount(-4);
 
-        Map<String, Integer> storage = new HashMap<>();
-
-        balanceOperationHandler.handle(transaction, storage);
-
-        assertEquals(-4, storageService.getStorage().getOrDefault("apple", 0).intValue());
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> balanceOperationHandler
+                        .handle(transaction, storageService.getStorage()));
+        assertEquals("Quantity cannot be negative", exception.getMessage());
     }
 }

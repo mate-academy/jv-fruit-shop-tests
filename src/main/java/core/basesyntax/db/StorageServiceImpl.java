@@ -8,11 +8,17 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void updateBalance(String fruit, int amount) {
+        if (amount < 0) {
+            throw new RuntimeException("Quantity cannot be negative");
+        }
         storage.put(fruit, amount);
     }
 
     @Override
     public void addSupply(String fruit, int amount) {
+        if (amount < 0) {
+            throw new RuntimeException("Quantity cannot be negative");
+        }
         storage.put(fruit, storage.getOrDefault(fruit, 0) + amount);
     }
 

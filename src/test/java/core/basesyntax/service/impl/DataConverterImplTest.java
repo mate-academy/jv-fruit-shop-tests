@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.FruitTransaction;
+import core.basesyntax.FruitTransaction.Operation;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -21,6 +22,9 @@ class DataConverterImplTest {
                 "Wrong first transaction fruit.");
         Assertions.assertEquals(FruitTransaction.Operation.BALANCE,
                 transactions.get(0).getOperation());
+        Assertions.assertEquals(Operation.SUPPLY,
+                transactions.get(1).getOperation());
+
     }
 
     @Test

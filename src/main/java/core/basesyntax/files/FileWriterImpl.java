@@ -14,7 +14,7 @@ public class FileWriterImpl implements FileWriter {
             Files.write(path, data.getBytes(), StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error writing file: " + filePath, e);
         }
     }
 }

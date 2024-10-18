@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
+    private static final String FRUIT = "apple";
     private StorageService storageService;
     private SupplyOperationHandler supplyOperationHandler;
 
@@ -24,19 +25,19 @@ class SupplyOperationHandlerTest {
     @Test
     public void handle_Ok() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("apple");
+        transaction.setFruit(FRUIT);
         transaction.setAmount(5);
 
         Map<String, Integer> storage = new HashMap<>();
 
         supplyOperationHandler.handle(transaction, storage);
-        assertEquals(5, storageService.getStorage().get("apple").intValue());
+        assertEquals(5, storageService.getStorage().get(FRUIT).intValue());
     }
 
     @Test
     public void handle_negativeAmount_NotOk() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("apple");
+        transaction.setFruit(FRUIT);
         transaction.setAmount(-3);
 
         RuntimeException exception = assertThrows(RuntimeException.class,

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
+    private static final String FRUIT = "apple";
     private StorageService storageService;
     private ReturnOperationHandler returnOperationHandler;
 
@@ -23,16 +24,16 @@ class ReturnOperationHandlerTest {
 
     @Test
     public void handle_Ok() {
-        storageService.updateBalance("apple", 3);
+        storageService.updateBalance(FRUIT, 3);
 
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("apple");
+        transaction.setFruit(FRUIT);
         transaction.setAmount(3);
 
         Map<String, Integer> storage = new HashMap<>();
         returnOperationHandler.handle(transaction, storage);
 
-        assertEquals(6, storageService.getStorage().get("apple").intValue());
+        assertEquals(6, storageService.getStorage().get(FRUIT).intValue());
     }
 
     @Test

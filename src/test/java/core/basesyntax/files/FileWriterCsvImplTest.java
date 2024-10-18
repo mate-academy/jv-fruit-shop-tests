@@ -20,10 +20,10 @@ class FileWriterCsvImplTest {
 
         StringBuilder content = new StringBuilder();
 
-        try (FileReader fr = new FileReader(testFile)) {
-            int ch;
-            while ((ch = fr.read()) != -1) {
-                content.append((char) ch);
+        try (FileReader fileReader = new FileReader(testFile)) {
+            int fileChararacters;
+            while ((fileChararacters = fileReader.read()) != -1) {
+                content.append((char) fileChararacters);
             }
         }
 

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
 
+    private static final String BANANA = "banana";
     private ShopServiceImpl shopService;
     private Storage storage;
 
@@ -38,24 +39,24 @@ class ShopServiceImplTest {
     @Test
     void process_validTransactions_ok() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana",
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA,
                     100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana",
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA,
                     30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10)
+                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 10)
         );
         shopService.process(transactions);
-        Assertions.assertEquals(130, storage.getAllFruits().get("banana"),
+        Assertions.assertEquals(130, storage.getAllFruits().get(BANANA),
                 "Wrong final banana quantity.");
     }
 
     @Test
     void process_purchaseMoreThanAvailable_exceptionThrown() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana",
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA,
                     100),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana",
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA,
                     150)
         );
         Assertions.assertThrows(RuntimeException.class, () -> {

@@ -8,30 +8,29 @@ import java.util.List;
 public class DataConverterImpl implements DataConverter {
 
     private static final String COMA_SEPARATOR = ",";
+    private static final int OPERATION_CODE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputData) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        List<String> dataLines = removeHeaderIfExists(inputData);
-        for (String line : dataLines) {
+        boolean hasHeader = !inputData.isEmpty()
+                && inputData.get(OPERATION_CODE_INDEX).startsWith("type");
+
+        for (int i = hasHeader ? FRUIT_INDEX : OPERATION_CODE_INDEX; i < inputData.size(); i++) {
+            String line = inputData.get(i);
             FruitTransaction transaction = parseLineToTransaction(line);
             transactions.add(transaction);
         }
         return transactions;
     }
 
-    private List<String> removeHeaderIfExists(List<String> inputData) {
-        if (!inputData.isEmpty() && inputData.get(0).startsWith("type")) {
-            return inputData.subList(1, inputData.size());
-        }
-        return inputData;
-    }
-
     private FruitTransaction parseLineToTransaction(String line) {
         String[] parts = splitLine(line);
-        String operationCode = parts[0];
-        String fruit = parts[1];
-        int quantity = parseQuantity(parts[2]);
+        String operationCode = parts[OPERATION_CODE_INDEX];
+        String fruit = parts[FRUIT_INDEX];
+        int quantity = parseQuantity(parts[QUANTITY_INDEX]);
         FruitTransaction.Operation operation = getOperationFromCode(operationCode);
         return new FruitTransaction(operation, fruit, quantity);
     }

@@ -13,14 +13,22 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handleTransaction(FruitTransaction fruitTransaction) {
-        int newQuantity = storage.getQuantity(fruitTransaction.getFruit())
-                - fruitTransaction.getQuantity();
+        if (!storage.containsFruit(fruitTransaction.getFruit())) {
+            throw new RuntimeException("incorrect operation " + fruitTransaction.getFruit()
+                    + " fruit not found in storage");
+        }
+        int newQuantity = getNewQuantity(fruitTransaction);
         if (fruitTransaction.getQuantity() > 0 && newQuantity >= 0) {
             storage.put(fruitTransaction.getFruit(), newQuantity);
-        } else {
-            throw new RuntimeException("negative balance " + newQuantity
-                    + " cannot be recorded at "
-                    + PurchaseOperation.class + " from fail " + READ_FILE_PATH);
+            return;
         }
+        throw new RuntimeException("negative balance " + newQuantity
+                + " cannot be recorded at "
+                + PurchaseOperation.class + " from fail " + READ_FILE_PATH);
+    }
+
+    public int getNewQuantity(FruitTransaction fruitTransaction) {
+        return storage.getQuantity(fruitTransaction.getFruit())
+                - fruitTransaction.getQuantity();
     }
 }

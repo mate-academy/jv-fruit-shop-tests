@@ -1,5 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation;
+import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ShopService;
@@ -10,6 +16,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -19,15 +26,16 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static final List<FruitTransaction> CORRECT_FRUIT_TRANSACTION_LIST = List.of(
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13),
-            new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
+            new FruitTransaction(BALANCE, "banana", 20),
+            new FruitTransaction(BALANCE, "apple", 100),
+            new FruitTransaction(SUPPLY, "banana", 100),
+            new FruitTransaction(PURCHASE, "banana", 13),
+            new FruitTransaction(RETURN, "apple", 10),
+            new FruitTransaction(PURCHASE, "apple", 20),
+            new FruitTransaction(PURCHASE, "banana", 5),
+            new FruitTransaction(SUPPLY, "banana", 50)
     );
+    private static final List<FruitTransaction> EMPTY_LIST = new ArrayList<>();
     private static final Map<String, Integer> CORRECT_STORAGE = Map.of(
             "banana", 152,
             "apple", 90
@@ -38,11 +46,11 @@ class ShopServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         storage = new Storage();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperation(storage),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(storage),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage)
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                BALANCE, new BalanceOperation(storage),
+                PURCHASE, new PurchaseOperation(storage),
+                RETURN, new ReturnOperation(storage),
+                SUPPLY, new SupplyOperation(storage)
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
@@ -59,5 +67,11 @@ class ShopServiceImplTest {
         Map<String, Integer> actual = storage.getStorage();
         Map<String, Integer> expected = CORRECT_STORAGE;
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void process_emptyList_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> shopService.process(EMPTY_LIST),
+                "Expected RuntimeException was not thrown in " + ShopServiceImpl.class);
     }
 }

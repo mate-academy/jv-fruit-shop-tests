@@ -12,6 +12,9 @@ public class FileReaderImpl implements FileReader {
         List<String> data = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
             String value = bufferedReader.readLine(); // skip header (first line)
+            if (value == null || value.trim().isEmpty()) {
+                throw new RuntimeException("file " + file + " is empty");
+            }
             while ((value = bufferedReader.readLine()) != null) {
                 data.add(value);
             }

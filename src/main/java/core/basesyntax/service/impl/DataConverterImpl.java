@@ -13,6 +13,9 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
+        if (inputReport.isEmpty()) {
+            throw new RuntimeException("List " + inputReport + "is empty");
+        }
         List<FruitTransaction> result = new ArrayList<>();
         for (String fruitReport : inputReport) {
             String[] splitInputReport = fruitReport.split(COMA);

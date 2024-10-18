@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 class FileReaderImplTest {
     private static final String CORRECT_FILE_PATH = "src/test/resources/reportToRead.csv";
     private static final String INCORRECT_FILE_PATH = "src/test/resources/report.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
     private static final List<String> CORRECT_DATA_FROM_FILE = List.of(
             "b,banana,20",
             "b,apple,100",
@@ -36,6 +37,12 @@ class FileReaderImplTest {
     @Test
     void read_incorrectFilePath_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () -> fileReader.read(INCORRECT_FILE_PATH),
+                "Expected RuntimeException was not thrown in " + FileReaderImpl.class);
+    }
+
+    @Test
+    void read_emptyFile_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> fileReader.read(EMPTY_FILE_PATH),
                 "Expected RuntimeException was not thrown in " + FileReaderImpl.class);
     }
 }

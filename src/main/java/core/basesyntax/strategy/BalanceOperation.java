@@ -15,10 +15,10 @@ public class BalanceOperation implements OperationHandler {
     public void handleTransaction(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() >= 0) {
             storage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-        } else {
-            throw new RuntimeException("negative balance " + fruitTransaction.getQuantity()
-                    + " cannot be recorded at "
-                    + BalanceOperation.class + " from fail " + READ_FILE_PATH);
+            return;
         }
+        throw new RuntimeException("negative balance " + fruitTransaction.getQuantity()
+                + " cannot be recorded at "
+                + BalanceOperation.class + " from fail " + READ_FILE_PATH);
     }
 }

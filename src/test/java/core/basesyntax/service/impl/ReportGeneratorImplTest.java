@@ -18,8 +18,6 @@ class ReportGeneratorImplTest {
     @BeforeAll
     static void beforeAll() {
         storage = new Storage();
-        storage.put("banana", 152);
-        storage.put("apple", 90);
         reportGenerator = new ReportGeneratorImpl();
     }
 
@@ -30,8 +28,15 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_correctReport_ok() {
+        storage.put("banana", 152);
+        storage.put("apple", 90);
         String actual = reportGenerator.getReport();
-        String expected = REPORT;
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(REPORT, actual);
+    }
+
+    @Test
+    void getReport_emptyStorage_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> reportGenerator.getReport(),
+                "Expected RuntimeException was not thrown in " + ReportGeneratorImpl.class);
     }
 }

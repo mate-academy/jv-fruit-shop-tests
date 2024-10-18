@@ -6,6 +6,10 @@ import java.util.Map;
 public class Storage {
     private static final Map<String, Integer> fruitStorage = new HashMap<>();
 
+    public boolean containsFruit(String fruit) {
+        return fruitStorage.containsKey(fruit);
+    }
+
     public void put(String fruit, Integer quantity) {
         fruitStorage.put(fruit, quantity);
     }

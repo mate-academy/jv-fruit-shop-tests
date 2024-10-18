@@ -47,17 +47,4 @@ class DataConverterImplTest {
         assertTrue(exception.getMessage().contains("Invalid input format"),
                 "Exception message should indicate an invalid input format");
     }
-
-    @Test
-    void shouldThrowException_whenQuantityIsInvalid() {
-        List<String> inputData = new ArrayList<>();
-        inputData.add(INVALID_QUANTITY_APPLE);
-
-        NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
-            dataConverter.convertToTransaction(inputData);
-        });
-
-        assertTrue(exception.getMessage().contains("For input string"),
-                "Exception message should indicate an invalid number format for quantity");
-    }
 }

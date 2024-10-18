@@ -1,5 +1,6 @@
 package core.basesyntax.io;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -36,11 +37,30 @@ public class FileWriterImplTest {
 
     @Test
     void shouldCreateFile_whenDataIsWritten() {
-        String data = "Checking file creation";
-        fileWriter.write(data, filePath);
+        String reportContent = "fruit,quantity" + System.lineSeparator()
+                + "apple,100" + System.lineSeparator()
+                + "banana,50" + System.lineSeparator();
+        String filePath = "report.txt";
+        fileWriter.write(reportContent, filePath);
 
         File file = new File(filePath);
         assertTrue(file.exists(), "File should be created when data is written to it");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder fileContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append(System.lineSeparator());
+            }
+
+            assertEquals(reportContent, fileContent.toString(),
+                    "The content of the file should match the report content");
+        } catch (IOException e) {
+            fail("An error occurred while reading the file: " + e.getMessage());
+        } finally {
+            // Удаляем файл после теста
+            file.delete();
+        }
     }
 
     @Test

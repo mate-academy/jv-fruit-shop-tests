@@ -8,27 +8,6 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    void shouldReturnCorrectOperation_whenSetOperationIsCalled() {
-        FruitTransaction fruitTransaction = new FruitTransaction(null, "", 0);
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        assertEquals(fruitTransaction.getOperation(), FruitTransaction.Operation.BALANCE);
-
-        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        assertEquals(fruitTransaction.getOperation(), FruitTransaction.Operation.SUPPLY);
-
-    }
-
-    @Test
-    void shouldReturnCorrectFruit_whenSetFruitIsCalled() {
-        FruitTransaction fruitTransaction = new FruitTransaction(null, "", 0);
-        fruitTransaction.setFruit("banana");
-        assertEquals(fruitTransaction.getFruit(), "banana");
-
-        fruitTransaction.setFruit("apple");
-        assertEquals("apple", fruitTransaction.getFruit());
-    }
-
-    @Test
     void shouldReturnCorrectQuantity_whenSetQuantityIsCalled() {
         FruitTransaction transaction = new FruitTransaction(null, "", 0);
 

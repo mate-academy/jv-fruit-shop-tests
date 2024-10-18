@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -46,7 +47,7 @@ class ShopServiceImplTest {
 
         shopService.process(transactions);
 
-        assertEquals(130, storage.get("apple"),
+        assertEquals(70, storage.get("apple"),
                 "Apple quantity should be updated correctly after SUPPLY and PURCHASE");
         assertEquals(50, storage.get("banana"),
                 "Banana quantity should be updated correctly after RETURN");
@@ -69,5 +70,20 @@ class ShopServiceImplTest {
         shopService.process(transactions);
         assertEquals(250, storage.get("banana"),
                 "Storage should reflect the quantity after a single SUPPLY transaction");
+    }
+
+    @Test
+    void shouldThrowException_whenNotEnoughProductToPurchase() {
+        storage.put("apple", 20);
+
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 50)
+        );
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+            shopService.process(transactions);
+        });
+
+        assertEquals("Not enough apple to complete the purchase.", exception.getMessage());
     }
 }

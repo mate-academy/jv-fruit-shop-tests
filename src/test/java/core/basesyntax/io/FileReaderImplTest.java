@@ -35,7 +35,6 @@ public class FileReaderImplTest {
         List<String> lines = fileReader.read(EMPTY_FILE_PATH);
         assertTrue(lines.isEmpty(), "Expected empty list for empty file");
 
-        // Удаляем файл после теста
         Files.delete(Path.of(EMPTY_FILE_PATH));
     }
 

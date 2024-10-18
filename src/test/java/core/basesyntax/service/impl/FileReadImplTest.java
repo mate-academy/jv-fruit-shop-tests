@@ -12,6 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReadImplTest {
+    private static final String NON_EXISTENT_FILE_NAME = "/invalid/path/to/file.txt";
+    private static final String CONTENT = "fruit,quantity\napple,10\nbanana,5";
+    private static final String INVALID_FILE_NAME = "nonExistentFile.txt";
+
     private FileRead fileRead;
     private File tempFile;
 
@@ -19,7 +23,6 @@ class FileReadImplTest {
     public void setUp() throws IOException {
         fileRead = new FileReadImpl();
         tempFile = File.createTempFile("testData", ".txt");
-        tempFile.deleteOnExit();
     }
 
     @AfterEach
@@ -31,9 +34,8 @@ class FileReadImplTest {
 
     @Test
     public void readDataFromFile_ReadsLinesSuccessfully() throws IOException {
-        String content = "fruit,quantity\napple,10\nbanana,5";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-            writer.write(content);
+            writer.write(CONTENT);
         }
         List<String> lines = fileRead.readDataFromFile(tempFile.getAbsolutePath());
 
@@ -45,15 +47,13 @@ class FileReadImplTest {
 
     @Test
     public void readDataFromFile_FileNotFound_ThrowsRuntimeException() {
-        String invalidFileName = "/invalid/path/to/file.txt";
         Assertions.assertThrows(RuntimeException.class, () ->
-                fileRead.readDataFromFile(invalidFileName));
+                fileRead.readDataFromFile(NON_EXISTENT_FILE_NAME));
     }
 
     @Test
     public void readDataFromFile_ReadError_ThrowsRuntimeException() {
-        String invalidFileName = "nonExistentFile.txt";
         Assertions.assertThrows(RuntimeException.class, () ->
-                fileRead.readDataFromFile(invalidFileName));
+                fileRead.readDataFromFile(INVALID_FILE_NAME));
     }
 }

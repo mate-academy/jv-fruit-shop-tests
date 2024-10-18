@@ -54,14 +54,14 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void processBalanceFruitTransactions_processFruitTransactions_Ok() {
+    public void processBalanceFruitTransactions_processFruitTransactions_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 10);
         shopService.processFruitTransactions(List.of(transaction), inventory);
         Assertions.assertEquals(10, inventory.get("apple"));
     }
 
     @Test
-    void processPurchaseFruitTransactions_processFruitTransactions_Ok() {
+    public void processPurchaseFruitTransactions_processFruitTransactions_Ok() {
         inventory.put("apple", 20);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "apple", 5);
         shopService.processFruitTransactions(List.of(transaction), inventory);
@@ -69,7 +69,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void processReturnFruitTransactions_processFruitTransactions_Ok() {
+    public void processReturnFruitTransactions_processFruitTransactions_Ok() {
         inventory.put("apple", 10);
         FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", 5);
         shopService.processFruitTransactions(List.of(transaction), inventory);
@@ -77,14 +77,14 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void processSupplyFruitTransactions_processFruitTransactions_Ok() {
+    public void processSupplyFruitTransactions_processFruitTransactions_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 10);
         shopService.processFruitTransactions(List.of(transaction), inventory);
         Assertions.assertEquals(10, inventory.get("banana"));
     }
 
     @Test
-    void processFruitTransactions_NoHandler_ThrowsException() {
+    public void processFruitTransactions_NoHandler_shouldThrowException() {
         FruitTransaction transaction = new FruitTransaction(null, "banana", 10);
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 shopService.processFruitTransactions(List.of(transaction), inventory));

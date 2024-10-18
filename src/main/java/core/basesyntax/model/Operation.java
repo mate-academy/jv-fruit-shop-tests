@@ -17,6 +17,9 @@ public enum Operation {
     }
 
     public static Operation getOperationByCode(String code) {
+        if (code == null) {
+            throw new IllegalArgumentException("Code cannot be null");
+        }
         for (Operation operation : Operation.values()) {
             if (operation.getCode().equals(code)) {
                 return operation;

@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriteImplTest {
+    private static final String NON_EXISTENT_FILE_NAME = "/invalid/path/to/file.txt";
+    private static final String REPORT_CONTENT = "fruit,quantity\napple,10\nbanana,5";
+
     private FileWrite fileWrite;
     private File tempFile;
 
@@ -18,7 +21,6 @@ class FileWriteImplTest {
     public void setUp() throws IOException {
         fileWrite = new FileWriteImpl();
         tempFile = File.createTempFile("testReport", ".txt");
-        tempFile.deleteOnExit();
     }
 
     @AfterEach
@@ -29,9 +31,8 @@ class FileWriteImplTest {
     }
 
     @Test
-    public void createsFileAndWritesContent_write_Ok() throws IOException {
-        String report = "fruit,quantity\napple,10\nbanana,5";
-        fileWrite.write(report, tempFile.getAbsolutePath());
+    public void writeToFile_validInput_writesContentSuccessfully() throws IOException {
+        fileWrite.write(REPORT_CONTENT, tempFile.getAbsolutePath());
 
         try (BufferedReader reader = new BufferedReader(new FileReader(tempFile))) {
             StringBuilder content = new StringBuilder();
@@ -39,17 +40,13 @@ class FileWriteImplTest {
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-            Assertions.assertEquals(report + "\n", content.toString());
+            Assertions.assertEquals(REPORT_CONTENT + "\n", content.toString());
         }
     }
 
     @Test
-    public void whenIoExceptionThrown_write_Ok() {
-        String report = "fruit,quantity\napple,10\nbanana,5";
-        String invalidFileName = "/invalid/path/to/file.txt";
-
+    public void writeToFile_invalidFileName_throwsRuntimeException() {
         Assertions.assertThrows(RuntimeException.class, () ->
-                fileWrite.write(report, invalidFileName));
-
+                fileWrite.write(REPORT_CONTENT, NON_EXISTENT_FILE_NAME));
     }
 }

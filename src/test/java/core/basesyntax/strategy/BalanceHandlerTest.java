@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
@@ -13,13 +14,16 @@ class BalanceHandlerTest {
     private Map<String, Integer> inventory;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         inventory = new HashMap<>();
         balanceOperation = new BalanceHandler();
+
+        inventory.put("orange", 5);
     }
 
     @Test
-    void addQuantityToFruit_executeOperation_Ok() {
+    @DisplayName("Set quantity of a new fruit - execute operation should set balance correctly")
+    public void addQuantityToFruit_executeOperation_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 10);
         balanceOperation.executeOperation(transaction, inventory);
 
@@ -27,19 +31,21 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void addQuantityToExistingFruit_executeOperation_Ok() {
-        inventory.put("apple", 5);
-        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 10);
+    @DisplayName("Set quantity of an existing fruit - "
+            + "execute operation should override previous balance")
+    public void addQuantityToExistingFruit_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "orange", 10);
         balanceOperation.executeOperation(transaction, inventory);
 
-        Assertions.assertEquals(15, inventory.get("apple"));
+        Assertions.assertEquals(10, inventory.get("orange"));
     }
 
     @Test
-    void addSubtractionQuantityToNotExistingFruit_executeOperation_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", -10);
-        balanceOperation.executeOperation(transaction, inventory);
+    @DisplayName("Set negative quantity - execute operation should throw exception")
+    public void setNegativeQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", -5);
 
-        Assertions.assertEquals(0, inventory.get("apple"));
+        Assertions.assertThrows(RuntimeException.class, () ->
+                balanceOperation.executeOperation(transaction, inventory));
     }
 }

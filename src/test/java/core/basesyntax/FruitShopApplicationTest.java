@@ -46,7 +46,7 @@ class FruitShopApplicationTest {
     private ShopService shopService;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         tempFileForRead = File.createTempFile("testReportForRead", ".txt");
         tempFileForWrite = File.createTempFile("testReportForWrite", ".txt");
 
@@ -70,8 +70,6 @@ class FruitShopApplicationTest {
 
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
-        tempFileForRead.deleteOnExit();
-        tempFileForWrite.deleteOnExit();
     }
 
     @AfterEach
@@ -80,9 +78,9 @@ class FruitShopApplicationTest {
         deleteFile(tempFileForWrite);
     }
 
-    private void deleteFile(File tempFileForWrite) {
-        if (tempFileForWrite.exists()) {
-            tempFileForWrite.delete();
+    private void deleteFile(File tempFile) {
+        if (tempFile.exists()) {
+            tempFile.delete();
         }
     }
 

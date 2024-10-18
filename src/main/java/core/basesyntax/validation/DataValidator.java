@@ -26,7 +26,11 @@ public class DataValidator {
 
             try {
                 Operation.getOperationByCode(partsOfData[0]);
-                Integer.parseInt(partsOfData[2]);
+                int quantity = Integer.parseInt(partsOfData[2]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Quantity cannot be negative in line: "
+                            + line);
+                }
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid data in line: " + line);
             }

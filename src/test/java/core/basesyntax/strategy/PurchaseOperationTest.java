@@ -13,14 +13,16 @@ class PurchaseOperationTest {
     private Map<String, Integer> inventory;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         inventory = new HashMap<>();
         purchaseOperation = new PurchaseOperation();
+
+        inventory.put("apple", 5);
+        inventory.put("orange", 5);
     }
 
     @Test
-    void addQuantityToFruit_executeOperation_Ok() {
-        inventory.put("apple", 5);
+    public void testSuccessfulPurchaseOperationUpdatesInventoryCorrectly() {
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "apple", 3);
         purchaseOperation.executeOperation(transaction, inventory);
 
@@ -28,9 +30,13 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void subtractionOfProductThatAreLessThan0_executeOperation_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "apple", 10);
-        Assertions.assertThrows(RuntimeException.class,
+    public void subtractionOfProductThatAreLessThan0_shouldThrowException_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "orange", 10);
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> purchaseOperation.executeOperation(transaction, inventory));
+
+        Assertions.assertEquals("Cannot complete purchase: "
+                + "insufficient stock for orange", exception.getMessage());
     }
 }

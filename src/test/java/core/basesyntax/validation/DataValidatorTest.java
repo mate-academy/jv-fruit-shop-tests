@@ -4,13 +4,27 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataValidatorTest {
-    private final DataValidator dataValidator = new DataValidator();
+    private DataValidator dataValidator;
+
+    @BeforeEach
+    public void setUp() {
+        dataValidator = new DataValidator();
+    }
 
     @Test
-    public void checkForEmptyList_validate_Ok() {
+    public void givenEmptyList_whenValidate_thenThrowsException() {
+        List<String> inputData = Collections.emptyList();
+
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                dataValidator.validate(inputData));
+    }
+
+    @Test
+    public void givenCorrectHeader_whenValidate_thenReturnsTrue() {
         List<String> inputData = Arrays.asList("type,fruit,quantity");
         boolean isCorrectHeader = dataValidator.validate(inputData);
 
@@ -18,7 +32,7 @@ class DataValidatorTest {
     }
 
     @Test
-    public void invalidQuantityThrowException_validate_NotOk() {
+    public void givenInvalidQuantity_whenValidate_thenThrowsException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,abc"
@@ -29,7 +43,7 @@ class DataValidatorTest {
     }
 
     @Test
-    public void invalidHeaderInFirstLine_validate_NotOk() {
+    public void givenInvalidHeaderInFirstLine_whenValidate_thenThrowsException() {
         List<String> inputData = Collections.singletonList("e,fruit,quantity");
 
         Assertions.assertThrows(IllegalArgumentException.class, () ->
@@ -37,7 +51,7 @@ class DataValidatorTest {
     }
 
     @Test
-    public void incompleteDataThrowException_validate_NotOk() {
+    public void givenIncompleteData_whenValidate_thenThrowsException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana"
@@ -48,7 +62,7 @@ class DataValidatorTest {
     }
 
     @Test
-    public void invalidInputDataThrowException_validate_NotOk() {
+    public void givenInvalidInputData_whenValidate_thenThrowsException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "x,banana,20"

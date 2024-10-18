@@ -6,20 +6,23 @@ import java.util.Map;
 public class ReturnOperation implements FruitOperationHandler {
     @Override
     public void executeOperation(FruitTransaction transaction, Map<String, Integer> inventory) {
-        int currentBalance = inventory.getOrDefault(transaction.getFruit(), 0);
-
-        if (transaction.getQuantity() < 0) {
-            throw new RuntimeException(
-                    "Cannot complete return operation: negative stock for "
-                            + transaction.getFruit());
+        if (transaction == null) {
+            throw new NullPointerException("Transaction cannot be null");
         }
 
-        if (transaction.getFruit() == null) {
-            throw new RuntimeException(
-                    "Cannot complete return operation: negative stock for "
-                            + transaction.getFruit());
+        String fruit = transaction.getFruit();
+        if (fruit == null) {
+            throw new RuntimeException("Cannot complete return operation: "
+                    + "fruit name cannot be null");
         }
 
-        inventory.put(transaction.getFruit(), currentBalance + transaction.getQuantity());
+        int quantity = transaction.getQuantity();
+        if (quantity < 0) {
+            throw new RuntimeException("Cannot complete return operation: "
+                    + "negative stock for " + fruit);
+        }
+
+        int currentBalance = inventory.getOrDefault(fruit, 0);
+        inventory.put(fruit, currentBalance + quantity);
     }
 }

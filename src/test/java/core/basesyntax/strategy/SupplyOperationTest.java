@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
@@ -13,13 +14,15 @@ class SupplyOperationTest {
     private Map<String, Integer> inventory;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         inventory = new HashMap<>();
         supplyOperation = new SupplyOperation();
+        inventory.put("banana", 5);
     }
 
     @Test
-    void addQuantityToFruit_executeOperation_Ok() {
+    @DisplayName("Add quantity to fruit - execute operation should update inventory correctly")
+    public void addQuantityToFruit_executeOperation_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 10);
         supplyOperation.executeOperation(transaction, inventory);
 
@@ -27,39 +30,43 @@ class SupplyOperationTest {
     }
 
     @Test
-    void addQuantityToExistingFruit_executeOperation_Ok() {
-        inventory.put("apple", 5);
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 10);
+    @DisplayName("Add quantity to existing fruit - execute operation should update inventory")
+    public void addQuantityToExistingFruit_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 10);
         supplyOperation.executeOperation(transaction, inventory);
 
-        Assertions.assertEquals(15, inventory.get("apple"));
+        Assertions.assertEquals(15, inventory.get("banana"));
     }
 
     @Test
-    void addNewFruit_executeOperation_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 20);
+    @DisplayName("Add new fruit - execute operation should add fruit to inventory")
+    public void addNewFruit_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "cucumber", 20);
         supplyOperation.executeOperation(transaction, inventory);
 
-        Assertions.assertEquals(20, inventory.get("banana"));
+        Assertions.assertEquals(20, inventory.get("cucumber"));
     }
 
     @Test
-    void supplyZeroQuantity_executeOperation_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 0);
+    @DisplayName("Supply zero quantity - execute operation should not change inventory")
+    public void supplyZeroQuantity_executeOperation_Ok() {
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "cherry", 0);
         supplyOperation.executeOperation(transaction, inventory);
 
-        Assertions.assertEquals(0, inventory.getOrDefault("apple", 0));
+        Assertions.assertEquals(0, inventory.getOrDefault("cherry", 0));
     }
 
     @Test
-    void supplyNegativeQuantity_executeOperation_Ok() {
+    @DisplayName("Supply negative quantity - execute operation should throw exception")
+    public void supplyNegativeQuantity_shouldThrowExceptiond_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "orange", -5);
         Assertions.assertThrows(RuntimeException.class, () ->
                 supplyOperation.executeOperation(transaction, inventory));
     }
 
     @Test
-    void supplyNullFruitName_executeOperation_Ok() {
+    @DisplayName("Supply with null fruit name - should throw exception")
+    public void supplyNullFruitName_shouldThrowException_Ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, null, 10);
         Assertions.assertThrows(RuntimeException.class, () ->
                 supplyOperation.executeOperation(transaction, inventory));

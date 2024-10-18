@@ -7,11 +7,18 @@ import core.basesyntax.validation.DataValidator;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private DataValidator dataValidator = new DataValidator();
-    private DataConverter dataConverter = new DataConverterImpl(dataValidator);
+    private DataValidator dataValidator;
+    private DataConverter dataConverter;
+
+    @BeforeEach
+    public void setUp() {
+        dataValidator = new DataValidator();
+        dataConverter = new DataConverterImpl(dataValidator);
+    }
 
     @Test
     public void returnsFruitTransactions_convertToTransaction_Ok() {
@@ -61,7 +68,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    public void handlesInvalidOperationCode_convertToTransaction_Ok() {
+    public void handlesInvalidOperationCode_shouldThrowException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "x,banana,20"
@@ -72,21 +79,18 @@ class DataConverterImplTest {
     }
 
     @Test
-    public void handlesNegativeQuantity_convertToTransaction_Ok() {
+    public void handlesNegativeQuantity_shouldThrowException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "s,apple,-5"
         );
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputData);
 
-        Assertions.assertEquals(1, transactions.size());
-        Assertions.assertEquals(Operation.SUPPLY, transactions.get(0).getOperation());
-        Assertions.assertEquals("apple", transactions.get(0).getFruit());
-        Assertions.assertEquals(-5, transactions.get(0).getQuantity());
+        Assertions.assertThrows(RuntimeException.class, () ->
+                dataConverter.convertToTransaction(inputData));
     }
 
     @Test
-    public void handlesNullFruitName_convertToTransaction_Ok() {
+    public void handlesNullFruitName_shouldThrowException() {
         List<String> inputData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,,10"

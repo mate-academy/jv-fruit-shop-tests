@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThrows;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.db.StorageService;
 import core.basesyntax.db.StorageServiceImpl;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +17,10 @@ class OperationStrategyImplTest {
     @BeforeEach
     public void setUp() {
         storageService = new StorageServiceImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(storageService));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(storageService));
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageService),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storageService)
+        );
         operationStrategy = new OperationStrategyImpl(operationHandlers);
     }
 

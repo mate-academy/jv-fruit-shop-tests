@@ -10,7 +10,7 @@ public class Storage {
         return Map.copyOf(assortment);
     }
 
-    static void updateStorage(String fruit, int quantity) {
+    public static void updateStorage(String fruit, int quantity) {
         int finalQuantity = assortment.containsKey(fruit)
                 ? assortment.get(fruit) + quantity : quantity;
         assortment.put(fruit, finalQuantity);

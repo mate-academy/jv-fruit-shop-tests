@@ -1,6 +1,5 @@
 package strategy;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
@@ -18,7 +17,6 @@ class OperationStrategyTest {
             FruitTransaction.Operation.SUPPLY;
     private static final FruitTransaction.Operation OPERATION_RETURN =
             FruitTransaction.Operation.RETURN;
-
     private static final Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
     private static OperationStrategy strategy;
 
@@ -32,20 +30,30 @@ class OperationStrategyTest {
     }
 
     @Test
-    void tryGetHandler_OK() {
+    void getOperationHandler_balance_ok() {
         OperationHandler expectedBalance = new BalanceOperation();
         OperationHandler actualBalance = strategy.getOperationHandler(OPERATION_BALANCE);
+        assertEquals(expectedBalance.getClass(), actualBalance.getClass());
+    }
+
+    @Test
+    void getOperationHandler_purchase_ok() {
         OperationHandler expectedPurchase = new PurchaseOperation();
         OperationHandler actualPurchase = strategy.getOperationHandler(OPERATION_PURCHASE);
+        assertEquals(expectedPurchase.getClass(), actualPurchase.getClass());
+    }
+
+    @Test
+    void getOperationHandler_supply_ok() {
         OperationHandler expectedSupply = new SupplyOperation();
         OperationHandler actualSupply = strategy.getOperationHandler(OPERATION_SUPPLY);
+        assertEquals(expectedSupply.getClass(), actualSupply.getClass());
+    }
+
+    @Test
+    void getOperationHandler_return_ok() {
         OperationHandler expectedReturn = new ReturnOperation();
         OperationHandler actualReturn = strategy.getOperationHandler(OPERATION_RETURN);
-
-        assertAll("getHandlerOkTest",
-                () -> assertEquals(expectedBalance, actualBalance),
-                () -> assertEquals(expectedPurchase, actualPurchase),
-                () -> assertEquals(expectedSupply, actualSupply),
-                () -> assertEquals(expectedReturn, actualReturn));
+        assertEquals(expectedReturn.getClass(), actualReturn.getClass());
     }
 }

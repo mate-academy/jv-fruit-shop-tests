@@ -1,21 +1,28 @@
 package strategy;
 
-import java.util.Objects;
+import database.Storage;
 import model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public int getQuantityToCalculate(FruitTransaction fruitTransaction) {
+    public void updateDatabase(FruitTransaction transaction) {
+        int quantity = getQuantityToCalculate(transaction);
+        String fruit = transaction.getFruit();
+        ensureNonNegativeBalance(fruit, quantity);
+        Storage.updateStorage(fruit, quantity);
+    }
+
+    private int getQuantityToCalculate(FruitTransaction fruitTransaction) {
         return fruitTransaction.getQuantity();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof SupplyOperation;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash();
+    private void ensureNonNegativeBalance(String fruit, int quantity) {
+        if (Storage.getAssortment().containsKey(fruit)) {
+            int currentBalanceForThisFruit = Storage.getAssortment().get(fruit);
+            if (currentBalanceForThisFruit + quantity < 0) {
+                throw new RuntimeException("Negative balance for fruit: " + fruit
+                        + " with quantity: " + quantity);
+            }
+        }
     }
 }

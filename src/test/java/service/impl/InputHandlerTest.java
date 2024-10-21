@@ -3,9 +3,6 @@ package service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,10 +10,9 @@ import service.InputFileHandler;
 import service.exceptions.EmptyFileException;
 
 class InputHandlerTest {
-    private static final String INPUT_FILE = "src/main/java/resources/input.csv";
-    private static final String NONEXISTENT_FILE = "src/main/java/resources/grocery.csv";
-    private static final String EMPTY_FILE = "src/main/java/resources/emptyFile.csv";
-    private static final String EMPTY_LINES_FILE = "src/main/java/resources/fileWithEmptyLines.csv";
+    private static final String INPUT_FILE = "src/test/resources/input.csv";
+    private static final String NONEXISTENT_FILE = "src/test/resources/grocery.csv";
+    private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
     private static InputFileHandler inputHandler;
 
     @BeforeAll
@@ -25,30 +21,29 @@ class InputHandlerTest {
     }
 
     @Test
-    void tryReadFile() {
+    void readFile_ok() {
         List<String> actual = inputHandler.readFile(INPUT_FILE);
-        List<String> expected = readFromFile(INPUT_FILE);
+        List<String> expected = List.of("type,fruit,quantity",
+                "    b,banana,20",
+                "    b,apple,100",
+                "    s,banana,100",
+                "    p,banana,13",
+                "    r,apple,10",
+                "    p,apple,20",
+                "    p,banana,5",
+                "    s,banana,50");
         assertEquals(expected, actual);
-
     }
 
     @Test
-    void tryReadNonexistentFile() {
+    void readFile_nonexistent_notOk() {
         assertThrows(RuntimeException.class,
                 () -> inputHandler.readFile(NONEXISTENT_FILE));
     }
 
     @Test
-    void tryReadEmptyFile() {
+    void readFile_empty_notOk() {
         assertThrows(EmptyFileException.class,
                 () -> inputHandler.readFile(EMPTY_FILE));
-    }
-
-    private List<String> readFromFile(String fileName) {
-        try {
-            return Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot read data from file " + fileName + " correctly.", e);
-        }
     }
 }

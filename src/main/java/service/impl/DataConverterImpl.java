@@ -15,7 +15,7 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> fileData) {
-        if (!fileData.get(0).trim().equals(PROPER_HEADER)) {
+        if (!fileData.get(0).equals(PROPER_HEADER)) {
             throw new IllegalArgumentException("The header is not appropriate");
         }
         return fileData.stream()

@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import database.StorageDealer;
-import database.StorageDealerImpl;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -24,8 +22,8 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/resources/fileWithEmptyLines.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/test/resources/finalReport.csv";
 
     public static void main(String[] args) {
         InputFileHandler inputHandler = new InputHandler();
@@ -44,9 +42,8 @@ public class Main {
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationHandlers);
 
-        StorageDealer storageDealer = new StorageDealerImpl();
         ShopService shopService = new ShopServiceImpl(
-                operationStrategy, storageDealer);
+                operationStrategy);
         shopService.process(fruitTransactionList);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();

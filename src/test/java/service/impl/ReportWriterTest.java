@@ -1,6 +1,8 @@
 package service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,11 +41,26 @@ class ReportWriterTest {
     }
 
     @Test
-    void writeReport_Ok() {
+    void writeReport_ok() {
         reportWriter.writeReport(dataToWrite, DESTINATION_FILE);
         String actualReport = readFromFile(DESTINATION_FILE);
         String expectedReport = dataToWrite;
         assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    void writeReport_destinationFileDoesExist_ok() {
+        assertDoesNotThrow(() -> reportWriter.writeReport(
+                dataToWrite, DESTINATION_FILE));
+        assertTrue(Files.exists(Path.of(DESTINATION_FILE)));
+    }
+
+    @Test
+    void writeReport_overwritesExistingContent() throws IOException {
+        Files.writeString(Path.of(DESTINATION_FILE), dataToWrite);
+        reportWriter.writeReport(dataToWrite, DESTINATION_FILE);
+        String actualReport = readFromFile(DESTINATION_FILE);
+        assertEquals(dataToWrite, actualReport);
     }
 
     private String readFromFile(String fileName) {

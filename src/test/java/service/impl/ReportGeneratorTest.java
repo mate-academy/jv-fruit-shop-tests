@@ -47,6 +47,9 @@ class ReportGeneratorTest {
 
     @Test
     void getReport_emptyStorage_notOk() {
-        assertThrows(RuntimeException.class, () -> generator.getReport());
+        Throwable exception = assertThrows(
+                RuntimeException.class, () -> generator.getReport());
+        assertEquals("There is no transaction stored in the database.",
+                exception.getMessage());
     }
 }

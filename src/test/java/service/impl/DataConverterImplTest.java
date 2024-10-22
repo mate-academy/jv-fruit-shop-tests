@@ -48,32 +48,36 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_emptyLines_notOk() {
         List<String> data = List.of();
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("Index 0 out of bounds for length 0", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_dataWithoutQuantity_notOk() {
         List<String> data = Arrays.asList(
                 PROPER_HEADER, FIRST_PROPER_LINE, "b,banana", THIRD_PROPER_LINE);
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("Index 2 out of bounds for length 2", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_invalidQuantity_notOk() {
         List<String> data = Arrays.asList(
                 PROPER_HEADER, FIRST_PROPER_LINE, "s,grape,twenty two");
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("Data from the file is corrupted", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_withoutFruit_notOk() {
         List<String> data = Arrays.asList(
                 PROPER_HEADER, FIRST_PROPER_LINE, "s, ,6", THIRD_PROPER_LINE);
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("Name of fruit is absent", exception.getMessage());
     }
 
     @Test
@@ -81,23 +85,26 @@ class DataConverterImplTest {
         List<String> data = Arrays.asList(
                 PROPER_HEADER, INVALID_OPERATION + " ,apple,32",
                 SECOND_PROPER_LINE, THIRD_PROPER_LINE);
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("Data from the file is corrupted", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_negativeQuantity_notOk() {
         List<String> data = Arrays.asList(PROPER_HEADER, FIRST_PROPER_LINE, SECOND_PROPER_LINE,
                 "b,pear,-45");
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(data));
+        assertEquals("The quantity is negative", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_withoutHeader_notOk() {
         List<String> dataWithoutHeader = Arrays.asList(
                 FIRST_PROPER_LINE, SECOND_PROPER_LINE, THIRD_PROPER_LINE);
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> converter.convertToTransaction(dataWithoutHeader));
+        assertEquals("The header is not appropriate", exception.getMessage());
     }
 }

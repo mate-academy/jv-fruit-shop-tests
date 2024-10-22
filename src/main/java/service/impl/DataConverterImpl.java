@@ -30,13 +30,15 @@ public class DataConverterImpl implements DataConverter {
             String fruit = fields[FRUIT_TYPE_INDEX];
             int quantity = Integer.parseInt(fields[QUANTITY_INDEX]);
 
-            if (fruit.isBlank() || quantity < 0) {
-                throw new IllegalArgumentException(
-                        "Name of fruit is absent or the quantity is negative");
+            if (fruit.isBlank()) {
+                throw new RuntimeException("Name of fruit is absent");
+            }
+            if (quantity < 0) {
+                throw new RuntimeException("The quantity is negative");
             }
 
             return new FruitTransaction(fields[OPERATION_TYPE_INDEX].trim(),
-                    fields[FRUIT_TYPE_INDEX], quantity);
+                    fruit, quantity);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Data from the file is corrupted", e);
         }

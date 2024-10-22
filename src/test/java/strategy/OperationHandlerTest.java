@@ -117,9 +117,11 @@ class OperationHandlerTest {
 
     @Test
     void updateDatabase_makeBalanceNegative_notOk() {
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.updateDatabase(
                         transactionToMakeBalanceNegative));
+        assertEquals("Negative balance for fruit: apple with quantity: -100",
+                exception.getMessage());
     }
 
     private void setBalance() {

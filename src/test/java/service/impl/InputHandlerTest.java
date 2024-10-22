@@ -37,13 +37,17 @@ class InputHandlerTest {
 
     @Test
     void readFile_nonexistent_notOk() {
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> inputHandler.readFile(NONEXISTENT_FILE));
+        assertEquals("Can't find src/test/resources/grocery.csv file",
+                exception.getMessage());
     }
 
     @Test
     void readFile_empty_notOk() {
-        assertThrows(EmptyFileException.class,
+        Throwable exception = assertThrows(EmptyFileException.class,
                 () -> inputHandler.readFile(EMPTY_FILE));
+        assertEquals("The file src/test/resources/emptyFile.csv is empty.",
+                exception.getMessage());
     }
 }

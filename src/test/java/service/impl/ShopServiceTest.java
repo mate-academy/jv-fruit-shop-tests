@@ -79,7 +79,9 @@ class ShopServiceTest {
     @Test
     void process_provokingTransaction_notOk() {
         transactionList.add(provokingTransaction);
-        assertThrows(RuntimeException.class,
+        Throwable exception = assertThrows(RuntimeException.class,
                 () -> shopService.process(transactionList));
+        assertEquals("Negative balance for fruit: grape with quantity: -100",
+                exception.getMessage());
     }
 }

@@ -21,7 +21,7 @@ public class ShopServiceImpl implements ShopService {
         }
     }
 
-    public OperationHandler getHandler(FruitTransaction transaction) {
+    private OperationHandler getHandler(FruitTransaction transaction) {
         return operationStrategy.getOperationHandler(transaction.getOperation());
     }
 }

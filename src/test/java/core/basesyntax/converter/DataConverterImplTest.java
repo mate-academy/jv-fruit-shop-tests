@@ -61,8 +61,9 @@ class DataConverterImplTest {
                 "x," + FRUIT_BANANA + ",20"
         );
 
-        assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(data));
+        assertEquals("Unknown operation code: x", exception.getMessage());
     }
 
     @Test
@@ -71,7 +72,9 @@ class DataConverterImplTest {
                 "b," + FRUIT_BANANA + ",abc"
         );
 
-        assertThrows(NumberFormatException.class, () -> dataConverter.convertToTransaction(data));
+        NumberFormatException exception = assertThrows(NumberFormatException.class,
+                () -> dataConverter.convertToTransaction(data));
+        assertEquals("Invalid quantity at line 2", exception.getMessage());
     }
 
     @Test
@@ -80,21 +83,25 @@ class DataConverterImplTest {
                 "b," + FRUIT_BANANA
         );
 
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(data));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> dataConverter.convertToTransaction(data));
+        assertEquals("Incorrect data format at line 2", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_nullData_notOk() {
-        assertThrows(NullPointerException.class, () -> dataConverter.convertToTransaction(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(null));
+        assertEquals("Data cannot be null", exception.getMessage());
     }
 
     @Test
     void convertToTransaction_emptyStringInData_notOk() {
-        List<String> data = createData(
-                ""
-        );
+        List<String> data = createData("");
 
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(data));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> dataConverter.convertToTransaction(data));
+        assertEquals("Empty line at position 2", exception.getMessage());
     }
 
     @Test
@@ -103,7 +110,8 @@ class DataConverterImplTest {
                 "b," + FRUIT_BANANA + ",-10"
         );
 
-        assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(data));
+        assertEquals("Quantity cannot be negative at line 2", exception.getMessage());
     }
 }

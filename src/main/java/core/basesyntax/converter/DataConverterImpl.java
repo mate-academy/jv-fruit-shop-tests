@@ -15,7 +15,7 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         if (data == null) {
-            throw new NullPointerException("Input data cannot be null");
+            throw new IllegalArgumentException("Data cannot be null");
         }
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {

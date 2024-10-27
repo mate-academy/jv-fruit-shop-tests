@@ -1,5 +1,6 @@
 package core.basesyntax.file.writer;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -33,12 +34,23 @@ class FileWriterImplTest {
 
         List<String> writtenData = Files.readAllLines(tempFile);
 
-        System.out.println("Written data: " + writtenData);
-
         assertTrue(writtenData.contains(HEADER));
         assertTrue(writtenData.contains("b," + FRUIT_BANANA + ",20"));
         assertTrue(writtenData.contains("s," + FRUIT_APPLE + ",30"));
 
         Files.delete(tempFile);
+    }
+
+    @Test
+    void write_invalidFilePath_throwsException() {
+        String invalidFilePath = "/invalid/path/output.csv";
+        String data = HEADER + "\n"
+                + "b," + FRUIT_BANANA + ",20\n"
+                + "s," + FRUIT_APPLE + ",30";
+
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileWriter.write(data, invalidFilePath));
+
+        assertTrue(exception.getMessage().contains("Cannot write to file"));
     }
 }

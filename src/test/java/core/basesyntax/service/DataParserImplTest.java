@@ -1,9 +1,7 @@
-package core.basesyntax.servicetest;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataParser;
-import core.basesyntax.serviceimpl.DataParserImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,7 +14,7 @@ public class DataParserImplTest {
 
     @BeforeAll
     static void beforeAll() {
-        dataParser = new DataParserImpl();
+        dataParser = new core.basesyntax.serviceimpl.DataParserImpl();
     }
 
     @Test

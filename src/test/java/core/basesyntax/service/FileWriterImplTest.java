@@ -1,7 +1,5 @@
-package core.basesyntax.servicetest;
+package core.basesyntax.service;
 
-import core.basesyntax.service.FileWriter;
-import core.basesyntax.serviceimpl.FileWriterImpl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
     private static final String FILES_ROOT =
-            "src/test/java/core/basesyntax/resourcestest/csv_writer/";
+            "src/test/java/resources/csv_writer/";
     private static FileWriter fileWriter;
 
     @BeforeAll
@@ -24,7 +22,7 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("An exception occurred while creating directories", e);
         }
-        fileWriter = new FileWriterImpl();
+        fileWriter = new core.basesyntax.serviceimpl.FileWriterImpl();
     }
 
     @Test

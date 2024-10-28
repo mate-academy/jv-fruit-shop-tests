@@ -1,21 +1,19 @@
-package core.basesyntax.servicetest;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.FileReader;
-import core.basesyntax.serviceimpl.FileReaderImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private static final String FILES_ROOT = "src/test/java/core/basesyntax/resourcestest/";
+    private static final String FILES_ROOT = "src/test/java/resources/";
     private static FileReader fileReader;
 
     @BeforeAll
     static void beforeAll() {
-        fileReader = new FileReaderImpl();
+        fileReader = new core.basesyntax.serviceimpl.FileReaderImpl();
     }
 
     @Test

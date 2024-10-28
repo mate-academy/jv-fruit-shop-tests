@@ -1,8 +1,6 @@
-package core.basesyntax.servicetest;
+package core.basesyntax.service;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.serviceimpl.ReportGeneratorImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +11,7 @@ public class ReportGeneratorImplTest {
 
     @BeforeEach
     void setUp() {
-        reportGenerator = new ReportGeneratorImpl();
+        reportGenerator = new core.basesyntax.serviceimpl.ReportGeneratorImpl();
         FruitStorage.getFruits().clear();
     }
 

@@ -1,4 +1,4 @@
-package core.basesyntax.servicetest;
+package core.basesyntax.service;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -8,8 +8,6 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.serviceimpl.ShopServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import java.util.Collections;
@@ -46,7 +44,7 @@ public class ShopServiceImplTest {
                 Operation.RETURN, new ReturnOperation(),
                 Operation.SUPPLY, new SupplyOperation());
         Strategy operationStrategy = new StrategyImpl(operationHandlers);
-        shopService = new ShopServiceImpl(operationStrategy);
+        shopService = new core.basesyntax.serviceimpl.ShopServiceImpl(operationStrategy);
         fruits = FruitStorage.getFruits();
     }
 

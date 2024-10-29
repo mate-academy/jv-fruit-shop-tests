@@ -1,9 +1,9 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.operations.BalanceOperation;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

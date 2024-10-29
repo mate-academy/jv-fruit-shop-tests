@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.opationstrategy.OperationHandler;
 import core.basesyntax.opationstrategy.OperationStrategy;
 import core.basesyntax.opationstrategy.OperationStrategyImpl;
@@ -10,7 +11,6 @@ import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

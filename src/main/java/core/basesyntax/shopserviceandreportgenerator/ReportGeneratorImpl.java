@@ -13,6 +13,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(System.lineSeparator());
         }
 
-        return report.toString();
+        return report.toString().trim();
     }
 }

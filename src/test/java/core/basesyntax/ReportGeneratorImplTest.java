@@ -17,9 +17,9 @@ public class ReportGeneratorImplTest {
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
-        String expected = "fruit,quantity\n" +
-                "banana,30\n" +
-                "apple,80";
+        String expected = "fruit,quantity\n"
+                + "banana,30\n"
+                + "apple,80";
 
         String actual = reportGenerator.getReport(storage);
 

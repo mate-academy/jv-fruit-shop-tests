@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.opationstrategy.OperationHandler;
 import core.basesyntax.opationstrategy.OperationStrategy;
 import core.basesyntax.opationstrategy.OperationStrategyImpl;

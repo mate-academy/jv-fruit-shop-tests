@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.shopserviceandreportgenerator.ReportGenerator;
 import core.basesyntax.shopserviceandreportgenerator.ReportGeneratorImpl;
 import java.util.HashMap;

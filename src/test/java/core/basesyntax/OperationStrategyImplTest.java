@@ -8,11 +8,12 @@ import core.basesyntax.operations.FruitTransaction;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 class OperationStrategyImplTest {
     private OperationStrategy operationStrategy;
@@ -29,9 +30,13 @@ class OperationStrategyImplTest {
 
     @Test
     void getHandler_shouldReturnCorrectHandler() {
-        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.BALANCE) instanceof BalanceOperation);
-        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY) instanceof SupplyOperation);
-        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE) instanceof PurchaseOperation);
-        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.RETURN) instanceof ReturnOperation);
+        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.BALANCE)
+                instanceof BalanceOperation);
+        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY)
+                instanceof SupplyOperation);
+        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE)
+                instanceof PurchaseOperation);
+        assertTrue(operationStrategy.getHandler(FruitTransaction.Operation.RETURN)
+                instanceof ReturnOperation);
     }
 }

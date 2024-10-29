@@ -25,7 +25,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FileDataReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("IDontKnowFileName.csv");
+        List<String> inputReport = fileReader.read("file.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);

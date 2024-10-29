@@ -11,7 +11,7 @@ public class FileReaderImpl implements FileDataReader {
     public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
-            reader.readLine(); // Пропускаем заголовок
+            reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);

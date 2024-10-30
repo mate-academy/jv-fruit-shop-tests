@@ -38,6 +38,7 @@ class PurchaseHandlerTest {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 200);
         shopService.addFruits("apple", 100);
+
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             purchaseHandler.apply(fruitTransaction);
         });

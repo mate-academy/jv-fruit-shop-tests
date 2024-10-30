@@ -1,7 +1,6 @@
 package core.basesyntax.converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,8 +17,6 @@ class FileReaderImplTest {
 
     @Test
     void readingFileData_isOk() {
-        assertNotNull(VALID_FILE_PATH);
-
         List<String> expected = new ArrayList<>(Arrays.asList("type, fruit, quantity"));
         List<String> actual = fileReader.read(VALID_FILE_PATH);
 
@@ -34,8 +31,9 @@ class FileReaderImplTest {
 
     @Test
     void readingInvalidFilePath_throwsRuntimeException() {
-        assertThrows(RuntimeException.class, () -> {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             fileReader.read(INVALID_FILE_PATH);
         });
+        assertEquals("Can't read file at " + INVALID_FILE_PATH, exception.getMessage());
     }
 }

@@ -31,7 +31,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void throwsExceptionForInvalidCode() {
+    void ifInvalidCode_throwsException() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> {
                 FruitTransaction.Operation.fromCode("k");

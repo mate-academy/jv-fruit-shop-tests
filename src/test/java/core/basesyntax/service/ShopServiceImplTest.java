@@ -33,14 +33,14 @@ class ShopServiceImplTest {
     }
 
     @Test
-    public void testAddFruits() {
+    public void shouldAddFruitsWith_correctQuantity() {
         shopService.addFruits("apple", 50);
         assertEquals(50, shopService.getQuantity("apple"),
                 "The quantity of apples should be 50.");
     }
 
     @Test
-    public void testSupplyFruits() {
+    public void shouldIncreaseQuantityWhen_fruitsAreSupplied() {
         shopService.addFruits("apple", 50);
         shopService.supplyFruits("apple", 20);
         assertEquals(70, shopService.getQuantity("apple"),
@@ -48,7 +48,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    public void testPurchaseFruits() {
+    public void shouldReduceQuantityWhen_fruitsArePurchased() {
         shopService.addFruits("apple", 50);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 30);
@@ -58,7 +58,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    public void testPurchaseInsufficientQuantity() {
+    public void shouldThrowExceptionWhen_purchasingMoreThanAvailable() {
         shopService.addFruits("apple", 20);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 30);
@@ -69,7 +69,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    public void testGetFruits() {
+    public void shouldReturn_correctInventory() {
         shopService.addFruits("apple", 50);
         shopService.addFruits("banana", 30);
 

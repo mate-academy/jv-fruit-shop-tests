@@ -34,6 +34,7 @@ class BalanceHandlerTest {
     void apply_nonBalanceOperation_throwsRuntimeException() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "apple", 100);
+
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             balanceHandler.apply(fruitTransaction);
         });

@@ -12,14 +12,18 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
+    private static final String HEADER = "type, fruit, quantity";
+    private static final String NEW_DATA = "newType, newFruit, newQuantity";
     private static final String INVALID_FILE_PATH = "src/main/converter/valid_data.csv";
     private FileWriter fileWriter = new FileWriterImpl();
 
     @Test
-    void writingDataAFile() throws IOException {
+    void writingData_aFile() throws IOException {
         String expected = "type, fruit, quantity";
         Path tempFile = Files.createTempFile("testfile", ".csv");
+
         fileWriter.write(expected, tempFile.toString());
+
         List<String> actual = Files.readAllLines(tempFile);
         assertEquals(Collections.singletonList(expected), actual);
     }
@@ -28,7 +32,9 @@ class FileWriterImplTest {
     void writingEmptyData_createsEmptyOrNewlineFile() throws IOException {
         String expected = "";
         Path tempFile = Files.createTempFile("testfile", ".csv");
+
         fileWriter.write(expected, tempFile.toString());
+
         List<String> actual = Files.readAllLines(tempFile);
         assertEquals(1, actual.size(),
                 "File should contain exactly one line");
@@ -37,14 +43,18 @@ class FileWriterImplTest {
 
     @Test
     void writingToFile_overwritesPreviousData() throws IOException {
-        String expected = "type, fruit, quantity";
+        String expected = HEADER;
         Path tempFile = Files.createTempFile("testfile", ".csv");
+
         fileWriter.write(expected, tempFile.toString());
+
         List<String> actual = Files.readAllLines(tempFile);
         assertEquals(Collections.singletonList(expected), actual);
 
-        String expected2 = "newType, newFruit, newQuantity";
+        String expected2 = NEW_DATA;
+
         fileWriter.write(expected2, tempFile.toString());
+
         List<String> actual1 = Files.readAllLines(tempFile);
         assertEquals(Collections.singletonList(expected2), actual1);
     }

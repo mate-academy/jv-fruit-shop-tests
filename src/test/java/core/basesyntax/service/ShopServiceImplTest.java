@@ -17,6 +17,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int FIFTY_QUANTITY = 50;
+    private static final int TWENTY_QUANTITY = 20;
+    private static final int THIRTY_QUANTITY = 30;
+    private static final int EIGHTY_QUANTITY = 80;
     private ShopService shopService;
 
     @BeforeEach
@@ -34,34 +40,34 @@ class ShopServiceImplTest {
 
     @Test
     public void shouldAddFruitsWith_correctQuantity() {
-        shopService.addFruits("apple", 50);
-        assertEquals(50, shopService.getQuantity("apple"),
+        shopService.addFruits(APPLE, FIFTY_QUANTITY);
+        assertEquals(FIFTY_QUANTITY, shopService.getQuantity(APPLE),
                 "The quantity of apples should be 50.");
     }
 
     @Test
     public void shouldIncreaseQuantityWhen_fruitsAreSupplied() {
-        shopService.addFruits("apple", 50);
-        shopService.supplyFruits("apple", 20);
-        assertEquals(70, shopService.getQuantity("apple"),
+        shopService.addFruits(APPLE, FIFTY_QUANTITY);
+        shopService.supplyFruits(APPLE, THIRTY_QUANTITY);
+        assertEquals(EIGHTY_QUANTITY, shopService.getQuantity(APPLE),
                 "The quantity of apples should be 70 after supply.");
     }
 
     @Test
     public void shouldReduceQuantityWhen_fruitsArePurchased() {
-        shopService.addFruits("apple", 50);
+        shopService.addFruits(APPLE, FIFTY_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 30);
+                APPLE, THIRTY_QUANTITY);
         shopService.process(List.of(transaction));
-        assertEquals(20, shopService.getQuantity("apple"),
+        assertEquals(TWENTY_QUANTITY, shopService.getQuantity(APPLE),
                 "The quantity of apples should be 20 after purchase.");
     }
 
     @Test
     public void shouldThrowExceptionWhen_purchasingMoreThanAvailable() {
-        shopService.addFruits("apple", 20);
+        shopService.addFruits(APPLE, THIRTY_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 30);
+                APPLE, FIFTY_QUANTITY);
 
         assertThrows(RuntimeException.class, () ->
                         shopService.process(List.of(transaction)),
@@ -70,12 +76,12 @@ class ShopServiceImplTest {
 
     @Test
     public void shouldReturn_correctInventory() {
-        shopService.addFruits("apple", 50);
-        shopService.addFruits("banana", 30);
+        shopService.addFruits(APPLE, FIFTY_QUANTITY);
+        shopService.addFruits(BANANA, THIRTY_QUANTITY);
 
         Map<String, Integer> expectedInventory = new HashMap<>();
-        expectedInventory.put("apple", 50);
-        expectedInventory.put("banana", 30);
+        expectedInventory.put(APPLE, FIFTY_QUANTITY);
+        expectedInventory.put(BANANA, THIRTY_QUANTITY);
 
         assertEquals(expectedInventory, shopService.getFruits(),
                 "The inventory should match the expected values.");

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
+    private static final String APPLE = "apple";
+    private static final int ONE_HUNDRED_QUANTITY = 100;
     private ShopService shopService;
     private BalanceHandler balanceHandler;
     private FruitTransaction fruitTransaction;
@@ -21,19 +23,19 @@ class BalanceHandlerTest {
         shopService = new ShopServiceImpl(operationStrategy);
         balanceHandler = new BalanceHandler(shopService);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
+                APPLE, ONE_HUNDRED_QUANTITY);
     }
 
     @Test
     void apply_shouldAddFruitsToShopService() {
         balanceHandler.apply(fruitTransaction);
-        assertEquals(100, shopService.getQuantity("apple"));
+        assertEquals(ONE_HUNDRED_QUANTITY, shopService.getQuantity(APPLE));
     }
 
     @Test
     void apply_nonBalanceOperation_throwsRuntimeException() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 100);
+                APPLE, ONE_HUNDRED_QUANTITY);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             balanceHandler.apply(fruitTransaction);

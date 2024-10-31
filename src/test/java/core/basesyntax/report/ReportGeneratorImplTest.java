@@ -9,6 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int ONE_HUNDREDL_QUANTITY = 100;
+    private static final int FIFTY_QUANTITY = 50;
     private ReportGenerator reportGenerator;
     private ShopService shopService;
     private OperationStrategy operationStrategy;
@@ -22,8 +26,8 @@ class ReportGeneratorImplTest {
 
     @Test
     void testGenerateReport_withFruits() {
-        shopService.addFruits("apple", 100);
-        shopService.addFruits("banana", 50);
+        shopService.addFruits(APPLE, ONE_HUNDREDL_QUANTITY);
+        shopService.addFruits(BANANA, FIFTY_QUANTITY);
 
         String report = reportGenerator.generateReport();
         String expectedReport = "Fruit, Quantity\nbanana,50\napple,100\n";

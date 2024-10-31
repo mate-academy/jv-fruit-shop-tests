@@ -19,7 +19,7 @@ class FileWriterImplTest {
 
     @Test
     void writingData_aFile() throws IOException {
-        String expected = "type, fruit, quantity";
+        String expected = HEADER;
         Path tempFile = Files.createTempFile("testfile", ".csv");
 
         fileWriter.write(expected, tempFile.toString());
@@ -61,7 +61,7 @@ class FileWriterImplTest {
 
     @Test
     void writingToInvalidFilePath_throwsRuntimeException() {
-        String expected = "type, fruit, quantity";
+        String expected = HEADER;
         assertThrows(RuntimeException.class, () -> {
             fileWriter.write(expected, INVALID_FILE_PATH);
         });

@@ -11,6 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
+    private static final String APPLE = "apple";
+    private static final int ONE_HUNDRED_QUANTITY = 100;
+    private static final int ONE_HUNDRED_FIFTY_QUANTITY = 150;
+    private static final int FIFTY_QUANTITY = 50;
+    private static final int TWO_HUNDRED_QUANTITY = 200;
     private ShopService shopService;
     private PurchaseHandler purchaseHandler;
     private FruitTransaction fruitTransaction;
@@ -21,23 +26,23 @@ class PurchaseHandlerTest {
         shopService = new ShopServiceImpl(operationStrategy);
         purchaseHandler = new PurchaseHandler(shopService);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 100);
-        shopService.addFruits("apple", 150);
+                APPLE, ONE_HUNDRED_QUANTITY);
+        shopService.addFruits(APPLE, ONE_HUNDRED_FIFTY_QUANTITY);
     }
 
     @Test
     void apply_purchaseTransaction_success() {
         purchaseHandler.apply(fruitTransaction);
-        int expectedQuantity = 50;
-        int actualQuantity = shopService.getQuantity("apple");
+        int expectedQuantity = FIFTY_QUANTITY;
+        int actualQuantity = shopService.getQuantity(APPLE);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     void apply_purchaseTransaction_unsuccessful() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 200);
-        shopService.addFruits("apple", 100);
+                APPLE, TWO_HUNDRED_QUANTITY);
+        shopService.addFruits(APPLE, ONE_HUNDRED_QUANTITY);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             purchaseHandler.apply(fruitTransaction);
@@ -48,7 +53,7 @@ class PurchaseHandlerTest {
     @Test
     void apply_nonPurchaseOperation_throwsRuntimeException() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
+                APPLE, ONE_HUNDRED_FIFTY_QUANTITY);
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             purchaseHandler.apply(fruitTransaction);
         });

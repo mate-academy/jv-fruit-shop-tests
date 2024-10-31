@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnHandlerTest {
+    private static final String APPLE = "apple";
+    private static final int INITIAL_QUANTITY = 100;
     private ShopService shopService;
     private ReturnHandler returnHandler;
     private FruitTransaction fruitTransaction;
@@ -21,19 +23,19 @@ class ReturnHandlerTest {
         shopService = new ShopServiceImpl(operationStrategy);
         returnHandler = new ReturnHandler(shopService);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "apple", 100);
+                APPLE, INITIAL_QUANTITY);
     }
 
     @Test
     void apply_returnTransaction_success() {
         returnHandler.apply(fruitTransaction);
-        assertEquals(100, shopService.getQuantity("apple"));
+        assertEquals(INITIAL_QUANTITY, shopService.getQuantity(APPLE));
     }
 
     @Test
     void apply_nonReturnOperation_throwsRuntimeException() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 100);
+                APPLE, INITIAL_QUANTITY);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             returnHandler.apply(fruitTransaction);

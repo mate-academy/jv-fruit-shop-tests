@@ -13,6 +13,12 @@ import org.junit.jupiter.api.Test;
 public class FileWriterImplTest {
     private static final String FILES_ROOT =
             "src/test/java/resources/csv_writer/";
+    private static final String WRITE_OK = "write_ok.csv";
+    private static final String TEST_CONTENT = "test content";
+    private static final String NON_EXISTENT_DIRECTORY =
+            "non_existent_dir/write_fail.csv";
+    private static final String WRITE_EMPTY = "write_empty.csv";
+    private static final String EMPTY_STRING = "";
     private static FileWriter fileWriter;
 
     @BeforeAll
@@ -27,17 +33,17 @@ public class FileWriterImplTest {
 
     @Test
     void write_validContent_ok() {
-        String fileName = FILES_ROOT + "write_ok.csv";
-        String content = "test content";
+        String fileName = FILES_ROOT + WRITE_OK;
 
-        fileWriter.writeToFile(fileName, content);
+        fileWriter.writeToFile(fileName, TEST_CONTENT);
 
         File file = new File(fileName);
         Assertions.assertTrue(file.exists(), "File should be created");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
-            Assertions.assertEquals(content, line, "File content should match the written string");
+            Assertions.assertEquals(TEST_CONTENT,
+                    line, "File content should match the written string");
         } catch (IOException e) {
             Assertions.fail("An exception occurred while reading the file: " + e.getMessage());
         }
@@ -47,20 +53,18 @@ public class FileWriterImplTest {
 
     @Test
     void write_nonExistenDirectory_throwsException() {
-        String invalidPath = FILES_ROOT + "non_existent_dir/write_fail.csv";
-        String content = "test content";
+        String invalidPath = FILES_ROOT + NON_EXISTENT_DIRECTORY;
 
         Assertions.assertThrows(RuntimeException.class,
-                () -> fileWriter.writeToFile(invalidPath, content),
+                () -> fileWriter.writeToFile(invalidPath, TEST_CONTENT),
                 "Writing to a non-existent directory should throw an exception");
     }
 
     @Test
     void write_emptyContent_createsEmptyFile() {
-        String fileName = FILES_ROOT + "write_empty.csv";
-        String content = "";
+        String fileName = FILES_ROOT + WRITE_EMPTY;
 
-        fileWriter.writeToFile(fileName, content);
+        fileWriter.writeToFile(fileName, EMPTY_STRING);
 
         File file = new File(fileName);
         Assertions.assertTrue(file.exists(), "File should be created");

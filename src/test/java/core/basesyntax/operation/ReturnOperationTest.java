@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
     private static OperationHandler operationHandler;
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
 
     @BeforeEach
     void setUp() {
@@ -20,7 +22,7 @@ public class ReturnOperationTest {
     @Test
     public void transaction_existingFruit_ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.RETURN, "apple", 10);
+                new FruitTransaction(Operation.RETURN, APPLE, 10);
         operationHandler.processOperation(fruitTransaction);
         int expectedQuantity = 30;
         int actualQuantity = FruitStorage.getFruits().get("apple");
@@ -30,7 +32,7 @@ public class ReturnOperationTest {
     @Test
     public void transaction_zeroQuantity_ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.RETURN, "banana", 0);
+                new FruitTransaction(Operation.RETURN, BANANA, 0);
         operationHandler.processOperation(fruitTransaction);
         int expectedQuantity = 10;
         int actualQuantity = FruitStorage.getFruits().get("banana");

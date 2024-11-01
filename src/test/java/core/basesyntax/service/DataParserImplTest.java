@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class DataParserImplTest {
     private static DataParser dataParser;
+    private static final String BANANA = "banana";
 
     @BeforeAll
     static void beforeAll() {
@@ -21,7 +22,7 @@ public class DataParserImplTest {
     void toParse_validInput_ok() {
         List<String> input = new ArrayList<>();
         input.add("s,banana,50");
-        FruitTransaction expected = new FruitTransaction(Operation.SUPPLY, "banana", 50);
+        FruitTransaction expected = new FruitTransaction(Operation.SUPPLY, BANANA, 50);
 
         List<FruitTransaction> actual = dataParser.parse(input);
 

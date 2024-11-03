@@ -34,6 +34,7 @@ class ReportGeneratorImplTest {
 
         String actualReport = reportGenerator.getReport(storage);
 
-        assertEquals(expectedReport, actualReport, "Отчет должен совпадать с ожидаемым.");
+        assertEquals(expectedReport, actualReport, "Failed in getReport_validStorage_success: "
+                + "Expected report does not match the actual report generated.");
     }
 }

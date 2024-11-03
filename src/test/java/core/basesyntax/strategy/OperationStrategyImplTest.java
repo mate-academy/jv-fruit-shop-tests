@@ -40,6 +40,8 @@ class OperationStrategyImplTest {
     void getHandler_invalidOperation_throwsException() {
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
                 () -> operationStrategy.getHandler(FruitTransaction.Operation.BALANCE));
-        assertEquals("No handler found for operation: BALANCE", thrown.getMessage());
+        assertEquals("No handler found for operation: " + FruitTransaction.Operation.BALANCE,
+                thrown.getMessage(),
+                "Expected message for unsupported operation was not thrown.");
     }
 }

@@ -5,46 +5,51 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
-    private HashMap<String, Integer> storage;
+    private static final String FRUIT = "banana";
+    private Map<String, Integer> storage;
+    private BalanceOperation balanceOperation;
+    private FruitTransaction.Operation operation;
 
     @BeforeEach
     void setUp() {
         storage = new HashMap<>();
+        balanceOperation = new BalanceOperation();
+        operation = FruitTransaction.Operation.BALANCE;
+    }
+
+    private void applyTransaction(int quantity) {
+        FruitTransaction transaction = new FruitTransaction(operation, FRUIT, quantity);
+        balanceOperation.apply(storage, transaction);
     }
 
     @Test
     void balancePositive_OK() {
-        String fruit = "banana";
         int quantity = 100;
-        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-        BalanceOperation balanceOperation = new BalanceOperation();
-        balanceOperation.apply(storage, transaction);
-        assertEquals(quantity, storage.get(fruit));
+        applyTransaction(quantity);
+        assertEquals(quantity, storage.get(FRUIT),
+                "Failed in balancePositive_OK: "
+                        + "Expected balance after positive transaction does not match.");
     }
 
     @Test
     void balanceZero_OK() {
-        String fruit = "banana";
         int quantity = 0;
-        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-        BalanceOperation balanceOperation = new BalanceOperation();
-        balanceOperation.apply(storage, transaction);
-        assertEquals(quantity, storage.get(fruit));
+        applyTransaction(quantity);
+        assertEquals(quantity, storage.get(FRUIT),
+                "Failed in balanceZero_OK: "
+                        + "Expected balance should be zero when transaction quantity is zero.");
     }
 
     @Test
     void balanceNegative_NotOK() {
-        String fruit = "banana";
         int quantity = -100;
-        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-        BalanceOperation balanceOperation = new BalanceOperation();
-        assertThrows(RuntimeException.class, () -> balanceOperation.apply(storage, transaction));
+        assertThrows(RuntimeException.class, () -> applyTransaction(quantity),
+                "Failed in balanceNegative_NotOK: "
+                        + "Expected RuntimeException when transaction quantity is negative.");
     }
 }

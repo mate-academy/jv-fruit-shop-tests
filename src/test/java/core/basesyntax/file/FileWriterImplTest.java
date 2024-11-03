@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String TEST_FILE_PATH = "test_output.txt";
+    private static final String INVALID_PATH = "/invalid_path/test.txt";
     private FileWriterImpl fileWriter;
 
     @BeforeEach
@@ -26,18 +27,18 @@ class FileWriterImplTest {
         fileWriter.write(testData, TEST_FILE_PATH);
 
         String fileContent = Files.readString(Path.of(TEST_FILE_PATH));
-        assertEquals(testData, fileContent, "File content should match the written data");
+        assertEquals(testData, fileContent, "Failed in write_validData_success: "
+                + "File content should match the written data");
 
         Files.deleteIfExists(Path.of(TEST_FILE_PATH));
     }
 
     @Test
     void write_invalidPath_throwsRuntimeException() {
-        String invalidPath = "/invalid_path/test.txt";
         String testData = "Some data";
 
         Exception exception = assertThrows(RuntimeException.class,
-                () -> fileWriter.write(testData, invalidPath));
+                () -> fileWriter.write(testData, INVALID_PATH));
 
         assertTrue(exception.getMessage().contains("Can't write to file"));
     }

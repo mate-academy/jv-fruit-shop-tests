@@ -30,6 +30,7 @@ public class DataConverterImplTest {
 
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputData);
 
-        assertEquals(expected, actual, "Должен быть корректный список транзакций.");
+        assertEquals(expected, actual, "Failed in convertToTransaction_validData_success "
+                + "Can be correct list of transaction");
     }
 }

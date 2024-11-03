@@ -17,7 +17,7 @@ public class CustomFileReaderImpl implements CustomFileReader {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + filePath, e);
+            throw new RuntimeException("Cant read the file " + filePath, e);
         }
         return lines;
     }

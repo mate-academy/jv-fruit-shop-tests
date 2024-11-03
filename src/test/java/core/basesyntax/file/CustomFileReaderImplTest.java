@@ -32,12 +32,15 @@ class CustomFileReaderImplTest {
 
         List<String> lines = fileReader.read(TEST_FILE_PATH);
 
-        assertEquals(3, lines.size(), "Can be 3 lines");
-        assertEquals("Line 1", lines.get(0), "First line incorrect");
-        assertEquals("Line 2", lines.get(1), "Second line incorrect");
-        assertEquals("Line 3", lines.get(2), "Third line incorrect");
+        assertEquals(3, lines.size(), "Failed in read_validFile_success: "
+                + "expected 3 lines");
+        assertEquals("Line 1", lines.get(0), "Failed in read_validFile_success: "
+                + "First line incorrect");
+        assertEquals("Line 2", lines.get(1), "Failed in read_validFile_success: "
+                + "Second line incorrect");
+        assertEquals("Line 3", lines.get(2), "Failed in read_validFile_success: "
+                + "Third line incorrect");
 
-        // Удаляем тестовый файл
         Files.deleteIfExists(new File(TEST_FILE_PATH).toPath());
     }
 
@@ -48,6 +51,7 @@ class CustomFileReaderImplTest {
         Exception exception = assertThrows(RuntimeException.class,
                 () -> fileReader.read(nonExistentFile));
 
-        assertTrue(exception.getMessage().contains("Can't read file"));
+        assertTrue(exception.getMessage().contains("Failed in read_fileDoesNotExist: "
+                + "Excepted RuntimeException when file does not exist."));
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax.file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class CustomFileReaderImplTest {
     private static final String TEST_FILE_PATH = "test_file.txt";
+    private static final String INVALID_FILE_PATH = "src/main/resources/fruitShop.csv";
     private CustomFileReaderImpl fileReader;
 
     @BeforeEach
@@ -45,13 +45,9 @@ class CustomFileReaderImplTest {
     }
 
     @Test
-    void read_fileDoesNotExist_throwsRuntimeException() {
-        String nonExistentFile = "non_existent_file.txt";
-
-        Exception exception = assertThrows(RuntimeException.class,
-                () -> fileReader.read(nonExistentFile));
-
-        assertTrue(exception.getMessage().contains("Failed in read_fileDoesNotExist: "
-                + "Excepted RuntimeException when file does not exist."));
+    void readingInvalidFilePath_throwsRuntimeException() {
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                fileReader.read(INVALID_FILE_PATH));
+        assertEquals("Can't read file at " + INVALID_FILE_PATH, exception.getMessage());
     }
 }

@@ -1,0 +1,40 @@
+package core.basesyntax.dao.impl;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.dao.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+class FileReaderImplTest {
+    private FileReader fileReader;
+
+    @BeforeEach
+    void setUp() {
+        fileReader = new FileReaderImpl();
+    }
+
+    @Test
+    void read_ShouldReturnFileContent_WhenFileExists(@TempDir Path tempDir) throws IOException {
+        Path file = tempDir.resolve("testFile.txt");
+        Files.write(file, List.of("line1", "line2", "line3"));
+        List<String> actualContent = fileReader.read(file.toString());
+        List<String> expectedContent = List.of("line1", "line2", "line3");
+        assertEquals(expectedContent, actualContent,
+                "File content should match the expected lines.");
+    }
+
+    @Test
+    void read_ShouldThrowRuntimeException_WhenFileDoesNotExist() {
+        String nonExistentFilePath = "nonexistentFile.txt";
+        assertThrows(RuntimeException.class, () -> fileReader.read(nonExistentFilePath),
+                "Reading a non-existent file should throw RuntimeException.");
+    }
+
+}

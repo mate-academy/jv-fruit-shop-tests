@@ -12,13 +12,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String HEADER = "type, fruit, quantity";
-    private static final String NEW_DATA = "newType, newFruit, newQuantity";
+    private static final String HEADER = "type,fruit,quantity";
+    private static final String NEW_DATA = "newType,newFruit,newQuantity";
     private static final String INVALID_FILE_PATH = "src/main/converter/valid_data.csv";
     private FileWriter fileWriter = new FileWriterImpl();
 
     @Test
-    void writingData_aFile() throws IOException {
+    void write_writingData_success() throws IOException {
         String expected = HEADER;
         Path tempFile = Files.createTempFile("testfile", ".csv");
 
@@ -29,7 +29,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writingEmptyData_createsEmptyOrNewlineFile() throws IOException {
+    void write_writingEmptyData_success() throws IOException {
         String expected = "";
         Path tempFile = Files.createTempFile("testfile", ".csv");
 
@@ -42,7 +42,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writingToFile_overwritesPreviousData() throws IOException {
+    void write_overwritesPreviousData_success() throws IOException {
         String expected = HEADER;
         Path tempFile = Files.createTempFile("testfile", ".csv");
 
@@ -60,7 +60,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writingToInvalidFilePath_throwsRuntimeException() {
+    void write_writingInvalidFilePath_shouldThrowException() {
         String expected = HEADER;
         assertThrows(RuntimeException.class, () -> {
             fileWriter.write(expected, INVALID_FILE_PATH);

@@ -1,10 +1,11 @@
 package core.basesyntax.operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.storage.FruitStorage;
+import core.basesyntax.storage.FruitStorageImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.transaction.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class BalanceHandlerTest {
     private static final String APPLE = "apple";
     private static final int ONE_HUNDRED_QUANTITY = 100;
+    private FruitStorage fruitStorage;
     private ShopService shopService;
     private BalanceHandler balanceHandler;
     private FruitTransaction fruitTransaction;
@@ -20,26 +22,16 @@ class BalanceHandlerTest {
 
     @BeforeEach
     void setUp() {
+        fruitStorage = new FruitStorageImpl();
         shopService = new ShopServiceImpl(operationStrategy);
-        balanceHandler = new BalanceHandler(shopService);
+        balanceHandler = new BalanceHandler(fruitStorage);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 APPLE, ONE_HUNDRED_QUANTITY);
     }
 
     @Test
-    void apply_shouldAddFruitsToShopService() {
+    void apply_addFruits_success() {
         balanceHandler.apply(fruitTransaction);
-        assertEquals(ONE_HUNDRED_QUANTITY, shopService.getQuantity(APPLE));
-    }
-
-    @Test
-    void apply_nonBalanceOperation_throwsRuntimeException() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                APPLE, ONE_HUNDRED_QUANTITY);
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            balanceHandler.apply(fruitTransaction);
-        });
-        assertEquals("Unsupported operation for BalanceHandler", exception.getMessage());
+        assertEquals(ONE_HUNDRED_QUANTITY, fruitStorage.getQuantity(APPLE));
     }
 }

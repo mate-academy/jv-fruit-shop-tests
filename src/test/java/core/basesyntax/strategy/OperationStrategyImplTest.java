@@ -1,14 +1,15 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.operation.BalanceHandler;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseHandler;
 import core.basesyntax.operation.ReturnHandler;
 import core.basesyntax.operation.SupplyHandler;
-import core.basesyntax.service.ShopService;
+import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.transaction.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,46 +17,53 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private ShopService shopService;
+    private FruitStorage fruitStorage;
     private OperationStrategy operationStrategy;
     private Map<FruitTransaction.Operation, OperationHandler> handlerMap;
 
     @BeforeEach
     void setUp() {
         handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopService));
-        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(shopService));
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(shopService));
-        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(shopService));
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitStorage));
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitStorage));
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitStorage));
+        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitStorage));
         operationStrategy = new OperationStrategyImpl(handlerMap);
     }
 
     @Test
-    void testGetOperationHandler_forReturn() {
+    void get_forReturn_success() {
         OperationHandler returnOperation = operationStrategy.get(FruitTransaction.Operation.RETURN);
         assertNotNull(returnOperation);
-        assertTrue(returnOperation instanceof ReturnHandler);
+        assertEquals(ReturnHandler.class, returnOperation.getClass());
     }
 
     @Test
-    void testGetOperationHandler_forPurchase() {
+    void get_forPurchase_success() {
         OperationHandler purchaseHandler = operationStrategy
                 .get(FruitTransaction.Operation.PURCHASE);
         assertNotNull(purchaseHandler);
-        assertTrue(purchaseHandler instanceof PurchaseHandler);
+        assertEquals(PurchaseHandler.class, purchaseHandler.getClass());
     }
 
     @Test
-    void testGetOperationHandler_forSupply() {
+    void get_forSupply_success() {
         OperationHandler supplyHandler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertNotNull(supplyHandler);
-        assertTrue(supplyHandler instanceof SupplyHandler);
+        assertEquals(SupplyHandler.class, supplyHandler.getClass());
     }
 
     @Test
-    void testGetOperationHandler_forBalance() {
+    void get_forBalance_success() {
         OperationHandler balanceHandler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertNotNull(balanceHandler);
-        assertTrue(balanceHandler instanceof BalanceHandler);
+        assertEquals(BalanceHandler.class, balanceHandler.getClass());
+    }
+
+    @Test
+    void get_forNull_shouldThrowException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                operationStrategy.get(null),
+                "Expected IllegalArgumentException if no handler is found for the operation");
     }
 }

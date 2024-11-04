@@ -1,27 +1,23 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.service.ShopService;
+import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.transaction.FruitTransaction;
 
 public class PurchaseHandler implements OperationHandler {
-    private ShopService shopService;
+    private FruitStorage fruitStorage;
 
-    public PurchaseHandler(ShopService shopService) {
-        this.shopService = shopService;
+    public PurchaseHandler(FruitStorage fruitStorage) {
+        this.fruitStorage = fruitStorage;
     }
 
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int transactionQuantity = transaction.getQuantity();
-        int currentQuantity = shopService.getQuantity(fruit);
-        if (transaction.getOperation() == FruitTransaction.Operation.PURCHASE) {
-            if (transactionQuantity > currentQuantity) {
-                throw new RuntimeException("Not enough " + fruit + " in stock for purchase");
-            }
-            shopService.addFruits(fruit, currentQuantity - transactionQuantity);
-        } else {
-            throw new RuntimeException("Unsupported operation for PurchaseHandler");
+        int currentQuantity = fruitStorage.getQuantity(fruit);
+        if (transactionQuantity > currentQuantity) {
+            throw new RuntimeException("Not enough " + fruit + " in stock for purchase");
         }
+        fruitStorage.addFruits(fruit, currentQuantity - transactionQuantity);
     }
 }

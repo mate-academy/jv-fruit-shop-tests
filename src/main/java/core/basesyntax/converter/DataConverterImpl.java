@@ -16,14 +16,14 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException("Incorrect input data format: " + data);
             }
 
-            String operationCode = parts[0].trim();
-            String fruitName = parts[1].trim();
+            String operationCode = parts[0];
+            String fruitName = parts[1];
 
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[2].trim());
+                quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid quantity: " + parts[2].trim(), e);
+                throw new IllegalArgumentException("Invalid quantity: " + parts[2], e);
             }
 
             // Determine the type of activity

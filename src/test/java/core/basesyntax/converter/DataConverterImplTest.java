@@ -1,8 +1,9 @@
 package core.basesyntax.converter;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.transaction.FruitTransaction;
 import java.util.Arrays;
@@ -25,15 +26,15 @@ class DataConverterImplTest {
                 "r,apple,20"
         );
         expectedTransactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.fromCode("b"), "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.fromCode("s"), "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.fromCode("p"), "orange", 30),
-                new FruitTransaction(FruitTransaction.Operation.fromCode("r"), "apple", 20)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 20)
         );
     }
 
     @Test
-    void shouldReturnCorrectTransactionList_WhenValidInputProvided() {
+    void converterToTransaction_returnTransactionList_success() {
         List<FruitTransaction> actualTransactions = dataConverter.converterToTransaction(inputData);
         assertEquals(expectedTransactions.size(), actualTransactions.size());
         assertNotNull(actualTransactions);
@@ -45,15 +46,27 @@ class DataConverterImplTest {
     }
 
     @Test
-    void shouldSkipHeaderRow_WhenInputContainsHeaders() {
-        List<FruitTransaction> actualTransactions = dataConverter.converterToTransaction(inputData);
-        assertEquals(expectedTransactions.size(), actualTransactions.size());
+    void converterToTransaction_skipHeader_success() {
+        List<String> inputData = List.of("type,fruit,quantity");
+        List<FruitTransaction> actualTransaction = dataConverter.converterToTransaction(inputData);
+        assertTrue("The list should be empty when input contains only headers",
+                actualTransaction.isEmpty());
+    }
 
-        for (FruitTransaction transaction : actualTransactions) {
-            assertFalse(transaction.getFruit().equals("type"), "Header should be skipped");
-            assertFalse(transaction.getFruit().equals("fruit"), "Header should be skipped");
-            assertFalse(String.valueOf(transaction.getQuantity()).equals("quantity"),
-                    "Header should be skipped");
-        }
+    @Test
+    void converterToTransaction_invalidColumnCount_shouldThrowException() {
+        List<String> invalidInputData = List.of("type, fruit", "b, apple");
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverter.converterToTransaction(invalidInputData),
+                "Expected IllegalArgumentException due to incorrect column count");
+    }
+
+    @Test
+    void converterToTransaction_invalidQuantity_shouldThrowException() {
+        List<String> invalidQuantityData = List.of("type,fruit,quantity",
+                "type,fruit,invalidQuantity");
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverter.converterToTransaction(invalidQuantityData),
+                "Expected IllegalArgumentException due to invalid quantity");
     }
 }

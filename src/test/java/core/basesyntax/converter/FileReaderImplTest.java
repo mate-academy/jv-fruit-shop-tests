@@ -16,7 +16,7 @@ class FileReaderImplTest {
     private FileReader fileReader = new FileReaderImpl();
 
     @Test
-    void readingFileData_isOk() {
+    void read_readingFileData_isOk() {
         List<String> expected = new ArrayList<>(Arrays.asList("type, fruit, quantity"));
         List<String> actual = fileReader.read(VALID_FILE_PATH);
 
@@ -24,13 +24,13 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readingEmptyFile_returnsEmptyList() {
+    void read_readingEmptyFile_returnsEmptyList() {
         List<String> actual = fileReader.read(EMPTY_FILE);
         assertTrue(actual.isEmpty(), "The list should be empty when reading an empty file.");
     }
 
     @Test
-    void readingInvalidFilePath_throwsRuntimeException() {
+    void read_invalidFilePath_shouldThrowException() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             fileReader.read(INVALID_FILE_PATH);
         });

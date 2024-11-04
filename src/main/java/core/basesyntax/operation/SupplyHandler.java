@@ -1,23 +1,23 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.service.ShopService;
+import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.transaction.FruitTransaction;
 
 public class SupplyHandler implements OperationHandler {
-    private ShopService shopService;
+    private FruitStorage fruitStorage;
 
-    public SupplyHandler(ShopService shopService) {
-        this.shopService = shopService;
+    public SupplyHandler(FruitStorage fruitStorage) {
+        this.fruitStorage = fruitStorage;
     }
 
     @Override
     public void apply(FruitTransaction transaction) {
-        if (transaction.getOperation() == FruitTransaction.Operation.SUPPLY) {
-            String fruit = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-            shopService.supplyFruits(fruit, quantity);
-        } else {
-            throw new RuntimeException("Unsupported operation for SupplyHandler");
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity for supply cannot be negative: "
+                    + quantity);
         }
+        fruitStorage.supplyFruits(fruit, quantity);
     }
 }

@@ -10,6 +10,7 @@ class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;
     private ShopService shopService;
     private OperationStrategy operationStrategy;
+    private final String lineSeparator = System.lineSeparator();
 
     @BeforeEach
     void setUp() {
@@ -23,7 +24,8 @@ class ReportGeneratorImplTest {
         shopService.addFruits("banana", 50);
 
         String report = reportGenerator.getReport(shopService);
-        String expectedReport = "fruit,quantity \nbanana,50\napple,100\n";
+        String expectedReport = "fruit,quantity" + lineSeparator
+                + "banana,50" + lineSeparator + "apple,100" + lineSeparator;
 
         assertEquals(expectedReport, report);
     }
@@ -31,7 +33,7 @@ class ReportGeneratorImplTest {
     @Test
     void testGenerateReport_withoutFruits() {
         String report = reportGenerator.getReport(shopService);
-        String expectedReport = "fruit,quantity \n";
+        String expectedReport = "fruit,quantity" + lineSeparator;
 
         assertEquals(expectedReport, report);
     }

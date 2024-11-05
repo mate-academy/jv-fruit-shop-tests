@@ -29,7 +29,7 @@ class StorageTest {
     @Test
     void addFruit_newFruit_addsFruitSuccessfully() {
         storage.addFruit(FRUIT_APPLE, QUANTITY_10);
-        assertEquals(QUANTITY_10, storage.getFruitQuantity("apple"));
+        assertEquals(QUANTITY_10, storage.getFruitQuantity(FRUIT_APPLE));
     }
 
     @Test
@@ -43,7 +43,7 @@ class StorageTest {
     void addFruit_zeroQuantity_doesNotChangeQuantity() {
         storage.addFruit(FRUIT_APPLE, QUANTITY_10);
         storage.addFruit(FRUIT_APPLE, QUANTITY_0);
-        assertEquals(QUANTITY_10, storage.getFruitQuantity("apple"));
+        assertEquals(QUANTITY_10, storage.getFruitQuantity(FRUIT_APPLE));
     }
 
     @Test

@@ -34,8 +34,11 @@ class FileReaderImplTest {
 
     @Test
     void read_ShouldThrowRuntimeException_WhenFileDoesNotExist() {
-        assertThrows(RuntimeException.class, () -> fileReader.read(NON_EXISTENT_FILE_NAME),
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> fileReader.read(NON_EXISTENT_FILE_NAME),
                 "Reading a non-existent file should throw RuntimeException.");
+        assertEquals("Failed to read file: " + NON_EXISTENT_FILE_NAME,
+                exception.getMessage(),
+                "Exception message should match the expected error message.");
     }
-
 }

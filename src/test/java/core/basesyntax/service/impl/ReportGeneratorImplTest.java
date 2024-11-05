@@ -38,7 +38,6 @@ class ReportGeneratorImplTest {
     @Test
     void getReport_ShouldReturnSingleFruitEntry_WhenStorageHasOneFruit() {
         storage.updateFruitQuantity(FRUIT_APPLE, QUANTITY_APPLE);
-
         String actualReport = reportGenerator.getReport();
         assertEquals(EXPECTED_REPORT_SINGLE_FRUIT, actualReport,
                 "Report should contain one fruit entry with the correct quantity.");
@@ -47,7 +46,6 @@ class ReportGeneratorImplTest {
     @Test
     void getReport_ShouldHandleZeroQuantityForFruit() {
         storage.updateFruitQuantity(FRUIT_KIWI, QUANTITY_KIWI_ZERO);
-
         String actualReport = reportGenerator.getReport();
         assertEquals(EXPECTED_REPORT_ZERO_QUANTITY, actualReport,
                 "Report should display zero quantity for fruits with no stock.");

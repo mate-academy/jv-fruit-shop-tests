@@ -63,9 +63,13 @@ class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setFruit(GRAPE);
         transaction.setQuantity(NEGATIVE_GRAPE_QUANTITY);
-        assertThrows(RuntimeException.class, () -> balanceOperation.handle(transaction),
-                "Error: Handling transaction with a "
-                        + "negative quantity should throw RuntimeException.");
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> balanceOperation.handle(transaction),
+                "Error: Handling transaction with "
+                        + "a negative quantity should throw RuntimeException.");
+        assertEquals("Transaction error: quantity cannot be negative. Given: "
+                        + NEGATIVE_GRAPE_QUANTITY,
+                exception.getMessage(),
+                "Exception message should match the expected error message.");
     }
-
 }

@@ -32,8 +32,11 @@ class FileWriterImplTest {
 
     @Test
     void write_ShouldThrowRuntimeException_WhenFilePathIsInvalid() {
-        assertThrows(RuntimeException.class, () -> fileWriter.write("Test data",
-                        NON_EXISTENT_FILE_NAME),
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> fileWriter.write("Test data", NON_EXISTENT_FILE_NAME),
                 "Writing to an invalid path should throw RuntimeException.");
+        assertEquals("Failed to write to file: " + NON_EXISTENT_FILE_NAME,
+                exception.getMessage(),
+                "Exception message should match the expected error message.");
     }
 }

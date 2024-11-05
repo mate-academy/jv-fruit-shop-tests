@@ -62,7 +62,6 @@ class SupplyOperationTest {
     public void handle_AddMultipleFruits_WhenQuantityIsPositive() {
         supplyOperation.handle(new FruitTransaction(FRUIT_APPLE, QUANTITY_POSITIVE_5));
         supplyOperation.handle(new FruitTransaction(FRUIT_APPLE, QUANTITY_POSITIVE_3));
-
         assertEquals(EXPECTED_QUANTITY_8, storage.getFruitQuantity(FRUIT_APPLE));
     }
 
@@ -70,7 +69,6 @@ class SupplyOperationTest {
     public void handle_AddDifferentFruits() {
         supplyOperation.handle(new FruitTransaction(FRUIT_BANANA, EXPECTED_QUANTITY_5));
         supplyOperation.handle(new FruitTransaction(FRUIT_ORANGE, EXPECTED_QUANTITY_10_ORANGE));
-
         assertEquals(EXPECTED_QUANTITY_5, storage.getFruitQuantity(FRUIT_BANANA));
         assertEquals(EXPECTED_QUANTITY_10_ORANGE, storage.getFruitQuantity(FRUIT_ORANGE));
     }

@@ -95,7 +95,6 @@ class StorageTest {
         storage.addFruit(FRUIT_APPLE, QUANTITY_10);
         storage.addFruit(FRUIT_BANANA, QUANTITY_5);
         Map<String, Integer> fruits = storage.getAllFruits();
-
         assertEquals(EXPECTED_MAP_SIZE_2, fruits.size());
         assertEquals(QUANTITY_10, fruits.get(FRUIT_APPLE));
         assertEquals(QUANTITY_5, fruits.get(FRUIT_BANANA));
@@ -106,7 +105,6 @@ class StorageTest {
         storage.addFruit(FRUIT_APPLE, QUANTITY_10);
         Map<String, Integer> fruits = storage.getAllFruits();
         fruits.put(FRUIT_BANANA, QUANTITY_20);
-
         assertNull(storage.getAllFruits().get(FRUIT_BANANA));
     }
 

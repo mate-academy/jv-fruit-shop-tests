@@ -118,8 +118,17 @@ class ShopServiceImplTest {
         transaction.setFruit(MELON);
         transaction.setQuantity(PURCHASE_MELON_QUANTITY);
         transactions.add(transaction);
-        assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions),
-                "Insufficient inventory to purchase melon");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> shopService.process(transactions),
+                "Expected an IllegalArgumentException"
+                        + " when purchasing quantity exceeds available inventory."
+        );
+        String expectedMessage = "Failed to process transaction for fruit: "
+                + MELON + " with quantity: " + PURCHASE_MELON_QUANTITY
+                + ". Insufficient inventory to purchase " + MELON;
+        assertEquals(expectedMessage, exception.getMessage(),
+                "The exception message should indicate insufficient inventory for " + MELON);
     }
 
     @Test

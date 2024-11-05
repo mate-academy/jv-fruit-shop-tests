@@ -8,7 +8,6 @@ import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 class PurchaseOperationTest {
     private static final String APPLE = "apple";
@@ -56,12 +55,14 @@ class PurchaseOperationTest {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setFruit(BANANA);
         transaction.setQuantity(PURCHASE_QUANTITY_BANANA);
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() {
-                purchaseOperation.handle(transaction);
-            }
-        });
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> purchaseOperation.handle(transaction),
+                "Expected IllegalArgumentException when quantity is insufficient."
+        );
+        String expectedMessage = "Insufficient inventory to purchase " + BANANA;
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Exception message should indicate insufficient inventory for " + BANANA);
     }
 
     @Test

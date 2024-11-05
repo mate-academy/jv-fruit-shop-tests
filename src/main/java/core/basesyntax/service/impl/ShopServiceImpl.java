@@ -17,7 +17,13 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.handle(transaction);
+            try {
+                handler.handle(transaction);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Failed to process transaction for fruit: "
+                        + transaction.getFruit() + " with quantity: "
+                        + transaction.getQuantity() + ". " + e.getMessage(), e);
+            }
         }
     }
 }

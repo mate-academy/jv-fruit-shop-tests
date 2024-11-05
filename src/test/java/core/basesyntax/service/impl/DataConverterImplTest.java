@@ -99,8 +99,14 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_ShouldThrowException_WhenQuantityIsInvalid() {
         List<String> data = List.of(INVALID_QUANTITY_DATA);
-
-        assertThrows(NumberFormatException.class, () -> dataConverter.convertToTransaction(data));
+        NumberFormatException exception = assertThrows(
+                NumberFormatException.class,
+                () -> dataConverter.convertToTransaction(data),
+                "Converting an invalid quantity value should throw a NumberFormatException."
+        );
+        String expectedMessage = "For input string: \"abc\"";
+        assertEquals(expectedMessage, exception.getMessage(),
+                "The error message should exactly indicate the invalid quantity 'abc'.");
     }
 
 }

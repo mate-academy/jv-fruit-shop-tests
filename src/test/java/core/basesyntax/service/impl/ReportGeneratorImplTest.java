@@ -9,6 +9,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private static final String HEADER = "fruit,quantity\n";
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_KIWI = "kiwi";
+    private static final int QUANTITY_APPLE = 50;
+    private static final int QUANTITY_KIWI_ZERO = 0;
+    private static final String EXPECTED_REPORT_EMPTY_STORAGE = HEADER;
+    private static final String EXPECTED_REPORT_SINGLE_FRUIT =
+            HEADER + FRUIT_APPLE + "," + QUANTITY_APPLE + "\n";
+    private static final String EXPECTED_REPORT_ZERO_QUANTITY =
+            HEADER + FRUIT_KIWI + "," + QUANTITY_KIWI_ZERO + "\n";
     private ReportGenerator reportGenerator;
     private FruitStorage storage;
 
@@ -20,29 +30,26 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_ShouldReturnHeaderOnly_WhenStorageIsEmpty() {
-        String expectedReport = "fruit,quantity\n";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
+        assertEquals(EXPECTED_REPORT_EMPTY_STORAGE, actualReport,
                 "Report for empty storage should only contain the header.");
     }
 
     @Test
     void getReport_ShouldReturnSingleFruitEntry_WhenStorageHasOneFruit() {
-        storage.updateFruitQuantity("apple", 50);
+        storage.updateFruitQuantity(FRUIT_APPLE, QUANTITY_APPLE);
 
-        String expectedReport = "fruit,quantity\napple,50\n";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
+        assertEquals(EXPECTED_REPORT_SINGLE_FRUIT, actualReport,
                 "Report should contain one fruit entry with the correct quantity.");
     }
 
     @Test
     void getReport_ShouldHandleZeroQuantityForFruit() {
-        storage.updateFruitQuantity("kiwi", 0);
+        storage.updateFruitQuantity(FRUIT_KIWI, QUANTITY_KIWI_ZERO);
 
-        String expectedReport = "fruit,quantity\nkiwi,0\n";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
+        assertEquals(EXPECTED_REPORT_ZERO_QUANTITY, actualReport,
                 "Report should display zero quantity for fruits with no stock.");
     }
 

@@ -18,6 +18,31 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
 
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
+    private static final String GRAPE = "grape";
+    private static final String MELON = "melon";
+    private static final String PEAR = "pear";
+    private static final int APPLE_QUANTITY = 50;
+    private static final int INITIAL_BANANA_QUANTITY = 20;
+    private static final int SUPPLY_BANANA_QUANTITY = 30;
+    private static final int EXPECTED_BANANA_QUANTITY = 50;
+    private static final int INITIAL_ORANGE_QUANTITY = 40;
+    private static final int PURCHASE_ORANGE_QUANTITY = 15;
+    private static final int EXPECTED_ORANGE_QUANTITY = 25;
+    private static final int INITIAL_GRAPE_QUANTITY = 10;
+    private static final int RETURN_GRAPE_QUANTITY = 5;
+    private static final int EXPECTED_GRAPE_QUANTITY = 15;
+    private static final int INITIAL_MELON_QUANTITY = 10;
+    private static final int PURCHASE_MELON_QUANTITY = 15;
+    private static final int INITIAL_PEAR_QUANTITY = 20;
+    private static final int BALANCE_PEAR_QUANTITY = 50;
+    private static final int SUPPLY_PEAR_QUANTITY = 20;
+    private static final int PURCHASE_PEAR_QUANTITY = 30;
+    private static final int RETURN_PEAR_QUANTITY = 5;
+    private static final int EXPECTED_PEAR_QUANTITY = 45;
+
     private ShopServiceImpl shopService;
     private FruitStorage storage;
 
@@ -38,60 +63,60 @@ class ShopServiceImplTest {
         final List<FruitTransaction> transactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.BALANCE);
-        transaction.setFruit("apple");
-        transaction.setQuantity(50);
+        transaction.setFruit(APPLE);
+        transaction.setQuantity(APPLE_QUANTITY);
         transactions.add(transaction);
         shopService.process(transactions);
-        assertEquals(50, storage.getFruitQuantity("apple"));
+        assertEquals(APPLE_QUANTITY, storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void process_ShouldUpdateStorage_WhenSupplyOperation() {
-        storage.updateFruitQuantity("banana", 20);
+        storage.updateFruitQuantity(BANANA, INITIAL_BANANA_QUANTITY);
         final List<FruitTransaction> transactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.SUPPLY);
-        transaction.setFruit("banana");
-        transaction.setQuantity(30);
+        transaction.setFruit(BANANA);
+        transaction.setQuantity(SUPPLY_BANANA_QUANTITY);
         transactions.add(transaction);
         shopService.process(transactions);
-        assertEquals(50, storage.getFruitQuantity("banana"));
+        assertEquals(EXPECTED_BANANA_QUANTITY, storage.getFruitQuantity(BANANA));
     }
 
     @Test
     void process_ShouldUpdateStorage_WhenPurchaseOperation() {
-        storage.updateFruitQuantity("orange", 40);
+        storage.updateFruitQuantity(ORANGE, INITIAL_ORANGE_QUANTITY);
         final List<FruitTransaction> transactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.PURCHASE);
-        transaction.setFruit("orange");
-        transaction.setQuantity(15);
+        transaction.setFruit(ORANGE);
+        transaction.setQuantity(PURCHASE_ORANGE_QUANTITY);
         transactions.add(transaction);
         shopService.process(transactions);
-        assertEquals(25, storage.getFruitQuantity("orange"));
+        assertEquals(EXPECTED_ORANGE_QUANTITY, storage.getFruitQuantity(ORANGE));
     }
 
     @Test
     void process_ShouldUpdateStorage_WhenReturnOperation() {
-        storage.updateFruitQuantity("grape", 10);
+        storage.updateFruitQuantity(GRAPE, INITIAL_GRAPE_QUANTITY);
         final List<FruitTransaction> transactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.RETURN);
-        transaction.setFruit("grape");
-        transaction.setQuantity(5);
+        transaction.setFruit(GRAPE);
+        transaction.setQuantity(RETURN_GRAPE_QUANTITY);
         transactions.add(transaction);
         shopService.process(transactions);
-        assertEquals(15, storage.getFruitQuantity("grape"));
+        assertEquals(EXPECTED_GRAPE_QUANTITY, storage.getFruitQuantity(GRAPE));
     }
 
     @Test
     void process_ShouldThrowException_WhenInsufficientQuantityForPurchase() {
-        storage.updateFruitQuantity("melon", 10);
+        storage.updateFruitQuantity(MELON, INITIAL_MELON_QUANTITY);
         final List<FruitTransaction> transactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.PURCHASE);
-        transaction.setFruit("melon");
-        transaction.setQuantity(15);
+        transaction.setFruit(MELON);
+        transaction.setQuantity(PURCHASE_MELON_QUANTITY);
         transactions.add(transaction);
         assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions),
                 "Insufficient inventory to purchase melon");
@@ -99,35 +124,35 @@ class ShopServiceImplTest {
 
     @Test
     void process_ShouldHandleMultipleTransactionsCorrectly() {
-        storage.updateFruitQuantity("pear", 20);
+        storage.updateFruitQuantity(PEAR, INITIAL_PEAR_QUANTITY);
         final List<FruitTransaction> transactions = new ArrayList<>();
 
         FruitTransaction balanceTransaction = new FruitTransaction();
         balanceTransaction.setOperation(Operation.BALANCE);
-        balanceTransaction.setFruit("pear");
-        balanceTransaction.setQuantity(50);
+        balanceTransaction.setFruit(PEAR);
+        balanceTransaction.setQuantity(BALANCE_PEAR_QUANTITY);
         transactions.add(balanceTransaction);
 
         FruitTransaction supplyTransaction = new FruitTransaction();
         supplyTransaction.setOperation(Operation.SUPPLY);
-        supplyTransaction.setFruit("pear");
-        supplyTransaction.setQuantity(20);
+        supplyTransaction.setFruit(PEAR);
+        supplyTransaction.setQuantity(SUPPLY_PEAR_QUANTITY);
         transactions.add(supplyTransaction);
 
         FruitTransaction purchaseTransaction = new FruitTransaction();
         purchaseTransaction.setOperation(Operation.PURCHASE);
-        purchaseTransaction.setFruit("pear");
-        purchaseTransaction.setQuantity(30);
+        purchaseTransaction.setFruit(PEAR);
+        purchaseTransaction.setQuantity(PURCHASE_PEAR_QUANTITY);
         transactions.add(purchaseTransaction);
 
         FruitTransaction returnTransaction = new FruitTransaction();
         returnTransaction.setOperation(Operation.RETURN);
-        returnTransaction.setFruit("pear");
-        returnTransaction.setQuantity(5);
+        returnTransaction.setFruit(PEAR);
+        returnTransaction.setQuantity(RETURN_PEAR_QUANTITY);
         transactions.add(returnTransaction);
 
         shopService.process(transactions);
-        assertEquals(45, storage.getFruitQuantity("pear"));
+        assertEquals(EXPECTED_PEAR_QUANTITY, storage.getFruitQuantity(PEAR));
     }
 
 }

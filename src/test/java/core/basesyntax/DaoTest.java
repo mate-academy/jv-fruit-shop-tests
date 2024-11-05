@@ -75,5 +75,4 @@ class DaoTest {
         assertEquals(new FruitTransaction(Operation.BALANCE, "apple", 100), result.get(0));
         assertEquals(new FruitTransaction(Operation.SUPPLY, "banana", 50), result.get(1));
     }
-
 }

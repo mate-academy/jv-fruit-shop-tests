@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.FruitStorage;
@@ -62,8 +63,9 @@ class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setFruit(GRAPE);
         transaction.setQuantity(NEGATIVE_GRAPE_QUANTITY);
-        balanceOperation.handle(transaction);
-        assertEquals(NEGATIVE_GRAPE_QUANTITY, storage.getFruitQuantity(GRAPE));
+        assertThrows(RuntimeException.class, () -> balanceOperation.handle(transaction),
+                "Error: Handling transaction with a "
+                        + "negative quantity should throw RuntimeException.");
     }
 
 }

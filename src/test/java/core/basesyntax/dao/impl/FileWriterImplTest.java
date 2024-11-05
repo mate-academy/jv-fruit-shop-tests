@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterImplTest {
-
     private static final String TEST_FILE_NAME = "outputFile.txt";
     private static final String NON_EXISTENT_FILE_NAME = "/invalid_path/outputFile.txt";
     private FileWriter fileWriter;

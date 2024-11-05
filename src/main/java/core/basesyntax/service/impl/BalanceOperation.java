@@ -13,6 +13,11 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
+        int quantity = transaction.getQuantity();
+        if (quantity < 0) {
+            throw new RuntimeException("Transaction error: quantity cannot be negative. Given: "
+                    + quantity);
+        }
         storage.updateFruitQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 }

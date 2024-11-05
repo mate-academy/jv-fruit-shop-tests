@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopService shopService;
+    private final String apple = "apple";
 
     @BeforeEach
     public void setUp() {
@@ -36,26 +37,26 @@ class ShopServiceImplTest {
 
     @Test
     public void testAddFruits() {
-        shopService.addFruits("apple", 50);
-        assertEquals(50, shopService.getQuantity("apple"),
+        shopService.addFruits(apple, 50);
+        assertEquals(50, shopService.getQuantity(apple),
                 "The quantity of apples should be 50.");
     }
 
     @Test
     public void testPurchaseFruits() {
-        shopService.addFruits("apple", 50);
+        shopService.addFruits(apple, 50);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 30);
+                apple, 30);
         shopService.process(List.of(transaction));
-        assertEquals(20, shopService.getQuantity("apple"),
+        assertEquals(20, shopService.getQuantity(apple),
                 "The quantity of apples should be 20 after purchase.");
     }
 
     @Test
     public void testPurchaseInsufficientQuantity() {
-        shopService.addFruits("apple", 20);
+        shopService.addFruits(apple, 20);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", 30);
+                apple, 30);
 
         assertThrows(RuntimeException.class, () ->
                         shopService.process(List.of(transaction)),
@@ -64,11 +65,11 @@ class ShopServiceImplTest {
 
     @Test
     public void testGetFruits() {
-        shopService.addFruits("apple", 50);
+        shopService.addFruits(apple, 50);
         shopService.addFruits("banana", 30);
 
         Map<String, Integer> expectedInventory = new HashMap<>();
-        expectedInventory.put("apple", 50);
+        expectedInventory.put(apple, 50);
         expectedInventory.put("banana", 30);
 
         assertEquals(expectedInventory, shopService.getFruits(),

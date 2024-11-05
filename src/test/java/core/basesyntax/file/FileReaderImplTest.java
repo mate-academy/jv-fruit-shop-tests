@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private final FileReaderImpl fileReader = new FileReaderImpl();
+    private final String report = "src/main/resources/reportToRead.csv";
 
     @Test
     void read_validFile_ok() {
-        List<String> result = fileReader.read("src/main/java/core/basesyntax/reportToRead.csv");
+        List<String> result = fileReader.read(report);
         Assertions.assertFalse(result.isEmpty(), "File shouldn't be empty.");
         Assertions.assertEquals("type,fruit,quantity", result.get(0),
                 "Wrong content.");

@@ -9,6 +9,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
+    private static final String GRAPE = "grape";
+    private static final int APPLE_QUANTITY = 50;
+    private static final int BANANA_QUANTITY = 100;
+    private static final int INITIAL_BANANA_QUANTITY = 20;
+    private static final int ORANGE_INITIAL_QUANTITY = 30;
+    private static final int ZERO_QUANTITY = 0;
+    private static final int NEGATIVE_GRAPE_QUANTITY = -15;
     private FruitStorage storage;
     private BalanceOperation balanceOperation;
 
@@ -21,39 +31,39 @@ class BalanceOperationTest {
     @Test
     public void handle_UpdateFruitQuantity_WhenFruitDoesNotExist() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("apple");
-        transaction.setQuantity(50);
+        transaction.setFruit(APPLE);
+        transaction.setQuantity(APPLE_QUANTITY);
         balanceOperation.handle(transaction);
-        assertEquals(50, storage.getFruitQuantity("apple"));
+        assertEquals(APPLE_QUANTITY, storage.getFruitQuantity(APPLE));
     }
 
     @Test
     public void handle_UpdateFruitQuantity_WhenFruitAlreadyExists() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("banana");
-        transaction.setQuantity(100);
-        storage.addFruit("banana", 20);
+        transaction.setFruit(BANANA);
+        transaction.setQuantity(BANANA_QUANTITY);
+        storage.addFruit(BANANA, INITIAL_BANANA_QUANTITY);
         balanceOperation.handle(transaction);
-        assertEquals(100, storage.getFruitQuantity("banana"));
+        assertEquals(BANANA_QUANTITY, storage.getFruitQuantity(BANANA));
     }
 
     @Test
     public void handle_UpdateFruitQuantity_ToZeroQuantity() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("orange");
-        transaction.setQuantity(0);
-        storage.addFruit("orange", 30);
+        transaction.setFruit(ORANGE);
+        transaction.setQuantity(ZERO_QUANTITY);
+        storage.addFruit(ORANGE, ORANGE_INITIAL_QUANTITY);
         balanceOperation.handle(transaction);
-        assertEquals(0, storage.getFruitQuantity("orange"));
+        assertEquals(ZERO_QUANTITY, storage.getFruitQuantity(ORANGE));
     }
 
     @Test
     public void handle_UpdateFruitQuantity_WithNegativeQuantity() {
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setFruit("grape");
-        transaction.setQuantity(-15);
+        transaction.setFruit(GRAPE);
+        transaction.setQuantity(NEGATIVE_GRAPE_QUANTITY);
         balanceOperation.handle(transaction);
-        assertEquals(-15, storage.getFruitQuantity("grape"));
+        assertEquals(NEGATIVE_GRAPE_QUANTITY, storage.getFruitQuantity(GRAPE));
     }
 
 }

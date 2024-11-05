@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-
     private ReportGenerator reportGenerator;
     private FruitStorage storage;
 

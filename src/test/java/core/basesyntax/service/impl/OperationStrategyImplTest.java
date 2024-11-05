@@ -15,6 +15,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
+    private static final String GRAPE = "grape";
+    private static final int BALANCE_QUANTITY = 50;
+    private static final int SUPPLY_QUANTITY = 30;
+    private static final int INITIAL_ORANGE_QUANTITY = 40;
+    private static final int PURCHASE_QUANTITY = 15;
+    private static final int EXPECTED_ORANGE_QUANTITY_AFTER_PURCHASE = 25;
+    private static final int RETURN_QUANTITY = 10;
     private OperationStrategyImpl operationStrategy;
     private FruitStorage storage;
 
@@ -68,42 +78,42 @@ class OperationStrategyImplTest {
     void getHandler_ShouldHandleBalanceOperationCorrectly() {
         FruitTransaction balanceTransaction = new FruitTransaction();
         balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        balanceTransaction.setFruit("apple");
-        balanceTransaction.setQuantity(50);
+        balanceTransaction.setFruit(APPLE);
+        balanceTransaction.setQuantity(BALANCE_QUANTITY);
         operationStrategy.getHandler(FruitTransaction.Operation.BALANCE).handle(balanceTransaction);
-        assertEquals(50, storage.getFruitQuantity("apple"));
+        assertEquals(BALANCE_QUANTITY, storage.getFruitQuantity(APPLE));
     }
 
     @Test
     void getHandler_ShouldHandleSupplyOperationCorrectly() {
         FruitTransaction supplyTransaction = new FruitTransaction();
         supplyTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        supplyTransaction.setFruit("banana");
-        supplyTransaction.setQuantity(30);
+        supplyTransaction.setFruit(BANANA);
+        supplyTransaction.setQuantity(SUPPLY_QUANTITY);
         operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY).handle(supplyTransaction);
-        assertEquals(30, storage.getFruitQuantity("banana"));
+        assertEquals(SUPPLY_QUANTITY, storage.getFruitQuantity(BANANA));
     }
 
     @Test
     void getHandler_ShouldHandlePurchaseOperationCorrectly() {
-        storage.updateFruitQuantity("orange", 40);
+        storage.updateFruitQuantity(ORANGE, INITIAL_ORANGE_QUANTITY);
         FruitTransaction purchaseTransaction = new FruitTransaction();
         purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        purchaseTransaction.setFruit("orange");
-        purchaseTransaction.setQuantity(15);
+        purchaseTransaction.setFruit(ORANGE);
+        purchaseTransaction.setQuantity(PURCHASE_QUANTITY);
         operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE)
                 .handle(purchaseTransaction);
-        assertEquals(25, storage.getFruitQuantity("orange"));
+        assertEquals(EXPECTED_ORANGE_QUANTITY_AFTER_PURCHASE, storage.getFruitQuantity(ORANGE));
     }
 
     @Test
     void getHandler_ShouldHandleReturnOperationCorrectly() {
         FruitTransaction returnTransaction = new FruitTransaction();
         returnTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        returnTransaction.setFruit("grape");
-        returnTransaction.setQuantity(10);
+        returnTransaction.setFruit(GRAPE);
+        returnTransaction.setQuantity(RETURN_QUANTITY);
         operationStrategy.getHandler(FruitTransaction.Operation.RETURN).handle(returnTransaction);
-        assertEquals(10, storage.getFruitQuantity("grape"));
+        assertEquals(RETURN_QUANTITY, storage.getFruitQuantity(GRAPE));
     }
 
 }

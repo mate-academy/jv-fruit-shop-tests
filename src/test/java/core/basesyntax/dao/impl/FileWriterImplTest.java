@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterImplTest {
+
+    private static final String TEST_FILE_NAME = "outputFile.txt";
+    private static final String NON_EXISTENT_FILE_NAME = "/invalid_path/outputFile.txt";
     private FileWriter fileWriter;
 
     @BeforeEach
@@ -21,7 +24,7 @@ class FileWriterImplTest {
 
     @Test
     void write_ShouldWriteDataToFile_WhenFilePathIsValid(@TempDir Path tempDir) throws IOException {
-        Path file = tempDir.resolve("outputFile.txt");
+        Path file = tempDir.resolve(TEST_FILE_NAME);
         String data = "Hello, World!";
         fileWriter.write(data, file.toString());
         String actualContent = Files.readString(file);
@@ -30,8 +33,8 @@ class FileWriterImplTest {
 
     @Test
     void write_ShouldThrowRuntimeException_WhenFilePathIsInvalid() {
-        String invalidFilePath = "/invalid_path/outputFile.txt";
-        assertThrows(RuntimeException.class, () -> fileWriter.write("Test data", invalidFilePath),
+        assertThrows(RuntimeException.class, () -> fileWriter.write("Test data",
+                        NON_EXISTENT_FILE_NAME),
                 "Writing to an invalid path should throw RuntimeException.");
     }
 }

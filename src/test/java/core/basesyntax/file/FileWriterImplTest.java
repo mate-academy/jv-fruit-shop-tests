@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
+    private static final String filePath = "src/main/resources/finalReport.csv";
+    private static final String data = "fruit,quantity\nbanana,20\n";
+
     private FileWriter writer = new FileWriterImpl();
-    private final String filePath = "src/main/resources/finalReport.csv";
-    private final String data = "fruit,quantity\nbanana,20\n";
 
     @Test
     void writer_valid_path_ok() throws Exception {

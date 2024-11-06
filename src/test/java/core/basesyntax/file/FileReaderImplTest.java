@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private final FileReaderImpl fileReader = new FileReaderImpl();
-    private final String report = "src/main/resources/reportToRead.csv";
+    private static final FileReaderImpl fileReader = new FileReaderImpl();
+    private static final String report = "src/main/resources/reportToRead.csv";
 
     @Test
     void read_validFile_ok() {
@@ -19,7 +19,7 @@ class FileReaderImplTest {
     @Test
     void read_fileNotFound_exceptionThrown() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            fileReader.read("src/test/resources/wrong.csv");
+            fileReader.read(report);
         }, "Expected RuntimeException for non-existent file.");
     }
 }

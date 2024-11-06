@@ -129,4 +129,11 @@ class FruitTransactionMapImplTest {
         assertEquals(70, actualWeight);
         assertEquals("apple", actualFruit);
     }
+
+    @Test
+    void returnEmptyList_NotOk() {
+        FruitTransactionMap transactionMap = new FruitTransactionMapImpl();
+        final List<ShopTransaction> actual = transactionMap.map(validData);
+        assertNotNull(actual);
+    }
 }

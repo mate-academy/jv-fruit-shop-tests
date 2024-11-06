@@ -1,6 +1,9 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.OperationType;
@@ -34,6 +37,36 @@ class SupplyOperationTest {
     }
 
     @Test
+    void putNull_NotOk() {
+        assertNull(Storage.fruitShopStorage.put(null, null));
+    }
+
+    @Test
+    void notValidOperationType_NotOk() {
+        OperationType actual = OperationType.PURCHASE;
+        assertNotEquals(OperationType.RETURN,
+                actual, "Operation type should be RETURN");
+    }
+
+    @Test
+    void validOperationType_Ok() {
+        OperationType actual = OperationType.PURCHASE;
+        assertEquals(OperationType.PURCHASE, actual);
+    }
+
+    @Test
+    void weightInStorage_Ok() {
+        final int actual = validTransaction.getWeight();
+        assertEquals(10, actual);
+    }
+
+    @Test
+    void weightInStorage_NotOK() {
+        final int actual = notValidTransaction.getWeight();
+        assertNotEquals(10, actual);
+    }
+
+    @Test
     void operationWithValidData_Ok() {
         Storage.fruitShopStorage.put(APPLE_KEY, 14);
         chooseOperation.handle(validTransaction);
@@ -52,9 +85,33 @@ class SupplyOperationTest {
     }
 
     @Test
+    void fruitNameInStorage_NotOk() {
+        final String actual = notValidTransaction.getFruitName();
+        assertNotEquals(APPLE_KEY, actual);
+    }
+
+    @Test
     void updateDataAfterSupply_Ok() {
         Storage.fruitShopStorage.put(APPLE_KEY, SUPPLY_WEIGHT);
         Integer actual = Storage.fruitShopStorage.get(APPLE_KEY);
         assertEquals(12, actual);
+    }
+
+    @Test
+    void checkValidTransaction() {
+        Storage.fruitShopStorage.put(APPLE_KEY, 17);
+        chooseOperation.handle(validTransaction);
+        String fruitAfter = validTransaction.getFruitName();
+        int weightAfterOperation = Storage.fruitShopStorage.get(fruitAfter);
+        assertEquals(27, weightAfterOperation);
+    }
+
+    @Test
+    void operationProcess_numberLessThatZero_notOk() {
+        NullPointerException expectedMessage =
+                assertThrows(NullPointerException.class,
+                        () -> chooseOperation.handle(notValidTransaction));
+        assertNotEquals("Can't return negative quantity",
+                expectedMessage.getMessage());
     }
 }

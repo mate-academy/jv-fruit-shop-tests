@@ -2,6 +2,7 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
@@ -46,6 +47,11 @@ class ReturnOperationTest {
     }
 
     @Test
+    void putNull_NotOk() {
+        assertNull(Storage.fruitShopStorage.put(null,null));
+    }
+
+    @Test
     void notValidOperationType_NotOk() {
         OperationType actual = validType;
         assertNotEquals(notValidType, actual, "Operation type should be RETURN");
@@ -62,7 +68,6 @@ class ReturnOperationTest {
         Storage.fruitShopStorage.put(FRUIT_NAME, FRUIT_WEIGHT);
         final Map<String, Integer> fruits = storage.getFruits();
         final Integer actual = fruits.putIfAbsent(FRUIT_NAME, FRUIT_WEIGHT);
-        System.out.println(actual);
         assertEquals(15, actual);
     }
 

@@ -2,6 +2,7 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
@@ -31,6 +32,11 @@ class PurchaseOperationTest {
     @AfterEach
     void tearDown() {
         Storage.fruitShopStorage.clear();
+    }
+
+    @Test
+    void putNull_NotOk() {
+        assertNull(Storage.fruitShopStorage.put(null, null));
     }
 
     @Test
@@ -95,7 +101,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void name() {
+    void checkValidTransaction() {
         Storage.fruitShopStorage.put(FRUIT_NAME, 17);
         purchase.handle(validTransaction);
         String fruitAfter = validTransaction.getFruitName();

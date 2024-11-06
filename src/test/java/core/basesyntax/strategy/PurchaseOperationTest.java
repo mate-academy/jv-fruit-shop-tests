@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
     private ShopService shopService;
-    private PurchaseOperation purchase;
+    private PurchaseHandler purchase;
     private FruitTransaction fruitTransaction;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
         shopService = new ShopServiceImpl(operationStrategy);
-        purchase = new PurchaseOperation(shopService);
+        purchase = new PurchaseHandler(shopService);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 100);
         shopService.addFruits("apple", 150);

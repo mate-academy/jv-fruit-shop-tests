@@ -3,10 +3,10 @@ package core.basesyntax.strategy;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.ShopService;
 
-public class PurchaseOperation implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     private ShopService shopService;
 
-    public PurchaseOperation(ShopService shopService) {
+    public PurchaseHandler(ShopService shopService) {
         this.shopService = shopService;
     }
 

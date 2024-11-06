@@ -11,13 +11,13 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
+import core.basesyntax.strategy.PurchaseHandler;
+import core.basesyntax.strategy.ReturnHandler;
+import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,13 +39,13 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperation(shopService));
+                new BalanceHandler(shopService));
         operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation(shopService));
+                new PurchaseHandler(shopService));
         operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation(shopService));
+                new ReturnHandler(shopService));
         operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation(shopService));
+                new SupplyHandler(shopService));
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
         DataConverter dataConverter = new DataConverterImpl();

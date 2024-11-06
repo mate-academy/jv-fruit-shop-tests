@@ -25,7 +25,7 @@ class ReportGeneratorImplTest {
 
         String report = reportGenerator.getReport(shopService);
         String expectedReport = "fruit,quantity" + lineSeparator
-                + "banana,50" + lineSeparator + "apple,100" + lineSeparator;
+                + "banana,50" + lineSeparator + "apple,100";
 
         assertEquals(expectedReport, report);
     }

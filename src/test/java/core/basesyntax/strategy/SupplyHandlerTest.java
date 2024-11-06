@@ -9,33 +9,34 @@ import core.basesyntax.service.ShopServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BalanceOperationTest {
+class SupplyHandlerTest {
     private ShopService shopService;
-    private BalanceHandler balance;
+    private ReturnHandler returnHandler;
     private FruitTransaction fruitTransaction;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
         shopService = new ShopServiceImpl(operationStrategy);
-        balance = new BalanceHandler(shopService);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        returnHandler = new ReturnHandler(shopService);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "apple", 100);
     }
 
     @Test
-    void apply_shouldAddFruitsToShopService() {
-        balance.handle(fruitTransaction);
+    void apply_returnTransaction_success() {
+        returnHandler.handle(fruitTransaction);
         assertEquals(100, shopService.getQuantity("apple"));
     }
 
     @Test
-    void apply_nonBalanceOperation_throwsRuntimeException() {
+    void apply_nonReturnOperation_throwsRuntimeException() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "apple", 100);
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            balance.handle(fruitTransaction);
+            returnHandler.handle(fruitTransaction);
         });
-        assertEquals("Unsupported operation for BalanceHandler", exception.getMessage());
+        assertEquals("Unsupported operation for ReturnHandler", exception.getMessage());
     }
+
 }

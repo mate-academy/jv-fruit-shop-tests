@@ -9,33 +9,36 @@ import core.basesyntax.service.ShopServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BalanceOperationTest {
+class ReturnHandlerTest {
     private ShopService shopService;
-    private BalanceHandler balance;
+    private SupplyHandler supplyHandler;
     private FruitTransaction fruitTransaction;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
         shopService = new ShopServiceImpl(operationStrategy);
-        balance = new BalanceHandler(shopService);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100);
-    }
-
-    @Test
-    void apply_shouldAddFruitsToShopService() {
-        balance.handle(fruitTransaction);
-        assertEquals(100, shopService.getQuantity("apple"));
-    }
-
-    @Test
-    void apply_nonBalanceOperation_throwsRuntimeException() {
+        supplyHandler = new SupplyHandler(shopService);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "apple", 100);
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            balance.handle(fruitTransaction);
-        });
-        assertEquals("Unsupported operation for BalanceHandler", exception.getMessage());
+        shopService.addFruits("apple", 150);
     }
+
+    @Test
+    void apply_supplyTransaction_success() {
+        supplyHandler.handle(fruitTransaction);
+        int expectedQuantity = 250;
+        assertEquals(expectedQuantity, shopService.getQuantity("apple"));
+    }
+
+    @Test
+    void apply_nonSupplyOperation_throwsRuntimeException() {
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 100);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            supplyHandler.handle(fruitTransaction);
+        });
+        assertEquals("Unsupported operation for SupplyHandler", exception.getMessage());
+    }
+
 }

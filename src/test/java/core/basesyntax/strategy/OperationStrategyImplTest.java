@@ -18,10 +18,10 @@ class OperationStrategyImplTest {
     @BeforeEach
     void setUp() {
         handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation(shopService));
-        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(shopService));
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(shopService));
-        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(shopService));
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopService));
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(shopService));
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(shopService));
+        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(shopService));
         operationStrategy = new OperationStrategyImpl(handlerMap);
     }
 
@@ -29,7 +29,7 @@ class OperationStrategyImplTest {
     void testGetOperationHandler_forReturn() {
         OperationHandler returnOperation = operationStrategy.get(FruitTransaction.Operation.RETURN);
         assertNotNull(returnOperation);
-        assertTrue(returnOperation instanceof ReturnOperation);
+        assertTrue(returnOperation instanceof ReturnHandler);
     }
 
     @Test
@@ -37,20 +37,20 @@ class OperationStrategyImplTest {
         OperationHandler purchaseHandler = operationStrategy
                 .get(FruitTransaction.Operation.PURCHASE);
         assertNotNull(purchaseHandler);
-        assertTrue(purchaseHandler instanceof PurchaseOperation);
+        assertTrue(purchaseHandler instanceof PurchaseHandler);
     }
 
     @Test
     void testGetOperationHandler_forSupply() {
         OperationHandler supplyHandler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertNotNull(supplyHandler);
-        assertTrue(supplyHandler instanceof SupplyOperation);
+        assertTrue(supplyHandler instanceof SupplyHandler);
     }
 
     @Test
     void testGetOperationHandler_forBalance() {
         OperationHandler balanceHandler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertNotNull(balanceHandler);
-        assertTrue(balanceHandler instanceof BalanceOperation);
+        assertTrue(balanceHandler instanceof BalanceHandler);
     }
 }

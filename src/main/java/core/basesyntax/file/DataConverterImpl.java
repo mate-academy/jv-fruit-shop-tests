@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String COMA_SEPARATOR = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -12,7 +14,7 @@ public class DataConverterImpl implements DataConverter {
             if (line.startsWith("type")) {
                 continue;
             }
-            String[] parts = line.split(",");
+            String[] parts = line.split(COMA_SEPARATOR);
             String operationCode = parts[0];
             String fruit = parts[1];
             int quantity = Integer.parseInt(parts[2]);

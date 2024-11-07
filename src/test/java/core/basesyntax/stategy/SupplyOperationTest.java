@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-
     private FruitOperationHandler supplyOperation;
     private Map<String, Integer> inventoryData;
 
@@ -46,7 +45,7 @@ class SupplyOperationTest {
     @Test
     void returnOperationZeroQuantity_trowsException() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "apple", 0);
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 supplyOperation.executeOperation(fruitTransaction, inventoryData));
     }
 }

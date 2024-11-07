@@ -38,7 +38,7 @@ class BalanceHandlerTest {
     @Test
     void setNegativeBalance_trowsException() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE, "banana", -10);
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 balanceHandler.executeOperation(fruitTransaction, inventoryData));
     }
 }

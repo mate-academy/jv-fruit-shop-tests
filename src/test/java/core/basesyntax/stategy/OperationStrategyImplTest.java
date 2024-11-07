@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-
     private OperationStrategyImpl operationStrategy;
     private Map<Operation, FruitOperationHandler> handlerMap;
 
@@ -56,8 +55,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getNullOperation_throwsException() {
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.getHandler(null));
     }
 }
-

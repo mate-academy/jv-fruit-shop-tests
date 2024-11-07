@@ -38,14 +38,14 @@ class ReturnOperationTest {
     @Test
     void returnOperationZeroQuantity_trowsException() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN, "apple", 0);
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 returnOperation.executeOperation(fruitTransaction, inventoryData));
     }
 
     @Test
     void returnOperationWithNegativeQuantity_trowsException() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN, "apple", -10);
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 returnOperation.executeOperation(fruitTransaction, inventoryData));
     }
 }

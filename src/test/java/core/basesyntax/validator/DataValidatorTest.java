@@ -20,7 +20,7 @@ class DataValidatorTest {
     @Test
     void emptyList_throwsException() {
         List<String> inputData = Collections.emptyList();
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 dataValidator.validate(inputData));
     }
 

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class ReportWriterImplTest {
     private static final String NON_EXISTENT_FILE_NAME = "/invalid/file.csv";
+    private static final String RESOURCES ="C:\\IdeaProjects\\jv-fruit-shop-tests\\src\\test\\resources";
     private static final String CONTENT = "fruit,quantity" + System.lineSeparator()
             + "apple,10" + System.lineSeparator()
             + "banana,5";
@@ -22,7 +23,7 @@ class ReportWriterImplTest {
     @BeforeEach
     void setUp() throws IOException {
         reportWriter = new ReportWriterImpl();
-        tempFile = File.createTempFile("testData", ".csv");
+        tempFile = File.createTempFile("testData", ".csv", new File(RESOURCES));
     }
 
     @AfterEach

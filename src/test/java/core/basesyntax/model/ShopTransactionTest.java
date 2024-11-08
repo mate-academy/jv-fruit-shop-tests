@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,24 +14,19 @@ class ShopTransactionTest {
     }
 
     @Test
-    void nullInstance_NotOk() {
-        assertNotNull(shopTransaction);
-    }
-
-    @Test
-    void weight_Ok() {
+    void getWeight_isOk() {
         int actual = shopTransaction.getWeight();
         assertEquals(15, actual);
     }
 
     @Test
-    void fruitName_Ok() {
+    void getFruitName_isOk() {
         String actual = shopTransaction.getFruitName();
         assertEquals("apple", actual);
     }
 
     @Test
-    void operationType_Ok() {
+    void getType_isOk() {
         OperationType type = shopTransaction.getType();
         assertEquals(OperationType.RETURN, type);
     }

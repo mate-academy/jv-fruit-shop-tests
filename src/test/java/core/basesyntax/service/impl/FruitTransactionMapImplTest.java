@@ -11,6 +11,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.model.ShopTransaction;
 import core.basesyntax.service.FruitTransactionMap;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class FruitTransactionMapImplTest {
     @BeforeEach
     void setUp() {
         listValidReturnType = new ArrayList<>();
-        emptyList = new ArrayList<>();
+        emptyList = Collections.emptyList();
         validData = List.of("b,apple,70", "s,banana,44");
         notValidData = List.of("n,melon,-152");
     }
@@ -44,20 +45,15 @@ class FruitTransactionMapImplTest {
     @Test
     void mapEmptyData_notOk() {
         assertThrows(RuntimeException.class,
-                () -> mapTransaction.map(emptyList));
+                () -> mapTransaction.map(emptyList),
+                "There are not any input data");
     }
 
     @Test
     void mullMapping_NotOk() {
         assertThrows(RuntimeException.class,
-                () -> mapTransaction.map(null));
-    }
-
-    @Test
-    void returnType_Ok() {
-        List<ShopTransaction> shopTransactionList = new ArrayList<>();
-        assertEquals(listValidReturnType, shopTransactionList,
-                "Should return List<ShopTransaction>");
+                () -> mapTransaction.map(null),
+                "Input data can`t be null");
     }
 
     @Test

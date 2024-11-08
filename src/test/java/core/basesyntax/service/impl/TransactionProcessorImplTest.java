@@ -48,22 +48,6 @@ class TransactionProcessorImplTest {
     }
 
     @Test
-    void operationType_Ok() {
-        final String actual = transactionsList.get(0).getType().getCodeOperation();
-        final String actual2 = transactionsList.get(1).getType().getCodeOperation();
-        assertEquals("p", actual);
-        assertEquals("r", actual2);
-    }
-
-    @Test
-    void fruitName_Ok() {
-        final String actualFruitName1 = transactionsList.get(0).getFruitName();
-        final String actualFruitName2 = transactionsList.get(1).getFruitName();
-        assertEquals("banana", actualFruitName1);
-        assertEquals("orange", actualFruitName2);
-    }
-
-    @Test
     void nullTransaction_NotOk() {
         assertThrows(NullPointerException.class, () ->
                 transactionProcessor.process(transactionsList),

@@ -12,7 +12,7 @@ class InventoryFromCsvTest {
     private final StockDao stockDao = new StockDaoStorageImpl();
 
     @Test
-    void prepare_fileDoNotExists_NotOk() {
+    void synchronizeWithTheStorage_fileDoNotExists_NotOk() {
         final String notExistingFile = "notExistingFile.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, notExistingFile);
         assertThrows(RuntimeException.class,
@@ -20,13 +20,13 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_emptyFile_Ok() {
+    void synchronizeWithTheStorage_emptyFile_Ok() {
         final String emptyFile = "emptyFile.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, emptyFile);
     }
 
     @Test
-    void prepare_addingProductData_Ok() {
+    void synchronizeWithTheStorage_addingProductData_Ok() {
         final String addingProduct = "addingProduct.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, addingProduct);
         inventory.synchronizeWithTheStorage();
@@ -36,7 +36,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_supply_Ok() {
+    void synchronizeWithTheStorage_supply_Ok() {
         final String supply = "supply.csv";
         Inventory inventorySupply = new InventoryFromCsv(stockDao, supply);
         inventorySupply.synchronizeWithTheStorage();
@@ -46,7 +46,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_return_Ok() {
+    void synchronizeWithTheStorage_return_Ok() {
         final String purchase = "return.csv";
         Inventory inventoryPurchase = new InventoryFromCsv(stockDao, purchase);
         inventoryPurchase.synchronizeWithTheStorage();
@@ -56,7 +56,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_purchase_Ok() {
+    void synchronizeWithTheStorage_purchase_Ok() {
         final String purchase = "purchase.csv";
         Inventory inventoryPurchase = new InventoryFromCsv(stockDao, purchase);
         inventoryPurchase.synchronizeWithTheStorage();
@@ -66,7 +66,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_incorrectData_TooManyComma_NotOk() {
+    void synchronizeWithTheStorage_incorrectData_TooManyComma_NotOk() {
         final String tooManyComma = "tooManyComma.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, tooManyComma);
         assertThrows(InvalidDataException.class,
@@ -74,7 +74,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_incorrectData_AmountIsNotANumber_NotOk() {
+    void synchronizeWithTheStorage_incorrectData_AmountIsNotANumber_NotOk() {
         final String amountIsNotANumber = "amountIsNotANumber.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, amountIsNotANumber);
         assertThrows(InvalidDataException.class,
@@ -82,7 +82,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_incorrectData_NotExistingOperation_NotOk() {
+    void synchronizeWithTheStorage_incorrectData_NotExistingOperation_NotOk() {
         final String notExistingOperation = "notExistingOperation.csv";
         Inventory inventory = new InventoryFromCsv(stockDao, notExistingOperation);
         assertThrows(InvalidDataException.class,
@@ -90,7 +90,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_unacceptableOperation_decreaseBelowZero_NotOk() {
+    void synchronizeWithTheStorage_unacceptableOperation_decreaseBelowZero_NotOk() {
         final String decreaseBelowZero = "decreaseBelowZero.csv";
         Inventory inventoryDecreaseBelowZero = new InventoryFromCsv(stockDao, decreaseBelowZero);
         assertThrows(UnacceptableStockOperationException.class,
@@ -98,7 +98,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_unacceptableOperation_increaseBelowZero_NotOk() {
+    void synchronizeWithTheStorage_unacceptableOperation_increaseBelowZero_NotOk() {
         final String increaseBelowZero = "increaseBelowZero.csv";
         Inventory inventoryIncreaseBelowZero = new InventoryFromCsv(stockDao, increaseBelowZero);
         assertThrows(UnacceptableStockOperationException.class,
@@ -106,7 +106,7 @@ class InventoryFromCsvTest {
     }
 
     @Test
-    void prepare_unacceptableOperation_noSuchElement_NotOk() {
+    void synchronizeWithTheStorage_unacceptableOperation_noSuchElement_NotOk() {
         final String noSuchElement = "noSuchElement.csv";
         Inventory inventoryNoSuchElement = new InventoryFromCsv(stockDao, noSuchElement);
         assertThrows(UnacceptableStockOperationException.class,

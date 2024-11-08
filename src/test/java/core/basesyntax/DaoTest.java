@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +46,7 @@ class DaoTest {
 
     @Test
     void read_nonExistentFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read("nonexistentFile.csv"));
+        assertThrows(NoSuchFileException.class, () -> fileReader.read("nonexistentFile.csv"));
     }
 
     @Test
@@ -61,14 +62,14 @@ class DaoTest {
 
     @Test
     void write_toNonExistentFile_NotOk() {
-        assertThrows(IOException.class, () -> fileWriter
+        assertThrows(NoSuchFileException.class, () -> fileWriter
                 .write("BALANCE,apple,100, SUPPLY,banana,50"
                         ,"nonexistentfile.csv"));
     }
 
     @Test
     void convertData_Ok() {
-        List<String> report = Arrays.asList("BALANCE,apple,100", "SUPPLY,banana,50");
+        List<String> report = Arrays.asList("BALANCE,apple,100, SUPPLY,banana,50");
         List<FruitTransaction> result = dataConverter.convertToTransaction(report);
 
         assertEquals(2, result.size());

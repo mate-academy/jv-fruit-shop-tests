@@ -22,7 +22,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void name() {
+    void reportContent_Ok() {
         final String expected = "fruit,weight\n" + "banana,15\n" + "orange,44";
         fruitMap.put("banana", 15);
         fruitMap.put("orange", 44);
@@ -32,6 +32,20 @@ class ReportServiceImplTest {
                     .append(COMA)
                     .append(entry.getValue())
                     .append(LINE_SEPARATOR);
+        }
+        String actual = builder.toString();
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    void reportContent_NotOk() {
+        final String expected = "fruit,weight\n" + "banana,15\n" + "orange,44";
+        fruitMap.put("pineapple", -45);
+        fruitMap.put("coconut", -3);
+        StringBuilder builder = new StringBuilder("fruit,weight" + LINE_SEPARATOR);
+        for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
+            builder.append(entry.getKey())
+                    .append(entry.getValue());
         }
         String actual = builder.toString();
         assertNotEquals(expected, actual);

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;

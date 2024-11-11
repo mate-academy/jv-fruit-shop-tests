@@ -1,10 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 public class FileWriterServiceTest {
 
@@ -22,7 +25,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void write_emptyContent_throwsIOException() {
+    public void writeEmptyContentThrowsIOException() {
         String content = "";
         String filePath = "src/test/resources/output.csv";
 

@@ -1,17 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.DataConverterImpl;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +22,8 @@ public class Main {
         List<String> inputReport = fileReader.read("src/main/resources/reportRead.csv");
 
         DataConverterImpl dataConverter = new DataConverterImpl();
+
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();

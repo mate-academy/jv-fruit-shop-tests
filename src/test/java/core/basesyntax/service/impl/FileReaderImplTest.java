@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.assertThrows;
 
 public class FileReaderImplTest {

@@ -10,6 +10,8 @@ public class PurchaseOperation implements OperationHandler {
         if (currentQuantity < transaction.getQuantity()) {
             throw new RuntimeException("Not enough " + transaction.getFruit() + " in stock.");
         }
-        storage.setFruitQuantity(transaction.getFruit(), currentQuantity - transaction.getQuantity());
+        storage
+                .setFruitQuantity(transaction
+                        .getFruit(), currentQuantity - transaction.getQuantity());
     }
 }

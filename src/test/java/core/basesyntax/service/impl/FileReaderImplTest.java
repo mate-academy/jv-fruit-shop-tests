@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.service.FileReaderService;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertThrows;
 
 public class FileReaderImplTest {
     private FileReaderService fileReaderService = new FileReaderImpl();

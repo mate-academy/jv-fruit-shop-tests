@@ -7,10 +7,10 @@ import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +23,7 @@ public class Main {
 
         DataConverterImpl dataConverter = new DataConverterImpl();
 
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());

@@ -41,7 +41,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readFile_EmptyFileInput_notOk() {
+    void readFile_EmptyFileInput_ok() {
         List<String> expected = expectedList;
         List<String> actual = fileReader.readFile(EMPTY_FILE);
         assertEquals(expected, actual);
@@ -53,7 +53,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readFile_negativeQuantityInput_notOk() {
+    void readFile_negativeQuantityInput_ok() {
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,-100");
         expectedList.add("s,banana,100");

@@ -57,8 +57,9 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void get_nullInput_notOk() {
-        assertNull(null);
+    void get_nullInput_ok() {
+        OperationHandler actual = operationStrategy.get(null);
+        assertNull(actual);
     }
 }
 

@@ -61,7 +61,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_emptyListInput_notOk() {
+    void convertToTransaction_emptyListInput_ok() {
         List<FruitTransaction> expected = expectedList;
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputReport);
         assertEquals(expected, actual);

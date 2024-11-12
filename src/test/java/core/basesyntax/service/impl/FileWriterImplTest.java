@@ -34,10 +34,15 @@ class FileWriterImplTest {
         resultingReport = RESULTING_REPORT;
         File file = tempDir.resolve(FILE_TO_WRITE).toFile();
         fileWriter.writeToFile(resultingReport, file.getPath());
+        String actual = readFromFile(file);
+        String expected = resultingReport;
+        assertEquals(expected, actual);
+    }
+
+    private String readFromFile(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line = reader.lines()
+            return reader.lines()
                     .collect(Collectors.joining("\n"));
-            assertEquals(resultingReport, line);
         } catch (IOException e) {
             throw new RuntimeException("The file by path "
                     + file.getPath() + " cannot be read or does not exist.", e);
@@ -49,14 +54,9 @@ class FileWriterImplTest {
         resultingReport = EMPTY_REPORT;
         File file = tempDir.resolve(FILE_TO_WRITE).toFile();
         fileWriter.writeToFile(resultingReport, file.getPath());
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line = reader.lines()
-                    .collect(Collectors.joining("\n"));
-            assertEquals(resultingReport, line);
-        } catch (IOException e) {
-            throw new RuntimeException("The file by path "
-                    + file.getPath() + " cannot be read or does not exist.", e);
-        }
+        String actual = readFromFile(file);
+        String expected = resultingReport;
+        assertEquals(expected, actual);
     }
 
     @Test

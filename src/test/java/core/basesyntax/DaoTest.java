@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileWriter;
@@ -11,16 +14,11 @@ import core.basesyntax.dao.impl.ReportGeneratorImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class DaoTest {
     private FileReader fileReader;
@@ -63,8 +61,8 @@ class DaoTest {
     @Test
     void write_toNonExistentFile_NotOk() {
         assertThrows(NoSuchFileException.class, () -> fileWriter
-                .write("BALANCE,apple,100, SUPPLY,banana,50"
-                        ,"nonexistentfile.csv"));
+                .write("BALANCE,apple,100, SUPPLY,banana,50",
+                        "nonexistentfile.csv"));
     }
 
     @Test

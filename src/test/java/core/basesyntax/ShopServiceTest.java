@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -7,16 +10,16 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceTest {
     private FruitStorage fruitStorage;

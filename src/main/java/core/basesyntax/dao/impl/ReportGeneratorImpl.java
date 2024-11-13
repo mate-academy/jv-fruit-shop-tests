@@ -3,6 +3,8 @@ package core.basesyntax.dao.impl;
 import core.basesyntax.dao.ReportGenerator;
 import core.basesyntax.db.FruitStorage;
 
+import java.util.Map;
+
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
@@ -17,10 +19,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport() {
         StringBuilder report = new StringBuilder(HEADER + LINE_SEPARATOR);
 
-        fruitStorage.getFruits()
-                .forEach((fruit, quantity) -> report.append(fruit)
+        fruitStorage.getFruits().entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> report.append(entry.getKey())
                         .append(SEPARATOR)
-                        .append(quantity)
+                        .append(entry.getValue())
                         .append(LINE_SEPARATOR));
         return report.toString();
     }

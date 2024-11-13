@@ -14,10 +14,8 @@ import core.basesyntax.dao.impl.ReportGeneratorImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +44,8 @@ class DaoTest {
 
     @Test
     void read_nonExistentFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read("nonexistentfolder/nonexistentfile.csv"));
+        assertThrows(RuntimeException.class, () -> fileReader
+                .read("nonexistentfolder/nonexistentfile.csv"));
     }
 
     @Test
@@ -81,28 +80,32 @@ class DaoTest {
     void convert_toWrongFormat_notOk() {
         List<String> report = Arrays.asList("BALANCE,apple", "SUPPLY,banana,50");
 
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(report));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test
     void convert_illegalOperation_notOK() {
         List<String> report = Arrays.asList("NONEXISTENTOPERATION,apple,100", "SUPPLY,banana,50");
 
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(report));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test
     void convert_illegalQuantity_notOK() {
         List<String> report = Arrays.asList("BALANCE,apple,-20", "SUPPLY,banana,50");
 
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(report));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test
     void convert_illegalQuantityFormat_notOK() {
         List<String> report = Arrays.asList("BALANCE,apple,20.00", "SUPPLY,banana,50");
 
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(report));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test
@@ -120,5 +123,4 @@ class DaoTest {
 
         assertEquals(expectedReport, actualResult);
     }
-
 }

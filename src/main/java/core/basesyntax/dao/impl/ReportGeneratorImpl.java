@@ -2,7 +2,6 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.ReportGenerator;
 import core.basesyntax.db.FruitStorage;
-
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {

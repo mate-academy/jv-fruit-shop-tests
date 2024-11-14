@@ -37,7 +37,7 @@ class DaoTest {
 
     @Test
     void read_validFile_Ok() {
-        List<String> result = fileReader.read("src/test/validFile.csv");
+        List<String> result = fileReader.read("src/test/java/core/basesyntax/testfile.csv");
         String joinedResult = String.join(", ", result);
         assertEquals("BALANCE,apple,100, SUPPLY,banana,50", joinedResult);
     }
@@ -51,7 +51,7 @@ class DaoTest {
     @Test
     void writeToFile_ok() {
         String expectedContent = "BALANCE,apple,100, SUPPLY,banana,50";
-        String filePath = "src/test/validfile.csv";
+        String filePath = "src/test/java/core/basesyntax/validfile.csv";
         fileWriter.write(expectedContent, filePath);
 
         List<String> result = fileReader.read(filePath);

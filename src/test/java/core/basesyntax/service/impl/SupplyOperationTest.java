@@ -1,18 +1,25 @@
 package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.Storage.storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private OperationStrategy supplyOperation = new SupplyOperation(fruitDao);
+    private static FruitDao fruitDao;
+    private static OperationStrategy supplyOperation;
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitDao = new FruitDaoImpl();
+        supplyOperation = new SupplyOperation(fruitDao);
+    }
 
     @BeforeEach
     void setUp() {
@@ -26,7 +33,7 @@ class SupplyOperationTest {
         supplyOperation.execute(fruitTransaction);
         int actualQuantity = storage.get("banana");
         int expected = 40;
-        Assertions.assertEquals(expected, actualQuantity);
+        assertEquals(expected, actualQuantity);
     }
 
     @Test
@@ -39,6 +46,6 @@ class SupplyOperationTest {
         supplyOperation.execute(fruitTransaction);
         int actualQuantity = storage.get("banana");
         int expected = 100;
-        Assertions.assertEquals(expected, actualQuantity);
+        assertEquals(expected, actualQuantity);
     }
 }

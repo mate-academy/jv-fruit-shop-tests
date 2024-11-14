@@ -5,10 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterTest {
-    private final DataConverter dataConverter = new DataConverter();
+    private static DataConverter dataConverter;
+
+    @BeforeAll
+    static void beforeAll() {
+        dataConverter = new DataConverter();
+    }
 
     @Test
     void converter_fruitData_ShouldReturnWholeList() {

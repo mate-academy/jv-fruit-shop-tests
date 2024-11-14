@@ -1,17 +1,19 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterServiceImplTest {
-    private FileWriterService fileWrite = new FileWriterServiceImpl();
-
+    private static FileWriterService fileWrite;
     @TempDir
     private Path tempDir;
     private Path tempFilePath;
@@ -19,6 +21,11 @@ class FileWriterServiceImplTest {
     @BeforeEach
     void setUp() {
         tempFilePath = tempDir.resolve("finalReport.csv");
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        fileWrite = new FileWriterServiceImpl();
     }
 
     @Test
@@ -29,8 +36,8 @@ class FileWriterServiceImplTest {
         fileWrite.writeIntoFile(report, tempFilePath.toString());
         String actualContent = Files.readString(tempFilePath);
         Assertions.assertTrue(Files.exists(tempFilePath));
-        Assertions.assertEquals(report.length(), Files.size(tempFilePath));
-        Assertions.assertEquals(report, actualContent);
+        assertEquals(report.length(), Files.size(tempFilePath));
+        assertEquals(report, actualContent);
     }
 
     @Test
@@ -43,6 +50,6 @@ class FileWriterServiceImplTest {
                 fileWrite.writeIntoFile(report, incorrectPath));
         String actual = exception.getMessage();
         String expected = "Error writing report to file at path: " + incorrectPath;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

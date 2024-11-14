@@ -1,18 +1,25 @@
 package core.basesyntax.dao.impl;
 
 import static core.basesyntax.db.Storage.storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitDaoImplTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
 
     @BeforeEach
     void setUp() {
         storage.clear();
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitDao = new FruitDaoImpl();
     }
 
     @Test
@@ -23,7 +30,7 @@ class FruitDaoImplTest {
 
         Integer actual = storage.get(fruit);
         Integer expected = 15;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -38,7 +45,7 @@ class FruitDaoImplTest {
         Integer actualQuantity = storage.get("apple");
         Integer expected = 50;
 
-        Assertions.assertEquals(actualQuantity, expected);
+        assertEquals(actualQuantity, expected);
     }
 
     @Test
@@ -51,7 +58,7 @@ class FruitDaoImplTest {
         int actual = storage.get("banana");
         int expected = 2;
 
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -61,7 +68,7 @@ class FruitDaoImplTest {
         String actual = exception.getMessage();
         String expected = "Quantity is not valid";
 
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -73,7 +80,7 @@ class FruitDaoImplTest {
         String expected = "The requested fruit is "
                 + "currently unavailable." + fruit;
 
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -86,7 +93,7 @@ class FruitDaoImplTest {
         String actual = exception.getMessage();
         String expected = "We do not have sufficient "
                 + "quantity of the requested fruit." + fruit;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -98,7 +105,7 @@ class FruitDaoImplTest {
         int actual = storage.get("banana");
         int expected = 50;
 
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -109,6 +116,6 @@ class FruitDaoImplTest {
         fruitDao.returnFruit(fruit, quantity);
         int actual = storage.get("banana");
         int expected = 100;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

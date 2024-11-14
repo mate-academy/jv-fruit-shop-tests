@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.Storage.storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
@@ -8,14 +9,19 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
     private OperationStrategy operationStrategy;
     private Map<FruitTransaction.Operation, OperationStrategy> operationHandlers = new HashMap<>();
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitDao = new FruitDaoImpl();
+    }
 
     @BeforeEach
     void setUp() {
@@ -34,7 +40,7 @@ class OperationStrategyImplTest {
         operationStrategy.execute(fruitTransaction);
         int actual = storage.get("banana");
         int expected = 50;
-        Assertions.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -44,7 +50,7 @@ class OperationStrategyImplTest {
         operationStrategy.execute(fruitTransaction);
         int actual = storage.get("banana");
         int expected = 50;
-        Assertions.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -54,7 +60,7 @@ class OperationStrategyImplTest {
         operationStrategy.execute(fruitTransaction);
         int actual = storage.get("banana");
         int expected = 50;
-        Assertions.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -65,6 +71,6 @@ class OperationStrategyImplTest {
         operationStrategy.execute(fruitTransaction);
         int actual = storage.get("banana");
         int expected = 2;
-        Assertions.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 }

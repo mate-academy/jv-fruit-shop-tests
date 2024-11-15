@@ -1,6 +1,8 @@
 package core.basesyntax.converter.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
@@ -29,6 +31,21 @@ class DataConverterTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void convertToTransaction_invalidNumber_shouldThrowNumberFormatException() {
+        List<String> report = List.of(
+                "type,fruit,quantity",
+                "BUY,apple,invalidNumber");
+        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(report));
+    }
+
+    @Test
+    void convertToTransaction_emptyList_shouldReturnEmptyList() {
+        List<String> report = new ArrayList<>();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(report);
+        assertTrue(transactions.isEmpty());
     }
 
     private static List<String> getData() {

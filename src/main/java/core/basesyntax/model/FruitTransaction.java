@@ -69,7 +69,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Operation with name " + string + " not found.");
+            throw new IllegalArgumentException("Operation with name " + string + " not found.");
         }
     }
 }

@@ -4,6 +4,7 @@ import static core.basesyntax.db.Storage.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,11 @@ import org.junit.jupiter.api.Test;
 
 class FruitDaoImplTest {
     private static FruitDao fruitDao;
+
+    @AfterEach
+    void tearDown() {
+        storage.clear();
+    }
 
     @BeforeEach
     void setUp() {

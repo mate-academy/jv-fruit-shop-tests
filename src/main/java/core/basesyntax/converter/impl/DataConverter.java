@@ -17,7 +17,7 @@ public class DataConverter implements Convertor {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> list =
-                new ArrayList<>(report.size() - REMOVE_REDUNDANT_FIRST_ROW);
+                new ArrayList<>(report.size());
 
         for (int i = START_FROM_INDEX; i < report.size(); i++) {
             String[] split = String.valueOf(report.get(i))

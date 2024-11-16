@@ -10,7 +10,7 @@ public class FileReaderImplTest {
 
     @Test
     public void read_invalidFile_throwsRuntimeException() {
-        String invalidFilePath = "src/test/resources/invalidFile.csv";
+        String invalidFilePath = "src/test/resources/output.csv";
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             fileReaderService.read(invalidFilePath);

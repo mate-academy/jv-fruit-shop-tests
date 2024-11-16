@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorage {
-    private Map<String, Integer> fruits;
+    private static Map<String, Integer> fruits;
 
     public FruitStorage() {
         fruits = new HashMap<>();

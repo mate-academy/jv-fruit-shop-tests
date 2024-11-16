@@ -2,10 +2,10 @@ package core.basesyntax.dao.impl;
 
 import static core.basesyntax.db.Storage.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,7 +69,7 @@ class FruitDaoImplTest {
 
     @Test
     void bought_quantityLessThanNull_throwRuntimeException() {
-        Exception exception = Assertions.assertThrows(RuntimeException.class, () ->
+        Exception exception = assertThrows(RuntimeException.class, () ->
                 fruitDao.boughtFruit("banana", -1));
         String actual = exception.getMessage();
         String expected = "Quantity is not valid";
@@ -80,8 +80,10 @@ class FruitDaoImplTest {
     @Test
     void bought_fruitDoesntExist_throwRuntimeException() {
         String fruit = "banana";
-        Exception exception = Assertions.assertThrows(RuntimeException.class, () ->
-                fruitDao.boughtFruit("banana", 5));
+
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                fruitDao.boughtFruit(fruit, 5));
+
         String actual = exception.getMessage();
         String expected = "The requested fruit is "
                 + "currently unavailable." + fruit;
@@ -94,7 +96,7 @@ class FruitDaoImplTest {
         String fruit = "banana";
         int quantity = 5;
         storage.put(fruit, quantity);
-        Exception exception = Assertions.assertThrows(RuntimeException.class, () ->
+        Exception exception = assertThrows(RuntimeException.class, () ->
                 fruitDao.boughtFruit("banana", 10));
         String actual = exception.getMessage();
         String expected = "We do not have sufficient "

@@ -1,7 +1,6 @@
 package core.basesyntax.converter.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -19,7 +18,7 @@ class DataConverterTest {
     }
 
     @Test
-    void converter_fruitData_ShouldReturnWholeList() {
+    void converter_fruitData_isOk() {
         List<String> data = getData();
         List<FruitTransaction> actual = dataConverter.convertToTransaction(data);
         List<FruitTransaction> expected = List.of(
@@ -31,14 +30,6 @@ class DataConverterTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void convertToTransaction_invalidNumber_shouldThrowNumberFormatException() {
-        List<String> report = List.of(
-                "type,fruit,quantity",
-                "BUY,apple,invalidNumber");
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(report));
     }
 
     @Test

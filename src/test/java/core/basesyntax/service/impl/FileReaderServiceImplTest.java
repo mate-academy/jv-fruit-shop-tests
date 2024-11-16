@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static FileReaderService fileReader;
-    private static final String PATH = "src/test/resources/reportToRead.csv";
+    private static final String VALID_PATH = "src/test/resources/reportToRead.csv";
     private static final String WRONG_PATH = "src/test/resources/wrongPath.csv";
 
     @BeforeAll
@@ -31,7 +31,7 @@ class FileReaderServiceImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = fileReader.read(PATH);
+        List<String> actual = fileReader.read(VALID_PATH);
         assertEquals(expected, actual);
     }
 

@@ -28,34 +28,5 @@ import java.util.Map;
  */
 public class HelloWorld {
     public static void main(String[] arg) {
-        // 1. Read the data from the input CSV file
-        FileService fileService = new FileServiceImpl();
-        List<String> inputReport = fileService.read("transactions.csv");
-
-        // 2. Convert the incoming data into FruitTransactions list
-        DataConverter dataConverter = new DataConverterImpl();
-
-        // 3. Create and feel the map with all OperationHandler implementations
-        FruitRepository repository = new FruitRepositoryImpl();
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler(repository));
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler(repository));
-        operationHandlers.put(Operation.RETURN, new ReturnOperationHandler(repository));
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler(repository));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
-
-        List<FruitTransaction> transactions = dataConverter
-                .convertToFruitTransactions(inputReport);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
-
-        // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(repository);
-        String resultingReport = reportGenerator.generateReport();
-
-        // 6. Write the received report into the destination file
-        fileService.write("report.csv", resultingReport);
     }
 }

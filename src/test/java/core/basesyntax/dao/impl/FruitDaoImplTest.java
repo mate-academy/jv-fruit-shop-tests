@@ -33,7 +33,6 @@ class FruitDaoImplTest {
         String fruit = "banana";
         int quantity = 15;
         fruitDao.supplyFruit(fruit, quantity);
-
         Integer actual = storage.get(fruit);
         Integer expected = 15;
         assertEquals(expected, actual);
@@ -46,24 +45,20 @@ class FruitDaoImplTest {
         storage.put(storageContainsApple, storageContainsQuantity);
         String newApple = "apple";
         int newQuantity = 15;
-
         fruitDao.supplyFruit(newApple, newQuantity);
-        Integer actualQuantity = storage.get("apple");
+        Integer actualQuantity = storage.get(newApple);
         Integer expected = 50;
-
         assertEquals(actualQuantity, expected);
     }
 
     @Test
-    void boughtFruit_isOk() {
+    void bought_storageExistFruit_isOk() {
         String fruit = "banana";
         int quantity = 15;
         storage.put(fruit, quantity);
-
-        fruitDao.boughtFruit("banana", 13);
-        int actual = storage.get("banana");
+        fruitDao.boughtFruit(fruit, 13);
+        int actual = storage.get(fruit);
         int expected = 2;
-
         assertEquals(expected, actual);
     }
 
@@ -73,21 +68,17 @@ class FruitDaoImplTest {
                 fruitDao.boughtFruit("banana", -1));
         String actual = exception.getMessage();
         String expected = "Quantity is not valid";
-
         assertEquals(expected, actual);
     }
 
     @Test
     void bought_fruitDoesntExist_throwRuntimeException() {
         String fruit = "banana";
-
         Exception exception = assertThrows(RuntimeException.class, () ->
                 fruitDao.boughtFruit(fruit, 5));
-
         String actual = exception.getMessage();
         String expected = "The requested fruit is "
                 + "currently unavailable." + fruit;
-
         assertEquals(expected, actual);
     }
 
@@ -97,7 +88,7 @@ class FruitDaoImplTest {
         int quantity = 5;
         storage.put(fruit, quantity);
         Exception exception = assertThrows(RuntimeException.class, () ->
-                fruitDao.boughtFruit("banana", 10));
+                fruitDao.boughtFruit(fruit, 10));
         String actual = exception.getMessage();
         String expected = "We do not have sufficient "
                 + "quantity of the requested fruit." + fruit;
@@ -108,11 +99,9 @@ class FruitDaoImplTest {
     void return_fruit_isOk() {
         String fruit = "banana";
         int quantity = 50;
-
         fruitDao.returnFruit(fruit, quantity);
-        int actual = storage.get("banana");
+        int actual = storage.get(fruit);
         int expected = 50;
-
         assertEquals(expected, actual);
     }
 
@@ -122,7 +111,7 @@ class FruitDaoImplTest {
         int quantity = 50;
         storage.put(fruit, quantity);
         fruitDao.returnFruit(fruit, quantity);
-        int actual = storage.get("banana");
+        int actual = storage.get(fruit);
         int expected = 100;
         assertEquals(expected, actual);
     }

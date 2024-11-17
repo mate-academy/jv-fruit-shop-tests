@@ -45,7 +45,6 @@ class FruitTransactionTest {
         String message = "k";
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
                 convertor(message));
-
         String actual = exception.getMessage();
         String expected = "Operation with name " + message + " not found.";
         assertEquals(expected, actual);

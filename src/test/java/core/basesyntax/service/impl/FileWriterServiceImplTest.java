@@ -30,8 +30,8 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_dataToFile_isOk() throws IOException {
-        String report = "fruit,quantity\n"
-                + "banana,152\n"
+        String report = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
                 + "apple,90";
         fileWrite.writeIntoFile(report, tempFilePath.toString());
         String actualContent = Files.readString(tempFilePath);

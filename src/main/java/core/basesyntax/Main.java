@@ -36,7 +36,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.generateReport(transactions);
 
         FileWriterImpl fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");

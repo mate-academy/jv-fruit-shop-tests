@@ -10,6 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class SupplyHandlerTest {
 
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
+    private static final int INITIAL_QUANTITY_APPLE = 0;
+    private static final int INITIAL_QUANTITY_BANANA = 7;
+    private static final int SUPPLY_QUANTITY_APPLE = 10;
+    private static final int SUPPLY_QUANTITY_MORE_APPLE = 10;
+
     private Map<String, Integer> fruitStorage;
 
     @BeforeEach
@@ -18,33 +25,34 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void testSupplyHandler_AddFruit() {
+    public void testSupplyHandler_AddFruit_ok() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 10);
+                FRUIT_APPLE, SUPPLY_QUANTITY_APPLE);
         SupplyHandler handler = new SupplyHandler(fruitStorage);
         handler.handle(transaction);
 
-        assertEquals(10, fruitStorage.get("apple"));
+        assertEquals(SUPPLY_QUANTITY_APPLE, fruitStorage.get(FRUIT_APPLE));
     }
 
     @Test
-    public void testSupplyHandler_AddMoreFruit() {
-        fruitStorage.put("apple", 5);
+    public void testSupplyHandler_AddMoreFruit_ok() {
+        fruitStorage.put(FRUIT_APPLE, INITIAL_QUANTITY_APPLE);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 10);
+                FRUIT_APPLE, SUPPLY_QUANTITY_MORE_APPLE);
         SupplyHandler handler = new SupplyHandler(fruitStorage);
         handler.handle(transaction);
 
-        assertEquals(15, fruitStorage.get("apple"));
+        assertEquals(SUPPLY_QUANTITY_APPLE + INITIAL_QUANTITY_APPLE,
+                fruitStorage.get(FRUIT_APPLE));
     }
 
     @Test
-    public void testSupplyHandler_EmptyStorage() {
+    public void testSupplyHandler_EmptyStorage_ok() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 7);
+                FRUIT_BANANA, INITIAL_QUANTITY_BANANA);
         SupplyHandler handler = new SupplyHandler(fruitStorage);
         handler.handle(transaction);
 
-        assertEquals(7, fruitStorage.get("banana"));
+        assertEquals(INITIAL_QUANTITY_BANANA, fruitStorage.get(FRUIT_BANANA));
     }
 }

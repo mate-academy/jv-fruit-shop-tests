@@ -14,9 +14,9 @@ public class PurchaseHandler implements FruitOperationHandler {
     public void handle(FruitTransaction transaction) {
         int currentQuantity = fruitStorage.getOrDefault(transaction.getFruit(), 0);
         if (currentQuantity - transaction.getQuantity() < 0) {
-            throw new IllegalArgumentException("Brak wystarczającej ilości owoców: "
-                    + transaction.getFruit() + ". Dostępna ilość: "
-                    + currentQuantity + ", żądana ilość: " + transaction.getQuantity());
+            throw new IllegalArgumentException("Insufficient quantity of fruit: "
+                    + transaction.getFruit() + ". Available quantity: "
+                    + currentQuantity + ", requested quantity: " + transaction.getQuantity());
         }
         fruitStorage.put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
     }

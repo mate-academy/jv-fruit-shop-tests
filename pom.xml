@@ -32,10 +32,11 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
     <build>
         <plugins>
+            <!-- Checkstyle Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -56,16 +57,20 @@
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
+                    <!-- Prepare JaCoCo agent for test execution -->
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+                    <!-- Generate the code coverage report after the tests -->
                     <execution>
                         <id>jacoco-report</id>
                         <phase>test</phase>
@@ -73,6 +78,7 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+                    <!-- Check the coverage against specified thresholds -->
                     <execution>
                         <id>jacoco-check</id>
                         <goals>
@@ -95,14 +101,19 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- Exclude files like Main.java from coverage -->
                     <excludes>
                         <exclude>**Main*</exclude>
                     </excludes>
+                    <!-- Specify the location for the JaCoCo execution data file -->
+                    <destFile>${project.build.directory}/jacoco.exec</destFile>
                 </configuration>
             </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
+                <!-- Maven Compiler Plugin to specify Java version -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -113,9 +124,17 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
+
+                <!-- Maven Surefire Plugin for running tests -->
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.0</version>
+                    <configuration>
+                        <!-- Optional: Parallel test execution for faster builds -->
+                        <parallel>classes</parallel>
+                        <threadCount>4</threadCount>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

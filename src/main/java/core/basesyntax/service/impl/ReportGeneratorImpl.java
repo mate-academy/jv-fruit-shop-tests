@@ -1,18 +1,21 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.ShopStorage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportGeneratorService;
-import java.util.Map;
+import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGeneratorService {
     @Override
-    public String getReport() {
-        StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity\n");
+    public String generateReport(List<FruitTransaction> transactions) {
+        StringBuilder report = new StringBuilder("fruit,quantity\n");
 
-        ShopStorage storage = ShopStorage.getInstance();
-        for (Map.Entry<String, Integer> entry : storage.getAllFruits().entrySet()) {
-            report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
+        if (transactions != null && !transactions.isEmpty()) {
+            for (FruitTransaction transaction : transactions) {
+                report.append(transaction.getFruit())
+                        .append(",")
+                        .append(transaction.getQuantity())
+                        .append("\n");
+            }
         }
         return report.toString();
     }

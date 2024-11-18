@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.strategy.ReportGeneratorServiceImpl;
-import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceTest {
 
@@ -25,7 +25,6 @@ public class ReportGeneratorServiceTest {
 
     @Test
     public void getReport_withTransactions_correctReport() {
-        // Транзакції є
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100));
         transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50));

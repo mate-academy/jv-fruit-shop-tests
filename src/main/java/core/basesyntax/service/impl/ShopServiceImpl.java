@@ -37,7 +37,8 @@ public class ShopServiceImpl implements ShopService {
             if (handler != null) {
                 handler.handle(storage, transaction);
             } else {
-                throw new RuntimeException("Operation not supported: " + transaction.getOperation());
+                throw new RuntimeException("Operation not supported: "
+                        + transaction.getOperation());
             }
         }
     }

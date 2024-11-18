@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.strategy.ReportGeneratorServiceImpl;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceTest {

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.service.FileWriterService;
 import java.io.File;
 import java.io.IOException;

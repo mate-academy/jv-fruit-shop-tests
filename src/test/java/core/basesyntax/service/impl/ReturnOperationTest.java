@@ -28,8 +28,8 @@ class ReturnOperationTest {
 
     @Test
     void return_operation_successful() {
-        FruitTransaction fruitTransaction = new
-                FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 25);
+        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "banana", 25);
         returnOperation.execute(fruitTransaction);
         int actual = storage.get("banana");
         int expected = 25;

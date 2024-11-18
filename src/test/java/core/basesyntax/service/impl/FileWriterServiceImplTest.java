@@ -42,8 +42,8 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_pathToFileNotCorrect_throwRuntimeException() {
-        String report = "fruit,quantity\n"
-                + "banana,152\n"
+        String report = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
                 + "apple,90";
         String incorrectPath = "incorrectPath/csv";
         Exception exception = Assertions.assertThrows(RuntimeException.class, () ->

@@ -1,36 +1,37 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-
-import core.basesyntax.db.ShopStorage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportGeneratorService;
-import org.junit.jupiter.api.BeforeEach;
+import core.basesyntax.strategy.ReportGeneratorServiceImpl;
 import org.junit.jupiter.api.Test;
+import java.util.List;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReportGeneratorServiceTest {
 
-    private ReportGeneratorService reportGenerator;
-
-    @BeforeEach
-    public void setUp() {
-        reportGenerator = new ReportGeneratorImpl();
-    }
+    private ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
 
     @Test
     public void getReport_noTransactions_emptyReport() {
+        List<FruitTransaction> transactions = new ArrayList<>();
+
         String expected = "fruit,quantity\n";
-        String actual = reportGenerator.getReport();
+        String actual = reportGenerator.generateReport(transactions);
+
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getReport_withTransactions_success() {
-        ShopStorage storage = ShopStorage.getInstance();
-        storage.setFruitQuantity("banana", 100);
-        storage.setFruitQuantity("apple", 50);
+    public void getReport_withTransactions_correctReport() {
+        // Транзакції є
+        List<FruitTransaction> transactions = new ArrayList<>();
+        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100));
+        transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50));
 
         String expected = "fruit,quantity\nbanana,100\napple,50\n";
-        String actual = reportGenerator.getReport();
+        String actual = reportGenerator.generateReport(transactions);
 
         assertEquals(expected, actual);
     }

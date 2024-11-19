@@ -34,26 +34,24 @@ class FileServiceImplTest {
 
     @Test
     void read_invalidPath_notOk() {
-        String filePath = INVALID_FILEPATH;
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-            fileService.read(filePath);
+            fileService.read(INVALID_FILEPATH);
         });
         String actualMessage = runtimeException.getMessage();
-        String expectedMessage = "Can't read from file " + filePath;
+        String expectedMessage = "Can't read from file " + INVALID_FILEPATH;
         assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
     void write_writeToFile_ok() {
-        String filePath = OUTPUT_FILEPATH;
-        File file = new File(filePath);
+        File file = new File(OUTPUT_FILEPATH);
         try {
             file.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException("Can't create test file", e);
         }
-        fileService.write(filePath, "some_data");
-        List<String> actual = fileService.read(filePath);
+        fileService.write(OUTPUT_FILEPATH, "some_data");
+        List<String> actual = fileService.read(OUTPUT_FILEPATH);
         List<String> expected = List.of("some_data");
         assertEquals(expected, actual);
         file.delete();
@@ -61,12 +59,11 @@ class FileServiceImplTest {
 
     @Test
     void write_invalidPath_notOk() {
-        String filePath = INVALID_FILEPATH;
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-            fileService.write(filePath, "any_data");
+            fileService.write(INVALID_FILEPATH, "any_data");
         });
         String actualMessage = runtimeException.getMessage();
-        String expectedMessage = "Can't write data to file " + filePath;
+        String expectedMessage = "Can't write data to file " + INVALID_FILEPATH;
         assertEquals(expectedMessage, actualMessage);
     }
 }

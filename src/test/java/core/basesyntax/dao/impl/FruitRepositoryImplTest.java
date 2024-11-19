@@ -54,18 +54,18 @@ class FruitRepositoryImplTest {
     }
 
     @Test
-    void hasFruit_true_ok() {
+    void hasFruit_storageContainsFruit_ok() {
         db.put(BANANA, 14);
         assertTrue(fruitRepository.hasFruit(BANANA));
     }
 
     @Test
-    void hasFruit_false_ok() {
+    void hasFruit_storageDoesntContainFruit_ok() {
         assertFalse(fruitRepository.hasFruit(BANANA));
     }
 
     @Test
-    void getAll_ok() {
+    void getAll_getAllFruitsInfoFromStorage_ok() {
         db.put(BANANA, 20);
         db.put(APPLE, 15);
         Map<String, Integer> expectedMap = Map.of(

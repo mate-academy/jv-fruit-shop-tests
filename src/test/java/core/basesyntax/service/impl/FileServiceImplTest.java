@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
+    private static final String INPUT_FILEPATH = "src/test/resources/input.csv";
+    private static final String INVALID_FILEPATH = "src/test/resources/invalid.csv";
+    private static final String OUTPUT_FILEPATH = "src/test/resources/output.csv";
     private static FileService fileService;
 
     @BeforeAll
@@ -20,7 +23,7 @@ class FileServiceImplTest {
 
     @Test
     void read_readFromFile_ok() {
-        List<String> actual = fileService.read("src/test/resources/input.csv");
+        List<String> actual = fileService.read(INPUT_FILEPATH);
         List<String> expected = List.of(
                 "operation,fruit,quantity",
                 "b,banana,20",
@@ -31,7 +34,7 @@ class FileServiceImplTest {
 
     @Test
     void read_invalidPath_notOk() {
-        String filePath = "src/test/resources/invalid.csv";
+        String filePath = INVALID_FILEPATH;
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
             fileService.read(filePath);
         });
@@ -42,7 +45,7 @@ class FileServiceImplTest {
 
     @Test
     void write_writeToFile_ok() {
-        String filePath = "src/test/resources/output.csv";
+        String filePath = OUTPUT_FILEPATH;
         File file = new File(filePath);
         try {
             file.createNewFile();
@@ -58,7 +61,7 @@ class FileServiceImplTest {
 
     @Test
     void write_invalidPath_notOk() {
-        String filePath = "src/test/resources/invalid.csv";
+        String filePath = INVALID_FILEPATH;
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
             fileService.write(filePath, "any_data");
         });

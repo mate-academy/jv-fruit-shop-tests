@@ -35,4 +35,12 @@ class ReportGeneratorImplTest {
                 + "banana,20";
         assertEquals(expected, actual);
     }
+
+    @Test
+    void generateReport_emptyStorage_ok() {
+        String actual = reportGenerator.generateReport();
+        String expected = "fruit,quantity"
+                + System.lineSeparator();
+        assertEquals(expected, actual);
+    }
 }

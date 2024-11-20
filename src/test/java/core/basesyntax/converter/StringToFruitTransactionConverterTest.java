@@ -1,8 +1,10 @@
 package core.basesyntax.converter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class StringToFruitTransactionConverterTest {
@@ -19,42 +21,46 @@ public class StringToFruitTransactionConverterTest {
                     new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 22));
     private final List<String> incorrectList = List.of("r,apple222", "b,apple,123", "s,apple,22");
 
-    private final StringToFruitTransactionConverter converter
-            = new StringToFruitTransactionConverter();
+    private final StringToFruitTransactionConverterImpl converter
+            = new StringToFruitTransactionConverterImpl();
 
     @Test
     void applyStringCorrect_OK() {
-        FruitTransaction fruitDao = converter.apply(correctString);
-        Assertions.assertEquals(correctFruitTransaction, fruitDao);
+        FruitTransaction fruitDao = converter.convert(correctString);
+        assertEquals(correctFruitTransaction, fruitDao);
     }
 
     @Test
     void applyStringIncorrectLength_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> converter.apply(incorrectLengthString));
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(incorrectLengthString),
+                "Error while parsing string [" + incorrectLengthString + "]");
     }
 
     @Test
     void applyStringIncorrectSeparator_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> converter.apply(incorrectSeparatorString));
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(incorrectSeparatorString),
+                "Error while parsing string [" + incorrectLengthString + "]");
     }
 
     @Test
     void applyStringIncorrectOperator_NotOK() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> converter.apply(incorrectOperatorString));
+        assertThrows(RuntimeException.class,
+                () -> converter.convert(incorrectOperatorString),
+                "Error while parsing string [" + incorrectLengthString + "]");
     }
 
     @Test
     void applyListStringCorrect_OK() {
-        Assertions.assertEquals(expectedTransactionList,
-                converter.applyList(correctList));
+        assertEquals(expectedTransactionList,
+                converter.convertList(correctList));
     }
 
     @Test
     void applyListStringIncorrect_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> converter.applyList(incorrectList));
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convertList(incorrectList),
+                "Error while parsing string [" + incorrectLengthString + "]");
     }
 }

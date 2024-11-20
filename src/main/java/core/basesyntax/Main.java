@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.converter.StringToFruitTransactionConverter;
+import core.basesyntax.converter.StringToFruitTransactionConverterImpl;
 import core.basesyntax.data.ShopService;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.BalanceOperation;
@@ -19,7 +19,8 @@ public class Main {
         FileReaderImpl fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("src/main/resources/test/testReportToRead.csv");
 
-        StringToFruitTransactionConverter dataConverter = new StringToFruitTransactionConverter();
+        StringToFruitTransactionConverterImpl dataConverter
+                = new StringToFruitTransactionConverterImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -28,7 +29,7 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategy(operationHandlers);
 
-        List<FruitTransaction> transactions = dataConverter.applyList(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convertList(inputReport);
         ShopService shopService = new ShopService(operationStrategy,
                 "src/main/resources/finalReport.csv");
         shopService.process(transactions);

@@ -1,6 +1,9 @@
 package core.basesyntax.converter;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 public class StringToFruitValidatorTest {
@@ -19,58 +22,65 @@ public class StringToFruitValidatorTest {
 
     @Test
     void validArr_OK() {
-        Assertions.assertTrue(validator.validateInputData(validArr));
+        assertTrue(validator.validateInputData(validArr));
     }
 
     @Test
     void invalidEmptyArr_NotOK() {
-        Assertions.assertFalse(validator.validateInputData(invalidEmptyArr));
+        assertFalse(validator.validateInputData(invalidEmptyArr));
     }
 
     @Test
     void invalidNullArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidNullArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidNullArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidSizeArr_NotOK() {
-        Assertions.assertFalse(validator.validateInputData(invalidSizeArr));
+        assertFalse(validator.validateInputData(invalidSizeArr));
     }
 
     @Test
     void invalidOperatorArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidOperatorArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidOperatorArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidOperatorNullArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidOperatorNullArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidOperatorNullArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidNameArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidNameArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidNameArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidNameNullArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidNameNullArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidNameNullArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidQuantityArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidQuantityArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidQuantityArr),
+                "Invalid operator: " + null);
     }
 
     @Test
     void invalidQuantityNullArr_ThrowsException() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> validator.validateInputData(invalidQuantityNullArr));
+        assertThrows(RuntimeException.class,
+                () -> validator.validateInputData(invalidQuantityNullArr),
+                "Invalid operator: " + null);
     }
 }

@@ -1,6 +1,8 @@
 package core.basesyntax.model;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 public class FruitTransactionTest {
@@ -8,18 +10,19 @@ public class FruitTransactionTest {
     void createObjectByCorrectData_OK() {
         String expectedName = "apple";
         int expectedQuantity = 123;
-        Assertions.assertEquals(expectedName,
+        assertEquals(expectedName,
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "apple", 123).getFruit());
-        Assertions.assertEquals(expectedQuantity,
+        assertEquals(expectedQuantity,
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "apple", 123).getQuantity());
     }
 
     @Test
     void createObjectByIncorrectData_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple", -22));
+                        "apple", -22),
+                "quantity should be more then 0!");
     }
 }

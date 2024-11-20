@@ -1,9 +1,11 @@
 package core.basesyntax.data;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
@@ -20,18 +22,20 @@ public class ReportGeneratorTest {
         correctMap.put("apple", 123);
         correctMap.put("banana", 321);
         List<String> generatedReport = generator.generateReport(correctMap);
-        Assertions.assertEquals(correctReportStringList, generatedReport);
+        assertEquals(correctReportStringList, generatedReport);
     }
 
     @Test
     void generateFromIncorrectEmptyMap_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> generator.generateReport(incorrectEmptyInventoryMap));
+        assertThrows(IllegalArgumentException.class,
+                () -> generator.generateReport(incorrectEmptyInventoryMap),
+                "Error while generate report. Map cannot be null or empty!");
     }
 
     @Test
     void generateFromIncorrectNullMap_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> generator.generateReport(incorrectNullInventoryMap));
+        assertThrows(IllegalArgumentException.class,
+                () -> generator.generateReport(incorrectNullInventoryMap),
+                "Error while generate report. Map cannot be null or empty!");
     }
 }

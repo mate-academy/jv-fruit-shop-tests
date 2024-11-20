@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.List;
 import java.util.Map;
 
 public class OperationStrategy {
@@ -12,8 +11,8 @@ public class OperationStrategy {
     }
 
     public void execute(FruitTransaction.Operation operation,
-                        List<FruitTransaction> transactions,
+                        FruitTransaction transaction,
                         Map<String, Integer> inventory) {
-        operationHandlers.get(operation).handle(transactions, inventory);
+        operationHandlers.get(operation).handle(transaction, inventory);
     }
 }

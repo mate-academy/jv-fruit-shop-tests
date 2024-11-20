@@ -21,7 +21,7 @@ public class ShopService {
         Map<String, Integer> inventory = new HashMap<>();
 
         for (FruitTransaction transaction : transactions) {
-            operationStrategy.execute(transaction.getOperation(), transactions, inventory);
+            operationStrategy.execute(transaction.getOperation(), transaction, inventory);
         }
         ReportGenerator reportGenerator = new ReportGenerator();
         List<String> report = reportGenerator.generateReport(inventory);

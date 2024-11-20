@@ -2,15 +2,14 @@ package core.basesyntax.dao;
 
 import java.util.Objects;
 
-public class FruitDao {
+public class Fruit {
     private String name;
     private int quantity;
 
-    public FruitDao(String name, int quantity) {
+    public Fruit(String name, int quantity) {
         this.name = name;
-        if (checkQuantity(quantity)) {
-            this.quantity = quantity;
-        }
+        checkQuantity(quantity);
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -26,30 +25,27 @@ public class FruitDao {
     }
 
     public void setQuantity(int quantity) {
-        if (checkQuantity(quantity)) {
-            this.quantity = quantity;
-        }
+        checkQuantity(quantity);
+        this.quantity = quantity;
+
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this != o) {
-            if (o != null && getClass() == o.getClass()) {
-                FruitDao fruitsDao = (FruitDao) o;
-                return Objects.equals(name, fruitsDao.name);
-            } else {
-                return false;
-            }
-        } else {
+        if (this == o) {
             return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return quantity == fruit.quantity && Objects.equals(name, fruit.name);
     }
 
-    private boolean checkQuantity(int quantity) {
+    private void checkQuantity(int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("quantity should be more then 0!");
         }
-        return true;
     }
 
     @Override

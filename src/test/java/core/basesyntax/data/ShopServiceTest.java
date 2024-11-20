@@ -1,5 +1,8 @@
 package core.basesyntax.data;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
@@ -16,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -69,11 +71,11 @@ public class ShopServiceTest {
         try {
             String actualContent = Files.readString(Paths.get(FINAL_REPORT_PATH));
             String expectedContent1 = "fruit,quantity";
-            String expectedContent2 = "banana,168";
-            String expectedContent3 = "apple,140";
-            Assertions.assertTrue(actualContent.trim().contains(expectedContent1));
-            Assertions.assertTrue(actualContent.trim().contains(expectedContent2));
-            Assertions.assertTrue(actualContent.trim().contains(expectedContent3));
+            String expectedContent2 = "banana,144";
+            String expectedContent3 = "apple,120";
+            assertTrue(actualContent.trim().contains(expectedContent1));
+            assertTrue(actualContent.trim().contains(expectedContent2));
+            assertTrue(actualContent.trim().contains(expectedContent3));
         } catch (IOException e) {
             throw new RuntimeException("Failed to read final report", e);
         }
@@ -81,9 +83,10 @@ public class ShopServiceTest {
 
     @Test
     void processOperationWithIncorrectData_NotOK() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(List.of(
                         new FruitTransaction(
-                                FruitTransaction.Operation.BALANCE, "banana", -1))));
+                                FruitTransaction.Operation.BALANCE, "banana", -1))),
+                "Error while generate report. Map cannot be null or empty!");
     }
 }

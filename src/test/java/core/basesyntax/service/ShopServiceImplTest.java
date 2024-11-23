@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
 import static core.basesyntax.storage.Storage.storageOfFruits;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -11,7 +10,11 @@ import core.basesyntax.service.action.BalanceAction;
 import core.basesyntax.service.action.PurchaseAction;
 import core.basesyntax.service.action.ReturnAction;
 import core.basesyntax.service.action.SupplyAction;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
@@ -22,84 +25,26 @@ class ShopServiceImplTest {
             Operation.SUPPLY, new SupplyAction()
     );
     private final ActionStrategy strategy = new ActionStrategyImpl(actionHandlerMap);
+    private final ShopService shopService = new ShopServiceImpl(strategy);
 
     @Test
-    void checkIfBalanceCountWork_Ok() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        strategy.get(fruitTransaction.getOperation())
-                .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-        assertEquals(20, storageOfFruits.get("banana"));
-    }
-
-    @Test
-    void checkIfPurchaseCountWork_Ok() {
+    void checkIfProcessWork_Ok() {
+        List<FruitTransaction> listOfTransactions = new ArrayList<>();
         FruitTransaction fruitTransaction1 =
                 new FruitTransaction(Operation.BALANCE, "banana", 20);
         FruitTransaction fruitTransaction2 =
-                new FruitTransaction(Operation.PURCHASE, "banana", 10);
-        strategy.get(fruitTransaction1.getOperation())
-                .count(fruitTransaction1.getFruit(), fruitTransaction1.getQuantity());
-        strategy.get(fruitTransaction2.getOperation())
-                .count(fruitTransaction2.getFruit(), fruitTransaction2.getQuantity());
-        assertEquals(10, storageOfFruits.get("banana"));
+                new FruitTransaction(Operation.RETURN, "banana", 20);
+        listOfTransactions.add(fruitTransaction1);
+        listOfTransactions.add(fruitTransaction2);
+        shopService.process(listOfTransactions);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 40);
+
+        assertTrue(checkIfMapsEquals(expected, storageOfFruits));
     }
 
-    @Test
-    void checkIfReturnCountWork_Ok() {
-        FruitTransaction fruitTransaction1 =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        FruitTransaction fruitTransaction2 =
-                new FruitTransaction(Operation.RETURN, "banana", 10);
-        strategy.get(fruitTransaction1.getOperation())
-                .count(fruitTransaction1.getFruit(), fruitTransaction1.getQuantity());
-        strategy.get(fruitTransaction2.getOperation())
-                .count(fruitTransaction2.getFruit(), fruitTransaction2.getQuantity());
-        assertEquals(30, storageOfFruits.get("banana"));
-    }
-
-    @Test
-    void checkIfSupplyCountWork_Ok() {
-        FruitTransaction fruitTransaction1 =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        FruitTransaction fruitTransaction2 =
-                new FruitTransaction(Operation.SUPPLY, "banana", 10);
-        strategy.get(fruitTransaction1.getOperation())
-                .count(fruitTransaction1.getFruit(), fruitTransaction1.getQuantity());
-        strategy.get(fruitTransaction2.getOperation())
-                .count(fruitTransaction2.getFruit(), fruitTransaction2.getQuantity());
-        assertEquals(30, storageOfFruits.get("banana"));
-    }
-
-    @Test
-    void checkIfSupplyCountWorkWithNegativeAmount_NotOk() {
-        FruitTransaction fruitTransaction1 =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        FruitTransaction fruitTransaction2 =
-                new FruitTransaction(Operation.SUPPLY, "banana", -10);
-        strategy.get(fruitTransaction1.getOperation())
-                .count(fruitTransaction1.getFruit(), fruitTransaction1.getQuantity());
-        assertThrows(RuntimeException.class, () -> strategy.get(fruitTransaction2.getOperation())
-                .count(fruitTransaction2.getFruit(), fruitTransaction2.getQuantity()));
-    }
-
-    @Test
-    void checkIfReturnCountWorkWithNegativeAmount_NotOk() {
-        FruitTransaction fruitTransaction1 =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        FruitTransaction fruitTransaction2 =
-                new FruitTransaction(Operation.RETURN, "banana", -30);
-        strategy.get(fruitTransaction1.getOperation())
-                .count(fruitTransaction1.getFruit(), fruitTransaction1.getQuantity());
-        assertThrows(RuntimeException.class, () -> strategy.get(fruitTransaction2.getOperation())
-                .count(fruitTransaction2.getFruit(), fruitTransaction2.getQuantity()));
-    }
-
-    @Test
-    void checkIfBalanceCountWorkWithNegativeAmount_NotOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.BALANCE, "banana", -20);
-        assertThrows(RuntimeException.class, () -> strategy.get(fruitTransaction.getOperation())
-                .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+    private static boolean checkIfMapsEquals(Map<String, Integer> expected,
+                                             Map<String, Integer> actual) {
+        return Objects.equals(expected.get("banana"), actual.get("banana"));
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static core.basesyntax.storage.Storage.storageOfFruits;
 import static junit.framework.TestCase.assertEquals;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class CsvReportGeneratorImplTest {
     private static final String HEADER = "fruit,quantity";
     private static final String FILE_PATH_FOR_DATABASE =
-            "src/test/resourcesTest/dataTest.csv";
+            "src/test/resources/dataTest.csv";
     private static final String INFO_FOR_DATABASE = HEADER + System.lineSeparator()
             + "b,banana,20\n"
             + "b,apple,100\n"
@@ -25,7 +25,7 @@ class CsvReportGeneratorImplTest {
 
     @Test
     void generateReport_Ok() throws IOException {
-        File directory = new File("src/test/resourcesTest");
+        File directory = new File("src/test/resources");
         directory.mkdir();
         File file = new File(FILE_PATH_FOR_DATABASE);
         file.createNewFile();

@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class CsvFileReaderImplTest {
 
     private static final String FILE_PATH_FOR_DATABASE =
-            "src/test/resourcesTest/dataTest.csv";
+            "src/test/resources/dataTest.csv";
     private static final String HEADER = "fruit,quantity";
     private static final String INFO_FOR_DATABASE_1 = HEADER + System.lineSeparator()
             + "b,banana,20\n"
@@ -30,7 +30,7 @@ class CsvFileReaderImplTest {
 
     @BeforeAll
     static void setUp() throws IOException {
-        File directory = new File("src/test/resourcesTest");
+        File directory = new File("src/test/resources");
         directory.mkdir();
         File file = new File(FILE_PATH_FOR_DATABASE);
         file.createNewFile();

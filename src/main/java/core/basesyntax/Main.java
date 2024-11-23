@@ -1,16 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.CsvFileReader;
-import core.basesyntax.dao.CsvFileReaderImpl;
-import core.basesyntax.dao.CsvReportGenerator;
-import core.basesyntax.dao.CsvReportGeneratorImpl;
-import core.basesyntax.dao.CsvReportWriter;
-import core.basesyntax.dao.CsvReportWriterImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.FruitTransactionParser;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.ActionStrategyImpl;
+import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvFileReaderImpl;
+import core.basesyntax.service.CsvReportGenerator;
+import core.basesyntax.service.CsvReportGeneratorImpl;
+import core.basesyntax.service.CsvReportWriter;
+import core.basesyntax.service.CsvReportWriterImpl;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.action.ActionHandler;

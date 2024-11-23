@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static core.basesyntax.storage.Storage.storageOfFruits;
 

@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 class CsvReportWriterImplTest {
     private static final String HEADER = "fruit,quantity";
     private static final String FILE_PATH_FOR_REPORT =
-            "src/test/resourcesTest/reportTest.csv";
+            "src/test/resources/reportTest.csv";
     private CsvReportWriter csvReportWriter = new CsvReportWriterImpl();
 
     @Test
     void writeReport_Ok() throws IOException {
-        File directory = new File("src/test/resourcesTest");
+        File directory = new File("src/test/resources");
         directory.mkdir();
         File file = new File(FILE_PATH_FOR_REPORT);
         file.createNewFile();

@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 public interface CsvReportGenerator {
     String generateReport(String nameOfFileToReport);

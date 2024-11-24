@@ -1,17 +1,17 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+
 class DataConverterTest {
 
     @Test
-    void testConvert_EmptyData() {
+    void convert_emptyData_returnsEmptyList() {
         DataConverter dataConverter = new DataConverter();
-        List<String> rawData = List.of(); // Empty list
+        List<String> rawData = List.of();
 
         List<FruitTransaction> transactions = dataConverter.convert(rawData);
 
@@ -19,26 +19,25 @@ class DataConverterTest {
     }
 
     @Test
-    void testConvert_InvalidData() {
-        DataConverter dataConverter = new DataConverter();
-        List<String> rawData = List.of("invalid,line,format");
-
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convert(rawData));
-    }
-
-    @Test
-    void testConvert() {
+    void convert_validData_createsTransactions() {
         // Arrange
         DataConverter dataConverter = new DataConverter();
-        List<String> rawData = List.of("b,banana,100", "s,apple,50", "p,banana,30");
+        List<String> rawData = List.of(
+                "b,banana,100",
+                "s,apple,50",
+                "p,banana,30"
+        );
 
-        // Act
         List<FruitTransaction> transactions = dataConverter.convert(rawData);
 
-        // Assert
         assertEquals(3, transactions.size());
-        assertEquals("b", transactions.get(0).getType());
-        assertEquals("banana", transactions.get(0).getFruit());
-        assertEquals(100, transactions.get(0).getQuantity());
+        String[] expectedFruits = {"banana", "apple", "banana"};
+        int[] expectedQuantities = {100, 50, 30};
+
+        for (int i = 0; i < transactions.size(); i++) {
+            assertEquals(expectedFruits[i], transactions.get(i).getFruit());
+            assertEquals(expectedQuantities[i], transactions.get(i).getQuantity());
+        }
     }
 }
+

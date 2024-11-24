@@ -11,11 +11,15 @@ public class FruitDB {
     }
 
     public void subtract(String fruit, int quantity) {
-        inventory.put(fruit, inventory.getOrDefault(fruit, 0) - quantity);
+        if (quantity > inventory.getOrDefault(fruit, 0)) {
+            throw new IllegalArgumentException("Not enough inventory to subtract");
+        }
+        inventory.put(fruit, inventory.get(fruit) - quantity);
     }
 
     public Map<String, Integer> getInventory() {
-        return inventory;
+        return new HashMap<>(inventory);
     }
 }
+
 

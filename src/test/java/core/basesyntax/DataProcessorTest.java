@@ -14,7 +14,7 @@ class DataProcessorTest {
     @BeforeEach
     void setUp() {
         fruitDB = new FruitDB();
-        dataProcessor = new DataProcessor(fruitDB, new DefaultDataOperationStrategy());
+        dataProcessor = new DataProcessor(fruitDB, new DefaultDataOperationStrategy(fruitDB));
     }
 
     @Test
@@ -33,7 +33,7 @@ class DataProcessorTest {
     void testProcess_MultipleFruits() {
         FruitDB fruitDB = new FruitDB();
         DataProcessor dataProcessor = new DataProcessor(
-                fruitDB, new DefaultDataOperationStrategy()
+                fruitDB, new DefaultDataOperationStrategy(fruitDB)
         );
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction("b", "banana", 100),

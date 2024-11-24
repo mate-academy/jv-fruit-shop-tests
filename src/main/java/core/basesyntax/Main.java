@@ -2,11 +2,12 @@ package core.basesyntax;
 
 public class Main {
     public static void main(String[] args) {
+        FruitDB fruitDB = new FruitDB();
+        DefaultDataOperationStrategy operationsStrategy = new DefaultDataOperationStrategy(fruitDB);
+
         FileReader fileReader = new CsvFileReader();
         DataConverter dataConverter = new DataConverter();
-        FruitDB fruitDB = new FruitDB();
-        DataOperationStrategy operationStrategy = new DefaultDataOperationStrategy();
-        DataProcessor dataProcessor = new DataProcessor(fruitDB, operationStrategy);
+        DataProcessor dataProcessor = new DataProcessor(fruitDB, operationsStrategy);
         ReportGenerator reportGenerator = new ReportGenerator(fruitDB);
         FileWriter fileWriter = new FileWriter();
 

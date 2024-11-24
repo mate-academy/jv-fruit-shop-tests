@@ -19,17 +19,20 @@ public class DefaultDataOperationStrategy {
         handlers.put(Operation.RETURN, (fruit, quantity) -> fruitDB.add(fruit, quantity));
     }
 
-    public void execute(String type, String fruit, int quantity) {
+    public void execute(FruitTransaction transaction, FruitDB fruitDB) {
+        String type = transaction.getType();
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+
         if (quantity < 0) {
             throw new IllegalArgumentException("Transaction quantity cannot be negative");
         }
+
         Operation operation = Operation.fromCode(type);
-        handlers.get(operation).apply(fruit, quantity);
+        OperationHandler handler = handlers.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("Invalid operation type: " + type);
+        }
+        handler.apply(fruit, quantity);
     }
 }
-
-@FunctionalInterface
-interface OperationHandler {
-    void apply(String fruit, int quantity);
-}
-

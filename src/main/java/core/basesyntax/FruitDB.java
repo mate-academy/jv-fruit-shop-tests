@@ -11,15 +11,17 @@ public class FruitDB {
     }
 
     public void subtract(String fruit, int quantity) {
-        if (quantity > inventory.getOrDefault(fruit, 0)) {
+        if (!inventory.containsKey(fruit) || inventory.get(fruit) < quantity) {
             throw new IllegalArgumentException("Not enough inventory to subtract");
         }
         inventory.put(fruit, inventory.get(fruit) - quantity);
     }
 
     public Map<String, Integer> getInventory() {
-        return new HashMap<>(inventory);
+        return inventory;
     }
 }
+
+
 
 

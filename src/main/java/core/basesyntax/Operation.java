@@ -25,3 +25,4 @@ public enum Operation {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid operation code: " + code));
     }
 }
+

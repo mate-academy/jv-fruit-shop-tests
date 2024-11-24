@@ -16,7 +16,7 @@ class FruitShopTest {
         DataConverter dataConverter = new DataConverter();
         FruitDB fruitDB = new FruitDB();
         DataProcessor dataProcessor = new DataProcessor(
-                fruitDB, new DefaultDataOperationStrategy()
+                fruitDB, new DefaultDataOperationStrategy(fruitDB)
         );
         ReportGenerator reportGenerator = new ReportGenerator(fruitDB);
         FileWriter fileWriter = new FileWriter();

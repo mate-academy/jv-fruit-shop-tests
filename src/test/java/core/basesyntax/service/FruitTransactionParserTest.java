@@ -11,18 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserTest {
     private static final String HEADER = "fruit,quantity";
-    private static final String FILE_PATH_FOR_DATABASE =
-            "src/test/resources/dataTest.csv";
-    private static final String INFO_FOR_DATABASE = HEADER + System.lineSeparator()
-            + "b,banana,20\n"
-            + "b,apple,100\n"
-            + "s,banana,100\n"
-            + "p,banana,13\n"
-            + "r,apple,10\n"
-            + "p,apple,20\n"
-            + "p,banana,5\n"
-            + "s,banana,50";
-    private FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
+    private final FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
 
     @Test
     void parseFruitTransaction_Ok() {

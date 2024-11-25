@@ -13,7 +13,7 @@ class CsvReportWriterImplTest {
     private static final String HEADER = "fruit,quantity";
     private static final String FILE_PATH_FOR_REPORT =
             "src/test/resources/reportTest.csv";
-    private CsvReportWriter csvReportWriter = new CsvReportWriterImpl();
+    private final CsvReportWriter csvReportWriter = new CsvReportWriterImpl();
 
     @Test
     void writeReport_Ok() throws IOException {
@@ -22,12 +22,11 @@ class CsvReportWriterImplTest {
         File file = new File(FILE_PATH_FOR_REPORT);
         file.createNewFile();
 
-        String reportData = HEADER + System.lineSeparator()
+        String expected = HEADER + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
 
-        csvReportWriter.write(reportData, FILE_PATH_FOR_REPORT);
-        String expected = reportData;
+        csvReportWriter.write(expected, FILE_PATH_FOR_REPORT);
         List<String> list = Files.readAllLines(Path.of(FILE_PATH_FOR_REPORT));
         StringBuilder builder = new StringBuilder(list.get(0));
         builder.append(System.lineSeparator()).append(list.get(1)).append(System.lineSeparator())

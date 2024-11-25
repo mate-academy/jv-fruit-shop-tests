@@ -28,7 +28,7 @@ class CsvFileReaderImplTest {
             + "p,apple,20\n"
             + "p,banana,5\n"
             + "s,banana,50";
-    private CsvFileReader fileReader = new CsvFileReaderImpl();
+    private final CsvFileReader fileReader = new CsvFileReaderImpl();
 
     @BeforeAll
     static void setUp() throws IOException {
@@ -57,13 +57,13 @@ class CsvFileReaderImplTest {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
         StringBuilder expectedTextBuilder = new StringBuilder();
-        for (int i = 0; i < expected.size(); i++) {
-            expectedTextBuilder.append(expected.get(i));
+        for (String lines: expected) {
+            expectedTextBuilder.append(lines);
         }
         StringBuilder actualTextBuilder = new StringBuilder();
         List<String> actual = fileReader.read(FILE_PATH_FOR_DATABASE);
-        for (int i = 0; i < actual.size(); i++) {
-            actualTextBuilder.append(actual.get(i));
+        for (String lines: actual) {
+            actualTextBuilder.append(lines);
         }
         assertLinesMatch(expectedTextBuilder.toString().lines(),
                 actualTextBuilder.toString().lines());

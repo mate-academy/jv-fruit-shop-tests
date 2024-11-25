@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class CsvReportGeneratorImplTest {
     private static final String HEADER = "fruit,quantity";
 
-    private CsvReportGenerator csvReportGenerator = new CsvReportGeneratorImpl();
+    private final CsvReportGenerator csvReportGenerator = new CsvReportGeneratorImpl();
 
     @Test
     public void generateReportWithClearStorage_NotOk() {

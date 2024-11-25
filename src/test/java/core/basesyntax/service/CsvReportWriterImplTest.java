@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ class CsvReportWriterImplTest {
         List<String> list = Files.readAllLines(Path.of(FILE_PATH_FOR_REPORT));
         StringBuilder builder = new StringBuilder(list.get(0));
         builder.append(System.lineSeparator()).append(list.get(1)).append(System.lineSeparator())
-                        .append(list.get(2)).append(System.lineSeparator());
+                .append(list.get(2)).append(System.lineSeparator());
         String actual = builder.toString();
         assertEquals(expected, actual);
     }

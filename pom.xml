@@ -95,7 +95,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Main.class/*</exclude>
                         <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>

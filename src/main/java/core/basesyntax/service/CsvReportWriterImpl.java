@@ -11,7 +11,7 @@ public class CsvReportWriterImpl implements CsvReportWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(reportData);
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file in direction: " + fileName, e);
+            throw new RuntimeException("Can't write information to the file: " + fileName, e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -43,14 +44,42 @@ class FruitTransactionParserTest {
 
     private static boolean isListsEquals(List<FruitTransaction> expected,
                                          List<FruitTransaction> actual) {
-        return expected.get(0).getOperation().equals(actual.get(0).getOperation())
-                && expected.get(0).getFruit().equals(actual.get(0).getFruit())
-                && expected.get(0).getQuantity() == (actual.get(0).getQuantity())
-                && expected.get(1).getOperation().equals(actual.get(1).getOperation())
-                && expected.get(1).getFruit().equals(actual.get(1).getFruit())
-                && expected.get(1).getQuantity() == (actual.get(1).getQuantity())
-                && expected.get(2).getOperation().equals(actual.get(2).getOperation())
-                && expected.get(2).getFruit().equals(actual.get(2).getFruit())
-                && expected.get(2).getQuantity() == (actual.get(2).getQuantity());
+        if (expected.size() != actual.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < expected.size(); i++) {
+            if (expected.get(i).getOperation().equals(actual.get(i).getOperation())
+                    && expected.get(i).getFruit().equals(actual.get(i).getFruit())
+                    && expected.get(i).getQuantity() == (actual.get(i).getQuantity()) == true) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Test
+    void parseFruitTransactionWithWrongOperation_NotOk() {
+        List<String> transactions = new ArrayList<>();
+        transactions.add(HEADER);
+        transactions.add("c,banana,20");
+        transactions.add("b,apple,100");
+        transactions.add("s,banana,100");
+
+        assertThrows(IllegalArgumentException.class, () ->
+                fruitTransactionParser.parseTransaction(transactions));
+    }
+
+    @Test
+    void parseFruitTransactionWithAmountWithWrongImplements_NotOk() {
+        List<String> transactions = new ArrayList<>();
+        transactions.add(HEADER);
+        transactions.add("b,banana,fg");
+        transactions.add("p,banana,100");
+
+        assertThrows(RuntimeException.class, () ->
+                fruitTransactionParser.parseTransaction(transactions));
     }
 }

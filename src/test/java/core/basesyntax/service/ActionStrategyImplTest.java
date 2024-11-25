@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -28,11 +29,29 @@ class ActionStrategyImplTest {
     }
 
     @Test
+    void checkBalanceActionGetWithWrongAmount_NotOk() {
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(Operation.BALANCE, "banana", -20);
+        assertThrows(RuntimeException.class, () ->
+                strategy.get(fruitTransaction.getOperation())
+                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+    }
+
+    @Test
     void checkPurchaseActionGet_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.PURCHASE, "banana", 20);
         assertEquals(PurchaseAction.class,
                 strategy.get(fruitTransaction.getOperation()).getClass());
+    }
+
+    @Test
+    void checkPurchaseActionGetWithWrongAmount_NotOk() {
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(Operation.PURCHASE, "banana", -20);
+        assertThrows(RuntimeException.class, () ->
+                strategy.get(fruitTransaction.getOperation())
+                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
     }
 
     @Test
@@ -42,8 +61,26 @@ class ActionStrategyImplTest {
     }
 
     @Test
+    void checkReturnActionGetWithWrongAmount_NotOk() {
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(Operation.RETURN, "banana", -20);
+        assertThrows(RuntimeException.class, () ->
+                strategy.get(fruitTransaction.getOperation())
+                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+    }
+
+    @Test
     void checkSupplyActionGet_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "banana", 20);
         assertEquals(SupplyAction.class, strategy.get(fruitTransaction.getOperation()).getClass());
+    }
+
+    @Test
+    void checkSupplyActionGetWithWrongAmount_NotOk() {
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(Operation.SUPPLY, "banana", -20);
+        assertThrows(RuntimeException.class, () ->
+                strategy.get(fruitTransaction.getOperation())
+                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
     }
 }

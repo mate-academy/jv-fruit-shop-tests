@@ -9,7 +9,7 @@ public class CsvReportGeneratorImpl implements CsvReportGenerator {
     private static final String COMMA = ",";
 
     @Override
-    public String generateReport(String fileName) {
+    public String generateReport() {
         StringBuilder reportDataBuilder = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> fruitNameQuantityEntry : storageOfFruits.entrySet()) {
             String fruitName = fruitNameQuantityEntry.getKey();

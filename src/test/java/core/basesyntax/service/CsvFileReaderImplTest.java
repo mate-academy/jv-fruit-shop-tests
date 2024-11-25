@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedWriter;
@@ -16,6 +16,8 @@ class CsvFileReaderImplTest {
 
     private static final String FILE_PATH_FOR_DATABASE =
             "src/test/resources/dataTest.csv";
+    private static final String FILE_WITH_NOT_RIGHT_PATH =
+            "src/main/report";
     private static final String HEADER = "fruit,quantity";
     private static final String INFO_FOR_DATABASE_1 = HEADER + System.lineSeparator()
             + "b,banana,20\n"
@@ -63,7 +65,8 @@ class CsvFileReaderImplTest {
         for (int i = 0; i < actual.size(); i++) {
             actualTextBuilder.append(actual.get(i));
         }
-        assertEquals(expectedTextBuilder.toString(), actualTextBuilder.toString());
+        assertLinesMatch(expectedTextBuilder.toString().lines(),
+                actualTextBuilder.toString().lines());
     }
 
     @Test
@@ -73,6 +76,6 @@ class CsvFileReaderImplTest {
             writeDatabase.write(INFO_FOR_DATABASE_1);
         }
 
-        assertThrows(RuntimeException.class, () -> fileReader.read("src/main/report"));
+        assertThrows(RuntimeException.class, () -> fileReader.read(FILE_WITH_NOT_RIGHT_PATH));
     }
 }

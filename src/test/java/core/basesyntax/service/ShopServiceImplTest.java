@@ -40,7 +40,8 @@ class ShopServiceImplTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 40);
 
-        assertTrue(checkIfMapsEquals(expected, storageOfFruits));
+        assertTrue(checkIfMapsEquals(expected, storageOfFruits),
+                "Storage contents do not match expected results.");
     }
 
     private static boolean checkIfMapsEquals(Map<String, Integer> expected,

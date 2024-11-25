@@ -11,19 +11,12 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public FruitTransaction() {
-    }
-
     public Operation getOperation() {
         return operation;
     }
 
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     public int getQuantity() {

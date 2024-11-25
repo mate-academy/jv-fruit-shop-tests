@@ -47,7 +47,7 @@ public class Main {
         shopService.process(allTransactions);
 
         CsvReportGenerator reportWriter = new CsvReportGeneratorImpl();
-        String reportInfo = reportWriter.generateReport(FILE_PATH_FOR_FINALREPORT);
+        String reportInfo = reportWriter.generateReport();
 
         CsvReportWriter csvReportWriter = new CsvReportWriterImpl();
         csvReportWriter.write(reportInfo, FILE_PATH_FOR_FINALREPORT);

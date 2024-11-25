@@ -1,8 +1,10 @@
 package core.basesyntax.utils.filereader;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +23,18 @@ class FileReaderTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        tempFile = Files.createTempFile("tempFile", ".csv");
+        Path testResourcesDirectory = Paths.get("src"
+                + File.separator
+                + "test"
+                + File.separator
+                + "resources"
+        );
+
+        if (!Files.exists(testResourcesDirectory)) {
+            Files.createDirectories(testResourcesDirectory);
+        }
+
+        tempFile = Files.createFile(testResourcesDirectory.resolve("tempFile.csv"));
     }
 
     @AfterEach

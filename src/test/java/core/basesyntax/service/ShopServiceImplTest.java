@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import static core.basesyntax.storage.Storage.storageOfFruits;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
@@ -40,12 +39,7 @@ class ShopServiceImplTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 40);
 
-        assertTrue(checkIfMapsEquals(expected, storageOfFruits),
+        assertEquals(expected.get("banana"), storageOfFruits.get("banana"),
                 "Storage contents do not match expected results.");
-    }
-
-    private static boolean checkIfMapsEquals(Map<String, Integer> expected,
-                                             Map<String, Integer> actual) {
-        return Objects.equals(expected.get("banana"), actual.get("banana"));
     }
 }

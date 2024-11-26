@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +23,16 @@ class CsvReportWriterImplTest {
         File file = new File(FILE_PATH_FOR_REPORT);
         file.createNewFile();
 
-        String expected = HEADER + System.lineSeparator()
+        List<String> expected = new ArrayList<>();
+        expected.add(HEADER);
+        expected.add("banana,152");
+        expected.add("apple,90");
+        String text = HEADER + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
 
-        csvReportWriter.write(expected, FILE_PATH_FOR_REPORT);
-        List<String> list = Files.readAllLines(Path.of(FILE_PATH_FOR_REPORT));
-        StringBuilder builder = new StringBuilder(list.get(0));
-        builder.append(System.lineSeparator()).append(list.get(1)).append(System.lineSeparator())
-                .append(list.get(2)).append(System.lineSeparator());
-        String actual = builder.toString();
+        csvReportWriter.write(text, FILE_PATH_FOR_REPORT);
+        List<String> actual = Files.readAllLines(Path.of(FILE_PATH_FOR_REPORT));
         assertEquals(expected, actual);
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertLinesMatch;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedWriter;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
-
     private static final String FILE_PATH_FOR_DATABASE =
             "src/test/resources/dataTest.csv";
     private static final String FILE_WITH_NOT_RIGHT_PATH =
@@ -36,16 +35,15 @@ class CsvFileReaderImplTest {
         directory.mkdir();
         File file = new File(FILE_PATH_FOR_DATABASE);
         file.createNewFile();
-    }
-
-    @Test
-    void readInformationFromDatabase_Ok() throws IOException {
 
         try (BufferedWriter writeDatabase =
                      new BufferedWriter(new FileWriter(FILE_PATH_FOR_DATABASE))) {
             writeDatabase.write(INFO_FOR_DATABASE_1);
         }
+    }
 
+    @Test
+    void readInformationFromDatabase_Ok() throws IOException {
         List<String> expected = new ArrayList<>();
         expected.add(HEADER);
         expected.add("b,banana,20");
@@ -56,26 +54,12 @@ class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        StringBuilder expectedTextBuilder = new StringBuilder();
-        for (String lines: expected) {
-            expectedTextBuilder.append(lines);
-        }
-        StringBuilder actualTextBuilder = new StringBuilder();
         List<String> actual = fileReader.read(FILE_PATH_FOR_DATABASE);
-        for (String lines: actual) {
-            actualTextBuilder.append(lines);
-        }
-        assertLinesMatch(expectedTextBuilder.toString().lines(),
-                actualTextBuilder.toString().lines());
+        assertEquals(expected, actual);
     }
 
     @Test
     void readInformationFromDatabase_withNotCorrectPath_NotOk() throws IOException {
-        try (BufferedWriter writeDatabase =
-                     new BufferedWriter(new FileWriter(FILE_PATH_FOR_DATABASE))) {
-            writeDatabase.write(INFO_FOR_DATABASE_1);
-        }
-
         assertThrows(RuntimeException.class, () -> fileReader.read(FILE_WITH_NOT_RIGHT_PATH));
     }
 }

@@ -1,7 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import java.nio.file.AccessDeniedException;
-import java.nio.file.NoSuchFileException;
+import core.basesyntax.dataprocessor.DataConverter;
+import core.basesyntax.dataprocessor.DataProcessor;
+import core.basesyntax.fileprocessor.FileReader;
+import core.basesyntax.fileprocessor.FileWriter;
 import java.util.List;
 
 public class FruitShop {
@@ -22,20 +24,14 @@ public class FruitShop {
     }
 
     public void run(String inputFilePath, String outputFilePath) {
-        List<String> rawData = null;
         try {
-            rawData = fileReader.read(inputFilePath);
-        } catch (NoSuchFileException e) {
-            throw new RuntimeException(e);
-        }
-        List<FruitTransaction> transactions = dataConverter.convert(rawData);
-        dataProcessor.process(transactions);
-        List<String> report = reportGenerator.generate();
-        try {
+            List<String> rawData = fileReader.read(inputFilePath);
+            List<FruitTransaction> transactions = dataConverter.convert(rawData);
+            dataProcessor.process(transactions);
+            List<String> report = reportGenerator.generateReport();
             fileWriter.write(report, outputFilePath);
-        } catch (AccessDeniedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 }
-

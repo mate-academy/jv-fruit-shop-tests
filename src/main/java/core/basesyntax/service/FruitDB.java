@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,3 @@ public class FruitDB {
         return inventory;
     }
 }
-
-
-
-

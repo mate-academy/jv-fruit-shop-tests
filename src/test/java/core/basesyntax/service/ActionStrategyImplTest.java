@@ -41,8 +41,8 @@ class ActionStrategyImplTest {
     void checkPurchaseActionGet_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.PURCHASE, "banana", 20);
-        assertEquals(PurchaseAction.class,
-                strategy.get(fruitTransaction.getOperation()).getClass());
+        ActionHandler action = strategy.get(fruitTransaction.getOperation());
+        assertEquals(PurchaseAction.class, action.getClass());
     }
 
     @Test

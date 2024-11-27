@@ -60,6 +60,10 @@ class CsvFileReaderImplTest {
 
     @Test
     void readInformationFromDatabase_withNotCorrectPath_NotOk() throws IOException {
-        assertThrows(RuntimeException.class, () -> fileReader.read(FILE_WITH_NOT_RIGHT_PATH));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> fileReader.read(FILE_WITH_NOT_RIGHT_PATH));
+
+        assertEquals("Can't read the data from the file "
+                + FILE_WITH_NOT_RIGHT_PATH, exception.getMessage());
     }
 }

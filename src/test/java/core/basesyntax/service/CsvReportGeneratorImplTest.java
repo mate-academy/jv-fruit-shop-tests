@@ -11,7 +11,7 @@ class CsvReportGeneratorImplTest {
     private final CsvReportGenerator csvReportGenerator = new CsvReportGeneratorImpl();
 
     @Test
-    public void generateReportWithEmptyStorage_NotOk() {
+    public void generateReportWithEmptyStorage_Ok() {
         storageOfFruits.clear();
         String actual = csvReportGenerator.generateReport();
         String expected = HEADER + System.lineSeparator();

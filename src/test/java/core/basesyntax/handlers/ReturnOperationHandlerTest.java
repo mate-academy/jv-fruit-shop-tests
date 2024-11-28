@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 public class ReturnOperationHandlerTest {
     private static ReturnOperationHandler returnOperationHandler;
 

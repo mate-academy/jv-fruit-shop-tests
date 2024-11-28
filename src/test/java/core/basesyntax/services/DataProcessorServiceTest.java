@@ -8,9 +8,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.impl.DataProcessorServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class DataProcessorServiceTest {
     private static DataProcessorService dataProcessorService;

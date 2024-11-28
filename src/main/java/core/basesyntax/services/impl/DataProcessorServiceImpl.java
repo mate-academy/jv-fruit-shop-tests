@@ -20,8 +20,8 @@ public class DataProcessorServiceImpl implements DataProcessorService {
 
     private FruitTransaction getFruitTransaction(String data) {
         String[] processedData = data.split(SPLIT_DELIMITER);
-        FruitTransaction.Operation operation = FruitTransaction
-                .Operation.getOperationByCode(processedData[OPERATION_TYPE_INDEX]);
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .getOperationByCode(processedData[OPERATION_TYPE_INDEX]);
         String fruitType = processedData[FRUIT_TYPE_INDEX];
         int fruitQuantity = Integer.parseInt(processedData[FRUIT_QUANTITY_INDEX]);
         if (fruitQuantity < 0) {

@@ -30,8 +30,8 @@ class PurchaseOperationHandlerTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 70);
         assertDoesNotThrow(() -> purchaseOperationHandler.calculateOperation(fruitTransaction));
-        int fruitInStorage = Storage.STORAGE.get("banana");
-        assertEquals(30, fruitInStorage);
+        int fruitsInStorage = Storage.STORAGE.get("banana");
+        assertEquals(30, fruitsInStorage);
     }
 
     @Test
@@ -56,7 +56,7 @@ class PurchaseOperationHandlerTest {
     void purchaseHandler_quantityMoreAmount_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 100);
+                FruitTransaction.Operation.PURCHASE, "banana", 70);
         assertThrows(InvalidDataException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }

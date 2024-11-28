@@ -37,7 +37,7 @@ class ReportCreatorServiceTest {
     }
 
     @Test
-    void createReport_oneItem_ok() {
+    void createReport_oneItem_Ok() {
         Storage.STORAGE.put("banana", 10);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator();

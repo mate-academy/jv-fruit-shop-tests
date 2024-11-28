@@ -36,17 +36,17 @@ class ReturnOperationHandlerTest {
 
     @Test
     void returnHandler_negativeQuantity_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction(
+        FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", -100);
         assertThrows(InvalidDataException.class,
-                () -> returnOperationHandler.calculateOperation(fruitTransaction));
+                () -> returnOperationHandler.calculateOperation(bananaTransaction));
     }
 
     @Test
     void returnHandler_nullFruit_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction(
+        FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, null, 100);
         assertThrows(NullPointerException.class,
-                () -> returnOperationHandler.calculateOperation(fruitTransaction));
+                () -> returnOperationHandler.calculateOperation(bananaTransaction));
     }
 }

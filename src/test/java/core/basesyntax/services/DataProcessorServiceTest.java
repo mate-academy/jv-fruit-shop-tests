@@ -26,10 +26,10 @@ class DataProcessorServiceTest {
 
     @Test
     void processData_validData_ok() {
-        List<String> data = List.of("b,banana,10", "b,apple,10", "s,banana,10");
+        List<String> data = List.of("b,banana,10", "b,apple,20", "s,banana,10");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10));
         List<FruitTransaction> fruitTransactions = dataProcessorService.processInputData(data);
         assertEquals(expected, fruitTransactions);

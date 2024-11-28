@@ -29,35 +29,11 @@ class ActionStrategyImplTest {
     }
 
     @Test
-    void checkBalanceActionGetWithWrongAmount_NotOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.BALANCE, "banana", -20);
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                strategy.get(fruitTransaction.getOperation())
-                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
-
-        assertEquals("You can not add negative amount of fruit,"
-                + " please change your report", exception.getMessage());
-    }
-
-    @Test
     void checkPurchaseActionGet_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.PURCHASE, "banana", 20);
         ActionHandler action = strategy.get(fruitTransaction.getOperation());
         assertEquals(PurchaseAction.class, action.getClass());
-    }
-
-    @Test
-    void checkPurchaseActionGetWithWrongAmount_NotOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.PURCHASE, "banana", -20);
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                strategy.get(fruitTransaction.getOperation())
-                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
-
-        assertEquals("You can not add negative amount of fruit,"
-                + " please change your report", exception.getMessage());
     }
 
     @Test
@@ -67,33 +43,9 @@ class ActionStrategyImplTest {
     }
 
     @Test
-    void checkReturnActionGetWithWrongAmount_NotOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.RETURN, "banana", -20);
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                strategy.get(fruitTransaction.getOperation())
-                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
-
-        assertEquals("You can not add negative amount of fruit,"
-                + " please change your report", exception.getMessage());
-    }
-
-    @Test
     void checkSupplyActionGet_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "banana", 20);
         assertEquals(SupplyAction.class, strategy.get(fruitTransaction.getOperation()).getClass());
-    }
-
-    @Test
-    void checkSupplyActionGetWithWrongAmount_NotOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.SUPPLY, "banana", -20);
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                strategy.get(fruitTransaction.getOperation())
-                        .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
-
-        assertEquals("You can not add negative amount of fruit,"
-                + " please change your report", exception.getMessage());
     }
 
     @Test

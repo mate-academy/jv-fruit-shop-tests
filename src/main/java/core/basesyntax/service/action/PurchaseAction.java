@@ -8,7 +8,7 @@ public class PurchaseAction implements ActionHandler {
         checkAmount(amount);
 
         if (storageOfFruits.get(fruit) < amount) {
-            throw new RuntimeException("We do not have a such amount of fruits");
+            throw new RuntimeException("Shop does not have a such amount of fruits");
         }
 
         int newBalance = storageOfFruits.get(fruit) - amount;

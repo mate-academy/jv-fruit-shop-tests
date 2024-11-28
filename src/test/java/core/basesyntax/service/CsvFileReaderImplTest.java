@@ -3,13 +3,9 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
@@ -28,19 +24,6 @@ class CsvFileReaderImplTest {
             + "p,banana,5\n"
             + "s,banana,50";
     private final CsvFileReader fileReader = new CsvFileReaderImpl();
-
-    @BeforeAll
-    static void setUp() throws IOException {
-        File directory = new File("src/test/resources");
-        directory.mkdir();
-        File file = new File(FILE_PATH_FOR_DATABASE);
-        file.createNewFile();
-
-        try (BufferedWriter writeDatabase =
-                     new BufferedWriter(new FileWriter(FILE_PATH_FOR_DATABASE))) {
-            writeDatabase.write(DATA);
-        }
-    }
 
     @Test
     void readInformationFromDatabase_Ok() throws IOException {

@@ -57,4 +57,29 @@ class ShopServiceImplTest {
         assertEquals("You can not add negative amount of fruit,"
                 + " please change your report", exception.getMessage());
     }
+
+    @Test
+    void checkIfCanAddAnotherFruitTypes_Ok() {
+        List<FruitTransaction> listOfTransactions = new ArrayList<>();
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(Operation.BALANCE, "strawberry", 200);
+        listOfTransactions.add(fruitTransaction);
+        shopService.process(listOfTransactions);
+
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("strawberry", 40);
+
+        assertEquals(expected.get("banana"), storageOfFruits.get("banana"),
+                "Storage contents do not match expected results.");
+    }
+
+    @Test
+    void checkIfCanAddEmptyTransactionList_NotOk() {
+        List<FruitTransaction> listOfTransactions = new ArrayList<>();
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(listOfTransactions));
+
+        assertEquals("Can not add empty list of fruit transactions",
+                exception.getMessage());
+    }
 }

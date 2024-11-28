@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class FileWriterServiceTest {
+class FileWriterServiceTest {
     private static FileWriterService fileWriterService;
     private static final String VALID_FILE_PATH = "src/test/java/resources/report.csv";
     private static final String INVALID_FILE_PATH = "src/test/java/resources/..";

@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class FileReaderServiceTest {
+class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
     private static final String VALID_FILE_PATH = "src/test/java/resources/test.csv";
     private static final String INVALID_FILE_PATH = "src/test/java/resources/InvalidTest.csv";

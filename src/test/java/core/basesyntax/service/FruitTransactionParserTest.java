@@ -35,7 +35,7 @@ class FruitTransactionParserTest {
     }
 
     @Test
-    void parseFruitTransactionWithWrongOperation_NotOk() {
+    void parseFruitTransaction_WithWrongOperation_NotOk() {
         List<String> transactions = new ArrayList<>();
         transactions.add(HEADER);
         transactions.add("c,banana,20");
@@ -47,14 +47,15 @@ class FruitTransactionParserTest {
     }
 
     @Test
-    void parseFruitTransactionWithAmountWithWrongImplements_NotOk() {
+    void parseFruitTransaction_WithWrongAmount_NotOk() {
+        String transaction = "fg";
         List<String> transactions = new ArrayList<>();
         transactions.add(HEADER);
-        transactions.add("b,banana,fg");
+        transactions.add("b,banana," + transaction);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 fruitTransactionParser.parseTransaction(transactions));
 
-        assertEquals("For input string: \"fg\"", exception.getMessage());
+        assertEquals("Invalid integer format: " + transaction, exception.getMessage());
     }
 }

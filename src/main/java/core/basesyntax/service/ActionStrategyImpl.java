@@ -13,6 +13,9 @@ public class ActionStrategyImpl implements ActionStrategy {
 
     @Override
     public ActionHandler get(Operation operation) {
+        if (actionHandlerMap == null) {
+            throw new RuntimeException("Action map is null");
+        }
         return actionHandlerMap.get(operation);
     }
 }

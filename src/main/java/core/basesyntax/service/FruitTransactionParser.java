@@ -20,7 +20,19 @@ public class FruitTransactionParser {
 
             Operation operation = Operation.getOperation(parts[OPERATION_INDEX]);
 
-            int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+            int quantity;
+
+            if (parts[QUANTITY_INDEX] instanceof String) {
+                try {
+                    quantity = Integer.parseInt((String) parts[QUANTITY_INDEX]);
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("Invalid integer format: "
+                            + parts[QUANTITY_INDEX], e);
+                }
+            } else {
+                throw new RuntimeException("Expected a String type but got: "
+                        + parts[QUANTITY_INDEX].getClass().getSimpleName());
+            }
 
             FruitTransaction fruitTransaction = new FruitTransaction(operation,
                     parts[FRUIT_INDEX], quantity);

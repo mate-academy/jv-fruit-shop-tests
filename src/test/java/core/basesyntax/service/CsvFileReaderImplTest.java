@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
 class CsvFileReaderImplTest {
     private static final String FILE_PATH_FOR_DATABASE =
             "src/test/resources/dataTest.csv";
-    private static final String FILE_WITH_NOT_RIGHT_PATH =
-            "src/main/report";
+    private static final String FILE_WITH_INCORRECT_PATH =
+            "src/test/resources/incorrect/test-data.csv";
     private static final String HEADER = "fruit,quantity";
-    private static final String INFO_FOR_DATABASE_1 = HEADER + System.lineSeparator()
+    private static final String DATA = HEADER + System.lineSeparator()
             + "b,banana,20\n"
             + "b,apple,100\n"
             + "s,banana,100\n"
@@ -38,7 +38,7 @@ class CsvFileReaderImplTest {
 
         try (BufferedWriter writeDatabase =
                      new BufferedWriter(new FileWriter(FILE_PATH_FOR_DATABASE))) {
-            writeDatabase.write(INFO_FOR_DATABASE_1);
+            writeDatabase.write(DATA);
         }
     }
 
@@ -61,9 +61,9 @@ class CsvFileReaderImplTest {
     @Test
     void readInformationFromDatabase_withNotCorrectPath_NotOk() throws IOException {
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> fileReader.read(FILE_WITH_NOT_RIGHT_PATH));
+                () -> fileReader.read(FILE_WITH_INCORRECT_PATH));
 
         assertEquals("Can't read the data from the file "
-                + FILE_WITH_NOT_RIGHT_PATH, exception.getMessage());
+                + FILE_WITH_INCORRECT_PATH, exception.getMessage());
     }
 }

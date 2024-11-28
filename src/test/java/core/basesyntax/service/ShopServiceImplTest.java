@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static core.basesyntax.storage.Storage.storageOfFruits;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -41,5 +42,19 @@ class ShopServiceImplTest {
 
         assertEquals(expected.get("banana"), storageOfFruits.get("banana"),
                 "Storage contents do not match expected results.");
+    }
+
+    @Test
+    void checkIfProcessWorkWithNegativeAmount_NotOk() {
+        List<FruitTransaction> listOfTransactions = new ArrayList<>();
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(Operation.BALANCE, "banana", -20);
+        listOfTransactions.add(fruitTransaction1);
+
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(listOfTransactions));
+
+        assertEquals("You can not add negative amount of fruit,"
+                + " please change your report", exception.getMessage());
     }
 }

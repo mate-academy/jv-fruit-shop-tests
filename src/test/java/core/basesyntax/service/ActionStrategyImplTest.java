@@ -32,9 +32,12 @@ class ActionStrategyImplTest {
     void checkBalanceActionGetWithWrongAmount_NotOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.BALANCE, "banana", -20);
-        assertThrows(RuntimeException.class, () ->
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 strategy.get(fruitTransaction.getOperation())
                         .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+
+        assertEquals("You can not add negative amount of fruit,"
+                + " please change your report", exception.getMessage());
     }
 
     @Test
@@ -49,9 +52,12 @@ class ActionStrategyImplTest {
     void checkPurchaseActionGetWithWrongAmount_NotOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.PURCHASE, "banana", -20);
-        assertThrows(RuntimeException.class, () ->
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 strategy.get(fruitTransaction.getOperation())
                         .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+
+        assertEquals("You can not add negative amount of fruit,"
+                + " please change your report", exception.getMessage());
     }
 
     @Test
@@ -64,9 +70,12 @@ class ActionStrategyImplTest {
     void checkReturnActionGetWithWrongAmount_NotOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.RETURN, "banana", -20);
-        assertThrows(RuntimeException.class, () ->
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 strategy.get(fruitTransaction.getOperation())
                         .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+
+        assertEquals("You can not add negative amount of fruit,"
+                + " please change your report", exception.getMessage());
     }
 
     @Test
@@ -79,8 +88,22 @@ class ActionStrategyImplTest {
     void checkSupplyActionGetWithWrongAmount_NotOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(Operation.SUPPLY, "banana", -20);
-        assertThrows(RuntimeException.class, () ->
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 strategy.get(fruitTransaction.getOperation())
                         .count(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));
+
+        assertEquals("You can not add negative amount of fruit,"
+                + " please change your report", exception.getMessage());
+    }
+
+    @Test
+    void getActionHandler_mapIsNull_notOk() {
+        ActionStrategy actionStrategy = new ActionStrategyImpl(null);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                actionStrategy.get(Operation.BALANCE)
+        );
+
+        assertEquals("Action map is null", exception.getMessage());
     }
 }

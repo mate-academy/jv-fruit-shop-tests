@@ -9,11 +9,11 @@ import core.basesyntax.handlers.ReturnOperationHandler;
 import core.basesyntax.handlers.SupplyOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.impl.OperationProcessorImpl;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class OperationProcessorTest {

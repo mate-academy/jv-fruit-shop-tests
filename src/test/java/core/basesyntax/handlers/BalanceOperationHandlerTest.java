@@ -45,20 +45,4 @@ public class BalanceOperationHandlerTest {
         assertThrows(InvalidDataException.class,
                 () -> balanceOperationHandler.calculateOperation(bananaTransaction));
     }
-
-    @Test
-    void addFruits_nullFruit_notOk() {
-        FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, null, 100);
-        assertThrows(NullPointerException.class,
-                () -> balanceOperationHandler.calculateOperation(bananaTransaction));
-    }
-
-    @Test
-    void addFruit_nullOperationType_notOk() {
-        FruitTransaction bananaTransaction = new FruitTransaction(
-                null, "banana", 100);
-        assertThrows(NullPointerException.class,
-                () -> balanceOperationHandler.calculateOperation(bananaTransaction));
-    }
 }

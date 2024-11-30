@@ -11,7 +11,7 @@ public class SupplyOperationHandler implements OperationHandler {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
         } else if (transaction.getFruit() == null || transaction.getOperation() == null) {
-            throw new NullPointerException("Invalid transaction or fruit type");
+            throw new IllegalArgumentException("Invalid transaction or fruit type");
         }
         int currentAmount = Storage.STORAGE.get(transaction.getFruit());
         int quantity = transaction.getQuantity();

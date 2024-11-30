@@ -27,21 +27,24 @@ public class BalanceOperationHandlerTest {
     @Test
     void addSomeFruit_BalanceOperation_Ok() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", 120);
+                FruitTransaction.Operation.BALANCE, "banana", 120
+        );
         assertDoesNotThrow(() -> balanceOperationHandler.calculateOperation(bananaTransaction));
         FruitTransaction appleTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 50);
+                FruitTransaction.Operation.BALANCE, "apple", 50
+        );
         assertDoesNotThrow(() -> balanceOperationHandler.calculateOperation(appleTransaction));
         int expectedBanana = Storage.STORAGE.get("banana");
-        assertEquals(expectedBanana, 120);
+        assertEquals(120, expectedBanana);
         int expectedApple = Storage.STORAGE.get("apple");
-        assertEquals(expectedApple, 50);
+        assertEquals(50, expectedApple);
     }
 
     @Test
     void addFruits_NegativeQuantity_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", -100);
+                FruitTransaction.Operation.BALANCE, "banana", -100
+        );
         assertThrows(InvalidDataException.class,
                 () -> balanceOperationHandler.calculateOperation(bananaTransaction));
     }

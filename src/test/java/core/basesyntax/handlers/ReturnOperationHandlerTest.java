@@ -28,7 +28,8 @@ class ReturnOperationHandlerTest {
     void returnHandler_ValidData_ok() {
         Storage.STORAGE.put("banana", 15);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "banana", 100);
+                FruitTransaction.Operation.RETURN, "banana", 100
+        );
         assertDoesNotThrow(() -> returnOperationHandler.calculateOperation(fruitTransaction));
         int actualAmount = Storage.STORAGE.get("banana");
         assertEquals(115, actualAmount);
@@ -37,7 +38,8 @@ class ReturnOperationHandlerTest {
     @Test
     void returnHandler_negativeQuantity_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "banana", -100);
+                FruitTransaction.Operation.RETURN, "banana", -100
+        );
         assertThrows(InvalidDataException.class,
                 () -> returnOperationHandler.calculateOperation(bananaTransaction));
     }
@@ -45,8 +47,9 @@ class ReturnOperationHandlerTest {
     @Test
     void returnHandler_nullFruit_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, null, 100);
-        assertThrows(NullPointerException.class,
+                FruitTransaction.Operation.RETURN, null, 100
+        );
+        assertThrows(InvalidDataException.class,
                 () -> returnOperationHandler.calculateOperation(bananaTransaction));
     }
 }

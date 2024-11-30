@@ -11,7 +11,7 @@ public class ReturnOperationHandler implements OperationHandler {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
         } else if (transaction.getFruit() == null) {
-            throw new NullPointerException("Invalid fruit type");
+            throw new IllegalArgumentException("Invalid fruit type");
         }
         int currentAmount = Storage.STORAGE.get(transaction.getFruit());
         int quantity = transaction.getQuantity();

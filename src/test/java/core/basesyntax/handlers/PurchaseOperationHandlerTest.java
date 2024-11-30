@@ -28,7 +28,8 @@ class PurchaseOperationHandlerTest {
     void purchaseHandler_validData_ok() {
         Storage.STORAGE.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 70);
+                FruitTransaction.Operation.PURCHASE, "banana", 70
+        );
         assertDoesNotThrow(() -> purchaseOperationHandler.calculateOperation(fruitTransaction));
         int fruitsInStorage = Storage.STORAGE.get("banana");
         assertEquals(30, fruitsInStorage);
@@ -38,8 +39,9 @@ class PurchaseOperationHandlerTest {
     void purchaseHandler_nullFruit_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, null, 10);
-        assertThrows(NullPointerException.class,
+                FruitTransaction.Operation.PURCHASE, null, 10
+        );
+        assertThrows(IllegalArgumentException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }
 
@@ -47,7 +49,8 @@ class PurchaseOperationHandlerTest {
     void purchaseHandler_NegativeQuantity_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", -100);
+                FruitTransaction.Operation.PURCHASE, "banana", -100
+        );
         assertThrows(InvalidDataException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }
@@ -56,7 +59,8 @@ class PurchaseOperationHandlerTest {
     void purchaseHandler_quantityMoreAmount_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 70);
+                FruitTransaction.Operation.PURCHASE, "banana", 70
+        );
         assertThrows(InvalidDataException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }

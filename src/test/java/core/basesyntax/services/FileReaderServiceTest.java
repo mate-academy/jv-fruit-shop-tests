@@ -35,6 +35,8 @@ class FileReaderServiceTest {
         List<String> expected = List.of();
         List<String> actual = fileReaderService.readFromFile(EMPTY_FILE_PATH);
         assertEquals(expected, actual);
+        assertThrows(RuntimeException.class,
+                () -> fileReaderService.readFromFile(EMPTY_FILE_PATH));
     }
 
     @Test

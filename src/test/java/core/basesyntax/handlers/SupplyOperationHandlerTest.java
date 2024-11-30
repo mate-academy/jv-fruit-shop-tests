@@ -28,7 +28,8 @@ class SupplyOperationHandlerTest {
     void supplyHandler_validData_ok() {
         Storage.STORAGE.put("banana", 15);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "banana", 100);
+                FruitTransaction.Operation.RETURN, "banana", 100
+        );
         assertDoesNotThrow(() -> supplyOperationHandler.calculateOperation(fruitTransaction));
         int actualAmount = Storage.STORAGE.get("banana");
         assertEquals(115, actualAmount);
@@ -37,7 +38,8 @@ class SupplyOperationHandlerTest {
     @Test
     void supplyHandler_NegativeQuantity_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", -100);
+                FruitTransaction.Operation.BALANCE, "banana", -100
+        );
         assertThrows(InvalidDataException.class,
                 () -> supplyOperationHandler.calculateOperation(bananaTransaction));
     }
@@ -45,16 +47,18 @@ class SupplyOperationHandlerTest {
     @Test
     void supplyHandler_NullFruit_notOK() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, null, 100);
-        assertThrows(NullPointerException.class,
+                FruitTransaction.Operation.BALANCE, null, 100
+        );
+        assertThrows(InvalidDataException.class,
                 () -> supplyOperationHandler.calculateOperation(bananaTransaction));
     }
 
     @Test
     void supplyHandler_NullOperationType_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
-                null, "banana", 100);
-        assertThrows(NullPointerException.class,
+                null, "banana", 100
+        );
+        assertThrows(InvalidDataException.class,
                 () -> supplyOperationHandler.calculateOperation(bananaTransaction));
     }
 }

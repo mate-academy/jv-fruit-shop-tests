@@ -49,7 +49,7 @@ class ReturnOperationHandlerTest {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, null, 100
         );
-        assertThrows(InvalidDataException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> returnOperationHandler.calculateOperation(bananaTransaction));
     }
 }

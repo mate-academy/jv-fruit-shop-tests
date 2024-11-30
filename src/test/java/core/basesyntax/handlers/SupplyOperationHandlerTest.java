@@ -49,7 +49,7 @@ class SupplyOperationHandlerTest {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, null, 100
         );
-        assertThrows(InvalidDataException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> supplyOperationHandler.calculateOperation(bananaTransaction));
     }
 
@@ -58,7 +58,7 @@ class SupplyOperationHandlerTest {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 null, "banana", 100
         );
-        assertThrows(InvalidDataException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> supplyOperationHandler.calculateOperation(bananaTransaction));
     }
 }

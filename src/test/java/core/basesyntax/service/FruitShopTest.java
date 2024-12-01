@@ -34,20 +34,20 @@ class FruitShopTest {
         Path tempDir = Files.createTempDirectory("fruitshop-test");
         inputFilePath = tempDir.resolve("test_input.csv").toString();
         outputFilePath = tempDir.resolve("test_output.csv").toString();
-        FruitDB fruitDB = new FruitDB();
+        FruitDB.getInstance().getInventory().clear();
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
         DataConverter dataConverter = new DataConverter();
         DefaultDataOperationStrategy operationStrategy = new DefaultDataOperationStrategy(
                 Map.of(
-                        Operation.BALANCE, new BalanceHandler(fruitDB),
-                        Operation.SUPPLY, new SupplyHandler(fruitDB),
-                        Operation.PURCHASE, new PurchaseHandler(fruitDB),
-                        Operation.RETURN, new ReturnHandler(fruitDB)
+                        Operation.BALANCE, new BalanceHandler(),
+                        Operation.SUPPLY, new SupplyHandler(),
+                        Operation.PURCHASE, new PurchaseHandler(),
+                        Operation.RETURN, new ReturnHandler()
                 )
         );
         DataProcessor dataProcessor = new DataProcessor(operationStrategy);
-        ReportGenerator reportGenerator = new ReportGenerator(fruitDB);
+        ReportGenerator reportGenerator = new ReportGenerator(FruitDB.getInstance());
         fruitShop = new FruitShop(
                 fileReader, dataConverter, dataProcessor, reportGenerator, fileWriter
         );
@@ -63,7 +63,6 @@ class FruitShopTest {
     void tearDown() throws IOException {
         Path inputFile = Path.of(inputFilePath);
         Path outputFile = Path.of(outputFilePath);
-
         if (Files.exists(inputFile)) {
             inputFile.toFile().setWritable(true);
             Files.deleteIfExists(inputFile);
@@ -72,6 +71,7 @@ class FruitShopTest {
             outputFile.toFile().setWritable(true);
             Files.deleteIfExists(outputFile);
         }
+        FruitDB.getInstance().getInventory().clear();
     }
 
     @Test
@@ -83,24 +83,27 @@ class FruitShopTest {
             }
         };
         DataConverter dataConverter = new DataConverter();
-        FruitDB fruitDB = new FruitDB();
         DefaultDataOperationStrategy strategy = new DefaultDataOperationStrategy(
-                Map.of(Operation.BALANCE, new BalanceHandler(fruitDB),
-                        Operation.SUPPLY, new SupplyHandler(fruitDB),
-                        Operation.PURCHASE, new PurchaseHandler(fruitDB),
-                        Operation.RETURN, new ReturnHandler(fruitDB))
+                Map.of(
+                        Operation.BALANCE, new BalanceHandler(),
+                        Operation.SUPPLY, new SupplyHandler(),
+                        Operation.PURCHASE, new PurchaseHandler(),
+                        Operation.RETURN, new ReturnHandler()
+                )
         );
         DataProcessor dataProcessor = new DataProcessor(strategy);
-        ReportGenerator reportGenerator = new ReportGenerator(fruitDB);
+        ReportGenerator reportGenerator = new ReportGenerator(FruitDB.getInstance());
         FileWriter fileWriter = new FileWriter();
+
         FruitShop fruitShop = new FruitShop(
                 fileReader, dataConverter, dataProcessor, reportGenerator, fileWriter
         );
+
         RuntimeException exception = assertThrows(
                 RuntimeException.class, () -> fruitShop.run(inputFilePath, outputFilePath)
         );
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
-        assertEquals("Invalid operation code: UNKNOWN", exception.getCause().getMessage());
+        assertEquals("Invalid operation code: x", exception.getCause().getMessage());
     }
 
     @Test

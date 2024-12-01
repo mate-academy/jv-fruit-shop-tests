@@ -13,18 +13,14 @@ import org.junit.jupiter.api.Test;
 public class DataProcessorTest {
 
     private DataProcessor dataProcessor;
-    private FruitDB fruitDB;
-    private DefaultDataOperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
-        fruitDB = new FruitDB();
-
-        BalanceHandler balanceHandler = new BalanceHandler(fruitDB);
-        SupplyHandler supplyHandler = new SupplyHandler(fruitDB);
-        PurchaseHandler purchaseHandler = new PurchaseHandler(fruitDB);
-
-        operationStrategy = new DefaultDataOperationStrategy(
+        FruitDB.getInstance().getInventory().clear();
+        BalanceHandler balanceHandler = new BalanceHandler();
+        SupplyHandler supplyHandler = new SupplyHandler();
+        PurchaseHandler purchaseHandler = new PurchaseHandler();
+        DefaultDataOperationStrategy operationStrategy = new DefaultDataOperationStrategy(
                 Map.of(
                         Operation.BALANCE, balanceHandler,
                         Operation.SUPPLY, supplyHandler,
@@ -42,15 +38,15 @@ public class DataProcessorTest {
                 new FruitTransaction("p", "apple", 20)
         );
         dataProcessor.process(transactions);
-        assertEquals(30, fruitDB.getInventory().get("apple")); // 50 (balance) - 20 (purchase)
-        assertEquals(30, fruitDB.getInventory().get("banana")); // 30 (supply)
+        assertEquals(30, FruitDB.getInstance().getInventory().get("apple").intValue());
+        assertEquals(30, FruitDB.getInstance().getInventory().get("banana").intValue());
     }
 
     @Test
     void process_emptyTransactionsList_doesNotChangeInventory() {
         List<FruitTransaction> transactions = List.of();
         dataProcessor.process(transactions);
-        assertEquals(0, fruitDB.getInventory().size());
+        assertEquals(0, FruitDB.getInstance().getInventory().size());
     }
 
     @Test
@@ -62,6 +58,10 @@ public class DataProcessorTest {
     @Test
     void process_negativeQuantity_throwsIllegalArgumentException() {
         List<FruitTransaction> transactions = List.of(new FruitTransaction("s", "apple", -10));
-        assertThrows(IllegalArgumentException.class, () -> dataProcessor.process(transactions));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> dataProcessor.process(transactions)
+        );
+        assertEquals("Transaction quantity cannot be negative", exception.getMessage());
     }
 }

@@ -1,11 +1,12 @@
 package core.basesyntax.dataprocessor;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
-    RETURN("r"),
-    UNKNOWN("");
+    RETURN("r");
 
     private final String code;
 
@@ -18,14 +19,9 @@ public enum Operation {
     }
 
     public static Operation fromCode(String code) {
-        if (code == null) {
-            return UNKNOWN;
-        }
-        for (Operation operation : values()) {
-            if (operation.code.equals(code)) {
-                return operation;
-            }
-        }
-        return UNKNOWN;
+        return Arrays.stream(Operation.values())
+                .filter(op -> op.code.equals(code))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid operation code: " + code));
     }
 }

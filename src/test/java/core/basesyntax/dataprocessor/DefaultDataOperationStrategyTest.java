@@ -41,11 +41,6 @@ public class DefaultDataOperationStrategyTest {
     }
 
     @Test
-    void getHandler_invalidOperation_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> strategy.getHandler(Operation.UNKNOWN));
-    }
-
-    @Test
     void getHandler_missingHandler_throwsIllegalArgumentException() {
         DefaultDataOperationStrategy incompleteStrategy = new DefaultDataOperationStrategy(
                 Map.of(

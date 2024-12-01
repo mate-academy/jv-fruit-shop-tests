@@ -9,27 +9,26 @@ import org.junit.jupiter.api.Test;
 
 public class PurchaseHandlerTest {
 
-    private FruitDB fruitDB;
     private PurchaseHandler purchaseHandler;
 
     @BeforeEach
     void setUp() {
-        fruitDB = new FruitDB();
-        purchaseHandler = new PurchaseHandler(fruitDB);
-        fruitDB.add("apple", 50);
-        fruitDB.add("banana", 30);
+        FruitDB.getInstance().getInventory().clear();
+        purchaseHandler = new PurchaseHandler();
+        FruitDB.getInstance().add("apple", 50);
+        FruitDB.getInstance().add("banana", 30);
     }
 
     @Test
     void apply_validPurchase_reducesInventory() {
         purchaseHandler.apply("apple", 20);
-        assertEquals(30, fruitDB.getInventory().get("apple"));
+        assertEquals(30, FruitDB.getInstance().getInventory().get("apple").intValue());
     }
 
     @Test
     void apply_exactInventoryPurchase_reducesInventoryToZero() {
         purchaseHandler.apply("banana", 30);
-        assertEquals(0, fruitDB.getInventory().get("banana"));
+        assertEquals(0, FruitDB.getInstance().getInventory().get("banana").intValue());
     }
 
     @Test
@@ -50,6 +49,6 @@ public class PurchaseHandlerTest {
     @Test
     void apply_zeroQuantity_doesNotChangeInventory() {
         purchaseHandler.apply("apple", 0);
-        assertEquals(50, fruitDB.getInventory().get("apple"));
+        assertEquals(50, FruitDB.getInstance().getInventory().get("apple").intValue());
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.dataprocessor;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.service.FruitDB;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +13,17 @@ public class BalanceHandlerTest {
 
     @BeforeEach
     void setUp() {
-        fruitDB = new FruitDB();
-        balanceHandler = new BalanceHandler(fruitDB);
+        fruitDB = FruitDB.getInstance();
+        fruitDB.getInventory().clear();
+        balanceHandler = new BalanceHandler();
+    }
+
+    @Test
+    void apply_addsQuantityToFruit() {
+        fruitDB.add("apple", 10);
+        balanceHandler.apply("apple", 20);
+
+        assertEquals(30, fruitDB.getInventory().get("apple"));
     }
 
     @Test

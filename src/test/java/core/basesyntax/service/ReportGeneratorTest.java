@@ -10,18 +10,17 @@ import org.junit.jupiter.api.Test;
 class ReportGeneratorTest {
 
     private ReportGenerator reportGenerator;
-    private FruitDB fruitDB;
 
     @BeforeEach
     void setUp() {
-        fruitDB = new FruitDB();
-        reportGenerator = new ReportGenerator(fruitDB);
+        FruitDB.getInstance().getInventory().clear();
+        reportGenerator = new ReportGenerator(FruitDB.getInstance());
     }
 
     @Test
     void generateReport_withValidData_returnsCorrectReport() {
-        fruitDB.add("apple", 50);
-        fruitDB.add("banana", 30);
+        FruitDB.getInstance().add("apple", 50);
+        FruitDB.getInstance().add("banana", 30);
         List<String> report = reportGenerator.generateReport();
         assertEquals(3, report.size());
         assertEquals("Fruit,Quantity", report.get(0));
@@ -38,7 +37,7 @@ class ReportGeneratorTest {
 
     @Test
     void generateReport_withNegativeQuantities_includesNegativeValues() {
-        fruitDB.add("apple", -10);
+        FruitDB.getInstance().add("apple", -10);
         List<String> report = reportGenerator.generateReport();
         assertEquals(2, report.size());
         assertEquals("Fruit,Quantity", report.get(0));
@@ -47,7 +46,7 @@ class ReportGeneratorTest {
 
     @Test
     void generateReport_withZeroQuantity_includesZeroValues() {
-        fruitDB.add("apple", 0);
+        FruitDB.getInstance().add("apple", 0);
         List<String> report = reportGenerator.generateReport();
         assertEquals(2, report.size());
         assertEquals("Fruit,Quantity", report.get(0));
@@ -56,9 +55,9 @@ class ReportGeneratorTest {
 
     @Test
     void generateReport_withMultipleFruits_sortsAlphabetically() {
-        fruitDB.add("banana", 30);
-        fruitDB.add("apple", 50);
-        fruitDB.add("cherry", 20);
+        FruitDB.getInstance().add("banana", 30);
+        FruitDB.getInstance().add("apple", 50);
+        FruitDB.getInstance().add("cherry", 20);
         List<String> report = reportGenerator.generateReport();
         assertEquals(4, report.size());
         assertEquals("Fruit,Quantity", report.get(0));

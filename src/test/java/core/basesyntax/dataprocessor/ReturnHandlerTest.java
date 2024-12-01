@@ -8,34 +8,32 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnHandlerTest {
-
-    private FruitDB fruitDB;
     private ReturnHandler returnHandler;
 
     @BeforeEach
     void setUp() {
-        fruitDB = new FruitDB();
-        returnHandler = new ReturnHandler(fruitDB);
-        fruitDB.add("apple", 50);
-        fruitDB.add("banana", 30);
+        FruitDB.getInstance().getInventory().clear();
+        returnHandler = new ReturnHandler();
+        FruitDB.getInstance().add("apple", 50);
+        FruitDB.getInstance().add("banana", 30);
     }
 
     @Test
     void apply_validReturn_increasesInventory() {
         returnHandler.apply("apple", 20);
-        assertEquals(70, fruitDB.getInventory().get("apple"));
+        assertEquals(70, FruitDB.getInstance().getInventory().get("apple").intValue());
     }
 
     @Test
     void apply_newFruitAdded_increasesInventory() {
         returnHandler.apply("orange", 15);
-        assertEquals(15, fruitDB.getInventory().get("orange"));
+        assertEquals(15, FruitDB.getInstance().getInventory().get("orange").intValue());
     }
 
     @Test
     void apply_zeroQuantity_doesNotChangeInventory() {
         returnHandler.apply("apple", 0);
-        assertEquals(50, fruitDB.getInventory().get("apple"));
+        assertEquals(50, FruitDB.getInstance().getInventory().get("apple").intValue());
     }
 
     @Test

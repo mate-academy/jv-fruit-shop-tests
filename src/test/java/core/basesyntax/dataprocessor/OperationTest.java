@@ -1,6 +1,7 @@
 package core.basesyntax.dataprocessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +16,10 @@ public class OperationTest {
     }
 
     @Test
-    void fromCode_invalidCode_returnsUnknownOperation() {
-        assertEquals(Operation.UNKNOWN, Operation.fromCode("invalidCode"));
-        assertEquals(Operation.UNKNOWN, Operation.fromCode("x"));
-        assertEquals(Operation.UNKNOWN, Operation.fromCode("123"));
-    }
-
-    @Test
-    void fromCode_nullCode_returnsUnknownOperation() {
-        assertEquals(Operation.UNKNOWN, Operation.fromCode(null));
+    void fromCode_invalidCode_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode("x"));
+        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode("123"));
+        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode(null));
     }
 
     @Test
@@ -32,6 +28,5 @@ public class OperationTest {
         assertEquals("s", Operation.SUPPLY.getCode());
         assertEquals("p", Operation.PURCHASE.getCode());
         assertEquals("r", Operation.RETURN.getCode());
-        assertEquals("", Operation.UNKNOWN.getCode());
     }
 }

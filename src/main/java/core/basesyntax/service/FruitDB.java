@@ -4,7 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDB {
+    private static final FruitDB INSTANCE = new FruitDB();
     private final Map<String, Integer> inventory = new HashMap<>();
+
+    private FruitDB() {
+    }
+
+    public static FruitDB getInstance() {
+        return INSTANCE;
+    }
 
     public void add(String fruit, int quantity) {
         inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
@@ -21,3 +29,4 @@ public class FruitDB {
         return inventory;
     }
 }
+

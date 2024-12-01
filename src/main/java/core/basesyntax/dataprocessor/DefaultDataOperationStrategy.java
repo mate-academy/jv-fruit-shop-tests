@@ -10,9 +10,6 @@ public class DefaultDataOperationStrategy {
     }
 
     public OperationHandler getHandler(Operation operation) {
-        if (operation == Operation.UNKNOWN) {
-            throw new IllegalArgumentException("Invalid operation code: " + operation);
-        }
         OperationHandler handler = handlers.get(operation);
         if (handler == null) {
             throw new IllegalArgumentException("No handler found for operation: " + operation);

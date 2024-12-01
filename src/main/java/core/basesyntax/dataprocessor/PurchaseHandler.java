@@ -1,22 +1,19 @@
 package core.basesyntax.dataprocessor;
 
 import core.basesyntax.service.FruitDB;
+import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {
-    private final FruitDB fruitDB;
-
-    public PurchaseHandler(FruitDB fruitDB) {
-        this.fruitDB = fruitDB;
-    }
 
     @Override
     public void apply(String fruit, int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        if (quantity > fruitDB.getInventory().getOrDefault(fruit, 0)) {
-            throw new IllegalArgumentException("Not enough inventory for purchase");
+        Map<String, Integer> inventory = FruitDB.getInstance().getInventory();
+        if (!inventory.containsKey(fruit) || inventory.get(fruit) < quantity) {
+            throw new IllegalArgumentException("Not enough inventory to subtract");
         }
-        fruitDB.subtract(fruit, quantity);
+        inventory.put(fruit, inventory.get(fruit) - quantity);
     }
 }

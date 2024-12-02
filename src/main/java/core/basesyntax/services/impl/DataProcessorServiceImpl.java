@@ -1,11 +1,9 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.exception.InvalidDataException;
+import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.DataProcessorService;
 import java.util.List;
-import java.util.stream.Stream;
-import javax.management.openmbean.InvalidOpenTypeException;
 
 public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String SPLIT_DELIMITER = ",";
@@ -30,9 +28,6 @@ public class DataProcessorServiceImpl implements DataProcessorService {
         if (fruitQuantity < 0) {
             throw new InvalidDataException("Invalid Quantity, fruit quantity is: "
                     + fruitQuantity);
-        }
-        if (Stream.of("b", "s", "p", "r").anyMatch(s -> !operationType.equals(s))) {
-            throw new InvalidOpenTypeException("Invalid operation type");
         }
         return new FruitTransaction(operation, fruitType, fruitQuantity);
     }

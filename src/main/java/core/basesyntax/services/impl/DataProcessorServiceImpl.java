@@ -3,10 +3,9 @@ package core.basesyntax.services.impl;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.DataProcessorService;
-
-import javax.management.openmbean.InvalidOpenTypeException;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.management.openmbean.InvalidOpenTypeException;
 
 public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String SPLIT_DELIMITER = ",";

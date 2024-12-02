@@ -10,12 +10,13 @@ public class SupplyOperationHandler implements OperationHandler {
     public void calculateOperation(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
-        } else if (transaction.getFruit() == null || transaction.getOperation() == null) {
+        }
+        if (transaction.getFruit() == null || transaction.getOperation() == null) {
             throw new IllegalArgumentException("Invalid transaction or fruit type");
         }
-        int currentAmount = Storage.STORAGE.get(transaction.getFruit());
+        int currentAmount = Storage.storage.get(transaction.getFruit());
         int quantity = transaction.getQuantity();
         int supplyResult = currentAmount + quantity;
-        Storage.STORAGE.put(transaction.getFruit(), supplyResult);
+        Storage.storage.put(transaction.getFruit(), supplyResult);
     }
 }

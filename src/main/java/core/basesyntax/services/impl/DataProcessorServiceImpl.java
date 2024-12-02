@@ -3,7 +3,10 @@ package core.basesyntax.services.impl;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.DataProcessorService;
+
+import javax.management.openmbean.InvalidOpenTypeException;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String SPLIT_DELIMITER = ",";
@@ -20,13 +23,17 @@ public class DataProcessorServiceImpl implements DataProcessorService {
 
     private FruitTransaction getFruitTransaction(String data) {
         String[] processedData = data.split(SPLIT_DELIMITER);
+        String operationType = processedData[OPERATION_TYPE_INDEX];
         FruitTransaction.Operation operation = FruitTransaction.Operation
-                .getOperationByCode(processedData[OPERATION_TYPE_INDEX]);
+                .getOperationByCode(operationType);
         String fruitType = processedData[FRUIT_TYPE_INDEX];
         int fruitQuantity = Integer.parseInt(processedData[FRUIT_QUANTITY_INDEX]);
         if (fruitQuantity < 0) {
             throw new InvalidDataException("Invalid Quantity, fruit quantity is: "
                     + fruitQuantity);
+        }
+        if (Stream.of("b", "s", "p", "r").anyMatch(s -> !operationType.equals(s))) {
+            throw new InvalidOpenTypeException("Invalid operation type");
         }
         return new FruitTransaction(operation, fruitType, fruitQuantity);
     }

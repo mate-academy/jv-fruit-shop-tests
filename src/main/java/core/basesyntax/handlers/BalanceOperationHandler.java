@@ -10,9 +10,10 @@ public class BalanceOperationHandler implements OperationHandler {
     public void calculateOperation(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
-        } else if (transaction.getFruit() == null || transaction.getOperation() == null) {
+        }
+        if (transaction.getFruit() == null || transaction.getOperation() == null) {
             throw new IllegalArgumentException("Invalid transaction or fruit type");
         }
-        Storage.STORAGE.put(transaction.getFruit(), transaction.getQuantity());
+        Storage.storage.put(transaction.getFruit(), transaction.getQuantity());
     }
 }

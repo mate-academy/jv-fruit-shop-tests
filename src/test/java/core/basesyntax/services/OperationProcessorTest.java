@@ -1,7 +1,5 @@
 package core.basesyntax.services;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.handlers.BalanceOperationHandler;
 import core.basesyntax.handlers.PurchaseOperationHandler;
@@ -31,13 +29,13 @@ class OperationProcessorTest {
 
     @AfterEach
     void tearDown() {
-        Storage.STORAGE.clear();
+        Storage.storage.clear();
     }
 
     @Test
     void processOperations_emptyList_Ok() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        assertDoesNotThrow(() -> operationProcessor.manageTransactions(fruitTransactions));
+        operationProcessor.manageTransactions(fruitTransactions);
     }
 
     @Test
@@ -47,6 +45,6 @@ class OperationProcessorTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10)
         );
-        assertDoesNotThrow(() -> operationProcessor.manageTransactions(transactions));
+        operationProcessor.manageTransactions(transactions);
     }
 }

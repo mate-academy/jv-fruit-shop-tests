@@ -10,12 +10,13 @@ public class ReturnOperationHandler implements OperationHandler {
     public void calculateOperation(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
-        } else if (transaction.getFruit() == null) {
+        }
+        if (transaction.getFruit() == null) {
             throw new IllegalArgumentException("Invalid fruit type");
         }
-        int currentAmount = Storage.STORAGE.get(transaction.getFruit());
+        int currentAmount = Storage.storage.get(transaction.getFruit());
         int quantity = transaction.getQuantity();
         int returnResult = currentAmount + quantity;
-        Storage.STORAGE.put(transaction.getFruit(), returnResult);
+        Storage.storage.put(transaction.getFruit(), returnResult);
     }
 }

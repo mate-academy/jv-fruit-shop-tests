@@ -1,6 +1,5 @@
 package core.basesyntax.handlers;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,23 +20,23 @@ class PurchaseOperationHandlerTest {
 
     @AfterEach
     void tearDown() {
-        Storage.STORAGE.clear();
+        Storage.storage.clear();
     }
 
     @Test
     void purchaseHandler_validData_ok() {
-        Storage.STORAGE.put("banana", 100);
+        Storage.storage.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 70
         );
-        assertDoesNotThrow(() -> purchaseOperationHandler.calculateOperation(fruitTransaction));
-        int fruitsInStorage = Storage.STORAGE.get("banana");
+        purchaseOperationHandler.calculateOperation(fruitTransaction);
+        int fruitsInStorage = Storage.storage.get("banana");
         assertEquals(30, fruitsInStorage);
     }
 
     @Test
     void purchaseHandler_nullFruit_notOk() {
-        Storage.STORAGE.put("banana", 20);
+        Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, null, 10
         );
@@ -47,7 +46,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void purchaseHandler_NegativeQuantity_notOk() {
-        Storage.STORAGE.put("banana", 20);
+        Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", -100
         );
@@ -57,7 +56,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void purchaseHandler_quantityMoreAmount_notOk() {
-        Storage.STORAGE.put("banana", 20);
+        Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 70
         );

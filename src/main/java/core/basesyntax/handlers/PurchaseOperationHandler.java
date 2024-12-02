@@ -10,15 +10,16 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void calculateOperation(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
-        } else if (transaction.getFruit() == null) {
+        }
+        if (transaction.getFruit() == null) {
             throw new IllegalArgumentException("Invalid fruit type");
         }
-        int currentAmount = Storage.STORAGE.get(transaction.getFruit());
+        int currentAmount = Storage.storage.get(transaction.getFruit());
         int quantity = transaction.getQuantity();
         int purchaseResult = currentAmount - quantity;
         if (purchaseResult < 0) {
             throw new InvalidDataException("Not enough fruits in storage");
         }
-        Storage.STORAGE.put(transaction.getFruit(), purchaseResult);
+        Storage.storage.put(transaction.getFruit(), purchaseResult);
     }
 }

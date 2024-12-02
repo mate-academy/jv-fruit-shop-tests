@@ -1,6 +1,5 @@
 package core.basesyntax.services;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -25,7 +24,7 @@ class FileWriterServiceTest {
     void writeTo_validFilePath_ok() throws IOException {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator() + "apple,90";
-        assertDoesNotThrow(() -> fileWriterService.writeToFile(VALID_FILE_PATH, report));
+        fileWriterService.writeToFile(VALID_FILE_PATH, report);
         assertEquals(Files.readString(Path.of(VALID_FILE_PATH)), report);
     }
 

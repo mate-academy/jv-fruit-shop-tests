@@ -1,6 +1,5 @@
 package core.basesyntax.handlers;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,17 +20,17 @@ class SupplyOperationHandlerTest {
 
     @AfterEach
     void tearDown() {
-        Storage.STORAGE.clear();
+        Storage.storage.clear();
     }
 
     @Test
     void supplyHandler_validData_ok() {
-        Storage.STORAGE.put("banana", 15);
+        Storage.storage.put("banana", 15);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 100
         );
-        assertDoesNotThrow(() -> supplyOperationHandler.calculateOperation(fruitTransaction));
-        int actualAmount = Storage.STORAGE.get("banana");
+        supplyOperationHandler.calculateOperation(fruitTransaction);
+        int actualAmount = Storage.storage.get("banana");
         assertEquals(115, actualAmount);
     }
 

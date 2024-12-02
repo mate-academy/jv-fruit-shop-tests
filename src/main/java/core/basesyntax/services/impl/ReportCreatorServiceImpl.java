@@ -11,7 +11,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     public String createReport() {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(DEFAULT_MESSAGE).append(System.lineSeparator());
-        Storage.STORAGE.forEach((key, value) -> reportBuilder.append(key)
+        Storage.storage.forEach((key, value) -> reportBuilder.append(key)
                 .append(SPLIT_DELIMITER)
                 .append(value)
                 .append(System.lineSeparator()));

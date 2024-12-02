@@ -18,7 +18,7 @@ class ReportCreatorServiceTest {
 
     @AfterEach
     void tearDown() {
-        Storage.STORAGE.clear();
+        Storage.storage.clear();
     }
 
     @Test
@@ -29,8 +29,8 @@ class ReportCreatorServiceTest {
 
     @Test
     void creatorReport_existingData_ok() {
-        Storage.STORAGE.put("banana", 10);
-        Storage.STORAGE.put("apple", 20);
+        Storage.storage.put("banana", 10);
+        Storage.storage.put("apple", 20);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator() + "apple,20" + System.lineSeparator();
         assertEquals(expectedReport, reportCreatorService.createReport());
@@ -38,7 +38,7 @@ class ReportCreatorServiceTest {
 
     @Test
     void createReport_oneItem_Ok() {
-        Storage.STORAGE.put("banana", 10);
+        Storage.storage.put("banana", 10);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator();
         assertEquals(expectedReport, reportCreatorService.createReport());

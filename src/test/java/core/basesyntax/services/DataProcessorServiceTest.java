@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.InvalidOperationTypeException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.impl.DataProcessorServiceImpl;
 import java.util.List;
@@ -21,7 +22,7 @@ class DataProcessorServiceTest {
 
     @AfterEach
     void tearDown() {
-        Storage.STORAGE.clear();
+        Storage.storage.clear();
     }
 
     @Test
@@ -44,7 +45,8 @@ class DataProcessorServiceTest {
     @Test
     void processData_invalidOperationType_notOk() {
         List<String> data = List.of("buy, banana,-200", "b,apple,20", "s,banana,10");
-        assertThrows(RuntimeException.class, () -> dataProcessorService.processInputData(data));
+        assertThrows(InvalidOperationTypeException.class,
+                () -> dataProcessorService.processInputData(data));
     }
 
     @Test

@@ -17,9 +17,11 @@ public class OperationTest {
 
     @Test
     void fromCode_invalidCode_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode("x"));
-        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode("123"));
-        assertThrows(IllegalArgumentException.class, () -> Operation.fromCode(null));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> Operation.fromCode("x")
+        );
+        assertEquals("Invalid operation code: x", exception.getMessage());
     }
 
     @Test

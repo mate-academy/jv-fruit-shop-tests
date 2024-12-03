@@ -17,7 +17,6 @@ public class Main {
     private static final String OUTPUT_FILE = "output.csv";
 
     public static void main(String[] args) {
-        FruitDB fruitDB = FruitDB.getInstance();
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
         DataConverter dataConverter = new DataConverter();
@@ -30,10 +29,12 @@ public class Main {
                 )
         );
         DataProcessor dataProcessor = new DataProcessor(operationStrategy);
-        ReportGenerator reportGenerator = new ReportGenerator(fruitDB);
+        ReportGenerator reportGenerator = new ReportGenerator();
+
         FruitShop fruitShop = new FruitShop(
                 fileReader, dataConverter, dataProcessor, reportGenerator, fileWriter
         );
+
         fruitShop.run(INPUT_FILE, OUTPUT_FILE);
     }
 }

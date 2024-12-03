@@ -1,5 +1,6 @@
 package core.basesyntax.dataprocessor;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,20 +12,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataProcessorTest {
-
     private DataProcessor dataProcessor;
 
     @BeforeEach
     void setUp() {
-        FruitDB.getInstance().getInventory().clear();
-        BalanceHandler balanceHandler = new BalanceHandler();
-        SupplyHandler supplyHandler = new SupplyHandler();
-        PurchaseHandler purchaseHandler = new PurchaseHandler();
+        FruitDB.getInventory().clear();
+
         DefaultDataOperationStrategy operationStrategy = new DefaultDataOperationStrategy(
                 Map.of(
-                        Operation.BALANCE, balanceHandler,
-                        Operation.SUPPLY, supplyHandler,
-                        Operation.PURCHASE, purchaseHandler
+                        Operation.BALANCE, new BalanceHandler(),
+                        Operation.SUPPLY, new SupplyHandler(),
+                        Operation.PURCHASE, new PurchaseHandler(),
+                        Operation.RETURN, new ReturnHandler()
                 )
         );
         dataProcessor = new DataProcessor(operationStrategy);
@@ -38,26 +37,32 @@ public class DataProcessorTest {
                 new FruitTransaction("p", "apple", 20)
         );
         dataProcessor.process(transactions);
-        assertEquals(30, FruitDB.getInstance().getInventory().get("apple").intValue());
-        assertEquals(30, FruitDB.getInstance().getInventory().get("banana").intValue());
+        assertEquals(30, FruitDB.getInventory().get("apple").intValue());
+        assertEquals(30, FruitDB.getInventory().get("banana").intValue());
     }
 
     @Test
     void process_emptyTransactionsList_doesNotChangeInventory() {
         List<FruitTransaction> transactions = List.of();
         dataProcessor.process(transactions);
-        assertEquals(0, FruitDB.getInstance().getInventory().size());
+        assertTrue(FruitDB.getInventory().isEmpty());
     }
 
     @Test
     void process_invalidOperation_throwsIllegalArgumentException() {
         List<FruitTransaction> transactions = List.of(new FruitTransaction("x", "apple", 50));
-        assertThrows(IllegalArgumentException.class, () -> dataProcessor.process(transactions));
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> dataProcessor.process(transactions)
+        );
+        assertEquals("Invalid operation code: x", exception.getMessage());
     }
 
     @Test
     void process_negativeQuantity_throwsIllegalArgumentException() {
         List<FruitTransaction> transactions = List.of(new FruitTransaction("s", "apple", -10));
+
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> dataProcessor.process(transactions)

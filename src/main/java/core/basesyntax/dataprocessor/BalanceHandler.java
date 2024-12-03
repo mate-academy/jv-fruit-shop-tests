@@ -10,7 +10,7 @@ public class BalanceHandler implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        Map<String, Integer> inventory = FruitDB.getInstance().getInventory();
+        Map<String, Integer> inventory = FruitDB.getInventory();
         inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
     }
 }

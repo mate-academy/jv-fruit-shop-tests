@@ -24,7 +24,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopTest {
-
     private String inputFilePath;
     private String outputFilePath;
     private FruitShop fruitShop;
@@ -34,7 +33,7 @@ class FruitShopTest {
         Path tempDir = Files.createTempDirectory("fruitshop-test");
         inputFilePath = tempDir.resolve("test_input.csv").toString();
         outputFilePath = tempDir.resolve("test_output.csv").toString();
-        FruitDB.getInstance().getInventory().clear();
+        FruitDB.getInventory().clear();
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
         DataConverter dataConverter = new DataConverter();
@@ -47,7 +46,7 @@ class FruitShopTest {
                 )
         );
         DataProcessor dataProcessor = new DataProcessor(operationStrategy);
-        ReportGenerator reportGenerator = new ReportGenerator(FruitDB.getInstance());
+        ReportGenerator reportGenerator = new ReportGenerator();
         fruitShop = new FruitShop(
                 fileReader, dataConverter, dataProcessor, reportGenerator, fileWriter
         );
@@ -63,6 +62,7 @@ class FruitShopTest {
     void tearDown() throws IOException {
         Path inputFile = Path.of(inputFilePath);
         Path outputFile = Path.of(outputFilePath);
+
         if (Files.exists(inputFile)) {
             inputFile.toFile().setWritable(true);
             Files.deleteIfExists(inputFile);
@@ -71,7 +71,8 @@ class FruitShopTest {
             outputFile.toFile().setWritable(true);
             Files.deleteIfExists(outputFile);
         }
-        FruitDB.getInstance().getInventory().clear();
+
+        FruitDB.getInventory().clear();
     }
 
     @Test
@@ -92,13 +93,11 @@ class FruitShopTest {
                 )
         );
         DataProcessor dataProcessor = new DataProcessor(strategy);
-        ReportGenerator reportGenerator = new ReportGenerator(FruitDB.getInstance());
+        ReportGenerator reportGenerator = new ReportGenerator();
         FileWriter fileWriter = new FileWriter();
-
         FruitShop fruitShop = new FruitShop(
                 fileReader, dataConverter, dataProcessor, reportGenerator, fileWriter
         );
-
         RuntimeException exception = assertThrows(
                 RuntimeException.class, () -> fruitShop.run(inputFilePath, outputFilePath)
         );

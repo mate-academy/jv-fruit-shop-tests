@@ -9,6 +9,6 @@ public class SupplyHandler implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        FruitDB.getInstance().add(fruit, quantity);
+        FruitDB.add(fruit, quantity);
     }
 }

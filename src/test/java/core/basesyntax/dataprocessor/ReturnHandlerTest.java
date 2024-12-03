@@ -12,32 +12,36 @@ public class ReturnHandlerTest {
 
     @BeforeEach
     void setUp() {
-        FruitDB.getInstance().getInventory().clear();
+        FruitDB.getInventory().clear();
         returnHandler = new ReturnHandler();
-        FruitDB.getInstance().add("apple", 50);
-        FruitDB.getInstance().add("banana", 30);
+        FruitDB.add("apple", 50);
+        FruitDB.add("banana", 30);
     }
 
     @Test
     void apply_validReturn_increasesInventory() {
         returnHandler.apply("apple", 20);
-        assertEquals(70, FruitDB.getInstance().getInventory().get("apple").intValue());
+        assertEquals(70, FruitDB.getInventory().get("apple").intValue());
     }
 
     @Test
     void apply_newFruitAdded_increasesInventory() {
         returnHandler.apply("orange", 15);
-        assertEquals(15, FruitDB.getInstance().getInventory().get("orange").intValue());
+        assertEquals(15, FruitDB.getInventory().get("orange").intValue());
     }
 
     @Test
     void apply_zeroQuantity_doesNotChangeInventory() {
         returnHandler.apply("apple", 0);
-        assertEquals(50, FruitDB.getInstance().getInventory().get("apple").intValue());
+        assertEquals(50, FruitDB.getInventory().get("apple").intValue());
     }
 
     @Test
     void apply_negativeQuantity_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> returnHandler.apply("apple", -10));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> returnHandler.apply("apple", -10)
+        );
+        assertEquals("Quantity cannot be negative", exception.getMessage());
     }
 }

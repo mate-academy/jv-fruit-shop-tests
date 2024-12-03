@@ -4,17 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FruitTransaction;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
-
     private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
-
+    private static final String SEPARATOR = ",";
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String ORANGE = "orange";
@@ -28,10 +26,10 @@ public class DataConverterTest {
 
     @Test
     void convert_validRawData_returnsCorrectTransactions() {
-        List<String> rawData = Arrays.asList(
-                BALANCE + "," + APPLE + ",50",
-                SUPPLY + "," + BANANA + ",20",
-                PURCHASE + "," + ORANGE + ",15"
+        List<String> rawData = List.of(
+                BALANCE + SEPARATOR + APPLE + ",50",
+                SUPPLY + SEPARATOR + BANANA + ",20",
+                PURCHASE + SEPARATOR + ORANGE + ",15"
         );
 
         List<FruitTransaction> transactions = dataConverter.convert(rawData);
@@ -52,16 +50,26 @@ public class DataConverterTest {
     }
 
     @Test
-    void convert_invalidQuantity_throwsNumberFormatException() {
-        List<String> rawData = List.of(BALANCE + "," + APPLE + ",invalid");
+    void convert_invalidQuantity_throwsCustomException() {
+        List<String> rawData = List.of(BALANCE + SEPARATOR + APPLE + ",invalid");
 
-        assertThrows(NumberFormatException.class, () -> dataConverter.convert(rawData));
+        DataConversionException exception = assertThrows(
+                DataConversionException.class,
+                () -> dataConverter.convert(rawData)
+        );
+        assertEquals("Invalid quantity in record: "
+                + BALANCE + SEPARATOR + APPLE + ",invalid", exception.getMessage());
     }
 
     @Test
-    void convert_missingFields_throwsArrayIndexOutOfBoundsException() {
-        List<String> rawData = List.of(BALANCE + "," + APPLE);
+    void convert_missingFields_throwsCustomException() {
+        List<String> rawData = List.of(BALANCE + SEPARATOR + APPLE);
 
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> dataConverter.convert(rawData));
+        DataConversionException exception = assertThrows(
+                DataConversionException.class,
+                () -> dataConverter.convert(rawData)
+        );
+        assertEquals("Invalid record format: "
+                + BALANCE + SEPARATOR + APPLE, exception.getMessage());
     }
 }

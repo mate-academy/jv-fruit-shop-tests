@@ -10,7 +10,7 @@ public class PurchaseHandler implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        Map<String, Integer> inventory = FruitDB.getInstance().getInventory();
+        Map<String, Integer> inventory = FruitDB.getInventory();
         if (!inventory.containsKey(fruit) || inventory.get(fruit) < quantity) {
             throw new IllegalArgumentException("Not enough inventory to subtract");
         }

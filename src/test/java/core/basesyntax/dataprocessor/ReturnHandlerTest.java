@@ -8,39 +8,40 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnHandlerTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private ReturnHandler returnHandler;
 
     @BeforeEach
     void setUp() {
         FruitDB.getInventory().clear();
         returnHandler = new ReturnHandler();
-        FruitDB.add("apple", 50);
-        FruitDB.add("banana", 30);
+        FruitDB.add(APPLE, 50);
     }
 
     @Test
     void apply_validReturn_increasesInventory() {
-        returnHandler.apply("apple", 20);
-        assertEquals(70, FruitDB.getInventory().get("apple").intValue());
+        returnHandler.apply(APPLE, 20);
+        assertEquals(70, FruitDB.getInventory().get(APPLE).intValue());
     }
 
     @Test
     void apply_newFruitAdded_increasesInventory() {
-        returnHandler.apply("orange", 15);
-        assertEquals(15, FruitDB.getInventory().get("orange").intValue());
+        returnHandler.apply(BANANA, 15);
+        assertEquals(15, FruitDB.getInventory().get(BANANA).intValue());
     }
 
     @Test
     void apply_zeroQuantity_doesNotChangeInventory() {
-        returnHandler.apply("apple", 0);
-        assertEquals(50, FruitDB.getInventory().get("apple").intValue());
+        returnHandler.apply(APPLE, 0);
+        assertEquals(50, FruitDB.getInventory().get(APPLE).intValue());
     }
 
     @Test
     void apply_negativeQuantity_throwsIllegalArgumentException() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> returnHandler.apply("apple", -10)
+                () -> returnHandler.apply(APPLE, -10)
         );
         assertEquals("Quantity cannot be negative", exception.getMessage());
     }

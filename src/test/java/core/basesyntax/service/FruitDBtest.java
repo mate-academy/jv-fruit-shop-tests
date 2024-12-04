@@ -12,7 +12,7 @@ public class FruitDBtest {
 
     @BeforeEach
     void setUp() {
-        FruitDB.getInventory().clear(); // Clear the inventory before each test
+        FruitDB.getInventory().clear();
     }
 
     @Test

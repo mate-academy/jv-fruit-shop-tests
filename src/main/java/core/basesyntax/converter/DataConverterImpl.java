@@ -1,24 +1,29 @@
 package core.basesyntax.converter;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String SEPARATOR = ",";
+    private static final int HEADER_INDEX = 1;
+    private static final int EXPECTED_FIELDS_COUNT = 3;
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> convertedTransaction = new ArrayList<>();
-        for (int i = 1; i < data.size(); i++) { // Skip header
-            String[] parts = data.get(i).split(",");
+        for (int i = HEADER_INDEX; i < data.size(); i++) {
+            String[] parts = data.get(i).split(SEPARATOR);
 
-            if (parts.length != 3) {
+            if (parts.length != EXPECTED_FIELDS_COUNT) {
                 throw new IllegalArgumentException("Invalid number of fields in row: "
                         + data.get(i));
             }
 
             FruitTransaction.Operation operation;
             try {
-                operation = mapOperation(parts[0]);
+                operation = getOperation(parts[0]);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid operation code in row: "
                         + data.get(i), e);
@@ -38,13 +43,12 @@ public class DataConverterImpl implements DataConverter {
         return convertedTransaction;
     }
 
-    private FruitTransaction.Operation mapOperation(String code) {
-        return switch (code) {
-            case "b" -> FruitTransaction.Operation.BALANCE;
-            case "s" -> FruitTransaction.Operation.SUPPLY;
-            case "p" -> FruitTransaction.Operation.PURCHASE;
-            case "r" -> FruitTransaction.Operation.RETURN;
-            default -> throw new IllegalArgumentException("Unknown operation code: " + code);
-        };
+    public static Operation getOperation(String code) {
+        for (Operation value : Operation.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException(code + " operation doesn't exist.");
     }
 }

@@ -28,7 +28,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    void testValidOperation_ReturnsCorrectHandler() {
+    void operationStrategy_returnsCorrectHandler_ok() {
         OperationHandler handler = operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
 
         Assertions.assertTrue(handler instanceof SupplyOperation,
@@ -36,9 +36,9 @@ public class OperationStrategyTest {
     }
 
     @Test
-    void testNullOperation_ThrowsException() {
-        Assertions.assertThrows(NullPointerException.class,
+    void operationStrategy_empty_notOk() {
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> operationStrategy.getHandler(null),
-                "NullPointerException.");
+                "IllegalArgumentException.");
     }
 }

@@ -15,7 +15,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
         OperationHandler handler = operationHandlerMap.get(operation);
         if (handler == null) {
-            throw new NullPointerException("No handler found for operation: " + operation);
+            throw new IllegalArgumentException("No handler found for operation: " + operation);
         }
         return handler;
     }

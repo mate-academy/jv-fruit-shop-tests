@@ -35,7 +35,7 @@ public class FileReaderTest {
     }
 
     @Test
-    void readFromFile_fileDoesNotExist_throwsRuntimeException() {
+    void readFromFile_fileDoesNotExist_notOk() {
         String nonExistentFilePath = "src/main/resources/nonExistentFile.csv";
 
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
@@ -47,7 +47,7 @@ public class FileReaderTest {
     }
 
     @Test
-    void readFromFile_directoryInsteadOfFile_throwsRuntimeException() {
+    void readFromFile_directoryInsteadOfFile_notOk() {
         String directoryPath = "src/main/resources/testDirectory";
         Path directory = Path.of(directoryPath);
         try {

@@ -27,7 +27,6 @@ public class ReportGeneratorTest {
 
     @Test
     void reportGenerator_EmptyStorage_notOk() {
-        String expected = "No records to report";
-        Assertions.assertEquals(expected, reportGenerator.getReport());
+        Assertions.assertThrows(RuntimeException.class, () -> reportGenerator.getReport());
     }
 }

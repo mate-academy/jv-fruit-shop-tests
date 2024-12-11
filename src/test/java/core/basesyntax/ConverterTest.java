@@ -17,7 +17,7 @@ public class ConverterTest {
     }
 
     @Test
-    void converter_testConverterToTransactions_ok() {
+    void converter_validTransactions_ok() {
         List<String> inputData = List.of(
                 "operation,fruit,quantity",
                 "b,banana,20",
@@ -31,17 +31,17 @@ public class ConverterTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10)
         );
         Assertions.assertEquals(expectedTransaction.size(), actualTransaction.size(),
-                "Кількість транзакцій не збігається");
+                "The number of transactions does not match");
         for (int i = 0; i < expectedTransaction.size(); i++) {
             FruitTransaction expected = expectedTransaction.get(i);
             FruitTransaction actual = actualTransaction.get(i);
 
             Assertions.assertEquals(expected.getOperation(), actual.getOperation(),
-                    "Операції не збігаються");
+                    "Transactions do not match");
             Assertions.assertEquals(expected.getFruit(), actual.getFruit(),
-                    "Фрукти не збігаються");
+                    "The fruits do not match");
             Assertions.assertEquals(expected.getQuantity(), actual.getQuantity(),
-                    "Кількість не збігається");
+                    "The quantity does not match");
         }
     }
 

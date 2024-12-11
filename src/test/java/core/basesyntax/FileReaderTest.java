@@ -48,24 +48,25 @@ public class FileReaderTest {
 
     @Test
     void readFromFile_directoryInsteadOfFile_notOk() {
-        String directoryPath = "src/main/resources/testDirectory";
-        Path directory = Path.of(directoryPath);
+        Path tempDirectory = null;
         try {
-            Files.createDirectory(directory);
-
+            tempDirectory = Files.createTempDirectory("testDirectory");
+            Path finalTempDirectory = tempDirectory;
             RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
-                fileReader.readFromFile(directoryPath);
+                fileReader.readFromFile(finalTempDirectory.toString());
             });
 
             Assertions.assertTrue(exception.getMessage()
-                    .contains("Can't read file " + directoryPath));
+                    .contains("Can't read file " + tempDirectory));
         } catch (IOException e) {
-            Assertions.fail("Failed to create test directory");
+            Assertions.fail("Failed to create temporary directory", e);
         } finally {
-            try {
-                Files.deleteIfExists(directory);
-            } catch (IOException e) {
-                Assertions.fail("Failed to delete test directory");
+            if (tempDirectory != null) {
+                try {
+                    Files.deleteIfExists(tempDirectory);
+                } catch (IOException e) {
+                    Assertions.fail("Failed to delete temporary directory", e);
+                }
             }
         }
     }

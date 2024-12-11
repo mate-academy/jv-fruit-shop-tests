@@ -11,8 +11,6 @@ import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
@@ -26,26 +24,28 @@ public class ShopServiceTest {
     void setUp() {
         Storage.fruits.clear();
 
-        Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation()
+        );
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @Test
     void shopServiceTest_validTransaction_ok() {
-        List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", 0));
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "banana", 10));
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 5));
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "banana", 5));
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(
+                        FruitTransaction.Operation.BALANCE, "banana", 0),
+                new FruitTransaction(
+                        FruitTransaction.Operation.SUPPLY, "banana", 10),
+                new FruitTransaction(
+                        FruitTransaction.Operation.PURCHASE, "banana", 5),
+                new FruitTransaction(
+                        FruitTransaction.Operation.RETURN, "banana", 5)
+        );
         shopService.process(transactions);
         Integer banana = Storage.fruits.getOrDefault("banana", 0);
         Assertions.assertEquals(10, banana);
@@ -53,11 +53,12 @@ public class ShopServiceTest {
 
     @Test
     void shopServiceTest_invalidTransaction_notOk() {
-        List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", -50));
-        transactions.add(new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 20));
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(
+                        FruitTransaction.Operation.BALANCE, "banana", -50),
+                new FruitTransaction(
+                        FruitTransaction.Operation.PURCHASE, "banana", 20)
+        );
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
     }

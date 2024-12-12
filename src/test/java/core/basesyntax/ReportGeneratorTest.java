@@ -1,9 +1,11 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.generator.ReportGenerator;
 import core.basesyntax.generator.ReportGeneratorImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,15 +20,16 @@ public class ReportGeneratorTest {
     }
 
     @Test
-    void reportGenerator_validReport_ok() {
+    void generateReport_validReport_ok() {
         Storage.fruits.put("banana", 10);
         Storage.fruits.put("apple", 20);
         String expected = "banana,10\napple,20\n";
-        Assertions.assertEquals(expected, reportGenerator.getReport());
+        assertEquals(expected, reportGenerator.getReport());
     }
 
     @Test
-    void reportGenerator_EmptyStorage_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> reportGenerator.getReport());
+    void generateReport_emptyStorage_notOk() {
+        assertThrows(RuntimeException.class, () -> reportGenerator.getReport(),
+                "Generating a report with an empty storage should throw a RuntimeException.");
     }
 }

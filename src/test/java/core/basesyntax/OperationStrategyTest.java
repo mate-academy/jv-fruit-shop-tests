@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.OperationStrategy;
 import core.basesyntax.handler.OperationStrategyImpl;
@@ -10,7 +13,6 @@ import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,17 +30,45 @@ public class OperationStrategyTest {
     }
 
     @Test
-    void operationStrategy_returnsCorrectHandler_ok() {
-        OperationHandler handler = operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
+    void operationStrategy_returnsCorrectHandlerForSupply_ok() {
+        OperationHandler handler = operationStrategy.getHandler(
+                FruitTransaction.Operation.SUPPLY);
 
-        Assertions.assertTrue(handler instanceof SupplyOperation,
+        assertTrue(handler instanceof SupplyOperation,
                 "Handler for SUPPLY should be of type SupplyOperation.");
     }
 
     @Test
+    void operationStrategy_returnsCorrectHandlerForPurchase_ok() {
+        OperationHandler handler = operationStrategy.getHandler(
+                FruitTransaction.Operation.PURCHASE);
+
+        assertTrue(handler instanceof PurchaseOperation,
+                "Handler for Purchase should be of type PurchaseOperation.");
+    }
+
+    @Test
+    void operationStrategy_returnsCorrectHandlerForBalance_ok() {
+        OperationHandler handler = operationStrategy.getHandler(
+                FruitTransaction.Operation.BALANCE);
+
+        assertTrue(handler instanceof BalanceOperation,
+                "Handler for Balance should be of type BalanceOperation.");
+    }
+
+    @Test
+    void operationStrategy_returnsCorrectHandlerForReturn_ok() {
+        OperationHandler handler = operationStrategy.getHandler(
+                FruitTransaction.Operation.RETURN);
+
+        assertTrue(handler instanceof ReturnOperation,
+                "Handler for Return should be of type ReturnOperation.");
+    }
+
+    @Test
     void operationStrategy_empty_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> operationStrategy.getHandler(null),
-                "IllegalArgumentException.");
+                "Expected IllegalArgumentException when operation is null.");
     }
 }

@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.OperationStrategy;
@@ -13,7 +16,6 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    void shopServiceTest_validTransaction_ok() {
+    void shopService_validTransaction_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(
                         FruitTransaction.Operation.BALANCE, "banana", 0),
@@ -48,18 +50,20 @@ public class ShopServiceTest {
         );
         shopService.process(transactions);
         Integer banana = Storage.fruits.getOrDefault("banana", 0);
-        Assertions.assertEquals(10, banana);
+        assertEquals(10, banana);
     }
 
     @Test
-    void shopServiceTest_invalidTransaction_notOk() {
+    void shopService_invalidTransaction_notOk() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(
                         FruitTransaction.Operation.BALANCE, "banana", -50),
                 new FruitTransaction(
                         FruitTransaction.Operation.PURCHASE, "banana", 20)
         );
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> shopService.process(transactions));
+        assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions),
+                "Processing transactions with invalid quantities"
+                        + " should throw an IllegalArgumentException.");
     }
 }

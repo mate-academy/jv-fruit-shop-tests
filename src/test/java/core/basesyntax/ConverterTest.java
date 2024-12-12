@@ -1,10 +1,12 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.converter.DataConverter;
 import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,7 @@ public class ConverterTest {
     }
 
     @Test
-    void converter_validTransactions_ok() {
+    void convertToTransaction_validTransactions_ok() {
         List<String> inputData = List.of(
                 "operation,fruit,quantity",
                 "b,banana,20",
@@ -30,31 +32,31 @@ public class ConverterTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10)
         );
-        Assertions.assertEquals(expectedTransaction.size(), actualTransaction.size(),
+        assertEquals(expectedTransaction.size(), actualTransaction.size(),
                 "The number of transactions does not match");
         for (int i = 0; i < expectedTransaction.size(); i++) {
             FruitTransaction expected = expectedTransaction.get(i);
             FruitTransaction actual = actualTransaction.get(i);
 
-            Assertions.assertEquals(expected.getOperation(), actual.getOperation(),
+            assertEquals(expected.getOperation(), actual.getOperation(),
                     "Transactions do not match");
-            Assertions.assertEquals(expected.getFruit(), actual.getFruit(),
+            assertEquals(expected.getFruit(), actual.getFruit(),
                     "The fruits do not match");
-            Assertions.assertEquals(expected.getQuantity(), actual.getQuantity(),
+            assertEquals(expected.getQuantity(), actual.getQuantity(),
                     "The quantity does not match");
         }
     }
 
     @Test
-    void converter_testInvalidDataToConvert_notOk() {
+    void convertToTransaction_testInvalidDataToConvert_notOk() {
         List<String> input = List.of(
                 "type,fruit,quantity",
                 "b,banana"
         );
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(input);
         });
-        Assertions.assertEquals("Invalid number of fields in row: b,banana",
+        assertEquals("Invalid number of fields in row: b,banana",
                 exception.getMessage());
     }
 
@@ -65,10 +67,10 @@ public class ConverterTest {
                 "p,banana,notANumber"
         );
 
-        Exception exception = Assertions.assertThrows(NumberFormatException.class, () -> {
+        Exception exception = assertThrows(NumberFormatException.class, () -> {
             dataConverter.convertToTransaction(input);
         });
-        Assertions.assertEquals("Invalid quantity for fruit 'banana': notANumber",
+        assertEquals("Invalid quantity for fruit 'banana': notANumber",
                 exception.getMessage());
     }
 
@@ -78,10 +80,10 @@ public class ConverterTest {
                 "type,fruit,quantity",
                 "p,banana,10, extraField"
         );
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(input);
         });
-        Assertions.assertEquals("Invalid number of fields in row: p,banana,10, extraField",
+        assertEquals("Invalid number of fields in row: p,banana,10, extraField",
                 exception.getMessage());
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
@@ -7,7 +9,6 @@ import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class OperationHandlerTest {
                 "banana", 0);
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.apply(transaction);
-        Assertions.assertEquals(0, Storage.fruits.get("banana"));
+        assertEquals(0, Storage.fruits.get("banana"));
     }
 
     @Test
@@ -33,7 +34,7 @@ public class OperationHandlerTest {
                 FruitTransaction.Operation.SUPPLY, "apple", 10);
         OperationHandler supplyOperation = new SupplyOperation();
         supplyOperation.apply(transaction);
-        Assertions.assertEquals(10, Storage.fruits.get("apple"));
+        assertEquals(10, Storage.fruits.get("apple"));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class OperationHandlerTest {
                 FruitTransaction.Operation.PURCHASE, "apple", 50);
         OperationHandler purchaseOperation = new PurchaseOperation();
         purchaseOperation.apply(transaction);
-        Assertions.assertEquals(50, Storage.fruits.get("apple"));
+        assertEquals(50, Storage.fruits.get("apple"));
     }
 
     @Test
@@ -53,6 +54,6 @@ public class OperationHandlerTest {
                 FruitTransaction.Operation.RETURN, "banana", 10);
         OperationHandler returnOperation = new ReturnOperation();
         returnOperation.apply(transaction);
-        Assertions.assertEquals(20, Storage.fruits.get("banana"));
+        assertEquals(20, Storage.fruits.get("banana"));
     }
 }

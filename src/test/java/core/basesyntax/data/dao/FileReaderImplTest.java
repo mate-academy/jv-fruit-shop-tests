@@ -3,16 +3,16 @@ package core.basesyntax.data.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.data.exeption.UnknownOperationException;
+import core.basesyntax.data.exeption.FileException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private static final String TEST_FILE_NAME = "src/reports/report";
-    private static final String NON_EXISTENT_FILE_NAME = "src/reports/nonExistent.csv";
-    private static final String EMPTY_FILE_NAME = "src/reports/empty.csv";
+    private static final String TEST_FILE_NAME = "src/resources/test.csv";
+    private static final String NON_EXISTENT_FILE_NAME = "src/resources/nonExistent.csv";
+    private static final String EMPTY_FILE_NAME = "src/resources/empty.csv";
     private static final List<String> EMPTY_LIST = new ArrayList<>();
     private static List<String> EXPECTED;
     private static FileReader fileReader;
@@ -20,7 +20,7 @@ public class FileReaderImplTest {
     @BeforeAll
     static void beforeAll() {
         fileReader = new FileReaderImpl();
-        EXPECTED = List.of("fruit,quantity", "banana,130", "apple,150");
+        EXPECTED = List.of("fruit,quantity", "banana,108", "apple,88");
     }
 
     @Test
@@ -31,11 +31,10 @@ public class FileReaderImplTest {
 
     @Test
     void read_fromNonExistentFile_NotOk() {
-        assertThrows(UnknownOperationException.class,
+        assertThrows(FileException.class,
                 () -> fileReader.readFile(NON_EXISTENT_FILE_NAME),
                 "Can't read data from file name: "
                         + NON_EXISTENT_FILE_NAME);
-
     }
 
     @Test

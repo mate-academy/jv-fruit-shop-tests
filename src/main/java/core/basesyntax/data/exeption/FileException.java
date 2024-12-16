@@ -1,0 +1,7 @@
+package core.basesyntax.data.exeption;
+
+public class FileException extends RuntimeException {
+    public FileException(String message, Throwable cause) {
+        super(message,cause);
+    }
+}

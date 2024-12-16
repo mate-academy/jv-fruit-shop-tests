@@ -3,6 +3,7 @@ package core.basesyntax.data.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.data.exeption.OperationException;
 import core.basesyntax.data.model.FruitTransaction;
 import core.basesyntax.data.model.OperationType;
 import core.basesyntax.data.servise.DataConverter;
@@ -12,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class DataConverterImplTest {
+ class DataConverterImplTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String HEADER = "type,fruit,quantity";

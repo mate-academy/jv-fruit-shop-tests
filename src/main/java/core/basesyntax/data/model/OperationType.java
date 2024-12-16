@@ -24,4 +24,3 @@ public enum OperationType {
         throw new IllegalArgumentException("No enum constant for code: " + code);
     }
 }
-

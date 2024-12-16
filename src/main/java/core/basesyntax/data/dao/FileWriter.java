@@ -1,5 +1,7 @@
 package core.basesyntax.data.dao;
 
+import java.util.List;
+
 public interface FileWriter {
-    void writeFile(String filePath, String report);
+    List<String> writeFile(String filePath, String report);
 }

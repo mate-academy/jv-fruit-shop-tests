@@ -1,6 +1,6 @@
 package core.basesyntax.data.dao;
 
-import core.basesyntax.data.exeption.UnknownOperationException;
+import core.basesyntax.data.exeption.FileException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +14,7 @@ public class FileReaderImpl implements FileReader {
         try {
             reportList = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new UnknownOperationException("Can't read data from file: " + filePath, e);
+            throw new FileException("Can't read data from file: " + filePath, e);
         }
         return reportList;
     }

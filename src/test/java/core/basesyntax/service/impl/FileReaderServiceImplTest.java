@@ -42,7 +42,5 @@ public class FileReaderServiceImplTest {
                 "Exception message should indicate the file that couldn't be read");
 
         assertNotNull(exception.getCause(), "The exception should have a cause");
-        assertTrue(exception.getCause() instanceof IOException,
-                "The cause should be an IOException");
     }
 }

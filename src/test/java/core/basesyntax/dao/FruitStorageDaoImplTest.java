@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.dp.Storage;
 import java.util.Map;
 import java.util.Set;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,10 @@ public class FruitStorageDaoImplTest {
     @BeforeEach
     public void setUp() {
         fruitStorageDao = new FruitStorageDaoImpl();
+    }
+
+    @AfterEach
+    public void tearDown() {
         Storage.storage.clear();
     }
 

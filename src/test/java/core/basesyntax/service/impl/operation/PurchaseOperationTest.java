@@ -38,7 +38,6 @@ public class PurchaseOperationTest {
 
     @Test
     public void testDoOperation_insufficientQuantity_notOk() {
-        // Arrange
         String fruitName = "apple";
         Integer initialQuantity = 20;
         Integer purchaseQuantity = 30;

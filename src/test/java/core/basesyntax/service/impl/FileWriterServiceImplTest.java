@@ -40,22 +40,24 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    void testWriteToFile_shouldThrowException_whenIoExceptionOccurs_notOk() throws IOException {
+    void testWriteToFile_shouldThrowRuntimeException_whenIoExceptionOccurs() throws IOException {
         String validPath = "test_report.txt";
         String reportContent = "Test report content";
 
         Path path = Paths.get(validPath);
-        Files.deleteIfExists(path); // Clean up if the file exists
+        Files.deleteIfExists(path);
 
         try (var mockedFiles = Mockito.mockStatic(Files.class)) {
-            mockedFiles.when(
-                    () -> Files.writeString(path, reportContent, StandardOpenOption.CREATE))
+            mockedFiles.when(() ->
+                            Files.writeString(path, reportContent, StandardOpenOption.CREATE))
                     .thenThrow(new IOException("Simulated IOException"));
 
-            assertThrows(RuntimeException.class,
+            RuntimeException exception = assertThrows(RuntimeException.class,
                     () -> fileWriterService.writeToFile(validPath, reportContent));
+
+            assertEquals("Can't write file " + validPath, exception.getMessage());
+            assertTrue(exception.getCause() instanceof IOException,
+                    "Expected cause to be an IOException");
         }
     }
 }
-
-

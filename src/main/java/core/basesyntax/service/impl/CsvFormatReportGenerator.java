@@ -21,7 +21,7 @@ public class CsvFormatReportGenerator implements ReportGenerator {
         stringBuilder.append(START_MESSAGE);
 
         storageDao.getAll().stream()
-                .sorted(Comparator.comparing(Map.Entry::getKey)) // Sort by fruit name
+                .sorted(Comparator.comparing(Map.Entry::getKey))
                 .forEach(e -> stringBuilder.append(LINE_SEPARATOR)
                         .append(e.getKey())
                         .append(CSV_SEPARATOR)

@@ -12,7 +12,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -26,7 +25,6 @@ public class ShopServiceImplTest {
     @Mock
     private OperationHandler purchaseHandler;
 
-    @InjectMocks
     private ShopServiceImpl shopService;
 
     @BeforeEach

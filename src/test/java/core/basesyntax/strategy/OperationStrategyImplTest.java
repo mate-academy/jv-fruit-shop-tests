@@ -1,62 +1,84 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.operation.OperationHandler;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class OperationStrategyImplTest {
+class OperationStrategyImplTest {
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private OperationStrategyImpl operationStrategy;
+
     private OperationHandler balanceHandler;
+    private OperationHandler supplyHandler;
     private OperationHandler purchaseHandler;
+    private OperationHandler returnHandler;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         balanceHandler = mock(OperationHandler.class);
+        supplyHandler = mock(OperationHandler.class);
         purchaseHandler = mock(OperationHandler.class);
+        returnHandler = mock(OperationHandler.class);
 
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, balanceHandler,
-                FruitTransaction.Operation.PURCHASE, purchaseHandler
+        operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, balanceHandler);
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyHandler);
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, purchaseHandler);
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, returnHandler);
+
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    }
+
+    @Test
+    void getOperationHandler_balance_OK() {
+        OperationHandler result = operationStrategy
+                .getOperationHandler(FruitTransaction.Operation.BALANCE);
+        assertEquals(balanceHandler, result, "Expected BALANCE handler to be returned.");
+    }
+
+    @Test
+    void getOperationHandler_supply_OK() {
+        OperationHandler result = operationStrategy
+                .getOperationHandler(FruitTransaction.Operation.SUPPLY);
+        assertEquals(supplyHandler, result, "Expected SUPPLY handler to be returned.");
+    }
+
+    @Test
+    void getOperationHandler_purchase_OK() {
+        OperationHandler result = operationStrategy
+                .getOperationHandler(FruitTransaction.Operation.PURCHASE);
+        assertEquals(purchaseHandler, result, "Expected PURCHASE handler to be returned.");
+    }
+
+    @Test
+    void getOperationHandler_return_OK() {
+        OperationHandler result = operationStrategy
+                .getOperationHandler(FruitTransaction.Operation.RETURN);
+        assertEquals(returnHandler, result, "Expected RETURN handler to be returned.");
+    }
+
+    @Test
+    void getOperationHandler_invalidOperation_notOK() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                operationStrategy.getOperationHandler(null)
         );
-
-        operationStrategy = new OperationStrategyImpl(handlerMap);
+        assertEquals("No handler found for operation: null", exception.getMessage());
     }
 
     @Test
-    public void testGetOperationHandlerForBalanceOperation_ok() {
-        OperationHandler handler =
-                operationStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE);
+    void getOperationHandler_unmappedOperation_notOK() {
+        operationHandlerMap.remove(FruitTransaction.Operation.RETURN);
 
-        assertNotNull(handler, "Handler should not be null");
-        assertEquals(balanceHandler, handler, "Should return the balance handler");
-    }
-
-    @Test
-    public void testGetOperationHandlerForPurchaseOperation_ok() {
-        OperationHandler handler =
-                operationStrategy.getOperationHandler(FruitTransaction.Operation.PURCHASE);
-
-        assertNotNull(handler, "Handler should not be null");
-        assertEquals(purchaseHandler, handler, "Should return the purchase handler");
-    }
-
-    @Test
-    public void testGetOperationHandlerForUnsupportedOperation_notOk() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> operationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN),
-                "Expected exception for unsupported operation"
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                operationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN)
         );
-
-        assertTrue(exception.getMessage().contains("No handler found for operation: RETURN"),
-                "Exception message should mention missing handler for RETURN operation");
+        assertEquals("No handler found for operation: RETURN", exception.getMessage());
     }
 }

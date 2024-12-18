@@ -69,7 +69,7 @@ public class FruitTransactionTest {
                 "Expected exception for invalid operation letter"
         );
 
-        assertTrue(exception.getMessage().contains("No enum constant for letter: x"),
+        assertTrue(exception.getMessage().contains("Operation not found by code: x"),
                 "Exception message should mention missing operation for letter 'x'");
     }
 

@@ -13,34 +13,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String letter;
-
-        Operation(String operation) {
-            this.letter = operation;
-        }
-
-        public String getLetter() {
-            return letter;
-        }
-
-        public static FruitTransaction.Operation getOperation(String letter) {
-            return Arrays.stream(FruitTransaction.Operation.values())
-                    .filter(a -> a.getLetter().equals(letter))
-                    .findFirst()
-                    .orElseThrow(
-                            () -> new IllegalArgumentException(
-                                    "No enum constant for letter: " + letter
-                            )
-                    );
-        }
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -72,5 +44,33 @@ public class FruitTransaction {
                 + ", fruit='" + fruit + '\''
                 + ", quantity=" + quantity
                 + '}';
+    }
+
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String letter;
+
+        Operation(String operation) {
+            this.letter = operation;
+        }
+
+        public String getLetter() {
+            return letter;
+        }
+
+        public static FruitTransaction.Operation getOperation(String letter) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(a -> a.getLetter().equals(letter))
+                    .findFirst()
+                    .orElseThrow(
+                            () -> new IllegalArgumentException(
+                                    "Operation not found by code: " + letter
+                            )
+                    );
+        }
     }
 }

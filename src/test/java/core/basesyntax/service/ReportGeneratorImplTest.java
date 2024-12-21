@@ -24,7 +24,7 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_validData_ok() {
-        String expectedReport = "fruit,quantity\nbanana,100\napple,200\n";
+        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,100" + System.lineSeparator() + "apple,200" + System.lineSeparator();
         String actualReport = reportGenerator.getReport();
         assertEquals(expectedReport, actualReport);
     }

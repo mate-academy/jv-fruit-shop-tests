@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class FileReaderServiceImplTest {
     @BeforeEach
     void setUp() throws IOException {
         fileReaderService = new FileReaderServiceImpl();
-        tempFile = File.createTempFile("test-data", ".txt");
+        tempFile = File.createTempFile("resources/test-data", ".csv");
         try (FileWriter writer = new FileWriter(tempFile)) {
             writer.write("b,banana,20\n");
             writer.write("b,apple,100\n");
@@ -32,36 +34,49 @@ class FileReaderServiceImplTest {
         }
     }
 
+    @AfterEach
+    void tearDown() {
+        if (tempFile != null && tempFile.exists()) {
+            tempFile.delete();
+        }
+    }
+
     @Test
     void readFile_validFile_ok() {
-        List<String> lines = fileReaderService.readFile(tempFile.getAbsolutePath());
-        assertNotNull(lines);
-        assertEquals(8, lines.size());
+        List<String> expectedLines = List.of(
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50"
+        );
 
-        assertEquals("b,banana,20", lines.get(0));
-        assertEquals("b,apple,100", lines.get(1));
-        assertEquals("s,banana,100", lines.get(2));
-        assertEquals("p,banana,13", lines.get(3));
-        assertEquals("r,apple,10", lines.get(4));
-        assertEquals("p,apple,20", lines.get(5));
-        assertEquals("p,banana,5", lines.get(6));
-        assertEquals("s,banana,50", lines.get(7));
+        List<String> lines = fileReaderService.readFile(tempFile.getAbsolutePath());
+
+        assertNotNull(lines);
+        assertEquals(expectedLines, lines);
     }
 
     @Test
     void readFile_fileDoesNotExist_notOk() {
-        String invalidPath = "non-existent-file.txt";
+        String invalidPath = "non-existent-file.csv";
         Exception exception = assertThrows(RuntimeException.class, () ->
                 fileReaderService.readFile(invalidPath));
-        assertTrue(exception.getMessage().contains("Can not read the file"));
+        assertEquals("Can not read the file", exception.getMessage());
     }
 
     @Test
     void readFile_emptyFile_ok() throws IOException {
         File emptyFile = File.createTempFile("empty-data", ".txt");
-        List<String> lines = fileReaderService.readFile(emptyFile.getAbsolutePath());
-        assertNotNull(lines);
-        assertTrue(lines.isEmpty());
-        emptyFile.deleteOnExit();
+        try {
+            List<String> lines = fileReaderService.readFile(emptyFile.getAbsolutePath());
+            assertNotNull(lines);
+            assertTrue(lines.isEmpty());
+        } finally {
+            emptyFile.delete();
+        }
     }
 }

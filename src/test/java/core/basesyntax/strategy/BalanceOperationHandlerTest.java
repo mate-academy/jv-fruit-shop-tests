@@ -13,7 +13,6 @@ class BalanceOperationHandlerTest {
     @BeforeEach
     void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
-        Storage.fruits.clear();
     }
 
     @AfterEach

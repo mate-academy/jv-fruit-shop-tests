@@ -25,16 +25,10 @@ class DataConverterImplTest {
 
         assertEquals(2, transactions.size());
 
-        FruitTransaction transaction1 = transactions.get(0);
-        assertEquals(FruitTransaction.Operation.BALANCE, transaction1.getOperation());
-        assertEquals("apple", transaction1.getFruit());
-        assertEquals(20, transaction1.getQuantity());
-
-        FruitTransaction transaction2 = transactions.get(1);
-        assertEquals(FruitTransaction.Operation.SUPPLY, transaction2.getOperation());
-        assertEquals("banana", transaction2.getFruit());
-        assertEquals(10, transaction2.getQuantity());
+        assertEquals(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20), transactions.get(0));
+        assertEquals(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10), transactions.get(1));
     }
+
 
     @Test
     void convertToTransaction_invalidFormat_notOk() {
@@ -57,7 +51,7 @@ class DataConverterImplTest {
         List<String> input = List.of("x,apple,20");
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
                 dataConverter.convertToTransaction(input));
-        assertTrue(exception.getMessage().contains("Error processing line"));
+        assertEquals("Error processing line: Unknown operation 'x'", exception.getMessage());
     }
 
     @Test

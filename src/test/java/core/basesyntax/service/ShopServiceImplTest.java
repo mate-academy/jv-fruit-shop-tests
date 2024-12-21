@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
@@ -15,12 +16,11 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopServiceImpl shopService;
-    private FakeOperationStrategy fakeOperationStrategy;
 
     @BeforeEach
     void setUp() {
-        fakeOperationStrategy = new FakeOperationStrategy();
-        shopService = new ShopServiceImpl(fakeOperationStrategy);
+        OperationStrategy operationStrategy = createRealOperationStrategy();
+        shopService = new ShopServiceImpl(operationStrategy);
         Storage.fruits.clear();
     }
 
@@ -56,29 +56,23 @@ class ShopServiceImplTest {
         );
 
         IllegalArgumentException exception =
-                org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
-                        () -> shopService.process(transactions));
+                assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
         assertEquals("Unknown operation: RETURN", exception.getMessage());
     }
 
-    private static class FakeOperationStrategy implements OperationStrategy {
-        private final Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
+    private OperationStrategy createRealOperationStrategy() {
+        Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
+        handlers.put(FruitTransaction.Operation.BALANCE, Storage.fruits::put);
+        handlers.put(FruitTransaction.Operation.PURCHASE, (fruit, quantity) ->
+                Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) - quantity));
+        handlers.put(FruitTransaction.Operation.SUPPLY, (fruit, quantity) ->
+                Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) + quantity));
 
-        public FakeOperationStrategy() {
-            handlers.put(FruitTransaction.Operation.BALANCE, (fruit, quantity) ->
-                    Storage.fruits.put(fruit, quantity));
-            handlers.put(FruitTransaction.Operation.PURCHASE, (fruit, quantity) ->
-                    Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) - quantity));
-            handlers.put(FruitTransaction.Operation.SUPPLY, (fruit, quantity) ->
-                    Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) + quantity));
-        }
-
-        @Override
-        public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        return operation -> {
             if (!handlers.containsKey(operation)) {
                 throw new IllegalArgumentException("Unknown operation: " + operation);
             }
             return handlers.get(operation);
-        }
+        };
     }
 }

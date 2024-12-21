@@ -24,8 +24,13 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_validData_ok() {
-        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,100" + System.lineSeparator() + "apple,200" + System.lineSeparator();
+        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,100"
+                + System.lineSeparator() + "apple,200" + System.lineSeparator();
         String actualReport = reportGenerator.getReport();
+
+        System.out.println("Expected Report: [" + expectedReport + "]");
+        System.out.println("Actual Report: [" + actualReport + "]");
+
         assertEquals(expectedReport, actualReport);
     }
 
@@ -33,7 +38,11 @@ class ReportGeneratorImplTest {
     void getReport_emptyStorage_ok() {
         Storage.fruits.clear();
         String expectedReport = "fruit,quantity\n";
-        String actualReport = reportGenerator.getReport();
+        String actualReport = reportGenerator.getReport().replace(System.lineSeparator(), "\n");
+
+        System.out.println("Expected Report: [" + expectedReport + "]");
+        System.out.println("Actual Report: [" + actualReport + "]");
+
         assertEquals(expectedReport, actualReport);
     }
 
@@ -42,7 +51,12 @@ class ReportGeneratorImplTest {
         Storage.fruits.clear();
         Storage.fruits.put("mango", 50);
         String expectedReport = "fruit,quantity\nmango,50\n";
-        String actualReport = reportGenerator.getReport();
+        String actualReport = reportGenerator.getReport().replace(System.lineSeparator(), "\n");
+
+        System.out.println("Expected Report: [" + expectedReport + "]");
+        System.out.println("Actual Report: [" + actualReport + "]");
+
         assertEquals(expectedReport, actualReport);
     }
+
 }

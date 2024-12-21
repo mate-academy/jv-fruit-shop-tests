@@ -56,7 +56,8 @@ class ShopServiceImplTest {
         );
 
         IllegalArgumentException exception =
-                assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+                assertThrows(IllegalArgumentException.class,
+                        () -> shopService.process(transactions));
         assertEquals("Unknown operation: RETURN", exception.getMessage());
     }
 

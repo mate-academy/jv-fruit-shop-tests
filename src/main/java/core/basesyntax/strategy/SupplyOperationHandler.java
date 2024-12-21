@@ -5,14 +5,14 @@ import core.basesyntax.storage.Storage;
 public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void apply(String fruit, int quantity) {
-        if (!Storage.fruits.containsKey(fruit)) {
-            throw new IllegalArgumentException("Fruit not available in storage: " + fruit);
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        int currentQuantity = Storage.fruits.get(fruit);
-        if (currentQuantity < quantity) {
-            throw new IllegalArgumentException("Not enough " + fruit + " in storage. Available: " + currentQuantity);
-        }
-        Storage.fruits.put(fruit, currentQuantity + quantity);
-    }
 
+        if (Storage.fruits.containsKey(fruit)) {
+            Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
+        } else {
+            Storage.fruits.put(fruit, quantity);
+        }
+    }
 }

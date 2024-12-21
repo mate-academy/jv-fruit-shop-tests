@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PurchaseOperationHandlerTest {
     private PurchaseOperationHandler purchaseOperationHandler;
@@ -58,7 +58,6 @@ class PurchaseOperationHandlerTest {
     @Test
     void apply_purchaseExactAmount_quantityBecomesZero() {
         Storage.fruits.put("pear", 50);
-        // Purchasing the exact amount
         purchaseOperationHandler.apply("pear", 50);
 
         assertEquals(0, Storage.fruits.get("pear"));

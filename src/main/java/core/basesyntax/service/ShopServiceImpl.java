@@ -13,10 +13,13 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        for (FruitTransaction fruitTransaction: transactions) {
-            operationStrategy.getHandler(
-                    fruitTransaction.getOperation()).apply(fruitTransaction.getFruit(),
-                    fruitTransaction.getQuantity());
+        for (FruitTransaction fruitTransaction : transactions) {
+            if (fruitTransaction.getQuantity() < 0) {
+                throw new IllegalArgumentException("Quantity cannot be negative: "
+                        + fruitTransaction.getQuantity());
+            }
+            operationStrategy.getHandler(fruitTransaction.getOperation())
+                    .apply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
 }

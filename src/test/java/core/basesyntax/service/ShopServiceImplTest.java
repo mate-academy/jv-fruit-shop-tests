@@ -5,42 +5,50 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ShopServiceImplTest {
-    private ShopServiceImpl shopService;
+public class ShopServiceImplTest {
+    private ShopService shopService;
 
     @BeforeEach
     void setUp() {
-        OperationStrategy operationStrategy = createRealOperationStrategy();
-        shopService = new ShopServiceImpl(operationStrategy);
         Storage.fruits.clear();
-    }
 
-    @AfterEach
-    void tearDown() {
-        Storage.fruits.clear();
+        Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler()
+        );
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+        shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @Test
-    void process_validTransactions_ok() {
+    void shopService_validTransaction_ok() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 30)
+                new FruitTransaction(
+                        FruitTransaction.Operation.BALANCE, "banana", 0),
+                new FruitTransaction(
+                        FruitTransaction.Operation.SUPPLY, "banana", 10),
+                new FruitTransaction(
+                        FruitTransaction.Operation.PURCHASE, "banana", 5),
+                new FruitTransaction(
+                        FruitTransaction.Operation.RETURN, "banana", 5)
         );
-
         shopService.process(transactions);
-
-        assertEquals(50, Storage.fruits.get("banana"));
-        assertEquals(30, Storage.fruits.get("apple"));
+        Integer banana = Storage.fruits.getOrDefault("banana", 0);
+        assertEquals(10, banana);
     }
 
     @Test
@@ -50,30 +58,16 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_unknownOperation_throwsException() {
+    void shopService_invalidTransaction_notOk() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "mango", 10)
+                new FruitTransaction(
+                        FruitTransaction.Operation.BALANCE, "banana", -50),
+                new FruitTransaction(
+                        FruitTransaction.Operation.PURCHASE, "banana", 20)
         );
-
-        IllegalArgumentException exception =
-                assertThrows(IllegalArgumentException.class,
-                        () -> shopService.process(transactions));
-        assertEquals("Unknown operation: RETURN", exception.getMessage());
-    }
-
-    private OperationStrategy createRealOperationStrategy() {
-        Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(FruitTransaction.Operation.BALANCE, Storage.fruits::put);
-        handlers.put(FruitTransaction.Operation.PURCHASE, (fruit, quantity) ->
-                Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) - quantity));
-        handlers.put(FruitTransaction.Operation.SUPPLY, (fruit, quantity) ->
-                Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) + quantity));
-
-        return operation -> {
-            if (!handlers.containsKey(operation)) {
-                throw new IllegalArgumentException("Unknown operation: " + operation);
-            }
-            return handlers.get(operation);
-        };
+        assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions),
+                "Processing transactions with invalid quantities"
+                        + " should throw an IllegalArgumentException.");
     }
 }

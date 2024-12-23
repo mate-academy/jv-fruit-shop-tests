@@ -26,28 +26,14 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/reportToRead.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
-    private final FileReaderService fileReader;
-    private final DataConverterService dataConverter;
-    private final OperationStrategy operationStrategy;
-    private final ShopService shopService;
-    private final ReportGenerator reportGenerator;
-    private final FileWriterService fileWriter;
 
-    public Main(FileReaderService fileReader,
-                DataConverterService dataConverter,
-                OperationStrategy operationStrategy,
-                ShopService shopService,
-                ReportGenerator reportGenerator,
-                FileWriterService fileWriter) {
-        this.fileReader = fileReader;
-        this.dataConverter = dataConverter;
-        this.operationStrategy = operationStrategy;
-        this.shopService = shopService;
-        this.reportGenerator = reportGenerator;
-        this.fileWriter = fileWriter;
-    }
-
-    public void run(String inputFilePath, String outputFilePath) {
+    public static void run(FileReaderService fileReader,
+                           DataConverterService dataConverter,
+                           ShopService shopService,
+                           ReportGenerator reportGenerator,
+                           FileWriterService fileWriter,
+                           String inputFilePath,
+                           String outputFilePath) {
         // 1. Read the data from the input CSV file
         List<String> inputReport = fileReader.read(inputFilePath);
 
@@ -65,7 +51,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // Setup dependencies
         FruitStorageDao storageDao = new FruitStorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(storageDao),
@@ -81,15 +66,13 @@ public class Main {
         ReportGenerator reportGenerator = new CsvFormatReportGenerator(storageDao);
         FileWriterService fileWriter = new FileWriterServiceImpl();
 
-        // Create Main instance with all dependencies and run
-        Main app = new Main(
+        run(
                 fileReader,
                 dataConverter,
-                operationStrategy,
                 shopService,
                 reportGenerator,
-                fileWriter
+                fileWriter,
+                INPUT_FILE_PATH, OUTPUT_FILE_PATH
         );
-        app.run(INPUT_FILE_PATH, OUTPUT_FILE_PATH);
     }
 }

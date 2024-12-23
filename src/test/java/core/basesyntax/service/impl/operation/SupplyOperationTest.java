@@ -1,9 +1,11 @@
 package core.basesyntax.service.impl.operation;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import core.basesyntax.dao.FruitStorageDao;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -47,5 +49,21 @@ public class SupplyOperationTest {
         Integer expectedNewQuantity = 30;
         verify(storageDao).getQuantity(fruitName);
         verify(storageDao).setQuantity(fruitName, expectedNewQuantity);
+    }
+
+    @Test
+    public void testDoOperation_negativeQuantity_notOk() {
+        String fruitName = "banana";
+        Integer negativeQuantity = -10;
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> supplyOperation.doOperation(fruitName, negativeQuantity),
+                "Expected exception for negative quantity"
+        );
+
+        Assertions.assertEquals(
+                "Quantity cannot be negative for supply operation: -10", exception.getMessage()
+        );
     }
 }

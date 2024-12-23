@@ -1,11 +1,14 @@
 package core.basesyntax.service.impl.operation;
 
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.verify;
 
 import core.basesyntax.dao.FruitStorageDao;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 public class BalanceOperationTest {
@@ -28,5 +31,21 @@ public class BalanceOperationTest {
         balanceOperation.doOperation(fruitName, quantity);
 
         verify(storageDao).setQuantity(fruitName, quantity);
+    }
+
+    @Test
+    void doOperation_ShouldThrowException_WhenQuantityIsNegative_notOk() {
+        FruitStorageDao storageDao = Mockito.mock(FruitStorageDao.class);
+        BalanceOperation balanceOperation = new BalanceOperation(storageDao);
+        String fruitName = "Apple";
+        int negativeQuantity = -10;
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> balanceOperation.doOperation(fruitName, negativeQuantity)
+        );
+        Assertions.assertEquals(
+                "Quantity cannot be negative for balance operation: -10", exception.getMessage()
+        );
     }
 }

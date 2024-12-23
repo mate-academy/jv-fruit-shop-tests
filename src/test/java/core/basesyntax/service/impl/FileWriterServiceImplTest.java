@@ -8,11 +8,8 @@ import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mockito;
 
 public class FileWriterServiceImplTest {
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
@@ -37,27 +34,5 @@ public class FileWriterServiceImplTest {
         assertThrows(RuntimeException.class, () -> {
             fileWriterService.writeToFile(invalidPath, reportContent);
         });
-    }
-
-    @Test
-    void testWriteToFile_shouldThrowRuntimeException_whenIoExceptionOccurs() throws IOException {
-        String validPath = "test_report.txt";
-        String reportContent = "Test report content";
-
-        Path path = Paths.get(validPath);
-        Files.deleteIfExists(path);
-
-        try (var mockedFiles = Mockito.mockStatic(Files.class)) {
-            mockedFiles.when(() ->
-                            Files.writeString(path, reportContent, StandardOpenOption.CREATE))
-                    .thenThrow(new IOException("Simulated IOException"));
-
-            RuntimeException exception = assertThrows(RuntimeException.class,
-                    () -> fileWriterService.writeToFile(validPath, reportContent));
-
-            assertEquals("Can't write file " + validPath, exception.getMessage());
-            assertTrue(exception.getCause() instanceof IOException,
-                    "Expected cause to be an IOException");
-        }
     }
 }

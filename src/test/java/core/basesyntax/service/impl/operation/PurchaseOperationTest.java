@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import core.basesyntax.dao.FruitStorageDao;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -51,5 +52,21 @@ public class PurchaseOperationTest {
         );
 
         verify(storageDao).getQuantity(fruitName);
+    }
+
+    @Test
+    public void testDoOperation_negativeQuantity_notOk() {
+        String fruitName = "apple";
+        Integer negativeQuantity = -10;
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> purchaseOperation.doOperation(fruitName, negativeQuantity),
+                "Expected exception for negative quantity"
+        );
+
+        Assertions.assertEquals(
+                "Quantity cannot be negative for purchase operation: -10", exception.getMessage()
+        );
     }
 }

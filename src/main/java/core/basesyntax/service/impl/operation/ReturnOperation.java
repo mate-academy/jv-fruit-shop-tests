@@ -12,6 +12,12 @@ public class ReturnOperation implements OperationHandler {
 
     @Override
     public void doOperation(String fruitName, Integer quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException(
+                    "Quantity cannot be negative for return operation: " + quantity
+            );
+        }
+
         Integer previousQuantity;
         Integer currentQuantity = storageDao.getQuantity(fruitName);
 

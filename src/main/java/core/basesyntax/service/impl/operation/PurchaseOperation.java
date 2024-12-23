@@ -11,6 +11,12 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void doOperation(String fruitName, Integer quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException(
+                    "Quantity cannot be negative for purchase operation: " + quantity
+            );
+        }
+
         Integer fruitQuantity = storageDao.getQuantity(fruitName);
         if (fruitQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruitName + " in the storage");

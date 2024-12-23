@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.storage.Storage;
@@ -13,7 +14,6 @@ class PurchaseOperationHandlerTest {
     @BeforeEach
     void setUp() {
         purchaseOperationHandler = new PurchaseOperationHandler();
-        Storage.fruits.clear();
     }
 
     @AfterEach
@@ -40,19 +40,23 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_purchaseNonExistentFruit_addsZero() {
-        purchaseOperationHandler.apply("mango", 20);
+    void apply_purchaseNonExistentFruit_throwsException() {
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class,
+                        () -> purchaseOperationHandler.apply("mango", 20));
 
-        assertEquals(-20, Storage.fruits.get("mango"));
+        assertEquals("Fruit does not exist in storage", exception.getMessage());
     }
 
     @Test
-    void apply_purchaseMoreThanAvailable_quantityCanBeNegative() {
+    void apply_purchaseMoreThanAvailable_throwsException() {
         Storage.fruits.put("orange", 10);
 
-        purchaseOperationHandler.apply("orange", 15);
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class,
+                        () -> purchaseOperationHandler.apply("orange", 15));
 
-        assertEquals(-5, Storage.fruits.get("orange"));
+        assertEquals("Not enough stock for orange", exception.getMessage());
     }
 
     @Test

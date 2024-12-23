@@ -14,6 +14,7 @@ import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,6 @@ public class ShopServiceImplTest {
     @BeforeEach
     void setUp() {
         Storage.fruits.clear();
-
         Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
@@ -32,6 +32,11 @@ public class ShopServiceImplTest {
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
         shopService = new ShopServiceImpl(operationStrategy);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test

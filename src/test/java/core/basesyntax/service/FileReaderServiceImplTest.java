@@ -69,13 +69,9 @@ class FileReaderServiceImplTest {
 
     @Test
     void readFile_emptyFile_ok() throws IOException {
-        File emptyFile = File.createTempFile("empty-data", ".txt");
-        try {
-            List<String> lines = fileReaderService.readFile(emptyFile.getAbsolutePath());
-            assertNotNull(lines);
-            assertTrue(lines.isEmpty());
-        } finally {
-            emptyFile.delete();
-        }
+        File emptyFile = File.createTempFile("empty-data", ".csv");
+        List<String> lines = fileReaderService.readFile(emptyFile.getAbsolutePath());
+        assertNotNull(lines);
+        assertTrue(lines.isEmpty());
     }
 }

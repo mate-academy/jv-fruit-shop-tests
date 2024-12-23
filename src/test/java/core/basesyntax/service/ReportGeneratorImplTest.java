@@ -28,10 +28,8 @@ class ReportGeneratorImplTest {
                 + System.lineSeparator() + "apple,200" + System.lineSeparator();
         String actualReport = reportGenerator.getReport();
 
-        System.out.println("Expected Report: [" + expectedReport + "]");
-        System.out.println("Actual Report: [" + actualReport + "]");
-
-        assertEquals(expectedReport, actualReport);
+        assertEquals(expectedReport, actualReport,
+                "Expected Report: [" + expectedReport + "], but got: [" + actualReport + "]");
     }
 
     @Test
@@ -40,10 +38,8 @@ class ReportGeneratorImplTest {
         String expectedReport = "fruit,quantity\n";
         String actualReport = reportGenerator.getReport().replace(System.lineSeparator(), "\n");
 
-        System.out.println("Expected Report: [" + expectedReport + "]");
-        System.out.println("Actual Report: [" + actualReport + "]");
-
-        assertEquals(expectedReport, actualReport);
+        assertEquals(expectedReport, actualReport,
+                "Expected Report: [" + expectedReport + "], but got: [" + actualReport + "]");
     }
 
     @Test
@@ -53,10 +49,7 @@ class ReportGeneratorImplTest {
         String expectedReport = "fruit,quantity\nmango,50\n";
         String actualReport = reportGenerator.getReport().replace(System.lineSeparator(), "\n");
 
-        System.out.println("Expected Report: [" + expectedReport + "]");
-        System.out.println("Actual Report: [" + actualReport + "]");
-
-        assertEquals(expectedReport, actualReport);
+        assertEquals(expectedReport, actualReport,
+                "Expected Report: [" + expectedReport + "], but got: [" + actualReport + "]");
     }
-
 }

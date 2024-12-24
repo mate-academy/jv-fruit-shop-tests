@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.strategy.FruitTransaction;
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

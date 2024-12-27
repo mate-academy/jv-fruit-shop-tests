@@ -36,15 +36,15 @@ public class FruitTransaction {
         }
 
         public static Operation fromCode(String code) {
-            for (Operation o : values()) {
-                if (code == null) {
-                    throw new NullPointerException();
-                }
-                if (o.code.equals(code)) {
-                    return o;
-                }
+            if (code.equals(null)) {
+                throw new IllegalArgumentException("Unknown operation code: " + code);
             }
 
+            for (Operation operation : values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
+            }
             throw new IllegalArgumentException("Unknown operation code: " + code);
         }
     }

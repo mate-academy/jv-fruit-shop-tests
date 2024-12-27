@@ -31,6 +31,7 @@ public class OperationStrategyTest {
         operationHandlers.put(FruitTransaction.Operation.BALANCE, balanceOperation);
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, purchaseOperation);
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, supplyOperation);
+        operationHandlers.put(FruitTransaction.Operation.RETURN, supplyOperation);
 
         operationStrategy = new OperationStrategyImpl(operationHandlers);
     }
@@ -43,15 +44,21 @@ public class OperationStrategyTest {
                 .getOperationHandler(FruitTransaction.Operation.PURCHASE));
         assertEquals(supplyOperation, operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.SUPPLY));
+        assertEquals(supplyOperation, operationStrategy
+                .getOperationHandler(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void getOperationHandlerNotMapped_returnsNull() {
-        assertNull(operationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN));
+        Map<FruitTransaction.Operation, OperationHandler> emptyOperationHandlers = new HashMap<>();
+        OperationStrategyImpl fakeOperationStrategy
+                = new OperationStrategyImpl(emptyOperationHandlers);
+        assertNull(fakeOperationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void getOperationHandlerNull_throwsException() {
-        assertThrows(NullPointerException.class, () -> operationStrategy.getOperationHandler(null));
+        assertThrows(IllegalArgumentException.class,
+                () -> operationStrategy.getOperationHandler(null));
     }
 }

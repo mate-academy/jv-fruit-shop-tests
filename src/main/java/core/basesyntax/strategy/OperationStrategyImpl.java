@@ -12,7 +12,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
         if (operation == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException("Operation is null");
+        }
+        if (!operationHandlers.containsKey(operation)) {
+            return null;
         }
         return operationHandlers.get(operation);
     }

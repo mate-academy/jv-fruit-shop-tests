@@ -51,7 +51,6 @@ public class StorageTest {
         Storage.add("apple", 10);
         Storage.update("apple", 100);
 
-        // Assert
         assertEquals(100, Storage.getAll().get("apple"));
     }
 

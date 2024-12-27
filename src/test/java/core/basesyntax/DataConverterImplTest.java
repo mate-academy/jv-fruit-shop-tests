@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.strategy.FruitTransaction;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterImplTest {
@@ -24,7 +24,7 @@ public class DataConverterImplTest {
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
 
-        Assertions.assertNotNull(transactions);
+        assertNotNull(transactions);
         assertEquals(3, transactions.size());
 
         assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0).getOperation());
@@ -41,21 +41,31 @@ public class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_invalidPurchase_throwsException() {
+    void convertToTransaction_invalidBalance_throwsException() {
         List<String> rawData = List.of(
                 "type,fruit,quantity",
                 "BALANCE,apple,100",
                 "PURCHASE,banana,50"
         );
 
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(rawData));
+        assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(rawData));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(rawData));
+
+        String expectedMessage = "Error processing data at line ";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage),
+                "Expected exception message to contain: " + expectedMessage);
     }
 
     @Test
     void convertToTransaction_emptyData_returnsEmptyList() {
         List<String> rawData = List.of();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        Assertions.assertNotNull(transactions);
+        assertNotNull(transactions);
         assertTrue(transactions.isEmpty());
     }
 
@@ -67,7 +77,17 @@ public class DataConverterImplTest {
                 "p,,50"
         );
 
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(rawData));
+        assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(rawData));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(rawData));
+
+        String expectedMessage = "Error processing data at line ";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage),
+                "Expected exception message to contain: " + expectedMessage);
     }
 
     @Test
@@ -79,6 +99,15 @@ public class DataConverterImplTest {
 
         assertThrows(IllegalArgumentException.class, () -> dataConverter
                 .convertToTransaction(rawData));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> dataConverter.convertToTransaction(rawData));
+
+        String expectedMessage = "Error processing data at line ";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage),
+                "Expected exception message to contain: " + expectedMessage);
     }
 
     @Test
@@ -104,8 +133,17 @@ public class DataConverterImplTest {
                 "b,apple,abc"
         );
 
-        assertThrows(NumberFormatException.class, () -> dataConverter
-                .convertToTransaction(rawData));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(rawData));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(rawData));
+
+        String expectedMessage = "Invalid number format at line ";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage),
+                "Expected exception message to contain: " + expectedMessage);
     }
 }
 

@@ -4,6 +4,8 @@ import core.basesyntax.db.Storage;
 
 public class PurchaseOperation implements OperationHandler {
     public void handle(FruitTransaction transaction) {
+        OperationHandler.validateQuantity(transaction.getQuantity());
+
         String fruit = transaction.getFruit();
         if (fruit == null || !Storage.getAll().containsKey(fruit)) {
             throw new RuntimeException("Such fruit is not sold here: " + fruit);

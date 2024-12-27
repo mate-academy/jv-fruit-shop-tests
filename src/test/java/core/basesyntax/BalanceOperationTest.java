@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.BalanceOperation;
@@ -46,5 +48,26 @@ public class BalanceOperationTest {
 
         balanceOperation.handle(transaction);
         assertEquals(newBalance, Storage.getAll().get(fruit));
+    }
+
+    @Test
+    void handle_negativeBalance_throwsException() {
+        String fruit = "apple";
+        int negativeBalance = -50;
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, fruit, negativeBalance
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> balanceOperation.handle(transaction));
+
+        RuntimeException exception = assertThrows(IllegalArgumentException.class, ()
+                -> balanceOperation.handle(transaction));
+
+        String expectedMessage = "Quantity cannot be negative";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage),
+                "Expected exception message to contain: " + expectedMessage);
+
     }
 }

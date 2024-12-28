@@ -29,9 +29,7 @@ class FileReaderImplTest {
 
     @Test
     void read_notExistingInputFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> {
-            reader.read(ABSENT_FILE);
-        });
+        assertThrows(RuntimeException.class, () -> reader.read(ABSENT_FILE));
     }
 
     @Test
@@ -43,8 +41,6 @@ class FileReaderImplTest {
 
     @Test
     void read_nullPathFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> {
-            reader.read(null);
-        });
+        assertThrows(RuntimeException.class, () -> reader.read(null));
     }
 }

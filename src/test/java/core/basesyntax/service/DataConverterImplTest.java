@@ -48,8 +48,7 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_invalidData_NotOk() {
         List<String> invalidOperation = List.of("type,fruit,quantity", "xfruit,20");
-        assertThrows(RuntimeException.class, () -> {
-            converter.convertToTransaction(invalidOperation);
-        });
+        assertThrows(RuntimeException.class, () -> converter
+                .convertToTransaction(invalidOperation));
     }
 }

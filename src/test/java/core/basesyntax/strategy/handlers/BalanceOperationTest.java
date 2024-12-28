@@ -41,16 +41,12 @@ class BalanceOperationTest {
     @Test
     void executeOperation_fruitIsNull_NotOk() {
         transaction.setFruit(null);
-        assertThrows(RuntimeException.class, () -> {
-            balanceOperation.executeOperation(transaction);
-        });
+        assertThrows(RuntimeException.class, () -> balanceOperation.executeOperation(transaction));
     }
 
     @Test
     void executeOperation_negativeQuantity_NotOk() {
         transaction.setQuantity(-20);
-        assertThrows(RuntimeException.class, () -> {
-            balanceOperation.executeOperation(transaction);
-        });
+        assertThrows(RuntimeException.class, () -> balanceOperation.executeOperation(transaction));
     }
 }

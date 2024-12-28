@@ -36,16 +36,12 @@ class PurchaseOperationTest {
     void executeOperation_fruitIsNotEnoughInStorage_NotOk() {
         int notEnoughQuantity = 10;
         FruitStorage.fruits.put(FRUIT, notEnoughQuantity);
-        assertThrows(RuntimeException.class, () -> {
-            purchaseOperation.executeOperation(transaction);
-        });
+        assertThrows(RuntimeException.class, () -> purchaseOperation.executeOperation(transaction));
     }
 
     @Test
     void executeOperation_fruitIsAbsentInStorage_NotOk() {
         FruitStorage.fruits.clear();
-        assertThrows(RuntimeException.class, () -> {
-            purchaseOperation.executeOperation(transaction);
-        });
+        assertThrows(RuntimeException.class, () -> purchaseOperation.executeOperation(transaction));
     }
 }

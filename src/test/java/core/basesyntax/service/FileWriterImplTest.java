@@ -54,9 +54,7 @@ class FileWriterImplTest {
     @Test
     void write_absentOutputFile_NotOk() {
         String report = "fruit,quantity" + System.lineSeparator() + "banana,20";
-        assertThrows(RuntimeException.class, () -> {
-            fileWriter.write(report, ABSENT_FILE);
-        });
+        assertThrows(RuntimeException.class, () -> fileWriter.write(report, ABSENT_FILE));
     }
 
     @AfterAll

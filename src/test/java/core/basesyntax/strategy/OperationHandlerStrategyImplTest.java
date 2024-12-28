@@ -47,8 +47,6 @@ class OperationHandlerStrategyImplTest {
 
     @Test
     void getOperationHandler_transactionIsNull_NotOk() {
-        assertThrows(NullPointerException.class, () -> {
-            strategy.getOperationHandler(null);
-        });
+        assertThrows(NullPointerException.class, () -> strategy.getOperationHandler(null));
     }
 }

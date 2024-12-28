@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final Path INPUT_FILE = Paths.get("src/test/resources/input.csv");
     private static final Path ABSENT_FILE = Paths.get("src/test/resour/ces/absent.csv");
     private static final Path OUTPUT_FILE = Paths.get("src/test/resources/output.csv");
     private static final Path NEW_OUTPUT_FILE = Paths.get("src/test/resources/new_output.csv");

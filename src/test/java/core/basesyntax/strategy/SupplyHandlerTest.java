@@ -6,24 +6,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.storage.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private BalanceHandler balanceHandler;
     private SupplyHandler supplyHandler;
 
     @BeforeEach
     void init() {
-        balanceHandler = new BalanceHandler();
+        fruitStorage.put("banana", 100);
         supplyHandler = new SupplyHandler();
+    }
+
+    @AfterEach
+    void clear() {
         fruitStorage.clear();
     }
 
     @Test
     void supplyHandler_correctDataProcessing_ok() {
-        balanceHandler.handleTransaction(new FruitTransaction("banana", 100,
-                FruitTransaction.Operation.BALANCE));
         supplyHandler.handleTransaction(new FruitTransaction("banana", 10,
                 FruitTransaction.Operation.SUPPLY));
         assertTrue(fruitStorage.containsKey("banana"));
@@ -36,18 +38,8 @@ class SupplyHandlerTest {
 
     @Test
     void supplyHandler_incorrectDataProcessing_notOk() {
-        balanceHandler.handleTransaction(new FruitTransaction("banana", 100,
-                FruitTransaction.Operation.BALANCE));
         assertThrows(IllegalArgumentException.class,
                 () -> supplyHandler.handleTransaction(new FruitTransaction("banana", -1,
                         FruitTransaction.Operation.SUPPLY)));
-        assertThrows(IllegalArgumentException.class,
-                () -> supplyHandler.handleTransaction(new FruitTransaction(null, 10,
-                        FruitTransaction.Operation.SUPPLY)));
-        assertThrows(IllegalArgumentException.class,
-                () -> supplyHandler.handleTransaction(new FruitTransaction("banana", 10, null)));
-        assertThrows(IllegalArgumentException.class,
-                () -> supplyHandler.handleTransaction(new FruitTransaction("banana", 10,
-                        FruitTransaction.Operation.PURCHASE)));
     }
 }

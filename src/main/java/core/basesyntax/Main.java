@@ -12,7 +12,7 @@ import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import core.basesyntax.strategyhandler.StrategyHandler;
 import core.basesyntax.strategyhandler.StrategyHandlerImpl;
-import core.basesyntax.writereport.FileWriter;
+import core.basesyntax.writereport.WriteReport;
 import core.basesyntax.writereport.WriteReportImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Main {
         strategyHandler.strategyHandler(strategyMap, fruitTransactions);
         ReportCreator reportCreator = new ReportCreator();
         String report = reportCreator.createReport();
-        FileWriter fileWriter = new WriteReportImpl();
-        fileWriter.writeToFile(report, REPORT_FILE_PATH);
+        WriteReport writeReport = new WriteReportImpl();
+        writeReport.writeToFile(report, REPORT_FILE_PATH);
     }
 }

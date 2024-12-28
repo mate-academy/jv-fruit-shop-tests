@@ -4,9 +4,7 @@ import static core.basesyntax.storage.FruitStorage.fruitStorage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,29 +14,32 @@ class ReportCreatorTest {
     @BeforeEach
     void setUp() {
         reportCreator = new ReportCreator();
+    }
+
+    @AfterEach
+    void clear() {
         fruitStorage.clear();
     }
 
     @Test
     void reportCreator_createReportWithValidData_ok() {
-        fruitStorage.put("melon", 100);
         fruitStorage.put("apple", 100);
+        fruitStorage.put("melon", 100);
         fruitStorage.put("banana", 100);
-        Set<String> expectedLines = Set.of(
-                "fruit,quantity",
-                "apple,100",
-                "melon,100",
-                "banana,100"
-        );
+        String expectedLines = "fruit,quantity"
+                + System.lineSeparator()
+                + "apple,100"
+                + System.lineSeparator()
+                + "melon,100"
+                + System.lineSeparator()
+                + "banana,100"
+                + System.lineSeparator();
         String report = reportCreator.createReport();
-        Set<String> actualLines = new HashSet<>(List.of(report.split(System.lineSeparator())));
-        assertEquals(expectedLines, actualLines);
+        assertEquals(expectedLines, report);
     }
 
     @Test
-    void reportCreator_createReportWithInvalidData_notOk() {
-        fruitStorage.put(null, 100);
-        fruitStorage.put("banana", null);
+    void createReport_createReportWithEmptyStorage_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> reportCreator.createReport());
     }

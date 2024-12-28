@@ -31,13 +31,25 @@ class RawDataHandlerTest {
     }
 
     @Test
-    void parseRawData_parseCorruptedFile_notOk() {
+    void parseRawData_parseNullList_notOk() {
         list = null;
         assertThrows(IllegalArgumentException.class, () -> rawDataHandler.parseRawData(list));
+    }
+
+    @Test
+    void parseRawData_parseEmptyList_notOk() {
         list = List.of("");
         assertThrows(IllegalArgumentException.class, () -> rawDataHandler.parseRawData(list));
+    }
+
+    @Test
+    void parseRawData_parseListWithIncompleteData_notOK() {
         list = List.of("b,,one");
         assertThrows(IllegalArgumentException.class, () -> rawDataHandler.parseRawData(list));
+    }
+
+    @Test
+    void parseRawData_parseListWithWrongData_notOk() {
         list = List.of("10, banana, 10");
         assertThrows(IllegalArgumentException.class, () -> rawDataHandler.parseRawData(list));
     }

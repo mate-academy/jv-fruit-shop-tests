@@ -10,6 +10,9 @@ public class StrategyHandlerImpl implements StrategyHandler {
     public void strategyHandler(Map<FruitTransaction.Operation, OperationHandler> strategyMap,
                                 List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruits : fruitTransactions) {
+            if (fruits.getOperation() == null) {
+                throw new IllegalArgumentException("Operation cant be NULL");
+            }
             strategyMap.get(fruits.getOperation()).handleTransaction(fruits);
         }
     }

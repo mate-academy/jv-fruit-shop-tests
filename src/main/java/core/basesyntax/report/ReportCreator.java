@@ -8,10 +8,10 @@ public class ReportCreator {
     public String createReport() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(System.lineSeparator());
+        if (fruitStorage.isEmpty()) {
+            throw new IllegalArgumentException("Can't create report, storage is empty");
+        }
         fruitStorage.forEach((key, value) -> {
-            if (key == null || value == null) {
-                throw new IllegalArgumentException("Data cannot contain null");
-            }
             report.append(key)
                     .append(",")
                     .append(value)

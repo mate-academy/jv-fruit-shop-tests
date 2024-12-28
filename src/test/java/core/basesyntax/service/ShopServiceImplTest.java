@@ -17,16 +17,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private static Map<FruitTransaction.Operation, OperationHandler> handlersMap;
-    private static OperationHandlerStrategy strategy;
     private static ShopService shopService;
     private static List<FruitTransaction> fruitTransactions;
 
     @BeforeAll
     static void beforeAll() {
-        handlersMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> handlersMap = new HashMap<>();
         handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        strategy = new OperationHandlerStrategyImpl(handlersMap);
+
+        OperationHandlerStrategy strategy = new OperationHandlerStrategyImpl(handlersMap);
         shopService = new ShopServiceImpl(strategy);
 
         FruitTransaction transaction = new FruitTransaction();

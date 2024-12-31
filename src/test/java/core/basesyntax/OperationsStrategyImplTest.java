@@ -16,25 +16,25 @@ class OperationsStrategyImplTest {
     }
 
     @Test
-    void check_B_function() {
+    void testBalanceFunction() {
         int operation = operationsStrategy.operation("b", "banana", 300);
         assertEquals(300,operation);
     }
 
     @Test
-    void check_P_function() {
+    void testPurchaseFunction() {
         fruit.balance("banana",400);
         assertEquals(200,fruit.purchase("banana",200));
     }
 
     @Test
-    void check_S_function() {
+    void testSupplyFunction() {
         fruit.balance("apple",200);
         assertEquals(300,fruit.supply("apple",100));
     }
 
     @Test
-    void check_R_function() {
+    void testReturnFunction() {
         fruit.balance("orange",200);
         assertEquals(300,fruit.returnFruit("orange",100));
     }

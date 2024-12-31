@@ -31,7 +31,7 @@ class DataReaderImplTest {
     }
 
     @Test
-    void testReadFromFile_shouldReturnList() {
+    void shouldReturnCorrectListWhenFileIsNotEmpty() {
         try (FileWriter fileWriter = new FileWriter(fileReader)) {
             fileWriter.write("b,banana,100\n");
             fileWriter.write("s,banana,300\n");
@@ -50,7 +50,7 @@ class DataReaderImplTest {
     }
 
     @Test
-    void CheckList_NotNull_notOk() {
+    void shouldReturnNotNullListWhenFileIsEmpty() {
         List<String> list = dataReader.readFromFile(fileReader.getAbsolutePath());
         assertNotNull(list);
         assertTrue(list.isEmpty(),"List should be empty for an empty file");

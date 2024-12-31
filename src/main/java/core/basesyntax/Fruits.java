@@ -4,32 +4,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Fruits {
-    private Map<String, Integer> fruitQuantities;
+    private Map<String,Integer> fruitMap;
 
     public Fruits() {
-        fruitQuantities = new HashMap<>();
+        this.fruitMap = new HashMap<>();
     }
 
-    public int balance(String fruitType,int init) {
-        fruitQuantities.put(fruitType,init);
-        return init;
+    public int getCurrentAmount(String fruitType) {
+        return fruitMap.getOrDefault(fruitType, 0);
     }
 
-    public int supply(String fruitType,int quantityOfFruits) {
-        int supplyAmount = fruitQuantities.get(fruitType) + quantityOfFruits;
-        fruitQuantities.put(fruitType,supplyAmount);
-        return supplyAmount;
+    public int balance(String fruitType, int amount) {
+        fruitMap.put(fruitType,amount);
+        return amount;
     }
 
-    public int purchase(String fruitType,int amount) {
-        int purchaseAmount = fruitQuantities.get(fruitType) - amount;
-        fruitQuantities.put(fruitType,purchaseAmount);
-        return purchaseAmount;
+    public int supply(String fruitType, int amount) {
+        int newAmount = fruitMap.get(fruitType) + amount;
+        fruitMap.put(fruitType,newAmount);
+        return newAmount;
     }
 
-    public int returnFruit(String fruitType,int amount) {
-        int returnedAmount = fruitQuantities.get(fruitType) + amount;
-        fruitQuantities.put(fruitType,returnedAmount);
+    public int returnFruit(String fruitType, int amount) {
+        int returnedAmount = fruitMap.getOrDefault(fruitType, 0) + amount;
+        fruitMap.put(fruitType, returnedAmount);
         return returnedAmount;
+    }
+
+    public int purchase(String fruitType, int amount) {
+        int purchaseAmount = fruitMap.getOrDefault(fruitType, 0);
+        if (purchaseAmount < amount) {
+            throw new IllegalStateException("Not enough fruits");
+        }
+        int newAmount = fruitMap.get(fruitType) - amount;
+        fruitMap.put(fruitType,newAmount);
+        return newAmount;
     }
 }

@@ -17,26 +17,26 @@ class FruitsTest {
     }
 
     @Test
-    void balance() {
+    void shouldSetCorrectValue() {
         int pineapple = fruits.balance("pineapple", 100);
         assertEquals(100,pineapple);
     }
-
+ 
     @Test
-    void supply() {
+    void shouldAddCorrectSupply() {
         fruits.balance("apple", 50);
         int apple = fruits.supply("apple",50);
         assertEquals(100,apple);
     }
-
+ 
     @Test
-    void purchase() {
+    void shouldDifferentiateCorrectValue() {
         fruits.balance("banana",400);
         assertEquals(200,fruits.purchase("banana",200));
     }
 
     @Test
-    void returnFruit() {
+    void shouldAddCorrectReturnedValue() {
         fruits.balance("orange",300);
         int returnFruits = fruits.returnFruit("orange",100);
         assertEquals(400,returnFruits);

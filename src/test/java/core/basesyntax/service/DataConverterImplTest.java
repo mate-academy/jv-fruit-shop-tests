@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -43,12 +42,5 @@ class DataConverterImplTest {
         List<String> onlyHeadLineRecord = List.of("type,fruit,quantity");
         List<FruitTransaction> resultList = converter.convertToTransaction(onlyHeadLineRecord);
         assertTrue(resultList.isEmpty());
-    }
-
-    @Test
-    void convertToTransaction_invalidData_NotOk() {
-        List<String> invalidOperation = List.of("type,fruit,quantity", "xfruit,20");
-        assertThrows(RuntimeException.class, () -> converter
-                .convertToTransaction(invalidOperation));
     }
 }

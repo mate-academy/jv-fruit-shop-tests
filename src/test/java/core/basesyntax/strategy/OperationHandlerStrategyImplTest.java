@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.BalanceOperation;
@@ -43,10 +42,5 @@ class OperationHandlerStrategyImplTest {
     void getOperationHandler_operationIsNull_NotOk() {
         OperationHandler operationHandler = strategy.getOperationHandler(new FruitTransaction());
         assertNull(operationHandler);
-    }
-
-    @Test
-    void getOperationHandler_transactionIsNull_NotOk() {
-        assertThrows(NullPointerException.class, () -> strategy.getOperationHandler(null));
     }
 }

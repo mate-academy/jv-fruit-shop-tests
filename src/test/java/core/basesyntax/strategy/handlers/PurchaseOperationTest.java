@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,12 @@ class PurchaseOperationTest {
         transaction.setQuantity(20);
     }
 
+    @AfterEach
+    void afterEach() {
+        FruitStorage.fruits.clear();
+        transaction.setQuantity(20);
+    }
+
     @Test
     void executeOperation_fruitIsEnoughInStorage_Ok() {
         FruitStorage.fruits.put(FRUIT, QUANTITY);
@@ -34,14 +41,13 @@ class PurchaseOperationTest {
 
     @Test
     void executeOperation_fruitIsNotEnoughInStorage_NotOk() {
-        int notEnoughQuantity = 10;
-        FruitStorage.fruits.put(FRUIT, notEnoughQuantity);
+        FruitStorage.fruits.put(FRUIT, QUANTITY);
+        transaction.setQuantity(200);
         assertThrows(RuntimeException.class, () -> purchaseOperation.executeOperation(transaction));
     }
 
     @Test
     void executeOperation_fruitIsAbsentInStorage_NotOk() {
-        FruitStorage.fruits.clear();
         assertThrows(RuntimeException.class, () -> purchaseOperation.executeOperation(transaction));
     }
 }

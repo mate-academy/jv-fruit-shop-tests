@@ -49,7 +49,7 @@ class WriteDataImplTest {
         file = writeData.writeData(empty);
         try (BufferedReader br = new BufferedReader(new FileReader("test_fruit_data.csv"))) {
             assertEquals("fruit,quantity", br.readLine());
-            assertNull(br.readLine(), "The file should not contain any other lines.");
+            assertNull(br.readLine());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,14 +1,17 @@
 package core.basesyntax;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 class WriteDataImplTest {
     private WriteDataImpl writeData;
@@ -35,8 +38,6 @@ class WriteDataImplTest {
             assertEquals("fruit,quantity", br.readLine());
             assertEquals(list.get(0),br.readLine());
             assertEquals(list.get(1), br.readLine());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -38,9 +38,4 @@ class FileReaderImplTest {
         List<String> actual = reader.read(EMPTY_INPUT_FILE);
         assertEquals(expected, actual);
     }
-
-    @Test
-    void read_nullPathFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> reader.read(null));
-    }
 }

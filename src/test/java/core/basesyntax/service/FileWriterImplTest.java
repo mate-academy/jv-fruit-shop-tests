@@ -27,12 +27,7 @@ class FileWriterImplTest {
         String report = "fruit,quantity" + System.lineSeparator() + "banana,20";
         fileWriter.write(report, OUTPUT_FILE);
         String expected = "banana,20";
-        String actual;
-        try {
-            actual = Files.readAllLines(OUTPUT_FILE).get(1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        String actual = readBackFile();
         assertEquals(expected, actual);
     }
 
@@ -41,12 +36,7 @@ class FileWriterImplTest {
         String report = "fruit,quantity" + System.lineSeparator() + "banana,20";
         fileWriter.write(report, NEW_OUTPUT_FILE);
         String expected = "banana,20";
-        String actual;
-        try {
-            actual = Files.readAllLines(OUTPUT_FILE).get(1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        String actual = readBackFile();
         assertEquals(expected, actual);
     }
 
@@ -63,6 +53,14 @@ class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException(String.format("Can't delete file: '%s'.",
                     NEW_OUTPUT_FILE), e);
+        }
+    }
+
+    private String readBackFile() {
+        try {
+            return Files.readAllLines(FileWriterImplTest.OUTPUT_FILE).get(1);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file: " + OUTPUT_FILE, e);
         }
     }
 }

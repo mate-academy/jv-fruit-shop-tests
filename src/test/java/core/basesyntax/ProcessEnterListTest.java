@@ -3,12 +3,11 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.basesyntax.model.Fruit;
 import core.basesyntax.services.impl.DataProcessingImpl;
 import core.basesyntax.strategy.FruitStrategyImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.services.DataProcessing;
 import core.basesyntax.services.impl.DataProcessingImpl;
+import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +14,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProcessEnterListTest {
-    private DataProcessingImpl processEnterList;
-    private FruitStrategyImpl operationsStrategy;
+    private DataProcessing processEnterList;
+    private FruitStrategy operationsStrategy;
     private Fruit fruits;
 
     @BeforeEach
     void setUp() {
         fruits = new Fruit();
         operationsStrategy = new FruitStrategyImpl(fruits);
-        processEnterList = new DataProcessingImpl(operationsStrategy);
+        processEnterList = new DataProcessingImpl((FruitStrategyImpl) operationsStrategy);
     }
 
     @Test

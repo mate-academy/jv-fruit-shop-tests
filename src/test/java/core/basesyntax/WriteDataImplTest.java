@@ -3,6 +3,7 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import core.basesyntax.services.FileDataWriter;
 import core.basesyntax.services.impl.FileDataWriterImpl;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriteDataImplTest {
-    private FileDataWriterImpl writeData;
+    private FileDataWriter writeData;
     private File file;
 
     @BeforeEach

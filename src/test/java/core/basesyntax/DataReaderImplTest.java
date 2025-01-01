@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.services.FileDataReader;
 import core.basesyntax.services.impl.FileDataReaderImpl;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 class DataReaderImplTest {
     private File fileReader;
-    private FileDataReaderImpl dataReader;
+    private FileDataReader dataReader;
 
     @BeforeEach
     void setUp() throws IOException {

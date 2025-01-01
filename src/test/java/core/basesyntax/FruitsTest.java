@@ -2,15 +2,16 @@ package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.model.Fruit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitsTest {
-    private Fruits fruits;
+    private Fruit fruits;
 
     @BeforeEach
     void setUp() {
-        fruits = new Fruits();
+        fruits = new Fruit();
     }
 
     @Test

@@ -9,18 +9,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import core.basesyntax.services.impl.FileDataWriterImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriteDataImplTest {
-    private WriteDataImpl writeData;
+    private FileDataWriterImpl writeData;
     private File file;
 
     @BeforeEach
     void setUp() {
         file = new File("test_fruit_data.csv");
-        writeData = new WriteDataImpl("test_fruit_data.csv");
+        writeData = new FileDataWriterImpl("test_fruit_data.csv");
     }
 
     @AfterEach

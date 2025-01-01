@@ -8,20 +8,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+
+import core.basesyntax.services.impl.FileDataReaderImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataReaderImplTest {
     private File fileReader;
-    private DataReaderImpl dataReader;
+    private FileDataReaderImpl dataReader;
 
     @BeforeEach
     void setUp() throws IOException {
         fileReader = new File("text.txt");
         fileReader.createNewFile();
-        dataReader = new DataReaderImpl(new FileReader(fileReader));
+        dataReader = new FileDataReaderImpl(new FileReader(fileReader));
     }
 
     @AfterEach
@@ -34,6 +37,7 @@ class DataReaderImplTest {
     @Test
     void shouldReturnCorrectListWhenFileIsNotEmpty() {
         try (FileWriter fileWriter = new FileWriter(fileReader)) {
+            fileWriter.write("operation,fruitType,amount\n");
             fileWriter.write("b,banana,100\n");
             fileWriter.write("s,banana,300\n");
             fileWriter.write("p,banana,100\n");
@@ -41,7 +45,7 @@ class DataReaderImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<String> list = dataReader.readFromFile(fileReader.getAbsolutePath());
+        List<String> list = dataReader.readData(Path.of(fileReader.getAbsolutePath()));
         assertNotNull(list);
         assertEquals(4, list.size());
         assertEquals("b,banana,100",list.get(0));
@@ -52,7 +56,7 @@ class DataReaderImplTest {
 
     @Test
     void shouldReturnNotNullListWhenFileIsEmpty() {
-        List<String> list = dataReader.readFromFile(fileReader.getAbsolutePath());
+        List<String> list = dataReader.readData(Path.of(fileReader.getAbsolutePath()));
         assertNotNull(list);
         assertTrue(list.isEmpty(),"List should be empty for an empty file");
     }

@@ -2,17 +2,19 @@ package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.strategy.FruitStrategyImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationsStrategyImplTest {
-    private OperationsStrategyImpl operationsStrategy;
-    private Fruits fruit;
+    private FruitStrategyImpl operationsStrategy;
+    private Fruit fruit;
 
     @BeforeEach
     void setUp() {
-        fruit = new Fruits();
-        operationsStrategy = new OperationsStrategyImpl(fruit);
+        fruit = new Fruit();
+        operationsStrategy = new FruitStrategyImpl(fruit);
     }
 
     @Test

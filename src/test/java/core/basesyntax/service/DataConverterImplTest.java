@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private DataConverterImpl dataConverter;
+    private DataConverter dataConverter;
 
     @BeforeEach
     void setUp() {

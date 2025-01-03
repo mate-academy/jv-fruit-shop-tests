@@ -18,7 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private ShopServiceImpl shopService;
+    private ShopService shopService;
     private OperationStrategy operationStrategy;
 
     @BeforeEach

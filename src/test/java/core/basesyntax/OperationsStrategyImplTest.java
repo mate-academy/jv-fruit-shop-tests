@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -3,7 +3,6 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.services.DataProcessing;
 import core.basesyntax.services.impl.DataProcessingImpl;
 import core.basesyntax.strategy.FruitStrategy;

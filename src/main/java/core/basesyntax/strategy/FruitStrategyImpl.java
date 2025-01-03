@@ -1,33 +1,54 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.Operation;
+import core.basesyntax.operationhandlers.BalanceOperationHandler;
+import core.basesyntax.operationhandlers.PurchaseOperationHandler;
+import core.basesyntax.operationhandlers.ReturnOperationHandler;
+import core.basesyntax.operationhandlers.SupplyOperationHandler;
+import core.basesyntax.storage.Storage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
 public class FruitStrategyImpl implements FruitStrategy {
-    private final Fruit fruit;
-    private Map<String, BiFunction<String, Integer, Integer>> operationMap;
+    private Storage storage;
+    private Map<Operation, BiFunction<String,Integer,Integer>> operationMap;
+    private BalanceOperationHandler balance;
+    private PurchaseOperationHandler purchase;
+    private ReturnOperationHandler returnFruit;
+    private SupplyOperationHandler supply;
 
-    public FruitStrategyImpl(Fruit fruit) {
-        this.fruit = fruit;
+    public FruitStrategyImpl() {
+        storage = new Storage();
         operationMap = new HashMap<>();
+        balance = new BalanceOperationHandler(storage);
+        purchase = new PurchaseOperationHandler(storage);
+        returnFruit = new ReturnOperationHandler(storage);
+        supply = new SupplyOperationHandler(storage);
 
-        operationMap.put("b", (fruitType, amount) -> fruit.balance(fruitType, amount));
-        operationMap.put("s", (fruitType, amount) -> fruit.supply(fruitType, amount));
-        operationMap.put("p", (fruitType, amount) -> fruit.purchase(fruitType, amount));
-        operationMap.put("r", (fruitType, amount) -> fruit.returnFruit(fruitType, amount));
+        operationMap.put(Operation.BALANCE, (fruitType, amount)
+                -> balance.balance(fruitType, amount));
+        operationMap.put(Operation.SUPPLY, (fruitType, amount)
+                -> supply.supply(fruitType, amount));
+        operationMap.put(Operation.PURCHASE, (fruitType, amount)
+                -> purchase.purchase(fruitType, amount));
+        operationMap.put(Operation.RETURN, (fruitType, amount)
+                -> returnFruit.returnFruit(fruitType, amount));
     }
 
     @Override
     public int operation(String operation, String fruitType, int amount) {
-
-        BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction =
-                operationMap.get(operation);
-        if (stringIntegerIntegerBiFunction == null) {
-            throw new IllegalArgumentException("Invalid operation: " + operation);
+        try {
+            Operation op = Operation.getOperation(operation);
+            BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction
+                    = operationMap.get(op);
+            if (stringIntegerIntegerBiFunction == null) {
+                throw new IllegalArgumentException("Invalid operation: " + operation);
+            }
+            return stringIntegerIntegerBiFunction.apply(fruitType, amount);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid operation code: "
+                    + operation + ". Please use a valid operation code.", e);
         }
-
-        return stringIntegerIntegerBiFunction.apply(fruitType, amount);
     }
 }

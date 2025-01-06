@@ -2,16 +2,17 @@ package core.basesyntax.service.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
+    private static final String FILE_PATH = "src/test/resources/reportToRead.csv";
+    private static final String TEXT1 = "b,banana,20";
+    private static final String TEXT2 = "b,apple,100";
     private FileReader fileReader = new FileReaderImpl();
-    private final static String FILE_PATH = "src/test/resources/reportToRead.csv";
     private List<String> fileTextList = new ArrayList<>();
-    private final static String TEXT1 = "b,banana,20";
-    private final static String TEXT2 = "b,apple,100";
 
     @Test
     void read_Ok() {

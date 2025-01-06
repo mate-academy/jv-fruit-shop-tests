@@ -2,13 +2,23 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.DataConverterImpl;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportGeneratorImpl;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.dao.FileReader;
 import core.basesyntax.service.dao.FileReaderImpl;
 import core.basesyntax.service.dao.FileWriter;
 import core.basesyntax.service.dao.FileWriterImpl;
-import core.basesyntax.service.operations.*;
-
+import core.basesyntax.service.operations.BalanceOperation;
+import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.PurchaseOperation;
+import core.basesyntax.service.operations.ReturnOperation;
+import core.basesyntax.service.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,16 +1,17 @@
 package core.basesyntax.service.dao;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private FileReader fileReader = new FileReaderImpl();
-    private static final String FILE_PATH = "src/test/resources/reportToRead.csv";
+    private final static String FILE_PATH = "src/test/resources/reportToRead.csv";
     private List<String> fileTextList = new ArrayList<>();
-    private static final String TEXT1 = "b,banana,20";
-    private static final String TEXT2 = "b,apple,100";
+    private final static String TEXT1 = "b,banana,20";
+    private final static String TEXT2 = "b,apple,100";
 
     @Test
     void read_Ok() {
@@ -22,6 +23,8 @@ class FileReaderImplTest {
 
     @Test
     void read_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read("src/test/resources/ohBoyImTired.csv"));
+        assertThrows(RuntimeException.class,
+                () -> fileReader.read(
+                        "src/test/resources/ohBoyImTired.csv"));
     }
 }

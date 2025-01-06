@@ -1,16 +1,16 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.BalanceOperation;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
 import core.basesyntax.service.operations.ReturnOperation;
 import core.basesyntax.service.operations.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();

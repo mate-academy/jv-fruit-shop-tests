@@ -1,29 +1,29 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.BalanceOperation;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
 import core.basesyntax.service.operations.ReturnOperation;
 import core.basesyntax.service.operations.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
     private OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
     private ShopService shopService = new ShopServiceImpl(operationStrategy);
-    private static final String FRUIT = "apple";
-    private static final int BALANCE = 100;
-    private static final int SUPPLY = 20;
-    private static final int PURCHASE = 10;
-    private static final int RETURN = 5;
-    private static final int RESULT = 115;
+    private final static String FRUIT = "apple";
+    private final static int BALANCE = 100;
+    private final static int SUPPLY = 20;
+    private final static int PURCHASE = 10;
+    private final static int RETURN = 5;
+    private final static int RESULT = 115;
     private FruitTransaction fruitTransactionBalance = new FruitTransaction();
     private FruitTransaction fruitTransactionSupply = new FruitTransaction();
     private FruitTransaction fruitTransactionPurchase = new FruitTransaction();

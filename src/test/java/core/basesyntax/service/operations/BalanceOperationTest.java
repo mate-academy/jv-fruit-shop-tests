@@ -1,8 +1,8 @@
 package core.basesyntax.service.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceOperationTest {
     private FruitTransaction fruitTransaction = new FruitTransaction();

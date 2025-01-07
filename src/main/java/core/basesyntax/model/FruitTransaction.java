@@ -70,7 +70,7 @@ public class FruitTransaction {
         }
     }
 
-    public static FruitTransaction.Operation getOperation(String code) {
+    public static FruitTransaction.Operation findOperation(String code) {
         for (FruitTransaction.Operation value : FruitTransaction.Operation.values()) {
             if (value.getCode().equals(code)) {
                 return value;

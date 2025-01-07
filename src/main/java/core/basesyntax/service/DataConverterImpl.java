@@ -16,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
         for (String line : input) {
             String[] transaction = line.split(SPLITERATOR);
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction.getOperation(transaction[TYPE]));
+            fruitTransaction.setOperation(FruitTransaction.findOperation(transaction[TYPE]));
             fruitTransaction.setFruit(transaction[FRUIT]);
             fruitTransaction.setQuantity(Integer.parseInt(transaction[QUANTITY]));
             fruitTransactionList.add(fruitTransaction);

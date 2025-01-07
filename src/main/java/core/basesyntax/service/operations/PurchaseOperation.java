@@ -7,7 +7,8 @@ public class PurchaseOperation implements OperationHandler {
     public void doOperation(String fruitTransaction, Integer quantityForOperation) {
         if (Storage.getCalculatedTransactions().get(fruitTransaction) >= quantityForOperation) {
             Storage.getCalculatedTransactions().put(fruitTransaction,
-                    Storage.getCalculatedTransactions().get(fruitTransaction) - quantityForOperation);
+                    Storage.getCalculatedTransactions()
+                            .get(fruitTransaction) - quantityForOperation);
         }
     }
 }

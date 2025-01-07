@@ -23,6 +23,11 @@ public class FruitTransaction {
         return Objects.hash(operation, fruit, quantity);
     }
 
+    @Override
+    public String toString() {
+        return operation + ", " + fruit + ", " + quantity;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -45,11 +50,6 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return operation + ", " + fruit + ", " + quantity;
     }
 
     public enum Operation {

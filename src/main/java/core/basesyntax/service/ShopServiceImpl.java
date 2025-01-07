@@ -30,7 +30,8 @@ public class ShopServiceImpl implements ShopService {
 
     private void processBalanceOperation(FruitTransaction fruitTransaction) {
         if (!Storage.getCalculatedTransactions().containsKey(fruitTransaction.getFruit())) {
-            Storage.getCalculatedTransactions().put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+            Storage.getCalculatedTransactions().put(fruitTransaction.getFruit(),
+                    fruitTransaction.getQuantity());
         }
     }
 }

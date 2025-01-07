@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.storage.Storage;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +37,7 @@ class ReturnOperationHandlerTest {
 
     @Test
     void applyHandler_addFruit_Ok() {
-        Map<String, Integer> expected = new HashMap<>();
+        Map<String, Integer> expected = new LinkedHashMap<>();
         expected.put("apple", 100);
         expected.put("banana", 250);
         returnOperationHandler.apply("apple", 100);

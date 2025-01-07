@@ -69,4 +69,13 @@ public class FruitTransaction {
             return code;
         }
     }
+
+    public static FruitTransaction.Operation getOperation(String code) {
+        for (FruitTransaction.Operation value : FruitTransaction.Operation.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException(code + " operation doesn't exist.");
+    }
 }

@@ -19,13 +19,13 @@ class FileReaderImplTest {
         fileTextList.clear();
         fileTextList.add(TEXT1);
         fileTextList.add(TEXT2);
-        assertEquals(fileTextList, fileReader.read(FILE_PATH));
+        assertEquals(fileTextList, fileReader.formattedRead(FILE_PATH));
     }
 
     @Test
     void read_NotOk() {
         assertThrows(RuntimeException.class,
-                () -> fileReader.read(
+                () -> fileReader.formattedRead(
                         "src/test/resources/ohBoyImTired.csv"));
     }
 }

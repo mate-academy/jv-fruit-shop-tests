@@ -14,11 +14,17 @@ public class FileReaderImpl implements FileReader {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName);
         }
+        return file;
+    }
+
+    @Override
+    public List<String> formattedRead(String fileName) {
+        List<String> file = read(fileName);
         skipHeader(file);
         return file;
     }
 
-    public void skipHeader(List<String> file) {
+    private void skipHeader(List<String> file) {
         file.remove(0);
     }
 }

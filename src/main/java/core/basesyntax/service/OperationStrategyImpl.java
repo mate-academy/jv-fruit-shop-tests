@@ -14,17 +14,8 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public void makeOperation(FruitTransaction.Operation operation,
-                              FruitTransaction fruitTransaction,
+                              String fruitTransaction,
                               Integer quantity) {
         operationHandlers.get(operation).doOperation(fruitTransaction, quantity);
-    }
-
-    public static FruitTransaction.Operation getOperation(String code) {
-        for (FruitTransaction.Operation value : FruitTransaction.Operation.values()) {
-            if (value.getCode().equals(code)) {
-                return value;
-            }
-        }
-        throw new IllegalArgumentException(code + " operation doesn't exist.");
     }
 }

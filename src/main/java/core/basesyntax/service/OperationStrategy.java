@@ -4,6 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 
 public interface OperationStrategy {
     void makeOperation(FruitTransaction.Operation operation,
-                       FruitTransaction fruitTransaction,
+                       String fruitTransaction,
                        Integer quantity);
 }

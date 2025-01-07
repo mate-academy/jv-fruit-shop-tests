@@ -31,7 +31,7 @@ class ShopServiceImplTest {
     private FruitTransaction fruitTransactionReturn = new FruitTransaction();
     private FruitTransaction fruitTransactionResult = new FruitTransaction();
     private List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-    private List<FruitTransaction> calculatedFruitTransactionList = new ArrayList<>();
+    private Map<String, Integer> calculatedFruitTransactionList = new HashMap<>();
 
     @BeforeEach
     void before() {
@@ -45,18 +45,21 @@ class ShopServiceImplTest {
         fruitTransactionSupply.setFruit(FRUIT);
         fruitTransactionPurchase.setFruit(FRUIT);
         fruitTransactionReturn.setFruit(FRUIT);
+
         fruitTransactionResult.setFruit(FRUIT);
 
         fruitTransactionBalance.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransactionSupply.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransactionPurchase.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransactionReturn.setOperation(FruitTransaction.Operation.RETURN);
+
         fruitTransactionResult.setOperation(FruitTransaction.Operation.BALANCE);
 
         fruitTransactionBalance.setQuantity(BALANCE);
         fruitTransactionSupply.setQuantity(SUPPLY);
         fruitTransactionPurchase.setQuantity(PURCHASE);
         fruitTransactionReturn.setQuantity(RETURN);
+
         fruitTransactionResult.setQuantity(RESULT);
 
         fruitTransactionList.add(fruitTransactionBalance);
@@ -64,7 +67,8 @@ class ShopServiceImplTest {
         fruitTransactionList.add(fruitTransactionPurchase);
         fruitTransactionList.add(fruitTransactionReturn);
 
-        calculatedFruitTransactionList.add(fruitTransactionResult);
+        calculatedFruitTransactionList.put(fruitTransactionResult.getFruit(),
+                fruitTransactionResult.getQuantity());
     }
 
     @Test

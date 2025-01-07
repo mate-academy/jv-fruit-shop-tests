@@ -26,10 +26,10 @@ import java.util.Map;
 public class Main {
     private static final String FILE_PATH = "src/main/resources/reportToRead.csv";
     private static final String REPORT_PATH = "src/main/resources/finalReport.csv";
-    private static FileReader fileReader = new FileReaderImpl();
+    private static final FileReader fileReader = new FileReaderImpl();
 
     public static void main(String[] args) {
-        List<String> inputReport = fileReader.read(FILE_PATH);
+        List<String> inputReport = fileReader.formattedRead(FILE_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -45,7 +45,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(Storage.getFruitTransactionList());
+        String resultingReport = reportGenerator.getReport(Storage.getCalculatedTransactions());
 
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, REPORT_PATH);

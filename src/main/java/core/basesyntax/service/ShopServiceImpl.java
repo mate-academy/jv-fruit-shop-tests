@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
+import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
@@ -12,25 +13,24 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<FruitTransaction> process(List<FruitTransaction> transactions) {
+    public Map<String, Integer> process(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
-            FruitTransaction calculatedTransaction =
-                    Storage.getCalculatedTransactions().get(fruitTransaction.getFruit());
-            if (calculatedTransaction != null) {
-                operationStrategy.makeOperation(
-                        fruitTransaction.getOperation(),
-                        calculatedTransaction,
-                        fruitTransaction.getQuantity()
-                );
-            }
-            if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE
-                    && !Storage.getCalculatedTransactions()
-                    .containsKey(fruitTransaction.getFruit())) {
-                Storage.getCalculatedTransactions()
-                        .put(fruitTransaction.getFruit(), fruitTransaction);
+            operationStrategy.makeOperation(
+                    fruitTransaction.getOperation(),
+                    fruitTransaction.getFruit(),
+                    fruitTransaction.getQuantity()
+            );
+            if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
+                processBalanceOperation(fruitTransaction);
             }
         }
 
-        return Storage.getFruitTransactionList();
+        return Storage.getCalculatedTransactions();
+    }
+
+    private void processBalanceOperation(FruitTransaction fruitTransaction) {
+        if (!Storage.getCalculatedTransactions().containsKey(fruitTransaction.getFruit())) {
+            Storage.getCalculatedTransactions().put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        }
     }
 }

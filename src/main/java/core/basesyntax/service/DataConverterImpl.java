@@ -11,6 +11,10 @@ public class DataConverterImpl implements DataConverter {
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line: data) {
+            if (line.contains(" ")) {
+                throw new IllegalArgumentException(
+                        "Data format is incorrect. Data shouldn't contain ' '");
+            }
             String[] elements = line.split(",");
             if (elements.length != ARRAY_EXPECTED_LENGTH) {
                 throw new IllegalArgumentException("Invalid input format. "

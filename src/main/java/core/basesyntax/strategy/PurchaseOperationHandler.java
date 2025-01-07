@@ -8,7 +8,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(String fruit, int quantity) {
         if (quantity > Storage.getFruits().get(fruit)) {
             throw new PurchaseBeyondStockException("Purchase quantity is bigger than stock. "
-                    + "Stock q-ty: " + quantity
+                    + "Purchase q-ty: " + quantity
                     + " Stock q-ty: " + Storage.getFruits().get(fruit));
         } else {
             Storage.getFruits().put(fruit, Storage.getFruits().get(fruit) - quantity);

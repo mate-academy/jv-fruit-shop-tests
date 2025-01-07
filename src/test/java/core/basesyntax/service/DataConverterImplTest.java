@@ -18,35 +18,19 @@ class DataConverterImplTest {
     }
 
     @Test
-    void fileConversion_Ok() {
+    void convertData_ValidData_Ok() {
         List<String> data = List.of("b,banana,20",
                 "s,apple,100",
                 "p,banana,13",
                 "r,apple,10");
+        List<FruitTransaction> expected = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10)
+        );
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
-        assertEquals(result.get(0).getOperation(), FruitTransaction.Operation.BALANCE);
-        assertEquals(result.get(0).getFruit(), "banana");
-        assertEquals(result.get(0).getQuantity(), 20);
-        assertEquals(result.get(1).getOperation(), FruitTransaction.Operation.SUPPLY);
-        assertEquals(result.get(1).getFruit(), "apple");
-        assertEquals(result.get(1).getQuantity(), 100);
-        assertEquals(result.get(2).getOperation(), FruitTransaction.Operation.PURCHASE);
-        assertEquals(result.get(2).getFruit(), "banana");
-        assertEquals(result.get(2).getQuantity(), 13);
-        assertEquals(result.get(3).getOperation(), FruitTransaction.Operation.RETURN);
-        assertEquals(result.get(3).getFruit(), "apple");
-        assertEquals(result.get(3).getQuantity(), 10);
-    }
-
-    @Test
-    void resultLength_Ok() {
-        List<String> data = List.of("b,banana,20",
-                "s,apple,100",
-                "p,banana,13",
-                "r,apple,10",
-                "b,orange,15");
-        List<FruitTransaction> result = dataConverter.convertToTransaction(data);
-        assertEquals(result.size(), 5);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -97,8 +81,10 @@ class DataConverterImplTest {
 
     @Test
     void whitespaceInData_NotOk() {
-        List<String> data = List.of("b, banana , 20");
-        assertThrows(IllegalArgumentException.class,
+        List<String> data = List.of("b, banana , 100");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(data));
+        assertEquals("Data format is incorrect. Data shouldn't contain ' '",
+                exception.getMessage());
     }
 }

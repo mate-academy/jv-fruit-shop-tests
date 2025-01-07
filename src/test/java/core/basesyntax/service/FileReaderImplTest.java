@@ -30,16 +30,15 @@ class FileReaderImplTest {
     @Test
     public void readFile_validFile_ok() throws IOException {
         List<String> testData = List.of("Header", "Line1", "Line2", "Line3");
+        List<String> expected = testData.subList(1, testData.size());
         Files.write(Path.of(TEST_FILE), testData);
         List<String> result = fileReader.readFile(TEST_FILE);
         Assertions.assertEquals(LIST_LENGTH, result.size());
-        Assertions.assertEquals("Line1", result.get(0));
-        Assertions.assertEquals("Line2", result.get(1));
-        Assertions.assertEquals("Line3", result.get(2));
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
-    public void readFile_fileWithOnlyHeader_NotOk() throws IOException {
+    public void readFile_fileWithOnlyHeader_Ok() throws IOException {
         List<String> testData = List.of("Header");
         Files.write(Path.of(TEST_FILE), testData);
         List<String> result = fileReader.readFile(TEST_FILE);

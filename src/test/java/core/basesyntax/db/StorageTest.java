@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Test;
 class StorageTest {
     @Test
     void getOperationBalance_Ok() {
-        assertEquals(FruitTransaction.Operation.BALANCE, FruitTransaction.getOperation("b"));
+        assertEquals(FruitTransaction.Operation.BALANCE, FruitTransaction.findOperation("b"));
     }
 
     @Test
     void getOperationSupply_Ok() {
-        assertEquals(FruitTransaction.Operation.SUPPLY, FruitTransaction.getOperation("s"));
+        assertEquals(FruitTransaction.Operation.SUPPLY, FruitTransaction.findOperation("s"));
     }
 
     @Test
     void getOperationPurchase_Ok() {
-        assertEquals(FruitTransaction.Operation.PURCHASE, FruitTransaction.getOperation("p"));
+        assertEquals(FruitTransaction.Operation.PURCHASE, FruitTransaction.findOperation("p"));
     }
 
     @Test
     void getOperationReturn_Ok() {
-        assertEquals(FruitTransaction.Operation.RETURN, FruitTransaction.getOperation("r"));
+        assertEquals(FruitTransaction.Operation.RETURN, FruitTransaction.findOperation("r"));
     }
 }

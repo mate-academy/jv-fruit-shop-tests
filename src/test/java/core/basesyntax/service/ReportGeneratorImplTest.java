@@ -20,10 +20,12 @@ class ReportGeneratorImplTest {
         Storage.getFruits().put("apple", 100);
         Storage.getFruits().put("orange", 50);
         Storage.getFruits().put("banana", 25);
+
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator()
                 + "orange,50" + System.lineSeparator()
                 + "banana,25" + System.lineSeparator();
+
         String result = reportGenerator.getReport();
         assertEquals(expected, result);
     }

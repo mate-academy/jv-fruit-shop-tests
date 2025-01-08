@@ -14,12 +14,12 @@ import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopService shopService;
-    private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ class ShopServiceImplTest {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationStrategy = new OperationStrategyImpl(operationHandlers);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
@@ -53,5 +53,10 @@ class ShopServiceImplTest {
         );
         shopService.process(transactions);
         assertEquals(150, Storage.getFruits().get("apple"));
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.getFruits().clear();
     }
 }

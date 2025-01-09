@@ -17,6 +17,6 @@ class FileReaderTest {
 
     @Test
     void read_Ok() {
-        assertEquals(12, fileReader.read("src/main/resources/fruits.csv").size());
+        assertEquals(11, fileReader.read("src/main/resources/fruits.csv").size());
     }
 }

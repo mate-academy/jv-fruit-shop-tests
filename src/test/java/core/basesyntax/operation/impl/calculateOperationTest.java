@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class calculateOperationTest {
+class CalculateOperationTest {
     private OperationHandler balanceOperation = new BalanceOperation();
     private OperationHandler purchaseOperation = new PurchaseOperation();
     private OperationHandler returnOperation = new ReturnOperation();

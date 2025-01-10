@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ResultData;
 import core.basesyntax.service.OperationStrategy;
@@ -18,7 +19,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public List<ResultData> process(List<FruitTransaction> transactions) {
-        Map<String, Integer> resultDataMap = new HashMap<>();
+        Map<String, Integer> resultDataMap = Storage.resultDataMap;
         for (FruitTransaction transaction : transactions) {
             ResultData resultData = operationStrategy.get(
                     transaction.getOperation()

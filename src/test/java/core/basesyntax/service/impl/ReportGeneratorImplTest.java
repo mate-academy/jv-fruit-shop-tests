@@ -1,7 +1,7 @@
-package core.basesyntax.utils.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.ResultData;
-import core.basesyntax.utils.ReportGenerator;
+import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -22,9 +22,12 @@ class ReportGeneratorImplTest {
         input.add(new ResultData("banana", 107));
         input.add(new ResultData("apple",110));
 
-        String expectedResult = "fruit,quantity\nbanana,107\napple,110\n";
+        String expectedResult = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,107\napple,110\n";
         String actualResult = reportGenerator.getReport(input);
-
+        System.out.println(expectedResult);
+        System.out.println(actualResult);
         Assertions.assertEquals(expectedResult, actualResult);
     }
 }

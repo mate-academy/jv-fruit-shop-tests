@@ -17,7 +17,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler get(FruitTransaction.Operation operation) {
         OperationHandler operationHandler;
         if ((operationHandler = operationMap.get(operation)) == null) {
-            throw new OperationDefinitionException();
+            throw new OperationDefinitionException("Cannot define operation handler for operation \"" + operation + "\"");
         }
         return operationHandler;
     }

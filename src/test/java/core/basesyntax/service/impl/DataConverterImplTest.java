@@ -1,10 +1,9 @@
-package core.basesyntax.utils.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.OperationDefinitionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationDefStrategy;
-import core.basesyntax.service.impl.OperationDefStrategyImpl;
-import core.basesyntax.utils.DataConverter;
+import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

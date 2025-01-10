@@ -1,7 +1,7 @@
-package core.basesyntax.utils.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.NotCsvFileException;
-import core.basesyntax.utils.FileReader;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,11 +13,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
+    private final static String INPUT_PATH = "src/main/resources/test.csv";
     private final FileReader fileReader = new FileReaderImpl();
 
     @BeforeAll
     static void beforeAll() {
-        File file = new File("test.csv");
+        File file = new File(INPUT_PATH);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             if (!file.exists()) {
                 file.createNewFile();
@@ -37,7 +38,7 @@ class FileReaderImplTest {
     @Test
     void readFromExistFileTest_Ok() {
         Assertions.assertDoesNotThrow(() -> {
-            fileReader.read("test.csv");
+            fileReader.read(INPUT_PATH);
         });
     }
 
@@ -64,7 +65,7 @@ class FileReaderImplTest {
         expectedResult.add("s,banana,100");
         expectedResult.add("p,banana,13");
         expectedResult.add("r,apple,10");
-        List<String> result = fileReader.read("test.csv");
+        List<String> result = fileReader.read(INPUT_PATH);
         Assertions.assertEquals(expectedResult, result);
     }
 }

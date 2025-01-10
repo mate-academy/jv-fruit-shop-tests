@@ -13,24 +13,26 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import core.basesyntax.utils.DataConverter;
-import core.basesyntax.utils.FileReader;
-import core.basesyntax.utils.FileWriter;
-import core.basesyntax.utils.ReportGenerator;
-import core.basesyntax.utils.impl.DataConverterImpl;
-import core.basesyntax.utils.impl.FileReaderImpl;
-import core.basesyntax.utils.impl.FileWriterImpl;
-import core.basesyntax.utils.impl.ReportGeneratorImpl;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private final static String INPUT_PATH = "src/main/resources/example.csv";
+    private final static String OUTPUT_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
 
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("example.csv");
+        List<String> inputReport = fileReader.read(INPUT_PATH);
 
         Map<String, FruitTransaction.Operation> operationMap = new HashMap<>();
         operationMap.put("b", FruitTransaction.Operation.BALANCE);
@@ -62,8 +64,7 @@ public class Main {
         String report = reportGenerator.getReport(resultData);
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report, "finalReport.csv");
-
+        fileWriter.write(report, OUTPUT_PATH);
     }
 }
 

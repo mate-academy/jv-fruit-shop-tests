@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    static final int TRANSACTIONS_START_INDEX = 1;
-    static final int OPERATION_INDEX = 0;
-    static final int FRUIT_INDEX = 1;
-    static final int QUANTITY_INDEX = 2;
+    private static final int TRANSACTIONS_START_INDEX = 1;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA_REGEX_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> readerOutput) {
@@ -18,13 +19,13 @@ public class DataConverterImpl implements DataConverter {
         }
         List<FruitTransaction> converterOutput = new ArrayList<>();
         for (int i = TRANSACTIONS_START_INDEX; i < readerOutput.size(); i++) {
-            String[] parts = readerOutput.get(i).split(",");
+            String[] parts = readerOutput.get(i).split(COMMA_REGEX_SEPARATOR);
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Incorrect format of data");
             }
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
+                quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid quantity format of given quantity: "
                         + parts[QUANTITY_INDEX]);
@@ -36,7 +37,7 @@ public class DataConverterImpl implements DataConverter {
             }
             converterOutput.add(new FruitTransaction(
                     getOperation(parts[OPERATION_INDEX]),
-                    parts[FRUIT_INDEX].trim(),
+                    parts[FRUIT_INDEX],
                     quantity
             ));
         }

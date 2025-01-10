@@ -17,11 +17,6 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    void getReport_emptyStorage_notOk() {
-        assertEquals("No data available for the report", reportGenerator.getReport());
-    }
-
-    @Test
     void getReport_storageWithOneRecord_Ok() {
         modifyFruitStock("orange", 10);
         assertEquals("fruit,quantity\norange,10",reportGenerator.getReport());

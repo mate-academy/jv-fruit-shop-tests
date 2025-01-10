@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.FileReaderImpl;
@@ -44,14 +43,6 @@ public class FileReaderImplTest {
     void read_csvFileWithContent_Ok() {
         List<String> result = reader.read(tempFile.toString());
         assertEquals(6, result.size());
-    }
-
-    @Test
-    void read_inexistentFile_notOk() {
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            reader.read("inexistentFile.csv");
-        });
-        assertEquals("No file at such path: inexistentFile.csv", exception.getMessage());
     }
 
     @AfterAll

@@ -48,7 +48,6 @@ public class ShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 99)
         );
         shopService.process(validList);
-        System.out.println(getFruitStock());
         assertEquals(1, getFruitStock().get("apple"));
     }
 

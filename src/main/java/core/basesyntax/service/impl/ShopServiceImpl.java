@@ -20,9 +20,6 @@ public class ShopServiceImpl implements ShopService {
         }
         for (FruitTransaction transaction : transactions) {
             FruitTransaction.Operation currentOperation = transaction.getOperation();
-            if (currentOperation == null) {
-                continue;
-            }
             OperationHandler handler = operationHandlers.get(currentOperation);
             if (handler == null) {
                 throw new IllegalArgumentException("Unsupported operation: " + currentOperation);

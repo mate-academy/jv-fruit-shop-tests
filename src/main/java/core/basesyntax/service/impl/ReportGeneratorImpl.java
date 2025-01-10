@@ -5,21 +5,20 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMMA_REGEX_SEPARATOR = ",";
 
     @Override
     public String getReport() {
-        if (!Storage.getFruitStock().isEmpty()) {
-            StringBuilder builder = new StringBuilder();
-            builder.append("fruit,quantity");
-            for (Map.Entry<String, Integer> entry : Storage.getFruitStock().entrySet()) {
-                builder.append(System.lineSeparator())
-                        .append(entry.getKey())
-                        .append(",")
-                        .append(entry.getValue());
-            }
-            return builder.toString();
-        } else {
-            return "No data available for the report";
+        StringBuilder builder = new StringBuilder();
+        builder.append(HEADER);
+        for (Map.Entry<String, Integer> entry : Storage.getFruitStock().entrySet()) {
+            builder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(COMMA_REGEX_SEPARATOR)
+                    .append(entry.getValue());
         }
+        return builder.toString();
+
     }
 }

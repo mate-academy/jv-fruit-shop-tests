@@ -8,10 +8,6 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException(
-                    "Quantity must be more than zero! Provided value: " + quantity);
-        }
         this.quantity = quantity;
         this.operation = operation;
         this.fruit = fruit;
@@ -31,10 +27,10 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
         private String code;
 

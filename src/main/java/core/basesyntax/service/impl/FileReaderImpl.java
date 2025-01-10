@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,11 +17,8 @@ public class FileReaderImpl implements core.basesyntax.service.FileReader {
         if (!Files.exists(path)) {
             throw new RuntimeException("No file at such path: " + filePath);
         }
-        if (!Files.isReadable(path)) {
-            throw new RuntimeException("Cannot read a file at path: " + path);
-        }
         List<String> output = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String value;
             while ((value = reader.readLine()) != null) {
                 output.add(value);

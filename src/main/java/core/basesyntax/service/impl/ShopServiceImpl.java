@@ -3,14 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
+    private final OperationStrategy strategy;
 
-    public ShopServiceImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlers) {
-        this.operationHandlers = operationHandlers;
+    public ShopServiceImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
     }
 
     @Override
@@ -19,11 +19,7 @@ public class ShopServiceImpl implements ShopService {
             throw new IllegalArgumentException("Empty list of transactions!");
         }
         for (FruitTransaction transaction : transactions) {
-            FruitTransaction.Operation currentOperation = transaction.getOperation();
-            OperationHandler handler = operationHandlers.get(currentOperation);
-            if (handler == null) {
-                throw new IllegalArgumentException("Unsupported operation: " + currentOperation);
-            }
+            OperationHandler handler = strategy.get(transaction.getOperation());
             handler.doOperation(transaction);
         }
     }

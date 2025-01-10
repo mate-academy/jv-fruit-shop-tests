@@ -12,6 +12,7 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
@@ -37,7 +38,9 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        ShopService shopService = new ShopServiceImpl(operationHandlers);
+        OperationStrategy strategy = new OperationStrategy(operationHandlers);
+
+        ShopService shopService = new ShopServiceImpl(strategy);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();

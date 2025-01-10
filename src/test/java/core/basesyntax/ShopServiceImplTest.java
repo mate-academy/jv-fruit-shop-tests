@@ -9,6 +9,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
@@ -31,7 +32,8 @@ public class ShopServiceImplTest {
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        shopService = new ShopServiceImpl(operationHandlers);
+        OperationStrategy strategy = new OperationStrategy(operationHandlers);
+        shopService = new ShopServiceImpl(strategy);
     }
 
     @Test

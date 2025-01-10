@@ -1,11 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.ResultData;
 import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
@@ -24,10 +25,13 @@ class ReportGeneratorImplTest {
 
         String expectedResult = "fruit,quantity"
                 + System.lineSeparator()
-                + "banana,107\napple,110\n";
+                + "banana,107"
+                + System.lineSeparator()
+                + "apple,110"
+                + System.lineSeparator();
         String actualResult = reportGenerator.getReport(input);
         System.out.println(expectedResult);
         System.out.println(actualResult);
-        Assertions.assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 }

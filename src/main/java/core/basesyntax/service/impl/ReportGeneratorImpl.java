@@ -11,9 +11,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport(List<ResultData> resultDataList) {
         StringBuilder stringBuilder = new StringBuilder(HEADER);
         for (ResultData resultData : resultDataList) {
-            stringBuilder.append("%s,%d\n".formatted(
+            stringBuilder.append("%s,%d%s".formatted(
                     resultData.getFruitName(),
-                    resultData.getQuantity()));
+                    resultData.getQuantity(),
+                    System.lineSeparator()));
         }
         return stringBuilder.toString();
     }

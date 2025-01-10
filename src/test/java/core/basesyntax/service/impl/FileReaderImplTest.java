@@ -1,5 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exceptions.NotCsvFileException;
 import core.basesyntax.service.FileReader;
 import java.io.BufferedWriter;
@@ -8,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,12 +27,12 @@ class FileReaderImplTest {
                 file.createNewFile();
             }
             bufferedWriter.write("");
-            bufferedWriter.append("type,fruit,quantity\n");
-            bufferedWriter.append("b,banana,20\n");
-            bufferedWriter.append("b,apple,100\n");
-            bufferedWriter.append("s,banana,100\n");
-            bufferedWriter.append("p,banana,13\n");
-            bufferedWriter.append("r,apple,10\n");
+            bufferedWriter.append("type,fruit,quantity").append(System.lineSeparator());
+            bufferedWriter.append("b,banana,20").append(System.lineSeparator());
+            bufferedWriter.append("b,apple,100").append(System.lineSeparator());
+            bufferedWriter.append("s,banana,100").append(System.lineSeparator());
+            bufferedWriter.append("p,banana,13").append(System.lineSeparator());
+            bufferedWriter.append("r,apple,10").append(System.lineSeparator());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -37,21 +40,21 @@ class FileReaderImplTest {
 
     @Test
     void readFromExistFileTest_Ok() {
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             fileReader.read(INPUT_PATH);
         });
     }
 
     @Test
     void readFromNonExistFileTest_NotOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             fileReader.read("nonExist.csv");
         });
     }
 
     @Test
     void readNotCsvFileTest_NotOk() {
-        Assertions.assertThrows(NotCsvFileException.class, () -> {
+        assertThrows(NotCsvFileException.class, () -> {
             fileReader.read("notCsvFile.txt");
         });
     }
@@ -66,6 +69,6 @@ class FileReaderImplTest {
         expectedResult.add("p,banana,13");
         expectedResult.add("r,apple,10");
         List<String> result = fileReader.read(INPUT_PATH);
-        Assertions.assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 }

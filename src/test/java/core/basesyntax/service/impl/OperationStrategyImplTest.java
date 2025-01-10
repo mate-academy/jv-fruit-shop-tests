@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exceptions.OperationDefinitionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
@@ -10,7 +13,6 @@ import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -34,19 +36,19 @@ class OperationStrategyImplTest {
 
     @Test
     void operationGetTest_Ok() {
-        Assertions.assertInstanceOf(
+        assertInstanceOf(
                 BalanceOperationHandler.class,
                 operationStrategy.get(FruitTransaction.Operation.BALANCE)
         );
-        Assertions.assertInstanceOf(
+        assertInstanceOf(
                 SupplyOperationHandler.class,
                 operationStrategy.get(FruitTransaction.Operation.SUPPLY)
         );
-        Assertions.assertInstanceOf(
+        assertInstanceOf(
                 PurchaseOperationHandler.class,
                 operationStrategy.get(FruitTransaction.Operation.PURCHASE)
         );
-        Assertions.assertInstanceOf(
+        assertInstanceOf(
                 ReturnOperationHandler.class,
                 operationStrategy.get(FruitTransaction.Operation.RETURN)
         );
@@ -54,7 +56,7 @@ class OperationStrategyImplTest {
 
     @Test
     void operationGetTest_NotOk() {
-        Assertions.assertThrows(OperationDefinitionException.class, () -> {
+        assertThrows(OperationDefinitionException.class, () -> {
             operationStrategy.get(null);
         });
     }

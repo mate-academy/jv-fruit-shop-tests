@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exceptions.OperationDefinitionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
@@ -9,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -71,14 +73,14 @@ class DataConverterImplTest {
 
         List<FruitTransaction> actualResult = dataConverter.convertToTransaction(input);
 
-        Assertions.assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
     void dataConvertTest_NotOk() {
         input.add("type,fruit,quantity");
         input.add("i,banana,20");
-        Assertions.assertThrows(OperationDefinitionException.class, () -> {
+        assertThrows(OperationDefinitionException.class, () -> {
             dataConverter.convertToTransaction(input);
         });
     }

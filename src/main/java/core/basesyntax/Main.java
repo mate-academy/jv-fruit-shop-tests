@@ -2,32 +2,32 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ResultData;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.OperationDefStrategy;
 import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.OperationDefStrategyImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.DataConverterImpl;
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private final static String INPUT_PATH = "src/main/resources/example.csv";
-    private final static String OUTPUT_PATH = "src/main/resources/finalReport.csv";
+    private static final String INPUT_PATH = "src/main/resources/example.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
 

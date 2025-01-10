@@ -6,7 +6,6 @@ import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.NoSuchFileException;
 
 public class FileWriterImpl implements FileWriter {
     @Override

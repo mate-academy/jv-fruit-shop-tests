@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+
     @Override
     public String getReport(List<ResultData> resultDataList) {
         StringBuilder stringBuilder = new StringBuilder(HEADER);

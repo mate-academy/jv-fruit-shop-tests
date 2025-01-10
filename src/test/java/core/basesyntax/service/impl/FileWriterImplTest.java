@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static FileWriter fileWriter = new FileWriterImpl();
-    private final static String OUTPUT_PATH = "src/main/resources/testReport.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/testReport.csv";
 
     @BeforeAll
     static void beforeAll() {

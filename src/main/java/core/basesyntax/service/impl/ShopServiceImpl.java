@@ -6,7 +6,6 @@ import core.basesyntax.model.ResultData;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ShopService;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

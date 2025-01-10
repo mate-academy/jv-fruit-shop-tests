@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private final static String INPUT_PATH = "src/main/resources/test.csv";
+    private static final String INPUT_PATH = "src/main/resources/test.csv";
     private final FileReader fileReader = new FileReaderImpl();
 
     @BeforeAll

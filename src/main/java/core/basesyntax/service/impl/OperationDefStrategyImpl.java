@@ -16,7 +16,9 @@ public class OperationDefStrategyImpl implements OperationDefStrategy {
     public FruitTransaction.Operation get(String code) {
         FruitTransaction.Operation operation;
         if ((operation = operationMap.get(code)) == null) {
-            throw new OperationDefinitionException("Cannot define operation type with code \"" + code + "\"");
+            throw new OperationDefinitionException("Cannot define operation type with code \""
+                    + code
+                    + "\"");
         }
         return operation;
     }

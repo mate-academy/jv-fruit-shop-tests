@@ -10,6 +10,9 @@ import java.nio.file.Paths;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String report, String filePath) {
+        if (report == null) {
+            throw new IllegalArgumentException("Cannot write a null report!");
+        }
         Path path = Paths.get(filePath);
         try {
             Files.createDirectories(path.getParent());

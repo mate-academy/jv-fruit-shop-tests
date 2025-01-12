@@ -28,12 +28,12 @@ class ShopServiceTest {
     @BeforeAll
     static void beforeAll() {
         operationHandlers = new HashMap<>() {{
-               put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-               put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        }};
-            operationStrategy = new OperationStrategyImpl(operationHandlers);
-            service = new ShopServiceImpl(operationStrategy);
-            transactions = Arrays.asList(new FruitTransaction(balance,new Fruit("banana"),20),
+                put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+                put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+            }};
+        operationStrategy = new OperationStrategyImpl(operationHandlers);
+        service = new ShopServiceImpl(operationStrategy);
+        transactions = Arrays.asList(new FruitTransaction(balance,new Fruit("banana"),20),
                 new FruitTransaction(balance, new Fruit("banana"), 55));
     }
 

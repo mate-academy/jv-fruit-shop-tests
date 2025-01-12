@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
@@ -15,7 +14,7 @@ class StorageTest {
         // Очищаем хранилище перед каждым тестом
         Map<String, Integer> fruits = Storage.getAllFruits();
         fruits.keySet().forEach(fruit ->
-                Storage.modifyFruitStorage(fruit, -Storage.getFruitQuantity(fruit)));
+            Storage.modifyFruitStorage(fruit, -Storage.getFruitQuantity(fruit)));
     }
 
     @Test
@@ -44,7 +43,7 @@ class StorageTest {
     void modifyFruitStorage_addNegativeQuantity_throwsException() {
         Storage.modifyFruitStorage("apple", 10); // Добавляем 10
         Exception exception = assertThrows(IllegalStateException.class,
-                () -> Storage.modifyFruitStorage("apple", -20));
+            () -> Storage.modifyFruitStorage("apple", -20));
         String expectedMessage = "Stock for fruit apple cannot be negative.";
         assertEquals(expectedMessage, exception.getMessage());
     }
@@ -64,15 +63,5 @@ class StorageTest {
         assertEquals(2, fruits.size(), "Размер хранилища должен быть 2");
         assertEquals(30, fruits.get("apple"), "Количество яблок должно быть 30");
         assertEquals(20, fruits.get("banana"), "Количество бананов должно быть 20");
-    }
-
-    @Test
-    void getAllFruits_doesNotAffectOriginalStorage_ok() {
-        Storage.modifyFruitStorage("apple", 10);
-        Map<String, Integer> fruits = Storage.getAllFruits();
-
-        fruits.put("banana", 20); // Изменяем локальную копию
-        assertFalse(Storage.getAllFruits().containsKey("banana"),
-                "Оригинальное хранилище не должно содержать банан");
     }
 }

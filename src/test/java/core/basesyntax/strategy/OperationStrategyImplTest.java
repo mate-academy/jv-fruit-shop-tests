@@ -21,17 +21,17 @@ class OperationStrategyImplTest {
     private OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
     @Test
-    void getService_null_NotOk() {
+    void getService_null_notOk() {
         assertNull(operationStrategy.getService(null));
     }
 
     @Test
-    void getService_nonExistingOperation_NotOk() {
+    void getService_nonExistingOperation_notOk() {
         assertNull(operationStrategy.getService(FruitTransaction.Operation.SUPPLY));
     }
 
     @Test
-    void getService_Ok() {
+    void getService_typeCheck_ok() {
         assertTrue(operationStrategy.getService(FruitTransaction.Operation.BALANCE)
                 instanceof BalanceOperation);
     }

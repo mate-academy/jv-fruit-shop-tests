@@ -8,7 +8,7 @@ class SupplyOperationTest {
     private OperationHandler supplyOperation = new SupplyOperation();
 
     @Test
-    void operationHandler_Ok() {
+    void operationHandler_calculateCheck_ok() {
         assertEquals(10, supplyOperation.calculateOperation(10));
     }
 }

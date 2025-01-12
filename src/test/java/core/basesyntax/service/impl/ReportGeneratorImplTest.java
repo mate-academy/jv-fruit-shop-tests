@@ -13,17 +13,18 @@ class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @Test
-    void getReport_nullContent_NotOk() {
+    void getReport_nullContent_notOk() {
         map.put(null,null);
         assertThrows(RuntimeException.class, () -> reportGenerator.getReport(map));
     }
 
     @Test
-    void getReport_Ok() {
+    void getReport_simpleReporting_ok() {
         map.put("banana",20);
         map.put("apple",50);
-        String expected = "fruit,quantity" + System.lineSeparator() + "banana,20"
-                + System.lineSeparator() + "apple,50" + System.lineSeparator();
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,20" + System.lineSeparator()
+                + "apple,50" + System.lineSeparator();
         assertEquals(expected, reportGenerator.getReport(map));
     }
 }

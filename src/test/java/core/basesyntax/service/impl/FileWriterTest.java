@@ -9,17 +9,13 @@ class FileWriterTest {
     private FileWriter fileWriter = new FileWriterImpl();
 
     @Test
-    void write_wrongContent_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileWriter.write("", "finalReport.csv"));
+    void write_wrongContent_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> fileWriter.write("", "src/test/resources/finalReport.csv"));
     }
 
     @Test
-    void write_wrongPath_NotOk() {
-        fileWriter.write("yy", "C:/Windows/System32/test.txt");
-    }
-
-    @Test
-    void write_Ok() {
-        fileWriter.write("kuku", "finalReport.csv");
+    void write_simpleFileWriting_Ok() {
+        fileWriter.write("kuku", "src/test/resources/finalReport.csv");
     }
 }

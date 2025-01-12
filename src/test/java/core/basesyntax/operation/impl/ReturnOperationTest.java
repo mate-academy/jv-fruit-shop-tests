@@ -8,7 +8,7 @@ class ReturnOperationTest {
     private OperationHandler returnOperation = new ReturnOperation();
 
     @Test
-    void operationHandler_Ok() {
+    void operationHandler_calculateCheck_ok() {
         assertEquals(10, returnOperation.calculateOperation(10));
     }
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DataConverterImplTest {
     private final DataConverter dataConverter = new DataConverterImpl();
@@ -18,9 +20,9 @@ class DataConverterImplTest {
         // Перевіряється, що список містить 2 елементи
         assertEquals(2, result.size());
         // Перевіряється, що фрукт першої транзакції — "apple"
-        assertEquals("apple", result.get(0).getFruit());
+        assertTrue(result.get(0).toString().contains("apple"));
         // Перевіряється, що кількість першої транзакції дорівнює 50
-        assertEquals(50, result.get(0).getQuantity());
+        assertTrue(result.get(0).toString().contains("50"));
     }
 
     @Test

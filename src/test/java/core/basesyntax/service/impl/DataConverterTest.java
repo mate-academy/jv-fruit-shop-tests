@@ -12,12 +12,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataConverterTest {
-    private DataConverter dataConverter = new DataConverterImpl();
-    private List<FruitTransaction> expected;
     private static final FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
     private static final FruitTransaction.Operation aReturn = FruitTransaction.Operation.RETURN;
     private static final FruitTransaction.Operation supply = FruitTransaction.Operation.SUPPLY;
     private static final FruitTransaction.Operation purchase = FruitTransaction.Operation.PURCHASE;
+
+    private DataConverter dataConverter = new DataConverterImpl();
+    private List<FruitTransaction> expected;
 
     @Test
     void convertToTransaction_wrongOperationFormat_notOk() {

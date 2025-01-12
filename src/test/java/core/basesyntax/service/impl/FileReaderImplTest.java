@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.exceptions.NotCsvFileException;
 import core.basesyntax.service.FileReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,16 +15,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private static final String INPUT_PATH = "src/main/resources/test.csv";
+    private static final String INPUT_PATH = "src/test/resources/test.csv";
     private final FileReader fileReader = new FileReaderImpl();
 
     @BeforeAll
     static void beforeAll() {
-        File file = new File(INPUT_PATH);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(INPUT_PATH))) {
             bufferedWriter.write("");
             bufferedWriter.append("type,fruit,quantity").append(System.lineSeparator());
             bufferedWriter.append("b,banana,20").append(System.lineSeparator());

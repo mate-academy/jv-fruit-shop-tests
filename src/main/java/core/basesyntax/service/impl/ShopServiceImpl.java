@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -40,6 +40,7 @@ public class ShopServiceImpl implements ShopService {
                     resultDataEntry.getValue()
             ));
         }
+        resultDataMap.clear();
         return resultDataList;
     }
 }

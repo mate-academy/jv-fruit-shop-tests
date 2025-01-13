@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static ShopService shopService;
-    private static List<FruitTransaction> inputTransactions = new ArrayList<>();
+    private List<FruitTransaction> inputTransactions = new ArrayList<>();
 
     @BeforeAll
     static void beforeAll() {

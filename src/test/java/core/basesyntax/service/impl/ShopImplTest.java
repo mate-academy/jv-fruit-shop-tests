@@ -25,6 +25,8 @@ class ShopImplTest {
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationStrategy = new OperationStrategyImpl(handlers);
         shop = new ShopImpl(operationStrategy);
+
+        core.basesyntax.db.Storage.clearStorage();
     }
 
     @Test

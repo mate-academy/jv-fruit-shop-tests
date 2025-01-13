@@ -7,7 +7,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("Quantity have negative");
+            throw new RuntimeException("Quantity is negative");
         }
         if (!Storage.fruits.containsKey(fruit)) {
             Storage.fruits.put(fruit,quantity);
@@ -19,7 +19,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void subtract(String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("Quantity have negative");
+            throw new RuntimeException("Quantity is negative");
         }
         if (!Storage.fruits.containsKey(fruit)) {
             throw new RuntimeException("There isn't " + fruit + " in Storage");

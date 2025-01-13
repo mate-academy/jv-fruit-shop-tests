@@ -61,7 +61,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertList_ThrowsExceptionsWhileWrongInput_OK() {
+    void convertList_throwsExceptionsWhileWrongInput_OK() {
         DataConverter dataConverter = new DataConverterImpl();
         INPUT_REPORT.set(2,WRONG_INPUT);
         Assertions.assertThrows(RuntimeException.class,
@@ -69,7 +69,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertList_ThrowsExceptionsWhileNullInput_OK() {
+    void convertList_throwsExceptionsWhileNullInput_OK() {
         DataConverter dataConverter = new DataConverterImpl();
         INPUT_REPORT.set(2,null);
         Assertions.assertThrows(RuntimeException.class,

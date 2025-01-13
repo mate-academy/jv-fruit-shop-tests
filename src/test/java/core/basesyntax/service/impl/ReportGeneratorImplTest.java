@@ -1,38 +1,47 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
-import java.util.List;
-import java.util.stream.Collectors;
+import core.basesyntax.service.ReportGeneratorService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReportGeneratorImplTest {
-    private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
+public class ReportGeneratorImplTest {
+
+    private ReportGeneratorService reportGenerator;
+
+    @BeforeEach
+    public void setUp() {
+        reportGenerator = new ReportGeneratorImpl();
+        Storage.clearStorage();
+    }
 
     @Test
-    void getReport_validStorage_containsExpectedData() {
-        // Заполняем хранилище тестовыми данными
-        Storage.modifyFruitStorage("apple", 100);
-        Storage.modifyFruitStorage("banana", 50);
+    public void getReport_emptyStorage_ok() {
+        String expectedReport = "fruit,quantity";
+        String actualReport = reportGenerator.getReport();
+        assertEquals(expectedReport, actualReport);
+    }
 
-        // Генерируем отчет
-        String report = reportGenerator.getReport();
+    @Test
+    public void getReport_singleFruit_ok() {
+        Storage.modifyFruitStorage("apple", 50);
+        String expectedReport = "fruit,quantity" + System.lineSeparator() + "apple,50";
+        String actualReport = reportGenerator.getReport();
+        assertEquals(expectedReport, actualReport);
+    }
 
-        // Ожидаемые строки в отчете
-        List<String> expectedLines = List.of(
-                "fruit,quantity", // Заголовок
-                "apple,100",
-                "banana,50"
-        );
-
-        // Преобразуем отчет в список строк
-        List<String> reportLines = report.lines().collect(Collectors.toList());
-
-        // Проверяем, что все ожидаемые строки присутствуют в отчете
-        for (String expectedLine : expectedLines) {
-            assertTrue(reportLines.contains(expectedLine),
-                    "Отчет не содержит строку: " + expectedLine);
-        }
+    @Test
+    public void getReport_multipleFruitsSorted_ok() {
+        Storage.modifyFruitStorage("banana", 30);
+        Storage.modifyFruitStorage("apple", 50);
+        Storage.modifyFruitStorage("orange", 40);
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "apple,50" + System.lineSeparator()
+                + "banana,30" + System.lineSeparator()
+                + "orange,40";
+        String actualReport = reportGenerator.getReport();
+        assertEquals(expectedReport, actualReport);
     }
 }

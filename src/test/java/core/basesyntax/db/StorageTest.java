@@ -11,7 +11,6 @@ class StorageTest {
 
     @BeforeEach
     void setUp() {
-        // Очищаем хранилище перед каждым тестом
         Map<String, Integer> fruits = Storage.getAllFruits();
         fruits.keySet().forEach(fruit ->
                 Storage.modifyFruitStorage(fruit, -Storage.getFruitQuantity(fruit)));

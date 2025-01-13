@@ -7,8 +7,8 @@ import core.basesyntax.service.FileWriter;
 import org.junit.jupiter.api.Test;
 
 class FileWriterTest {
-    private FileWriter fileWriter = new FileWriterImpl();
     private static final String correctPath = "src/test/resources/finalReport.csv";
+    private FileWriter fileWriter = new FileWriterImpl();
 
     @Test
     void write_wrongContent_notOk() {

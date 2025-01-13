@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
-    private FileReader fileReader = new FileReaderImpl();
     private static final String wrongPath = "src/main/fruits.csv";
     private static final String correctPath = "src/test/resources/fruits.csv";
+    private FileReader fileReader = new FileReaderImpl();
 
     @Test
     void read_wrongPath_notOk() {

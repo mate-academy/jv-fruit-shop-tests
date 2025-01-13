@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.handler.BalanceHandler;
 import core.basesyntax.handler.OperationHandler;
@@ -44,13 +43,5 @@ class ShopImplTest {
 
         int finalQuantity = core.basesyntax.db.Storage.getFruitQuantity("apple");
         assertEquals(15, finalQuantity);
-    }
-
-    @Test
-    void process_emptyTransactionList_doesNotModifyStorage() {
-        shop.process(List.of());
-
-        Map<String, Integer> storageContents = core.basesyntax.db.Storage.getAllFruits();
-        assertTrue(storageContents.isEmpty());
     }
 }

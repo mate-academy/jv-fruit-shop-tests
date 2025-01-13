@@ -20,8 +20,7 @@ public class ReportGeneratorImplTest {
     public void getReport_emptyStorage_ok() {
         String expectedReport = "fruit,quantity";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
-                "Звіт для порожнього сховища має містити лише заголовок.");
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test
@@ -29,8 +28,7 @@ public class ReportGeneratorImplTest {
         Storage.modifyFruitStorage("apple", 50);
         String expectedReport = "fruit,quantity" + System.lineSeparator() + "apple,50";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
-                "Звіт має правильно відображати кількість одного фрукта.");
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test
@@ -43,7 +41,6 @@ public class ReportGeneratorImplTest {
                 + "banana,30" + System.lineSeparator()
                 + "orange,40";
         String actualReport = reportGenerator.getReport();
-        assertEquals(expectedReport, actualReport,
-                "Фрукти мають бути відсортовані в алфавітному порядку.");
+        assertEquals(expectedReport, actualReport);
     }
 }

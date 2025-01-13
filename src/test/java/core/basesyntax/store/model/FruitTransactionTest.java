@@ -10,27 +10,22 @@ public class FruitTransactionTest {
     @Test
     void fromCode_validCode_returnsCorrectOperation() {
         assertEquals(FruitTransaction.Operation.BALANCE,
-                FruitTransaction.Operation.fromCode("b"),
-                "Expected BALANCE operation for code 'b'");
+                FruitTransaction.Operation.fromCode("b"));
 
         assertEquals(FruitTransaction.Operation.SUPPLY,
-                FruitTransaction.Operation.fromCode("s"),
-                "Expected SUPPLY operation for code 's'");
+                FruitTransaction.Operation.fromCode("s"));
 
         assertEquals(FruitTransaction.Operation.PURCHASE,
-                FruitTransaction.Operation.fromCode("p"),
-                "Expected PURCHASE operation for code 'p'");
+                FruitTransaction.Operation.fromCode("p"));
 
         assertEquals(FruitTransaction.Operation.RETURN,
-                FruitTransaction.Operation.fromCode("r"),
-                "Expected RETURN operation for code 'r' (check your enum setup)");
+                FruitTransaction.Operation.fromCode("r"));
     }
 
     @Test
     void fromCode_invalidCode_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.Operation.fromCode("x"),
-                "Expected IllegalArgumentException for invalid code 'x'");
+                () -> FruitTransaction.Operation.fromCode("x"));
     }
 }
 

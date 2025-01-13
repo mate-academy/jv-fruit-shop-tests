@@ -19,21 +19,26 @@ public class FileReaderImplTest {
     @BeforeEach
     void setUp() throws IOException {
         fileReader = new FileReaderImpl();
-        // Створення тестового файлу з вмістом
-        Files.writeString(Path.of(VALID_FILE), "type,fruit,quantity\nb,banana,20\np,apple,10");
+
+        String content = "type,fruit,quantity"
+                + System.lineSeparator()
+                + "b,banana,20"
+                + System.lineSeparator()
+                + "p,apple,10";
+
+        Files.writeString(Path.of(VALID_FILE), content);
     }
 
     @Test
     void read_validFile_ok() {
         List<String> result = fileReader.read(VALID_FILE);
-        assertEquals(3, result.size(), "Розмір списку має бути 3 для файлу з трьома рядками");
-        assertEquals("type,fruit,quantity", result.get(0),
-                "Перший рядок має відповідати очікуваному заголовку");
+        assertEquals(3, result.size());
+        assertEquals("type,fruit,quantity", result.get(0));
     }
 
     @Test
     void read_invalidFile_emptyList() {
         List<String> result = fileReader.read(INVALID_FILE);
-        assertTrue(result.isEmpty(), "Список має бути порожнім для неіснуючого файлу");
+        assertTrue(result.isEmpty());
     }
 }

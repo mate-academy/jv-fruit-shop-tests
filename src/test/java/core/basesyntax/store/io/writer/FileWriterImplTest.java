@@ -19,14 +19,17 @@ public class FileWriterImplTest {
 
     @Test
     void write_validData_writesToFile() throws IOException {
-        String report = "fruit,quantity\nbanana,152\napple,90";
+        String report = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,152"
+                + System.lineSeparator()
+                + "apple,90";
         fileWriter.write(report, TEST_FILE);
 
-        String writtenData = Files.readString(Path.of(TEST_FILE));
+        String writtenData = Files.readString(Path.of("src/test/resources", TEST_FILE));
         assert writtenData.equals(report) : "File content should match the written report.";
 
-        // Clean up the test file
-        Files.deleteIfExists(Path.of(TEST_FILE));
+        Files.deleteIfExists(Path.of("src/test/resources", TEST_FILE));
     }
 
     @Test
@@ -35,7 +38,6 @@ public class FileWriterImplTest {
         String report = "test report data";
 
         assertThrows(RuntimeException.class,
-                () -> fileWriter.write(report, invalidFileName),
-                "Expected to throw RuntimeException for an invalid file path");
+                () -> fileWriter.write(report, invalidFileName));
     }
 }

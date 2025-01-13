@@ -19,35 +19,28 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_shouldConvertValidDataCorrectly() {
         List<String> lines = List.of(
-                "operation,fruit,quantity", // заголовок
-                "b,apple,100", // для BALANCE
-                "s,banana,50", // для SUPPLY
-                "p,orange,30" // для PURCHASE
+                "operation,fruit,quantity",
+                "b,apple,100",
+                "s,banana,50",
+                "p,orange,30"
         );
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(lines);
 
-        assertEquals(3, transactions.size(), "The number of transactions should be 3.");
-
-        assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0).getOperation());
-        assertEquals("apple", transactions.get(0).getFruit());
-        assertEquals(100, transactions.get(0).getQuantity());
-
-        assertEquals(FruitTransaction.Operation.SUPPLY, transactions.get(1).getOperation());
-        assertEquals("banana", transactions.get(1).getFruit());
-        assertEquals(50, transactions.get(1).getQuantity());
-
-        assertEquals(FruitTransaction.Operation.PURCHASE, transactions.get(2).getOperation());
-        assertEquals("orange", transactions.get(2).getFruit());
-        assertEquals(30, transactions.get(2).getQuantity());
+        List<FruitTransaction> expectedTransactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 30)
+        );
+        assertEquals(expectedTransactions, transactions);
     }
 
     @Test
     void convertToTransaction_shouldHandleIncorrectFormatGracefully() {
         List<String> lines = List.of(
-                "operation,fruit,quantity", // заголовок
-                "b,apple,100", // коректний рядок
-                "INVALID,banana,50" // некоректний код операції
+                "operation,fruit,quantity",
+                "b,apple,100",
+                "INVALID,banana,50"
         );
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
@@ -60,9 +53,9 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_shouldHandleIncompleteData() {
         List<String> lines = List.of(
-                "operation,fruit,quantity", // заголовок
-                "b,apple,100", // коректний рядок
-                "s,banana" // неповний рядок (відсутня кількість)
+                "operation,fruit,quantity",
+                "b,apple,100",
+                "s,banana"
         );
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {

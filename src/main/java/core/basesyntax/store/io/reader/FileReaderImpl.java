@@ -8,12 +8,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+    private static final String RESOURCE_FOLDER = "src/test/resources/";
+
     @Override
     public List<String> read(String fileName) {
+        Path path = Path.of(RESOURCE_FOLDER, fileName);
         try {
-            return Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(path);
         } catch (IOException e) {
-            Logger.logError("Error reading file: " + fileName, e); // Логуємо помилку
+            Logger.logError("Error reading file: " + path, e);
             return Collections.emptyList();
         }
     }

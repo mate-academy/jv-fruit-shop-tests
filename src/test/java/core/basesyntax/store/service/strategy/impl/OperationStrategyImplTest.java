@@ -20,26 +20,22 @@ class OperationStrategyImplTest {
 
     @BeforeEach
     void setUp() {
-        // Створюємо обробники операцій
         OperationHandler balanceHandler = new BalanceOperation();
         OperationHandler supplyHandler = new SupplyOperation();
         OperationHandler purchaseHandler = new PurchaseOperation();
         OperationHandler returnHandler = new ReturnOperation();
 
-        // Створюємо мапу обробників для різних операцій
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, balanceHandler);
         handlers.put(FruitTransaction.Operation.SUPPLY, supplyHandler);
         handlers.put(FruitTransaction.Operation.PURCHASE, purchaseHandler);
         handlers.put(FruitTransaction.Operation.RETURN, returnHandler);
 
-        // Ініціалізуємо стратегію з цією мапою
         operationStrategy = new OperationStrategyImpl(handlers);
     }
 
     @Test
     void getHandler_validOperation_returnCorrectHandler() {
-        // Перевірка, чи повертається правильний обробник для кожної операції
         OperationHandler handler = operationStrategy.getHandler(FruitTransaction.Operation.BALANCE);
         assertTrue(handler instanceof BalanceOperation);
 
@@ -55,8 +51,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getHandler_invalidOperation_returnNull() {
-        // Тест на наявність коректної обробки випадку, коли операція не знайдена в мапі
         OperationHandler handler = operationStrategy.getHandler(null);
-        assertNull(handler, "Handler for null operation should be null");
+        assertNull(handler);
     }
 }

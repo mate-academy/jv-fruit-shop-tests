@@ -6,6 +6,9 @@ import java.util.Map;
 public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(String fruit, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity have negative");
+        }
         if (!Storage.fruits.containsKey(fruit)) {
             Storage.fruits.put(fruit,quantity);
             return;
@@ -15,6 +18,9 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void subtract(String fruit, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity have negative");
+        }
         if (!Storage.fruits.containsKey(fruit)) {
             throw new RuntimeException("There isn't " + fruit + " in Storage");
         }

@@ -69,7 +69,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void convertListThrowsExceptions_OK() {
+    void convertList_ThrowsExceptions_OK() {
         FileReader fileWork = new FileReaderImpl(WRONG_FILE_NAME);
         Assertions.assertThrows(RuntimeException.class, fileWork::read);
     }

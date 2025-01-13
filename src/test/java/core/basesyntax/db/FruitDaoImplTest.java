@@ -59,36 +59,23 @@ class FruitDaoImplTest {
     }
 
     @Test
-    void throwsExceptionsWithNotEnoughFruitsInStorage_OK() {
+    void subtract_throwsExceptionsWithNotEnoughFruitsInStorage_OK() {
         FruitDao actualResult = new FruitDaoImpl();
         actualResult.add("orange", 42);
-        try {
-            actualResult.subtract("orange", 50);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assertions.fail("method should throws RuntimeExceptions:"
-                + "\"There isn't enough \""
-                + "fruit"
-                + "\" in Storage, you can buy \""
-                + "oldQuantity");
+        Assertions.assertThrows(RuntimeException.class, () ->
+                actualResult.subtract("orange", 50));
     }
 
     @Test
-    void throwsExceptionsWithNotIdenticalFruitsInStorage_OK() {
+    void subtract_throwsExceptionsWithNotIdenticalFruitsInStorage_OK() {
         FruitDao actualResult = new FruitDaoImpl();
         actualResult.add("orange", 42);
-        try {
-            actualResult.subtract("pineapple", 50);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assertions.fail("method should throws RuntimeExceptions"
-                + "\"There isn't \" + fruit + \" in Storage\"");
+        Assertions.assertThrows(RuntimeException.class,() ->
+                actualResult.subtract("pineapple", 50));
     }
 
     @Test
-    void getFruitsFromStorage() {
+    void getFruitsFromStorage_OK() {
         FruitDao fruitDao = new FruitDaoImpl();
         Storage.fruits.put("banana", 20);
         Storage.fruits.put("orange", 4);

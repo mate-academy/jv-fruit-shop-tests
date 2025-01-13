@@ -5,6 +5,9 @@ public class Fruit {
     private int quantity;
 
     public Fruit(String fruit, int quantity) {
+        if (fruit == null) {
+            throw new RuntimeException("Fruit name can't be null");
+        }
         this.fruit = fruit;
         this.quantity = quantity;
     }

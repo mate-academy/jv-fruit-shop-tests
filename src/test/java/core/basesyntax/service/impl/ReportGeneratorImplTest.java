@@ -9,11 +9,14 @@ import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
 
-    private static final String EXCEPTED_RESULT = """
+    private static final String EXPECTED_RESULT = """
                 fruit,quantity
                 apple,100
                 banana,20
                 orange,30
+                """;
+    private static final String EMPTY_RESULT = """
+                fruit,quantity
                 """;
 
     @BeforeEach
@@ -32,6 +35,14 @@ class ReportGeneratorImplTest {
     void generatingReport_OK() {
         ReportGenerator report = new ReportGeneratorImpl();
         String actualResult = report.getReport();
-        Assertions.assertEquals(EXCEPTED_RESULT, actualResult);
+        Assertions.assertEquals(EXPECTED_RESULT, actualResult);
+    }
+
+    @Test
+    void generatingEmptyReport_OK() {
+        ReportGenerator report = new ReportGeneratorImpl();
+        Storage.fruits.clear();
+        String actualResult = report.getReport();
+        Assertions.assertEquals(EMPTY_RESULT, actualResult);
     }
 }

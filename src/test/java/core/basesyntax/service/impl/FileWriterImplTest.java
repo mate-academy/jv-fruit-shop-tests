@@ -63,7 +63,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void emptyReport_OK() {
+    void saveEmptyReport_OK() {
         FileWriter fileWork = new FileWriterImpl(FILE_NAME);
         fileWork.write(EMPTY_REPORT_TO_SAVE);
         try {
@@ -75,13 +75,8 @@ class FileWriterImplTest {
     }
 
     @Test
-    void throwsRuntimeExceptions_OK() {
-        try {
-            FileWriter fileWork = new FileWriterImpl(FILE_NAME);
-            fileWork.write(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assertions.fail("method should throws RuntimeExceptions while input is null");
+    void throwsRuntimeExceptionsWhileFileNameIsNull_OK() {
+        FileWriter fileWork = new FileWriterImpl(FILE_NAME);
+        Assertions.assertThrows(RuntimeException.class, () -> fileWork.write(null));
     }
 }

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static ReportGenerator reportGenerator = new ReportGeneratorImpl();
-    private static List<ResultData> input = new ArrayList<>();
+    private ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private List<ResultData> input = new ArrayList<>();
 
     @AfterEach
     void tearDown() {
@@ -21,7 +21,7 @@ class ReportGeneratorImplTest {
     @Test
     void generateReport_Ok() {
         input.add(new ResultData("banana", 107));
-        input.add(new ResultData("apple",110));
+        input.add(new ResultData("apple", 110));
 
         String expectedResult = "fruit,quantity"
                 + System.lineSeparator()
@@ -30,8 +30,14 @@ class ReportGeneratorImplTest {
                 + "apple,110"
                 + System.lineSeparator();
         String actualResult = reportGenerator.getReport(input);
-        System.out.println(expectedResult);
-        System.out.println(actualResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void generateReportFromEmptyList() {
+        String expectedResult = "fruit,quantity"
+                + System.lineSeparator();
+        String actualResult = reportGenerator.getReport(input);
         assertEquals(expectedResult, actualResult);
     }
 }

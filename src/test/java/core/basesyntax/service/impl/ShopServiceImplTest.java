@@ -47,6 +47,26 @@ class ShopServiceImplTest {
 
     @Test
     void processTest_Ok() {
+        addDefaultInputData();
+
+        List<ResultData> expectedResult = new ArrayList<>();
+        expectedResult.add(new ResultData("banana", 107));
+        expectedResult.add(new ResultData("apple",110));
+
+        List<ResultData> actualResult = shopService.process(inputTransactions);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void processEmptyDataTest_Ok() {
+        List<ResultData> expectedResult = new ArrayList<>();
+        List<ResultData> actualResult = shopService.process(inputTransactions);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    public void addDefaultInputData() {
         inputTransactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
                 "banana",
@@ -72,13 +92,5 @@ class ShopServiceImplTest {
                 "apple",
                 10
         ));
-
-        List<ResultData> expectedResult = new ArrayList<>();
-        expectedResult.add(new ResultData("banana", 107));
-        expectedResult.add(new ResultData("apple",110));
-
-        List<ResultData> actualResult = shopService.process(inputTransactions);
-
-        assertEquals(expectedResult, actualResult);
     }
 }

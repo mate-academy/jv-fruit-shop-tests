@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import java.util.Map;
-import org.junit.jupiter.api.Test;
 import core.basesyntax.model.FruitTransaction;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OperationStrategyImplTest {
@@ -15,20 +15,20 @@ class OperationStrategyImplTest {
         // де операція BALANCE пов'язана з баланс-обробником
         OperationStrategy operationStrategy = new OperationStrategyImpl(
                 Map.of(FruitTransaction.Operation.BALANCE, balanceHandler));
-        //Викликається метод getHandler для операції BALANCE,
+        // Викликається метод getHandler для операції BALANCE,
         // результат зберігається у змінній result
         OperationHandler result = operationStrategy.getHandler(
                 FruitTransaction.Operation.BALANCE);
-        //Перевіряється, що отриманий обробник
+        // Перевіряється, що отриманий обробник
         // відповідає очікуваному (handlerMock)
         assertEquals(balanceHandler, result);
     }
 
     @Test
     void getHandler_invalidOperation_throwsException() {
-        //Ініціалізується OperationStrategyImpl без жодних зареєстрованих обробників
+        // Ініціалізується OperationStrategyImpl без жодних зареєстрованих обробників
         OperationStrategy operationStrategy = new OperationStrategyImpl(Map.of());
-        //Перевіряється, що виклик getHandler для операції
+        // Перевіряється, що виклик getHandler для операції
         // PURCHASE призводить до винятку RuntimeException
         assertThrows(RuntimeException.class,
                 () -> operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE),

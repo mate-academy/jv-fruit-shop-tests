@@ -1,10 +1,10 @@
 package core.basesyntax.converter;
 
-import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +16,8 @@ class DataConverterImplTest {
     void convertToTransaction_validData_ok() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity", " b,banana,20", " p,apple,20 ");
-        List<FruitTransaction> result = dataConverter.convertToTransaction(input);
+        List<FruitTransaction> result;
+        result = dataConverter.convertToTransaction(input);
         // Перевіряється, що список містить 2 елементи
         assertEquals(2, result.size());
         // Перевіряється, що фрукт першої транзакції — "apple"
@@ -27,9 +28,9 @@ class DataConverterImplTest {
 
     @Test
     void convertToTransaction_invalidData_throwsException() {
-        List<String> input = Arrays.asList("invalid,data");
+        List<String> input = Arrays.asList("invalid data");
         // Перевіряється, що при виклику методу
-        // з невалідними даними викидається виняток RuntimeException
+        // з не валідними даними викидається виняток RuntimeException
         assertThrows(RuntimeException.class, () ->
                 dataConverter.convertToTransaction(input));
     }

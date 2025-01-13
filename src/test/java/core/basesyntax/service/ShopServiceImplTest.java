@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import core.basesyntax.model.FruitTransaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +26,6 @@ class ShopServiceImplTest {
     }
 
     @Test
-        //перевіряє, чи правильно обробляються валідні транзакції.
     void process_validTransactions_ok() {
         // Створюється об'єкт транзакції з операцією BALANCE,  apple - 50
         FruitTransaction transaction = new FruitTransaction(
@@ -46,7 +45,6 @@ class ShopServiceImplTest {
     }
 
     @Test
-        //перевіряє, чи сервіс коректно обробляє порожній список транзакцій
     void process_emptyTransactions_noHandlersCalled() {
         // Ініціалізуємо початковий стан (порожній інвентар)
         List<FruitTransaction> emptyTransactions = Collections.emptyList();

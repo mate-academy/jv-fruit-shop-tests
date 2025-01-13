@@ -9,6 +9,7 @@ import core.basesyntax.operation.impl.BalanceOperation;
 import core.basesyntax.operation.impl.OperationHandler;
 import core.basesyntax.operation.impl.PurchaseOperation;
 import core.basesyntax.operation.impl.ReturnOperation;
+import core.basesyntax.operation.impl.SupplyOperation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;

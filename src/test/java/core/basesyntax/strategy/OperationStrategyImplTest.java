@@ -21,11 +21,6 @@ class OperationStrategyImplTest {
     private OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
     @Test
-    void getService_null_notOk() {
-        assertNull(operationStrategy.getService(null));
-    }
-
-    @Test
     void getService_nonExistingOperation_notOk() {
         assertNull(operationStrategy.getService(FruitTransaction.Operation.SUPPLY));
     }

@@ -14,7 +14,7 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_nullContent_notOk() {
-        map.put(null,null);
+        map.put(null, null);
         assertThrows(RuntimeException.class, () -> reportGenerator.getReport(map));
     }
 

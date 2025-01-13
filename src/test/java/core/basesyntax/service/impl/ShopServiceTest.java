@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.impl.BalanceOperation;
-import core.basesyntax.operation.impl.OperationHandler;
-import core.basesyntax.operation.impl.PurchaseOperation;
+import core.basesyntax.operation.impl.*;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -30,6 +28,8 @@ class ShopServiceTest {
         operationHandlers = new HashMap<>() {{
                 put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
                 put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+                put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+                put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
             }};
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         service = new ShopServiceImpl(operationStrategy);

@@ -10,11 +10,13 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
     private FileReader fileReader = new FileReaderImpl();
+    private static final String wrongPath = "src/main/fruits.csv";
+    private static final String correctPath = "src/test/resources/fruits.csv";
 
     @Test
     void read_wrongPath_notOk() {
         assertThrows(RuntimeException.class,
-                () -> fileReader.read("src/main/fruits.csv"),"bad path");
+                () -> fileReader.read(wrongPath),"bad path");
     }
 
     @Test
@@ -23,6 +25,6 @@ class FileReaderTest {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("s,banana,100");
-        assertEquals(expected, fileReader.read("src/test/resources/fruits.csv"));
+        assertEquals(expected, fileReader.read(correctPath));
     }
 }

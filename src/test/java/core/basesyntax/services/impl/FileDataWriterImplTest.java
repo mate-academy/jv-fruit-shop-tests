@@ -28,12 +28,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileDataWriterImplTest {
+    private static final String OUTPUT_PATH = "src/test/resources/output1.csv";
     private static final Path INPUT_PATH = Path.of("src/test/resources/input1.csv");
     private static final String expectedString = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator()
             + System.lineSeparator();
-    private static final String OUTPUT_PATH = "src/test/resources/output1.csv";
 
     private FileDataReader dataReader;
     private DataProcessing dataProcessing;

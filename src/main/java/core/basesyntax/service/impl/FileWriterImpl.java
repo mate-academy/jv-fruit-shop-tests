@@ -8,8 +8,8 @@ import java.nio.file.Path;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String content, String file) {
-        if (content.equals("") || content == null) {
-            throw new RuntimeException("wrong content");
+        if (content == null || content.equals("")) {
+            throw new RuntimeException("Empty content was given");
         }
         Path path = Path.of(file);
         try {

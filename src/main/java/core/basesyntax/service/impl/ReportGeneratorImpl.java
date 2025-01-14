@@ -8,7 +8,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport(Map<String, Integer> fruitMap) {
         String result = "fruit,quantity" + System.lineSeparator();
         for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
-            if (entry == null || entry.getValue() < 0) {
+            if (entry == null || entry.getKey() == null || entry.getValue() < 0) {
                 throw new RuntimeException("Wrong map value!");
             }
             result = result + entry.getKey() + "," + entry.getValue()

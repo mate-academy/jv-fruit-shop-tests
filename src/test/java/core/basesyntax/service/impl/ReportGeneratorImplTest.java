@@ -15,7 +15,10 @@ class ReportGeneratorImplTest {
     @Test
     void getReport_nullContent_notOk() {
         map.put(null, null);
-        assertThrows(RuntimeException.class, () -> reportGenerator.getReport(map));
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> reportGenerator.getReport(map));
+        String expected = "Wrong map value!";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test

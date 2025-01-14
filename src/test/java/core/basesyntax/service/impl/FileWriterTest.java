@@ -1,9 +1,12 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 class FileWriterTest {
@@ -12,13 +15,24 @@ class FileWriterTest {
 
     @Test
     void write_wrongContent_notOk() {
-        assertThrows(RuntimeException.class,
+        Exception exception = assertThrows(RuntimeException.class,
                 () -> fileWriter.write(null, correctPath));
+        String expected = "Empty content was given";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void write_simpleFileWriting_Ok() {
-        String result = "fruit,quantity" + System.lineSeparator() + "banana,55";
-        assertDoesNotThrow(() -> fileWriter.write(result, correctPath));
+        String testLine = "fruit,quantity" + System.lineSeparator() + "banana,55";
+        fileWriter.write(testLine, correctPath);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(correctPath));
+            String actual = br.readLine();
+            assertEquals("fruit,quantity", actual);
+            actual = br.readLine();
+            assertEquals("banana,55", actual);
+        } catch (IOException e) {
+            System.out.println("Can`t read file");;
+        }
     }
 }

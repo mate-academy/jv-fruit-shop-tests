@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Storage {
     public Map<String, Integer> createStorage(List<FruitTransaction> transactions) {
-        return transactions.stream().map(f -> f.getFruit().getName())
+        return transactions.stream().map(obj -> obj.getFruit().getName())
                 .distinct()
                 .collect(Collectors.toMap(obj -> obj, obj -> 0));
     }

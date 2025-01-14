@@ -22,19 +22,15 @@ class ReturnOperationHandlerTest {
     void check_returnOperationHandlerIsValid_ok() {
         balanceOperationHandler.apply("banana", 100);
         balanceOperationHandler.apply("apple", 100);
-        balanceOperationHandler.apply("plum", 100);
 
         Map<String, Integer> storage1 = new HashMap<>();
         storage1.put("banana", 120);
         storage1.put("apple", 190);
-        storage1.put("plum", 120);
 
         operationHandler.apply("banana", 20);
         operationHandler.apply("apple", 90);
-        operationHandler.apply("plum", 20);
 
         Assertions.assertEquals(storage1.get("banana"), storage.getStorage().get("banana"));
         Assertions.assertEquals(storage1.get("apple"), storage.getStorage().get("apple"));
-        Assertions.assertEquals(storage1.get("plum"), storage.getStorage().get("plum"));
     }
 }

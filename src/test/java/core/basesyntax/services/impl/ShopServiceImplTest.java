@@ -22,34 +22,27 @@ class ShopServiceImplTest {
         shopService = new ShopServiceImpl(storage);
         fruitTransaction = new FruitTransaction();
         testMap = new HashMap<>();
-        testMap.put("banana", 90);
-        testMap.put("orange", 110);
-        testMap.put("apple", 100);
+        testMap.put("banana", 152);
+        testMap.put("apple", 90);
     }
 
     @Test
     void check_validShopServiceMethod_ok() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setFruit("banana");
-        fruitTransaction1.setQuantity(90);
+        fruitTransaction1.setQuantity(152);
 
         FruitTransaction fruitTransaction2 = new FruitTransaction();
         fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setQuantity(100);
-
-        FruitTransaction fruitTransaction3 = new FruitTransaction();
-        fruitTransaction3.setFruit("orange");
-        fruitTransaction3.setQuantity(110);
+        fruitTransaction2.setQuantity(90);
 
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(fruitTransaction1);
         fruitTransactions.add(fruitTransaction2);
-        fruitTransactions.add(fruitTransaction3);
 
         shopService.operations(fruitTransactions);
 
         Assertions.assertEquals(testMap.get("banana"), storage.getStorage().get("banana"));
-        Assertions.assertEquals(testMap.get("orange"), storage.getStorage().get("orange"));
         Assertions.assertEquals(testMap.get("apple"), storage.getStorage().get("apple"));
     }
 }

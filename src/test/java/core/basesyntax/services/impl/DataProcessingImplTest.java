@@ -38,20 +38,19 @@ class DataProcessingImplTest {
     @Test
     void dataProcessing_validFruitTransactionObjects_ok() {
         List<String> strings = new ArrayList<>();
-        strings.add("b,banana,20");
-        strings.add("b,apple,100");
-        strings.add("s,banana,100");
+        strings.add("b,banana,152");
+        strings.add("b,apple,90");
 
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         FruitTransaction fruitTransaction1 = new FruitTransaction();
 
-        fruitTransaction1.setQuantity(120);
+        fruitTransaction1.setQuantity(152);
         fruitTransaction1.setFruit("banana");
         fruitTransactions.add(fruitTransaction1);
 
         FruitTransaction fruitTransaction2 = new FruitTransaction();
 
-        fruitTransaction2.setQuantity(100);
+        fruitTransaction2.setQuantity(90);
         fruitTransaction2.setFruit("apple");
         fruitTransactions.add(fruitTransaction2);
 

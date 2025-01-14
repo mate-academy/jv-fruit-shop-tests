@@ -18,9 +18,8 @@ class ReportGeneratorImplTest {
     @BeforeEach
     void setUp() {
         reportGenerator = new ReportGeneratorImpl(storage);
-        storage1.put("apple", 100);
-        storage1.put("orange", 110);
-        storage1.put("plum", 200);
+        storage1.put("apple", 90);
+        storage1.put("banana", 150);
     }
 
     @Test

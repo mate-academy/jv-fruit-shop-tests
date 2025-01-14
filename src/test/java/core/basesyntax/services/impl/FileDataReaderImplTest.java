@@ -1,8 +1,8 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.services.FileDataReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import core.basesyntax.services.FileDataReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;

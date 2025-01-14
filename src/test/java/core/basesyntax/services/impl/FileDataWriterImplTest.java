@@ -34,6 +34,7 @@ class FileDataWriterImplTest {
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator()
             + System.lineSeparator();
+    private static Map<Operation, OperationHandler> operationMap = new HashMap<>();
 
     private FileDataReader dataReader;
     private DataProcessing dataProcessing;
@@ -42,7 +43,6 @@ class FileDataWriterImplTest {
     private ReportGenerator reportGenerator;
     private Storage storage = new Storage();
     private ShopService shopService;
-    private static Map<Operation, OperationHandler> operationMap = new HashMap<>();
 
     @BeforeEach
     void setUp() {

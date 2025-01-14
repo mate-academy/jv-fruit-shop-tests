@@ -1,8 +1,8 @@
 package core.basesyntax.report;
 
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReportGeneratorImplTest {
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
@@ -17,7 +17,7 @@ class ReportGeneratorImplTest {
         // Перевіряється, що результат відповідає очікуваному формату:
         // Кожен елемент інвентарю у форматі fruit,quantity.
         // Дані розділені символом нового рядка.
-        assertEquals("apple,50\nbanana,30\n", result);
+        Assert.assertEquals("apple,50\nbanana,30\n", result);
     }
 
     @Test
@@ -26,6 +26,6 @@ class ReportGeneratorImplTest {
         // і результат зберігається у змінній result
         String result = reportGenerator.getReport(Map.of());
         // Перевіряється, що результат — порожній рядок.
-        assertEquals("", result);
+        Assert.assertEquals("", result);
     }
 }

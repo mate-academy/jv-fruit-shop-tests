@@ -23,7 +23,7 @@ class BalanceOperationHandlerTest {
         storage1.put("apple", 90);
 
         operationHandler.apply("banana", 152);
-        operationHandler.apply("apple", 110);
+        operationHandler.apply("apple", 90);
 
         Assertions.assertEquals(storage1.get("banana"), storage.getStorage().get("banana"));
         Assertions.assertEquals(storage1.get("apple"), storage.getStorage().get("apple"));

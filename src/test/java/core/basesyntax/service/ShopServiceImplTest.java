@@ -1,14 +1,13 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import core.basesyntax.model.FruitTransaction;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ShopServiceImplTest {
     private ShopService shopService;
@@ -40,8 +39,7 @@ class ShopServiceImplTest {
         // Виклик методу process з переданим списком транзакцій
         shopService.process(List.of(transaction));
         // Перевірка, чи обробник правильно обробив операцію
-        assertEquals(50,
-                ((ShopServiceImpl) shopService).getInventory().get("apple"));
+        Assert.assertEquals(50, "apple");
     }
 
     @Test
@@ -52,8 +50,9 @@ class ShopServiceImplTest {
         shopService.process(emptyTransactions);
         // Перевіряємо, що інвентар магазину залишився порожнім після обробки
         Map<String, Integer> inventory = ((ShopServiceImpl) shopService).getInventory();
-        assertTrue(inventory.isEmpty(),
-                "Inventory should remain empty "
-                        + "when processing an empty transaction list");
+        Assert.assertTrue("Inventory should remain empty "
+                        + "when processing an empty transaction list",
+                inventory.isEmpty()
+        );
     }
 }

@@ -1,13 +1,11 @@
 package core.basesyntax.converter;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import core.basesyntax.model.FruitTransaction;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DataConverterImplTest {
     private final DataConverter dataConverter = new DataConverterImpl();
@@ -19,11 +17,11 @@ class DataConverterImplTest {
         List<FruitTransaction> result;
         result = dataConverter.convertToTransaction(input);
         // Перевіряється, що список містить 2 елементи
-        assertEquals(2, result.size());
+        Assert.assertEquals(2, result.size());
         // Перевіряється, що фрукт першої транзакції — "apple"
-        assertTrue(result.get(0).toString().contains("apple"));
+        Assert.assertTrue(result.get(0).toString().contains("apple"));
         // Перевіряється, що кількість першої транзакції дорівнює 50
-        assertTrue(result.get(0).toString().contains("50"));
+        Assert.assertTrue(result.get(0).toString().contains("50"));
     }
 
     @Test
@@ -31,7 +29,7 @@ class DataConverterImplTest {
         List<String> input = Arrays.asList("invalid data");
         // Перевіряється, що при виклику методу
         // з не валідними даними викидається виняток RuntimeException
-        assertThrows(RuntimeException.class, () ->
+        Assert.assertThrows(RuntimeException.class, () ->
                 dataConverter.convertToTransaction(input));
     }
 
@@ -39,6 +37,6 @@ class DataConverterImplTest {
     void convertToTransaction_emptyList_returnsEmptyList() {
         List<FruitTransaction> result = dataConverter.convertToTransaction(
                 Collections.emptyList());
-        assertTrue(result.isEmpty());
+        Assert.assertTrue(result.isEmpty());
     }
 }

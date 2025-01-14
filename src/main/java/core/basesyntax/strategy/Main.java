@@ -1,8 +1,5 @@
 package core.basesyntax.strategy;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.converter.DataConverter;
 import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.filereader.FileReaderImpl;
@@ -20,6 +17,9 @@ import core.basesyntax.service.ReturnOperation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.SupplyOperation;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] arg) {

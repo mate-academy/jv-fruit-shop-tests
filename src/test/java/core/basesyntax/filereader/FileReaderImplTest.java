@@ -4,27 +4,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FileReaderImplTest {
     private final FileReaderImpl fileReader = new FileReaderImpl();
 
     @Test
-    void read_missingFile_throwsException() { 
+    void read_missingFile_throwsException() {
         // Перевіряється, що при виклику методу
         // з неіснуючим файлом викидається виняток RuntimeException
-        assertThrows(RuntimeException.class, () ->
-        fileReader.read("nonexistent.csv"));
+        Assert.assertThrows(RuntimeException.class, () ->
+                fileReader.read("nonexistent.csv"));
     }
 
     @Test
     void read_emptyFile_returnsEmptyList() throws IOException {
         File tempFile = File.createTempFile("empty", ".csv");
         List<String> result = fileReader.read(tempFile.getPath());
-        assertTrue(result.isEmpty());
+        Assert.assertTrue(result.isEmpty());
     }
 
     @Test
@@ -37,9 +35,9 @@ class FileReaderImplTest {
             // Викликається метод read, який зчитує вміст файлу у список рядків.
             List<String> result = fileReader.read(tempFile.getPath());
             // Перевіряється, що список містить три рядки.
-            assertEquals(3, result.size());
+            Assert.assertEquals(3, result.size());
             // Перевіряється, що перший рядок у списку — "line1".
-            assertEquals("line1", result.get(0));
+            Assert.assertEquals("line1", result.get(0));
         }
     }
 }

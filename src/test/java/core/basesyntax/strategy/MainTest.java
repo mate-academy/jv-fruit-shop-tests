@@ -12,14 +12,14 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.PurchaseOperation;
 import core.basesyntax.service.ReturnOperation;
 import core.basesyntax.service.SupplyOperation;
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 public class MainTest {
 
@@ -62,7 +62,7 @@ public class MainTest {
         // 7. Перевірка результату
         String expectedReport = "fruit,quantity\n"
                 + "apple,140\n";
-        assertEquals(expectedReport, resultingReport);
+        Assert.assertEquals(expectedReport, resultingReport);
 
         // 8. Створення тимчасового файлу для вихідного звіту
         File outputFile = File.createTempFile("finalReport", ".csv");
@@ -71,7 +71,7 @@ public class MainTest {
 
         // 9. Перевірка, чи звіт успішно записаний
         List<String> writtenReport = fileReader.read(outputFile.getAbsolutePath());
-        assertEquals(expectedReport, String.join("\n", writtenReport));
+        Assert.assertEquals(expectedReport, String.join("\n", writtenReport));
 
         // Видалення тимчасових файлів
         inputFile.delete();

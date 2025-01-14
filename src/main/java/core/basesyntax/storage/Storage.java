@@ -4,25 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String,Integer> storage;
-
-    public Storage() {
-        storage = new HashMap<>();
-    }
+    private static final Map<String,Integer> storage = new HashMap<>();
 
     public int getCurrentAmount(String fruitType) {
         return storage.getOrDefault(fruitType, 0);
     }
 
-    public void put(String fruitType, int amount) {
-        storage.put(fruitType, amount);
+    public int getOrDefault(String fruitType, int defaultValue) {
+        return storage.getOrDefault(fruitType, defaultValue);
     }
 
-    public int get(String fruitType) {
-        return storage.get(fruitType);
-    }
-
-    public int getOrDefault(String fruitType, int i) {
-        return storage.getOrDefault(fruitType, i);
+    public Map<String, Integer> getStorage() {
+        return storage;
     }
 }

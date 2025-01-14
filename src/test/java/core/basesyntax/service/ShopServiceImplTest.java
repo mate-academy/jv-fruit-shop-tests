@@ -39,7 +39,7 @@ class ShopServiceImplTest {
         // Виклик методу process з переданим списком транзакцій
         shopService.process(List.of(transaction));
         // Перевірка, чи обробник правильно обробив операцію
-        Assert.assertEquals(50, "apple");
+        Assert.assertEquals("apple", 50);
     }
 
     @Test

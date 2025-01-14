@@ -35,4 +35,15 @@ class OperationStrategyImplTest {
                 () -> operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE)
         );
     }
+
+    @Test
+    void operationStrategyImpl_emptyMap_throwsException() {
+        // Перевірка, що конструктор викидає RuntimeException при передачі порожньої мапи
+        Assert.assertThrows(
+                "Expected OperationStrategyImpl " +
+                        "constructor to throw RuntimeException for empty map",
+                RuntimeException.class,
+                () -> new OperationStrategyImpl(Map.of())
+        );
+    }
 }

@@ -19,7 +19,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void check_purchaseOperationHandlerIsValid_ok() {
+    void apply() {
         balanceOperationHandler.apply("banana", 100);
         balanceOperationHandler.apply("apple", 100);
         balanceOperationHandler.apply("plum", 100);

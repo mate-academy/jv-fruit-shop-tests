@@ -1,12 +1,16 @@
 package core.basesyntax.strategy;
 
+import java.util.HashMap;
+import java.util.Map;
 import core.basesyntax.model.Operation;
-import core.basesyntax.operationhandlers.*;
+import core.basesyntax.operationhandlers.BalanceOperationHandler;
+import core.basesyntax.operationhandlers.OperationHandler;
+import core.basesyntax.operationhandlers.PurchaseOperationHandler;
+import core.basesyntax.operationhandlers.SupplyOperationHandler;
+import core.basesyntax.operationhandlers.ReturnOperationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 class OperationStrategyImplTest {
     private Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();

@@ -8,11 +8,15 @@ public class FruitTransaction {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) object;
-        return quantity == that.quantity &&
-                Objects.equals(fruit, that.fruit);
+        return quantity == that.quantity
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override

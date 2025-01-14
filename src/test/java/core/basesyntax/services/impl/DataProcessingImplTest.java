@@ -1,5 +1,9 @@
 package core.basesyntax.services.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
@@ -14,10 +18,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 class DataProcessingImplTest {
     private DataProcessing dataProcessing;
@@ -60,7 +60,9 @@ class DataProcessingImplTest {
         Assertions.assertEquals(2, fruitTransactions1.size(),
                 "The number of processed transactions does not match the expected.");
 
-        Assertions.assertEquals(fruitTransactions.get(0).getFruit(), fruitTransactions1.get(0).getFruit());
-        Assertions.assertEquals(fruitTransactions.get(1).getQuantity(), fruitTransactions1.get(1).getQuantity());
+        Assertions.assertEquals(fruitTransactions.get(0).getFruit(),
+                fruitTransactions1.get(0).getFruit());
+        Assertions.assertEquals(fruitTransactions.get(1).getQuantity(),
+                fruitTransactions1.get(1).getQuantity());
     }
 }

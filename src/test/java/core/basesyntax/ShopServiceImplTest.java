@@ -22,8 +22,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
-    private static Storage storage;
-    private static ShopService shopService;
+    private Storage storage;
+    private ShopService shopService;
 
     @BeforeEach
     void setUp() {

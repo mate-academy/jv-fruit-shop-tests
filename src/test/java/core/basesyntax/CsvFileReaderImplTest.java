@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FileReader;
+import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +15,12 @@ import org.junit.jupiter.api.Test;
 class CsvFileReaderImplTest {
     private static final String TEMP_FILE_NAME = "test_transactions.csv";
     private static final String WRONG_FILE_NAME = "test.csv";
-    private static FileReader fileReader;
+    private static final String HEADER = "type,fruit,quantity";
+    private static final String FIRST_ENTRY = "b,banana,30";
+    private static final String SECOND_ENTRY = "b,apple,50";
+    private static final String THIRD_ENTRY = "p,banana,10";
+
+    private CsvFileReader fileReader;
     private File tempFile;
 
     @BeforeEach
@@ -23,10 +28,10 @@ class CsvFileReaderImplTest {
         tempFile = new File(TEMP_FILE_NAME);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
             String[] lines = {
-                    "type,fruit,quantity",
-                    "b,banana,30",
-                    "b,apple,50",
-                    "p,banana,10"
+                    HEADER,
+                    FIRST_ENTRY,
+                    SECOND_ENTRY,
+                    THIRD_ENTRY
             };
             for (String line : lines) {
                 writer.write(line);
@@ -47,9 +52,9 @@ class CsvFileReaderImplTest {
         fileReader = new CsvFileReaderImpl(TEMP_FILE_NAME);
         List<String> actualTransactions = fileReader.getAll();
         List<String> expectedTransactions = List.of(
-                "b,banana,30",
-                "b,apple,50",
-                "p,banana,10"
+                FIRST_ENTRY,
+                SECOND_ENTRY,
+                THIRD_ENTRY
         );
         Assertions.assertEquals(expectedTransactions, actualTransactions);
     }

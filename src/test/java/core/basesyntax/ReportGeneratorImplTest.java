@@ -5,7 +5,6 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,17 +12,21 @@ public class ReportGeneratorImplTest {
     private static final String lineSeparator = System.lineSeparator();
 
     private static Storage storage;
-    private static String expectedResult;
     private static ReportGenerator reportGenerator;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() {
         storage = new Storage();
         reportGenerator = new ReportGeneratorImpl();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
+        storage.clear();
+    }
+
+    @Test
+    void getReport_storageIsValid_Ok() {
         storage.set("banana", 20);
         storage.set("apple", 120);
         storage.add("banana", 100);
@@ -34,18 +37,19 @@ public class ReportGeneratorImplTest {
         resultBuilder.append("fruit,quantity").append(lineSeparator);
         resultBuilder.append("banana,115").append(lineSeparator);
         resultBuilder.append("apple,130").append(lineSeparator);
+        String expectedResult = resultBuilder.toString();
 
-        expectedResult = resultBuilder.toString();
-    }
-
-    @AfterEach
-    void tearDown() {
-        storage.clear();
+        String actualResult = reportGenerator.getReport(storage);
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    void getReport_Ok() {
-        String actualResult = reportGenerator.getReport(storage);
-        Assertions.assertEquals(expectedResult, actualResult);
+    void getReport_storageIsNullOrEmpty_Ok() {
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            reportGenerator.getReport(storage);
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "The storage is null or empty";
+        Assertions.assertEquals(expectedMessage, actualMessage);
     }
 }

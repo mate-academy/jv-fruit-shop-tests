@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlersMap;
-    private static OperationStrategy strategy;
+    private OperationStrategy strategy;
 
     @BeforeAll
     static void beforeAll() {
@@ -39,13 +39,11 @@ public class OperationStrategyImplTest {
 
     @Test
     void get_TypeNotExist_NotOk() {
-        NullPointerException exception = Assertions.assertThrows(NullPointerException.class, () -> {
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
             strategy.get(FruitTransaction.Operation.SUPPLY);
         });
-
         String expectedMessage = "No handler found for type: "
                 + FruitTransaction.Operation.SUPPLY;
-
         Assertions.assertEquals(expectedMessage, exception.getMessage());
     }
 }

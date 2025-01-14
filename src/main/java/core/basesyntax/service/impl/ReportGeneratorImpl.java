@@ -11,6 +11,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport(Storage storage) {
+        if (storage == null || storage.getInventory() == null
+                || storage.getInventory().isEmpty()) {
+            throw new IllegalArgumentException("The storage is null or empty");
+        }
         StringBuilder report = new StringBuilder();
         report.append(csvHeader).append(lineSeparator);
         for (Map.Entry<String, Integer> entry : storage.getInventory().entrySet()) {

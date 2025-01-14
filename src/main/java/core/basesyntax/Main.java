@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Converter;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.ConverterImpl;
@@ -53,7 +53,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(storage);
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new CsvFileWriterImpl();
+        CsvFileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.write(resultingReport, DESTINATION_FILE);
     }
 }

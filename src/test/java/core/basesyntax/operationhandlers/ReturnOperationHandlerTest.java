@@ -1,8 +1,8 @@
 package core.basesyntax.operationhandlers;
 
+import core.basesyntax.storage.Storage;
 import java.util.HashMap;
 import java.util.Map;
-import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

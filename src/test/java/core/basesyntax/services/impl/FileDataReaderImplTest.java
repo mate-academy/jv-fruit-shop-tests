@@ -2,11 +2,11 @@ package core.basesyntax.services.impl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import core.basesyntax.services.FileDataReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.services.FileDataReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class FileDataReaderImplTest {
     @Test
     void returnList_validList_ok() {
         List<String> list = new ArrayList<>();
-        try(BufferedReader bf = new BufferedReader(new FileReader(String.valueOf(INPUT_PATH)))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader(String.valueOf(INPUT_PATH)))) {
             String string;
             bf.readLine();
             while ((string = bf.readLine()) != null) {

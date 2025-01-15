@@ -26,7 +26,7 @@ public class FileReaderImplTest {
                 + System.lineSeparator()
                 + "b,banana,20"
                 + System.lineSeparator()
-                + "p,apple,10";
+                + "p,apple,11";
 
         Files.writeString(Path.of(RESOURCE_FOLDER,VALID_FILE), content);
     }

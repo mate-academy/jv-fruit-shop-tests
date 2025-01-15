@@ -28,19 +28,19 @@ public class FileReaderImplTest {
                 + System.lineSeparator()
                 + "p,apple,11";
 
-        Files.writeString(Path.of(RESOURCE_FOLDER,VALID_FILE), content);
+        Files.writeString(Path.of(RESOURCE_FOLDER + VALID_FILE), content);
     }
 
     @Test
     void read_validFile_ok() {
-        List<String> result = fileReader.read(VALID_FILE);
+        List<String> result = fileReader.read(RESOURCE_FOLDER + VALID_FILE);
         assertEquals(3, result.size());
         assertEquals("type,fruit,quantity", result.get(0));
     }
 
     @Test
     void read_invalidFile_emptyList() {
-        List<String> result = fileReader.read(INVALID_FILE);
+        List<String> result = fileReader.read(RESOURCE_FOLDER + INVALID_FILE);
         assertTrue(result.isEmpty());
     }
 }

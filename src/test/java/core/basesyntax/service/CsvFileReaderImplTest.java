@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,8 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
-    private static final String TEMP_FILE_NAME = "test_transactions.csv";
-    private static final String WRONG_FILE_NAME = "test.csv";
+    private static final String TEMP_FILE_NAME = "src/test/resources/test_report.csv";
+    private static final String WRONG_FILE_NAME = "invalid_path/test.csv";
     private static final String HEADER = "type,fruit,quantity";
     private static final String FIRST_ENTRY = "b,banana,30";
     private static final String SECOND_ENTRY = "b,apple,50";
@@ -48,7 +47,7 @@ class CsvFileReaderImplTest {
     }
 
     @Test
-    void getAll_ReturnTransactionsList_Ok() {
+    void getAll_validDataFile_Ok() {
         fileReader = new CsvFileReaderImpl(TEMP_FILE_NAME);
         List<String> actualTransactions = fileReader.getAll();
         List<String> expectedTransactions = List.of(
@@ -60,7 +59,7 @@ class CsvFileReaderImplTest {
     }
 
     @Test
-    void getAll_ReturnTransactionsList_NotOk() {
+    void getAll_wrongDataFile_NotOk() {
         fileReader = new CsvFileReaderImpl(WRONG_FILE_NAME);
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
                 fileReader::getAll);

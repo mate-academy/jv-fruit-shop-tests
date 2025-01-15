@@ -1,7 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -44,9 +43,19 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    void getReport_storageIsNullOrEmpty_Ok() {
+    void getReport_storageIsEmpty_Ok() {
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             reportGenerator.getReport(storage);
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "The storage is null or empty";
+        Assertions.assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void getReport_storageIsNull_Ok() {
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            reportGenerator.getReport(null);
         });
         String actualMessage = exception.getMessage();
         String expectedMessage = "The storage is null or empty";

@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -48,7 +47,7 @@ public class CsvFileWriterImplTest {
     }
 
     @Test
-    void write_Ok() throws IOException {
+    void write_validPath_Ok() throws IOException {
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER).append(System.lineSeparator());
         builder.append(FIRST_ENTRY).append(System.lineSeparator());
@@ -69,7 +68,7 @@ public class CsvFileWriterImplTest {
     }
 
     @Test
-    void write_InvalidPath_NotOk() {
+    void write_invalidPath_NotOk() {
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER).append(System.lineSeparator());
         builder.append(FIRST_ENTRY).append(System.lineSeparator());

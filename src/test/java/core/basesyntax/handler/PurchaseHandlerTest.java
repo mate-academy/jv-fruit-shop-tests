@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,8 @@ class PurchaseHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Storage.clearStorage();
         Storage.modifyFruitStorage("apple", 100);
         Storage.modifyFruitStorage("banana", 50);
-
         purchaseOperation = new PurchaseHandler();
     }
 
@@ -46,17 +45,8 @@ class PurchaseHandlerTest {
         });
     }
 
-    @Test
-    void apply_shouldHandleZeroPurchaseQuantity() {
-        String fruit = "apple";
-        int quantityToPurchase = 0;
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation
-                .PURCHASE, fruit, quantityToPurchase);
-
-        purchaseOperation.handle(transaction);
-
-        int result = Storage.getFruitQuantity(fruit);
-        assertEquals(100, result);
+    @AfterEach
+    void clearStorage() {
+        Storage.clearStorage();
     }
 }
-

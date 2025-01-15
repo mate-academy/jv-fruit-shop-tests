@@ -17,7 +17,7 @@ class FileWriterImplTest {
     @Test
     void write_validData_writesToFile() throws IOException {
         String expectedData = "Test data for file writer";
-        Path tempFile = Files.createTempFile("testFile", ".txt");
+        Path tempFile = Files.createTempFile("testFile", ".csv");
 
         fileWriter.write(expectedData, tempFile.toString());
 
@@ -30,7 +30,7 @@ class FileWriterImplTest {
     @Test
     void write_invalidPath_throwsRuntimeException() {
         String data = "Some data";
-        String invalidPath = "invalid_path/testFile.txt";
+        String invalidPath = "invalid_path/testFile.csv";
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 fileWriter.write(data, invalidPath)
@@ -41,7 +41,7 @@ class FileWriterImplTest {
 
     @Test
     void write_existingFile_overwritesContent() throws IOException {
-        Path tempFile = Files.createTempFile("testFile", ".txt");
+        Path tempFile = Files.createTempFile("testFile", ".csv");
         Files.writeString(tempFile, "Old content", StandardOpenOption.WRITE);
 
         String newContent = "New content";

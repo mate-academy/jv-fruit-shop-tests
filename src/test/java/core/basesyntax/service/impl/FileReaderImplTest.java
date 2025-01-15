@@ -16,7 +16,7 @@ class FileReaderImplTest {
     @Test
     void readFile_validFile_returnsContent() throws IOException {
         String content = "Line 1\nLine 2\nLine 3";
-        Path tempFile = Files.createTempFile("testFile", ".txt");
+        Path tempFile = Files.createTempFile("testFile", ".csv");
         Files.writeString(tempFile, content);
 
         List<String> lines = fileReader.readFile(tempFile.toString());
@@ -31,7 +31,7 @@ class FileReaderImplTest {
 
     @Test
     void readFile_nonExistentFile_throwsRuntimeException() {
-        String nonExistentFilePath = "non_existent_file.txt";
+        String nonExistentFilePath = "non_existent_file.csv";
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 fileReader.readFile(nonExistentFilePath)
@@ -42,7 +42,7 @@ class FileReaderImplTest {
 
     @Test
     void readFile_emptyFile_returnsEmptyList() throws IOException {
-        Path tempFile = Files.createTempFile("emptyFile", ".txt");
+        Path tempFile = Files.createTempFile("emptyFile", ".csv");
 
         List<String> lines = fileReader.readFile(tempFile.toString());
 

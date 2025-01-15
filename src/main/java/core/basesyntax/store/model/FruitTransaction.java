@@ -26,16 +26,20 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-        BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+        BALANCE("b"), // BALANCE - operation to set the initial stock balance
+        SUPPLY("s"), // SUPPLY - operation to add stock to the inventory
+        PURCHASE("p"), // PURCHASE - operation to reduce stock when a purchase is made
+        RETURN("r"); // RETURN - operation to add stock back when items are returned
         private final String code;
+
         Operation(String code) {
             this.code = code;
         }
 
         public static Operation fromCode(String code) {
-            for (Operation op : values()) {
-                if (op.code.equals(code)) {
-                    return op;
+            for (Operation operation : values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
                 }
             }
             throw new IllegalArgumentException("Invalid operation code: " + code);

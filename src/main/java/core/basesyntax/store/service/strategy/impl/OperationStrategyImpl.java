@@ -14,6 +14,17 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-        return handlers.get(operation);
+        try {
+            OperationHandler handler = handlers.get(operation);
+            if (handler == null) {
+                throw new IllegalArgumentException("No handler found for operation: " + operation);
+            }
+            return handler;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Warning: " + e.getMessage());
+            return operationData -> {
+                System.out.println("Skipping operation: " + operation);
+            };
+        }
     }
 }

@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String SEPARATOR = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
-            String[] parts = lines.get(i).split(",");
+            String[] parts = lines.get(i).split(SEPARATOR);
 
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Insufficient data for transaction: "

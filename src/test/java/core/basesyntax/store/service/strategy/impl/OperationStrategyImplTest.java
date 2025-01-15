@@ -1,6 +1,6 @@
 package core.basesyntax.store.service.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.store.handler.OperationHandler;
@@ -50,8 +50,8 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void getHandler_invalidOperation_returnNull() {
-        OperationHandler handler = operationStrategy.getHandler(null);
-        assertNull(handler);
+    void getHandler_invalidOperation_returnDefaultHandler() {
+        OperationHandler handler = operationStrategy.getHandler(FruitTransaction.Operation.RETURN);
+        assertNotNull(handler);
     }
 }

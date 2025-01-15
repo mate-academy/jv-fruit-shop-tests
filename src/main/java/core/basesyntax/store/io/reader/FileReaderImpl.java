@@ -17,7 +17,12 @@ public class FileReaderImpl implements FileReader {
             return Files.readAllLines(path);
         } catch (IOException e) {
             Logger.logError("Error reading file: " + path, e);
-            return Collections.emptyList();
+            try {
+                throw new RuntimeException("Failed to read file: " + path, e);
+            } catch (RuntimeException ex) {
+                Logger.logError("Handled runtime exception: " + ex.getMessage(), ex);
+                return Collections.emptyList();
+            }
         }
     }
 }

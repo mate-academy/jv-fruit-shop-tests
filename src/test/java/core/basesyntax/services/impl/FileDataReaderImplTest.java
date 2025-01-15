@@ -33,9 +33,6 @@ class FileDataReaderImplTest {
             throw new RuntimeException(e);
         }
         List<String> list1 = fileDataReader.readData(INPUT_PATH);
-        Assertions.assertEquals(list.get(0), list1.get(0));
-        Assertions.assertEquals(list.get(1), list1.get(1));
-        Assertions.assertEquals(list.get(2), list1.get(2));
-        Assertions.assertEquals(list.get(3), list1.get(3));
+        Assertions.assertEquals(list, list1);
     }
 }

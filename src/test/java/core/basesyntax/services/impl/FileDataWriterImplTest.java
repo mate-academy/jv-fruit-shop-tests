@@ -41,11 +41,12 @@ class FileDataWriterImplTest {
     private FileDataWriter fileDataWriter;
     private OperationStrategy operationStrategy;
     private ReportGenerator reportGenerator;
-    private Storage storage = new Storage();
+    private Storage storage;
     private ShopService shopService;
 
     @BeforeEach
     void setUp() {
+        storage = new Storage();
         fileDataWriter = new FileDataWriterImpl(Path.of(OUTPUT_PATH));
         dataReader = new FileDataReaderImpl();
         operationMap.put(Operation.BALANCE, new BalanceOperationHandler());

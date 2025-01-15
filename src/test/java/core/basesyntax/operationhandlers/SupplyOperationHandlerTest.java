@@ -1,19 +1,21 @@
 package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
-    private Storage storage = new Storage();
+    private static final int BANANA_QUANTITY = 80;
+    private static final int APPLE_QUANTITY = 10;
+
+    private Storage storage;
     private OperationHandler operationHandler;
     private OperationHandler balanceOperationHandler;
 
     @BeforeEach
     void setUp() {
+        storage = new Storage();
         balanceOperationHandler = new BalanceOperationHandler();
         operationHandler = new PurchaseOperationHandler();
     }
@@ -21,16 +23,12 @@ class SupplyOperationHandlerTest {
     @Test
     void check_supplyOperationHandlerIsValid_ok() {
         balanceOperationHandler.apply("banana", 100);
-        balanceOperationHandler.apply("apple", 100);
-
-        Map<String, Integer> storage1 = new HashMap<>();
-        storage1.put("banana", 80);
-        storage1.put("apple", 10);
+        balanceOperationHandler.apply("apple", 100);;
 
         operationHandler.apply("banana", 20);
         operationHandler.apply("apple", 90);
 
-        Assertions.assertEquals(storage1.get("banana"), storage.getStorage().get("banana"));
-        Assertions.assertEquals(storage1.get("apple"), storage.getStorage().get("apple"));
+        Assertions.assertEquals(BANANA_QUANTITY, storage.getStorage().get("banana"));
+        Assertions.assertEquals(APPLE_QUANTITY, storage.getStorage().get("apple"));
     }
 }

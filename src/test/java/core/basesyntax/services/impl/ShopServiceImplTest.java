@@ -12,18 +12,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private Storage storage = new Storage();
+    private static final int BANANA_QUANTITY = 152;
+    private static final int APPLE_QUANTITY = 90;
+
+    private Storage storage;
     private ShopService shopService;
-    private FruitTransaction fruitTransaction;
-    private Map<String, Integer> testMap;
 
     @BeforeEach
     void setUp() {
+        storage = new Storage();
         shopService = new ShopServiceImpl(storage);
-        fruitTransaction = new FruitTransaction();
-        testMap = new HashMap<>();
-        testMap.put("banana", 152);
-        testMap.put("apple", 90);
     }
 
     @Test
@@ -42,7 +40,7 @@ class ShopServiceImplTest {
 
         shopService.operations(fruitTransactions);
 
-        Assertions.assertEquals(testMap.get("banana"), storage.getStorage().get("banana"));
-        Assertions.assertEquals(testMap.get("apple"), storage.getStorage().get("apple"));
+        Assertions.assertEquals(BANANA_QUANTITY, storage.getStorage().get("banana"));
+        Assertions.assertEquals(APPLE_QUANTITY, storage.getStorage().get("apple"));
     }
 }

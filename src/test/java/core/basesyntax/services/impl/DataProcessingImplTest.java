@@ -20,12 +20,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataProcessingImplTest {
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+
     private DataProcessing dataProcessing;
-    private Storage storage = new Storage();
+    private Storage storage;
     private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUp() {
+        storage = new Storage();
         Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
         operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
@@ -42,26 +46,23 @@ class DataProcessingImplTest {
         strings.add("b,apple,90");
 
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        FruitTransaction fruitTransaction1 = new FruitTransaction();
+        FruitTransaction fruitTransactionFirst = new FruitTransaction();
 
-        fruitTransaction1.setQuantity(152);
-        fruitTransaction1.setFruit("banana");
-        fruitTransactions.add(fruitTransaction1);
+        fruitTransactionFirst.setQuantity(152);
+        fruitTransactionFirst.setFruit("banana");
+        fruitTransactions.add(fruitTransactionFirst);
 
-        FruitTransaction fruitTransaction2 = new FruitTransaction();
+        FruitTransaction fruitTransactionSecond = new FruitTransaction();
 
-        fruitTransaction2.setQuantity(90);
-        fruitTransaction2.setFruit("apple");
-        fruitTransactions.add(fruitTransaction2);
+        fruitTransactionSecond.setQuantity(90);
+        fruitTransactionSecond.setFruit("apple");
+        fruitTransactions.add(fruitTransactionSecond);
 
-        List<FruitTransaction> fruitTransactions1 = dataProcessing.processData(strings);
+        List<FruitTransaction> processedFruitList = dataProcessing.processData(strings);
 
-        Assertions.assertEquals(2, fruitTransactions1.size(),
-                "The number of processed transactions does not match the expected.");
-
-        Assertions.assertEquals(fruitTransactions.get(0).getFruit(),
-                fruitTransactions1.get(0).getFruit());
-        Assertions.assertEquals(fruitTransactions.get(1).getQuantity(),
-                fruitTransactions1.get(1).getQuantity());
+        Assertions.assertEquals(fruitTransactions.get(ZERO).getFruit(),
+                processedFruitList.get(ZERO).getFruit());
+        Assertions.assertEquals(fruitTransactions.get(ONE).getQuantity(),
+                processedFruitList.get(ONE).getQuantity());
     }
 }

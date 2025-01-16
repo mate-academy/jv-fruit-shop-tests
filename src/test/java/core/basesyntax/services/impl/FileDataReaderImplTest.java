@@ -1,15 +1,16 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FileDataReader;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 class FileDataReaderImplTest {
     private static final Path INPUT_PATH = Path.of("src/test/resources/input1.csv");

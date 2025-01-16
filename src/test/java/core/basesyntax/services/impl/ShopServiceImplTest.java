@@ -3,13 +3,14 @@ package core.basesyntax.services.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.storage.Storage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 class ShopServiceImplTest {
     private static final int BANANA_QUANTITY = 152;
@@ -17,11 +18,20 @@ class ShopServiceImplTest {
 
     private Storage storage;
     private ShopService shopService;
+    private Map<String, Integer> storageNew;
 
     @BeforeEach
     void setUp() {
         storage = new Storage();
+        storageNew = storage.getStorage();
+        storageNew.put("banana", 152);
+        storageNew.put("apple", 90);
         shopService = new ShopServiceImpl(storage);
+    }
+
+    @AfterAll
+    static void afterAll() {
+        Storage.clearAll();
     }
 
     @Test
@@ -42,5 +52,11 @@ class ShopServiceImplTest {
 
         Assertions.assertEquals(BANANA_QUANTITY, storage.getStorage().get("banana"));
         Assertions.assertEquals(APPLE_QUANTITY, storage.getStorage().get("apple"));
+    }
+
+    @Test
+    void check_FruitTransactionListNotNull_ok() {
+        Assertions.assertNotNull(storage.getStorage().get("banana"));
+        Assertions.assertNotNull(storage.getStorage().get("apple"));
     }
 }

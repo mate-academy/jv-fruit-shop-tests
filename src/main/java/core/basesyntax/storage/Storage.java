@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static final Map<String,Integer> storage = new HashMap<>();
+    private static final Map<String, Integer> storage = new HashMap<>();
 
     public int getCurrentAmount(String fruitType) {
         return storage.getOrDefault(fruitType, 0);
@@ -16,5 +16,9 @@ public class Storage {
 
     public Map<String, Integer> getStorage() {
         return storage;
+    }
+
+    public static void clearAll() {
+        storage.clear();
     }
 }

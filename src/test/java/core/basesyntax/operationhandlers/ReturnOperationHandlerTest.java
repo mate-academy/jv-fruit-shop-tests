@@ -1,9 +1,12 @@
 package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 class ReturnOperationHandlerTest {
     private static final int BANANA_QUANTITY = 120;
@@ -11,20 +14,24 @@ class ReturnOperationHandlerTest {
 
     private Storage storage;
     private OperationHandler operationHandler;
-    private OperationHandler balanceOperationHandler;
+    private Map<String, Integer> storageNew;
 
     @BeforeEach
     void setUp() {
         storage = new Storage();
-        balanceOperationHandler = new BalanceOperationHandler();
+        storageNew = storage.getStorage();
+        storageNew.put("banana", 100);
+        storageNew.put("apple", 100);
         operationHandler = new ReturnOperationHandler();
+    }
+
+    @AfterEach
+    void tearDown() {
+        storage.clearAll();
     }
 
     @Test
     void check_returnOperationHandlerIsValid_ok() {
-        balanceOperationHandler.apply("banana", 100);
-        balanceOperationHandler.apply("apple", 100);
-
         operationHandler.apply("banana", 20);
         operationHandler.apply("apple", 90);
 

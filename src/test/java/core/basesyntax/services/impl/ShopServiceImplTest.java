@@ -1,8 +1,8 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

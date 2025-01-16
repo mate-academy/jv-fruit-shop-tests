@@ -11,14 +11,13 @@ import core.basesyntax.services.DataProcessing;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class DataProcessingImplTest {
     private static final int ZERO = 0;

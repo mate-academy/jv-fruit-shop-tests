@@ -2,12 +2,11 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.services.ReportGenerator;
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.AfterEach;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 class FileDataWriterImplTest {
     private static final String expectedString = "fruit,quantity" + System.lineSeparator()

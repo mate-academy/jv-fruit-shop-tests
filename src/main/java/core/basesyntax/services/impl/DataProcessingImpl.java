@@ -38,8 +38,8 @@ public class DataProcessingImpl implements DataProcessing {
 
         DataProcessingImpl that = (DataProcessingImpl) obj;
 
-        return Objects.equals(fruitStrategy, that.fruitStrategy) &&
-                Objects.equals(storage, that.storage);
+        return Objects.equals(fruitStrategy, that.fruitStrategy)
+                && Objects.equals(storage, that.storage);
     }
 
     @Override

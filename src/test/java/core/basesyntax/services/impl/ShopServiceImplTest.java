@@ -1,5 +1,8 @@
 package core.basesyntax.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.storage.Storage;
@@ -7,10 +10,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 class ShopServiceImplTest {
     private static final int BANANA_QUANTITY = 152;

@@ -1,12 +1,11 @@
 package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.AfterEach;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 class PurchaseOperationHandlerTest {
     private static final int BANANA_QUANTITY = 80;

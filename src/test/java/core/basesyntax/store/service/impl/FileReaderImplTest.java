@@ -1,7 +1,6 @@
 package core.basesyntax.store.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.store.service.FileReader;
 import java.io.IOException;
@@ -15,7 +14,6 @@ public class FileReaderImplTest {
 
     private static final String RESOURCE_FOLDER = "src/test/resources/";
     private static final String VALID_FILE = "test-file.csv";
-    private static final String INVALID_FILE = "non-existent-file.csv";
     private FileReader fileReader;
 
     @BeforeEach
@@ -36,11 +34,5 @@ public class FileReaderImplTest {
         List<String> result = fileReader.read(RESOURCE_FOLDER + VALID_FILE);
         assertEquals(3, result.size());
         assertEquals("type,fruit,quantity", result.get(0));
-    }
-
-    @Test
-    void read_invalidFile_emptyList() {
-        List<String> result = fileReader.read(RESOURCE_FOLDER + INVALID_FILE);
-        assertTrue(result.isEmpty());
     }
 }

@@ -1,11 +1,11 @@
 package core.basesyntax.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.storage.Storage;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

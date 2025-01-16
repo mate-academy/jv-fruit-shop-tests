@@ -7,7 +7,6 @@ import core.basesyntax.services.DataProcessing;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

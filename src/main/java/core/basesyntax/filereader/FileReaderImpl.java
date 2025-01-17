@@ -2,11 +2,12 @@ package core.basesyntax.filereader;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class FileReaderImpl implements FileRead {
 
     @Override
     public List<String> read(String filePath) {
@@ -16,7 +17,7 @@ public class FileReaderImpl implements FileReader {
         }
         List<String> inputReport = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(
-                new java.io.FileReader(file))) {
+                new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 inputReport.add(line);

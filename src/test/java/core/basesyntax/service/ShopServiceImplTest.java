@@ -26,29 +26,20 @@ class ShopServiceImplTest {
 
     @Test
     void process_validTransactions_ok() {
-        // Створюється об'єкт транзакції з операцією BALANCE,  apple - 50
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 50);
-        // Реалізація обробника операції BALANCE
         OperationHandler balanceHandler = new BalanceOperation();
-        // Ініціалізація стратегії операцій з реальною мапою
         OperationStrategy operationStrategy = new OperationStrategyImpl(
                 Map.of(FruitTransaction.Operation.BALANCE, balanceHandler));
-        // Ініціалізація ShopService з реальною стратегією
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        // Виклик методу process з переданим списком транзакцій
         shopService.process(List.of(transaction));
-        // Перевірка, чи обробник правильно обробив операцію
         Assert.assertEquals("apple", 50);
     }
 
     @Test
     void process_emptyTransactions_noHandlersCalled() {
-        // Ініціалізуємо початковий стан (порожній інвентар)
         List<FruitTransaction> emptyTransactions = Collections.emptyList();
-        // Викликаємо метод process із порожнім списком транзакцій
         shopService.process(emptyTransactions);
-        // Перевіряємо, що інвентар магазину залишився порожнім після обробки
         Map<String, Integer> inventory = ((ShopServiceImpl) shopService).getInventory();
         Assert.assertTrue("Inventory should remain empty "
                         + "when processing an empty transaction list",

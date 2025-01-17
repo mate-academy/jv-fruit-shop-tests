@@ -16,11 +16,11 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException(
                         "Invalid line format: " + line);
             }
-            String operationCode = parts[0].trim();
-            String fruit = parts[1].trim();
+            String operationCode = parts[0];
+            String fruit = parts[1];
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[2].trim());
+                quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(
                         "Invalid quantity in line: " + line);

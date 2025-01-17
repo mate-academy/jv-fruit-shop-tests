@@ -10,7 +10,6 @@ public class FileWriterImpl implements FileWriter {
         try (BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(fileName))) {
             bw.write("fruit,quantity");
             bw.newLine();
-
             for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
                 bw.write(entry.getKey() + "," + entry.getValue());
                 bw.newLine();

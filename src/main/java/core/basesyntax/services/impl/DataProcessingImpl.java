@@ -25,7 +25,7 @@ public class DataProcessingImpl implements DataProcessing {
         this.storage = storage;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -44,7 +44,7 @@ public class DataProcessingImpl implements DataProcessing {
     @Override
     public int hashCode() {
         return Objects.hash(fruitStrategy, storage);
-    }
+    }*/
 
     @Override
     public List<FruitTransaction> processData(List<String> enterList) {

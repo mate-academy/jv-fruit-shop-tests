@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 class FileDataReaderImplTest {
     private static final Path INPUT_PATH = Path.of("src/test/resources/input1.csv");
+    private static final String INVALID_PATH = "src/test/resources/nonexistentFile.csv";
+
     private FileDataReader fileDataReader;
 
     @BeforeEach
@@ -34,5 +36,12 @@ class FileDataReaderImplTest {
         }
         List<String> list1 = fileDataReader.readData(INPUT_PATH);
         Assertions.assertEquals(list, list1);
+    }
+
+    @Test
+    void check_inputPathIsValid_ok() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            fileDataReader.readData(Path.of(INVALID_PATH));
+        });
     }
 }

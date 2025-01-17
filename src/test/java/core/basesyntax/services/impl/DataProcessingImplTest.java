@@ -60,16 +60,19 @@ class DataProcessingImplTest {
 
         List<FruitTransaction> processedFruitList = dataProcessing.processData(strings);
 
-        Assertions.assertEquals(fruitTransactionSecond.getQuantity() > 0,
-                processedFruitList.get(1).getQuantity() > 0);
-        Assertions.assertEquals(fruitTransactionFirst.getQuantity() > 0,
-                processedFruitList.get(0).getQuantity() > 0);
+        Assertions.assertNotNull(processedFruitList.get(ZERO));
+        Assertions.assertNotNull(processedFruitList.get(ONE));
+
+        Assertions.assertEquals(fruitTransactionSecond.getQuantity() > ZERO,
+                processedFruitList.get(ONE).getQuantity() > ZERO);
+        Assertions.assertEquals(fruitTransactionFirst.getQuantity() > ZERO,
+                processedFruitList.get(ZERO).getQuantity() > ZERO);
         Assertions.assertEquals(fruitTransactions.get(ZERO).getFruit(),
                 processedFruitList.get(ZERO).getFruit());
-        Assertions.assertEquals(fruitTransactionFirst, processedFruitList.get(0));
+        Assertions.assertEquals(fruitTransactionFirst, processedFruitList.get(ZERO));
         Assertions.assertEquals(fruitTransactions.get(ONE).getQuantity(),
                 processedFruitList.get(ONE).getQuantity());
-        Assertions.assertEquals(fruitTransactionSecond, processedFruitList.get(1));
+        Assertions.assertEquals(fruitTransactionSecond, processedFruitList.get(ONE));
         Assertions.assertEquals(fruitTransactions, processedFruitList);
     }
 }

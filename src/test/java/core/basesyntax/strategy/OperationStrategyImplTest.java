@@ -30,13 +30,21 @@ class OperationStrategyImplTest {
         Assertions.assertEquals(new BalanceOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.BALANCE).getClass());
 
+        Assertions.assertNotNull(operationOperationHandlerMap.get(Operation.BALANCE));
+
         Assertions.assertEquals(new PurchaseOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.PURCHASE).getClass());
+
+        Assertions.assertNotNull(operationOperationHandlerMap.get(Operation.PURCHASE));
 
         Assertions.assertEquals(new ReturnOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.RETURN).getClass());
 
+        Assertions.assertNotNull(operationOperationHandlerMap.get(Operation.RETURN));
+
         Assertions.assertEquals(new SupplyOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.SUPPLY).getClass());
+
+        Assertions.assertNotNull(operationOperationHandlerMap.get(Operation.SUPPLY));
     }
 }

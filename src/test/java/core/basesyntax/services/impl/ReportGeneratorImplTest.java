@@ -69,6 +69,7 @@ class ReportGeneratorImplTest {
         String expectReport = str.toString();
         String actualReport = reportGenerator.getReport();
 
+        Assertions.assertNotNull(actualReport);
         Assertions.assertEquals(expectReport, actualReport);
     }
 }

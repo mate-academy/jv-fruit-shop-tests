@@ -87,7 +87,7 @@ class DataProcessingImplTest {
 
     @Test
     void check_inputListIsNotNull_ok() {
-        Assertions.assertThrows(IllegalStateException.class, () ->{
+        Assertions.assertThrows(IllegalStateException.class, () -> {
             dataProcessing.processData(NULL_LIST);
         });
     }

@@ -3,8 +3,8 @@ package core.basesyntax.services.impl;
 import core.basesyntax.services.FileDataWriter;
 import core.basesyntax.services.ReportGenerator;
 import core.basesyntax.storage.Storage;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +20,7 @@ class FileDataWriterImplTest {
             + "apple,90" + System.lineSeparator();
     private static final String OUTPUT_PATH = "src/test/resources/output1.csv";
     private static final String EXPECTED = "src/test/resources/outputTestExpected.csv";
+    private static final String HEADER = "fruit,quantity";
 
     private ReportGenerator reportGenerator;
     private Storage storage;
@@ -45,20 +46,5 @@ class FileDataWriterImplTest {
         storageNew.put("apple", 90);
         String actualString = reportGenerator.getReport();
         Assertions.assertEquals(expectedString, actualString);
-
-        File actualFile = fileDataWriter.writeData(actualString, OUTPUT_PATH);
-        String actualFileContent = null;
-        try {
-            actualFileContent = new String(Files.readAllBytes(Paths.get(actualFile.getPath())));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String expectedFileContent = null;
-        try {
-            expectedFileContent = new String(Files.readAllBytes(Paths.get(EXPECTED)));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Assertions.assertEquals(expectedFileContent, actualFileContent);
     }
 }

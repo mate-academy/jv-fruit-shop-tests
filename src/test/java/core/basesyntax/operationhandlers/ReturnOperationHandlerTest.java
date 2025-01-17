@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 class ReturnOperationHandlerTest {
     private static final int BANANA_QUANTITY = 120;
     private static final int APPLE_QUANTITY = 190;
+    private static final int INVALID_INTEGER = -20;
+    private static final String INVALID_TYPE = "mango";
 
     private Storage storage;
     private OperationHandler operationHandler;
@@ -36,5 +38,19 @@ class ReturnOperationHandlerTest {
 
         Assertions.assertEquals(BANANA_QUANTITY, storage.getStorage().get("banana"));
         Assertions.assertEquals(APPLE_QUANTITY, storage.getStorage().get("apple"));
+    }
+
+    @Test
+    void check_negativeQuantity_notOk() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            operationHandler.apply("banana", INVALID_INTEGER);
+        });
+    }
+
+    @Test
+    void check_invalidFruitType_notOk() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            storage.get(INVALID_TYPE);
+        });
     }
 }

@@ -13,6 +13,9 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (purchaseAmount < amount) {
             throw new IllegalStateException("Not enough fruits");
         }
+        if (amount < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         int newAmount = storage1.get(fruitType) - amount;
         storage1.put(fruitType,newAmount);
         return newAmount;

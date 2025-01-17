@@ -8,6 +8,9 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public int apply(String fruitType, int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         Map<String, Integer> storage1 = storage.getStorage();
         int newAmount = storage1.get(fruitType) + amount;
         storage1.put(fruitType,newAmount);

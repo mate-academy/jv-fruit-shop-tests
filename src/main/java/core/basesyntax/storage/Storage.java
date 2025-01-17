@@ -21,4 +21,11 @@ public class Storage {
     public static void clearAll() {
         storage.clear();
     }
+
+    public Integer get(String fruit) {
+        if (!storage.containsKey(fruit)) {
+            throw new IllegalArgumentException("Fruit not found: " + fruit);
+        }
+        return storage.get(fruit);
+    }
 }

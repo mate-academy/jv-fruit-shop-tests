@@ -48,6 +48,10 @@ public class DataProcessingImpl implements DataProcessing {
 
     @Override
     public List<FruitTransaction> processData(List<String> enterList) {
+        if (enterList == null || enterList.isEmpty()) {
+            throw new IllegalStateException("List is noy valid");
+        }
+
         List<FruitTransaction> list = new ArrayList<>();
         enterList.forEach(enter -> {
             String[] split = enter.split(COMMA);

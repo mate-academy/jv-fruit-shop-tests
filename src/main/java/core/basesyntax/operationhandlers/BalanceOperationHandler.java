@@ -8,6 +8,9 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public int apply(String fruitType, int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         Map<String, Integer> storage1 = storage.getStorage();
         storage1.put(fruitType, amount);
         return amount;

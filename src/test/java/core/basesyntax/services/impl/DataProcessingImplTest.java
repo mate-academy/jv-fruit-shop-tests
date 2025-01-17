@@ -22,6 +22,8 @@ import org.junit.jupiter.api.Test;
 class DataProcessingImplTest {
     private static final int ZERO = 0;
     private static final int ONE = 1;
+    private static final List<String> INVALID_LIST = new ArrayList<>();
+    private static final List<String> NULL_LIST = null;
 
     private DataProcessing dataProcessing;
     private Storage storage;
@@ -74,5 +76,19 @@ class DataProcessingImplTest {
                 processedFruitList.get(ONE).getQuantity());
         Assertions.assertEquals(fruitTransactionSecond, processedFruitList.get(ONE));
         Assertions.assertEquals(fruitTransactions, processedFruitList);
+    }
+
+    @Test
+    void check_inputListIsEmpty_notOk() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            dataProcessing.processData(INVALID_LIST);
+        });
+    }
+
+    @Test
+    void check_inputListIsNotNull_ok() {
+        Assertions.assertThrows(IllegalStateException.class, () ->{
+            dataProcessing.processData(NULL_LIST);
+        });
     }
 }

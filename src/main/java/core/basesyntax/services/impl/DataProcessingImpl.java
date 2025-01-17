@@ -10,7 +10,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class DataProcessingImpl implements DataProcessing {
     private static final int OPERATION_TYPE = 0;
@@ -24,27 +23,6 @@ public class DataProcessingImpl implements DataProcessing {
         this.fruitStrategy = fruitStrategy;
         this.storage = storage;
     }
-
-    /*@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        DataProcessingImpl that = (DataProcessingImpl) obj;
-
-        return Objects.equals(fruitStrategy, that.fruitStrategy)
-                && Objects.equals(storage, that.storage);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fruitStrategy, storage);
-    }*/
 
     @Override
     public List<FruitTransaction> processData(List<String> enterList) {

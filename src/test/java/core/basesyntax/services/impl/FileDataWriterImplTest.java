@@ -59,6 +59,6 @@ class FileDataWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assertions.assertEquals(expectedFileContent, actualFileContent, "Файли не збігаються!");
+        Assertions.assertEquals(expectedFileContent, actualFileContent);
     }
 }

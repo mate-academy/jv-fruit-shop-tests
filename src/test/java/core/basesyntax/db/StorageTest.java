@@ -11,9 +11,7 @@ class StorageTest {
 
     @BeforeEach
     void setUp() {
-        Map<String, Integer> fruits = Storage.getAllFruits();
-        fruits.keySet().forEach(fruit ->
-                Storage.modifyFruitStorage(fruit, -Storage.getFruitQuantity(fruit)));
+        Storage.clearStorage();
     }
 
     @Test
@@ -40,7 +38,7 @@ class StorageTest {
 
     @Test
     void modifyFruitStorage_addNegativeQuantity_throwsException() {
-        Storage.modifyFruitStorage("apple", 10); // Добавляем 10
+        Storage.modifyFruitStorage("apple", 10);
         Exception exception = assertThrows(IllegalStateException.class,
                 () -> Storage.modifyFruitStorage("apple", -20));
         String expectedMessage = "Stock for fruit apple cannot be negative.";

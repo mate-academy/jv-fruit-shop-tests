@@ -7,6 +7,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.fao.FileCreator;
+import core.basesyntax.fao.FileCreatorImpl;
 import core.basesyntax.fao.FileReaderImpl;
 import core.basesyntax.fao.FileReaderMy;
 import core.basesyntax.fao.FileWriterImpl;
@@ -25,17 +27,18 @@ import core.basesyntax.model.strategy.OperationStrategy;
 import core.basesyntax.model.strategy.OperationStrategyImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-/**
- * Feel free to remove this class and create your own.
- */
 
 public class FruitStorageTest {
+    private static final String FILE_TO_READ = "newReportToRead.csv";
+    private static FileCreator fileCreator;
     private static FileReaderMy fileReader;
     private static List<String> inputReport;
     private static DataConvertor dataConverter;
@@ -50,8 +53,10 @@ public class FruitStorageTest {
 
     @BeforeAll
     static void beforeAll() {
+        fileCreator = new FileCreatorImpl();
+        fileCreator.createInputFile(FILE_TO_READ);
         fileReader = new FileReaderImpl();
-        inputReport = fileReader.read("reportToRead.csv");
+        inputReport = fileReader.read(FILE_TO_READ);
         dataConverter = new DataConvertorImpl();
         dataConverter.convertToTransaction(inputReport);
         transactions = dataConverter.convertToTransaction(inputReport);
@@ -67,6 +72,22 @@ public class FruitStorageTest {
         resultingReport = reportGenerator.getReport(storage);
         fileWriter = new FileWriterImpl();
         fileWriter.write("finalReport.csv", resultingReport);
+    }
+
+    @Test
+    void fileCreatorOK() {
+        assertTrue(Files.exists(Paths.get(FILE_TO_READ)));
+    }
+
+    @Test
+    void fileCreatorNotOk() {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fileCreator.createInputFile("/invalid/someFile.csv");
+        });
+
+        // Проверяем, что сообщение об ошибке содержит нужный текст
+        assertTrue(exception.getMessage()
+                .contains("Unable to create input file: reportToRead.csv"));
     }
 
     @Test
@@ -89,9 +110,10 @@ public class FruitStorageTest {
     @Test
     void readFileTestNotOK() {
         String fileName = "somefile.csv";
-        assertThrows(RuntimeException.class, () -> {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             List<String> inputReport = fileReader.read(fileName);
         });
+        assertEquals(exception.getMessage(),"Error reading file: " + fileName);
     }
 
     @Test
@@ -101,10 +123,13 @@ public class FruitStorageTest {
         wrongList.add("something");
         wrongList.add(null);
         wrongList.add("b,some,50");
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(wrongList);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            dataConverter.convertToTransaction(wrongList);
+        });
 
-        assertNotEquals(4, transactions.size());
-        assertEquals(1, transactions.size());
+        String expectedMessage = "Invalid data format: something";
+        assertEquals(exception.getMessage(),
+                "Invalid data format: something");
 
     }
 
@@ -169,3 +194,4 @@ public class FruitStorageTest {
         assertNotNull(fileWriter);
     }
 }
+

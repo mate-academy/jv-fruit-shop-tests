@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.fao.FileCreator;
+import core.basesyntax.fao.FileCreatorImpl;
 import core.basesyntax.fao.FileReaderImpl;
 import core.basesyntax.fao.FileReaderMy;
 import core.basesyntax.fao.FileWriterImpl;
@@ -23,9 +25,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+
+    private static final String FILE_TO_READ = "newReportToRead.csv";
+    private static final String FILE_TO_WRITE = "finalReport.csv";
+
     public static void main(String[] args) {
+        FileCreator fileCreator = new FileCreatorImpl();
+        fileCreator.createInputFile(FILE_TO_READ);
+
         FileReaderMy fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(FILE_TO_READ);
 
         DataConvertor dataConverter = new DataConvertorImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -44,7 +53,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(storage);
 
         FileWriterMy fileWriter = new FileWriterImpl();
-        fileWriter.write("finalReport.csv",resultingReport);
+        fileWriter.write(FILE_TO_WRITE,resultingReport);
     }
 
 }

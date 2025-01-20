@@ -14,7 +14,7 @@ public class Storage {
         return storage.getOrDefault(fruitType, defaultValue);
     }
 
-    public Map<String, Integer> getStorage() {
+    public static Map<String, Integer> getStorage() {
         return storage;
     }
 
@@ -22,7 +22,7 @@ public class Storage {
         storage.clear();
     }
 
-    public Integer get(String fruit) {
+    public static Integer get(String fruit) {
         if (!storage.containsKey(fruit)) {
             throw new IllegalArgumentException("Fruit not found: " + fruit);
         }

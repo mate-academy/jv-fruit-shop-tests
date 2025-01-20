@@ -49,6 +49,5 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("No enum constant with code " + code);
         }
-
     }
 }

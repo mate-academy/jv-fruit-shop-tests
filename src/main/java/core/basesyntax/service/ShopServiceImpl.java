@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.strategy.OperationStrategy;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
@@ -14,14 +13,11 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Integer> process(List<FruitTransaction> transactions) {
-        Map<String, Integer> storage = new HashMap<>();
-
+    public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.getOperationHandler(transaction
-                    .getOperation()).handle(storage, transaction);
+                    .getOperation()).handle(Storage.storage, transaction);
         }
 
-        return storage;
     }
 }

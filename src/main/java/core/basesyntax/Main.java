@@ -1,11 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.fao.FileCreator;
-import core.basesyntax.fao.FileCreatorImpl;
-import core.basesyntax.fao.FileReaderImpl;
-import core.basesyntax.fao.FileReaderMy;
+import core.basesyntax.dao.Storage;
+import core.basesyntax.fao.CustomFileReader;
+import core.basesyntax.fao.CustomFileReaderImpl;
+import core.basesyntax.fao.CustomFileWriter;
 import core.basesyntax.fao.FileWriterImpl;
-import core.basesyntax.fao.FileWriterMy;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ReportGenerator;
 import core.basesyntax.model.ReportGeneratorImpl;
@@ -26,20 +25,14 @@ import java.util.Map;
 
 public class Main {
 
-    private static final String FILE_TO_READ = "newReportToRead.csv";
-    private static final String FILE_TO_WRITE = "finalReport.csv";
-
     public static void main(String[] args) {
-        FileCreator fileCreator = new FileCreatorImpl();
-        fileCreator.createInputFile(FILE_TO_READ);
-
-        FileReaderMy fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(FILE_TO_READ);
+        CustomFileReader customFileReader = new CustomFileReaderImpl();
+        List<String> inputReport = customFileReader.read();
 
         DataConvertor dataConverter = new DataConvertorImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
@@ -47,13 +40,14 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        Map<String, Integer> storage = shopService.process(transactions);
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage);
+        String resultingReport = reportGenerator.getReport(Storage.storage);
 
-        FileWriterMy fileWriter = new FileWriterImpl();
-        fileWriter.write(FILE_TO_WRITE,resultingReport);
+        CustomFileWriter customFileWriter = new FileWriterImpl();
+        customFileWriter.write(resultingReport);
     }
 
 }

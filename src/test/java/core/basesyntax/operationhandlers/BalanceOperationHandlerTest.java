@@ -1,9 +1,9 @@
 package core.basesyntax.operationhandlers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.storage.Storage;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,14 +32,14 @@ class BalanceOperationHandlerTest {
 
     @Test
     void check_negativeQuantity_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             operationHandler.apply(BANANA, INVALID_INTEGER);
         });
     }
 
     @Test
     void check_invalidFruitType_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             Storage.get(INVALID_TYPE);
         });
     }

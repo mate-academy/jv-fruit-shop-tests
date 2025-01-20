@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
 import core.basesyntax.operationhandlers.OperationHandler;
@@ -8,7 +10,6 @@ import core.basesyntax.operationhandlers.ReturnOperationHandler;
 import core.basesyntax.operationhandlers.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +28,16 @@ class OperationStrategyImplTest {
 
     @Test
     void check_validOperationHandlers_ok() {
-        Assertions.assertEquals(new BalanceOperationHandler().getClass(),
+        assertEquals(new BalanceOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.BALANCE).getClass());
 
-        Assertions.assertNotNull(operationOperationHandlerMap.get(Operation.BALANCE));
-
-        Assertions.assertEquals(new PurchaseOperationHandler().getClass(),
+        assertEquals(new PurchaseOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.PURCHASE).getClass());
 
-        Assertions.assertEquals(new ReturnOperationHandler().getClass(),
+        assertEquals(new ReturnOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.RETURN).getClass());
 
-        Assertions.assertEquals(new SupplyOperationHandler().getClass(),
+        assertEquals(new SupplyOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.SUPPLY).getClass());
 
     }

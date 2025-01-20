@@ -1,11 +1,11 @@
 package core.basesyntax.operationhandlers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.storage.Storage;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,14 +42,14 @@ class ReturnOperationHandlerTest {
 
     @Test
     void check_negativeQuantity_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             operationHandler.apply("banana", INVALID_INTEGER);
         });
     }
 
     @Test
     void check_invalidFruitType_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             Storage.get(INVALID_TYPE);
         });
     }

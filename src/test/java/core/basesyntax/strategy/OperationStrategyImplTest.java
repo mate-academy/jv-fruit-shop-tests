@@ -38,7 +38,6 @@ class OperationStrategyImplTest {
         Assertions.assertEquals(new ReturnOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.RETURN).getClass());
 
-
         Assertions.assertEquals(new SupplyOperationHandler().getClass(),
                 operationOperationHandlerMap.get(Operation.SUPPLY).getClass());
 

@@ -1,16 +1,12 @@
 package core.basesyntax.service;
 
-import core.basesyntax.exception.UnknownOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.strategy.OperationHandler;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-    private final Map<String, Integer> fruitInventory = new HashMap<>();
     private final Map<OperationType, OperationHandler> operationStrategy;
 
     public FruitShopService(Map<OperationType, OperationHandler> operationStrategy) {
@@ -22,15 +18,11 @@ public class FruitShopService {
             OperationType operation = transaction.getOperation();
             String fruit = transaction.getFruit();
             int quantity = transaction.getQuantity();
-            OperationHandler handler = operationStrategy.get(operation);
-            if (handler == null) {
-                throw new UnknownOperationException("Unknown operation type: " + operation);
-            }
-            handler.apply(fruitInventory, fruit, quantity);
+            TransactionProcessor.applyOperation(operation, fruit, quantity, operationStrategy);
         }
     }
 
     public Map<String, Integer> getInventory() {
-        return Collections.unmodifiableMap(fruitInventory);
+        return Storage.inventory;
     }
 }

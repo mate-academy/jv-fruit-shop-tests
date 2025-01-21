@@ -6,8 +6,8 @@ import core.basesyntax.dao.FileWriter;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
-import core.basesyntax.service.ConfigService;
 import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -19,14 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String CONFIG_FILE_PATH = "config.properties";
+    private static final String SOURCE_PATH = "src/main/resources/fruit_shop_transactions";
+    private static final String REPORT_PATH = "src/main/resources/report";
 
     public static void main(String[] args) {
-        ConfigService configService = new ConfigService(CONFIG_FILE_PATH);
         FileReader fileReader = new FileReaderImpl();
-
-        String sourcePath = configService.getSourcePath();
-        List<String> lines = fileReader.readFile(sourcePath);
+        List<String> lines = fileReader.readFile(SOURCE_PATH);
 
         Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
         operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
@@ -39,10 +37,12 @@ public class Main {
         FruitShopService fruitShopService = new FruitShopService(operationStrategy);
         fruitShopService.processTransactions(transactions);
 
-        String targetPath = configService.getTargetPath();
         Map<String, Integer> inventory = fruitShopService.getInventory();
+        ReportGenerator reportGenerator = new ReportGenerator();
+        String report = reportGenerator.generateReport(inventory);
+
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeFile(targetPath, inventory);
-        System.out.println("Report was successfully written in: " + targetPath);
+        fileWriter.writeFile(REPORT_PATH, report);
+        System.out.println("Report was successfully written in: " + REPORT_PATH);
     }
 }

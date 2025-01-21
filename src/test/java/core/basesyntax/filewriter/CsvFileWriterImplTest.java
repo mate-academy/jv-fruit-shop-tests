@@ -11,31 +11,35 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterImplTest {
-    private static final String EXPECTED_CONTENT = "fruit,quantity\nbanana,20";
+    private static final String EXPECTED_CONTENT_FILE = "src/test/resources/expected_fruit.csv";
     private static final String INVALID_PATH = "/invalid/path/test.csv";
-    private static final String TEMP_FILE_PREFIX = "test_output";
-    private static final String TEMP_FILE_SUFFIX = "csv";
+    private static final String TEST_OUTPUT_FILE = "src/test/resources/test_output.csv";
     private CsvFileWriter csvFileWriter;
     private Path tempFile;
 
     @BeforeEach
     void setUp() throws IOException {
         csvFileWriter = new CsvFileWriterImpl();
-        tempFile = Files.createTempFile(TEMP_FILE_PREFIX, TEMP_FILE_SUFFIX);
+        tempFile = Path.of(TEST_OUTPUT_FILE);
+        if (!Files.exists(tempFile)) {
+            Files.createFile(tempFile);
+        }
     }
 
     @Test
     void write_validContent_writesToFile() throws IOException {
-        csvFileWriter.write(EXPECTED_CONTENT, tempFile.toString());
+        String expectedContent = Files.readString(Path.of(EXPECTED_CONTENT_FILE));
+        csvFileWriter.write(expectedContent, tempFile.toString());
         String actualContent = Files.readString(tempFile);
-        assertEquals(EXPECTED_CONTENT, actualContent,
+        assertEquals(expectedContent, actualContent,
                 "File content should match written content");
     }
 
     @Test
-    void write_invalidPath_throwsRuntimeException() {
+    void write_invalidPath_throwsRuntimeException() throws IOException {
+        String expectedContent = Files.readString(Path.of(EXPECTED_CONTENT_FILE));
         assertThrows(RuntimeException.class,
-                () -> csvFileWriter.write(EXPECTED_CONTENT, INVALID_PATH),
+                () -> csvFileWriter.write(expectedContent, INVALID_PATH),
                 "Should throw RuntimeException for invalid path");
     }
 

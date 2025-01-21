@@ -14,4 +14,8 @@ public class Storage {
     public static int getQuantity(String fruit) {
         return fruits.getOrDefault(fruit, DEFAULT_QUANTITY);
     }
+
+    public static void clear() {
+        fruits.clear();
+    }
 }

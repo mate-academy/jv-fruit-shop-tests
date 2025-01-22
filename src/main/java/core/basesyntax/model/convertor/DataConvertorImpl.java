@@ -31,5 +31,4 @@ public class DataConvertorImpl implements DataConvertor {
 
         return transactions;
     }
-
 }

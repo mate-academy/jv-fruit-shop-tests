@@ -24,10 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_TO_READ = "reportToRead.csv";
+    private static final String FILE_TO_WRITE = "finalReport.csv";
 
     public static void main(String[] args) {
+
         CustomFileReader customFileReader = new CustomFileReaderImpl();
-        List<String> inputReport = customFileReader.read();
+        List<String> inputReport = customFileReader.read(FILE_TO_READ);
 
         DataConvertor dataConverter = new DataConvertorImpl();
 
@@ -47,7 +50,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(Storage.storage);
 
         CustomFileWriter customFileWriter = new FileWriterImpl();
-        customFileWriter.write(resultingReport);
+        customFileWriter.write(FILE_TO_WRITE,resultingReport);
     }
 
 }

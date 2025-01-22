@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomFileReaderImpl implements CustomFileReader {
-    private static final String FILE_TO_READ = "reportToRead.csv";
 
-    public List<String> read() {
+    public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
         try (InputStream inputStream = getClass().getClassLoader()
-                .getResourceAsStream(FILE_TO_READ)) {
+                .getResourceAsStream(fileName)) {
 
             if (inputStream == null) {
-                throw new RuntimeException("File not found: " + FILE_TO_READ);
+                throw new RuntimeException("File not found: " + fileName);
             }
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,
@@ -28,7 +27,7 @@ public class CustomFileReaderImpl implements CustomFileReader {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + FILE_TO_READ, e);
+            throw new RuntimeException("Error reading file: " + fileName, e);
         }
 
         return lines;

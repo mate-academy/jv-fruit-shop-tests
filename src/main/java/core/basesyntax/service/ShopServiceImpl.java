@@ -18,6 +18,5 @@ public class ShopServiceImpl implements ShopService {
             operationStrategy.getOperationHandler(transaction
                     .getOperation()).handle(Storage.storage, transaction);
         }
-
     }
 }

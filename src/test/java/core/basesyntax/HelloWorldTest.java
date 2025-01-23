@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 /**
  * Feel free to remove this class and create your own.
  */
@@ -22,6 +21,7 @@ public class HelloWorldTest {
     private static final String FINAL_REPORT = "finalReport.csv";
 
     private HelloWorld helloWorld = new HelloWorldImpl();
+
     @Test
     void transfer_FileNotExists_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
@@ -74,7 +74,7 @@ public class HelloWorldTest {
     void transfer_AmountIsLessThanZero_NotNull() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-                    helloWorld.getFileOfReport(FILE6);
+                    helloWorld.getFileOfReport(FILE7);
                 });
     }
 

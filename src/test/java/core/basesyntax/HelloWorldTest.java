@@ -25,7 +25,7 @@ public class HelloWorldTest {
     @Test
     void transfer_FileNotExists_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
-                ()-> {
+                () -> {
                     helloWorld.getFileOfReport("FILE9");
                 });
     }
@@ -34,7 +34,7 @@ public class HelloWorldTest {
     void transfer_EmptyFile_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE2);
+                    helloWorld.getFileOfReport(FILE2);
                 });
     }
 
@@ -42,7 +42,7 @@ public class HelloWorldTest {
     void transfer_FieldFruitIsNull_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE3);
+                    helloWorld.getFileOfReport(FILE3);
                 });
     }
 
@@ -50,7 +50,7 @@ public class HelloWorldTest {
     void transfer_AmountIsLessThanZero_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE4);
+                    helloWorld.getFileOfReport(FILE4);
                 });
     }
 
@@ -58,7 +58,7 @@ public class HelloWorldTest {
     void transfer_BalanceEqualsZero_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE5);
+                    helloWorld.getFileOfReport(FILE5);
                 });
     }
 
@@ -66,7 +66,7 @@ public class HelloWorldTest {
     void transfer_OperationIsNull_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE6);
+                    helloWorld.getFileOfReport(FILE6);
                 });
     }
 
@@ -74,7 +74,7 @@ public class HelloWorldTest {
     void transfer_AmountIsLessThanZero_NotNull() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> {
-            helloWorld.getFileOfReport(FILE7);
+                    helloWorld.getFileOfReport(FILE6);
                 });
     }
 

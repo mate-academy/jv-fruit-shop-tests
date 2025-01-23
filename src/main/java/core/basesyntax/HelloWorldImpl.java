@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.HelloWorld;
 import core.basesyntax.dataservice.DataConverter;
 import core.basesyntax.dataservice.DataConverterImpl;
 import core.basesyntax.dataservice.ShopService;
@@ -12,13 +11,13 @@ import core.basesyntax.fileservice.FileWriterImpl;
 import core.basesyntax.reportservice.ReportGenerator;
 import core.basesyntax.reportservice.ReportGeneratorImpl;
 import core.basesyntax.transactions.FruitTransaction;
-import core.basesyntax.transactions.OperationHandler;
 import core.basesyntax.transactions.BalanceOperation;
+import core.basesyntax.transactions.OperationHandler;
 import core.basesyntax.transactions.PurchaseOperation;
 import core.basesyntax.transactions.ReturnOperation;
-import core.basesyntax.transactions.SupplyOperation;
 import core.basesyntax.transactions.OperationStrategy;
 import core.basesyntax.transactions.OperationStrategyImpl;
+import core.basesyntax.transactions.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

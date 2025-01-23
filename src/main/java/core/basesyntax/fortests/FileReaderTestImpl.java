@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileReaderTestImpl implements FileReaderTest{
+public class FileReaderTestImpl implements FileReaderTest {
     @Override
     public String readFile(String nameOfFile) {
         StringBuilder stringBuilder = new StringBuilder();

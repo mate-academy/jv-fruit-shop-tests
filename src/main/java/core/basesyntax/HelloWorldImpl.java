@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorldImpl implements HelloWorld {
+    private static final String OUTPUT_FILE = "finalReport.csv";
+
     @Override
     public void getFileOfReport(String nameofFile) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
@@ -45,6 +47,6 @@ public class HelloWorldImpl implements HelloWorld {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeFile(resultingReport, "finalReport.csv");
+        fileWriter.writeFile(resultingReport, OUTPUT_FILE);
     }
 }

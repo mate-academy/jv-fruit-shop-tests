@@ -3,7 +3,7 @@ package core.basesyntax.storage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DateFruits {
+public class Storage {
     private static final Map<String, Integer> fruitsStorage = new HashMap<>();
 
     public static void save(String name, Integer amount) {

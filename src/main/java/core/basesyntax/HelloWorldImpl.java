@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorldImpl implements HelloWorld {
-    private static final String OUTPUT_FILE = "finalReport.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
 
     @Override
     public void getFileOfReport(String nameofFile) {

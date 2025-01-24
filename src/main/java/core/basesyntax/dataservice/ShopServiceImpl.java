@@ -3,6 +3,7 @@ package core.basesyntax.dataservice;
 import core.basesyntax.transactions.FruitTransaction;
 import core.basesyntax.transactions.OperationHandler;
 import core.basesyntax.transactions.OperationStrategy;
+
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {

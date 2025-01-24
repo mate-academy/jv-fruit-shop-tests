@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorldTest {
-    private static final String FILE1 = "file1valid.csv";
-    private static final String FILE2 = "file2empty.csv";
-    private static final String FILE3 = "file3invalid.csv";
-    private static final String FILE4 = "file4invalid.csv";
-    private static final String FILE5 = "file5invalid.csv";
-    private static final String FILE6 = "file6invalid.csv";
-    private static final String FILE7 = "file7invalid.csv";
-    private static final String EXPECTED_RESULT = "expectedResult.csv";
-    private static final String FINAL_REPORT = "finalReport.csv";
+    private static final String FILE1 = "src/main/resources/file1.csv";
+    private static final String FILE2 = "src/main/resources/file2.csv";
+    private static final String FILE3 = "src/main/resources/file3.csv";
+    private static final String FILE4 = "src/main/resources/file4.csv";
+    private static final String FILE5 = "src/main/resources/file5.csv";
+    private static final String FILE6 = "src/main/resources/file6.csv";
+    private static final String FILE7 = "src/main/resources/file7.csv";
+    private static final String EXPECTED_RESULT = "src/main/resources/expected.csv";
+    private static final String FINAL_REPORT = "src/main/resources/finalReport.csv";
 
     private HelloWorld helloWorld = new HelloWorldImpl();
 
@@ -80,11 +80,11 @@ public class HelloWorldTest {
 
     @Test
     void transfer_ValidData_Ok() {
+        helloWorld.getFileOfReport(FILE1);
         FileReaderTest fileReaderTest = new FileReaderTestImpl();
         String expected = fileReaderTest.readFile(EXPECTED_RESULT);
         FileReaderTest fileReaderTest1 = new FileReaderTestImpl();
         String actual = fileReaderTest1.readFile(FINAL_REPORT);
-        helloWorld.getFileOfReport(FILE1);
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 }

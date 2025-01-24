@@ -60,7 +60,7 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(e -> e.getCode().equals(code))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException(("Operation with code [%s] "
+                    .orElseThrow(() -> new IllegalArgumentException(("Operation with code [%s] "
                             + "does not exist!").formatted(code)));
         }
     }

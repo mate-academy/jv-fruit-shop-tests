@@ -21,16 +21,20 @@ class OperationTypeTest {
 
     @Test
     void fromCode_invalidCode_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> OperationType.fromCode("x"),
                 "Invalid code 'x' should throw IllegalArgumentException");
+        assertEquals("Invalid operation code: x", exception.getMessage(),
+                "Exception message should indicate the invalid code");
     }
 
     @Test
     void fromCode_nullCode_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> OperationType.fromCode(null),
                 "Null code should throw IllegalArgumentException");
+        assertEquals("Operation code cannot be null", exception.getMessage(),
+                "Exception message should indicate that code cannot be null");
     }
 
     @Test

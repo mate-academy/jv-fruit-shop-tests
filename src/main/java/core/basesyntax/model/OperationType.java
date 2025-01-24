@@ -17,11 +17,14 @@ public enum OperationType {
     }
 
     public static OperationType fromCode(String code) {
+        if (code == null) {
+            throw new IllegalArgumentException("Operation code cannot be null");
+        }
         for (OperationType operation : OperationType.values()) {
             if (operation.getCode().equals(code)) {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("No enum constant for code: " + code);
+        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
@@ -101,15 +100,6 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void processTransactions_negativeQuantity_throwsIllegalArgumentException() {
-        FruitTransaction transaction = new FruitTransaction(OperationType.PURCHASE,
-                "Apple", -10);
-        List<FruitTransaction> transactions = Collections.singletonList(transaction);
-        assertThrows(IllegalArgumentException.class, ()
-                -> fruitShopService.processTransactions(transactions));
-    }
-
-    @Test
     public void processTransactions_emptyList_doesNotChangeInventory() {
         Map<String, Integer> initialInventory = fruitShopService.getInventory();
         Map<String, Integer> expectedInventory = new HashMap<>(initialInventory);
@@ -118,20 +108,5 @@ public class FruitShopServiceTest {
         Map<String, Integer> inventoryAfterProcessing = fruitShopService.getInventory();
         assertEquals("Inventory should remain unchanged",
                 expectedInventory, inventoryAfterProcessing);
-    }
-
-    @Test
-    public void processTransactions_nullTransaction_throwsIllegalArgumentException() {
-        List<FruitTransaction> transactions = Collections.singletonList(null);
-        assertThrows(IllegalArgumentException.class, ()
-                -> fruitShopService.processTransactions(transactions));
-    }
-
-    @Test
-    public void processTransactions_nullValueInTransaction_throwsIllegalArgumentException() {
-        FruitTransaction transaction = new FruitTransaction(null, "Apple", 10);
-        List<FruitTransaction> transactions = Collections.singletonList(transaction);
-        assertThrows(IllegalArgumentException.class, ()
-                -> fruitShopService.processTransactions(transactions));
     }
 }

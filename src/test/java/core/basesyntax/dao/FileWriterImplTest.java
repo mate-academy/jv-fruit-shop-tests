@@ -2,10 +2,7 @@ package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,35 +32,22 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writeFile_validReport_createsFileWithContent() {
+    void writeFile_validReport_createsFileWithContent() throws IOException {
         String report = "fruit,quantity\napple,10\nbanana,20";
         fileWriter.writeFile(TEST_OUTPUT_FILE, report);
-        File file = new File(TEST_OUTPUT_FILE);
-        assertTrue(file.exists(), "File should be created");
-        try {
-            String fileContent = Files.readString(tempFile);
-            String[] lines = fileContent.split("\n");
-
-            assertEquals("fruit,quantity", lines[0], "Header should match");
-            assertEquals("apple,10", lines[1], "First data line should match");
-            assertEquals("banana,20", lines[2], "Second data line should match");
-        } catch (IOException e) {
-            fail("IOException should not be thrown during reading the file");
-        }
+        String fileContent = Files.readString(tempFile);
+        String[] lines = fileContent.split("\n");
+        assertEquals("fruit,quantity", lines[0], "Header should match");
+        assertEquals("apple,10", lines[1], "First data line should match");
+        assertEquals("banana,20", lines[2], "Second data line should match");
     }
 
     @Test
-    void writeFile_emptyReport_createsFileWithNoContent() {
+    void writeFile_emptyReport_createsFileWithNoContent() throws IOException {
         String report = "";
         fileWriter.writeFile(TEST_OUTPUT_FILE, report);
-        File file = new File(TEST_OUTPUT_FILE);
-        assertTrue(file.exists(), "File should be created");
-        try {
-            String fileContent = Files.readString(tempFile);
-            assertEquals("", fileContent, "File content should be empty");
-        } catch (IOException e) {
-            fail("IOException should not be thrown during reading the file");
-        }
+        String fileContent = Files.readString(tempFile);
+        assertEquals("", fileContent, "File content should be empty");
     }
 
     @Test

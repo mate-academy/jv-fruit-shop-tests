@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -33,7 +34,8 @@ public class TransactionParserTest {
                 new FruitTransaction(OperationType.SUPPLY, "Orange", 20),
                 new FruitTransaction(OperationType.BALANCE, "Lemon", 15)
         );
-        List<FruitTransaction> actualTransactions = transactionParser.parseTransactions(inputLines);
+        List<FruitTransaction> actualTransactions
+                = transactionParser.parseTransactions(inputLines);
         assertEquals("The number of transactions should match",
                 expectedTransactions.size(), actualTransactions.size());
         for (int i = 0; i < expectedTransactions.size(); i++) {
@@ -42,22 +44,38 @@ public class TransactionParserTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void parseTransactions_invalidOperationCode_throwsIllegalArgumentException() {
-        List<String> inputLines = Arrays.asList("INVALID,Apple,10");
-        transactionParser.parseTransactions(inputLines);
+    @Test
+    public void parseTransactions_negativeQuantity_throwsIllegalArgumentException() {
+        List<String> inputLines = Arrays.asList("p,Apple,-10");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                transactionParser.parseTransactions(inputLines));
+        assertTrue(exception.getMessage().contains("Quantity cannot be negative"),
+                "Error message should contain 'Quantity cannot be negative'");
     }
 
-    @Test(expected = NumberFormatException.class)
-    public void parseTransactions_invalidQuantity_throwsNumberFormatException() {
+    @Test
+    public void parseTransactions_invalidOperationCode_throwsIllegalArgumentException() {
+        List<String> inputLines = Arrays.asList("INVALID,Apple,10");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                transactionParser.parseTransactions(inputLines));
+        assertTrue(exception.getMessage().contains("Invalid operation code"),
+                "Error message should contain 'Invalid operation code'");
+    }
+
+    @Test
+    public void parseTransactions_invalidQuantity_throwsIllegalArgumentException() {
         List<String> inputLines = Arrays.asList("p,Apple,abc");
-        transactionParser.parseTransactions(inputLines);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                transactionParser.parseTransactions(inputLines));
+        assertTrue(exception.getMessage().contains("Quantity is not a valid number"),
+                "Error message should contain 'Quantity is not a valid number'");
     }
 
     @Test
     public void parseTransactions_EmptyInput_ReturnsEmptyList() {
         List<String> inputLines = Arrays.asList();
-        List<FruitTransaction> actualTransactions = transactionParser.parseTransactions(inputLines);
+        List<FruitTransaction> actualTransactions
+                = transactionParser.parseTransactions(inputLines);
         assertTrue(actualTransactions.isEmpty(), "The transaction list should be empty");
     }
 }

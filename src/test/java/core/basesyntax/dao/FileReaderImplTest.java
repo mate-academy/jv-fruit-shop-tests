@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileWriter;
@@ -13,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-
     private static final String TEST_FILE = "test_file.txt";
     private static final String EMPTY_FILE = "empty_file.txt";
     private FileReader fileReader;
@@ -49,8 +49,9 @@ public class FileReaderImplTest {
         assertTrue("The list of lines should be empty", actualLines.isEmpty());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void readFile_fileNotFound_throwsRuntimeException() {
-        fileReader.readFile("nonexistent_file.txt");
+        assertThrows(RuntimeException.class,
+                () -> fileReader.readFile("nonexistent_file.txt"));
     }
 }

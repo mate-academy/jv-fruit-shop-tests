@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
@@ -28,7 +29,8 @@ public class FruitShopServiceTest {
         operationStrategy.put(OperationType.RETURN, new ReturnOperationHandler());
         operationStrategy.put(OperationType.SUPPLY, new SupplyOperationHandler());
         operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
-        fruitShopService = new FruitShopService(operationStrategy);
+        TransactionProcessor transactionProcessor = new TransactionProcessor(operationStrategy);
+        fruitShopService = new FruitShopService(transactionProcessor);
     }
 
     @Test
@@ -44,7 +46,8 @@ public class FruitShopServiceTest {
                 = Collections.singletonList(transactionPurchase);
         fruitShopService.processTransactions(transactionsPurchase);
         Map<String, Integer> inventory = fruitShopService.getInventory();
-        assertEquals("Apple quantity should be 90", Integer.valueOf(90), inventory.get("Apple"));
+        assertEquals("Apple quantity should be 90",
+                Integer.valueOf(90), inventory.get("Apple"));
     }
 
     @Test
@@ -53,25 +56,30 @@ public class FruitShopServiceTest {
         List<FruitTransaction> transactions = Collections.singletonList(transaction);
         fruitShopService.processTransactions(transactions);
         Map<String, Integer> inventory = fruitShopService.getInventory();
-        assertEquals("Apple quantity should be 5", Integer.valueOf(5), inventory.get("Apple"));
+        assertEquals("Apple quantity should be 5",
+                Integer.valueOf(5), inventory.get("Apple"));
     }
 
     @Test
     public void processTransactions_supplyOperation_updatesInventoryCorrectly() {
-        FruitTransaction transaction = new FruitTransaction(OperationType.SUPPLY, "Banana", 15);
+        FruitTransaction transaction = new FruitTransaction(OperationType.SUPPLY,
+                "Banana", 15);
         List<FruitTransaction> transactions = Collections.singletonList(transaction);
         fruitShopService.processTransactions(transactions);
         Map<String, Integer> inventory = fruitShopService.getInventory();
-        assertEquals("Banana quantity should be 15", Integer.valueOf(15), inventory.get("Banana"));
+        assertEquals("Banana quantity should be 15",
+                Integer.valueOf(15), inventory.get("Banana"));
     }
 
     @Test
     public void processTransactions_balanceOperation_setsExactInventoryQuantity() {
-        FruitTransaction transaction = new FruitTransaction(OperationType.BALANCE, "Orange", 50);
+        FruitTransaction transaction = new FruitTransaction(OperationType.BALANCE,
+                "Orange", 50);
         List<FruitTransaction> transactions = Collections.singletonList(transaction);
         fruitShopService.processTransactions(transactions);
         Map<String, Integer> inventory = fruitShopService.getInventory();
-        assertEquals("Orange quantity should be 50", Integer.valueOf(50), inventory.get("Orange"));
+        assertEquals("Orange quantity should be 50",
+                Integer.valueOf(50), inventory.get("Orange"));
     }
 
     @Test
@@ -88,6 +96,42 @@ public class FruitShopServiceTest {
                 transaction3, transaction4);
         fruitShopService.processTransactions(transactions);
         Map<String, Integer> inventory = fruitShopService.getInventory();
-        assertEquals("Apple quantity should be 5", Integer.valueOf(5), inventory.get("Apple"));
+        assertEquals("Apple quantity should be 5",
+                Integer.valueOf(5), inventory.get("Apple"));
+    }
+
+    @Test
+    public void processTransactions_negativeQuantity_throwsIllegalArgumentException() {
+        FruitTransaction transaction = new FruitTransaction(OperationType.PURCHASE,
+                "Apple", -10);
+        List<FruitTransaction> transactions = Collections.singletonList(transaction);
+        assertThrows(IllegalArgumentException.class, ()
+                -> fruitShopService.processTransactions(transactions));
+    }
+
+    @Test
+    public void processTransactions_emptyList_doesNotChangeInventory() {
+        Map<String, Integer> initialInventory = fruitShopService.getInventory();
+        Map<String, Integer> expectedInventory = new HashMap<>(initialInventory);
+        List<FruitTransaction> transactions = Collections.emptyList();
+        fruitShopService.processTransactions(transactions);
+        Map<String, Integer> inventoryAfterProcessing = fruitShopService.getInventory();
+        assertEquals("Inventory should remain unchanged",
+                expectedInventory, inventoryAfterProcessing);
+    }
+
+    @Test
+    public void processTransactions_nullTransaction_throwsIllegalArgumentException() {
+        List<FruitTransaction> transactions = Collections.singletonList(null);
+        assertThrows(IllegalArgumentException.class, ()
+                -> fruitShopService.processTransactions(transactions));
+    }
+
+    @Test
+    public void processTransactions_nullValueInTransaction_throwsIllegalArgumentException() {
+        FruitTransaction transaction = new FruitTransaction(null, "Apple", 10);
+        List<FruitTransaction> transactions = Collections.singletonList(transaction);
+        assertThrows(IllegalArgumentException.class, ()
+                -> fruitShopService.processTransactions(transactions));
     }
 }

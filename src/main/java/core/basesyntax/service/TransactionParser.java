@@ -14,12 +14,32 @@ public class TransactionParser {
     public List<FruitTransaction> parseTransactions(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : lines) {
-            String[] data = line.split(SEPARATOR);
-            OperationType operation = OperationType.fromCode(data[OPERATION_INDEX]);
-            String fruit = data[FRUIT_INDEX];
-            int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
-            FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-            transactions.add(transaction);
+            try {
+                String[] data = line.split(SEPARATOR);
+                OperationType operation;
+                try {
+                    operation = OperationType.fromCode(data[OPERATION_INDEX]);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Invalid operation code: "
+                            + data[OPERATION_INDEX]);
+                }
+                String fruit = data[FRUIT_INDEX];
+                int quantity;
+                try {
+                    quantity = Integer.parseInt(data[QUANTITY_INDEX]);
+                    if (quantity < 0) {
+                        throw new IllegalArgumentException("Quantity cannot be negative: "
+                                + quantity);
+                    }
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Quantity is not a valid number: "
+                            + data[QUANTITY_INDEX], e);
+                }
+                FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
+                transactions.add(transaction);
+            } catch (IllegalArgumentException e) {
+                throw e;
+            }
         }
         return transactions;
     }

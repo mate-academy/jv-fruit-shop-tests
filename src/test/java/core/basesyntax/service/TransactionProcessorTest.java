@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -16,10 +17,12 @@ import org.junit.jupiter.api.Test;
 class TransactionProcessorTest {
 
     private Map<OperationType, OperationHandler> operationStrategy;
+    private TransactionProcessor transactionProcessor;
 
     @BeforeEach
     void setUp() {
         operationStrategy = new HashMap<>();
+        transactionProcessor = new TransactionProcessor(operationStrategy);
         operationStrategy.put(OperationType.SUPPLY, new SupplyOperationHandler());
         operationStrategy.put(OperationType.PURCHASE, new PurchaseOperationHandler());
         operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
@@ -28,31 +31,31 @@ class TransactionProcessorTest {
 
     @Test
     void applyOperation_validBalanceOperation_updatesInventory() {
-        TransactionProcessor.applyOperation(OperationType.BALANCE, "banana",
-                20, operationStrategy);
+        FruitTransaction transaction = new FruitTransaction(OperationType.BALANCE, "banana", 20);
+        transactionProcessor.applyOperation(transaction);
         assertEquals(20, Storage.inventory.get("banana"));
     }
 
     @Test
     void applyOperation_validSupplyOperation_updatesInventory() {
-        TransactionProcessor.applyOperation(OperationType.SUPPLY, "banana",
-                10, operationStrategy);
+        FruitTransaction transaction = new FruitTransaction(OperationType.SUPPLY, "banana", 10);
+        transactionProcessor.applyOperation(transaction);
         assertEquals(10, Storage.inventory.get("banana"));
     }
 
     @Test
     void applyOperation_validReturnOperation_updatesInventory() {
         Storage.inventory.put("banana", 10);
-        TransactionProcessor.applyOperation(OperationType.RETURN, "banana",
-                5, operationStrategy);
+        FruitTransaction transaction = new FruitTransaction(OperationType.RETURN, "banana", 5);
+        transactionProcessor.applyOperation(transaction);
         assertEquals(15, Storage.inventory.get("banana"));
     }
 
     @Test
     void applyOperation_validPurchaseOperation_updatesInventory() {
         Storage.inventory.put("banana", 10);
-        TransactionProcessor.applyOperation(OperationType.PURCHASE, "banana",
-                5, operationStrategy);
+        FruitTransaction transaction = new FruitTransaction(OperationType.PURCHASE, "banana", 5);
+        transactionProcessor.applyOperation(transaction);
         assertEquals(5, Storage.inventory.get("banana"));
     }
 }

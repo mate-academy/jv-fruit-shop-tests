@@ -9,6 +9,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -34,7 +35,8 @@ public class Main {
 
         TransactionParser transactionParser = new TransactionParser();
         List<FruitTransaction> transactions = transactionParser.parseTransactions(lines);
-        FruitShopService fruitShopService = new FruitShopService(operationStrategy);
+        TransactionProcessor transactionProcessor = new TransactionProcessor(operationStrategy);
+        FruitShopService fruitShopService = new FruitShopService(transactionProcessor);
         fruitShopService.processTransactions(transactions);
 
         Map<String, Integer> inventory = fruitShopService.getInventory();

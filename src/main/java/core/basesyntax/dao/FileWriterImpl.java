@@ -6,6 +6,9 @@ import java.io.IOException;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void writeFile(String fileName, String report) {
+        if (fileName == null) {
+            throw new RuntimeException("File name cannot be null");
+        }
         try (BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(fileName))) {
             bw.write(report);
         } catch (IOException e) {

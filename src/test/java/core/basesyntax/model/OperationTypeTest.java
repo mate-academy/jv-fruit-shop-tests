@@ -27,6 +27,13 @@ class OperationTypeTest {
     }
 
     @Test
+    void fromCode_nullCode_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> OperationType.fromCode(null),
+                "Null code should throw IllegalArgumentException");
+    }
+
+    @Test
     void getCode_returnsCorrectCodeForEachOperationType() {
         assertEquals("b", OperationType.BALANCE.getCode(), "BALANCE should return 'b'");
         assertEquals("s", OperationType.SUPPLY.getCode(), "SUPPLY should return 's'");

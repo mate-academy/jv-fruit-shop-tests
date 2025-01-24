@@ -1,24 +1,31 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.OperationType;
-import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-    private final Map<OperationType, OperationHandler> operationStrategy;
+    private final TransactionProcessor transactionProcessor;
 
-    public FruitShopService(Map<OperationType, OperationHandler> operationStrategy) {
-        this.operationStrategy = operationStrategy;
+    public FruitShopService(TransactionProcessor transactionProcessor) {
+        this.transactionProcessor = transactionProcessor;
     }
 
     public void processTransactions(List<FruitTransaction> transactions) {
+        if (transactions == null || transactions.contains(null)) {
+            throw new IllegalArgumentException("Transaction list cannot contain null elements");
+        }
         for (FruitTransaction transaction : transactions) {
-            OperationType operation = transaction.getOperation();
-            String fruit = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-            TransactionProcessor.applyOperation(operation, fruit, quantity, operationStrategy);
+            if (transaction == null) {
+                throw new IllegalArgumentException("Transaction cannot be null");
+            }
+            if (transaction.getOperation() == null) {
+                throw new IllegalArgumentException("Transaction operation cannot be null");
+            }
+            if (transaction.getQuantity() < 0) {
+                throw new IllegalArgumentException("Quantity cannot be negative");
+            }
+            transactionProcessor.applyOperation(transaction);
         }
     }
 

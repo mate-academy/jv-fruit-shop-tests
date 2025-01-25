@@ -13,19 +13,19 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-       try {
-           for (String array : data) {
-               String[] strings = array.split(SEPARATOR);
-               FruitTransaction fruitTransaction = new FruitTransaction();
-               fruitTransaction.setFruit(strings[FRUIT_TYPE]);
-               fruitTransaction.setQuantity(Integer.parseInt(strings[NUMBER]));
-               fruitTransaction.setOperation(FruitTransaction.Operation
+        try {
+            for (String array : data) {
+                String[] strings = array.split(SEPARATOR);
+                FruitTransaction fruitTransaction = new FruitTransaction();
+                fruitTransaction.setFruit(strings[FRUIT_TYPE]);
+                fruitTransaction.setQuantity(Integer.parseInt(strings[NUMBER]));
+                fruitTransaction.setOperation(FruitTransaction.Operation
                        .coverToOperation(strings[OPERATION]));
-               fruitTransactionList.add(fruitTransaction);
-           }
-           return fruitTransactionList;
-       } catch (RuntimeException e) {
-           throw new IllegalArgumentException("Date in this file are invalid");
-       }
+                fruitTransactionList.add(fruitTransaction);
+            }
+            return fruitTransactionList;
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("Date in this file are invalid");
+        }
     }
 }

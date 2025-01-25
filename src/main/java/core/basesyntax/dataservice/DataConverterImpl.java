@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
                 fruitTransaction.setFruit(strings[FRUIT_TYPE]);
                 fruitTransaction.setQuantity(Integer.parseInt(strings[NUMBER]));
                 fruitTransaction.setOperation(FruitTransaction.Operation
-                       .coverToOperation(strings[OPERATION]));
+                        .coverToOperation(strings[OPERATION]));
                 fruitTransactionList.add(fruitTransaction);
             }
             return fruitTransactionList;

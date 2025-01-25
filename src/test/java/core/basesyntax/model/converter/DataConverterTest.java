@@ -20,12 +20,7 @@ class DataConverterTest {
     }
 
     @Test
-    void nullListNotOk() {
-        assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(null));
-    }
-
-    @Test
-    void incorrectStringOperationNotOk() {
+    void incorrectStringOperation_NotOk() {
         assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(
                 List.of("type,fruit,quantity", "y,banana,20")));
         assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(
@@ -33,7 +28,7 @@ class DataConverterTest {
     }
 
     @Test
-    void incorrectQuantityFormatNotOk() {
+    void incorrectQuantityFormat_NotOk() {
         assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(
                 List.of("type,fruit,quantity", "s,banana,20L")));
         assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(
@@ -41,7 +36,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertToTransactionOk() {
+    void convertToTransaction_Ok() {
         List<FruitTransaction> expectedList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 100),

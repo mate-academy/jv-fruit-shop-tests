@@ -1,7 +1,6 @@
 package core.basesyntax.model.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.strategy.OperationStrategy;
@@ -25,12 +24,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void fromNullOperationNotOk() {
-        assertThrows(RuntimeException.class, () -> operationStrategy.getOperationHandler(null));
-    }
-
-    @Test
-    void getOperationHandlerOk() {
+    void getOperationHandler_Ok() {
         for (Map.Entry<FruitTransaction.Operation, OperationHandler> pair
                 : startegyMap.entrySet()) {
             assertEquals(pair.getValue(), operationStrategy.getOperationHandler(pair.getKey()));

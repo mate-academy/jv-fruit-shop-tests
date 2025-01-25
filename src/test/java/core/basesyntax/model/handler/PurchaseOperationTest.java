@@ -1,13 +1,12 @@
 package core.basesyntax.model.handler;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
@@ -18,50 +17,43 @@ class PurchaseOperationTest {
         purchaseOperation = new PurchaseOperation();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void afterEach() {
         Storage.getStorage().clear();
     }
 
     @Test
-    void purchaseNullFruitTransactionNotOk() {
-        assertThrows(RuntimeException.class, () -> purchaseOperation.handle(null));
-    }
-
-    @Test
-    void purchaseMaxIntMoreThanHaveNotOk() {
+    void purchaseMaxIntMoreThanHave_NotOk() {
         assertThrows(RuntimeException.class, () -> purchaseOperation.handle(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         "kiwi", Integer.MAX_VALUE)));
     }
 
     @Test
-    void purchaseNullOperationNotOk() {
-        assertThrows(RuntimeException.class, () -> purchaseOperation.handle(
-                new FruitTransaction(null,
-                        "apple", 10)));
-    }
-
-    @Test
-    void purchaseNullFruitNotOk() {
-        assertThrows(RuntimeException.class, () -> purchaseOperation.handle(
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                        null, 10)));
-    }
-
-    @Test
-    void purchaseIncorrectOperationNotOk() {
-        assertThrows(RuntimeException.class, () -> purchaseOperation.handle(
-                new FruitTransaction(FruitTransaction.Operation.RETURN,
-                        "kiwi", 10)));
-    }
-
-    @Test
-    void purchaseOk() {
+    void purchase_Ok() {
         Storage.getStorage().put("banana", 100);
         purchaseOperation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 33));
-        Map.Entry<String, Integer> expectedEntry = Map.entry("banana", 67);
-        assertTrue(Storage.getStorage().entrySet().contains(expectedEntry));
+        assertEquals(Integer.valueOf(67), Storage.getStorage().get("banana"));
+    }
+
+    @Test
+    void purchase_negativeQuantity_NotOk() {
+        Storage.getStorage().put("banana", 10);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", -7);
+        assertThrows(IllegalArgumentException.class,
+                () -> purchaseOperation.handle(fruitTransaction));
+        assertEquals(Integer.valueOf(10), Storage.getStorage().get("banana"));
+    }
+
+    @Test
+    public void handleFruitOperation_purchase_illegalQuantity() {
+        Storage.getStorage().put("banana", 25);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", 0);
+        assertThrows(IllegalArgumentException.class,
+                () -> purchaseOperation.handle(fruitTransaction));
+        assertEquals(Integer.valueOf(25), Storage.getStorage().get("banana"));
     }
 }

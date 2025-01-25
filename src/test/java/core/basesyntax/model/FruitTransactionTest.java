@@ -7,19 +7,14 @@ import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     @Test
-    void transactionsIsOk() {
-        FruitTransaction.Operation operation = FruitTransaction.Operation.SUPPLY;
-        String fruit = "banana";
-        int quantity = 13;
-
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
-        assertEquals(operation, transaction.getOperation());
-        assertEquals(fruit, transaction.getFruit());
-        assertEquals(quantity, transaction.getQuantity());
+    void transactionsWithValidCode_OK() {
+        String validCode = "p";
+        FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(validCode);
+        assertEquals(FruitTransaction.Operation.PURCHASE, operation);
     }
 
     @Test
-    void transactionNotOk() {
+    void transactionWithInvalidCode_NotOk() {
         String invalidCode = "z";
         assertThrows(IllegalArgumentException.class, () ->
                 FruitTransaction.Operation.fromCode(invalidCode)

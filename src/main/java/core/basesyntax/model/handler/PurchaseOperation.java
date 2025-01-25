@@ -7,11 +7,13 @@ public class PurchaseOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         int currentBalance = Storage.getStorage().getOrDefault(transaction.getFruit(), 0);
-        int newBalance = currentBalance - transaction.getQuantity();
+        int purchaseQuantity = transaction.getQuantity();
 
-        if (newBalance < 0) {
-            throw new RuntimeException("Insufficient balance for fruit: " + transaction.getFruit());
+        if (purchaseQuantity <= currentBalance && purchaseQuantity > 0) {
+            int updateQuantity = currentBalance - purchaseQuantity;
+            Storage.getStorage().put(transaction.getFruit(), updateQuantity);
+        } else {
+            throw new IllegalArgumentException("Invalid purchase Quantity" + purchaseQuantity);
         }
-        Storage.getStorage().put(transaction.getFruit(), newBalance);
     }
 }

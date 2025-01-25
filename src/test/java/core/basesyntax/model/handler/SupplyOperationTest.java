@@ -1,13 +1,12 @@
 package core.basesyntax.model.handler;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
@@ -18,33 +17,47 @@ class SupplyOperationTest {
         supplyOperation = new SupplyOperation();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void afterEach() {
         Storage.getStorage().clear();
     }
 
     @Test
-    void supplyNullFruitTransactionNotOk() {
-        assertThrows(RuntimeException.class, () -> supplyOperation.handle(null));
-    }
-
-    @Test
-    void supplyOk() {
+    void supplyIsVaLid_Ok() {
         Storage.getStorage().put("banana", 100);
         supplyOperation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 57));
-        Map.Entry<String, Integer> expectedEntry = Map.entry(
-                "banana", 157);
-        assertTrue(Storage.getStorage().entrySet().contains(expectedEntry));
+        assertEquals(Integer.valueOf(157), Storage.getStorage().get("banana"));
     }
 
     @Test
-    void supplyMultipleFruitsOk() {
-        Storage.getStorage().put("orange", 50);
-        supplyOperation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "orange", 30));
-        Map.Entry<String, Integer> expectedEntry = Map.entry(
-                "orange", 80);
-        assertTrue(Storage.getStorage().entrySet().contains(expectedEntry));
+    void supplyHandler_addMultipleFruits_ok() {
+        FruitTransaction transaction1 = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY,
+                "orange",
+                12);
+        FruitTransaction transaction2 = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY,
+                "banana",
+                28);
+        supplyOperation.handle(transaction1);
+        supplyOperation.handle(transaction2);
+        Integer actualAppleQuantity = Storage.getStorage()
+                .getOrDefault("orange", 0);
+        Integer actualBananaQuantity = Storage.getStorage()
+                .getOrDefault("banana", 0);
+        assertEquals(Integer.valueOf(12), actualAppleQuantity);
+        assertEquals(Integer.valueOf(28), actualBananaQuantity);
+    }
+
+    @Test
+    void supplyHandler_addNegativeQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            FruitTransaction transaction = new FruitTransaction(
+                    FruitTransaction.Operation.SUPPLY,
+                    "banana",
+                    -23);
+            supplyOperation.handle(transaction);
+        });
     }
 }

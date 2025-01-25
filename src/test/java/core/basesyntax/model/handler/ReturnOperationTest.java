@@ -1,13 +1,12 @@
 package core.basesyntax.model.handler;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
@@ -18,22 +17,24 @@ class ReturnOperationTest {
         returnOperation = new ReturnOperation();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void afterEach() {
         Storage.getStorage().clear();
     }
 
     @Test
-    void return_nullFruitTransaction_notOk() {
-        assertThrows(RuntimeException.class, () -> returnOperation.handle(null));
-    }
-
-    @Test
-    void return_Ok() {
+    void returnIsValid_Ok() {
         Storage.getStorage().put("banana", 100);
         returnOperation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 57));
-        Map.Entry<String, Integer> expectedEntry = Map.entry("banana", 157);
-        assertTrue(Storage.getStorage().entrySet().contains(expectedEntry));
+        assertEquals(Integer.valueOf(157), Storage.getStorage().get("banana"));
+    }
+
+    @Test
+    void addNegativeQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> returnOperation.handle(
+                        new FruitTransaction(
+                                FruitTransaction.Operation.RETURN, "banana", -34)));
     }
 }

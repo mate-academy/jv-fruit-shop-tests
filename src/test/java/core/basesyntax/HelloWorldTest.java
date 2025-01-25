@@ -40,7 +40,7 @@ public class HelloWorldTest {
 
     @Test
     void transfer_FieldFruitIsNull_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     helloWorld.getFileOfReport(FILE3);
                 });
@@ -48,7 +48,7 @@ public class HelloWorldTest {
 
     @Test
     void transfer_AmountIsLessThanZero_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     helloWorld.getFileOfReport(FILE4);
                 });
@@ -56,7 +56,7 @@ public class HelloWorldTest {
 
     @Test
     void transfer_BalanceEqualsZero_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     helloWorld.getFileOfReport(FILE5);
                 });
@@ -64,7 +64,7 @@ public class HelloWorldTest {
 
     @Test
     void transfer_OperationIsNull_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     helloWorld.getFileOfReport(FILE6);
                 });
@@ -72,7 +72,7 @@ public class HelloWorldTest {
 
     @Test
     void transfer_AmountIsLessThanZero_NotNull() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     helloWorld.getFileOfReport(FILE7);
                 });
@@ -85,6 +85,6 @@ public class HelloWorldTest {
         String expected = fileReaderTest.readFile(EXPECTED_RESULT);
         FileReaderTest fileReaderTest1 = new FileReaderTestImpl();
         String actual = fileReaderTest1.readFile(FINAL_REPORT);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(actual, expected);
     }
 }

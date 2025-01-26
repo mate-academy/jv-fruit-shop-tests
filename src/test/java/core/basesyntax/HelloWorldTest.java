@@ -199,7 +199,8 @@ public class HelloWorldTest {
         Storage.FruitTransactionStorage.put("banana", 30);
         Storage.FruitTransactionStorage.put("apple", 40);
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String expected = "fruit,quantity\r\nbanana,30\r\napple,40\r\n";
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,30" + System.lineSeparator() + "apple,40" + System.lineSeparator();
         Assert.assertEquals(expected, reportGenerator.generate());
     }
 }

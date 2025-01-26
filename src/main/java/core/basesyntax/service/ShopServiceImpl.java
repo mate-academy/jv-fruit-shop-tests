@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {

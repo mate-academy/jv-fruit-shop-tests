@@ -1,21 +1,21 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.Storage;
+import core.basesyntax.handler.BalanceOperation;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.PurchaseOperation;
+import core.basesyntax.handler.ReturnOperation;
+import core.basesyntax.handler.SupplyOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.handler.BalanceOperation;
-import core.basesyntax.model.handler.OperationHandler;
-import core.basesyntax.model.handler.PurchaseOperation;
-import core.basesyntax.model.handler.ReturnOperation;
-import core.basesyntax.model.handler.SupplyOperation;
-import core.basesyntax.model.strategy.OperationStrategy;
-import core.basesyntax.model.strategy.OperationStrategyImpl;
-import java.util.Arrays;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,18 +35,29 @@ class ShopServiceTest {
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterEach
+     void afterEach() {
         Storage.storage.clear();
     }
 
     @Test
     void shopOk() {
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 10);
-        List<FruitTransaction> transactions = Arrays.asList(transaction);
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 50),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 20),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10));
         shopService.process(transactions);
 
-        assertEquals(10, Storage.storage.get("apple"));
+        assertEquals(50, Storage.storage.get("apple"));
+    }
+
+    @Test
+    void shopNotOk() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 15));
+        assertThrows(IllegalArgumentException.class,() ->
+                shopService.process(transactions));
     }
 }

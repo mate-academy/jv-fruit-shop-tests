@@ -1,24 +1,24 @@
 package core.basesyntax;
 
+import core.basesyntax.convertor.DataConvertor;
+import core.basesyntax.convertor.DataConvertorImpl;
 import core.basesyntax.dao.Storage;
-import core.basesyntax.fao.CustomFileReader;
-import core.basesyntax.fao.CustomFileReaderImpl;
-import core.basesyntax.fao.CustomFileWriter;
-import core.basesyntax.fao.FileWriterImpl;
+import core.basesyntax.files.CustomFileReader;
+import core.basesyntax.files.CustomFileReaderImpl;
+import core.basesyntax.files.CustomFileWriter;
+import core.basesyntax.files.FileWriterImpl;
+import core.basesyntax.generator.ReportGenerator;
+import core.basesyntax.generator.ReportGeneratorImpl;
+import core.basesyntax.handler.BalanceOperation;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.PurchaseOperation;
+import core.basesyntax.handler.ReturnOperation;
+import core.basesyntax.handler.SupplyOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.ReportGenerator;
-import core.basesyntax.model.ReportGeneratorImpl;
-import core.basesyntax.model.convertor.DataConvertor;
-import core.basesyntax.model.convertor.DataConvertorImpl;
-import core.basesyntax.model.handler.BalanceOperation;
-import core.basesyntax.model.handler.OperationHandler;
-import core.basesyntax.model.handler.PurchaseOperation;
-import core.basesyntax.model.handler.ReturnOperation;
-import core.basesyntax.model.handler.SupplyOperation;
-import core.basesyntax.model.strategy.OperationStrategy;
-import core.basesyntax.model.strategy.OperationStrategyImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(Storage.storage);
 
         CustomFileWriter customFileWriter = new FileWriterImpl();
-        customFileWriter.write(FILE_TO_WRITE,resultingReport);
+        customFileWriter.write("src\\main\\resources\\" + FILE_TO_WRITE,resultingReport);
     }
 
 }

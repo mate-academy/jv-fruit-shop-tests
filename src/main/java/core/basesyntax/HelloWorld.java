@@ -3,11 +3,14 @@ package core.basesyntax;
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.models.activities.*;
+import core.basesyntax.models.activities.ActivityHandler;
+import core.basesyntax.models.activities.BalanceActivityHandler;
+import core.basesyntax.models.activities.PurchaseActivityHandler;
+import core.basesyntax.models.activities.ReturnActivityHandler;
+import core.basesyntax.models.activities.SupplyActivityHandler;
 import core.basesyntax.services.DataProcessor;
 import core.basesyntax.services.DataProcessorImpl;
 import core.basesyntax.services.ReportGeneratorImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

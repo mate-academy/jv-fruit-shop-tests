@@ -9,20 +9,14 @@ import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterImplTest {
     private final DataConverter dataConverter = new DataConverterImpl();
-    private List<String> inputReport;
-
-    @BeforeEach
-    void setUp() {
-        inputReport = new ArrayList<>();
-    }
 
     @Test
     void convertToTransaction_Ok() {
+        List<String> inputReport = new ArrayList<>();
         inputReport.add("type,fruit,quantity");
         inputReport.add("b,banana,20");
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE,
@@ -34,6 +28,7 @@ public class DataConverterImplTest {
 
     @Test
     void convertToTransaction_headersOnly_Ok() {
+        List<String> inputReport = new ArrayList<>();
         inputReport.add("type,fruit,quantity");
         List<FruitTransaction> expected = Collections.emptyList();
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputReport);
@@ -42,6 +37,7 @@ public class DataConverterImplTest {
 
     @Test
     void convertToTransaction_emptyList_Ok() {
+        List<String> inputReport = Collections.emptyList();
         List<FruitTransaction> expected = Collections.emptyList();
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputReport);
         assertEquals(expected, actual);

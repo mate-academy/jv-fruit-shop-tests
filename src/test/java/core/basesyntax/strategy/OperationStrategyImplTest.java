@@ -41,4 +41,3 @@ public class OperationStrategyImplTest {
                 .get(EXISTING_OPERATION));
     }
 }
-

@@ -18,12 +18,6 @@ public class FileWriterImplTest {
     private static final String REPORT_OK = "fruit, amount" + System.lineSeparator() + "banana,20";
     private final FileWriter fileWriter = new FileWriterImpl();
 
-    private void compareFiles(String expectedFile) throws IOException {
-        List<String> expectedFileContent = Files.readAllLines(Path.of(expectedFile));
-        List<String> actualFileContent = Files.readAllLines(Path.of(OUTPUT_FILE));
-        assertLinesMatch(expectedFileContent, actualFileContent);
-    }
-
     @Test
     void write_emptyResultingReport_ok() throws IOException {
         String emptyReport = "";
@@ -54,5 +48,11 @@ public class FileWriterImplTest {
     void write_emptyFileName_notOk() {
         assertThrows(RuntimeException.class, () -> fileWriter.write(REPORT_OK, ""),
                 "You should throw an IO exception if file name is empty");
+    }
+
+    private void compareFiles(String expectedFile) throws IOException {
+        List<String> expectedFileContent = Files.readAllLines(Path.of(expectedFile));
+        List<String> actualFileContent = Files.readAllLines(Path.of(OUTPUT_FILE));
+        assertLinesMatch(expectedFileContent, actualFileContent);
     }
 }

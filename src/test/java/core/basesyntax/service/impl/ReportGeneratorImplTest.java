@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
@@ -12,11 +12,6 @@ public class ReportGeneratorImplTest {
     private static final String REPORT_OK =
             "fruit, amount" + System.lineSeparator() + "banana,20";
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
-
-    @BeforeEach
-    void setUp() {
-        Storage.clear();
-    }
 
     @Test
     void getReport_emptyStorage_ok() {
@@ -29,5 +24,10 @@ public class ReportGeneratorImplTest {
         Storage.save("banana", 20);
         String actualReport = reportGenerator.getReport();
         assertEquals(REPORT_OK, actualReport);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 }

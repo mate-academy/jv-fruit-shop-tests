@@ -16,6 +16,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,7 +68,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_purchaseNotEnoughFruitBalance_ok() {
+    void process_purchaseNotEnoughFruitBalance_notOk() {
         Storage.save("melon", 10);
         assertThrows(RuntimeException.class, () -> shopService.process(List.of(
                         new FruitTransaction(Operation.PURCHASE, "melon", 11))),
@@ -80,5 +81,10 @@ public class ShopServiceImplTest {
         shopService.process(List.of(new FruitTransaction(Operation.RETURN, "orange",
                 15)));
         assertEquals(15, Storage.get("orange"));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 }

@@ -17,6 +17,9 @@ public class DataConverterImpl implements DataConverter {
             for (String array : data) {
                 String[] strings = array.split(SEPARATOR);
                 FruitTransaction fruitTransaction = new FruitTransaction();
+                if (strings[FRUIT_TYPE].length() == 0) {
+                    throw new IllegalArgumentException("Field fruit can`t be empty");
+                }
                 fruitTransaction.setFruit(strings[FRUIT_TYPE]);
                 fruitTransaction.setQuantity(Integer.parseInt(strings[NUMBER]));
                 fruitTransaction.setOperation(FruitTransaction.Operation

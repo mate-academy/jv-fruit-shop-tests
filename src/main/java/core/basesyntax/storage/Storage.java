@@ -17,4 +17,8 @@ public class Storage {
     public static Map<String, Integer> getAll() {
         return Map.copyOf(fruitsStorage);
     }
+
+    public static void clearStorage() {
+        fruitsStorage.clear();
+    }
 }

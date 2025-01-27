@@ -1,9 +1,10 @@
 package core.basesyntax.reportservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportGeneratorImplTest {
     private static final String HEADERS = "fruit,quantity" + System.lineSeparator();

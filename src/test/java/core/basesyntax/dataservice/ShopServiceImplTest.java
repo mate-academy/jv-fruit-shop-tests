@@ -1,14 +1,22 @@
 package core.basesyntax.dataservice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.storage.Storage;
-import core.basesyntax.transactions.*;
+import core.basesyntax.transactions.BalanceOperation;
+import core.basesyntax.transactions.FruitTransaction;
+import core.basesyntax.transactions.OperationHandler;
+import core.basesyntax.transactions.OperationStrategy;
+import core.basesyntax.transactions.OperationStrategyImpl;
+import core.basesyntax.transactions.PurchaseOperation;
+import core.basesyntax.transactions.ReturnOperation;
+import core.basesyntax.transactions.SupplyOperation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ShopServiceImplTest {
     private ShopService shopService;
@@ -25,7 +33,6 @@ class ShopServiceImplTest {
         shopService = new ShopServiceImpl(operationStrategy);
         fruitTransaction = new FruitTransaction();
     }
-
 
     @Test
     void processing_SupplyOperationIsValid() {

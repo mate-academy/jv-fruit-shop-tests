@@ -7,18 +7,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
+import core.basesyntax.operation.Storage;
 import core.basesyntax.operation.SupplyOperation;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationHandlersTest {
-    private Map<String, Integer> storage;
-
     @BeforeEach
     void setUp() {
-        storage = new HashMap<>();
+        Storage.storage.clear();
     }
 
     @Test
@@ -30,8 +27,8 @@ class OperationHandlersTest {
                 20
         );
 
-        handler.handle(storage, transaction);
-        assertEquals(20, storage.get("banana").intValue());
+        handler.handle(transaction);
+        assertEquals(20, Storage.storage.get("banana").intValue());
     }
 
     @Test
@@ -39,42 +36,42 @@ class OperationHandlersTest {
         OperationHandler handler = new SupplyOperation();
 
         // Initial supply
-        handler.handle(storage, new FruitTransaction(
+        handler.handle(new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 "apple",
                 100
         ));
-        assertEquals(100, storage.get("apple").intValue());
+        assertEquals(100, Storage.storage.get("apple").intValue());
 
         // Additional supply
-        handler.handle(storage, new FruitTransaction(
+        handler.handle(new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 "apple",
                 50
         ));
-        assertEquals(150, storage.get("apple").intValue());
+        assertEquals(150, Storage.storage.get("apple").intValue());
     }
 
     @Test
     void testPurchaseOperation() {
-        storage.put("banana", 100);
+        Storage.storage.put("banana", 100);
         OperationHandler handler = new PurchaseOperation();
 
-        handler.handle(storage, new FruitTransaction(
+        handler.handle(new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 "banana",
                 30
         ));
-        assertEquals(70, storage.get("banana").intValue());
+        assertEquals(70, Storage.storage.get("banana").intValue());
     }
 
     @Test
     void testPurchaseOperationInsufficientStock() {
-        storage.put("banana", 20);
+        Storage.storage.put("banana", 20);
         OperationHandler handler = new PurchaseOperation();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> handler.handle(storage, new FruitTransaction(
+                () -> handler.handle(new FruitTransaction(
                         FruitTransaction.Operation.PURCHASE,
                         "banana",
                         30

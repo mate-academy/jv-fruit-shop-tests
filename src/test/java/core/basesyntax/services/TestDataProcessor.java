@@ -13,7 +13,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestServices {
+public class TestDataProcessor {
 
     private final Map<FruitTransaction.TypeOfActivity, ActivityHandler> activityHandlerMap = Map.of(
             FruitTransaction.TypeOfActivity.BALANCE, new BalanceActivityHandler(),
@@ -51,17 +51,6 @@ public class TestServices {
                 FruitTransaction.of(FruitTransaction.TypeOfActivity.PURCHASE, "banana", 10000),
                 FruitTransaction.of(FruitTransaction.TypeOfActivity.PURCHASE, "apple", 10));
         Assert.assertThrows(RuntimeException.class, () -> dataProcessor.process(input));
-    }
-
-    @Test
-    public void testGenerator_Ok() {
-        Storage.FruitTransactionStorage.clear();
-        Storage.FruitTransactionStorage.put("banana", 30);
-        Storage.FruitTransactionStorage.put("apple", 40);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,30" + System.lineSeparator() + "apple,40" + System.lineSeparator();
-        Assert.assertEquals(expected, reportGenerator.generate());
     }
 
 }

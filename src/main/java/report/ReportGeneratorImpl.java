@@ -1,22 +1,23 @@
-package result;
+package report;
 
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
+
     @Override
     public String generateReport(Map<String, Integer> storage) {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity\n");
+        report.append(HEADER).append(System.lineSeparator());
 
         storage.entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> report
                         .append(entry.getKey())
-                        .append(",")
+                        .append(COMMA)
                         .append(entry.getValue())
-                        .append("\n"));
-
+                        .append(System.lineSeparator()));
         return report.toString();
     }
 }

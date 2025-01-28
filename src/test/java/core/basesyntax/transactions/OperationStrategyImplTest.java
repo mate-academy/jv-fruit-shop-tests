@@ -2,11 +2,11 @@ package core.basesyntax.transactions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 class OperationStrategyImplTest {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;

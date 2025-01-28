@@ -3,11 +3,11 @@ package core.basesyntax.dataservice;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import core.basesyntax.transactions.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 class DataConverterImplTest {
     private DataConverter dataConverter = new DataConverterImpl();

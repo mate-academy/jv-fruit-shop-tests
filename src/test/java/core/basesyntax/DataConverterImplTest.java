@@ -20,7 +20,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertValidData() {
+    void convert_Valid_Data() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -45,7 +45,7 @@ class DataConverterImplTest {
     void convertInvalidFormat() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
-                "b,banana" // Missing quantity
+                "b,banana"
         );
         assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransactions(input));
@@ -55,7 +55,7 @@ class DataConverterImplTest {
     void convertNegativeQuantity() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
-                "b,banana,-20" // Negative quantity
+                "b,banana,-20"
         );
         assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransactions(input));

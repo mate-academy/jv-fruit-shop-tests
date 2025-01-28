@@ -3,11 +3,11 @@ package core.basesyntax.fileservice;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
@@ -35,16 +35,16 @@ class FileWriterImplTest {
     @Test
     void writing_writeFileToWrongFolder_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
-            fileWriter.writeFile(REPORT_OK,WRONG_PATH_OUTPUT_FILE)
-                , "This path is wrong"
+                        fileWriter.writeFile(REPORT_OK,WRONG_PATH_OUTPUT_FILE),
+                "This path is wrong"
         );
     }
 
     @Test
     void writing_nameFileIsNull_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
-                fileWriter.writeFile(EMPTY_FILE,null)
-        ,"Name of your file can`t be null");
+                fileWriter.writeFile(EMPTY_FILE,null),
+                "Name of your file can`t be null");
     }
 
     private void compareFiles(String expectedFile) throws IOException {

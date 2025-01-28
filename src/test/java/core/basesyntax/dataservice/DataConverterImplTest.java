@@ -12,6 +12,7 @@ import java.util.List;
 class DataConverterImplTest {
     private DataConverter dataConverter = new DataConverterImpl();
     private List<String> inputData;
+
     @BeforeEach
     void setUp() {
         inputData = new ArrayList<>();

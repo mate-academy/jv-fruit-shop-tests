@@ -12,11 +12,11 @@ import core.basesyntax.transactions.PurchaseOperation;
 import core.basesyntax.transactions.ReturnOperation;
 import core.basesyntax.transactions.SupplyOperation;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopService shopService;

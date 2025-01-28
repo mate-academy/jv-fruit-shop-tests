@@ -30,13 +30,13 @@ class OperationStrategyImplTest {
 
     @Test
     void getOperation_GetValidOperation_Ok() {
-        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
-        , operationHandlerMap.get(FruitTransaction.Operation.PURCHASE));
-        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.BALANCE)
-        , operationHandlerMap.get(FruitTransaction.Operation.BALANCE));
-        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.SUPPLY)
-        , operationHandlerMap.get(FruitTransaction.Operation.SUPPLY));
-        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.RETURN)
-        , operationHandlerMap.get(FruitTransaction.Operation.RETURN));
+        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE),
+                operationHandlerMap.get(FruitTransaction.Operation.PURCHASE));
+        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.BALANCE),
+                operationHandlerMap.get(FruitTransaction.Operation.BALANCE));
+        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.SUPPLY),
+                operationHandlerMap.get(FruitTransaction.Operation.SUPPLY));
+        assertEquals(operationStrategy.getOperation(FruitTransaction.Operation.RETURN),
+                operationHandlerMap.get(FruitTransaction.Operation.RETURN));
     }
 }

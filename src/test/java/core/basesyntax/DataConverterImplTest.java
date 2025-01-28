@@ -20,7 +20,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_Valid_Data() {
+    void convertValidData() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -42,7 +42,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertInvalidFormat() {
+    void convert_Invalid_Format() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana"

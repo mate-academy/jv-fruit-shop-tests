@@ -1,7 +1,8 @@
 package core.basesyntax.transactions;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
@@ -10,7 +11,7 @@ class FruitTransactionTest {
 
     @Test
     void transfer_WrongCodeOfOperation_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.coverToOperation(WRONG_CODE);
         });
     }
@@ -19,6 +20,6 @@ class FruitTransactionTest {
     void transfer_RightCodeOfOperation_Ok() {
         FruitTransaction.Operation actual = FruitTransaction.Operation.coverToOperation(RIGHT_CODE);
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
-        Assert.assertEquals(actual,expected);
+        assertEquals(actual,expected);
     }
 }

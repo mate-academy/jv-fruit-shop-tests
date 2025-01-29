@@ -1,11 +1,11 @@
 package core.basesyntax.dataservice;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.transactions.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class DataConverterImplTest {
     void conversion_ParameterOperationNotValid_NotOk() {
         inputData.add("b,apple,80");
         inputData.add("23,banana,700");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(inputData);
         });
     }
@@ -31,7 +31,7 @@ class DataConverterImplTest {
     void conversion_ParameterFruitIsEmpty_NotOk() {
         inputData.add("s,apple,78");
         inputData.add("r,,9");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(inputData);
         });
     }
@@ -40,7 +40,7 @@ class DataConverterImplTest {
     void conversion_ParameterNumberIsInvalid_NotOk() {
         inputData.add("s,banana,78");
         inputData.add("r,apple,string");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(inputData);
         });
     }
@@ -49,7 +49,7 @@ class DataConverterImplTest {
     void conversion_ParameterNumberIsEmpty_NotOk() {
         inputData.add("b,apple,178");
         inputData.add("r,apple,");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(inputData);
         });
     }
@@ -64,6 +64,5 @@ class DataConverterImplTest {
         List<FruitTransaction> expected = List.of(fruitTransaction);
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputData);
         assertIterableEquals(actual, expected);
-
     }
 }

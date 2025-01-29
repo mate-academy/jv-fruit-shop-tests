@@ -1,10 +1,10 @@
 package core.basesyntax.transactions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getOperation_GetNull_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.getOperation(null));
     }
 

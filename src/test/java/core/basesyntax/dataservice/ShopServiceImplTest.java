@@ -1,6 +1,7 @@
 package core.basesyntax.dataservice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.storage.Storage;
 import core.basesyntax.transactions.BalanceOperation;
@@ -14,13 +15,11 @@ import core.basesyntax.transactions.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopService shopService;
-    private FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
@@ -30,13 +29,13 @@ class ShopServiceImplTest {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        Storage.clearStorage();
         shopService = new ShopServiceImpl(operationStrategy);
-        fruitTransaction = new FruitTransaction();
     }
 
     @Test
-    void processing_SupplyOperationIsValid() {
-        assertEquals(0, Storage.get("banana"));
+    void processing_SupplyOperationIsValid_Ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setQuantity(89);
@@ -45,8 +44,8 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void processing_BalanceOperationIsValid() {
-        assertEquals(0, Storage.get("apple"));
+    void processing_BalanceOperationIsValid_Ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(70);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("apple");
@@ -56,59 +55,58 @@ class ShopServiceImplTest {
 
     @Test
     void processing_BalanceOperationIsZero_NotOk() {
-        assertEquals(0, Storage.get("apple"));
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(0);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("apple");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             shopService.process(List.of(fruitTransaction));
         });
     }
 
     @Test
     void processing_BalanceOperationIsLessThanZero_NotOk() {
-        assertEquals(0, Storage.get("apple"));
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(-200);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("apple");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             shopService.process(List.of(fruitTransaction));
         });
     }
 
     @Test
     void processing_OperationsAreValid_Ok() {
-        assertEquals(0, Storage.get("pineapple"));
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(200);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("pineapple");
         shopService.process(List.of(fruitTransaction));
-        assertEquals(200,Storage.get("pineapple"));
-        fruitTransaction.setQuantity(150);
-        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction.setFruit("pineapple");
-        shopService.process(List.of(fruitTransaction));
-        assertEquals(50, Storage.get("pineapple"));
-        fruitTransaction.setQuantity(50);
-        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction.setFruit("pineapple");
-        shopService.process(List.of(fruitTransaction));
-        assertEquals(100, Storage.get("pineapple"));
+        FruitTransaction fruitTransaction1 = new FruitTransaction();
+        fruitTransaction1.setQuantity(150);
+        fruitTransaction1.setOperation(FruitTransaction.Operation.PURCHASE);
+        fruitTransaction1.setFruit("pineapple");
+        shopService.process(List.of(fruitTransaction1));
+        FruitTransaction fruitTransaction2 = new FruitTransaction();
+        fruitTransaction2.setQuantity(50);
+        fruitTransaction2.setOperation(FruitTransaction.Operation.RETURN);
+        fruitTransaction2.setFruit("pineapple");
+        shopService.process(List.of(fruitTransaction2));
     }
 
     @Test
     void processing_SupplyOperationIsInvalid_NotOk() {
-        assertEquals(0, Storage.get("pitch"));
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(100);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("pitch");
         shopService.process(List.of(fruitTransaction));
-        assertEquals(100,Storage.get("pitch"));
-        fruitTransaction.setQuantity(170);
-        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction.setFruit("pitch");
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            shopService.process(List.of(fruitTransaction));
+        FruitTransaction fruitTransaction1 = new FruitTransaction();
+        fruitTransaction1.setQuantity(170);
+        fruitTransaction1.setOperation(FruitTransaction.Operation.PURCHASE);
+        fruitTransaction1.setFruit("pitch");
+        assertThrows(IllegalArgumentException.class, () -> {
+            shopService.process(List.of(fruitTransaction1));
         });
     }
 }

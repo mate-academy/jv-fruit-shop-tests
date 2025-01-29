@@ -22,9 +22,9 @@ class SupplyOperationTest {
     }
 
     @Test
-    void supplyTest() {
+    void supply_ok() {
         supply.handle(Storage.storage,
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY,"apple",30));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 30));
         assertEquals(30,Storage.storage.get("apple"));
     }
 }

@@ -23,17 +23,17 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void purchaseOk() {
+    void purchase_enoughFruit_ok() {
         Storage.storage.put("peach", 10);
         purchase.handle(Storage.storage,
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,"peach",5));
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "peach", 5));
         assertEquals(5, Storage.storage.get("peach"));
     }
 
     @Test
-    void purchaseNotOk() {
+    void purchase_notEnough_notOk() {
         assertThrows(IllegalArgumentException.class,() ->
                 purchase.handle(Storage.storage,
-                        new FruitTransaction(FruitTransaction.Operation.PURCHASE,"peach",5)));
+                        new FruitTransaction(FruitTransaction.Operation.PURCHASE, "peach", 5)));
     }
 }

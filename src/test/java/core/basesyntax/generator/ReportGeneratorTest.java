@@ -21,7 +21,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    void reportContentCheck() {
+    void report_contentCheck_ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 5);
         Storage.storage.put("orange", 8);
@@ -35,7 +35,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    void emptyStorageCheck() {
+    void report_emptyStorageCheck_Ok() {
         String expected = "fruit,quantity";
         String report = reportGenerator.getReport(Storage.storage);
         assertEquals(expected, report);

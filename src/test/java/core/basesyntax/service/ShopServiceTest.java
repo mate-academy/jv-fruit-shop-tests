@@ -41,7 +41,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void shopOk() {
+    void shop_operationsWithFruits_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 50),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 20),
@@ -53,7 +53,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void shopNotOk() {
+    void shop_notEnoughFruit_notOk() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 15));

@@ -22,9 +22,9 @@ class ReturnOperationTest {
     }
 
     @Test
-    void returnTest() {
+    void return_ok() {
         returnOperation.handle(Storage.storage,
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "pineapple",10));
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "pineapple", 10));
         assertEquals(10,Storage.storage.get("pineapple"));
     }
 }

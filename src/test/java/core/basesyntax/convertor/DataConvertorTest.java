@@ -17,7 +17,7 @@ class DataConvertorTest {
     }
 
     @Test
-    void convertorOk() {
+    void convertToTransaction_validData_ok() {
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "peach", 30),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "grape", 3)
@@ -26,12 +26,11 @@ class DataConvertorTest {
         List<FruitTransaction> current = dataConvertor.convertToTransaction(input);
 
         assertEquals(expected, current);
-        assertEquals(expected.get(0).toString(),current.get(0).toString());
 
     }
 
     @Test
-    void convertorNotOk() {
+    void convertToTransaction_invalidData_NotOk() {
         List<String> input = List.of("skip","incorrect data");
         assertThrows(IllegalArgumentException.class,() ->
                 dataConvertor.convertToTransaction(input));

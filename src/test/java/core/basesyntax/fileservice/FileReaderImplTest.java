@@ -1,10 +1,10 @@
 package core.basesyntax.fileservice;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String EMPTY_FILE = "src/test/resources/file2.csv";

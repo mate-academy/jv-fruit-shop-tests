@@ -25,19 +25,22 @@ class ReportGeneratorTest {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 5);
         Storage.storage.put("orange", 8);
-        String report = reportGenerator.getReport(Storage.storage);
+
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator()
                 + "banana,5" + System.lineSeparator()
                 + "orange,8";
 
-        assertEquals(expectedReport, report);
+        String actualReport = reportGenerator.getReport(Storage.storage);
+
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test
     void report_emptyStorageCheck_Ok() {
         String expected = "fruit,quantity";
         String report = reportGenerator.getReport(Storage.storage);
+
         assertEquals(expected, report);
     }
 }

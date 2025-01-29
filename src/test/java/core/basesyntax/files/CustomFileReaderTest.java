@@ -6,33 +6,36 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CustomFileReaderTest {
     private static final String FILE_TO_READ = "reportToRead.csv";
     private static final String TEST_FILE = "emptyfile.csv";
     private static final String WRONG_PATH_FILE = "someFile";
-    private static CustomFileReader customFileReader;
+    private CustomFileReader customFileReader;
 
-    @BeforeAll
-    static void beforeAll() {
-
+    @BeforeEach
+    void setUp() {
         customFileReader = new CustomFileReaderImpl();
     }
 
     @Test
     void read_size_ok() {
         List<String> read = customFileReader.read(FILE_TO_READ);
+
         assertNotNull(read);
+
         assertTrue(read.size() == 9);
 
     }
 
     @Test
     void read_nonExistentFile_notOk() {
-        assertThrows(RuntimeException.class, () ->
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 customFileReader.read(WRONG_PATH_FILE));
+
+        assertEquals("File not found: " + WRONG_PATH_FILE, exception.getMessage());
     }
 
     @Test
@@ -49,13 +52,16 @@ class CustomFileReaderTest {
                 "s,banana,50"
         );
         List<String> read = customFileReader.read(FILE_TO_READ);
+
         assertEquals(expected,read);
     }
 
     @Test
-    void read_emptyContent_notOk() {
+    void read_emptyContent() {
         List<String> read = customFileReader.read(TEST_FILE);
+
         assertTrue(read.isEmpty());
+
         assertTrue(read.size() == 0);
     }
 }

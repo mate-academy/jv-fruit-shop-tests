@@ -57,6 +57,7 @@ class ShopServiceTest {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 15));
+
         assertThrows(IllegalArgumentException.class,() ->
                 shopService.process(transactions));
     }

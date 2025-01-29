@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConvertorTest {
-    private static DataConvertor dataConvertor;
+    private DataConvertor dataConvertor;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() {
         dataConvertor = new DataConvertorImpl();
     }
 
@@ -32,6 +32,7 @@ class DataConvertorTest {
     @Test
     void convertToTransaction_invalidData_NotOk() {
         List<String> input = List.of("skip","incorrect data");
+
         assertThrows(IllegalArgumentException.class,() ->
                 dataConvertor.convertToTransaction(input));
     }

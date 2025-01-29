@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-    private static OperationHandler supply;
+    private OperationHandler supply;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() {
         supply = new SupplyOperation();
     }
 
@@ -25,6 +25,7 @@ class SupplyOperationTest {
     void supply_ok() {
         supply.handle(Storage.storage,
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 30));
+
         assertEquals(30,Storage.storage.get("apple"));
     }
 }

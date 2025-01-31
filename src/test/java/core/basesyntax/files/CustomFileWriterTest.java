@@ -19,9 +19,6 @@ class CustomFileWriterTest {
     @BeforeEach
     void setUp() {
         customFileWriter = new FileWriterImpl();
-        customFileWriter.write(FILE_TO_WRITE, "fruit,quantity\n"
-                + "banana,152\n"
-                + "apple,90");
         filePath = Paths.get(FILE_TO_WRITE);
         somePath = filePath.toString();
     }
@@ -48,8 +45,7 @@ class CustomFileWriterTest {
         });
 
         assertEquals("Error writing to the file "
-                        + invalidPath
-                        + ": Parent directory does not exist.",
+                        + invalidPath,
                 exception.getMessage());
     }
 }

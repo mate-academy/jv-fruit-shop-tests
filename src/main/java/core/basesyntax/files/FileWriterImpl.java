@@ -1,7 +1,6 @@
 package core.basesyntax.files;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;

@@ -41,7 +41,7 @@ class CustomFileWriterTest {
     @Test
     void writer_invalidPath_notOk() {
         String invalidPath = "path\\to\\non_writable_directory";
-        String content = "some data";
+        String content = "some data content";
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             customFileWriter.write(invalidPath, content);

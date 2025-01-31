@@ -2,15 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderTest {
     private static final String VALID_FILE = "src/main/resources/testFiles/validFile.csv";
     private static final String EMPTY_FILE = "src/main/resources/testFiles/emptyFile.csv";
-    private static final String NON_EXISTING_FILE = "src/main/resources/testFiles/nonExistingFile.csv";
+    private static final String NON_EXISTING_FILE
+            = "src/main/resources/testFiles/nonExistingFile.csv";
     private final CsvFileReader reader = new CsvFileReaderImpl();
     private final List<String> expectedData = fillExpectedDataArray();
 
@@ -22,13 +23,14 @@ public class CsvFileReaderTest {
 
     @Test
     public void read_existingEmptyFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> reader.read(EMPTY_FILE), "Empty CSV file");
-
+        Assertions.assertThrows(RuntimeException.class,
+                () -> reader.read(EMPTY_FILE), "Empty CSV file");
     }
 
     @Test
     public void read_nonExistingFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> reader.read(NON_EXISTING_FILE), "Cannot read file nonExistingFile.csv");
+        Assertions.assertThrows(RuntimeException.class,
+                () -> reader.read(NON_EXISTING_FILE), "Cannot read file nonExistingFile.csv");
     }
 
     private List<String> fillExpectedDataArray() {

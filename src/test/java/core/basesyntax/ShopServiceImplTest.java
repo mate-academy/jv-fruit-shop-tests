@@ -24,7 +24,8 @@ public class ShopServiceImplTest {
     private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLERS
             = new HashMap<>();
     private static List<FruitTransaction> transactions;
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS);
+    private final OperationStrategy operationStrategy
+            = new OperationStrategyImpl(OPERATION_HANDLERS);
 
     @BeforeAll
     public static void setUpBeforeClass() {

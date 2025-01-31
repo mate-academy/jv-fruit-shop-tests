@@ -47,6 +47,9 @@ class CustomFileWriterTest {
             customFileWriter.write(invalidPath, content);
         });
 
-        assertEquals("Error writing to the file " + invalidPath,exception.getMessage());
+        assertEquals("Error writing to the file "
+                        + invalidPath
+                        + ": Parent directory does not exist.",
+                exception.getMessage());
     }
 }

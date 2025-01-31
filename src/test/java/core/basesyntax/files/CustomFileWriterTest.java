@@ -39,8 +39,8 @@ class CustomFileWriterTest {
     }
 
     @Test
-    void writer_invalidPath_notOk() throws IOException {
-        String invalidPath = "non_writable_directory\\report.csv";
+    void writer_invalidPath_notOk() {
+        String invalidPath = "C:\\non_existing_directory\\test_file.txt";
         String content = "some data content";
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {

@@ -12,7 +12,7 @@ public class FileWriterImpl implements CustomFileWriter {
     @Override
     public void write(String fileName, String info) {
         Path filePath = Paths.get(fileName);
-        File parentDir = filePath.getParent().toFile();
+        File parentDir = filePath.getParent() != null ? filePath.getParent().toFile() : null;
 
         if (parentDir != null && !parentDir.exists()) {
             throw new RuntimeException("Error writing to the file "

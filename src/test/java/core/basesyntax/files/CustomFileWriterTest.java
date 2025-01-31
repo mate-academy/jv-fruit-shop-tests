@@ -1,8 +1,7 @@
 package core.basesyntax.files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +13,8 @@ import org.junit.jupiter.api.Test;
 class CustomFileWriterTest {
     private static final String FILE_TO_WRITE = "src\\main\\resources\\finalReport.csv";
     private CustomFileWriter customFileWriter;
+    private Path filePath;
+    private String somePath;
 
     @BeforeEach
     void setUp() {
@@ -21,32 +22,31 @@ class CustomFileWriterTest {
         customFileWriter.write(FILE_TO_WRITE, "fruit,quantity\n"
                 + "banana,152\n"
                 + "apple,90");
+        filePath = Paths.get(FILE_TO_WRITE);
+        somePath = filePath.toString();
     }
 
     @Test
     void writer_contentCheck_ok() throws IOException {
-        String expected = "fruit,quantity\n"
+        String expectedContent = "fruit,quantity\n"
                 + "banana,152\n"
                 + "apple,90";
-        Path filePath = Paths.get(FILE_TO_WRITE);
-
-        assertTrue(Files.exists(filePath));
+        customFileWriter.write(somePath,expectedContent);
 
         String readString = Files.readString(filePath);
 
-        assertEquals(expected, readString);
+        assertEquals(expectedContent, readString);
     }
 
     @Test
-    void writer_invalidContent_notOk() throws IOException {
-        String unexpected = "banana,153\n"
-                + "apple,90";
-        Path filePath = Paths.get(FILE_TO_WRITE);
+    void writer_invalidPath_notOk() {
+        String invalidPath = "path\\to\\non_writable_directory";
+        String content = "some data";
 
-        assertTrue(Files.exists(filePath));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            customFileWriter.write(invalidPath, content);
+        });
 
-        String readString = Files.readString(filePath);
-
-        assertNotEquals(unexpected, readString);
+        assertEquals("Error writing to the file " + invalidPath,exception.getMessage());
     }
 }

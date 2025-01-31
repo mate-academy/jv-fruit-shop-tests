@@ -1,7 +1,6 @@
 package core.basesyntax.files;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,13 +11,6 @@ public class FileWriterImpl implements CustomFileWriter {
     @Override
     public void write(String fileName, String info) {
         Path filePath = Paths.get(fileName);
-        File parentDir = filePath.getParent() != null ? filePath.getParent().toFile() : null;
-
-        if (parentDir != null && !parentDir.exists()) {
-            throw new RuntimeException("Error writing to the file "
-                    + fileName
-                    + ": Parent directory does not exist.");
-        }
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(
                 new FileWriter(filePath.toFile()))) {

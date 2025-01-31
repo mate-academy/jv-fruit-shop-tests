@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class CsvDataConverterTest {
     private final List<FruitTransaction> validFruitTransactions = fillTransactionList();
-    private final List<String> inputArray = fillInputArray();
     private final DataConverter dataConverter = new CsvDataConverterImpl();
 
     @Test

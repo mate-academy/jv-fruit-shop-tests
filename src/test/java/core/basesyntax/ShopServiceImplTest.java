@@ -24,10 +24,10 @@ public class ShopServiceImplTest {
     private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLERS
             = new HashMap<>();
     private static List<FruitTransaction> transactions;
-    private OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS);
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS);
 
     @BeforeAll
-    public static void setUpBeforeClass() throws Exception {
+    public static void setUpBeforeClass() {
         OPERATION_HANDLERS.clear();
         OPERATION_HANDLERS.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(STORAGE));

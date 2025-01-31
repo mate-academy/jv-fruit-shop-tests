@@ -39,7 +39,7 @@ class CustomFileWriterTest {
     }
 
     @Test
-    void writer_invalidPath_notOk() {
+    void writer_invalidPath_notOk() throws IOException {
         String invalidPath = "non_writable_directory\\report.csv";
         String content = "some data content";
 

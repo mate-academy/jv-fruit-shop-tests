@@ -18,7 +18,8 @@ public class ServiceTests {
 
     @Test
     public void processTransaction_Balance_ShouldSetCorrectQuantity() {
-        FruitTransaction transaction = new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transaction =
+                new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
         transactionDao.processTransaction(transaction);
 
         FruitTransaction storedTransaction = transactionDao.getTransactionByName("apple");

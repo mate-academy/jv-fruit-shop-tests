@@ -50,7 +50,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(Storage.storage);
 
         CustomFileWriter customFileWriter = new FileWriterImpl();
-        customFileWriter.write("src\\main\\resources\\" + FILE_TO_WRITE,resultingReport);
+        customFileWriter.write("src/main/resources/" + FILE_TO_WRITE,resultingReport);
     }
 
 }

@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -23,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String COMMA_SEPARATOR = ",";
     public static final String INPUT_DATA_PATH = "src/main/resources/input-data.csv";
     public static final String OUTPUT_DATA_PATH = "src/main/resources/final-report.csv";
 
@@ -45,7 +45,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.generateReport(Storage.fruitStorage);
+        String resultingReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeReport(resultingReport, OUTPUT_DATA_PATH);

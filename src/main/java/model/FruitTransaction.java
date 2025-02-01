@@ -11,6 +11,11 @@ public class FruitTransaction {
         setQuantity(quantity);
     }
 
+    public FruitTransaction(String fruit, int quantity) {
+        setFruit(fruit);
+        setQuantity(quantity);
+    }
+
     public Operation getOperation() {
         return operation;
     }

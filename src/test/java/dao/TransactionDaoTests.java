@@ -18,7 +18,8 @@ class TransactionDaoTests {
 
     @Test
     void processTransaction_WhenBalanceOperation() {
-        FruitTransaction transaction = new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transaction =
+                new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
         transactionDao.processTransaction(transaction);
 
         Assertions.assertEquals(50, transactionDao.getTransactionByName("apple").getQuantity());
@@ -26,8 +27,10 @@ class TransactionDaoTests {
 
     @Test
     void processTransaction_WhenSupplyOperation_Ok() {
-        FruitTransaction transactionBalance = new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionSupply = new FruitTransaction("apple", 50, FruitTransaction.Operation.SUPPLY);
+        FruitTransaction transactionBalance =
+                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transactionSupply =
+                new FruitTransaction("apple", 50, FruitTransaction.Operation.SUPPLY);
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionSupply);
 
@@ -36,8 +39,10 @@ class TransactionDaoTests {
 
     @Test
     void processTransaction_WhenReturnOperation_Ok() {
-        FruitTransaction transactionBalance = new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn = new FruitTransaction("apple", 30, FruitTransaction.Operation.RETURN);
+        FruitTransaction transactionBalance =
+                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transactionReturn =
+                new FruitTransaction("apple", 30, FruitTransaction.Operation.RETURN);
 
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionReturn);
@@ -47,20 +52,23 @@ class TransactionDaoTests {
 
     @Test
     void processTransaction_WhenPurchaseOperation_Ok() {
-        FruitTransaction transactionBalance = new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn = new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
-
+        FruitTransaction transactionBalance =
+                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transactionReturn =
+                new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionReturn);
-
         Assertions.assertEquals(120, transactionDao.getTransactionByName("apple").getQuantity());
     }
 
     @Test
     void processTransaction_WhenGetAll_Ok() {
-        FruitTransaction appleBalance = new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction bananaBalance = new FruitTransaction("banana", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn = new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
+        FruitTransaction appleBalance =
+                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+        FruitTransaction bananaBalance =
+                new FruitTransaction("banana", 150, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transactionReturn =
+                new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
 
         transactionDao.processTransaction(appleBalance);
         transactionDao.processTransaction(bananaBalance);
@@ -81,10 +89,14 @@ class TransactionDaoTests {
 
     @Test
     void processTransaction_WhenBlackFriday_Ok() {
-        FruitTransaction transactionBalance = new FruitTransaction("apple", 1000, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionPurchase = new FruitTransaction("apple", 500, FruitTransaction.Operation.PURCHASE);
-        FruitTransaction transactionSupply = new FruitTransaction("apple", 200, FruitTransaction.Operation.SUPPLY);
-        FruitTransaction transactionReturn = new FruitTransaction("apple", 300, FruitTransaction.Operation.RETURN);
+        FruitTransaction transactionBalance =
+                new FruitTransaction("apple", 1000, FruitTransaction.Operation.BALANCE);
+        FruitTransaction transactionPurchase =
+                new FruitTransaction("apple", 500, FruitTransaction.Operation.PURCHASE);
+        FruitTransaction transactionSupply =
+                new FruitTransaction("apple", 200, FruitTransaction.Operation.SUPPLY);
+        FruitTransaction transactionReturn =
+                new FruitTransaction("apple", 300, FruitTransaction.Operation.RETURN);
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionPurchase);
         transactionDao.processTransaction(transactionPurchase);

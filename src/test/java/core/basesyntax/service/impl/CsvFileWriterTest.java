@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,7 +18,7 @@ class CsvFileWriterTest {
         String path = tempFile.toString();
         csvFileWriter.writeReport(data, path);
         String writtenData = Files.readString(tempFile);
-        assertTrue(writtenData.equals(data));
+        assertEquals(data, writtenData);
         Files.deleteIfExists(tempFile);
     }
 

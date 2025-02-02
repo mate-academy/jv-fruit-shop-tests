@@ -4,43 +4,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
+    private static final String VALID_FILE_PATH = "src/test/resources/valid-output.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty-output.csv";
+    private static final String INVALID_FILE_PATH = "qwe/qwe/valid-output.csv";
+    private static final String DATA = "Test data,123,456";
+    private static final String EMPTY_DATA = "";
+
     @Test
-    void writeReport_validDataAndPath_shouldWriteToFile() throws IOException {
-        CsvFileWriter csvFileWriter = new CsvFileWriter();
-        String data = "Test data,123,456";
-        Path tempFile = Files.createTempFile("test-file", ".csv");
-        String path = tempFile.toString();
-        csvFileWriter.writeReport(data, path);
-        String writtenData = Files.readString(tempFile);
-        assertEquals(data, writtenData);
-        Files.deleteIfExists(tempFile);
+    void writeReport_validDataAndPath_ok() throws IOException {
+        FileWriter csvFileWriter = new CsvFileWriter();
+        Path path = Path.of(VALID_FILE_PATH);
+        csvFileWriter.writeReport(DATA, VALID_FILE_PATH);
+        String actual = Files.readString(path);
+        assertEquals(DATA, actual);
+        Files.deleteIfExists(path);
     }
 
     @Test
-    void writeReport_invalidPath_shouldThrowRuntimeException() {
-        CsvFileWriter csvFileWriter = new CsvFileWriter();
-        String data = "Invalid data test";
-        String invalidPath = "/invalid/path/test.csv";
+    void writeReport_invalidPath_notOk() {
+        FileWriter csvFileWriter = new CsvFileWriter();
         assertThrows(RuntimeException.class, () ->
-                csvFileWriter.writeReport(data, invalidPath)
+                csvFileWriter.writeReport(DATA, INVALID_FILE_PATH)
         );
     }
 
     @Test
-    void writeReport_emptyData_validPath_shouldCreateEmptyFile() throws IOException {
-        CsvFileWriter csvFileWriter = new CsvFileWriter();
-        String data = "";
-        Path tempFile = Files.createTempFile("empty-data", ".csv");
-        String path = tempFile.toString();
-        csvFileWriter.writeReport(data, path);
-        String writtenData = Files.readString(tempFile);
-        assertTrue(writtenData.isEmpty());
-        Files.deleteIfExists(tempFile);
+    void writeReport_emptyData_validPath_ok() throws IOException {
+        FileWriter csvFileWriter = new CsvFileWriter();
+        Path path = Path.of(EMPTY_FILE_PATH);
+        csvFileWriter.writeReport(EMPTY_DATA, EMPTY_FILE_PATH);
+        String actual = Files.readString(path);
+        assertTrue(actual.isEmpty());
+        Files.deleteIfExists(path);
     }
 }

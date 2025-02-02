@@ -13,7 +13,9 @@ public class CsvFileReader implements FileReader {
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                data.add(line);
+                if (!line.trim().isEmpty()) {
+                    data.add(line);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file: " + path, e);

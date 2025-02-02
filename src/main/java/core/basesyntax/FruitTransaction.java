@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -27,6 +29,21 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof FruitTransaction that)) {
+            return false;
+        }
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 
     public enum Operation {

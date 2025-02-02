@@ -11,6 +11,9 @@ import java.util.List;
 public class CsvDataConverter implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
+        if (data == null || data.isEmpty() || data.size() == 1) {
+            throw new IllegalArgumentException("Empty data input list provided");
+        }
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
             String line = data.get(i);

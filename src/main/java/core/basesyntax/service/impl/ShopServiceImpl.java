@@ -14,6 +14,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions cannot be null");
+        }
         for (FruitTransaction transaction : transactions) {
             operationStrategy
                     .getOperationHandler(transaction.getOperation())

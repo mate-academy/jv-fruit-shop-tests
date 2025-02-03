@@ -6,15 +6,17 @@ import service.CsvTransactionService;
 import service.CsvWriteService;
 
 public class FruitStore {
+    private static final String OUTPUT_FILE_NAME = "outputFile";
+
     public static void main(String[] args) {
         TransactionsDao transactionDao = new TransactionDaoImpl();
         CsvWriteService reportGenerator = new CsvWriteService(transactionDao);
         CsvParseService csvParseService = new CsvParseService();
         CsvReadService csvReadService = new CsvReadService(csvParseService);
         CsvTransactionService csvTransactionService =
-                new CsvTransactionService(transactionDao, csvReadService);
+                new CsvTransactionService(transactionDao, csvReadService, csvParseService);
 
         csvTransactionService.processCsv();
-        reportGenerator.exportToCsv();
+        reportGenerator.exportToCsv(OUTPUT_FILE_NAME);
     }
 }

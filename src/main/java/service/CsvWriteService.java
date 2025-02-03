@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import model.FruitTransaction;
 
 public class CsvWriteService implements Exporter {
-    private static final String OUTPUT_FILE_NAME = "outputFile";
     private final TransactionsDao transactionsDao;
 
     public CsvWriteService(TransactionsDao transactionsDao) {
@@ -15,8 +14,8 @@ public class CsvWriteService implements Exporter {
     }
 
     @Override
-    public void exportToCsv() {
-        String filePath = Paths.get("src", "main", "resources", OUTPUT_FILE_NAME).toString();
+    public void exportToCsv(String fileName) {
+        String filePath = Paths.get("src", "main", "resources", fileName).toString();
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.append("fruit,quantity\n");
             for (FruitTransaction fruit : transactionsDao.getAll()) {

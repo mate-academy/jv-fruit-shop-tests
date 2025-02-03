@@ -2,5 +2,5 @@ package service;
 
 public interface Exporter {
 
-    void exportToCsv();
+    void exportToCsv(String fileName);
 }

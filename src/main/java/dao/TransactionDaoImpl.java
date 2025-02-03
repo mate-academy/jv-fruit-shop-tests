@@ -60,6 +60,6 @@ public class TransactionDaoImpl implements TransactionsDao {
     }
 
     public void clearTransactions() {
-        Storage.transactions.clear();  // Reset stored transactions
+        Storage.transactions.clear();
     }
 }

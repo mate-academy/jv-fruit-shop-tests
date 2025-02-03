@@ -4,10 +4,10 @@ import dao.TransactionDaoImpl;
 import model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
 
 public class CsvWriteServiceTests {
     private CsvWriteService csvWriteService;

@@ -11,7 +11,10 @@ public class CsvTransactionService implements Processor {
     private final CsvReadService csvReadService;
     private final CsvParseService csvParserService;
 
-    public CsvTransactionService(TransactionsDao transactionsDao, CsvReadService readService, CsvParseService csvParserService) {
+    public CsvTransactionService(
+            TransactionsDao transactionsDao,
+            CsvReadService readService,
+            CsvParseService csvParserService) {
         this.transactionsDao = transactionsDao;
         this.csvReadService = readService;
         this.csvParserService = csvParserService;

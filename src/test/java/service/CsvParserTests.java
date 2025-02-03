@@ -20,7 +20,9 @@ public class CsvParserTests {
             csvParserService.parseTransaction(wrongLineFormat);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Invalid CSV format: " + wrongLineFormat));
+        Assertions.assertTrue(exception.getMessage().contains(
+                "Invalid CSV format: " + wrongLineFormat)
+        );
     }
 
     @Test

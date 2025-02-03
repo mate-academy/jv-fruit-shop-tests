@@ -3,9 +3,8 @@ package service;
 import dao.TransactionDaoImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
 
 public class ReadServiceTests {
     private CsvWriteService csvWriteService;
@@ -29,6 +28,8 @@ public class ReadServiceTests {
             csvReadService.readTransactionsFromCsv(wrongFileName);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: " + filePath));
+        Assertions.assertTrue(
+                exception.getMessage().contains("Error reading CSV file: " + filePath)
+        );
     }
 }

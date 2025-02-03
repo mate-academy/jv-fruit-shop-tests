@@ -9,7 +9,8 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CsvDataConverterTest {
     private static final String HEADER_CSV = "type,fruit,quantity";
@@ -25,10 +26,15 @@ public class CsvDataConverterTest {
     private static final String FRUIT_NO_TYPE = "apple,20";
     private static final String FRUIT_NO_FRUIT = "b,55";
     private static final String FRUIT_NO_QUANTITY = "b,apple";
+    private DataConverter converter;
+
+    @BeforeEach
+    public void setUp() {
+        converter = new CsvDataConverter();
+    }
 
     @Test
     public void convertToTransaction_emptyInputList_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>();
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> converter.convertToTransaction(actual));
@@ -36,14 +42,12 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_nullInputList_notOk() {
-        DataConverter converter = new CsvDataConverter();
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> converter.convertToTransaction(null));
     }
 
     @Test
     public void convertToTransaction_onlyHeaderInputList_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(HEADER_CSV));
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> converter.convertToTransaction(actual));
@@ -51,7 +55,6 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_dataLineWithTwoFields_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(HEADER_CSV, FRUIT_NO_QUANTITY));
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> converter.convertToTransaction(actual));
@@ -82,13 +85,11 @@ public class CsvDataConverterTest {
                 transaction2,
                 transaction3
         ));
-        DataConverter converter = new CsvDataConverter();
         assertIterableEquals(expected, converter.convertToTransaction(actual));
     }
 
     @Test
     public void convertToTransaction_typeDataAbsent_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(
                 HEADER_CSV,
                 FRUIT_NO_TYPE
@@ -99,7 +100,6 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_fruitDataAbsent_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(
                 HEADER_CSV,
                 FRUIT_NO_FRUIT
@@ -110,7 +110,6 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_quantityDataAbsent_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(
                 HEADER_CSV,
                 FRUIT_NO_QUANTITY
@@ -121,7 +120,6 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_typeDataInvalid_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(
                 HEADER_CSV,
                 FRUIT_INVALID_TYPE
@@ -132,7 +130,6 @@ public class CsvDataConverterTest {
 
     @Test
     public void convertToTransaction_quantityIsNotANumber_notOk() {
-        DataConverter converter = new CsvDataConverter();
         List<String> actual = new ArrayList<>(List.of(
                 HEADER_CSV,
                 FRUIT_INVALID_QUANTITY

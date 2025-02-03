@@ -3,9 +3,10 @@ package core.basesyntax.model.operation;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PurchaseOperationHandlerTest {
     private static final Storage STORAGE = new Storage();
@@ -25,8 +26,8 @@ public class PurchaseOperationHandlerTest {
         transaction.setQuantity(10);
         operationHandler.handle(transaction);
 
-        Assertions.assertTrue(STORAGE.getInventory().containsKey("Melon"));
-        Assertions.assertTrue(STORAGE.getInventory().containsValue(15));
+        assertTrue(STORAGE.getInventory().containsKey("Melon"));
+        assertTrue(STORAGE.getInventory().containsValue(15));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class PurchaseOperationHandlerTest {
         transaction.setFruit("Melon");
         transaction.setQuantity(0);
 
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationHandler.handle(transaction), "Purchase quantity cannot be zero");
     }
 
@@ -49,7 +50,7 @@ public class PurchaseOperationHandlerTest {
         transaction.setFruit("Melon");
         transaction.setQuantity(-5);
 
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationHandler.handle(transaction), "Purchase quantity cannot be negative");
     }
 
@@ -61,7 +62,7 @@ public class PurchaseOperationHandlerTest {
         transaction.setFruit("Melon");
         transaction.setQuantity(30);
 
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationHandler.handle(transaction), "Not enough fruits in storage");
     }
 
@@ -72,7 +73,7 @@ public class PurchaseOperationHandlerTest {
         transaction.setFruit("Melon");
         transaction.setQuantity(30);
 
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationHandler.handle(transaction), "Fruit is not present in storage");
     }
 }

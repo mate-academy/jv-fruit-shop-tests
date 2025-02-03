@@ -2,8 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CsvFileWriterImplTest {
 
@@ -20,11 +21,11 @@ public class CsvFileWriterImplTest {
     public void write_validData_Ok() {
         fileWriter.write(REPORT, PATH_TO_FILE);
         String expectedAfterRead = "[fruit,quantity, banana,152, apple,90]";
-        Assertions.assertEquals(expectedAfterRead, fileReader.read(PATH_TO_FILE).toString());
+        assertEquals(expectedAfterRead, fileReader.read(PATH_TO_FILE).toString());
     }
 
     @Test
     public void write_nullFilename_Ok() {
-        Assertions.assertThrows(RuntimeException.class, () -> fileWriter.write(REPORT, null));
+        assertThrows(RuntimeException.class, () -> fileWriter.write(REPORT, null));
     }
 }

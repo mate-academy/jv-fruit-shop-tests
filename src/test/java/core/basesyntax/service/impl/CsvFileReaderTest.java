@@ -4,8 +4,9 @@ import core.basesyntax.service.CsvFileReader;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CsvFileReaderTest {
     private static final String VALID_FILE = "src/main/resources/testFiles/validFile.csv";
@@ -18,18 +19,18 @@ public class CsvFileReaderTest {
     @Test
     public void read_existingValidFile_Ok() {
         List<String> readData = reader.read(VALID_FILE);
-        Assertions.assertEquals(expectedData, readData);
+        assertEquals(expectedData, readData);
     }
 
     @Test
     public void read_existingEmptyFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> reader.read(EMPTY_FILE), "Empty CSV file");
     }
 
     @Test
     public void read_nonExistingFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> reader.read(NON_EXISTING_FILE), "Cannot read file nonExistingFile.csv");
     }
 

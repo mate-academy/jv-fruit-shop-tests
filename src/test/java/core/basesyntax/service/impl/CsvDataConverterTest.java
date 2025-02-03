@@ -5,8 +5,9 @@ import core.basesyntax.service.DataConverter;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CsvDataConverterTest {
     private final List<FruitTransaction> validFruitTransactions = fillTransactionList();
@@ -17,14 +18,14 @@ public class CsvDataConverterTest {
         List<String> actualArray = fillInputArray();
         List<FruitTransaction> currentTransactions
                 = dataConverter.convertToTransaction(actualArray);
-        Assertions.assertEquals(validFruitTransactions, currentTransactions);
+        assertEquals(validFruitTransactions, currentTransactions);
     }
 
     @Test
     public void convertToTransaction_invalidOperation_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("a,apple,20"); // wrong operation "a"
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -32,7 +33,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_emptyOperation_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add(",apple,-5"); // empty operation ""
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -40,7 +41,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_emptyFruit_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("s,,-5"); // empty fruit ""
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -48,7 +49,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_nonMatchingPatternFruit_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("s, ,-5"); // whitespace fruit " "
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -56,7 +57,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_emptyQuantity_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("s,apple,"); // empty quantity ""
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -64,7 +65,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_nonNumberQuantity_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("s,apple,abc"); // non number quantity
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 
@@ -72,7 +73,7 @@ public class CsvDataConverterTest {
     public void convertToTransaction_notAllParamsProvided_notOk() {
         List<String> invalidOperationList = fillInputArray();
         invalidOperationList.add("s,apple"); // only 2 params
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
 

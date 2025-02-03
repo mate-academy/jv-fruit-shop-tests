@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ShopServiceImplTest {
     private static final Storage STORAGE = new Storage();
@@ -64,9 +65,9 @@ public class ShopServiceImplTest {
     public void process_validData_Ok() {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
-        Assertions.assertFalse(STORAGE.getInventory().isEmpty());
-        Assertions.assertTrue(STORAGE.getInventory().containsKey("Melon"));
-        Assertions.assertEquals(STORAGE.getInventory().get("Melon"),10);
-        Assertions.assertTrue(STORAGE.getInventory().containsKey("Cherry"));
+        assertFalse(STORAGE.getInventory().isEmpty());
+        assertTrue(STORAGE.getInventory().containsKey("Melon"));
+        assertEquals(STORAGE.getInventory().get("Melon"),10);
+        assertTrue(STORAGE.getInventory().containsKey("Cherry"));
     }
 }

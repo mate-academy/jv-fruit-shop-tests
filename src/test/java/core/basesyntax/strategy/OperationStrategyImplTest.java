@@ -10,9 +10,10 @@ import core.basesyntax.model.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OperationStrategyImplTest {
     private static final Storage STORAGE = new Storage();
@@ -45,7 +46,8 @@ public class OperationStrategyImplTest {
         fruitTransaction.setQuantity(15);
         OperationHandler operationHandler = OPERATION_HANDLERS.get(fruitTransaction.getOperation());
         operationHandler.handle(fruitTransaction);
-        Assertions.assertTrue(STORAGE.getInventory().containsKey("Mango"));
+
+        assertTrue(STORAGE.getInventory().containsKey("Mango"));
     }
 
     @Test
@@ -53,7 +55,8 @@ public class OperationStrategyImplTest {
         FruitTransaction fruitTransaction = null;
         OperationHandler nullOperationHandler =
                 OPERATION_HANDLERS.get(FruitTransaction.Operation.BALANCE);
-        Assertions.assertThrows(RuntimeException.class,
+
+        assertThrows(RuntimeException.class,
                 () -> nullOperationHandler.handle(fruitTransaction),
                 "Fruit transaction cannot be null");
     }

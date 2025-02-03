@@ -16,26 +16,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OperationStrategyImplTest {
-    private static final Storage STORAGE = new Storage();
-    private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLERS
+    private static final Storage storage = new Storage();
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlers
             = new HashMap<>();
 
     @BeforeAll
     public static void setUp() {
-        OPERATION_HANDLERS.clear();
-        OPERATION_HANDLERS.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(STORAGE));
-        OPERATION_HANDLERS.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(STORAGE));
-        OPERATION_HANDLERS.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(STORAGE));
-        OPERATION_HANDLERS.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(STORAGE));
+        operationHandlers.clear();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(storage));
     }
 
     @AfterEach
     public void tearDown() {
-        STORAGE.getInventory().clear();
+        storage.getInventory().clear();
     }
 
     @Test
@@ -44,17 +44,17 @@ public class OperationStrategyImplTest {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("Mango");
         fruitTransaction.setQuantity(15);
-        OperationHandler operationHandler = OPERATION_HANDLERS.get(fruitTransaction.getOperation());
+        OperationHandler operationHandler = operationHandlers.get(fruitTransaction.getOperation());
         operationHandler.handle(fruitTransaction);
 
-        assertTrue(STORAGE.getInventory().containsKey("Mango"));
+        assertTrue(storage.getInventory().containsKey("Mango"));
     }
 
     @Test
     public void execute_invalidNullFruitTransaction_notOk() {
         FruitTransaction fruitTransaction = null;
         OperationHandler nullOperationHandler =
-                OPERATION_HANDLERS.get(FruitTransaction.Operation.BALANCE);
+                operationHandlers.get(FruitTransaction.Operation.BALANCE);
 
         assertThrows(RuntimeException.class,
                 () -> nullOperationHandler.handle(fruitTransaction),

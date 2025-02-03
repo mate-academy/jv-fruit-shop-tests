@@ -3,10 +3,10 @@ package service;
 import dao.TransactionDaoImpl;
 import model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import java.util.Arrays;
 import java.util.List;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvWriteServiceTests {
@@ -31,7 +31,9 @@ public class CsvWriteServiceTests {
             csvWriteService.exportToCsv(wrongFileName);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Error writing to CSV file: " + filePath));
+        Assertions.assertTrue(exception.getMessage().contains(
+                "Error writing to CSV file: " + filePath)
+        );
     }
 
     @Test

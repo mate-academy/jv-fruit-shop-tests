@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileWriter;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.CsvFileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterImplTest {
 
@@ -22,7 +21,6 @@ public class CsvFileWriterImplTest {
             + System.lineSeparator()
             + "apple,90";
     private final CsvFileWriter fileWriter = new CsvFileWriterImpl();
-
 
     @Test
     public void write_validData_Ok() throws IOException {

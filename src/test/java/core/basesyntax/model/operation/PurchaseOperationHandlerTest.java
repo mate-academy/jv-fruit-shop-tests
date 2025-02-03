@@ -9,30 +9,30 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PurchaseOperationHandlerTest {
-    private static final Storage STORAGE = new Storage();
-    private final OperationHandler operationHandler = new PurchaseOperationHandler(STORAGE);
+    private static final Storage storage = new Storage();
+    private final OperationHandler operationHandler = new PurchaseOperationHandler(storage);
 
     @BeforeEach
     public void setUp() {
-        STORAGE.getInventory().clear();
+        storage.getInventory().clear();
     }
 
     @Test
     public void handle_validPresentInStorageTransaction_Ok() {
-        STORAGE.getInventory().put("Melon", 25);
+        storage.getInventory().put("Melon", 25);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Melon");
         transaction.setQuantity(10);
         operationHandler.handle(transaction);
 
-        assertTrue(STORAGE.getInventory().containsKey("Melon"));
-        assertTrue(STORAGE.getInventory().containsValue(15));
+        assertTrue(storage.getInventory().containsKey("Melon"));
+        assertTrue(storage.getInventory().containsValue(15));
     }
 
     @Test
     public void handle_zeroFruitPurchaseQuantity_notOk() {
-        STORAGE.getInventory().put("Melon", 25);
+        storage.getInventory().put("Melon", 25);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Melon");
@@ -44,7 +44,7 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void handle_negativeFruitPurchaseQuantity_notOk() {
-        STORAGE.getInventory().put("Melon", 25);
+        storage.getInventory().put("Melon", 25);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Melon");
@@ -56,7 +56,7 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void handle_notEnoughFruitsInStorage_notOk() {
-        STORAGE.getInventory().put("Melon", 25);
+        storage.getInventory().put("Melon", 25);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Melon");

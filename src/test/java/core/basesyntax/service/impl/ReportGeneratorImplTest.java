@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReportGeneratorImplTest {
-    private static final Storage STORAGE = new Storage();
-    private final ReportGenerator reportGenerator = new ReportGeneratorImpl(STORAGE);
+    private static final Storage storage = new Storage();
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
     private final String expectedReport = "fruit,quantity"
             + System.lineSeparator()
             + "Apple,20"
@@ -20,10 +20,10 @@ public class ReportGeneratorImplTest {
 
     @BeforeEach
     public void setUp() {
-        STORAGE.getInventory().clear();
-        STORAGE.getInventory().put("Apple", 20);
-        STORAGE.getInventory().put("Mango", 10);
-        STORAGE.getInventory().put("Avocado", 15);
+        storage.getInventory().clear();
+        storage.getInventory().put("Apple", 20);
+        storage.getInventory().put("Mango", 10);
+        storage.getInventory().put("Avocado", 15);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ReportGeneratorImplTest {
 
     @Test
     public void getReport_emptyStorage_Ok() {
-        STORAGE.getInventory().clear();
+        storage.getInventory().clear();
         String emptyStorageExpected = "fruit,quantity" + System.lineSeparator();
         assertEquals(reportGenerator.getReport(), emptyStorageExpected,
                 "Reports are not equal");

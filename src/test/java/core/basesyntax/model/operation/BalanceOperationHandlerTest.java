@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BalanceOperationHandlerTest {
-    private final Storage currentStorage = new Storage();
-    private final OperationHandler operationHandler = new BalanceOperationHandler(currentStorage);
+    private final Storage storage = new Storage();
+    private final OperationHandler operationHandler = new BalanceOperationHandler(storage);
 
     @AfterEach
     public void tearDown() {
-        currentStorage.getInventory().clear();
+        storage.getInventory().clear();
     }
 
     @Test
@@ -24,8 +24,8 @@ public class BalanceOperationHandlerTest {
         transaction.setQuantity(10);
         operationHandler.handle(transaction);
 
-        assertTrue(currentStorage.getInventory().containsKey("Grapes"));
-        assertTrue(currentStorage.getInventory().containsValue(10));
+        assertTrue(storage.getInventory().containsKey("Grapes"));
+        assertTrue(storage.getInventory().containsValue(10));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class BalanceOperationHandlerTest {
         first.setOperation(FruitTransaction.Operation.BALANCE);
         first.setFruit("Grapes");
         first.setQuantity(10);
-        currentStorage.getInventory().put(first.getFruit(), first.getQuantity());
+        storage.getInventory().put(first.getFruit(), first.getQuantity());
 
         FruitTransaction second = new FruitTransaction();
         second.setOperation(FruitTransaction.Operation.BALANCE);
@@ -42,7 +42,7 @@ public class BalanceOperationHandlerTest {
         second.setQuantity(25);
         operationHandler.handle(second);
 
-        assertTrue(currentStorage.getInventory().containsKey("Grapes"));
-        assertTrue(currentStorage.getInventory().containsValue(25));
+        assertTrue(storage.getInventory().containsKey("Grapes"));
+        assertTrue(storage.getInventory().containsValue(25));
     }
 }

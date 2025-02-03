@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -46,18 +46,6 @@ public class OperationStrategyImplTest {
         OperationHandler operationHandler = OPERATION_HANDLERS.get(fruitTransaction.getOperation());
         operationHandler.handle(fruitTransaction);
         Assertions.assertTrue(STORAGE.getInventory().containsKey("Mango"));
-    }
-
-    @Test
-    public void execute_invalidNullOperationHandler_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("Mango");
-        fruitTransaction.setQuantity(15);
-        OperationHandler nullOperationHandler = null;
-        Assertions.assertThrows(RuntimeException.class,
-                () -> nullOperationHandler.handle(fruitTransaction),
-                "Operation handler cannot be null");
     }
 
     @Test

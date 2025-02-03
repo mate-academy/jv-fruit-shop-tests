@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,6 @@ public class ReportGeneratorImplTest {
 
     @Test
     public void getReport_validData_Ok() {
-
         Assertions.assertEquals(expectedReport, reportGenerator.getReport(),
                 "Reports are not equal");
     }
@@ -41,5 +39,4 @@ public class ReportGeneratorImplTest {
         Assertions.assertEquals(reportGenerator.getReport(), emptyStorageExpected,
                 "Reports are not equal");
     }
-
 }

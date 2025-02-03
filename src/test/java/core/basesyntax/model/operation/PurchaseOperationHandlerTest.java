@@ -1,9 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.model.operation;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
-import core.basesyntax.model.operation.PurchaseOperationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

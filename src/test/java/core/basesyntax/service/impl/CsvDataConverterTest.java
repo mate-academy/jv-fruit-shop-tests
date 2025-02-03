@@ -1,8 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.impl.CsvDataConverterImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

@@ -1,9 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
-import core.basesyntax.service.impl.CsvFileReaderImpl;
-import core.basesyntax.service.impl.CsvFileWriterImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

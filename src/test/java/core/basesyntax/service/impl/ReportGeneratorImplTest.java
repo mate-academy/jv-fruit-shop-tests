@@ -3,11 +3,11 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    @BeforeEach
+    @AfterEach
     void setUp() {
         Storage.fruitStorage.clear();
     }

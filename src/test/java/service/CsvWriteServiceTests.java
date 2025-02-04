@@ -12,15 +12,14 @@ import org.junit.jupiter.api.Test;
 public class CsvWriteServiceTests {
     private CsvWriteService csvWriteService;
     private TransactionDaoImpl transactionDao;
-    private CsvParseService csvParserService;
     private CsvReadService csvReadService;
 
     @BeforeEach
     void setUp() {
         transactionDao = new TransactionDaoImpl();
         csvWriteService = new CsvWriteService(transactionDao.getAll());
-        csvParserService = new CsvParseService();
         csvReadService = new CsvReadService();
+        transactionDao.clearTransactions();
     }
 
     @Test

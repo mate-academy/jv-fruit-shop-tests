@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class CsvReadService implements Reader {
     private static final int SKIP_LINES_COUNT = 1;
+
     @Override
     public List<String> readTransactionsFromCsv(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {

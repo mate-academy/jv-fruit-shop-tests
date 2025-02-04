@@ -4,11 +4,10 @@ import model.FruitTransaction;
 import service.CsvParseService;
 import service.CsvReadService;
 import service.CsvTransactionService;
-import service.CsvWriteService;
-
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.nio.file.Paths;
+import service.CsvWriteService;
 
 public class FruitStore {
     private static final String OUTPUT_FILE_NAME = "outputFile";

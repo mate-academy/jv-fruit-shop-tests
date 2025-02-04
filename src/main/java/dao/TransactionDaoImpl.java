@@ -40,7 +40,7 @@ public class TransactionDaoImpl implements TransactionsDao {
         Storage.fruitsStore.put(transaction.getFruit(), updatedQuantity);
     }
 
-    public Integer getTransactionByName (String fruitName) {
+    public Integer getTransactionByName(String fruitName) {
         return Storage.fruitsStore.get(fruitName);
     }
 

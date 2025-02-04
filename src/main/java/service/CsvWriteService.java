@@ -1,19 +1,14 @@
 package service;
 
-import dao.TransactionsDao;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 
-import model.FruitTransaction;
-
 public class CsvWriteService implements Exporter {
-    private final Map<String, Integer> allTransactions;
     private static final String SEPARATOR = ",";
     private static final String REPORT_HEADER = "fruit,quantity\n";
     private static final String LINE_BRAKE = "\n";
+    private final Map<String, Integer> allTransactions;
 
     public CsvWriteService(Map<String, Integer> allTransactions) {
         this.allTransactions = allTransactions;

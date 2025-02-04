@@ -20,7 +20,8 @@ public class OperationStrategyImplTest {
     private static final Storage storage = new Storage();
     private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlers
             = new HashMap<>();
-    private static final OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+    private static final OperationStrategy operationStrategy
+            = new OperationStrategyImpl(operationHandlers);
 
     @BeforeAll
     public static void setUp() {
@@ -54,8 +55,6 @@ public class OperationStrategyImplTest {
     @Test
     public void execute_invalidNullFruitTransaction_notOk() {
         FruitTransaction fruitTransaction = null;
-        OperationHandler nullOperationHandler =
-                operationHandlers.get(FruitTransaction.Operation.BALANCE);
 
         assertThrows(RuntimeException.class,
                 () -> operationStrategy.execute(fruitTransaction),

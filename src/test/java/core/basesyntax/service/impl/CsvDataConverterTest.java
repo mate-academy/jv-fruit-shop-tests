@@ -24,7 +24,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_invalidOperation_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("a,apple,20"); // wrong operation "a"
+        invalidOperationList.add("a,apple,20");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -32,7 +32,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_emptyOperation_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add(",apple,-5"); // empty operation ""
+        invalidOperationList.add(",apple,-5");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -40,7 +40,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_emptyFruit_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("s,,-5"); // empty fruit ""
+        invalidOperationList.add("s,,-5");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -48,7 +48,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_nonMatchingPatternFruit_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("s, ,-5"); // whitespace fruit " "
+        invalidOperationList.add("s, ,-5");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -56,7 +56,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_emptyQuantity_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("s,apple,"); // empty quantity ""
+        invalidOperationList.add("s,apple,");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -64,7 +64,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_nonNumberQuantity_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("s,apple,abc"); // non number quantity
+        invalidOperationList.add("s,apple,abc");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }
@@ -72,7 +72,7 @@ public class CsvDataConverterTest {
     @Test
     public void convertToTransaction_notAllParamsProvided_notOk() {
         List<String> invalidOperationList = fillInputArray();
-        invalidOperationList.add("s,apple"); // only 2 params
+        invalidOperationList.add("s,apple");
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(invalidOperationList));
     }

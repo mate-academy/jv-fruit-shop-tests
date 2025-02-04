@@ -34,7 +34,7 @@ public class CsvFileWriterImplTest {
     }
 
     @Test
-    public void write_nullFilename_Ok() {
+    public void write_nullFilename_notOk() {
         assertThrows(RuntimeException.class, () -> fileWriter.write(REPORT, null));
     }
 }

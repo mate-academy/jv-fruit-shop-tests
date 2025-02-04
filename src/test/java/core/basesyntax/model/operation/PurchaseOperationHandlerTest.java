@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +14,8 @@ public class PurchaseOperationHandlerTest {
     private static final Storage storage = new Storage();
     private final OperationHandler operationHandler = new PurchaseOperationHandler(storage);
 
-    @BeforeEach
-    public void setUp() {
+    @AfterEach
+    public void tearDown() {
         storage.getInventory().clear();
     }
 

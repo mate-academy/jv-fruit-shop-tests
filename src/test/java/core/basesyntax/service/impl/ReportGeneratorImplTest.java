@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +22,14 @@ public class ReportGeneratorImplTest {
 
     @BeforeEach
     public void setUp() {
-        storage.getInventory().clear();
         storage.getInventory().put("Apple", 20);
         storage.getInventory().put("Mango", 10);
         storage.getInventory().put("Avocado", 15);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        storage.getInventory().clear();
     }
 
     @Test

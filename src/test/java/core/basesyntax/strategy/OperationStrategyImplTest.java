@@ -20,6 +20,7 @@ public class OperationStrategyImplTest {
     private static final Storage storage = new Storage();
     private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlers
             = new HashMap<>();
+    private static final OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
     @BeforeAll
     public static void setUp() {
@@ -45,8 +46,7 @@ public class OperationStrategyImplTest {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("Mango");
         fruitTransaction.setQuantity(15);
-        OperationHandler operationHandler = operationHandlers.get(fruitTransaction.getOperation());
-        operationHandler.handle(fruitTransaction);
+        operationStrategy.execute(fruitTransaction);
 
         assertTrue(storage.getInventory().containsKey("Mango"));
     }
@@ -58,7 +58,7 @@ public class OperationStrategyImplTest {
                 operationHandlers.get(FruitTransaction.Operation.BALANCE);
 
         assertThrows(RuntimeException.class,
-                () -> nullOperationHandler.handle(fruitTransaction),
+                () -> operationStrategy.execute(fruitTransaction),
                 "Fruit transaction cannot be null");
     }
 }

@@ -16,7 +16,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void execute(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
         if (handler == null) {
-            throw new UnsupportedOperationException("Operation not supported: "
+            throw new RuntimeException("Operation not supported: "
                     + transaction.getOperation());
         }
         handler.handle(transaction);

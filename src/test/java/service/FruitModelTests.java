@@ -25,7 +25,9 @@ public class FruitModelTests {
 
     @Test
     public void setters_ShouldUpdateValuesCorrectly() {
-        FruitTransaction transaction = new FruitTransaction("Orange", 20, FruitTransaction.Operation.RETURN);
+        FruitTransaction transaction = new FruitTransaction(
+                "Orange", 20, FruitTransaction.Operation.RETURN
+        );
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Mango");
         transaction.setQuantity(40);

@@ -5,8 +5,6 @@ import java.util.List;
 import model.FruitTransaction;
 
 public class CsvTransactionService implements Processor {
-
-
     private final TransactionsDao transactionsDao;
     private final List<FruitTransaction> transactions;
 

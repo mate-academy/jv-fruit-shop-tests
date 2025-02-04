@@ -4,28 +4,33 @@ import dao.TransactionsDao;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+
 import model.FruitTransaction;
 
 public class CsvWriteService implements Exporter {
-    private final TransactionsDao transactionsDao;
+    private final Map<String, Integer> allTransactions;
+    private static final String SEPARATOR = ",";
+    private static final String REPORT_HEADER = "fruit,quantity\n";
+    private static final String LINE_BRAKE = "\n";
 
-    public CsvWriteService(TransactionsDao transactionsDao) {
-        this.transactionsDao = transactionsDao;
+    public CsvWriteService(Map<String, Integer> allTransactions) {
+        this.allTransactions = allTransactions;
     }
 
     @Override
     public void exportToCsv(String fileName) {
-        String filePath = Paths.get("src", "main", "resources", fileName).toString();
-        try (FileWriter writer = new FileWriter(filePath)) {
-            writer.append("fruit,quantity\n");
-            for (FruitTransaction fruit : transactionsDao.getAll()) {
-                writer.append(fruit.getFruit())
-                        .append(",")
-                        .append(String.valueOf(fruit.getQuantity()))
-                        .append("\n");
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.append(REPORT_HEADER);
+            for (Map.Entry<String, Integer> fruit : allTransactions.entrySet()) {
+                writer.append(fruit.getKey())
+                        .append(SEPARATOR)
+                        .append(String.valueOf(fruit.getValue()))
+                        .append(LINE_BRAKE);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + filePath, e);
+            throw new RuntimeException("Error writing to CSV file: " + fileName, e);
         }
     }
 }

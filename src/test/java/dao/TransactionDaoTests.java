@@ -12,7 +12,7 @@ class TransactionDaoTests {
     @BeforeEach
     void setUp() {
         transactionDao = new TransactionDaoImpl();
-        Storage.transactions.clear(); // Ensure a fresh state before each test
+        Storage.fruitsStore.clear(); // Ensure a fresh state before each test
     }
 
     @Test
@@ -21,7 +21,7 @@ class TransactionDaoTests {
                 new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
         transactionDao.processTransaction(transaction);
 
-        Assertions.assertEquals(50, transactionDao.getTransactionByName("apple").getQuantity());
+        Assertions.assertEquals(50, transactionDao.getTransactionByName("apple"));
     }
 
     @Test
@@ -33,7 +33,7 @@ class TransactionDaoTests {
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionSupply);
 
-        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple").getQuantity());
+        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
     }
 
     @Test
@@ -46,7 +46,7 @@ class TransactionDaoTests {
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionReturn);
 
-        Assertions.assertEquals(180, transactionDao.getTransactionByName("apple").getQuantity());
+        Assertions.assertEquals(180, transactionDao.getTransactionByName("apple"));
     }
 
     @Test
@@ -57,7 +57,7 @@ class TransactionDaoTests {
                 new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
         transactionDao.processTransaction(transactionBalance);
         transactionDao.processTransaction(transactionReturn);
-        Assertions.assertEquals(120, transactionDao.getTransactionByName("apple").getQuantity());
+        Assertions.assertEquals(120, transactionDao.getTransactionByName("apple"));
     }
 
     @Test
@@ -98,7 +98,7 @@ class TransactionDaoTests {
         transactionDao.processTransaction(transactionPurchase);
         transactionDao.processTransaction(transactionPurchase);
         transactionDao.processTransaction(transactionSupply);
-        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple").getQuantity());
+        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
 
     }
 }

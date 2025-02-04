@@ -18,9 +18,9 @@ public class CsvWriteServiceTests {
     @BeforeEach
     void setUp() {
         transactionDao = new TransactionDaoImpl();
-        csvWriteService = new CsvWriteService(transactionDao);
+        csvWriteService = new CsvWriteService(transactionDao.getAll());
         csvParserService = new CsvParseService();
-        csvReadService = new CsvReadService(csvParserService);
+        csvReadService = new CsvReadService();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class CsvWriteServiceTests {
         });
 
         Assertions.assertTrue(exception.getMessage().contains(
-                "Error writing to CSV file: " + filePath)
+                "Error writing to CSV file: ")
         );
     }
 

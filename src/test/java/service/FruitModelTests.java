@@ -17,15 +17,15 @@ public class FruitModelTests {
 
     @Test
     public void constructor_ShouldSetFieldsCorrectly_WhenNoOperationProvided() {
-        FruitTransaction transaction = new FruitTransaction("Banana", 30);
+        FruitTransaction transaction = new FruitTransaction("Banana", 30, null);
         Assertions.assertEquals("Banana", transaction.getFruit());
         Assertions.assertEquals(30, transaction.getQuantity());
-        Assertions.assertNull(transaction.getOperation()); // Operation не установлен
+        Assertions.assertNull(transaction.getOperation());
     }
 
     @Test
     public void setters_ShouldUpdateValuesCorrectly() {
-        FruitTransaction transaction = new FruitTransaction("Orange", 20);
+        FruitTransaction transaction = new FruitTransaction("Orange", 20, FruitTransaction.Operation.RETURN);
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Mango");
         transaction.setQuantity(40);

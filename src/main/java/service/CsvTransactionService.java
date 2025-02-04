@@ -5,27 +5,19 @@ import java.util.List;
 import model.FruitTransaction;
 
 public class CsvTransactionService implements Processor {
-    private static final String INPUT_FILE_NAME = "inputFile";
+
 
     private final TransactionsDao transactionsDao;
-    private final CsvReadService csvReadService;
-    private final CsvParseService csvParserService;
+    private final List<FruitTransaction> transactions;
 
     public CsvTransactionService(
-            TransactionsDao transactionsDao,
-            CsvReadService readService,
-            CsvParseService csvParserService) {
+            TransactionsDao transactionsDao, List<FruitTransaction> transactions) {
+        this.transactions = transactions;
         this.transactionsDao = transactionsDao;
-        this.csvReadService = readService;
-        this.csvParserService = csvParserService;
     }
 
     @Override
     public void processCsv() {
-        List<String> lines
-                = csvReadService.readTransactionsFromCsv(INPUT_FILE_NAME);
-        List<FruitTransaction> transactions
-                = lines.stream().map(csvParserService::parseTransaction).toList();
         transactions.forEach(transactionsDao::processTransaction);
     }
 }

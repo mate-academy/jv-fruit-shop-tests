@@ -14,7 +14,7 @@ public class CsvReadService implements Reader {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             return br.lines()
                     .skip(SKIP_LINES_COUNT) // Skip header
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (IOException e) {
             throw new RuntimeException("Error reading CSV file: " + fileName, e);
         }

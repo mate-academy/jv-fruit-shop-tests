@@ -1,16 +1,13 @@
 package service;
 
 import dao.TransactionDaoImpl;
-
 import java.util.Arrays;
 import java.util.List;
-
 import model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import strategy.OperationStrategyImpl;
-
 import static java.util.Arrays.stream;
 
 public class TransactionServiceTests {

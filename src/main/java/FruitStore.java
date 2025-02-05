@@ -27,7 +27,6 @@ public class FruitStore {
         List<String> lines = csvReadService.readTransactionsFromCsv(inputFilePath);
         List<FruitTransaction> transactions = lines.stream()
                 .map(csvParseService::parseTransaction).toList();
-//        Map<String, Integer> allTransactions = transactionDao.getAll();
         CsvTransactionService csvTransactionService = new CsvTransactionService(
                 transactionDao, transactions
         );

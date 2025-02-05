@@ -1,6 +1,8 @@
 package service;
 
+import java.util.Map;
+
 public interface Processor {
 
-    void processCsv();
+    Map<String, Integer> processCsv();
 }

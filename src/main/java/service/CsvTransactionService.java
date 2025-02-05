@@ -2,6 +2,8 @@ package service;
 
 import dao.TransactionsDao;
 import java.util.List;
+import java.util.Map;
+
 import model.FruitTransaction;
 
 public class CsvTransactionService implements Processor {
@@ -15,7 +17,8 @@ public class CsvTransactionService implements Processor {
     }
 
     @Override
-    public void processCsv() {
+    public Map<String, Integer> processCsv() {
         transactions.forEach(transactionsDao::processTransaction);
+        return transactionsDao.getAll();
     }
 }

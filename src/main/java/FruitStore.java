@@ -8,13 +8,15 @@ import service.CsvParseService;
 import service.CsvReadService;
 import service.CsvTransactionService;
 import service.CsvWriteService;
+import strategy.OperationStrategyImpl;
 
 public class FruitStore {
     private static final String OUTPUT_FILE_NAME = "outputFile";
     private static final String INPUT_FILE_NAME = "inputFile";
 
     public static void main(String[] args) {
-        TransactionsDao transactionDao = new TransactionDaoImpl();
+        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+        TransactionsDao transactionDao = new TransactionDaoImpl(operationStrategyImpl);
 
         CsvParseService csvParseService = new CsvParseService();
         CsvReadService csvReadService = new CsvReadService();

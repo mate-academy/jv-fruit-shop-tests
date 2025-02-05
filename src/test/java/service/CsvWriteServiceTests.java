@@ -8,6 +8,7 @@ import model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.OperationStrategyImpl;
 
 public class CsvWriteServiceTests {
     private CsvWriteService csvWriteService;
@@ -16,7 +17,8 @@ public class CsvWriteServiceTests {
 
     @BeforeEach
     void setUp() {
-        transactionDao = new TransactionDaoImpl();
+        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+        transactionDao = new TransactionDaoImpl(operationStrategyImpl);
         csvWriteService = new CsvWriteService(transactionDao.getAll());
         csvReadService = new CsvReadService();
         transactionDao.clearTransactions();

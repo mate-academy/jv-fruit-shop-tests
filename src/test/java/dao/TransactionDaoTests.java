@@ -5,13 +5,15 @@ import model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.OperationStrategyImpl;
 
 class TransactionDaoTests {
     private TransactionDaoImpl transactionDao;
 
     @BeforeEach
     void setUp() {
-        transactionDao = new TransactionDaoImpl();
+        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+        transactionDao = new TransactionDaoImpl(operationStrategyImpl);
         Storage.fruitsStore.clear(); // Ensure a fresh state before each test
     }
 

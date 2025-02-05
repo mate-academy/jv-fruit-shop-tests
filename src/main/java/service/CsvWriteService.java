@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class CsvWriteService implements Exporter {
     private static final String SEPARATOR = ",";
-    private static final String REPORT_HEADER = "fruit,quantity\n";
-    private static final String LINE_BRAKE = "\n";
+    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String LINE_BRAKE = System.lineSeparator();
     private final Map<String, Integer> allTransactions;
 
     public CsvWriteService(Map<String, Integer> allTransactions) {
@@ -18,6 +18,7 @@ public class CsvWriteService implements Exporter {
     public void exportToCsv(String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.append(REPORT_HEADER);
+            writer.append(LINE_BRAKE);
             for (Map.Entry<String, Integer> fruit : allTransactions.entrySet()) {
                 writer.append(fruit.getKey())
                         .append(SEPARATOR)

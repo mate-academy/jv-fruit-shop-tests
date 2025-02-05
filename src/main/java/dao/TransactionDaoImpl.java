@@ -1,7 +1,6 @@
 package dao;
 
 import db.Storage;
-import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
 import strategy.*;

@@ -3,7 +3,6 @@ package service;
 import dao.TransactionsDao;
 import java.util.List;
 import java.util.Map;
-
 import model.FruitTransaction;
 
 public class CsvTransactionService implements Processor {

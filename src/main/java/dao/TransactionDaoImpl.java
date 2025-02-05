@@ -3,7 +3,8 @@ package dao;
 import db.Storage;
 import java.util.Map;
 import model.FruitTransaction;
-import strategy.*;
+import strategy.OperationStrategy;
+import strategy.TransactionHandler;
 
 public class TransactionDaoImpl implements TransactionsDao {
 

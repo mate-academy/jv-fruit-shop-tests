@@ -1,9 +1,9 @@
 package strategy;
 
-import model.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.Map;
+import model.FruitTransaction;
+
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, TransactionHandler> operationHandlers

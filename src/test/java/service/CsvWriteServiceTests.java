@@ -32,7 +32,9 @@ public class CsvWriteServiceTests {
         String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
 
         Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            csvWriteService.writeReport(wrongFileName,csvReportGenerator.generateReport(transactionDao.getAll()));
+            csvWriteService.writeReport(
+                    wrongFileName,csvReportGenerator.generateReport(transactionDao.getAll())
+            );
         });
 
         Assertions.assertTrue(exception.getMessage().contains(
@@ -48,7 +50,9 @@ public class CsvWriteServiceTests {
         };
 
         Arrays.stream(transactions).forEach(transactionDao::processTransaction);
-        csvWriteService.writeReport("outputFile",csvReportGenerator.generateReport(transactionDao.getAll()));
+        csvWriteService.writeReport(
+                "outputFile",csvReportGenerator.generateReport(transactionDao.getAll())
+        );
 
         List<String> lines = csvReadService.readTransactionsFromCsv("outputFile");
         Assertions.assertEquals("Apple,10", lines.get(0));

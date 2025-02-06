@@ -9,8 +9,7 @@ public class CsvWriteService implements Writer {
     public void writeReport(String fileName, String content) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(content);
-
-            } catch (IOException ex) {
+        } catch (IOException ex) {
             throw new RuntimeException("Error writing to CSV file: " + fileName);
         }
     }

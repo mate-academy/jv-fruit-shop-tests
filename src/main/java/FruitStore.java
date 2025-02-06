@@ -4,7 +4,11 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.*;
+import service.CsvParseService;
+import service.CsvReadService;
+import service.CsvReportGenerator;
+import service.CsvTransactionService;
+import service.CsvWriteService;
 import strategy.OperationStrategyImpl;
 
 public class FruitStore {
@@ -27,10 +31,11 @@ public class FruitStore {
         CsvTransactionService csvTransactionService = new CsvTransactionService(
                 transactionDao, transactions
         );
-
         Map<String, Integer> allTransactions = csvTransactionService.processCsv();
         CsvReportGenerator csvReportGenerator = new CsvReportGenerator();
         CsvWriteService csvWriteService = new CsvWriteService();
-        csvWriteService.writeReport(outputFilePath, csvReportGenerator.generateReport(allTransactions));
+        csvWriteService.writeReport(
+                outputFilePath, csvReportGenerator.generateReport(allTransactions)
+        );
     }
 }

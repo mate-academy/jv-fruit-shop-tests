@@ -20,7 +20,7 @@ public class CsvWriteServiceTests {
     void setUp() {
         OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
         transactionDao = new TransactionDaoImpl(operationStrategyImpl);
-        CsvReportGenerator csvReportGenerator = new CsvReportGenerator();
+        csvReportGenerator = new CsvReportGenerator();
         csvWriteService = new CsvWriteService();
         csvReadService = new CsvReadService();
         transactionDao.clearTransactions();
@@ -30,10 +30,11 @@ public class CsvWriteServiceTests {
     void parseTransaction_WhenWrongLine() {
         String wrongFileName = "";
         String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
+        CsvWriteService csvWriteService = new CsvWriteService();
 
         Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
             csvWriteService.writeReport(
-                    wrongFileName,csvReportGenerator.generateReport(transactionDao.getAll())
+                    wrongFileName, csvReportGenerator.generateReport(transactionDao.getAll())
             );
         });
 

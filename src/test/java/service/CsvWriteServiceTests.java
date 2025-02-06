@@ -14,12 +14,14 @@ public class CsvWriteServiceTests {
     private CsvWriteService csvWriteService;
     private TransactionDaoImpl transactionDao;
     private CsvReadService csvReadService;
+    private CsvReportGenerator csvReportGenerator;
 
     @BeforeEach
     void setUp() {
         OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
         transactionDao = new TransactionDaoImpl(operationStrategyImpl);
-        csvWriteService = new CsvWriteService(transactionDao.getAll());
+        CsvReportGenerator csvReportGenerator = new CsvReportGenerator();
+        csvWriteService = new CsvWriteService();
         csvReadService = new CsvReadService();
         transactionDao.clearTransactions();
     }
@@ -28,8 +30,9 @@ public class CsvWriteServiceTests {
     void parseTransaction_WhenWrongLine() {
         String wrongFileName = "";
         String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
+
         Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            csvWriteService.exportToCsv(wrongFileName);
+            csvWriteService.writeReport(wrongFileName,csvReportGenerator.generateReport(transactionDao.getAll()));
         });
 
         Assertions.assertTrue(exception.getMessage().contains(
@@ -45,7 +48,7 @@ public class CsvWriteServiceTests {
         };
 
         Arrays.stream(transactions).forEach(transactionDao::processTransaction);
-        csvWriteService.exportToCsv("outputFile");
+        csvWriteService.writeReport("outputFile",csvReportGenerator.generateReport(transactionDao.getAll()));
 
         List<String> lines = csvReadService.readTransactionsFromCsv("outputFile");
         Assertions.assertEquals("Apple,10", lines.get(0));

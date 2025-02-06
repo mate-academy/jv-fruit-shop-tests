@@ -2,31 +2,16 @@ package service;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
-public class CsvWriteService implements Exporter {
-    private static final String SEPARATOR = ",";
-    private static final String REPORT_HEADER = "fruit,quantity";
-    private static final String LINE_BRAKE = System.lineSeparator();
-    private final Map<String, Integer> allTransactions;
-
-    public CsvWriteService(Map<String, Integer> allTransactions) {
-        this.allTransactions = allTransactions;
-    }
+public class CsvWriteService implements Writer {
 
     @Override
-    public void exportToCsv(String fileName) {
+    public void writeReport(String fileName, String content) {
         try (FileWriter writer = new FileWriter(fileName)) {
-            writer.append(REPORT_HEADER);
-            writer.append(LINE_BRAKE);
-            for (Map.Entry<String, Integer> fruit : allTransactions.entrySet()) {
-                writer.append(fruit.getKey())
-                        .append(SEPARATOR)
-                        .append(String.valueOf(fruit.getValue()))
-                        .append(LINE_BRAKE);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + fileName, e);
+            writer.write(content);
+
+            } catch (IOException ex) {
+            throw new RuntimeException("Error writing to CSV file: " + fileName);
         }
     }
 }

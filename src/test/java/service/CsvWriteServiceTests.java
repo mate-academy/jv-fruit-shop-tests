@@ -11,52 +11,49 @@ import org.junit.jupiter.api.Test;
 import strategy.OperationStrategyImpl;
 
 public class CsvWriteServiceTests {
-    private CsvWriteService csvWriteService;
-    private TransactionDaoImpl transactionDao;
-    private CsvReadService csvReadService;
-    private CsvReportGenerator csvReportGenerator;
+  private CsvWriteService csvWriteService;
+  private TransactionDaoImpl transactionDao;
+  private CsvReadService csvReadService;
+  private CsvReportGenerator csvReportGenerator;
 
-    @BeforeEach
-    void setUp() {
-        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
-        transactionDao = new TransactionDaoImpl(operationStrategyImpl);
-        csvReportGenerator = new CsvReportGenerator();
-        csvWriteService = new CsvWriteService();
-        csvReadService = new CsvReadService();
-        transactionDao.clearTransactions();
-    }
+  @BeforeEach
+  void setUp() {
+    OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+    transactionDao = new TransactionDaoImpl(operationStrategyImpl);
+    csvReportGenerator = new CsvReportGenerator();
+    csvWriteService = new CsvWriteService();
+    csvReadService = new CsvReadService();
+    transactionDao.clearTransactions();
+  }
 
-    @Test
-    void parseTransaction_WhenWrongLine() {
-        String wrongFileName = "";
-        String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
-        CsvWriteService csvWriteService = new CsvWriteService();
+  @Test
+  void parseTransaction_WhenWrongLine() {
+    String wrongFileName = "";
+    String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
+    CsvWriteService csvWriteService = new CsvWriteService();
 
-        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            csvWriteService.writeReport(
-                    wrongFileName, csvReportGenerator.generateReport(transactionDao.getAll())
-            );
-        });
+    Exception exception =
+        Assertions.assertThrows(
+            RuntimeException.class,
+            () -> {
+              csvWriteService.writeReport(wrongFileName, csvReportGenerator.generateReport());
+            });
 
-        Assertions.assertTrue(exception.getMessage().contains(
-                "Error writing to CSV file: ")
-        );
-    }
+    Assertions.assertTrue(exception.getMessage().contains("Error writing to CSV file: "));
+  }
 
-    @Test
-    void processTransaction_WhenSuccess() {
-        FruitTransaction[] transactions = {
-                new FruitTransaction("Apple", 10, FruitTransaction.Operation.BALANCE),
-                new FruitTransaction("Banana", 5, FruitTransaction.Operation.BALANCE)
-        };
+  @Test
+  void processTransaction_WhenSuccess() {
+    FruitTransaction[] transactions = {
+      new FruitTransaction("Apple", 10, FruitTransaction.Operation.BALANCE),
+      new FruitTransaction("Banana", 5, FruitTransaction.Operation.BALANCE)
+    };
 
-        Arrays.stream(transactions).forEach(transactionDao::processTransaction);
-        csvWriteService.writeReport(
-                "outputFile",csvReportGenerator.generateReport(transactionDao.getAll())
-        );
+    Arrays.stream(transactions).forEach(transactionDao::processTransaction);
+    csvWriteService.writeReport("outputFile", csvReportGenerator.generateReport());
 
-        List<String> lines = csvReadService.readTransactionsFromCsv("outputFile");
-        Assertions.assertEquals("Apple,10", lines.get(0));
-        Assertions.assertEquals("Banana,5", lines.get(1));
-    }
+    List<String> lines = csvReadService.readTransactionsFromCsv("outputFile");
+    Assertions.assertEquals("Apple,10", lines.get(0));
+    Assertions.assertEquals("Banana,5", lines.get(1));
+  }
 }

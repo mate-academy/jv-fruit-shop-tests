@@ -1,22 +1,21 @@
 package strategy;
 
-import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, TransactionHandler> operationHandlers
-            = new HashMap<>();
+  private final Map<FruitTransaction.Operation, TransactionHandler> operationHandlers;
 
-    public OperationStrategyImpl() {
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-    }
+  public OperationStrategyImpl(
+      Map<FruitTransaction.Operation, TransactionHandler> operationHandlers) {
+    this.operationHandlers = operationHandlers;
+  }
 
-    @Override
-    public TransactionHandler getStrategy(FruitTransaction.Operation operationType) {
-        return operationHandlers.get(operationType);
+  @Override
+  public TransactionHandler getStrategy(FruitTransaction.Operation operationType) {
+    if (operationType == null) {
+      throw new IllegalArgumentException("Unknown operation: " + operationType);
     }
+    return operationHandlers.get(operationType);
+  }
 }

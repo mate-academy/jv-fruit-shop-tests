@@ -8,99 +8,101 @@ import org.junit.jupiter.api.Test;
 import strategy.OperationStrategyImpl;
 
 class TransactionDaoTests {
-    private TransactionDaoImpl transactionDao;
+  private TransactionDaoImpl transactionDao;
 
-    @BeforeEach
-    void setUp() {
-        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
-        transactionDao = new TransactionDaoImpl(operationStrategyImpl);
-        Storage.fruitsStore.clear(); // Ensure a fresh state before each test
-    }
+  @BeforeEach
+  void setUp() {
+    OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+    transactionDao = new TransactionDaoImpl(operationStrategyImpl);
+    Storage.fruitsStore.clear(); // Ensure a fresh state before each test
+  }
 
-    @Test
-    void processTransaction_WhenBalanceOperation() {
-        FruitTransaction transaction =
-                new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
-        transactionDao.processTransaction(transaction);
+  @Test
+  void processTransaction_WhenBalanceOperation() {
+    FruitTransaction transaction =
+        new FruitTransaction("apple", 50, FruitTransaction.Operation.BALANCE);
+    transactionDao.processTransaction(transaction);
 
-        Assertions.assertEquals(50, transactionDao.getTransactionByName("apple"));
-    }
+    Assertions.assertEquals(50, transactionDao.getTransactionByName("apple"));
+  }
 
-    @Test
-    void processTransaction_WhenSupplyOperation_Ok() {
-        FruitTransaction transactionBalance =
-                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionSupply =
-                new FruitTransaction("apple", 50, FruitTransaction.Operation.SUPPLY);
-        transactionDao.processTransaction(transactionBalance);
-        transactionDao.processTransaction(transactionSupply);
+  @Test
+  void processTransaction_WhenSupplyOperation_Ok() {
+    FruitTransaction transactionBalance =
+        new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+    FruitTransaction transactionSupply =
+        new FruitTransaction("apple", 50, FruitTransaction.Operation.SUPPLY);
+    transactionDao.processTransaction(transactionBalance);
+    transactionDao.processTransaction(transactionSupply);
 
-        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
-    }
+    Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
+  }
 
-    @Test
-    void processTransaction_WhenReturnOperation_Ok() {
-        FruitTransaction transactionBalance =
-                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn =
-                new FruitTransaction("apple", 30, FruitTransaction.Operation.RETURN);
+  @Test
+  void processTransaction_WhenReturnOperation_Ok() {
+    FruitTransaction transactionBalance =
+        new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+    FruitTransaction transactionReturn =
+        new FruitTransaction("apple", 30, FruitTransaction.Operation.RETURN);
 
-        transactionDao.processTransaction(transactionBalance);
-        transactionDao.processTransaction(transactionReturn);
+    transactionDao.processTransaction(transactionBalance);
+    transactionDao.processTransaction(transactionReturn);
 
-        Assertions.assertEquals(180, transactionDao.getTransactionByName("apple"));
-    }
+    Assertions.assertEquals(180, transactionDao.getTransactionByName("apple"));
+  }
 
-    @Test
-    void processTransaction_WhenPurchaseOperation_Ok() {
-        FruitTransaction transactionBalance =
-                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn =
-                new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
-        transactionDao.processTransaction(transactionBalance);
-        transactionDao.processTransaction(transactionReturn);
-        Assertions.assertEquals(120, transactionDao.getTransactionByName("apple"));
-    }
+  @Test
+  void processTransaction_WhenPurchaseOperation_Ok() {
+    FruitTransaction transactionBalance =
+        new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+    FruitTransaction transactionReturn =
+        new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
+    transactionDao.processTransaction(transactionBalance);
+    transactionDao.processTransaction(transactionReturn);
+    Assertions.assertEquals(120, transactionDao.getTransactionByName("apple"));
+  }
 
-    @Test
-    void processTransaction_WhenGetAll_Ok() {
-        FruitTransaction appleBalance =
-                new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction bananaBalance =
-                new FruitTransaction("banana", 150, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionReturn =
-                new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
+  @Test
+  void processTransaction_WhenGetAll_Ok() {
+    FruitTransaction appleBalance =
+        new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE);
+    FruitTransaction bananaBalance =
+        new FruitTransaction("banana", 150, FruitTransaction.Operation.BALANCE);
+    FruitTransaction transactionReturn =
+        new FruitTransaction("apple", 30, FruitTransaction.Operation.PURCHASE);
 
-        transactionDao.processTransaction(appleBalance);
-        transactionDao.processTransaction(bananaBalance);
+    transactionDao.processTransaction(appleBalance);
+    transactionDao.processTransaction(bananaBalance);
 
-        Assertions.assertEquals(2, transactionDao.getAll().size());
-    }
+    Assertions.assertEquals(2, transactionDao.getAll().size());
+  }
 
-    @Test
-    void processTransaction_ShouldThrowException_ForUnknownOperation() {
-        FruitTransaction invalidTransaction = new FruitTransaction("kiwi", 10, null);
+  @Test
+  void processTransaction_ShouldThrowException_ForUnknownOperation() {
+    FruitTransaction invalidTransaction = new FruitTransaction("kiwi", 10, null);
 
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            transactionDao.processTransaction(invalidTransaction);
-        });
+    Exception exception =
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              transactionDao.processTransaction(invalidTransaction);
+            });
 
-        Assertions.assertTrue(exception.getMessage().contains("Unknown operation"));
-    }
+    Assertions.assertTrue(exception.getMessage().contains("Unknown operation"));
+  }
 
-    @Test
-    void processTransaction_WhenBlackFriday_Ok() {
-        FruitTransaction transactionBalance =
-                new FruitTransaction("apple", 1000, FruitTransaction.Operation.BALANCE);
-        FruitTransaction transactionPurchase =
-                new FruitTransaction("apple", 500, FruitTransaction.Operation.PURCHASE);
-        FruitTransaction transactionSupply =
-                new FruitTransaction("apple", 200, FruitTransaction.Operation.SUPPLY);
-        transactionDao.processTransaction(transactionBalance);
-        transactionDao.processTransaction(transactionPurchase);
-        transactionDao.processTransaction(transactionPurchase);
-        transactionDao.processTransaction(transactionSupply);
-        Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
-
-    }
+  @Test
+  void processTransaction_WhenBlackFriday_Ok() {
+    FruitTransaction transactionBalance =
+        new FruitTransaction("apple", 1000, FruitTransaction.Operation.BALANCE);
+    FruitTransaction transactionPurchase =
+        new FruitTransaction("apple", 500, FruitTransaction.Operation.PURCHASE);
+    FruitTransaction transactionSupply =
+        new FruitTransaction("apple", 200, FruitTransaction.Operation.SUPPLY);
+    transactionDao.processTransaction(transactionBalance);
+    transactionDao.processTransaction(transactionPurchase);
+    transactionDao.processTransaction(transactionPurchase);
+    transactionDao.processTransaction(transactionSupply);
+    Assertions.assertEquals(200, transactionDao.getTransactionByName("apple"));
+  }
 }

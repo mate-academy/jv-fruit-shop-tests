@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Reader {
 
-    List<String> readTransactionsFromCsv(String fileName);
+  List<String> readTransactionsFromCsv(String fileName);
 }

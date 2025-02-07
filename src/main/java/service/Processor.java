@@ -1,8 +1,9 @@
 package service;
 
-import java.util.Map;
+import java.util.List;
+import model.FruitTransaction;
 
 public interface Processor {
 
-    Map<String, Integer> processCsv();
+  void processCsv(List<FruitTransaction> transactions);
 }

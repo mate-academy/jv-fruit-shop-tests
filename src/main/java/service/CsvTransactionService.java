@@ -2,22 +2,28 @@ package service;
 
 import dao.TransactionsDao;
 import java.util.List;
-import java.util.Map;
 import model.FruitTransaction;
+import strategy.OperationStrategy;
+import strategy.TransactionHandler;
 
 public class CsvTransactionService implements Processor {
-    private final TransactionsDao transactionsDao;
-    private final List<FruitTransaction> transactions;
+  private final TransactionsDao transactionsDao;
+  private final OperationStrategy operationStrategy;
 
-    public CsvTransactionService(
-            TransactionsDao transactionsDao, List<FruitTransaction> transactions) {
-        this.transactions = transactions;
-        this.transactionsDao = transactionsDao;
-    }
+  public CsvTransactionService(
+      TransactionsDao transactionsDao, OperationStrategy operationStrategy) {
+    this.transactionsDao = transactionsDao;
+    this.operationStrategy = operationStrategy;
+  }
 
-    @Override
-    public Map<String, Integer> processCsv() {
-        transactions.forEach(transactionsDao::processTransaction);
-        return transactionsDao.getAll();
-    }
+  @Override
+  public void processCsv(List<FruitTransaction> transactions) {
+    transactions.forEach(
+        transaction -> {
+          int currentQuantity = transactionsDao.getAll().getOrDefault(transaction.getFruit(), 0);
+          TransactionHandler handler = operationStrategy.getStrategy(transaction.getOperation());
+          int updatedQuantity = handler.apply(currentQuantity, transaction);
+          transactionsDao.getAll().put(transaction.getFruit(), updatedQuantity);
+        });
+  }
 }

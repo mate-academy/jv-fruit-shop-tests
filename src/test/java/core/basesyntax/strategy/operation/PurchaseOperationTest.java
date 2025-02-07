@@ -4,10 +4,16 @@ import core.basesyntax.data.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
     private final PurchaseOperation purchaseOperation = new PurchaseOperation();
+
+    @BeforeEach
+    void setUp() {
+        Storage.clear();
+    }
 
     @AfterEach
     void tearDown() {
@@ -20,10 +26,8 @@ class PurchaseOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 20);
 
-        System.out.println("Before purchase: " + Storage.getInventory().get("banana"));
         purchaseOperation.apply(transaction);
-        System.out.println("After purchase: " + Storage.getInventory().get("banana"));
-        
+
         Assertions.assertEquals(30, Storage.getInventory().get("banana"));
     }
 

@@ -16,9 +16,9 @@ class PurchaseOperationTest {
 
     @Test
     void apply_validPurchaseTransaction_reducesStock() {
-        Storage.add("banana", 30);
+        Storage.add("banana", 40);
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 10);
+                FruitTransaction.Operation.PURCHASE, "banana", 20);
         
         purchaseOperation.apply(transaction);
         

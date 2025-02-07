@@ -66,14 +66,11 @@
                 </executions>
                 <configuration>
                     <configLocation>${project.basedir}/config/checkstyle/google_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
-<!--                <configuration>-->
-<!--                    <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>-->
-<!--                    <consoleOutput>true</consoleOutput>-->
-<!--                    <failsOnError>true</failsOnError>-->
-<!--                    <linkXRef>false</linkXRef>-->
-<!--                    <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
-<!--                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

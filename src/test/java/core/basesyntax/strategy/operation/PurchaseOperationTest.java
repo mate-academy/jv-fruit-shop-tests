@@ -16,13 +16,15 @@ class PurchaseOperationTest {
 
     @Test
     void apply_validPurchaseTransaction_reducesStock() {
-        Storage.add("banana", 40);
+        Storage.add("banana", 50);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 20);
-        
+
+        System.out.println("Before purchase: " + Storage.getInventory().get("banana"));
         purchaseOperation.apply(transaction);
+        System.out.println("After purchase: " + Storage.getInventory().get("banana"));
         
-        Assertions.assertEquals(20, Storage.getInventory().get("banana"));
+        Assertions.assertEquals(30, Storage.getInventory().get("banana"));
     }
 
     @Test

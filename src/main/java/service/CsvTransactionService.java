@@ -2,6 +2,8 @@ package service;
 
 import dao.TransactionsDao;
 import java.util.List;
+
+import db.Storage;
 import model.FruitTransaction;
 import strategy.OperationStrategy;
 import strategy.TransactionHandler;
@@ -23,7 +25,7 @@ public class CsvTransactionService implements Processor {
           int currentQuantity = transactionsDao.getAll().getOrDefault(transaction.getFruit(), 0);
           TransactionHandler handler = operationStrategy.getStrategy(transaction.getOperation());
           int updatedQuantity = handler.apply(currentQuantity, transaction);
-          transactionsDao.getAll().put(transaction.getFruit(), updatedQuantity);
+            Storage.fruitsStore.put(transaction.getFruit(), updatedQuantity);
         });
   }
 }

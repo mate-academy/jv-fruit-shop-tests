@@ -1,6 +1,7 @@
 import dao.TransactionDaoImpl;
 import dao.TransactionsDao;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -16,16 +17,11 @@ public class FruitStore {
   private static final String INPUT_FILE_NAME = "inputFile";
 
   public static void main(String[] args) {
-    Map<FruitTransaction.Operation, TransactionHandler> operationHandlers =
-        Map.of(
-            FruitTransaction.Operation.BALANCE,
-            new BalanceHandler(),
-            FruitTransaction.Operation.SUPPLY,
-            new SupplyHandler(),
-            FruitTransaction.Operation.PURCHASE,
-            new PurchaseHandler(),
-            FruitTransaction.Operation.RETURN,
-            new ReturnHandler());
+    Map<FruitTransaction.Operation, TransactionHandler> operationHandlers = new HashMap<>();
+    operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+    operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+    operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+    operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
 
     OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl(operationHandlers);
     TransactionsDao transactionDao = new TransactionDaoImpl();

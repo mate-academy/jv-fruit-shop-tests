@@ -1,25 +1,33 @@
 package service;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import dao.TransactionDaoImpl;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import model.FruitTransaction;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import strategy.OperationStrategyImpl;
 
-public class CsvWriteServiceTests {
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+class CsvWriteServiceTests {
   private CsvWriteService csvWriteService;
   private TransactionDaoImpl transactionDao;
   private CsvReadService csvReadService;
   private CsvReportGenerator csvReportGenerator;
+  private Path tempFilePath;
 
   @BeforeEach
-  void setUp() {
-    OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
-    transactionDao = new TransactionDaoImpl(operationStrategyImpl);
+  void setUp() throws IOException {
+    // Create a temporary file for testing
+    tempFilePath = Files.createTempFile("test_output", ".csv");
+    tempFilePath.toFile().deleteOnExit(); // Ensure cleanup after test execution
+
+    transactionDao = new TransactionDaoImpl();
     csvReportGenerator = new CsvReportGenerator();
     csvWriteService = new CsvWriteService();
     csvReadService = new CsvReadService();
@@ -27,33 +35,31 @@ public class CsvWriteServiceTests {
   }
 
   @Test
-  void parseTransaction_WhenWrongLine() {
-    String wrongFileName = "";
-    String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
-    CsvWriteService csvWriteService = new CsvWriteService();
+  void writeReport_WhenInvalidFileName_ThrowsException() {
+    String invalidFileName = "";
 
-    Exception exception =
-        Assertions.assertThrows(
+    Exception exception = assertThrows(
             RuntimeException.class,
-            () -> {
-              csvWriteService.writeReport(wrongFileName, csvReportGenerator.generateReport());
-            });
+            () -> csvWriteService.writeReport(invalidFileName, csvReportGenerator.generateReport())
+    );
 
-    Assertions.assertTrue(exception.getMessage().contains("Error writing to CSV file: "));
+    assertTrue(exception.getMessage().contains("Error writing to CSV file: "),
+            "Expected exception message to contain 'Error writing to CSV file'");
   }
 
   @Test
-  void processTransaction_WhenSuccess() {
-    FruitTransaction[] transactions = {
-      new FruitTransaction("Apple", 10, FruitTransaction.Operation.BALANCE),
-      new FruitTransaction("Banana", 5, FruitTransaction.Operation.BALANCE)
-    };
+  void writeReport_WhenValidTransactions_WritesSuccessfully() throws IOException {
+    // Arrange: Create transactions
+    transactionDao.saveTransaction("Apple", 10);
+    transactionDao.saveTransaction("Banana", 5);
 
-    Arrays.stream(transactions).forEach(transactionDao::processTransaction);
-    csvWriteService.writeReport("outputFile", csvReportGenerator.generateReport());
+    // Act: Write report to temporary file
+    csvWriteService.writeReport(tempFilePath.toString(), csvReportGenerator.generateReport());
 
-    List<String> lines = csvReadService.readTransactionsFromCsv("outputFile");
-    Assertions.assertEquals("Apple,10", lines.get(0));
-    Assertions.assertEquals("Banana,5", lines.get(1));
+    // Assert: Read and verify written content
+    List<String> lines = Files.readAllLines(tempFilePath);
+    assertEquals("fruit,quantity", lines.get(0), "First line should be header");
+    assertEquals("Apple,10", lines.get(1), "First fruit transaction should match");
+    assertEquals("Banana,5", lines.get(2), "Second fruit transaction should match");
   }
 }

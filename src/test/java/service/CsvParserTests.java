@@ -3,34 +3,25 @@ package service;
 import dao.TransactionDaoImpl;
 import dao.TransactionsDao;
 import model.FruitTransaction;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.*;
-
+import strategy.OperationStrategyImpl;
+import strategy.TransactionHandler;
+import strategy.BalanceHandler;
+import strategy.PurchaseHandler;
+import strategy.ReturnHandler;
+import strategy.SupplyHandler;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvParserTests {
   private CsvParseService csvParseService;
-  private CsvTransactionService transactionService;
 
   @BeforeEach
   void setUp() {
-    Map<FruitTransaction.Operation, TransactionHandler> operationHandlers = new HashMap<>();
-    operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-    operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-    operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-    operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-
-    OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl(operationHandlers);
-    TransactionsDao transactionDao = new TransactionDaoImpl();
     csvParseService = new CsvParseService();
-    transactionService =
-            new CsvTransactionService(transactionDao, operationStrategyImpl);;
   }
 
   @Test
@@ -61,7 +52,10 @@ public class CsvParserTests {
   @Test
   void parseTransaction_WhenInvalidFormat_ShouldThrowException() {
     String invalidLine = "apple,10";
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> csvParseService.parseTransaction(invalidLine));
+    Exception exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> csvParseService.parseTransaction(invalidLine)
+    );
     assertTrue(exception.getMessage().contains("Invalid CSV format"));
   }
 

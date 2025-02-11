@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Map;
 
 class TransactionDaoImplTests {
@@ -13,7 +12,7 @@ class TransactionDaoImplTests {
   @BeforeEach
   void setUp() {
     transactionDao = new TransactionDaoImpl();
-    transactionDao.clearTransactions(); // Reset storage
+    transactionDao.clearTransactions();
   }
 
   @Test
@@ -31,12 +30,18 @@ class TransactionDaoImplTests {
   @Test
   void getTransactionByName_WhenFruitExists_ReturnsCorrectQuantity() {
     transactionDao.saveTransaction("Apple", 25);
-    assertEquals(25, transactionDao.getTransactionByName("Apple"), "Should return 25 for Apple");
+    assertEquals(25, transactionDao.getTransactionByName(
+            "Apple"),
+            "Should return 25 for Apple"
+    );
   }
 
   @Test
   void getTransactionByName_WhenFruitNotExists_ReturnsZero() {
-    assertEquals(0, transactionDao.getTransactionByName("NonExistentFruit"), "Should return 0 for unknown fruit");
+    assertEquals(0, transactionDao.getTransactionByName(
+            "NonExistentFruit"),
+            "Should return 0 for unknown fruit"
+    );
   }
 
   @Test

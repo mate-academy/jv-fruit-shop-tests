@@ -1,6 +1,5 @@
 package service;
 
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ public class ReadServiceTests {
   @Test
   void parseTransaction_WhenWrongLine() {
     String wrongFileName = "";
-    String filePath = Paths.get("src", "main", "resources", wrongFileName).toString();
     Exception exception =
         Assertions.assertThrows(
             RuntimeException.class,

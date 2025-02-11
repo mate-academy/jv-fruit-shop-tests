@@ -56,7 +56,6 @@ public class FruitModelTests {
             () -> {
               FruitTransaction.Operation.fromCode("x");
             });
-
     Assertions.assertTrue(exception.getMessage().contains("Unknown transaction type: x"));
   }
 }

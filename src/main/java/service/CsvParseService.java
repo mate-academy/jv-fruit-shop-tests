@@ -18,7 +18,7 @@ public class CsvParseService implements Parser {
     }
 
     return lines.stream()
-        .skip(SKIP_LINES_COUNT) // Skip header
+        .skip(SKIP_LINES_COUNT)
         .map(this::parseTransaction)
         .toList();
   }

@@ -7,7 +7,7 @@ public class TransactionDaoImpl implements TransactionsDao {
 
   @Override
   public Map<String, Integer> getAll() {
-    return Map.copyOf(Storage.fruitsStore); // Returns an unmodifiable copy for safety
+    return Map.copyOf(Storage.fruitsStore);
   }
 
   public Integer getTransactionByName(String fruitName) {

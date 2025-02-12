@@ -1,14 +1,16 @@
 package service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dao.TransactionDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import org.junit.jupiter.api.Test;
 
 class CsvWriteServiceTests {
     private CsvWriteService csvWriteService;
@@ -30,12 +32,12 @@ class CsvWriteServiceTests {
     void writeReport_WhenInvalidFileName_ThrowsException() {
         String invalidFileName = "";
         Exception exception = assertThrows(
-            RuntimeException.class,
-            () -> csvWriteService.writeReport(invalidFileName, csvReportGenerator.generateReport())
+                RuntimeException.class,
+                () -> csvWriteService.writeReport(invalidFileName, csvReportGenerator.generateReport())
         );
 
         assertTrue(exception.getMessage().contains("Error writing to CSV file: "),
-            "Expected exception message to contain 'Error writing to CSV file'");
+                "Expected exception message to contain 'Error writing to CSV file'");
     }
 
     @Test

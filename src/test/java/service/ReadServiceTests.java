@@ -9,18 +9,17 @@ public class ReadServiceTests {
 
     @BeforeEach
     void setUp() {
-    csvReadService = new CsvReadService();
-  }
+        csvReadService = new CsvReadService();
+    }
 
     @Test
     void parseTransaction_WhenWrongLine() {
-        String wrongFileName = "";
-        Exception exception =
-        Assertions.assertThrows(
-            RuntimeException.class,
-            () -> {
-              csvReadService.readTransactionsFromCsv(wrongFileName);
-            });
+                String wrongFileName = "";
+                Exception exception =
+                Assertions.assertThrows(
+                RuntimeException.class,
+                () -> {csvReadService.readTransactionsFromCsv(wrongFileName);}
+        );
 
         Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
     }

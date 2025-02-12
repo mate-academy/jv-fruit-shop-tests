@@ -2,5 +2,5 @@ package service;
 
 public interface Writer {
 
-  void writeReport(String fileName, String content);
+    void writeReport(String fileName, String content);
 }

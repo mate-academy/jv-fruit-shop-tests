@@ -5,5 +5,5 @@ import model.FruitTransaction;
 
 public interface Processor {
 
-  void processCsv(List<FruitTransaction> transactions);
+    void processCsv(List<FruitTransaction> transactions);
 }

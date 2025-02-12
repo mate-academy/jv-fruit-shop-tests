@@ -17,54 +17,54 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvParserTests {
-  private CsvParseService csvParseService;
+    private CsvParseService csvParseService;
 
-  @BeforeEach
-  void setUp() {
-    csvParseService = new CsvParseService();
-  }
+    @BeforeEach
+    void setUp() {
+        csvParseService = new CsvParseService();
+    }
 
-  @Test
-  void parseTransaction_ShouldThrowException_WhenInvalidFormat() {
-    String wrongLineFormat = "b,lemon,100,sold";
-    Exception exception =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              csvParseService.parseTransaction(wrongLineFormat);
+    @Test
+    void parseTransaction_ShouldThrowException_WhenInvalidFormat() {
+        String wrongLineFormat = "b,lemon,100,sold";
+        Exception exception =
+            assertThrows(
+                IllegalArgumentException.class,
+                    () -> {
+                    csvParseService.parseTransaction(wrongLineFormat);
             });
 
-    assertTrue(
+        assertTrue(
         exception.getMessage().contains("Invalid CSV format: " + wrongLineFormat));
-  }
+    }
 
-  @Test
-  void parseTransaction_ShouldReturnCorrectTransaction_WhenValidFormat() {
-    FruitTransaction transactionBalance =
-        new FruitTransaction("lemon", 100, FruitTransaction.Operation.BALANCE);
-    String wrongLineFormat = "b,lemon,100";
-    FruitTransaction resultOfParse = csvParseService.parseTransaction(wrongLineFormat);
-    assertEquals(transactionBalance.getFruit(), resultOfParse.getFruit());
-    assertEquals(transactionBalance.getQuantity(), resultOfParse.getQuantity());
-    assertEquals(transactionBalance.getOperation(), resultOfParse.getOperation());
-  }
+    @Test
+    void parseTransaction_ShouldReturnCorrectTransaction_WhenValidFormat() {
+        FruitTransaction transactionBalance =
+            new FruitTransaction("lemon", 100, FruitTransaction.Operation.BALANCE);
+        String wrongLineFormat = "b,lemon,100";
+        FruitTransaction resultOfParse = csvParseService.parseTransaction(wrongLineFormat);
+        assertEquals(transactionBalance.getFruit(), resultOfParse.getFruit());
+        assertEquals(transactionBalance.getQuantity(), resultOfParse.getQuantity());
+        assertEquals(transactionBalance.getOperation(), resultOfParse.getOperation());
+    }
 
-  @Test
-  void parseTransaction_WhenInvalidFormat_ShouldThrowException() {
-    String invalidLine = "apple,10";
-    Exception exception = assertThrows(
+    @Test
+    void parseTransaction_WhenInvalidFormat_ShouldThrowException() {
+        String invalidLine = "apple,10";
+        Exception exception = assertThrows(
             IllegalArgumentException.class,
             () -> csvParseService.parseTransaction(invalidLine)
-    );
-    assertTrue(exception.getMessage().contains("Invalid CSV format"));
-  }
+        );
+        assertTrue(exception.getMessage().contains("Invalid CSV format"));
+    }
 
-  @Test
-  void parseTransaction_WhenValidFormat_ShouldReturnFruitTransaction() {
-    String validLine = "s,apple,10";
-    FruitTransaction transaction = csvParseService.parseTransaction(validLine);
-    assertEquals("apple", transaction.getFruit());
-    assertEquals(10, transaction.getQuantity());
-    assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
-  }
+    @Test
+    void parseTransaction_WhenValidFormat_ShouldReturnFruitTransaction() {
+        String validLine = "s,apple,10";
+        FruitTransaction transaction = csvParseService.parseTransaction(validLine);
+        assertEquals("apple", transaction.getFruit());
+        assertEquals(10, transaction.getQuantity());
+        assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
+    }
 }

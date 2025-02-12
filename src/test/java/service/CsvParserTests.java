@@ -4,7 +4,9 @@ import model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CsvParserTests {
     private CsvParseService csvParseService;
@@ -51,10 +53,10 @@ public class CsvParserTests {
 
     @Test
     void parseTransaction_WhenValidFormat_ShouldReturnFruitTransaction() {
-        String validLine = "s,apple,10";
-        FruitTransaction transaction = csvParseService.parseTransaction(validLine);
-        assertEquals("apple", transaction.getFruit());
-        assertEquals(10, transaction.getQuantity());
-        assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
+            String validLine = "s,apple,10";
+            FruitTransaction transaction = csvParseService.parseTransaction(validLine);
+            assertEquals("apple", transaction.getFruit());
+            assertEquals(10, transaction.getQuantity());
+            assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
+        }
     }
-}

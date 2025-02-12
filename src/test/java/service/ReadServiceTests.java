@@ -19,8 +19,8 @@ public class ReadServiceTests {
                 Assertions.assertThrows(
                 RuntimeException.class,
                 () -> {csvReadService.readTransactionsFromCsv(wrongFileName);}
-        );
+            );
 
-        Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
+            Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
+        }
     }
-}

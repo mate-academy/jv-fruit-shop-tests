@@ -3,12 +3,12 @@ package dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionDaoImplTests {
-
+    
     private TransactionDaoImpl transactionDao;
 
     @BeforeEach
@@ -33,16 +33,16 @@ class TransactionDaoImplTests {
     void getTransactionByName_WhenFruitExists_ReturnsCorrectQuantity() {
         transactionDao.saveTransaction("Apple", 25);
         assertEquals(25, transactionDao.getTransactionByName(
-                "Apple"),
-            "Should return 25 for Apple"
+                        "Apple"),
+                "Should return 25 for Apple"
         );
     }
 
     @Test
     void getTransactionByName_WhenFruitNotExists_ReturnsZero() {
         assertEquals(0, transactionDao.getTransactionByName(
-                "NonExistentFruit"),
-            "Should return 0 for unknown fruit"
+                        "NonExistentFruit"),
+                "Should return 0 for unknown fruit"
         );
     }
 

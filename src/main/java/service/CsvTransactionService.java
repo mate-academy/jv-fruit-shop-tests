@@ -1,8 +1,8 @@
 package service;
 
 import dao.TransactionsDao;
-import java.util.List;
 import db.Storage;
+import java.util.List;
 import model.FruitTransaction;
 import strategy.OperationStrategy;
 import strategy.TransactionHandler;
@@ -13,7 +13,7 @@ public class CsvTransactionService implements Processor {
     private final OperationStrategy operationStrategy;
 
     public CsvTransactionService(
-        TransactionsDao transactionsDao, OperationStrategy operationStrategy) {
+            TransactionsDao transactionsDao, OperationStrategy operationStrategy) {
         this.transactionsDao = transactionsDao;
         this.operationStrategy = operationStrategy;
     }

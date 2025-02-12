@@ -8,7 +8,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, TransactionHandler> operationHandlers;
 
     public OperationStrategyImpl(
-        Map<FruitTransaction.Operation, TransactionHandler> operationHandlers) {
+            Map<FruitTransaction.Operation, TransactionHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 

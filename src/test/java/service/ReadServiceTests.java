@@ -17,12 +17,12 @@ public class ReadServiceTests {
     void parseTransaction_WhenWrongLine() {
         String wrongFileName = "";
         Exception exception =
-            Assertions.assertThrows(
-                RuntimeException.class,
-                () -> {
-                    csvReadService.readTransactionsFromCsv(wrongFileName);
-                }
-            );
+                Assertions.assertThrows(
+                        RuntimeException.class,
+                        () -> {
+                            csvReadService.readTransactionsFromCsv(wrongFileName);
+                        }
+                );
 
         Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
     }

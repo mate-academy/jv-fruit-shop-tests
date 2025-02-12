@@ -34,7 +34,7 @@ public class FruitStore {
         CsvParseService csvParseService = new CsvParseService();
         CsvReadService csvReadService = new CsvReadService();
         CsvTransactionService csvTransactionService =
-            new CsvTransactionService(transactionDao, operationStrategyImpl);
+                new CsvTransactionService(transactionDao, operationStrategyImpl);
         CsvReportGenerator csvReportGenerator = new CsvReportGenerator();
         CsvWriteService csvWriteService = new CsvWriteService();
 

@@ -5,11 +5,11 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class FruitModelTests {
-
+    
     @Test
     public void constructor_ShouldSetFieldsCorrectly_WhenAllParamsProvided() {
         FruitTransaction transaction =
-            new FruitTransaction("Apple", 50, FruitTransaction.Operation.SUPPLY);
+                new FruitTransaction("Apple", 50, FruitTransaction.Operation.SUPPLY);
         Assertions.assertEquals("Apple", transaction.getFruit());
         Assertions.assertEquals(50, transaction.getQuantity());
         Assertions.assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
@@ -26,7 +26,7 @@ public class FruitModelTests {
     @Test
     public void setters_ShouldUpdateValuesCorrectly() {
         FruitTransaction transaction =
-            new FruitTransaction("Orange", 20, FruitTransaction.Operation.RETURN);
+                new FruitTransaction("Orange", 20, FruitTransaction.Operation.RETURN);
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit("Mango");
         transaction.setQuantity(40);
@@ -39,24 +39,24 @@ public class FruitModelTests {
     @Test
     public void operationEnum_ShouldReturnCorrectOperation_WhenValidCode() {
         Assertions.assertEquals(
-            FruitTransaction.Operation.BALANCE, FruitTransaction.Operation.fromCode("b"));
+                FruitTransaction.Operation.BALANCE, FruitTransaction.Operation.fromCode("b"));
         Assertions.assertEquals(
-            FruitTransaction.Operation.SUPPLY, FruitTransaction.Operation.fromCode("s"));
+                FruitTransaction.Operation.SUPPLY, FruitTransaction.Operation.fromCode("s"));
         Assertions.assertEquals(
-            FruitTransaction.Operation.PURCHASE, FruitTransaction.Operation.fromCode("p"));
+                FruitTransaction.Operation.PURCHASE, FruitTransaction.Operation.fromCode("p"));
         Assertions.assertEquals(
-            FruitTransaction.Operation.RETURN, FruitTransaction.Operation.fromCode("r"));
+                FruitTransaction.Operation.RETURN, FruitTransaction.Operation.fromCode("r"));
     }
 
     @Test
     public void operationEnum_ShouldThrowException_WhenInvalidCode() {
         Exception exception =
-            Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    FruitTransaction.Operation.fromCode("x");
-                }
-            );
+                Assertions.assertThrows(
+                        IllegalArgumentException.class,
+                        () -> {
+                            FruitTransaction.Operation.fromCode("x");
+                        }
+                );
         Assertions.assertTrue(exception.getMessage().contains("Unknown transaction type: x"));
     }
 }

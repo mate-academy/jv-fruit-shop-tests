@@ -1,12 +1,14 @@
 package strategy;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.HashMap;
+import java.util.Map;
 import model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 class OperationStrategyImplTest {
 
@@ -25,26 +27,20 @@ class OperationStrategyImplTest {
 
     @Test
     void getStrategy_WhenValidOperation_ReturnsCorrectHandler() {
-        assertInstanceOf(
-            BalanceHandler.class,
-            operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE));
-        assertInstanceOf(
-            SupplyHandler.class,
-            operationStrategy.getStrategy(FruitTransaction.Operation.SUPPLY));
-        assertInstanceOf(
-            PurchaseHandler.class,
-            operationStrategy.getStrategy(FruitTransaction.Operation.PURCHASE));
-        assertInstanceOf(
-            ReturnHandler.class,
-            operationStrategy.getStrategy(FruitTransaction.Operation.RETURN));
+        assertInstanceOf(BalanceHandler.class,
+                operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE));
+        assertInstanceOf(SupplyHandler.class,
+                operationStrategy.getStrategy(FruitTransaction.Operation.SUPPLY));
+        assertInstanceOf(PurchaseHandler.class,
+                operationStrategy.getStrategy(FruitTransaction.Operation.PURCHASE));
+        assertInstanceOf(ReturnHandler.class,
+                operationStrategy.getStrategy(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void getStrategy_WhenNullOperation_ThrowsException() {
-        Exception exception = assertThrows(
-            IllegalArgumentException.class,
-            () -> operationStrategy.getStrategy(null)
-        );
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> operationStrategy.getStrategy(null));
         assertEquals("Unknown operation: null", exception.getMessage());
     }
 

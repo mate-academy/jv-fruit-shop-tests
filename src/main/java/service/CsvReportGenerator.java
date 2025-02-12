@@ -16,7 +16,7 @@ public class CsvReportGenerator implements Generator {
 
         for (Map.Entry<String, Integer> fruit : Storage.fruitsStore.entrySet()) {
             report.append(fruit.getKey()).append(SEPARATOR).append(fruit.getValue())
-                .append(LINE_BREAK);
+                    .append(LINE_BREAK);
         }
         return report.toString();
     }

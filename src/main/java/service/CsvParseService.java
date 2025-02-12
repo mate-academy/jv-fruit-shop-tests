@@ -19,9 +19,9 @@ public class CsvParseService implements Parser {
         }
 
         return lines.stream()
-            .skip(SKIP_LINES_COUNT)
-            .map(this::parseTransaction)
-            .toList();
+                .skip(SKIP_LINES_COUNT)
+                .map(this::parseTransaction)
+                .toList();
     }
 
     public FruitTransaction parseTransaction(String line) {
@@ -30,8 +30,8 @@ public class CsvParseService implements Parser {
             throw new IllegalArgumentException("Invalid CSV format: " + line);
         }
         return new FruitTransaction(
-            parts[FRUIT_NAME_INDEX],
-            Integer.parseInt(parts[QUANTITY_INDEX]),
-            FruitTransaction.Operation.fromCode(parts[OPERATION_TYPE_INDEX]));
+                parts[FRUIT_NAME_INDEX],
+                Integer.parseInt(parts[QUANTITY_INDEX]),
+                FruitTransaction.Operation.fromCode(parts[OPERATION_TYPE_INDEX]));
     }
 }

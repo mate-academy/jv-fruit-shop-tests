@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 class CsvTransactionServiceTest {
+
     private CsvTransactionService csvTransactionService;
     private TransactionDaoImpl transactionDao;
     private CsvParseService csvParseService;
@@ -36,46 +37,46 @@ class CsvTransactionServiceTest {
     void processCsv_WhenEmptyTransactionList_NoChangesInStorage() {
         csvTransactionService.processCsv(List.of());
         assertEquals(
-                0,
-                transactionDao.getAll().size(),
-                "Storage should remain empty if no transactions are processed");
+            0,
+            transactionDao.getAll().size(),
+            "Storage should remain empty if no transactions are processed");
     }
 
     @Test
     void processCsv_WhenValidSupplyTransaction_StorageUpdatedCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                "banana",
-                20,
-                FruitTransaction.Operation.SUPPLY);
+            "banana",
+            20,
+            FruitTransaction.Operation.SUPPLY);
         csvTransactionService.processCsv(List.of(transaction));
         assertEquals(
-                20,
-                transactionDao.getAll().get("banana"),
-                "Storage should be updated correctly after supply transaction");
+            20,
+            transactionDao.getAll().get("banana"),
+            "Storage should be updated correctly after supply transaction");
     }
 
     @Test
     void processCsv_WhenValidPurchaseTransaction_StorageDecreasedCorrectly() {
         FruitTransaction supplyTransaction = new FruitTransaction(
-                "orange",
-                30,
-                FruitTransaction.Operation.SUPPLY);
+            "orange",
+            30,
+            FruitTransaction.Operation.SUPPLY);
         FruitTransaction purchaseTransaction = new FruitTransaction(
-                "orange",
-                10,
-                FruitTransaction.Operation.PURCHASE);
+            "orange",
+            10,
+            FruitTransaction.Operation.PURCHASE);
         csvTransactionService.processCsv(List.of(supplyTransaction, purchaseTransaction));
         assertEquals(
-                20,
-                transactionDao.getAll().get("orange"),
-                "Storage should decrease correctly after purchase transaction");
+            20,
+            transactionDao.getAll().get("orange"),
+            "Storage should decrease correctly after purchase transaction");
     }
 
     @Test
     void parseTransactions_WhenEmptyList_ShouldThrowException() {
         Exception exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> csvParseService.parseTransactions(null));
+            IllegalArgumentException.class,
+            () -> csvParseService.parseTransactions(null));
         assertEquals("CSV file is empty.", exception.getMessage());
     }
 
@@ -83,8 +84,8 @@ class CsvTransactionServiceTest {
     void parseTransaction_WhenInvalidFormat_ShouldThrowException() {
         String invalidLine = "apple,10";
         Exception exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> csvParseService.parseTransaction(invalidLine));
+            IllegalArgumentException.class,
+            () -> csvParseService.parseTransaction(invalidLine));
         assertTrue(exception.getMessage().contains("Invalid CSV format"));
     }
 

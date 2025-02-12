@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface TransactionsDao {
 
-  Map<String, Integer> getAll();
+    Map<String, Integer> getAll();
 }

@@ -8,7 +8,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class TransactionDaoImplTests {
-  private TransactionDaoImpl transactionDao;
+
+    private TransactionDaoImpl transactionDao;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +34,7 @@ class TransactionDaoImplTests {
         transactionDao.saveTransaction("Apple", 25);
         assertEquals(25, transactionDao.getTransactionByName(
                 "Apple"),
-                "Should return 25 for Apple"
+            "Should return 25 for Apple"
         );
     }
 
@@ -41,7 +42,7 @@ class TransactionDaoImplTests {
     void getTransactionByName_WhenFruitNotExists_ReturnsZero() {
         assertEquals(0, transactionDao.getTransactionByName(
                 "NonExistentFruit"),
-                "Should return 0 for unknown fruit"
+            "Should return 0 for unknown fruit"
         );
     }
 
@@ -51,5 +52,5 @@ class TransactionDaoImplTests {
         transactionDao.saveTransaction("Banana", 10);
         transactionDao.clearTransactions();
         assertTrue(transactionDao.getAll().isEmpty(), "Storage should be empty after clearing");
-        }
     }
+}

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReadServiceTests {
+
     private CsvReadService csvReadService;
 
     @BeforeEach
@@ -14,13 +15,15 @@ public class ReadServiceTests {
 
     @Test
     void parseTransaction_WhenWrongLine() {
-                String wrongFileName = "";
-                Exception exception =
-                Assertions.assertThrows(
+        String wrongFileName = "";
+        Exception exception =
+            Assertions.assertThrows(
                 RuntimeException.class,
-                () -> {csvReadService.readTransactionsFromCsv(wrongFileName);}
+                () -> {
+                    csvReadService.readTransactionsFromCsv(wrongFileName);
+                }
             );
 
-            Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
-        }
+        Assertions.assertTrue(exception.getMessage().contains("Error reading CSV file: "));
     }
+}

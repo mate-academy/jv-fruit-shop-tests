@@ -4,11 +4,12 @@ import java.util.Map;
 import model.FruitTransaction;
 
 public class OperationStrategyImpl implements OperationStrategy {
+
     private final Map<FruitTransaction.Operation, TransactionHandler> operationHandlers;
 
     public OperationStrategyImpl(
         Map<FruitTransaction.Operation, TransactionHandler> operationHandlers) {
-      this.operationHandlers = operationHandlers;
+        this.operationHandlers = operationHandlers;
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class OperationStrategyImplTest {
+
     private OperationStrategyImpl operationStrategy;
 
     @BeforeEach
@@ -25,24 +26,24 @@ class OperationStrategyImplTest {
     @Test
     void getStrategy_WhenValidOperation_ReturnsCorrectHandler() {
         assertInstanceOf(
-                BalanceHandler.class,
-                operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE));
+            BalanceHandler.class,
+            operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE));
         assertInstanceOf(
-                SupplyHandler.class,
-                operationStrategy.getStrategy(FruitTransaction.Operation.SUPPLY));
+            SupplyHandler.class,
+            operationStrategy.getStrategy(FruitTransaction.Operation.SUPPLY));
         assertInstanceOf(
-                PurchaseHandler.class,
-                operationStrategy.getStrategy(FruitTransaction.Operation.PURCHASE));
+            PurchaseHandler.class,
+            operationStrategy.getStrategy(FruitTransaction.Operation.PURCHASE));
         assertInstanceOf(
-                ReturnHandler.class,
-                operationStrategy.getStrategy(FruitTransaction.Operation.RETURN));
+            ReturnHandler.class,
+            operationStrategy.getStrategy(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void getStrategy_WhenNullOperation_ThrowsException() {
         Exception exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> operationStrategy.getStrategy(null)
+            IllegalArgumentException.class,
+            () -> operationStrategy.getStrategy(null)
         );
         assertEquals("Unknown operation: null", exception.getMessage());
     }

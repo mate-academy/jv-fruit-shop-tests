@@ -1,6 +1,7 @@
 package model;
 
 public class FruitTransaction {
+
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -41,19 +42,19 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-    private final String operation;
+        private final String operation;
 
-    Operation(String operation) {
-      this.operation = operation;
-    }
-
-    public static Operation fromCode(String code) {
-        for (Operation type : Operation.values()) {
-            if (type.operation.equalsIgnoreCase(code)) {
-                return type;
-            }
+        Operation(String operation) {
+            this.operation = operation;
         }
-        throw new IllegalArgumentException("Unknown transaction type: " + code);
+
+        public static Operation fromCode(String code) {
+            for (Operation type : Operation.values()) {
+                if (type.operation.equalsIgnoreCase(code)) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Unknown transaction type: " + code);
+        }
     }
-  }
 }

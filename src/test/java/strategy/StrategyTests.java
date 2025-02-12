@@ -10,6 +10,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StrategyTests {
+
     private TransactionDaoImpl transactionDao;
 
     @BeforeEach
@@ -27,14 +28,14 @@ public class StrategyTests {
     void balanceHandler_ShouldAddQuantityToExistingStock() {
         BalanceHandler balanceHandler = new BalanceHandler();
         FruitTransaction transaction = new FruitTransaction(
-                "apple",
-                10,
-                FruitTransaction.Operation.BALANCE);
+            "apple",
+            10,
+            FruitTransaction.Operation.BALANCE);
         int updatedQuantity = balanceHandler.apply(5, transaction);
         assertEquals(
-                15,
-                updatedQuantity,
-                "Balance operation should add quantity to existing stock");
+            15,
+            updatedQuantity,
+            "Balance operation should add quantity to existing stock");
     }
 
     @Test
@@ -43,9 +44,9 @@ public class StrategyTests {
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
         assertInstanceOf(
-                BalanceHandler.class,
-                operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE),
-                "Should return correct handler for BALANCE operation");
+            BalanceHandler.class,
+            operationStrategy.getStrategy(FruitTransaction.Operation.BALANCE),
+            "Should return correct handler for BALANCE operation");
     }
 
     @Test
@@ -53,8 +54,8 @@ public class StrategyTests {
         Map<FruitTransaction.Operation, TransactionHandler> operationHandlers = new HashMap<>();
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
         Exception exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> operationStrategy.getStrategy(null));
+            IllegalArgumentException.class,
+            () -> operationStrategy.getStrategy(null));
         assertTrue(exception.getMessage().contains("Unknown operation"));
     }
 
@@ -66,20 +67,20 @@ public class StrategyTests {
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
         assertInstanceOf(ReturnHandler.class, operationStrategy.getStrategy(
                 FruitTransaction.Operation.RETURN),
-                "Should return correct handler for RETURN operation");
+            "Should return correct handler for RETURN operation");
     }
 
     @Test
     void returnHandler_ShouldIncreaseQuantityInStorage() {
         ReturnHandler returnHandler = new ReturnHandler();
         FruitTransaction transaction = new FruitTransaction(
-                "banana",
-                5,
-                FruitTransaction.Operation.RETURN);
+            "banana",
+            5,
+            FruitTransaction.Operation.RETURN);
         int updatedQuantity = returnHandler.apply(10, transaction);
         assertEquals(
-                15,
-                updatedQuantity,
-                "Return operation should increase quantity in storage");
+            15,
+            updatedQuantity,
+            "Return operation should increase quantity in storage");
     }
 }

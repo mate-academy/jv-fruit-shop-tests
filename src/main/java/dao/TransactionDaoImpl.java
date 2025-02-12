@@ -7,18 +7,18 @@ public class TransactionDaoImpl implements TransactionsDao {
 
     @Override
     public Map<String, Integer> getAll() {
-      return Map.copyOf(Storage.fruitsStore);
+        return Map.copyOf(Storage.fruitsStore);
     }
 
     public Integer getTransactionByName(String fruitName) {
-      return Storage.fruitsStore.getOrDefault(fruitName, 0);
+        return Storage.fruitsStore.getOrDefault(fruitName, 0);
     }
 
     public void saveTransaction(String fruitName, int quantity) {
-      Storage.fruitsStore.put(fruitName, quantity);
+        Storage.fruitsStore.put(fruitName, quantity);
     }
 
     public void clearTransactions() {
-      Storage.fruitsStore.clear();
+        Storage.fruitsStore.clear();
     }
 }

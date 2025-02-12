@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TransactionDaoImplTests {
+class TransactionDaoImplTest {
     
     private TransactionDaoImpl transactionDao;
     

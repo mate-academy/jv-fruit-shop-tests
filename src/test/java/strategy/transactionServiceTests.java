@@ -24,18 +24,18 @@ class CsvTransactionServiceTest {
     void setUp() {
         Map<FruitTransaction.Operation, TransactionHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
-            new BalanceHandler());
+                new BalanceHandler());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-            new SupplyHandler());
+                new SupplyHandler());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-            new PurchaseHandler());
+                new PurchaseHandler());
         operationHandlers.put(FruitTransaction.Operation.RETURN,
-            new ReturnHandler());
+                new ReturnHandler());
         
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
         transactionDao = new TransactionDaoImpl();
         csvTransactionService = new CsvTransactionService(transactionDao,
-            operationStrategy);
+                operationStrategy);
         csvParseService = new CsvParseService();
         transactionDao.clearTransactions();
     }
@@ -43,63 +43,55 @@ class CsvTransactionServiceTest {
     @Test
     void processCsv_WhenEmptyTransactionList_NoChangesInStorage() {
         csvTransactionService.processCsv(List.of());
-        assertEquals(
-            0,
-            transactionDao.getAll()
-                .size(),
-            "Storage should remain empty if no transactions are processed");
+        assertEquals(0,
+                transactionDao.getAll()
+                        .size(),
+                "Storage should remain empty if no transactions are processed");
     }
     
     @Test
     void processCsv_WhenValidSupplyTransaction_StorageUpdatedCorrectly() {
-        FruitTransaction transaction = new FruitTransaction(
-            "banana",
-            20,
-            FruitTransaction.Operation.SUPPLY);
+        FruitTransaction transaction = new FruitTransaction("banana",
+                20,
+                FruitTransaction.Operation.SUPPLY);
         csvTransactionService.processCsv(List.of(transaction));
-        assertEquals(
-            20,
-            transactionDao.getAll()
-                .get("banana"),
-            "Storage should be updated correctly after supply transaction");
+        assertEquals(20,
+                transactionDao.getAll()
+                        .get("banana"),
+                "Storage should be updated correctly after supply transaction");
     }
     
     @Test
     void processCsv_WhenValidPurchaseTransaction_StorageDecreasedCorrectly() {
-        FruitTransaction supplyTransaction = new FruitTransaction(
-            "orange",
-            30,
-            FruitTransaction.Operation.SUPPLY);
-        FruitTransaction purchaseTransaction = new FruitTransaction(
-            "orange",
-            10,
-            FruitTransaction.Operation.PURCHASE);
+        FruitTransaction supplyTransaction = new FruitTransaction("orange",
+                30,
+                FruitTransaction.Operation.SUPPLY);
+        FruitTransaction purchaseTransaction = new FruitTransaction("orange",
+                10,
+                FruitTransaction.Operation.PURCHASE);
         csvTransactionService.processCsv(List.of(supplyTransaction,
-            purchaseTransaction));
-        assertEquals(
-            20,
-            transactionDao.getAll()
-                .get("orange"),
-            "Storage should decrease correctly after purchase transaction");
+                purchaseTransaction));
+        assertEquals(20,
+                transactionDao.getAll()
+                        .get("orange"),
+                "Storage should decrease correctly after purchase transaction");
     }
     
     @Test
     void parseTransactions_WhenEmptyList_ShouldThrowException() {
-        Exception exception = assertThrows(
-            IllegalArgumentException.class,
-            () -> csvParseService.parseTransactions(null));
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> csvParseService.parseTransactions(null));
         assertEquals("CSV file is empty.",
-            exception.getMessage());
+                exception.getMessage());
     }
     
     @Test
     void parseTransaction_WhenInvalidFormat_ShouldThrowException() {
         String invalidLine = "apple,10";
-        Exception exception = assertThrows(
-            IllegalArgumentException.class,
-            () -> csvParseService.parseTransaction(invalidLine));
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> csvParseService.parseTransaction(invalidLine));
         assertTrue(exception.getMessage()
-            .contains("Invalid CSV format"));
+                .contains("Invalid CSV format"));
     }
     
     @Test
@@ -107,10 +99,10 @@ class CsvTransactionServiceTest {
         String validLine = "s,apple,10";
         FruitTransaction transaction = csvParseService.parseTransaction(validLine);
         assertEquals("apple",
-            transaction.getFruit());
+                transaction.getFruit());
         assertEquals(10,
-            transaction.getQuantity());
+                transaction.getQuantity());
         assertEquals(FruitTransaction.Operation.SUPPLY,
-            transaction.getOperation());
+                transaction.getOperation());
     }
 }

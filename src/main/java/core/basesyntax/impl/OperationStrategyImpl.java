@@ -17,7 +17,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
         OperationHandler operationHandler = operationHandlerMap.get(operation);
         if (operationHandler == null) {
-            throw new RuntimeException("Operation doesn't exist by number : " + operation);
+            throw new IllegalArgumentException("Operation doesn't exist by number : " + operation);
         }
         return operationHandler;
     }

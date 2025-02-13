@@ -4,7 +4,7 @@ import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class FileWriterImpl implements FileWriter {
+public class CsvFileWriter implements FileWriter {
     @Override
     public void writeReport(String data, String path) {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(path))) {

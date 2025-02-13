@@ -11,6 +11,9 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
+        if (Storage.getFruitStorage().isEmpty()) {
+            return CSV_FILE_HEADER;
+        }
         return Storage.getFruitStorage().entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())

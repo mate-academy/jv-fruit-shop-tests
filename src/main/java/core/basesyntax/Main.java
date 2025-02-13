@@ -1,8 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.impl.CsvFileReader;
+import core.basesyntax.impl.CsvFileWriter;
 import core.basesyntax.impl.DataConverterImpl;
-import core.basesyntax.impl.FileReaderImpl;
-import core.basesyntax.impl.FileWriterImpl;
 import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.impl.ShopServiceImpl;
@@ -27,7 +27,7 @@ public class Main {
     public static final String OUTPUT_DATA_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
-        FileReader fileReader = new FileReaderImpl();
+        FileReader fileReader = new CsvFileReader();
         List<String> inputReport = fileReader.read(INPUT_DATA_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -46,7 +46,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeReport(resultingReport, OUTPUT_DATA_PATH);
     }
 }

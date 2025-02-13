@@ -1,22 +1,31 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.FileWriterImpl;
+import core.basesyntax.impl.CsvFileWriter;
 import core.basesyntax.service.FileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FileWriterImplTest {
+class CsvFileWriterTest {
     private static final String TEST_FILE_PATH = "src/test/resources/test_output.csv";
     private FileWriter fileWriter;
 
     @BeforeEach
     void setUp() {
-        fileWriter = new FileWriterImpl();
+        fileWriter = new CsvFileWriter();
+    }
+
+    @AfterEach
+    void tearDown() {
+        File file = new File(TEST_FILE_PATH);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     @Test

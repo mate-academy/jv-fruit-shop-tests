@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.impl.FileReaderImpl;
+import core.basesyntax.impl.CsvFileReader;
 import core.basesyntax.service.FileReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FileReaderImplTest {
+class CsvFileReaderTest {
     private static final String TEST_FILE_PATH = "src/test/resources/test_file.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty_file.csv";
     private static final String NON_EXIST_FILE_PATH = "src/test/resources/missing.csv";
@@ -21,7 +21,7 @@ class FileReaderImplTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        fileReader = new FileReaderImpl();
+        fileReader = new CsvFileReader();
         createTestFile(TEST_FILE_PATH, "line1\nline2\nline3");
         createTestFile(EMPTY_FILE_PATH, "");
     }

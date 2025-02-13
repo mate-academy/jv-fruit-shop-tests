@@ -40,4 +40,10 @@ class ReportGeneratorImplTest {
                 + "cherry,20";
         assertEquals(expectedReport, reportGenerator.getReport());
     }
+
+    @Test
+    void getReport_emptyStorage_ok() {
+        String expectedReport = "fruit,quantity";
+        assertEquals(expectedReport, reportGenerator.getReport());
+    }
 }

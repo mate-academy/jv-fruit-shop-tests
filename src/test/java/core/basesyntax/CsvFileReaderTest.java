@@ -52,7 +52,7 @@ class CsvFileReaderTest {
         File file = new File(path);
         file.getParentFile().mkdirs();
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(content);
+            writer.write(content.replace("\n", System.lineSeparator()));
         }
     }
 }

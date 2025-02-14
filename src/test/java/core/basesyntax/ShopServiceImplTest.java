@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -13,7 +14,6 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -70,7 +70,7 @@ class ShopServiceImplTest {
     @Test
     void getOperationHandler_allOperations_ok() {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            Assertions.assertNotNull(operationStrategy.getOperationHandler(operation),
+            assertNotNull(operationStrategy.getOperationHandler(operation),
                     "Handler is missing for operation: " + operation);
         }
     }

@@ -68,4 +68,39 @@ class OperationHandlerTest {
         supplyOperation.apply(new FruitTransaction(KIWI, QUANTITY_20));
         assertEquals(QUANTITY_20, Storage.getFruitStorage().get(KIWI));
     }
+
+    @Test
+    void balanceOperation_apply_throwsExceptionForNegativeQuantity() {
+        OperationHandler balanceOperation = new BalanceOperation();
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> balanceOperation.apply(new FruitTransaction(APPLE, -10)));
+        assertEquals("Quantity cannot be negative: -10", exception.getMessage());
+    }
+
+    @Test
+    void purchaseOperation_apply_throwsExceptionForNegativeQuantity() {
+        Storage.getFruitStorage().put(BANANA, 50);
+        OperationHandler purchaseOperation = new PurchaseOperation();
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> purchaseOperation.apply(new FruitTransaction(BANANA, -10)));
+        assertEquals("Quantity cannot be negative: -10", exception.getMessage());
+    }
+
+    @Test
+    void returnOperation_apply_throwsExceptionForNegativeQuantity() {
+        Storage.getFruitStorage().put(ORANGE, 10);
+        OperationHandler returnOperation = new ReturnOperation();
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> returnOperation.apply(new FruitTransaction(ORANGE, -10)));
+        assertEquals("Quantity cannot be negative: -10", exception.getMessage());
+    }
+
+    @Test
+    void supplyOperation_apply_throwsExceptionForNegativeQuantity() {
+        OperationHandler supplyOperation = new SupplyOperation();
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> supplyOperation.apply(new FruitTransaction(KIWI, -10)));
+        assertEquals("Quantity cannot be negative: -10", exception.getMessage());
+    }
+
 }

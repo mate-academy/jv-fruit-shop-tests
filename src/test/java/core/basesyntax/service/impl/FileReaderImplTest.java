@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static FileReader fileReader;
+    private static final String FILE_FOR_FIRST_TEST = "fileWithFruits.csv";
+    private static final String FILE_FOR_SECOND_TEST = "emptyFile.csv";
 
     @BeforeAll
     public static void setUp() {
@@ -19,18 +20,25 @@ class FileReaderImplTest {
     }
 
     @Test
-    public void completedList_Ok() {
-        String fileName = "fruits.csv";
-
-        List<String> expected = fileReader.readFile(fileName);
+    public void fileReader_completedList_ok() {
+        String fileName = FILE_FOR_FIRST_TEST;
+        List<String> expected =
+                List.of("b,banana,10",
+                        "b,apple,100",
+                        "s,banana,100",
+                        "p,banana,13",
+                        "r,apple,10",
+                        "p,apple,20",
+                        "p,banana,5",
+                        "s,banana,50");
         List<String> actual = fileReader.readFile(fileName);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void completedList_NotOk() {
-        String fileName = "fruits1.csv";
+    public void fileReader_completedList_notOk() {
+        String fileName = FILE_FOR_SECOND_TEST;
 
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.readFile(fileName);
@@ -39,16 +47,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    public void fileFound_Ok() {
-        String fileName = "fruits.csv";
-
-        List<String> list = fileReader.readFile(fileName);
-
-        assertTrue(list.size() != 0);
-    }
-
-    @Test
-    public void fileFound_NotOk() {
+    public void fileReader_fileFound_notOk() {
         String fileName = "f";
 
         assertThrows(RuntimeException.class, () -> {

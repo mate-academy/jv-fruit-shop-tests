@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,6 +14,16 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static FileWriter fileWriter;
+    private static final String FILE_FOR_FIRST_TEST = "emptyFile.csv";
+    private static final String FILE_FOR_SECOND_TEST = "fileWithHello.csv";
+
+    private List<String> readFileContents(String fileName) {
+        try {
+            return Files.readAllLines(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t write data from file " + fileName);
+        }
+    }
 
     @BeforeAll
     public static void setUp() {
@@ -22,56 +31,33 @@ class FileWriterImplTest {
     }
 
     @Test
-    public void correctWritingToFileIfTextIsEmpty_Ok() {
-        String fileName = "fileToTest.csv";
+    public void writeToFile_correctWritingToFileIfTextIsEmpty_ok() {
+        String fileName = FILE_FOR_FIRST_TEST;
         String text = "";
 
         fileWriter.writeToFile(fileName, text);
         List<String> expected = new ArrayList<>();
 
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write data from file " + fileName);
-        }
+        List<String> actual = readFileContents(fileName);
 
         assertEquals(expected.size(), actual.size());
     }
 
     @Test
-    public void correctWritingToFileIfTextIsNotEmpty_Ok() {
-        String fileName = "file.csv";
+    public void writeToFile_correctWritingToFileIfTextIsNotEmpty_ok() {
+        String fileName = FILE_FOR_SECOND_TEST;
         String text = "Hello";
 
         fileWriter.writeToFile(fileName, text);
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file " + fileName);
-        }
+        List<String> actual = readFileContents(fileName);
 
-        List<String> expected;
-        try {
-            expected = Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file " + fileName);
-        }
+        List<String> expected = List.of("Hello");
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fileFound_Ok() {
-        String fileName = "fileToTest.csv";
-        String text = "";
-
-        assertDoesNotThrow(() -> fileWriter.writeToFile(fileName, text));
-    }
-
-    @Test
-    public void fileFound_NotOk() {
+    public void writeToFile_fileFound_notOk() {
         String fileName = "";
         String text = "";
 

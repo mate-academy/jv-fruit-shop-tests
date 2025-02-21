@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class ReportService {
-    private static final String NEW_LINE_SEPARATOR = "\n";
+    private static final String NEW_LINE_SEPARATOR = System.lineSeparator();
     private static final String HEADER = "fruit,quantity" + NEW_LINE_SEPARATOR;
     private static final String CSV_SEPARATOR = ",";
 

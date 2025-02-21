@@ -16,16 +16,13 @@ class ParserServiceImplTest {
     @Test
     void validInput_Ok() {
         List<String> lines = List.of("b,apple,10", "s,banana,5");
-        List<FruitTransaction> fruitTransactions = parserService.parseTransactions(lines);
+        List<FruitTransaction> expectedTransactions = List.of(
+                new FruitTransaction(Operation.BALANCE, "apple", 10),
+                new FruitTransaction(Operation.SUPPLY, "banana", 5)
+        );
 
-        assertEquals(2, fruitTransactions.size());
-        assertEquals(Operation.BALANCE, fruitTransactions.get(0).getOperation());
-        assertEquals("apple", fruitTransactions.get(0).getFruit());
-        assertEquals(10, fruitTransactions.get(0).getQuantity());
-
-        assertEquals(Operation.SUPPLY, fruitTransactions.get(1).getOperation());
-        assertEquals("banana", fruitTransactions.get(1).getFruit());
-        assertEquals(5, fruitTransactions.get(1).getQuantity());
+        List<FruitTransaction> actualTransactions = parserService.parseTransactions(lines);
+        assertEquals(expectedTransactions, actualTransactions);
     }
 
     @Test
@@ -64,8 +61,8 @@ class ParserServiceImplTest {
 
     @Test
     void nullInput_ThrowsException() {
-        Exception exception = assertThrows(NullPointerException.class,
+        Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> parserService.parseTransactions(null));
-        assertNotNull(exception);
+        assertNotNull("Input list cannot be null", exception.getMessage());
     }
 }

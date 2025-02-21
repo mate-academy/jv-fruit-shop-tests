@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,13 +35,13 @@ class ReportServiceTest {
     void multipleFruits_CorrectFormat() {
         Storage.getFruits().put("orange", 5);
         Storage.getFruits().put("apple", 10);
+
         String actual = reportService.generateReport();
+        String expected = "fruit,quantity\n"
+                + "orange,5\n"
+                + "apple,10\n";
 
-        assertEquals(3, actual.lines().count());
-
-        assertTrue(actual.contains("fruit,quantity\n"));
-        assertTrue(actual.contains("orange,5\n"));
-        assertTrue(actual.contains("apple,10\n"));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -50,5 +50,10 @@ class ReportServiceTest {
         String expected = "fruit,quantity\norange,0\n";
         String actual = reportService.generateReport();
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.getFruits().clear();
     }
 }

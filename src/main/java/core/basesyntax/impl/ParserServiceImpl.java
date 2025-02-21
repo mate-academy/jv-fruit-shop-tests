@@ -15,13 +15,17 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> lines) {
+        if (lines == null) {
+            throw new IllegalArgumentException("Input list cannot be null");
+        }
+
         List<FruitTransaction> transactions = new ArrayList<>();
 
         for (String line : lines) {
             try {
                 String[] transaction = line.split(CSV_SEPARATOR);
                 if (transaction.length < TRANSACTION_FIELDS_COUNT) {
-                    throw new RuntimeException("Invalid input format: insufficient fields");
+                    throw new RuntimeException("Invalid input format: insufficient fields" + line);
                 }
                 transactions.add(new FruitTransaction(Operation
                         .getOperationByCode(transaction[OPERATION_INDEX]),

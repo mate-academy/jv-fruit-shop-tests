@@ -3,11 +3,12 @@ package core.basesyntax.strategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.operationhandler.BalanceHandler;
 import core.basesyntax.service.operationhandler.OperationHandler;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class OperationStrategyTest {
 
@@ -16,16 +17,14 @@ class OperationStrategyTest {
 
     @BeforeEach
     void setUp() {
-        operationHandlerMap = Mockito.mock(Map.class);
-
-        OperationHandler mockHandler = Mockito.mock(OperationHandler.class);
-        Mockito.when(operationHandlerMap.get(Operation.BALANCE)).thenReturn(mockHandler);
-
+        operationHandlerMap = new HashMap<>();
+        OperationHandler balanceHandler = new BalanceHandler();
+        operationHandlerMap.put(Operation.BALANCE, balanceHandler);
         operationStrategy = new OperationStrategy(operationHandlerMap);
     }
 
     @Test
-    void getHandler_ShouldReturnCorrectHandlerForOperation() {
+    void shouldReturnCorrectHandlerForOperation() {
         OperationHandler handler = operationStrategy.getHandler(Operation.BALANCE);
         assertEquals(operationHandlerMap.get(Operation.BALANCE), handler);
     }

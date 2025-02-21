@@ -11,10 +11,14 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class ReaderServiceImplTest {
     private ReaderService readerService;
     private Path tempFile;
+
+    @TempDir
+    private Path tempDir;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -24,6 +28,7 @@ class ReaderServiceImplTest {
 
     @Test
     void fileIsExists() throws IOException {
+        Path tempFile = tempDir.resolve("Fruit.txt");
         List<String> expectedFruitsData = List.of("apple,10", "strawberry,5", "banana,7");
         Files.write(tempFile, expectedFruitsData);
 
@@ -40,7 +45,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void fileNotFound_NotOk() {
+    void fileNotFound_Ok() {
         String invalidFile = "non_Inappropriate_file.txt";
         Exception exception = assertThrows(RuntimeException.class,
                 () -> readerService.readData(invalidFile));
@@ -48,7 +53,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void fileWithEmptyLines_NotOk() throws IOException {
+    void fileWithEmptyLines_Ok() throws IOException {
         List<String> expectedFruitsData = List.of("apple,10", " ", "banana,7");
         Files.write(tempFile, expectedFruitsData);
 

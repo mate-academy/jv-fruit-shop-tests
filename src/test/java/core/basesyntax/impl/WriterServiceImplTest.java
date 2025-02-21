@@ -17,13 +17,13 @@ class WriterServiceImplTest {
     private Path tempFile;
 
     @BeforeEach
-    void set_Up() throws IOException {
+    void setUp() throws IOException {
         writerService = new WriterServiceImpl();
         tempFile = Files.createTempFile("testFile", ".txt");
     }
 
     @Test
-    void validInput_Ok() throws IOException {
+    void writeValidData_Ok() throws IOException {
         String actual = "apple,10\nbanana,5\norange,8";
         writerService.writeToFile(actual, tempFile.toString());
 
@@ -32,7 +32,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void overwriteFile_Ok() throws IOException {
+    void overwriteExistingFile_Ok() throws IOException {
         Files.writeString(tempFile, "Old data");
 
         String newDataFile = "new data";
@@ -43,7 +43,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void nonWritablePath_NotOk() {
+    void nonWritablePath_Failure() {
         String invalidPath = "/invalidPath/testFile.txt";
         Exception exception = assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile("data", invalidPath));
@@ -51,14 +51,14 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void emptyFile_NotOk() throws IOException {
+    void writeEmptyString_Ok() throws IOException {
         writerService.writeToFile(" ", tempFile.toString());
         String actualFile = Files.readString(tempFile);
         assertEquals(" ", actualFile);
     }
 
     @Test
-    void null_NotOk() {
+    void writeNull_NotOk() {
         Exception exception = assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile(null, tempFile.toString()));
         assertNotNull(exception);

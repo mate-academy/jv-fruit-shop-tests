@@ -19,6 +19,7 @@ import core.basesyntax.service.ShopUpdateService;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.transactor.FruitTransaction;
 import core.basesyntax.transactor.Operation;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -33,13 +34,13 @@ public class Main {
     public static void main(String[] args) {
         CsvFileReader csvFileReader = new CsvReaderImpl();
         ProcessData processData = new ProcessDataImpl();
-        Strategy operationStrategy = new OperationStrategyImpl();
+        Strategy operationStrategy = new OperationStrategyImpl(MAP);
         ShopUpdateService<FruitTransaction> fruitShopUpdateService
                 = new ShopUpdateImpl(operationStrategy);
         ReportCreator createReport = new ReportCreatorImpl();
         CsvFileWriter csvFileWriter = new CsvWriterImpl();
-        String transaction = csvFileReader.readFile(FILE_FROM_PATH);
-        fruitShopUpdateService.update(processData.process(transaction), MAP);
+        List transaction = csvFileReader.readFile(FILE_FROM_PATH);
+        fruitShopUpdateService.update(processData.process(transaction.toString()));
         csvFileWriter.writeFile(FILE_TO_PATH, createReport.createReport());
     }
 }

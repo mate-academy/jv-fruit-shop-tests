@@ -30,11 +30,10 @@ class ShopUpdateImplTest {
 
     @BeforeEach
     void setUp() {
-        operationStrategy = new OperationStrategyImpl() {
+        operationStrategy = new OperationStrategyImpl(MAP) {
             @Override
-            public OperationHandler get(Operation operation,
-                                        Map<Operation, OperationHandler> map) {
-                return map.get(operation);
+            public OperationHandler getOperationHandler(Operation operation) {
+                return MAP.get(operation);
             }
         };
         shopUpdateService = new ShopUpdateImpl(operationStrategy);
@@ -47,7 +46,7 @@ class ShopUpdateImplTest {
                 new FruitTransaction(Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(Operation.RETURN, "banana", 10),
                 new FruitTransaction(Operation.SUPPLY, "banana", 10));
-        shopUpdateService.update(expectedFruitShopUpdate, MAP);
+        shopUpdateService.update(expectedFruitShopUpdate);
         assertEquals(35, (int) Storage.storage.get("banana"));
     }
 }

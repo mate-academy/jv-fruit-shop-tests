@@ -20,13 +20,6 @@ public class ProcessDataImpl implements ProcessData {
                 .map(this::convertDataToTransaction).toList();
     }
 
-    private Operation getOperation(String code) {
-        return Stream.of(Operation.values())
-                .filter(o -> o.getCode().equals(code))
-                .findFirst().orElseThrow(() -> new RuntimeException(
-                        "No operation following code: " + code));
-    }
-
     private FruitTransaction convertDataToTransaction(String inputDataLine) {
         if (inputDataLine == null || inputDataLine.isEmpty()) {
             throw new IllegalArgumentException("The entrance row cannot be empty");
@@ -42,7 +35,7 @@ public class ProcessDataImpl implements ProcessData {
             throw new IllegalArgumentException("Data contains empty values: "
                     + inputDataLine);
         }
-        return new FruitTransaction(getOperation(data[OPERATION_INDEX]),
+        return new FruitTransaction(Operation.getOperationCode(data[OPERATION_INDEX]),
                 data[FRUIT_TYPE_INDEX], Integer.parseInt(data[INDEX_OF_AMOUNT]));
     }
 }

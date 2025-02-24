@@ -1,5 +1,7 @@
 package core.basesyntax.handler;
 
+import core.basesyntax.transactor.FruitTransaction;
+
 public interface OperationHandler {
-    void operate(String fruitType, int amount);
+    void operate(FruitTransaction fruitTransaction);
 }

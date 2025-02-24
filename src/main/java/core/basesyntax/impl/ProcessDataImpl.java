@@ -12,11 +12,10 @@ public class ProcessDataImpl implements ProcessData {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int INDEX_OF_AMOUNT = 2;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
     public List<FruitTransaction> process(String inputData) {
-        String[] records = inputData.split(LINE_SEPARATOR);
+        String[] records = inputData.split(System.lineSeparator());
         return Stream.of(records).skip(HEAD_INFO_INDEX)
                 .map(this::convertDataToTransaction).toList();
     }
@@ -29,8 +28,21 @@ public class ProcessDataImpl implements ProcessData {
     }
 
     private FruitTransaction convertDataToTransaction(String inputDataLine) {
+        if (inputDataLine == null || inputDataLine.isEmpty()) {
+            throw new IllegalArgumentException("The entrance row cannot be empty");
+        }
         String[] data = inputDataLine.split(COMMA);
-        return new FruitTransaction(getOperation(data[OPERATION_INDEX].trim()),
-                data[FRUIT_TYPE_INDEX].trim(), Integer.parseInt(data[INDEX_OF_AMOUNT].trim()));
+        if (data.length < 3) {
+            throw new IllegalArgumentException("Invalid input data format: "
+                    + inputDataLine);
+        }
+        if (data[OPERATION_INDEX].isEmpty()
+                || data[FRUIT_TYPE_INDEX].isEmpty()
+                || data[INDEX_OF_AMOUNT].isEmpty()) {
+            throw new IllegalArgumentException("Data contains empty values: "
+                    + inputDataLine);
+        }
+        return new FruitTransaction(getOperation(data[OPERATION_INDEX]),
+                data[FRUIT_TYPE_INDEX], Integer.parseInt(data[INDEX_OF_AMOUNT]));
     }
 }

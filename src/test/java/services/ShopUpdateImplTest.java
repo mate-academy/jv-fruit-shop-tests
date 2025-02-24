@@ -47,7 +47,7 @@ class ShopUpdateImplTest {
                 new FruitTransaction(Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(Operation.RETURN, "banana", 10),
                 new FruitTransaction(Operation.SUPPLY, "banana", 10));
-        shopUpdateService.update(expectedFruitShopUpdate);
+        shopUpdateService.update(expectedFruitShopUpdate, MAP);
         assertEquals(35, (int) Storage.storage.get("banana"));
     }
 }

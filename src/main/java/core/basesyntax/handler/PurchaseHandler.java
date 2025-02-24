@@ -1,17 +1,21 @@
 package core.basesyntax.handler;
 
 import core.basesyntax.database.Storage;
+import core.basesyntax.transactor.FruitTransaction;
 
 public class PurchaseHandler implements OperationHandler {
 
     @Override
-    public void operate(String fruitType, int amount) {
-        int amountAfterPurchase = Storage.storage.get(fruitType)
-                - amount;
+    public void operate(FruitTransaction transaction) {
+        int currentAmount = Storage.storage.get(transaction.getFruit());
+        int purchaseAmount = transaction.getQuantity();
+        int amountAfterPurchase = currentAmount - purchaseAmount;
         if (amountAfterPurchase < 0) {
             throw new RuntimeException("Can't "
-                    + "do purchase, because amount < purchase");
+                    + "do purchase, because amount = "
+                    + currentAmount + " < purchase = "
+                    + purchaseAmount);
         }
-        Storage.storage.put(fruitType, amountAfterPurchase);
+        Storage.storage.put(transaction.getFruit(), amountAfterPurchase);
     }
 }

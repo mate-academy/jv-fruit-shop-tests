@@ -21,7 +21,6 @@ class FileReaderImplTest {
 
     @Test
     public void fileReader_completedList_ok() {
-        String fileName = FILE_FOR_FIRST_TEST;
         List<String> expected =
                 List.of("b,banana,10",
                         "b,apple,100",
@@ -31,27 +30,23 @@ class FileReaderImplTest {
                         "p,apple,20",
                         "p,banana,5",
                         "s,banana,50");
-        List<String> actual = fileReader.readFile(fileName);
+        List<String> actual = fileReader.readFile(FILE_FOR_FIRST_TEST);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fileReader_completedList_notOk() {
-        String fileName = FILE_FOR_SECOND_TEST;
-
+    public void fileReader_emptyList_ok() {
         List<String> expected = new ArrayList<>();
-        List<String> actual = fileReader.readFile(fileName);
+        List<String> actual = fileReader.readFile(FILE_FOR_SECOND_TEST);
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void fileReader_fileFound_notOk() {
-        String fileName = "f";
-
         assertThrows(RuntimeException.class, () -> {
-            fileReader.readFile(fileName);
+            fileReader.readFile("f");
         });
     }
 }

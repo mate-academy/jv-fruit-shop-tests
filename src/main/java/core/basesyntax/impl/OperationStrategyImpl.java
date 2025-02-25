@@ -6,14 +6,15 @@ import core.basesyntax.transactor.Operation;
 import java.util.Map;
 
 public class OperationStrategyImpl implements Strategy {
-    private Map<Operation, OperationHandler> map;
+    private final Map<Operation, OperationHandler> operationHandlersMap;
 
     public OperationStrategyImpl(Map<Operation, OperationHandler> map) {
-        this.map = map;
+        this.operationHandlersMap = map;
     }
 
     @Override
     public OperationHandler getOperationHandler(Operation operation) {
-        return map.get(operation);
+
+        return operationHandlersMap.get(operation);
     }
 }

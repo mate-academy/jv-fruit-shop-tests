@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class CsvWriterImplTest {
     public static final String VALID_FILE_NAME = "src/test/java/resources/WriteFileTest.csv";
     public static final String INVALID_FILE_NAME = "";
-    public static final String REPORT = "type,fruit,quantity\n"
+    public static final String REPORT = "type,fruit,quantity" + System.lineSeparator()
             + "b,banana,20";
     private CsvFileWriter csvFileWriter;
 
@@ -28,6 +28,7 @@ class CsvWriterImplTest {
         File file = new File(VALID_FILE_NAME);
         csvFileWriter.writeFile(file.getAbsolutePath(), REPORT);
         String actualContent = Files.readString(file.toPath());
+        assertEquals(REPORT, actualContent);
     }
 
     @Test

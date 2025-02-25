@@ -20,12 +20,11 @@ class ReportCreatorTest {
     @Test
     void createReport_ok() {
         Storage.storage.put("banana", 50);
-        String expected = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,50"
-                + System.lineSeparator();
+        StringBuilder expected = new StringBuilder()
+                .append("fruit,quantity").append(System.lineSeparator())
+                .append("banana,50").append(System.lineSeparator());
         String actual = createReport.createReport();
-        assertEquals(expected, actual);
+        assertEquals(expected.toString(), actual);
     }
 
     @Test

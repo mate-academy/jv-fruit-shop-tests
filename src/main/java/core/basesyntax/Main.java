@@ -38,8 +38,8 @@ public class Main {
                 = new ShopUpdateImpl(operationStrategy);
         ReportCreator createReport = new ReportCreatorImpl();
         CsvFileWriter csvFileWriter = new CsvWriterImpl();
-        List transaction = csvFileReader.readFile(FILE_FROM_PATH);
-        fruitShopUpdateService.update(processData.process(transaction.toString()));
+        List<String> fileLines = csvFileReader.readFile(FILE_FROM_PATH);
+        fruitShopUpdateService.update(processData.process(fileLines));
         csvFileWriter.writeFile(FILE_TO_PATH, createReport.createReport());
     }
 }

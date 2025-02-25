@@ -10,8 +10,12 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
     private static final String VALID_PATH = "src/test/java/resources/ReadTestFile.csv";
-    private static final String Invalid_Path = "";
-    private static final List<String> FILE_CONTENT = List.of("Test file");
+    private static final String INVALID_PATH = "";
+    private static final List<String> FILE_CONTENT = List.of("type,fruit,quantity",
+            "    b,banana,20",
+            "    b,apple,100",
+            "    s,banana,100");
+
     private CsvReaderImpl csvReader;
 
     @BeforeEach
@@ -28,7 +32,8 @@ class CsvFileReaderImplTest {
     @Test
     void testRead_invalidPath() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class,
-                () -> csvReader.readFile(Invalid_Path));
-        assertEquals("Can't read file", runtimeException.getMessage());
+                () -> csvReader.readFile(INVALID_PATH));
+        assertEquals("Can't read file ", runtimeException.getMessage());
     }
+
 }

@@ -13,8 +13,10 @@ public class ReportCreatorImpl implements ReportCreator {
         StringBuilder report = new StringBuilder().append(FIRST_LINE)
                 .append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
-            report.append(entry.getKey()).append(COMMA)
-                    .append(entry.getValue()).append(System.lineSeparator());
+            report.append(entry.getKey())
+                    .append(COMMA)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

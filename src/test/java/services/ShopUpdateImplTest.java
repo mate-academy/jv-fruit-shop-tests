@@ -20,22 +20,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopUpdateImplTest {
-    private static final Map<Operation, OperationHandler> MAP = Map.of(
+    private static final Map<Operation, OperationHandler> OPERATION_HANDLERS_MAP = Map.of(
             Operation.BALANCE, new BalanceHandler(),
             Operation.RETURN, new ReturnHandler(),
             Operation.PURCHASE, new PurchaseHandler(),
             Operation.SUPPLY, new SupplyHandler());
-    private ShopUpdateService shopUpdateService;
     private Strategy operationStrategy;
+    private ShopUpdateService shopUpdateService;
 
     @BeforeEach
     void setUp() {
-        operationStrategy = new OperationStrategyImpl(MAP) {
-            @Override
-            public OperationHandler getOperationHandler(Operation operation) {
-                return MAP.get(operation);
-            }
-        };
+        operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS_MAP);
         shopUpdateService = new ShopUpdateImpl(operationStrategy);
     }
 
@@ -47,6 +42,7 @@ class ShopUpdateImplTest {
                 new FruitTransaction(Operation.RETURN, "banana", 10),
                 new FruitTransaction(Operation.SUPPLY, "banana", 10));
         shopUpdateService.update(expectedFruitShopUpdate);
-        assertEquals(35, (int) Storage.storage.get("banana"));
+        Integer expected = 35;
+        assertEquals(expected, Storage.storage.get("banana"));
     }
 }

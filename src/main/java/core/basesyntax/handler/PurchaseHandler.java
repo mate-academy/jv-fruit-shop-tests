@@ -11,10 +11,9 @@ public class PurchaseHandler implements OperationHandler {
         int purchaseAmount = transaction.getQuantity();
         int amountAfterPurchase = currentAmount - purchaseAmount;
         if (amountAfterPurchase < 0) {
-            throw new RuntimeException("Can't "
-                    + "do purchase, because amount = "
-                    + currentAmount + " < purchase = "
-                    + purchaseAmount);
+            throw new RuntimeException(String.format(
+                    "Can't do purchase, because amount = %d < purchase = %d",
+                    currentAmount, purchaseAmount));
         }
         Storage.storage.put(transaction.getFruit(), amountAfterPurchase);
     }

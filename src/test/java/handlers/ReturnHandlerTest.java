@@ -24,7 +24,7 @@ class ReturnHandlerTest {
     void testOperateReturn_ok() {
         operationHandler.operate(new FruitTransaction(Operation.RETURN, "banana", 5));
         Map<String, Integer> expected = Map.of("banana", 25);
-        Map<String, Integer> actual = Storage.getStorage();
+        Map<String, Integer> actual = Storage.storage;
         assertEquals(expected, actual);
     }
 }

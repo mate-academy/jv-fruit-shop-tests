@@ -17,7 +17,6 @@ import core.basesyntax.service.ProcessData;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ShopUpdateService;
 import core.basesyntax.strategy.Strategy;
-import core.basesyntax.transactor.FruitTransaction;
 import core.basesyntax.transactor.Operation;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class Main {
         CsvFileReader csvFileReader = new CsvReaderImpl();
         ProcessData processData = new ProcessDataImpl();
         Strategy operationStrategy = new OperationStrategyImpl(MAP);
-        ShopUpdateService<FruitTransaction> fruitShopUpdateService
+        ShopUpdateService fruitShopUpdateService
                 = new ShopUpdateImpl(operationStrategy);
         ReportCreator createReport = new ReportCreatorImpl();
         CsvFileWriter csvFileWriter = new CsvWriterImpl();

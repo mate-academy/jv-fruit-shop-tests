@@ -23,7 +23,7 @@ class BalanceHandlerTest {
     void testOperateBalance_ok() {
         operationHandler.operate(new FruitTransaction(Operation.BALANCE, "banana", 50));
         Map<String, Integer> expected = Map.of("banana", 50);
-        Map<String, Integer> actual = Storage.getStorage();
+        Map<String, Integer> actual = Storage.storage;
         assertEquals(expected, actual);
     }
 }

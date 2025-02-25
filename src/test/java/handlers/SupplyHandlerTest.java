@@ -24,7 +24,7 @@ class SupplyHandlerTest {
     void testOperateSupply_ok() {
         operationHandler.operate(new FruitTransaction(Operation.SUPPLY, "banana", 20));
         Map<String, Integer> expected = Map.of("banana", 70);
-        Map<String, Integer> actual = Storage.getStorage();
+        Map<String, Integer> actual = Storage.storage;
         assertEquals(expected, actual);
     }
 }

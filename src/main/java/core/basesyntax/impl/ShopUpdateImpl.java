@@ -6,7 +6,7 @@ import core.basesyntax.transactor.FruitTransaction;
 import java.util.List;
 
 public class ShopUpdateImpl implements
-        ShopUpdateService<FruitTransaction> {
+        ShopUpdateService {
     private final Strategy operationStrategy;
 
     public ShopUpdateImpl(Strategy operationStrategy) {

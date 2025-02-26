@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProcessDataImplTest {
-    private static final String VALID_INPUT_DATA = "type,fruit,quantity;"
+    private static final String VALID_INPUT_DATA = "type,fruit,quantity"
             + System.lineSeparator()
             + "b,apple,2" + System.lineSeparator()
             + "s,apple,3" + System.lineSeparator()
@@ -40,56 +40,56 @@ class ProcessDataImplTest {
     @Test
     void process_invalidFormat_lessThanThreeValues_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "b,apple");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Invalid input data format: b,apple", exception.getMessage());
+        assertEquals("Invalid input data format: b,apple", runtimeException.getMessage());
     }
 
     @Test
     void process_invalidFormat_moreThanThreeValues_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "b,apple,10,extra");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Invalid input data format: b,apple,10,extra", exception.getMessage());
+        assertEquals("Invalid input data format: b,apple,10,extra", runtimeException.getMessage());
     }
 
     @Test
     void process_invalidQuantity_notANumber_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "b,apple,ten");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Quantity must be a valid number: ten", exception.getMessage());
+        assertEquals("Quantity must be a valid number: ten", runtimeException.getMessage());
     }
 
     @Test
     void process_invalidQuantity_negativeNumber_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "b,apple,-5");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Quantity cannot be negative: -5", exception.getMessage());
+        assertEquals("Quantity cannot be negative: -5", runtimeException.getMessage());
     }
 
     @Test
     void process_emptyLine_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("The entrance row cannot be empty", exception.getMessage());
+        assertEquals("The entrance row cannot be empty", runtimeException.getMessage());
     }
 
     @Test
     void process_missingValues_emptyOperation_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", ",apple,10");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Data contains empty values: ,apple,10", exception.getMessage());
+        assertEquals("Data contains empty values: ,apple,10", runtimeException.getMessage());
     }
 
     @Test
     void process_missingValues_emptyQuantity_throwsException() {
         List<String> inputLines = List.of("type,fruit,quantity", "b,apple,");
-        Exception exception = assertThrows(IllegalArgumentException.class,
+        RuntimeException runtimeException = assertThrows(IllegalArgumentException.class,
                 () -> processData.process(inputLines));
-        assertEquals("Invalid input data format: b,apple,", exception.getMessage());
+        assertEquals("Invalid input data format: b,apple,", runtimeException.getMessage());
     }
 }

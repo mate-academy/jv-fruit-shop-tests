@@ -14,17 +14,23 @@ import core.basesyntax.service.ShopUpdateService;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.transactor.FruitTransaction;
 import core.basesyntax.transactor.Operation;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopUpdateImplTest {
-    private static final Map<Operation, OperationHandler> OPERATION_HANDLERS_MAP = Map.of(
-            Operation.BALANCE, new BalanceHandler(),
-            Operation.RETURN, new ReturnHandler(),
-            Operation.PURCHASE, new PurchaseHandler(),
-            Operation.SUPPLY, new SupplyHandler());
+    private static final Map<Operation, OperationHandler> OPERATION_HANDLERS_MAP = new HashMap<>();
+
+    static {
+        OPERATION_HANDLERS_MAP.put(Operation.BALANCE, new BalanceHandler());
+        OPERATION_HANDLERS_MAP.put(Operation.RETURN, new ReturnHandler());
+        OPERATION_HANDLERS_MAP.put(Operation.PURCHASE, new PurchaseHandler());
+        OPERATION_HANDLERS_MAP.put(Operation.SUPPLY, new SupplyHandler());
+    }
+
     private Strategy operationStrategy;
     private ShopUpdateService shopUpdateService;
 
@@ -32,6 +38,11 @@ class ShopUpdateImplTest {
     void setUp() {
         operationStrategy = new OperationStrategyImpl(OPERATION_HANDLERS_MAP);
         shopUpdateService = new ShopUpdateImpl(operationStrategy);
+    }
+
+    @AfterEach
+    void clear() {
+        Storage.storage.clear();
     }
 
     @Test

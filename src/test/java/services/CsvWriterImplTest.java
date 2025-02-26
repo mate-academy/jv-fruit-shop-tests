@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvWriterImplTest {
-    public static final String VALID_FILE_NAME = "src/test/java/resources/WriteFileTest.csv";
+    public static final String VALID_FILE_NAME = "src/test/resources/WriteFileTest.csv";
     public static final String INVALID_FILE_NAME = "";
     public static final String REPORT = "type,fruit,quantity" + System.lineSeparator()
             + "b,banana,20";

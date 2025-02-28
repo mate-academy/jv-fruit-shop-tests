@@ -1,7 +1,8 @@
 package core.basesyntax;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,7 +43,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeinvalidPath_notOk() {
+    public void writeInvalidPath_notOk() {
         String invalidPath = "/invalid/directory/testFile.txt";
         String content = "Some content";
 
@@ -52,7 +53,8 @@ public class FileWriterImplTest {
             fileWriter.write(invalidPath, content);
         });
 
-        assertTrue(exception.getMessage().contains("Error writing to file"), "Exception should be thrown for invalid path");
+        assertTrue(exception.getMessage().contains("Error writing to file"),
+                "Exception should be thrown for invalid path");
     }
-
 }
+

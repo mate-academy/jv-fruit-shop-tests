@@ -23,7 +23,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void validReport_Ok() {
+    void getReport_validReport_Ok() {
         fruitStorage.saveItem("banana", 0);
         fruitStorage.saveItem("apple", 100);
         String expected = builder.append(FILE_HEADER).append(System.lineSeparator())
@@ -34,7 +34,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void emptyReport_Ok() {
+    void getReport_emptyReport_Ok() {
         String expected = builder.append(FILE_HEADER).append(System.lineSeparator()).toString();
         String actual = reportGenerator.getReport();
         assertEquals(expected, actual);

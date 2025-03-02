@@ -16,17 +16,16 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopServiceImpl shopService;
-    private OperationStrategy operationStrategy;
 
     @Test
-    void process_Ok() {
+    void process_validInput_Ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
                 FruitTransaction.Operation.RETURN, new ReturnOperation()
         );
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         shopService = new ShopServiceImpl(operationStrategy);
         List<FruitTransaction> testList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10),

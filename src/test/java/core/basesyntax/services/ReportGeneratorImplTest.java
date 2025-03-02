@@ -1,4 +1,4 @@
-package core.basesyntax.servises;
+package core.basesyntax.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

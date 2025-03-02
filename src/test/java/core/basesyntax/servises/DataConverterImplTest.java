@@ -1,10 +1,12 @@
-package core.basesyntax.data;
+package core.basesyntax.servises;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.data.DataConverterImpl;
+import core.basesyntax.data.FruitTransaction;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

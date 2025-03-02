@@ -1,9 +1,11 @@
-package core.basesyntax.file.reader;
+package core.basesyntax.servises;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.file.reader.Reader;
+import core.basesyntax.file.reader.ReaderImpl;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

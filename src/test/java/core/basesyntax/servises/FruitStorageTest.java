@@ -1,7 +1,9 @@
-package core.basesyntax.storage;
+package core.basesyntax.servises;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.storage.FruitStorage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +19,8 @@ class FruitStorageTest {
     @Test
     void purchaseItem_notEnoughFruitsInStorage_NotOk() {
         fruitStorage.saveItem("apple", 5);
-        fruitStorage.purchaseItem("apple", 10);
-        int expected = 0;
-        int actual = fruitStorage.getAmount("apple");
-        assertEquals(expected, actual);
+        assertThrows(IllegalArgumentException.class,
+                () -> fruitStorage.purchaseItem("apple", 10));
     }
 
     @Test

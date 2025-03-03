@@ -1,9 +1,8 @@
-package core.basesyntax;
+package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import model.FruitTransaction;
 import org.junit.Test;
 
 public class FruitTransactionTest {
@@ -52,7 +51,7 @@ public class FruitTransactionTest {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setQuantity(1000);
 
-        assertEquals(100, transaction.getQuantity());
+        assertEquals(1000, transaction.getQuantity());
     }
 
     @Test

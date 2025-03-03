@@ -57,4 +57,40 @@ class InventoryServiceTest {
         assertThrows(UnsupportedOperationException.class,
                 () -> unmodifiableInventory.put("orange", 5));
     }
+
+    @Test
+    void addFruit_ShouldHandleZeroQuantity() {
+        inventoryService.addFruit("apple", 0);
+        assertEquals(0, inventoryService.getQuantity("apple"));
+    }
+
+    @Test
+    void removeFruit_ShouldWork_WhenRemovingExactQuantity() {
+        inventoryService.addFruit("apple", 10);
+        inventoryService.removeFruit("apple", 10);
+        assertEquals(0, inventoryService.getQuantity("apple"));
+    }
+
+    @Test
+    void removeFruit_ShouldThrowException_WhenFruitNotPresent() {
+        assertThrows(IllegalArgumentException.class,
+                () -> inventoryService.removeFruit("banana", 1));
+    }
+
+    @Test
+    void addFruit_ShouldHandleMultipleFruits() {
+        inventoryService.addFruit("apple", 5);
+        inventoryService.addFruit("banana", 8);
+        inventoryService.addFruit("orange", 3);
+        assertEquals(5, inventoryService.getQuantity("apple"));
+        assertEquals(8, inventoryService.getQuantity("banana"));
+        assertEquals(3, inventoryService.getQuantity("orange"));
+    }
+
+    @Test
+    void removeFruit_NegativeQuantity_ShouldIncreaseInventory() {
+        inventoryService.addFruit("apple", 10);
+        inventoryService.removeFruit("apple", -5);
+        assertEquals(15, inventoryService.getQuantity("apple"));
+    }
 }

@@ -18,28 +18,34 @@ public class FileWriterImpl implements CsvFileWriter {
                     + DEFAULT_OUTPUT_FILE);
             fileName = DEFAULT_OUTPUT_FILE;
         }
-
+        String[] parts = fileName.split("[/\\\\]");
+        for (int i = 0; i < parts.length; i++) {
+            String part = parts[i];
+            if (part.contains(":")) {
+                if (i == 0 && part.matches("^[A-Za-z]:$")) {
+                    continue;
+                }
+                logger.error("Invalid file name: " + fileName);
+                throw new RuntimeException("Error while writing to file: Invalid file name");
+            }
+        }
         File file = new File(fileName);
         logger.info("Using file: " + file.getAbsolutePath());
-
         if (file.getParentFile() != null && !file.getParentFile().exists()) {
             logger.warn("Parent directory does not exist, trying to create it.");
             if (!file.getParentFile().mkdirs()) {
                 logger.error("Failed to create parent directories.");
             }
         }
-
         try {
             if (!file.exists()) {
                 logger.info("File does not exist, creating new file.");
                 file.createNewFile();
             }
-
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
                 bw.write(content);
                 logger.info("Report successfully written to: " + file.getAbsolutePath());
             }
-
         } catch (IOException e) {
             logger.error("Error writing to file: " + file.getAbsolutePath(), e);
         }

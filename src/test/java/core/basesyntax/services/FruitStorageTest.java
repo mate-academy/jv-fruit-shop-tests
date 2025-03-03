@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStorageTest {
+    private static final String APPLE_TEST = "apple";
     private FruitStorage fruitStorage;
 
     @BeforeEach
@@ -18,24 +19,25 @@ class FruitStorageTest {
 
     @Test
     void purchaseItem_notEnoughFruitsInStorage_NotOk() {
-        fruitStorage.saveItem("apple", 5);
+        fruitStorage.saveItem(APPLE_TEST, 5);
         assertThrows(IllegalArgumentException.class,
-                () -> fruitStorage.purchaseItem("apple", 10));
+                () -> fruitStorage.purchaseItem(APPLE_TEST, 10),
+                "Not enough fruit: 5");
     }
 
     @Test
     void getAmount_UnknownFruit_Ok() {
         int expected = 0;
-        int actual = fruitStorage.getAmount("apple");
+        int actual = fruitStorage.getAmount(APPLE_TEST);
         assertEquals(expected, actual);
     }
 
     @Test
     void clear_Ok() {
-        fruitStorage.saveItem("apple", 2);
+        fruitStorage.saveItem(APPLE_TEST, 2);
         fruitStorage.clear();
         int expected = 0;
-        int actual = fruitStorage.getAmount("apple");
+        int actual = fruitStorage.getAmount(APPLE_TEST);
         assertEquals(expected, actual);
     }
 

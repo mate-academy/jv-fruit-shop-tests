@@ -1,5 +1,7 @@
 package core.basesyntax.data;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private final Operation operation;
     private String fruit;
@@ -47,5 +49,21 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("Unknown value = " + code);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

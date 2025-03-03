@@ -30,11 +30,15 @@ class FileWriterImplTest {
     }
 
     @Test
-    void write_nullArguments_NoOk() {
-        assertThrows(NullPointerException.class,
-                () -> writer.write(null, FINAL_REPORT_CSV));
-        assertThrows(NullPointerException.class,
-                () -> writer.write(TEST_STRING,null));
+    void write_nullReport_NoOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> writer.write(null, FINAL_REPORT_CSV), "Report should not be null");
+    }
+
+    @Test
+    void write_nullFilePath_NoOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> writer.write(TEST_STRING,null), "File path should not be null");
     }
 
     @Test

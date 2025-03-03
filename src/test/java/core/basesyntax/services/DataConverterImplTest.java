@@ -38,16 +38,16 @@ class DataConverterImplTest {
         assertEquals(expected.size(), actual.size());
 
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i).getOperation(), actual.get(i).getOperation());
-            assertEquals(expected.get(i).getFruit(), actual.get(i).getFruit());
-            assertEquals(expected.get(i).getQuantity(), actual.get(i).getQuantity());
+            assertEquals(expected.get(i), actual.get(i));
         }
     }
 
     @Test
     void convert_inValidOrderInput_NotOk() {
         List<String> wrongInput = List.of("b,1,banana", "s,1,apple", "r,orange,2");
-        assertThrows(IllegalArgumentException.class, () -> converter.convert(wrongInput));
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(wrongInput),
+                "Line should be in pattern: \"type,fruit,quantity\" ");
     }
 
     @Test
@@ -61,7 +61,9 @@ class DataConverterImplTest {
     void convert_lessOrMoreThanThreeValuesInALine_NoOk() {
         List<String> inputLess = List.of("b,apple", "s,banana", "r,orange");
         List<String> inputMore = List.of("b,apple,1,1", "s,banana,2,2", "r,orange,4,5");
-        assertThrows(IllegalArgumentException.class, () -> converter.convert(inputLess));
-        assertThrows(IllegalArgumentException.class, () -> converter.convert(inputMore));
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(inputLess), "There should be 3 values in line and not: 2");
+        assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(inputMore), "There should be 3 values in line and not: 4");
     }
 }

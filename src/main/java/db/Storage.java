@@ -24,4 +24,9 @@ public class Storage {
     public Map<String, Integer> getAllFruits() {
         return new HashMap<>(fruits);
     }
+
+    public static void clearStorage() {
+        fruits.clear();
+    }
+
 }

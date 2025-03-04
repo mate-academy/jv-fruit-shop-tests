@@ -12,13 +12,24 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputFromCsv) {
+        if (inputFromCsv == null) {
+            throw new IllegalArgumentException("Input list cannot be null.");
+        }
         return inputFromCsv.stream()
-                .map(this::getFromCsvRow)
+                .map(line -> {
+                    if (line == null) {
+                        throw new IllegalArgumentException("List contains a null element.");
+                    }
+                    return getFromCsvRow(line);
+                })
                 .toList();
     }
 
     private FruitTransaction getFromCsvRow(String line) {
         String[] fields = line.split(COMMA);
+        if (fields.length < 3) {
+            throw new IllegalArgumentException("Invalid CSV format: " + line);
+        }
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation
                 .getByCode(fields[OPERATION_INDEX]));

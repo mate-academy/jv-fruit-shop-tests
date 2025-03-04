@@ -14,6 +14,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation type) {
+        if (!operationHandlersMap.containsKey(type)) {
+            throw new IllegalArgumentException("No handler found for operation: " + type);
+        }
         return operationHandlersMap.get(type);
     }
 }

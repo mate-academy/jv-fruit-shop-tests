@@ -13,12 +13,13 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static String EXPORT_FILE_NAME;
+    private static final String EXPORT_FILE_NAME = "src/test/resources/finalReport.csv";
+    private static final String CONTENT = "Some content";
+    private static final String INVALID_FILE_PATH = "src/test/resources/invalid_folder/test.txt";
     private static FileWriter fileWriter;
 
     @BeforeAll
     static void beforeAll() {
-        EXPORT_FILE_NAME = "src/test/resources/finalReport.csv";
         fileWriter = new FileWriterImpl();
     }
 
@@ -48,8 +49,6 @@ public class FileWriterTest {
 
     @Test
     void write_invalidFilePath_notOk() {
-        String content = "Some content";
-        String invalidFilePath = "src/test/resources/invalid_folder/test.txt";
-        assertThrows(RuntimeException.class, () -> fileWriter.write(content, invalidFilePath));
+        assertThrows(RuntimeException.class, () -> fileWriter.write(CONTENT, INVALID_FILE_PATH));
     }
 }

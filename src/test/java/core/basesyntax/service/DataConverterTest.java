@@ -59,7 +59,7 @@ public class DataConverterTest {
 
     @Test
     void convertToTransaction_nullList_notOk() {
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(nullList);
         });
     }
@@ -79,7 +79,7 @@ public class DataConverterTest {
 
     @Test
     void convertToTransaction_missingFields_notOk() {
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(missingFieldsList);
         });
     }
@@ -93,7 +93,7 @@ public class DataConverterTest {
 
     @Test
     void convertToTransaction_listWithNull_notOk() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(listWithNull);
         });
     }

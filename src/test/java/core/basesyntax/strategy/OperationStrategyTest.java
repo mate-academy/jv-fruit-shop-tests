@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.BalanceOperationHandlers;
@@ -30,6 +30,8 @@ public class OperationStrategyTest {
 
     @Test
     void get_unregisteredOperation_notOk() {
-        assertNull(operationStrategy.get(FruitTransaction.Operation.PURCHASE));
+        assertThrows(IllegalArgumentException.class, () -> {
+            operationStrategy.get(FruitTransaction.Operation.PURCHASE);
+        });
     }
 }

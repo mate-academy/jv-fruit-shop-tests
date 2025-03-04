@@ -9,13 +9,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String headers;
     private static ReportGenerator reportGenerator;
 
     @BeforeAll
     static void beforeAll() {
-        FruitStorage.storage.clear();
         headers = "fruit,quantity";
         reportGenerator = new ReportGeneratorImpl();
     }
@@ -30,8 +28,8 @@ public class ReportGeneratorTest {
         FruitStorage.storage.put("banana", 20);
         FruitStorage.storage.put("apple", 50);
         String expected = headers
-                + LINE_SEPARATOR + "banana,20"
-                + LINE_SEPARATOR + "apple,50";
+                + System.lineSeparator() + "banana,20"
+                + System.lineSeparator() + "apple,50";
         assertEquals(expected, reportGenerator.generateReport());
     }
 
@@ -43,8 +41,7 @@ public class ReportGeneratorTest {
     @Test
     void generateReport_singleEntry_Ok() {
         FruitStorage.storage.put("banana", 30);
-        String expected = headers + LINE_SEPARATOR + "banana,30";
+        String expected = headers + System.lineSeparator() + "banana,30";
         assertEquals(expected, reportGenerator.generateReport());
     }
 }
-

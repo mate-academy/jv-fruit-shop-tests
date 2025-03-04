@@ -33,4 +33,3 @@ public class OperationStrategyTest {
         assertNull(operationStrategy.get(FruitTransaction.Operation.PURCHASE));
     }
 }
-

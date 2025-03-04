@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.impl.CheckFruitExistImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CheckFruitExistTest {
@@ -25,8 +25,8 @@ public class CheckFruitExistTest {
         quantity = 10;
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
         FruitStorage.storage.clear();
     }
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,10 @@ class BalanceOperationHandlersTest {
     @BeforeEach
     void setUp() {
         balanceOperationHandlers = new BalanceOperationHandlers();
+    }
+
+    @AfterEach
+    void tearDown() {
         FruitStorage.storage.clear();
     }
 
@@ -60,5 +65,3 @@ class BalanceOperationHandlersTest {
         });
     }
 }
-
-

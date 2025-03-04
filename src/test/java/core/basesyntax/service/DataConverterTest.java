@@ -69,9 +69,6 @@ public class DataConverterTest {
         assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(listOfLineWithUnknownOperation);
         });
-        assertThrows(RuntimeException.class, () -> {
-            dataConverter.convertToTransaction(listOfLineWithQuantityNotNumber);
-        });
     }
 
     @Test

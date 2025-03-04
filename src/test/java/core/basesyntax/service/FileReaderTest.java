@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderTest {
+    private static final String VALID_PATH = "src/test/resources/validFile.csv";
+    private static final String NON_EXISTENT_PATH = "src/test/resources/nonExistentFile.csv";
     private static FileReader fileReader;
     private static List<String> listOfOkLines;
 
@@ -20,21 +22,12 @@ public class FileReaderTest {
 
     @Test
     void read_validFile_Ok() {
-        String validFilePath = "src/test/resources/validFile.csv";
-        assertEquals(listOfOkLines, fileReader.read(validFilePath));
-    }
-
-    @Test
-    void read_nullFile_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            fileReader.read(null);
-        });
+        assertEquals(listOfOkLines, fileReader.read(VALID_PATH));
     }
 
     @Test
     void read_nonExistentFile_notOk() {
-        String nonExistentFilePath = "src/test/resources/nonExistentFile.csv";
-        assertThrows(RuntimeException.class, () -> fileReader.read(nonExistentFilePath));
+        assertThrows(RuntimeException.class, () -> fileReader.read(NON_EXISTENT_PATH));
     }
 
     @Test

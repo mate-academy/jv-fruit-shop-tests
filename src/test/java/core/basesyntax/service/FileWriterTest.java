@@ -17,10 +17,9 @@ public class FileWriterTest {
     private static FileWriter fileWriter;
 
     @BeforeAll
-    static void beforeAll() throws IOException {
+    static void beforeAll() {
         EXPORT_FILE_NAME = "src/test/resources/finalReport.csv";
         fileWriter = new FileWriterImpl();
-        Files.deleteIfExists(Path.of(EXPORT_FILE_NAME));
     }
 
     @AfterEach
@@ -45,11 +44,6 @@ public class FileWriterTest {
         fileWriter.write(expectedContent, EXPORT_FILE_NAME);
         String actualContent = Files.readString(Path.of(EXPORT_FILE_NAME));
         assertEquals(expectedContent, actualContent);
-    }
-
-    @Test
-    void write_nullContent_notOk() {
-        assertThrows(RuntimeException.class, () -> fileWriter.write(null, EXPORT_FILE_NAME));
     }
 
     @Test

@@ -14,18 +14,18 @@ import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
+import core.basesyntax.report.ReportGenerator;
+import core.basesyntax.report.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import report.ReportGenerator;
-import report.ReportGeneratorImpl;
 
 public class Main {
-    private static final String READ_PATH = "recources/reportToRead.csv";
-    private static final String WRITE_PATH = "recources/finalReport.csv";
+    private static final String READ_PATH = "src/main/report/reportToRead.csv";
+    private static final String WRITE_PATH = "src/main/report/finalReport.csv";
 
     public static void main(String[] args) throws IOException {
         FileReader fileReader = new FileReaderImpl();
@@ -44,8 +44,8 @@ public class Main {
 
         List<String> inputLines = fileReader.read(READ_PATH);
         List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputLines);
-        Map<String, Integer> finalStorage = shopService.process(transactions);
-        String report = reportGenerator.generateReport(finalStorage);
+        shopService.process(transactions);
+        String report = reportGenerator.generateReport();
         fileWriter.write(report, WRITE_PATH);
     }
 }

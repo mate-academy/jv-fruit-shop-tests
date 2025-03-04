@@ -20,10 +20,20 @@ public class FileReaderImpl implements FileReader {
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader br = Files.newBufferedReader(Path.of(filePath))) {
-            br.readLine();
             String line;
+            boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
-                lines.add(line);
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+
+                line = line.replaceAll("\\s+", "");
+
+                if (!line.isEmpty()) {
+                    logger.info("Adding line: '" + line + "'");
+                    lines.add(line);
+                }
             }
             logger.info("Successfully read file: " + filePath);
         } catch (IOException e) {

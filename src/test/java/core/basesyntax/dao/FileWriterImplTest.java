@@ -73,7 +73,9 @@ class FileWriterImplTest {
     void writeFile_shouldCreateParentDirectory_whenDirectoryDoesNotExist() {
         String fileName = "nonExistingDir/testFile.csv";
         Path filePath = Path.of(fileName);
+
         fileWriter.writeFile(fileName, TEST_CONTENT);
+
         Assertions.assertTrue(Files.exists(filePath),
                 "File in non-existing directory should be created.");
 
@@ -108,5 +110,31 @@ class FileWriterImplTest {
         } catch (IOException e) {
             Assertions.fail("IOException occurred during the test: " + e.getMessage());
         }
+    }
+
+    @Test
+    void writeFile_shouldHandleEmptyContent() {
+        Path emptyContentFile = Path.of("emptyContentFile.csv");
+        fileWriter.writeFile("emptyContentFile.csv", "");
+        Assertions.assertTrue(Files.exists(emptyContentFile),
+                "File should be created with empty content.");
+
+        try {
+            String writtenContent = Files.readString(emptyContentFile);
+            Assertions.assertEquals("", writtenContent,
+                    "Content of the file should be empty.");
+        } catch (IOException e) {
+            Assertions.fail("IOException occurred during the test: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void writeFile_shouldThrowException_whenFileNameIsInvalid() {
+        String invalidFileName = "invalid:/file\\name.csv";
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            fileWriter.writeFile(invalidFileName, TEST_CONTENT);
+        });
+        Assertions.assertTrue(exception.getMessage().contains("Error while writing to file"),
+                "Exception message should indicate an error while writing to the file.");
     }
 }

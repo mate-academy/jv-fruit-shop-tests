@@ -1,14 +1,12 @@
-package core.basesyntax;
+package core.basesyntax.service;
+
+import static core.basesyntax.Storage.inventory;
 
 import core.basesyntax.dao.CsvFileWriter;
 import core.basesyntax.dao.FileReader;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.InventoryService;
-import core.basesyntax.service.ReportGeneratorService;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TransactionProcessingService {
     private final FileReader fileReader;
@@ -47,11 +45,16 @@ public class TransactionProcessingService {
     }
 
     private String generateReport() {
-        Map<String, Integer> inventory = inventoryService.getInventory();
-        return reportGeneratorService.generateReport(inventory);
+        return inventory.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .collect(Collectors.joining("\n"));
     }
 
     private void writeInventoryToFile(String targetFilePath, String reportContent) {
         fileWriter.writeFile(targetFilePath, reportContent);
+    }
+
+    public void setInventoryService(InventoryService inventoryService) {
+        this.inventoryService = inventoryService;
     }
 }

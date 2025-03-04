@@ -69,4 +69,69 @@ class FruitShopServiceTest {
         Assertions.assertEquals(40, inventoryService.getQuantity("apple"));
         Assertions.assertEquals(25, inventoryService.getQuantity("banana"));
     }
+
+    @Test
+    void processTransactions_emptyTransactionsList_success() {
+        List<FruitTransaction> transactions = List.of();
+
+        inventoryService.addFruit("apple", 10);
+        inventoryService.addFruit("banana", 10);
+
+        Assertions.assertDoesNotThrow(() -> fruitShopService.processTransactions(transactions));
+        Assertions.assertEquals(10, inventoryService.getQuantity("apple"));
+        Assertions.assertEquals(10, inventoryService.getQuantity("banana"));
+    }
+
+    @Test
+    void processTransactions_invalidTransaction_throwsException() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 20),
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "banana", 15)
+        );
+
+        inventoryService.addFruit("apple", 10);
+        inventoryService.addFruit("banana", 5);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> fruitShopService.processTransactions(transactions));
+    }
+
+    @Test
+    void processTransactions_invalidFruit_throwsException() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 20),
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "orange", 10)
+        );
+
+        inventoryService.addFruit("apple", 10);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> fruitShopService.processTransactions(transactions));
+    }
+
+    @Test
+    void processTransactions_negativeQuantity_throwsException() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", -5)
+        );
+
+        inventoryService.addFruit("apple", 10);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> fruitShopService.processTransactions(transactions));
+    }
+
+    @Test
+    void processTransactions_multipleOperationsForSameFruit_success() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.OperationType.BALANCE, "apple", 10),
+                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 10),
+                new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "apple", 20)
+        );
+
+        inventoryService.addFruit("apple", 0);
+
+        Assertions.assertDoesNotThrow(() -> fruitShopService.processTransactions(transactions));
+        Assertions.assertEquals(40, inventoryService.getQuantity("apple"));
+    }
 }

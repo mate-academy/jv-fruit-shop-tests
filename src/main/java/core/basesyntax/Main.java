@@ -8,6 +8,7 @@ import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.InventoryService;
 import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationStrategyProvider;
 import java.util.HashMap;
 import java.util.List;

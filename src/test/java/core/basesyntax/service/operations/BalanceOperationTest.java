@@ -1,11 +1,12 @@
 package core.basesyntax.service.operations;
 
-import static core.basesyntax.storage.Storage.shop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
@@ -14,6 +15,11 @@ public class BalanceOperationTest {
     @BeforeAll
     public static void setUp() {
         balanceOperation = new BalanceOperation();
+    }
+
+    @BeforeEach
+    public void resetTheStateOfShopBetweenTest_Ok() {
+        Storage.shop.clear();
     }
 
     @Test
@@ -27,9 +33,9 @@ public class BalanceOperationTest {
         balanceOperation.processTransaction(appleBalance);
         balanceOperation.processTransaction(bananaBalance);
         balanceOperation.processTransaction(cherryBalance);
-        assertEquals(1, shop.get("apple"));
-        assertEquals(10, shop.get("banana"));
-        assertEquals(100, shop.get("cherry"));
+        assertEquals(1, Storage.shop.get("apple"));
+        assertEquals(10, Storage.shop.get("banana"));
+        assertEquals(100, Storage.shop.get("cherry"));
     }
 
     @Test
@@ -46,8 +52,8 @@ public class BalanceOperationTest {
                 () -> balanceOperation.processTransaction(bananaBalance));
         String expectedMessage = "The quantity is negative";
         String actualMessage = exception.getMessage();
-        assertEquals(1, shop.get("apple"));
-        assertEquals(0, shop.get("cherry"));
+        assertEquals(1, Storage.shop.get("apple"));
+        assertEquals(0, Storage.shop.get("cherry"));
         assertEquals(expectedMessage, actualMessage);
     }
 }

@@ -67,7 +67,7 @@ public class SupplyOperationTest {
         supplyOperation.processTransaction(cherrySupply);
         assertEquals(2, shop.get("apple"));
         assertEquals(20, shop.get("banana"));
-        assertEquals(200, shop.get("pear"));
+        assertEquals(100, shop.get("pear"));
     }
 
     @Test
@@ -82,11 +82,11 @@ public class SupplyOperationTest {
         supplyOperation.processTransaction(bananaSupply);
         Exception exception = assertThrows(RuntimeException.class,
                 () -> supplyOperation.processTransaction(cherrySupply));
-        String expectedMessage = "The quantity is negative";
         String actualMessage = exception.getMessage();
         assertEquals(2, shop.get("apple"));
         assertEquals(20, shop.get("banana"));
-        assertEquals(expectedMessage, actualMessage);
+        assertEquals("The quantity is negative", actualMessage);
+        assertEquals(100, shop.get("cherry"));
     }
 }
 

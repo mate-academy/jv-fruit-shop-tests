@@ -36,11 +36,11 @@ public class FileReaderImpTest {
     }
 
     @Test
-    void wrongFileToRead_NotOk() {
+    void readFromNonExistentFile_ThrowsRuntimeException() {
         Path path = Paths.get(REPORT_TO_READ_WRONG_FILE);
         Exception exception = assertThrows(RuntimeException.class,
                 () -> fileReader.read(REPORT_TO_READ_WRONG_FILE));
-        String exceptedMessage = "Error writing to file at path: " + path;
+        String exceptedMessage = "Error reading from file at path: " + path;
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(exceptedMessage));
     }

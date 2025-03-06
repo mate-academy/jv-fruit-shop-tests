@@ -71,6 +71,7 @@ public class PurchaseOperationTest {
         assertEquals(0, shop.get("apple"));
         assertEquals(0, shop.get("banana"));
         assertEquals(expectedMessage, actualMessage);
+        assertEquals(100, shop.get("cherry"));
     }
 
     @Test
@@ -94,5 +95,6 @@ public class PurchaseOperationTest {
         assertEquals(0, shop.get("apple"));
         assertEquals(0, shop.get("banana"));
         assertEquals(0, shop.get("cherry"));
+        assertEquals(null, shop.get("pear"));
     }
 }

@@ -35,7 +35,7 @@ public class ShopDaoImpTest {
     }
 
     @Test
-    void addingFruitsNoToBalance_Ok() {
+    void purchasingFruitsIncreasesBalance_Ok() {
         shopDao.addFruitToBalance("apple", 0);
         shopDao.addFruitToBalance("pear", 1);
         shopDao.addFruitToBalance("pineapple", 50);
@@ -69,7 +69,7 @@ public class ShopDaoImpTest {
     }
 
     @Test
-    void buyingFruitsWithToLowBalance_NotOk() {
+    void purchasingNegativeQuantity_NotOk() {
         shopDao.addFruitToBalance("apple", 5);
         Exception exception = assertThrows(RuntimeException.class,
                 () -> shopDao.purchaseFruit("apple", -10));

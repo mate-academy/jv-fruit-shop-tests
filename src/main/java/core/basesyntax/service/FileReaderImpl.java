@@ -14,7 +14,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing to file at path: " + path, e);
+            throw new RuntimeException("Error reading from file at path: " + path, e);
         }
     }
 }

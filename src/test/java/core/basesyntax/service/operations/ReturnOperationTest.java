@@ -67,7 +67,7 @@ public class ReturnOperationTest {
         returnOperation.processTransaction(cherryReturn);
         assertEquals(2, shop.get("apple"));
         assertEquals(20, shop.get("banana"));
-        assertEquals(200, shop.get("pear"));
+        assertEquals(100, shop.get("pear"));
     }
 
     @Test

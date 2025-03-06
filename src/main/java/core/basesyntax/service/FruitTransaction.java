@@ -40,11 +40,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "{" + operation + ", " + fruit + ", " + quantity + "}";
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -55,10 +50,6 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
-        }
-
-        public String getCode() {
-            return code;
         }
     }
 }

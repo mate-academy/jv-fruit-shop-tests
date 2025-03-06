@@ -2,12 +2,14 @@ package core.basesyntax.db;
 
 import static core.basesyntax.storage.Storage.shop;
 
+import core.basesyntax.service.NegativeQuantityException;
+
 public class ShopDaoImpl implements ShopDao {
 
     @Override
     public void addFruitToBalance(String fruit, Integer quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("The quantity is negative");
+            throw new NegativeQuantityException("The quantity is negative");
         }
         shop.put(fruit, quantity);
     }
@@ -26,11 +28,12 @@ public class ShopDaoImpl implements ShopDao {
     @Override
     public void returnOrSupplyFruit(String fruit, Integer quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("The quantity is negative");
+            throw new NegativeQuantityException("The quantity is negative");
         }
         if (shop.get(fruit) == null) {
             shop.put(fruit, quantity);
+        } else {
+            shop.put(fruit, shop.get(fruit) + quantity);
         }
-        shop.put(fruit, shop.get(fruit) + quantity);
     }
 }

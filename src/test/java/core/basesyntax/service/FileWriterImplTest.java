@@ -5,13 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
     private static final String REPORT_TO_WRITE_FILE = "src/test/resources/finalReportCorrect.csv";
     private static FileWriterImpl fileWriter;
-    private static final String textToWrite = "fruit,quantity" + System.lineSeparator()
+    private static final String TEXT_TO_WRITE = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,990";
 
     @BeforeAll
@@ -21,17 +24,19 @@ public class FileWriterImplTest {
 
     @Test
     public void writeReportToFile_Ok() {
-        String[] fileArray = textToWrite.split(System.lineSeparator());
-        fileWriter.write(textToWrite, Path.of(REPORT_TO_WRITE_FILE));
+        String[] textArray = TEXT_TO_WRITE.split(System.lineSeparator());
+        Path path = Paths.get(REPORT_TO_WRITE_FILE);
+        fileWriter.write(TEXT_TO_WRITE, path);
         try {
-            String firstLine = Files.readAllLines(Path.of(REPORT_TO_WRITE_FILE)).get(0);
-            String secondLine = Files.readAllLines(Path.of(REPORT_TO_WRITE_FILE)).get(1);
-            String thirdLine = Files.readAllLines(Path.of(REPORT_TO_WRITE_FILE)).get(2);
-            assertEquals(fileArray[0], firstLine);
-            assertEquals(fileArray[1], secondLine);
-            assertEquals(fileArray[2], thirdLine);
+            List<String> expected = new ArrayList<>();
+            List<String> actual = new ArrayList<>();
+            for (int i = 0; i < textArray.length; i++) {
+                expected.add(i, Files.readAllLines(path).get(i));
+                actual.add(i, textArray[i]);
+            }
+            assertEquals(expected, actual);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing to file");
+            throw new RuntimeException("Error reading from file at path: " + path, e);
         }
     }
 }

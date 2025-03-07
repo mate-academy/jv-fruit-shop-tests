@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvWriterImplTest {
+    private static final String EXPECTED_PATH = "src/test/java/testResources/testExpectedFile.csv";
+    private static final String ACTUAL_PATH = "src/test/java/testResources/testWrittenFile.csv";
     private CsvWriterImpl csvWriter;
 
     @BeforeEach
@@ -32,15 +34,14 @@ public class CsvWriterImplTest {
 
     @Test
     void file_checkOutput_IsOk() throws IOException {
-        String filePath = "src/test/java/testResources/testWrittenFile.csv";
         List<String> list = new ArrayList<>();
         list.add("banana,20");
         list.add("apple,40");
-        File file = new File(filePath);
-        csvWriter.writeFile(filePath, list);
+        File file = new File(ACTUAL_PATH);
+        csvWriter.writeFile(ACTUAL_PATH, list);
         List<String> expected = Files.readAllLines(
-                Paths.get("src/test/java/testResources/testExpectedFile.csv"));
-        List<String> actual = Files.readAllLines(Paths.get(filePath));
+                Paths.get(EXPECTED_PATH));
+        List<String> actual = Files.readAllLines(Paths.get(ACTUAL_PATH));
         assertEquals(expected, actual);
         file.delete();
     }

@@ -1,9 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.CsvReaderImpl;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +17,16 @@ public class CsvReaderImplTest {
     }
 
     @Test
-    void file_isNull_NotOk() {
-        String filePath = null;
+    void file_IsNotCorrect_NotOk() {
+        String filePath = "randomName.txt";
+        assertThrows(RuntimeException.class, () -> {
+            csvReader.readFile(filePath);
+        });
+    }
+
+    @Test
+    void file_IsEmpty_NotOk() {
+        String filePath = "src/test/java/testResources/emptyFile.csv";
         assertThrows(RuntimeException.class, () -> {
             csvReader.readFile(filePath);
         });

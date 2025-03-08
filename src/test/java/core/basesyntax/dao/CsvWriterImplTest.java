@@ -1,10 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.CsvWriterImpl;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvWriterImplTest {
-    private static final String EXPECTED_PATH = "src/test/java/testResources/testExpectedFile.csv";
     private static final String ACTUAL_PATH = "src/test/java/testResources/testWrittenFile.csv";
     private CsvWriterImpl csvWriter;
 
@@ -37,12 +34,11 @@ public class CsvWriterImplTest {
         List<String> list = new ArrayList<>();
         list.add("banana,20");
         list.add("apple,40");
-        File file = new File(ACTUAL_PATH);
         csvWriter.writeFile(ACTUAL_PATH, list);
-        List<String> expected = Files.readAllLines(
-                Paths.get(EXPECTED_PATH));
+        List<String> expected = new ArrayList<>();
+        expected.add("banana,20");
+        expected.add("apple,40");
         List<String> actual = Files.readAllLines(Paths.get(ACTUAL_PATH));
         assertEquals(expected, actual);
-        file.delete();
     }
 }

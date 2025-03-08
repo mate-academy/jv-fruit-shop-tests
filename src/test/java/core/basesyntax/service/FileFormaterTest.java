@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileFormaterTest {
-    private static final String FILE_PATH = "src/test/java/testResources/testWrittenFile.csv";
+    private static final String FILE_PATH = "src/test/java/testResources/testFormatterFile.csv";
     private CustomFileReader reader;
     private FileFormaterForCsvReader fileFormaterForCsvReader;
 

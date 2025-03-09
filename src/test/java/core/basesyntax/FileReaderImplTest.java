@@ -1,61 +1,64 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.FileReaderImpl;
-import core.basesyntax.service.FileReader;
-import org.junit.jupiter.api.BeforeEach;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import org.junit.jupiter.api.Test;
-import java.io.IOException;
-
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.impl.FileReaderImpl;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private FileReader fileReader;
-    private Path tempFile;
+    private static final String REPORT_TO_READ = "src/main/resources/input.csv";
+    private static final String EMPTY_REPORT = "src/test/resources/emptyReport.csv";
+    private static final String CHAR_REPORT = "src/test/resources/reportWithSpecialChars.csv";
+    private static FileReaderImpl fileReader;
 
-    @BeforeEach
-    void setUp() throws IOException {
+    @BeforeAll
+    static void beforeAll() {
         fileReader = new FileReaderImpl();
-        tempFile = Files.createTempFile("testFile", ".txt");
     }
 
     @Test
-    void read_ValidFile_ReturnsCorrectData() throws IOException {
-        Files.write(tempFile, List.of("line1", "line2", "line3"));
-        List<String> result = fileReader.read(tempFile.toString());
+    void read_validReport_Ok() {
+        List<String> read = fileReader.read(REPORT_TO_READ);
+        assertNotNull(read);
+        assertFalse(read.isEmpty());
 
-        assertEquals(3, result.size());
-        assertEquals("line1", result.get(0));
-        assertEquals("line2", result.get(1));
-        assertEquals("line3", result.get(2));
+        List<String> expectedContent = Arrays.asList(
+                "type,fruit,quantity",
+                "    b,banana,20",
+                "    b,apple,100",
+                "    s,banana,100",
+                "    p,banana,13",
+                "    r,apple,10",
+                "    p,apple,20",
+                "    p,banana,5",
+                "    s,banana,50"
+        );
+        assertEquals(expectedContent, read);
     }
 
     @Test
-    void read_EmptyFile_ReturnsEmptyList() {
-        List<String> result = fileReader.read(tempFile.toString());
-        assertTrue(result.isEmpty());
+    void read_nonExistentFile_NotOk() {
+        assertThrows(RuntimeException.class, () -> fileReader.read("randomFile"));
+        List<String> read = fileReader.read(EMPTY_REPORT);
+        assertTrue(read.isEmpty());
+        assertEquals(0, read.size());
     }
 
     @Test
-    void read_FileNotFound_ThrowsRuntimeException() {
-        String invalidPath = "non_existing_file.txt";
-        Exception exception = assertThrows(RuntimeException.class, () -> fileReader.read(invalidPath));
+    void read_FileWithSpecialCharacters_Ok() {
+        List<String> read = fileReader.read(CHAR_REPORT);
+        assertNotNull(read);
+        assertFalse(read.isEmpty());
 
-        assertTrue(exception.getMessage().contains("Error reading the file"));
-    }
-
-    @Test
-    void read_FileWithBlankLines_HandlesCorrectly() throws IOException {
-        Files.write(tempFile, List.of("line1", "", "line2", " ", "line3"));
-        List<String> result = fileReader.read(tempFile.toString());
-
-        assertEquals(5, result.size());
-        assertEquals("", result.get(1));
-        assertEquals(" ", result.get(3));
+        String expectedContent = "!@#$%^&|!@&#!*_)!*(^(^+!+(%";
+        String actualContent = String.join("", read);
+        assertEquals(expectedContent, actualContent);
     }
 }

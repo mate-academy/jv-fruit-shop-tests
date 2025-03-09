@@ -13,11 +13,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void process(List<FruitTransaction> transactions) {
-        for (FruitTransaction fruitTransaction : transactions) {
-            operationStrategy.getOperationHandler(fruitTransaction.getOperation())
-                    .apply(fruitTransaction);
-        }
-
+    public void process(List<FruitTransaction> fruitTransactions) {
+        fruitTransactions.forEach(fruitTransaction ->
+                operationStrategy.getOperationHandler(
+                        FruitTransaction.Operation.valueOf(fruitTransaction.getOperation()))
+                        .apply(fruitTransaction));
     }
 }

@@ -1,46 +1,51 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.base.Storage;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.service.ReportGenerator;
-import java.util.LinkedHashMap;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
 
 class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         reportGenerator = new ReportGeneratorImpl();
-        Storage.fruitStorage = new LinkedHashMap<>();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 
     @Test
-    void getReport_EmptyStorage_ReturnsOnlyHeader() {
-        String expectedReport = "fruit,quantity" + System.lineSeparator();
-        assertEquals(expectedReport, reportGenerator.getReport());
+    public void emptyStorage_Ok() {
+        String expected = "fruit,quantity";
+        String actual = reportGenerator.getReport();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getReport_SingleEntry_ReturnsCorrectReport() {
-        Storage.fruitStorage.put("banana", 10);
-        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,10"
-                + System.lineSeparator();
-
-        assertEquals(expectedReport, reportGenerator.getReport());
+    public void nonEmptyStorage_Ok() {
+        Storage.getStorage().put("Apple", 10);
+        Storage.getStorage().put("Banana", 5);
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "Apple,10" + System.lineSeparator()
+                + "Banana,5";
+        String actual = reportGenerator.getReport();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getReport_MultipleEntries_ReturnsFormattedReport() {
-        Storage.fruitStorage.put("banana", 10);
-        Storage.fruitStorage.put("apple", 20);
-
-        String expectedReport = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator()
-                + "apple,20" + System.lineSeparator();
-
-        assertEquals(expectedReport, reportGenerator.getReport());
+    public void singleItemStorage_Ok() {
+        Storage.getStorage().put("Orange", 3);
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "Orange,3";
+        String actual = reportGenerator.getReport();
+        assertEquals(expected, actual);
     }
 }

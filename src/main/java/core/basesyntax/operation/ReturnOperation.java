@@ -8,7 +8,7 @@ public class ReturnOperation implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        int currentQuantity = Storage.fruitStorage.getOrDefault(fruit, 0);
+        int currentQuantity = (int) Storage.fruitStorage.getOrDefault(fruit, 0);
         Storage.fruitStorage.put(fruit, quantity + currentQuantity);
     }
 }

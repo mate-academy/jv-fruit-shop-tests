@@ -1,6 +1,6 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 
 import java.util.ArrayList;

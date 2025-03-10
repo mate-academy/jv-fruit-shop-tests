@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.base.Storage;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.service.ReportGenerator;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,39 +12,38 @@ class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         reportGenerator = new ReportGeneratorImpl();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        Storage.getStorage().clear();
+        Storage.getFruitStorage().clear();
     }
 
     @Test
-    public void emptyStorage_Ok() {
-        String expected = "fruit,quantity";
-        String actual = reportGenerator.getReport();
-        assertEquals(expected, actual);
+    void getReport_nonEmptyStorage_ok() {
+        Storage.getFruitStorage().put("apple", 50);
+        Storage.getFruitStorage().put("banana", 30);
+        Storage.getFruitStorage().put("cherry", 20);
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "apple,50" + System.lineSeparator()
+                + "banana,30" + System.lineSeparator()
+                + "cherry,20";
+        assertEquals(expectedReport, reportGenerator.getReport());
     }
 
     @Test
-    public void nonEmptyStorage_Ok() {
-        Storage.getStorage().put("Apple", 10);
-        Storage.getStorage().put("Banana", 5);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "Apple,10" + System.lineSeparator()
-                + "Banana,5";
-        String actual = reportGenerator.getReport();
-        assertEquals(expected, actual);
+    void getReport_alphabeticalOrder_ok() {
+        Storage.getFruitStorage().put("banana", 30);
+        Storage.getFruitStorage().put("apple", 50);
+        Storage.getFruitStorage().put("cherry", 20);
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "apple,50" + System.lineSeparator()
+                + "banana,30" + System.lineSeparator()
+                + "cherry,20";
+        assertEquals(expectedReport, reportGenerator.getReport());
     }
 
     @Test
-    public void singleItemStorage_Ok() {
-        Storage.getStorage().put("Orange", 3);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "Orange,3";
-        String actual = reportGenerator.getReport();
-        assertEquals(expected, actual);
+    void getReport_emptyStorage_ok() {
+        String expectedReport = "fruit,quantity";
+        assertEquals(expectedReport, reportGenerator.getReport());
     }
 }

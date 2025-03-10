@@ -1,10 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.DataConverterImpl;
 import core.basesyntax.impl.FileReaderImpl;
 import core.basesyntax.impl.FileWriterImpl;
+import core.basesyntax.impl.DataConverterImpl;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.impl.ShopServiceImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
@@ -16,14 +18,13 @@ import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_DATA_PATH = "src/main/resources/input.csv";
-    public static final String OUTPUT_DATA_PATH = "src/main/resources/output.csv";
+    public static final String INPUT_DATA_PATH = "src/main/resources/reportToRead.csv";
+    public static final String OUTPUT_DATA_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
         FileReader fileReader = new FileReaderImpl();
@@ -49,4 +50,3 @@ public class Main {
         fileWriter.writeReport(resultingReport, OUTPUT_DATA_PATH);
     }
 }
-

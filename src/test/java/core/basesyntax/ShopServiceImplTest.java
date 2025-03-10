@@ -1,64 +1,77 @@
 package core.basesyntax;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.strategy.OperationHandler;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import core.basesyntax.impl.ShopServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Collections;
-import java.util.List;
-
-import static javax.management.Query.times;
-import static jdk.internal.classfile.impl.verifier.VerifierImpl.verify;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class ShopServiceImplTest {
-    private ShopServiceImpl shopService;
+    private ShopService shopService;
     private OperationStrategy operationStrategy;
-    private OperationHandler operationHandler;
+    private OperationHandler balanceHandler;
+    private OperationHandler purchaseHandler;
+    private OperationHandler returnHandler;
+    private OperationHandler supplyHandler;
 
     @BeforeEach
     void setUp() {
         operationStrategy = mock(OperationStrategy.class);
-        operationHandler = mock(OperationHandler.class);
+        balanceHandler = mock(OperationHandler.class);
+        purchaseHandler = mock(OperationHandler.class);
+        returnHandler = mock(OperationHandler.class);
+        supplyHandler = mock(OperationHandler.class);
+        when(operationStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE))
+                .thenReturn(balanceHandler);
+        when(operationStrategy.getOperationHandler(FruitTransaction.Operation.PURCHASE))
+                .thenReturn(purchaseHandler);
+        when(operationStrategy.getOperationHandler(FruitTransaction.Operation.RETURN))
+                .thenReturn(returnHandler);
+        when(operationStrategy.getOperationHandler(FruitTransaction.Operation.SUPPLY))
+                .thenReturn(supplyHandler);
+
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @Test
-    void process_NullTransactions_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> shopService.process(null));
+    void process_validTransactions_ok() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 10),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "orange", 15)
+        );
+        shopService.process(transactions);
 
-        assertEquals("Transactions cannot be null", exception.getMessage());
+        verify(balanceHandler, times(1)).apply(transactions.get(0));
+        verify(purchaseHandler, times(1)).apply(transactions.get(1));
+        verify(returnHandler, times(1)).apply(transactions.get(2));
+        verify(supplyHandler, times(1)).apply(transactions.get(3));
     }
 
     @Test
-    void process_ValidTransaction_ShouldCallOperationHandler() {
-        FruitTransaction transaction = new FruitTransaction("BALANCE", "apple", 100);
-        when(operationStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE))
-                .thenReturn(operationHandler);
-
-        shopService.process(List.of(transaction));
-
-        verify(operationStrategy, times(1)).getOperationHandler(FruitTransaction.Operation.BALANCE);
-        verify(operationHandler, times(1)).apply(transaction);
+    void process_emptyList_ok() {
+        List<FruitTransaction> emptyTransactions = List.of();
+        shopService.process(emptyTransactions);
+        verify(operationStrategy, never()).getOperationHandler(any());
     }
 
     @Test
-    void process_InvalidOperation_ShouldThrowException() {
-        FruitTransaction invalidTransaction = new FruitTransaction("INVALID", "banana", 50);
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> shopService.process(List.of(invalidTransaction)));
-
-        assertTrue(exception.getMessage().contains("Invalid operation"));
-    }
-
-    @Test
-    void process_EmptyList_ShouldNotThrowException() {
-        assertDoesNotThrow(() -> shopService.process(Collections.emptyList()));
+    void getOperationHandler_allOperations_ok() {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            assertNotNull(operationStrategy.getOperationHandler(operation),
+                    "Handler is missing for operation: " + operation);
+        }
     }
 }

@@ -1,42 +1,52 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.impl.FileWriterImpl;
-import java.io.FileWriter;
+import core.basesyntax.service.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String TEST_FILE_TO_WRITE = "src/test/resources/test.csv";
-    private static FileWriter fileWriter;
+    private static final String TEST_FILE_PATH = "src/test/resources/test_output.csv";
+    private FileWriter fileWriter;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() {
         fileWriter = new FileWriterImpl();
     }
 
-    @Test
-    void write_validData_Ok() throws Exception {
-        fileWriter.write(TEST_FILE_TO_WRITE, "data");
-        String content = new String(Files.readAllBytes(Paths.get(TEST_FILE_TO_WRITE)));
-        assertEquals("data", content.trim());
+    @AfterEach
+    void tearDown() {
+        File file = new File(TEST_FILE_PATH);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     @Test
-    void writerHandlesEmptyData_Ok() throws IOException {
-        fileWriter.write(TEST_FILE_TO_WRITE, "");
-        String content = new String(Files.readAllBytes(Paths.get(TEST_FILE_TO_WRITE)));
-        assertEquals("", content.trim());
+    void writeReport_validData_ok() throws IOException {
+        String testData = "header1,header2\nvalue1,value2";
+        fileWriter.writeReport(testData, TEST_FILE_PATH);
+        File file = new File(TEST_FILE_PATH);
+        assertTrue(file.exists());
+        assertEquals(testData,
+                new String(Files.readAllBytes(Paths.get(TEST_FILE_PATH))));
     }
 
     @Test
-    void writer_NotNull_Ok() {
-        fileWriter.write(TEST_FILE_TO_WRITE,"data");
-        assertNotNull(fileWriter);
+    void writeReport_invalidPath_notOk() {
+        String testData = "Some data";
+        String invalidPath = "/invalid_folder/test.csv";
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileWriter.writeReport(testData, invalidPath));
+        assertTrue(exception.getMessage().contains("Failed to write report to file"));
     }
 }

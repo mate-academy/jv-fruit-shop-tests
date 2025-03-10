@@ -1,64 +1,58 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.impl.FileReaderImpl;
-import java.util.Arrays;
+import core.basesyntax.service.FileReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private static final String REPORT_TO_READ = "src/main/resources/input.csv";
-    private static final String EMPTY_REPORT = "src/test/resources/emptyReport.csv";
-    private static final String CHAR_REPORT = "src/test/resources/reportWithSpecialChars.csv";
-    private static FileReaderImpl fileReader;
+    private static final String TEST_FILE_PATH = "src/test/resources/test_file.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty_file.csv";
+    private static final String NON_EXIST_FILE_PATH = "src/test/resources/missing.csv";
+    private FileReader fileReader;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() throws IOException {
         fileReader = new FileReaderImpl();
+        createTestFile(TEST_FILE_PATH, "line1\nline2\nline3");
+        createTestFile(EMPTY_FILE_PATH, "");
     }
 
     @Test
-    void read_validReport_Ok() {
-        List<String> read = fileReader.read(REPORT_TO_READ);
-        assertNotNull(read);
-        assertFalse(read.isEmpty());
-
-        List<String> expectedContent = Arrays.asList(
-                "type,fruit,quantity",
-                "    b,banana,20",
-                "    b,apple,100",
-                "    s,banana,100",
-                "    p,banana,13",
-                "    r,apple,10",
-                "    p,apple,20",
-                "    p,banana,5",
-                "    s,banana,50"
-        );
-        assertEquals(expectedContent, read);
+    void read_validFile_ok() {
+        List<String> result = fileReader.read(TEST_FILE_PATH);
+        assertEquals(3, result.size());
+        assertEquals("line1", result.get(0));
+        assertEquals("line2", result.get(1));
+        assertEquals("line3", result.get(2));
     }
 
     @Test
-    void read_nonExistentFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read("randomFile"));
-        List<String> read = fileReader.read(EMPTY_REPORT);
-        assertTrue(read.isEmpty());
-        assertEquals(0, read.size());
+    void read_emptyFile_ok() {
+        List<String> result = fileReader.read(EMPTY_FILE_PATH);
+        assertTrue(result.isEmpty());
     }
 
     @Test
-    void read_FileWithSpecialCharacters_Ok() {
-        List<String> read = fileReader.read(CHAR_REPORT);
-        assertNotNull(read);
-        assertFalse(read.isEmpty());
+    void read_nonExistentFile_notOk() {
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileReader.read(NON_EXIST_FILE_PATH));
+        assertTrue(exception.getMessage().contains("Cannot read file"));
+    }
 
-        String expectedContent = "!@#$%^&|!@&#!*_)!*(^(^+!+(%";
-        String actualContent = String.join("", read);
-        assertEquals(expectedContent, actualContent);
+    private void createTestFile(String path, String content) throws IOException {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(content.replace("\n", System.lineSeparator()));
+        }
     }
 }

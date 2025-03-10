@@ -1,9 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.impl.DataConverterImpl;
 import core.basesyntax.impl.FileReaderImpl;
 import core.basesyntax.impl.FileWriterImpl;
-import core.basesyntax.impl.DataConverterImpl;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.impl.ShopServiceImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -18,6 +17,7 @@ import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

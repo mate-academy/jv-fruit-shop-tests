@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.service.impl.ShopServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,36 +8,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ShopServiceImplTest {
-
     private ShopServiceImpl shopService;
 
     @BeforeEach
     void setUp() {
-        shopService = new ShopServiceImpl();
+        shopService = new ShopServiceImpl(new HashMap<>());
     }
 
     @Test
-    void testAddFruit() {
+    void shouldAddFruitCorrectly() {
         shopService.addFruit("apple", 10);
         assertEquals(10, shopService.getFruitQuantity("apple"));
     }
-}
 
-class ShopServiceImpl {
-
-    private final Map<String, Integer> fruits;
-
-    public ShopServiceImpl() {
-        this.fruits = new HashMap<>();
+    @Test
+    void shouldUpdateQuantityWhenFruitAlreadyExists() {
+        shopService.addFruit("apple", 10);
+        shopService.addFruit("apple", 5);
+        assertEquals(15, shopService.getFruitQuantity("apple"));
     }
 
-    public void addFruit(String name, int quantity) {
-        fruits.put(name, fruits.getOrDefault(name, 0) + quantity);
-    }
-
-    public int getFruitQuantity(String name) {
-        return fruits.getOrDefault(name, 0);
+    @Test
+    void shouldThrowExceptionWhenRemovingMoreThanAvailable() {
+        shopService.addFruit("apple", 10);
+        assertThrows(IllegalArgumentException.class, () -> {
+            shopService.removeFruit("apple", 15);
+        });
     }
 }

@@ -1,10 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.io;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.io.FileReader;
-import core.basesyntax.io.FileReaderImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +31,6 @@ class FileReaderImplTest {
 
     @Test
     void readNonExistentFile() {
-        assertThrows(IOException.class, () -> fileReader.read("nonexistent.csv"));
+        assertThrows(RuntimeException.class, () -> fileReader.read("nonexistent.csv"));
     }
 }

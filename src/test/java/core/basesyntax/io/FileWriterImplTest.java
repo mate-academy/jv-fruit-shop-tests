@@ -1,11 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.io;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.io.FileWriter;
-import core.basesyntax.io.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,12 +65,12 @@ class FileWriterImplTest {
     }
 
     @Test
-    void write_invalidFilePath_throwsIoexception() {
+    void write_invalidFilePath_throwsRuntimeException() {
         String content = "Hello, World!";
         String filePath = "/invalid/path/test.txt"; // Assuming this path is invalid
 
-        IOException exception = assertThrows(
-                IOException.class,
+        RuntimeException exception = assertThrows(
+                RuntimeException.class,
                 () -> fileWriter.write(content, filePath)
         );
         assertTrue(exception

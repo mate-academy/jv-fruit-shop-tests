@@ -1,13 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.converter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import core.basesyntax.converter.DataConverter;
-import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +17,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertValidData() {
+    void convertToTransactions_validData_ok() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -28,17 +25,13 @@ class DataConverterImplTest {
         );
 
         List<FruitTransaction> transactions = dataConverter.convertToTransactions(input);
-        assertEquals(2, transactions.size());
+        Assertions.assertEquals(2, transactions.size());
 
-        FruitTransaction first = transactions.get(0);
-        assertEquals(FruitTransaction.Operation.BALANCE, first.getOperation());
-        assertEquals("banana", first.getFruit());
-        assertEquals(20, first.getQuantity());
+        FruitTransaction expectedFirst = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        Assertions.assertEquals(expectedFirst, transactions.get(0));
 
-        FruitTransaction second = transactions.get(1);
-        assertEquals(FruitTransaction.Operation.SUPPLY, second.getOperation());
-        assertEquals("apple", second.getFruit());
-        assertEquals(100, second.getQuantity());
+        FruitTransaction expectedSecond = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
+        Assertions.assertEquals(expectedSecond, transactions.get(1));
     }
 
     @Test
@@ -47,7 +40,7 @@ class DataConverterImplTest {
                 "type,fruit,quantity",
                 "b,banana"
         );
-        assertThrows(IllegalArgumentException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransactions(input));
     }
 
@@ -57,7 +50,7 @@ class DataConverterImplTest {
                 "type,fruit,quantity",
                 "b,banana,-20"
         );
-        assertThrows(IllegalArgumentException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransactions(input));
     }
 }

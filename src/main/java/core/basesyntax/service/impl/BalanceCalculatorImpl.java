@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class BalanceCalculatorImpl implements Operation {
     private final OperationStrategy strategy;
+    private BalanceChecker balanceChecker = new BalanceChecker();
 
     public BalanceCalculatorImpl(OperationStrategy strategy) {
         this.strategy = strategy;
@@ -24,6 +25,9 @@ public class BalanceCalculatorImpl implements Operation {
             int updatedBalance = operationService
                     .operate(quantity, Storage.fruitsStorage.getOrDefault(fruitName, 0));
             Storage.fruitsStorage.put(fruitName, updatedBalance);
+        }
+        for (Map.Entry<String, Integer> entry : Storage.fruitsStorage.entrySet()) {
+            balanceChecker.checkBalance(entry.getValue(), entry.getKey());
         }
         return Storage.fruitsStorage;
     }

@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -48,9 +49,17 @@ public class BalanceCalculatorTest {
         fruitTransaction.setOperation(operation);
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(quantity);
+        String fruit2 = "apple";
+        OperationsList operation2 = OperationsList.BALANCE;
+        int quantity2 = 20;
+        FruitTransaction fruitTransaction2 = new FruitTransaction();
+        fruitTransaction2.setOperation(operation2);
+        fruitTransaction2.setFruit(fruit2);
+        fruitTransaction2.setQuantity(quantity2);
         List<FruitTransaction> list = new ArrayList<>();
         list.add(fruitTransaction);
-        assertEquals(-10, balanceCalculator.update(list).get(fruit));
+        list.add(fruitTransaction2);
+        assertEquals(10, balanceCalculator.update(list).get(fruit));
         Storage.fruitsStorage.clear();
     }
 
@@ -96,6 +105,23 @@ public class BalanceCalculatorTest {
         List<FruitTransaction> list = new ArrayList<>();
         list.add(fruitTransaction);
         assertEquals(10, balanceCalculator.update(list).get(fruit));
+        Storage.fruitsStorage.clear();
+    }
+
+    @Test
+    void update_NegativeBalance_NotOk() {
+        String fruit = "apple";
+        OperationsList operation = OperationsList.PURCHASE;
+        int quantity = 10;
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(operation);
+        fruitTransaction.setFruit(fruit);
+        fruitTransaction.setQuantity(quantity);
+        List<FruitTransaction> list = new ArrayList<>();
+        list.add(fruitTransaction);
+        assertThrows(RuntimeException.class, () -> {
+            balanceCalculator.update(list);
+        });
         Storage.fruitsStorage.clear();
     }
 }

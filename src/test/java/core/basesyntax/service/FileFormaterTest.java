@@ -6,16 +6,16 @@ import core.basesyntax.dao.CsvReaderImpl;
 import core.basesyntax.dao.CustomFileReader;
 import core.basesyntax.service.impl.FileFormaterForCsvReader;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileFormaterTest {
     private static final String FILE_PATH = "src/test/java/testResources/testFormatterFile.csv";
-    private CustomFileReader reader;
-    private FileFormaterForCsvReader fileFormaterForCsvReader;
+    private static CustomFileReader reader;
+    private static FileFormaterForCsvReader fileFormaterForCsvReader;
 
-    @BeforeEach
-    void set_Up() {
+    @BeforeAll
+    static void set_Up() {
         reader = new CsvReaderImpl();
         fileFormaterForCsvReader = new FileFormaterForCsvReader(reader);
     }

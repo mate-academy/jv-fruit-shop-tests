@@ -21,7 +21,7 @@ public class CsvWriterImplTest {
     }
 
     @Test
-    void file_IsNull_NotOk() {
+    void writeFile_FileIsNull_NotOk() {
         String filePath = null;
         List<String> list = new ArrayList<>();
         assertThrows(RuntimeException.class, () -> {
@@ -30,7 +30,7 @@ public class CsvWriterImplTest {
     }
 
     @Test
-    void file_checkOutput_IsOk() throws IOException {
+    void writeFile_checkOutput_IsOk() throws IOException {
         List<String> list = new ArrayList<>();
         list.add("banana,20");
         list.add("apple,40");

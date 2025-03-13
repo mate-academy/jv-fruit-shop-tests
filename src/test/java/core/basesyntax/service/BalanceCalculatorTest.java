@@ -14,19 +14,23 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceCalculatorTest {
-    private BalanceCalculatorImpl balanceCalculator;
-    private OperationStrategy strategy;
+    private static BalanceCalculatorImpl balanceCalculator;
+    private static OperationStrategy strategy;
+    private static OperationHandler balance;
+    private static OperationHandler purchase;
+    private static OperationHandler returner;
+    private static OperationHandler supply;
 
-    @BeforeEach
-    void setUp() {
-        OperationHandler balance = new BalanceHandler();
-        OperationHandler purchase = new PurchaseHandler();
-        OperationHandler returner = new ReturnHandler();
-        OperationHandler supply = new SupplyHandler();
+    @BeforeAll
+    static void setUp() {
+        balance = new BalanceHandler();
+        purchase = new PurchaseHandler();
+        returner = new ReturnHandler();
+        supply = new SupplyHandler();
         strategy = new OperationStrategy(Map.of(
                 OperationsList.BALANCE, balance,
                 OperationsList.PURCHASE, purchase,
@@ -36,7 +40,7 @@ public class BalanceCalculatorTest {
     }
 
     @Test
-    void purchase_Operation_IsOk() {
+    void update_PurchaseOperation_IsOk() {
         String fruit = "apple";
         OperationsList operation = OperationsList.PURCHASE;
         int quantity = 10;
@@ -51,7 +55,7 @@ public class BalanceCalculatorTest {
     }
 
     @Test
-    void balance_Operation_IsOk() {
+    void update_BalanceOperation_IsOk() {
         String fruit = "apple";
         OperationsList operation = OperationsList.BALANCE;
         int quantity = 10;
@@ -66,7 +70,7 @@ public class BalanceCalculatorTest {
     }
 
     @Test
-    void return_Operation_IsOk() {
+    void update_ReturnOperation_IsOk() {
         String fruit = "apple";
         OperationsList operation = OperationsList.RETURN;
         int quantity = 10;
@@ -81,7 +85,7 @@ public class BalanceCalculatorTest {
     }
 
     @Test
-    void supply_Operation_IsOk() {
+    void update_SupplyOperation_IsOk() {
         String fruit = "apple";
         OperationsList operation = OperationsList.SUPPLY;
         int quantity = 10;

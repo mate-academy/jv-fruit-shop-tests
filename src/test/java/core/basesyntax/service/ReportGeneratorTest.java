@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class ReportGeneratorTest {
     private ReportCreator reportCreator;
     private Map<String, Integer> map;
+    private List<String> expected;
 
     @BeforeEach
     void setUp() {
@@ -24,8 +25,8 @@ public class ReportGeneratorTest {
     }
 
     @Test
-    void report_Generating_IsOk() {
-        List<String> expected = new ArrayList<>();
+    void createReport_Generating_IsOk() {
+        expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,20");
         expected.add("apple,10");

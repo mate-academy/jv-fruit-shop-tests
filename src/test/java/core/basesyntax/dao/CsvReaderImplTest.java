@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class CsvReaderImplTest {
     private static final String PATH = "src/test/java/testResources/testFile.csv";
+    private static final String emptyFilePath = "src/test/java/testResources/emptyFile.csv";
     private CsvReaderImpl csvReader;
 
     @BeforeEach
@@ -17,7 +18,7 @@ public class CsvReaderImplTest {
     }
 
     @Test
-    void file_IsNotCorrect_NotOk() {
+    void readFile_FileIsNotCorrect_NotOk() {
         String filePath = "randomName.txt";
         assertThrows(RuntimeException.class, () -> {
             csvReader.readFile(filePath);
@@ -25,15 +26,14 @@ public class CsvReaderImplTest {
     }
 
     @Test
-    void file_IsEmpty_NotOk() {
-        String filePath = "src/test/java/testResources/emptyFile.csv";
+    void readFile_FileIsEmpty_NotOk() {
         assertThrows(RuntimeException.class, () -> {
-            csvReader.readFile(filePath);
+            csvReader.readFile(emptyFilePath);
         });
     }
 
     @Test
-    void file_checkOutput_IsOk() throws IOException {
+    void readFile_checkOutput_IsOk() throws IOException {
         String expected = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,20" + System.lineSeparator();
         assertEquals(expected, csvReader.readFile(PATH));

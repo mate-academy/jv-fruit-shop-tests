@@ -11,9 +11,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class DataFruitConverterTest {
+    private List<String[]> data;
+
     @Test
-    void quantity_Parse_NotOk() {
-        List<String[]> data = new ArrayList<>();
+    void convertToTransaction_Parse_NotOk() {
+        data = new ArrayList<>();
         data.add(new String[]{"operation", "fruit", "quantity"});
         data.add(new String[]{"b", "apple", "ddd"});
         DataFruitConverterImpl dataFruitConverter = new DataFruitConverterImpl();
@@ -23,8 +25,8 @@ public class DataFruitConverterTest {
     }
 
     @Test
-    void fruit_Convertation_IsOk() {
-        List<String[]> data = new ArrayList<>();
+    void convertToTransaction_Convertation_IsOk() {
+        data = new ArrayList<>();
         data.add(new String[]{"operation", "fruit", "quantity"});
         data.add(new String[]{"s", "apple", "20"});
         DataFruitConverterImpl dataFruitConverter = new DataFruitConverterImpl();

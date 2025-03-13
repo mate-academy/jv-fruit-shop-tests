@@ -4,22 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.PurchaseHandler;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseHandlerTest {
-    private PurchaseHandler purchaseHandler;
+    private static PurchaseHandler purchaseHandler;
+
+    @BeforeAll
+    static void setUp() {
+        purchaseHandler = new PurchaseHandler();
+    }
 
     @Test
-    void return_Check_IsOk() {
-        purchaseHandler = new PurchaseHandler();
+    void operate_BalanceCheck_IsOk() {
         int result = purchaseHandler.operate(10, 20);
         int expected = 10;
         assertEquals(result, expected);
     }
 
     @Test
-    void operAmount_Negative_NotOk() {
-        purchaseHandler = new PurchaseHandler();
+    void operate_AmountNegative_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             purchaseHandler.operate(-10, 20);
         });

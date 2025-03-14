@@ -20,8 +20,12 @@ public class ShopServiceImpl implements ShopService {
         while (!fruitTransactions.isEmpty()) {
             FruitTransaction fruitTransaction = fruitTransactions.remove(0);
             if (fruitTransaction.getQuantity() < 0) {
-                throw new RuntimeException("Quantity could not be les then 0! "
+                throw new RuntimeException("Quantity could not be less then 0! "
                         + "Please check input data!!");
+            }
+            if (fruitTransaction.getFruit() == null || fruitTransaction.getFruit().isEmpty()) {
+                throw new RuntimeException("You cannot sell a nameless fruit! "
+                        + "You have to provide a fruit title!");
             }
             reportData.merge(fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity(),

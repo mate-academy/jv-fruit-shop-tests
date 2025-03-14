@@ -10,6 +10,7 @@ public class DataConverterImpl implements DataConverter {
     private static final String FRUIT_NAME = "fruit";
     private static final String FRUIT_QUANTITY = "quantity";
     private static final String HEADER_SEPARATOR = ",";
+    private static final int INPUT_COLS_NUMBER = 3;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
@@ -40,10 +41,21 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String row : inputReport) {
             String[] rowArray = row.split(HEADER_SEPARATOR);
+            int fruitQuantity;
+            if (rowArray.length != INPUT_COLS_NUMBER) {
+                throw new RuntimeException("Given input data contains invalid columns: accepted - "
+                + INPUT_COLS_NUMBER + " columns but present - " + rowArray.length + " columns");
+            }
+            try {
+                fruitQuantity = Integer.parseInt(rowArray[qnttColIndex].trim());
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("The quantity of fruit cannot be read: "
+                        + "the field cannot be parsed as an integer, currently giver value is \""
+                        + rowArray[qnttColIndex].trim() + "\"");
+            }
             transactions.add(new FruitTransaction(FruitTransaction.Operation
                     .getOperation(rowArray[operationColIndex].trim()),
-                    rowArray[fruitColIndex].trim(),
-                    Integer.parseInt(rowArray[qnttColIndex].trim())));
+                    rowArray[fruitColIndex].trim(), fruitQuantity));
         }
         return transactions;
     }

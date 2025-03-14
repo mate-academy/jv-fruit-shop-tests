@@ -11,12 +11,19 @@ import core.basesyntax.service.impl.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyTest {
-    private final Map<FruitTransaction.Operation, OperationHandler>
+    private static final Map<FruitTransaction.Operation, OperationHandler>
             operationHandlers = new HashMap<>();
+    private static OperationStrategy operationStrategy;
+
+    @BeforeAll
+    static void beforeAll() {
+        operationStrategy = new OperationStrategyImpl(operationHandlers);
+    }
 
     @BeforeEach
     void setUp() {
@@ -28,7 +35,6 @@ public class OperationStrategyTest {
 
     @Test
     void getOperation_normalMap_Ok() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         OperationHandler actual = operationStrategy.getOperation(FruitTransaction
                 .Operation.PURCHASE);
         OperationHandler expected = operationHandlers.get(FruitTransaction.Operation.PURCHASE);
@@ -37,7 +43,6 @@ public class OperationStrategyTest {
 
     @Test
     void getOperation_emptyMap_notOk() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         operationHandlers.clear();
         Assertions.assertThrows(RuntimeException.class, () -> operationStrategy
                 .getOperation(FruitTransaction.Operation.PURCHASE));

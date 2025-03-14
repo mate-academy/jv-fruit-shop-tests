@@ -4,48 +4,52 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
+    private static ReportGenerator reportGenerator;
     private Map<String, Integer> reportData;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         reportData = new HashMap<>();
         reportData.put("banana",152);
         reportData.put("apple",90);
     }
 
+    @BeforeAll
+    static void beforeAll() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
+
     @Test
-    public void getReport_properMap_ok() {
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    void getReport_properMap_ok() {
         String res = reportGenerator.getReport(reportData);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
-        Assert.assertEquals(res, expected);
+        Assertions.assertEquals(res, expected);
     }
 
     @Test
     public void getReport_emptyMap_ok() {
-        reportData.clear();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String res = reportGenerator.getReport(reportData);
+        Map<String, Integer> emptyData = new HashMap<>();
+        String res = reportGenerator.getReport(emptyData);
         String expected = "fruit,quantity" + System.lineSeparator();
-        Assert.assertEquals(res, expected);
+        Assertions.assertEquals(res, expected);
     }
 
     @Test
     public void getReport_emptyKeyMap_ok() {
         reportData.put(null,86);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String res = reportGenerator.getReport(reportData);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "null,86" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
-        Assert.assertEquals(res, expected);
+        Assertions.assertEquals(res, expected);
     }
 }

@@ -19,5 +19,3 @@ public class CsvWriterImpl implements CustomFileWriter {
         }
     }
 }
-
-

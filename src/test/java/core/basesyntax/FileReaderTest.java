@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderTest {
-    private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
-    private static final String NON_EXIST_FILE_PATH = "src/main/resources/otherdata.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/data.csv";
+    private static final String NON_EXIST_FILE_PATH = "src/test/resources/otherdata.csv";
     private static FileReader fileReader;
 
     @BeforeAll

@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
-import core.basesyntax.model.PurchaseOperation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import core.basesyntax.model.BalanceOperation;
 import core.basesyntax.model.FruitTransaction;
@@ -6,8 +6,6 @@ import core.basesyntax.model.OperationHandler;
 import core.basesyntax.model.PurchaseOperation;
 import core.basesyntax.model.ReturnOperation;
 import core.basesyntax.model.SupplyOperation;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import java.util.ArrayList;

@@ -1,7 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.db;
 
-import core.basesyntax.db.FileReader;
-import core.basesyntax.db.FileReaderImpl;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

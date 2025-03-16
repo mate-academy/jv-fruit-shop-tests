@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.Map;

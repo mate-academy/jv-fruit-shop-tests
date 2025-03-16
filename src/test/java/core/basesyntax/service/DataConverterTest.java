@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.ArrayList;

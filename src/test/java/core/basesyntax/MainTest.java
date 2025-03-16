@@ -153,4 +153,78 @@ class MainTest {
 
         assertEquals(actual, expected);
     }
+
+    @Test
+    void dataConverterTestStringOk() {
+        List<String> list = new ArrayList<>();
+        list.add("p,banana,wrong");
+        DataConverter dataConverter = new DataConverterImpl();
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> dataConverter.convertToTransaction(list));
+
+        assertEquals("Invalid number format: 'wrong'. Expected an integer value.", exception.getMessage());
+    }
+
+    @Test
+    void dataConverterTestLessZeroOk() {
+        List<String> list = new ArrayList<>();
+        list.add("p,banana,-10");
+        DataConverter dataConverter = new DataConverterImpl();
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> dataConverter.convertToTransaction(list));
+
+        assertEquals("Error! Number can't be less than zero", exception.getMessage());
+    }
+
+    @Test
+    void NotFoundProduct() {
+        Storage.STORAGE.remove("banana");
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
+        List<FruitTransaction> transactions = new ArrayList<>();
+        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13));
+
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(transactions));
+
+        assertEquals("Can't find fruit: banana", exception.getMessage());
+
+    }
+
+    @Test
+    void NotEnoughProduct() {
+        Storage.STORAGE.put("banana", 10);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
+        List<FruitTransaction> transactions = new ArrayList<>();
+
+        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 9999));
+
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(transactions));
+
+        assertEquals("Too little of product: banana", exception.getMessage());
+
+    }
+
+    @Test
+    void testGetOperationValidCode() {
+        // Test with a valid code
+        assertEquals(FruitTransaction.Operation.BALANCE, FruitTransaction.getOperation("b"));
+        assertEquals(FruitTransaction.Operation.SUPPLY, FruitTransaction.getOperation("s"));
+        assertEquals(FruitTransaction.Operation.PURCHASE, FruitTransaction.getOperation("p"));
+        assertEquals(FruitTransaction.Operation.RETURN, FruitTransaction.getOperation("r"));
+    }
+
+    @Test
+    void testGetOperationInvalidCode() {
+        // Test with an invalid code to ensure IllegalArgumentException is thrown
+        assertThrows(IllegalArgumentException.class, () -> FruitTransaction.getOperation("invalid"));
+    }
 }

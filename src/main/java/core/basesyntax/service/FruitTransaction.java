@@ -72,6 +72,5 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
-
     }
 }

@@ -10,12 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
-
     private final DataConverter dataConverter = new DataConverterImpl();
 
     @Test
-    void fruitTransaction_shouldConvert() {
-
+    void fruitTransaction_convert_Ok() {
         List<String> input = List.of("b,apple,80", "p,orange,10");
         List<FruitTransaction> transaction = dataConverter.fruitTransaction(input);
 
@@ -31,8 +29,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void fruitTransaction_shouldSkipNotAllowedOperation() {
-
+    void fruitTransaction_skipNotAllowedOperation_Ok() {
         List<String> input = List.of("z,apple,100", "b,banana,50");
         List<FruitTransaction> transaction = dataConverter.fruitTransaction(input);
 
@@ -40,8 +37,7 @@ public class DataConverterTest {
     }
 
     @Test
-    void fruitTransaction_shouldReturnEmptyListForEmptyInput_Ok() {
-
+    void fruitTransaction_returnEmptyListForEmptyInput_Ok() {
         List<String> input = List.of();
         List<FruitTransaction> transaction = dataConverter.fruitTransaction(input);
 

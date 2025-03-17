@@ -16,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyTest {
-
     private OperationStrategy operationStrategy;
 
     @BeforeEach
@@ -32,7 +31,6 @@ public class OperationStrategyTest {
 
     @Test
     void operationStrategy_shouldChooseCorrectOperation_Ok() {
-
         FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
         OperationHandler handlerBalance = operationStrategy.strategy(balance);
         assertTrue(handlerBalance instanceof BalanceOperation);

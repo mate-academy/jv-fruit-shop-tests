@@ -1,23 +1,39 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.infrastructure.DataConverter;
 import core.basesyntax.infrastructure.DataConverterImpl;
-import core.basesyntax.infrastructure.db.*;
-import core.basesyntax.service.*;
-import core.basesyntax.service.operations.*;
+import core.basesyntax.infrastructure.db.FileReader;
+import core.basesyntax.infrastructure.db.FileReaderImpl;
+import core.basesyntax.infrastructure.db.FileWriter;
+import core.basesyntax.infrastructure.db.FileWriterImpl;
+import core.basesyntax.infrastructure.db.Storage;
+import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.operations.BalanceOperation;
+import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.PurchaseOperation;
+import core.basesyntax.service.operations.ReturnOperation;
+import core.basesyntax.service.operations.SupplyOperation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
     private static final String OPERATION_LIST_FILE_PATH
             = "src/main/resources/operationslist.csv";
     private static final String DB_FILE_PATH
             = "src/main/resources/database.csv";
-
 
     @BeforeEach
     void setUp() {
@@ -43,7 +59,6 @@ class MainTest {
         FileReader fileReader = new FileReaderImpl();
         List<String> actualList = fileReader.read(OPERATION_LIST_FILE_PATH);
         assertEquals(expectedList, actualList);
-
     }
 
     @Test
@@ -162,7 +177,8 @@ class MainTest {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> dataConverter.convertToTransaction(list));
 
-        assertEquals("Invalid number format: 'wrong'. Expected an integer value.", exception.getMessage());
+        assertEquals("Invalid number format: 'wrong'. Expected an integer value.",
+                exception.getMessage());
     }
 
     @Test
@@ -177,7 +193,7 @@ class MainTest {
     }
 
     @Test
-    void NotFoundProduct() {
+    void notFoundProduct() {
         Storage.STORAGE.remove("banana");
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
@@ -195,7 +211,7 @@ class MainTest {
     }
 
     @Test
-    void NotEnoughProduct() {
+    void notEnoughProduct() {
         Storage.STORAGE.put("banana", 10);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
@@ -225,6 +241,7 @@ class MainTest {
     @Test
     void testGetOperationInvalidCode() {
         // Test with an invalid code to ensure IllegalArgumentException is thrown
-        assertThrows(IllegalArgumentException.class, () -> FruitTransaction.getOperation("invalid"));
+        assertThrows(IllegalArgumentException.class,
+                () -> FruitTransaction.getOperation("invalid"));
     }
 }

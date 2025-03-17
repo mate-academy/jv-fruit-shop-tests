@@ -3,6 +3,9 @@ package core.basesyntax.db;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,12 +34,15 @@ public class FileWriterTest {
 
     @Test
     void write_verifyWrittenContent_ok() {
-        String actual;
+        List<String> actual;
+        List<String> expected = new ArrayList<>();
+        expected.add("Some data to test");
+        fileWriter.write(dataToWrite, REPORT_FILE_PATH);
         try {
-            actual = Files.readAllLines(Paths.get(REPORT_FILE_PATH)).get(0);
+            actual = Files.readAllLines(Paths.get(REPORT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Unable to read the file: " + REPORT_FILE_PATH, e);
         }
-        Assertions.assertEquals(dataToWrite, actual);
+        Assertions.assertEquals(expected, actual);
     }
 }

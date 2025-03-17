@@ -15,7 +15,7 @@ class MainTest {
             = "src/test/java/core/basesyntax/testFinalReport.csv";
 
     @Test
-    void main_ValidInput_ProcessesAndGeneratesReport() throws IOException {
+    public void main_ValidInput_ProcessesAndGeneratesReport() throws IOException {
         Main.main(new String[]{});
 
         Path outputPath = Path.of(FINAL_REPORT_PATH_FILE);

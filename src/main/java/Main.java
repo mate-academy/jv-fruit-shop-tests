@@ -1,5 +1,3 @@
-package core.basesyntax;
-
 import core.basesyntax.dao.FileWriter;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;

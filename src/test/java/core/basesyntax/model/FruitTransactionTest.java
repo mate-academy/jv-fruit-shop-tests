@@ -23,12 +23,14 @@ class FruitTransactionTest {
                 "banana",
                 50);
         String expectedFruit = "banana";
-        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        int expectedAmount = 50;
-
         assertEquals(expectedFruit, fruitTransaction.getFruit());
+        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
         assertEquals(operation, fruitTransaction.getOperation());
+        int expectedAmount = 50;
         assertEquals(expectedAmount,fruitTransaction.getQuantity());
+        String code = operation.getCode();
+        String expectedCode = "b";
+        assertEquals(expectedCode,code);
     }
 
     @Test
@@ -38,6 +40,10 @@ class FruitTransactionTest {
                 "banana",
                 50);
         fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(50);
+        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         assertEquals("apple", fruitTransaction.getFruit());
+        assertEquals(50, fruitTransaction.getQuantity());
+        assertEquals(FruitTransaction.Operation.RETURN, fruitTransaction.getOperation());
     }
 }

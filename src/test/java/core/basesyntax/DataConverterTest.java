@@ -48,4 +48,12 @@ class DataConverterTest {
                 () -> dataConverter.convertToTransaction(rawData));
         assertEquals("Quantity can't be negative: -10", thrown.getMessage());
     }
+
+    @Test
+    void convertToTransaction_emptyData_throwsException() {
+        List<String> rawData = List.of();
+        RuntimeException thrown = assertThrows(RuntimeException.class,
+                () -> dataConverter.convertToTransaction(rawData));
+        assertEquals("Data can't be empty", thrown.getMessage());
+    }
 }

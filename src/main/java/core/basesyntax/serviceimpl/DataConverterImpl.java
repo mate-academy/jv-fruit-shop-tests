@@ -12,19 +12,23 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
-        return data.stream()
-                .skip(1)
-                .map(line -> {
-                    String[] parts = line.split(SEPARATOR_SIGN);
-                    String opCode = parts[OPERATOR_PART];
-                    FruitTransaction.Operation op = FruitTransaction.Operation.fromCode(opCode);
-                    String fruit = parts[FRUIT_PART];
-                    int quantity = Integer.parseInt(parts[QUANTITY_PART]);
-                    if (quantity >= 0) {
-                        return new FruitTransaction(op, fruit, quantity);
-                    }
-                    throw new IllegalArgumentException("Quantity can't be negative: " + quantity);
-                })
-                .toList();
+        if (!data.isEmpty()) {
+            return data.stream()
+                    .skip(1)
+                    .map(line -> {
+                        String[] parts = line.split(SEPARATOR_SIGN);
+                        String opCode = parts[OPERATOR_PART];
+                        FruitTransaction.Operation op = FruitTransaction.Operation.fromCode(opCode);
+                        String fruit = parts[FRUIT_PART];
+                        int quantity = Integer.parseInt(parts[QUANTITY_PART]);
+                        if (quantity >= 0) {
+                            return new FruitTransaction(op, fruit, quantity);
+                        }
+                        throw new IllegalArgumentException("Quantity can't be negative: "
+                                + quantity);
+                    })
+                    .toList();
+        }
+        throw new RuntimeException("Data can't be empty");
     }
 }

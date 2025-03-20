@@ -20,7 +20,10 @@ public class DataConverterImpl implements DataConverter {
                     FruitTransaction.Operation op = FruitTransaction.Operation.fromCode(opCode);
                     String fruit = parts[FRUIT_PART];
                     int quantity = Integer.parseInt(parts[QUANTITY_PART]);
-                    return new FruitTransaction(op, fruit, quantity);
+                    if (quantity >= 0) {
+                        return new FruitTransaction(op, fruit, quantity);
+                    }
+                    throw new IllegalArgumentException("Quantity can't be negative: " + quantity);
                 })
                 .toList();
     }

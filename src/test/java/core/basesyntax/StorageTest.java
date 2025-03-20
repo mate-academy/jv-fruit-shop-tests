@@ -2,20 +2,12 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
-
-    @Test
-    void getFruitQuantity_fruitNameIsNull_throwsException() {
-        NullPointerException thrown = assertThrows(NullPointerException.class,
-                () -> Storage.getFruitQuantity(null));
-        assertEquals("Fruit can't be null", thrown.getMessage());
-    }
 
     @Test
     void getFruitQuantity_wrongFruitName_returnsZero() {

@@ -21,7 +21,8 @@ class FileReaderTest {
 
     @Test
     void read_validFile_correct() {
-        List<String> data = fileReader.read("src/test/java/resources/testInput.csv");
+        final String testPath = "src/test/java/resources/testInput.csv";
+        List<String> data = fileReader.read(testPath);
         assertNotNull(data);
         assertFalse(data.isEmpty());
         assertEquals("b,banana,20", data.get(1));
@@ -29,7 +30,7 @@ class FileReaderTest {
 
     @Test
     void read_invalidFile_throwsException() {
-        String invalidFilePath = "src/test/java/resources";
+        final String invalidFilePath = "src/test/java/resources";
         RuntimeException thrown = assertThrows(RuntimeException.class,
                 () -> fileReader.read(invalidFilePath));
         assertEquals("Can't read file from path: " + invalidFilePath, thrown.getMessage());

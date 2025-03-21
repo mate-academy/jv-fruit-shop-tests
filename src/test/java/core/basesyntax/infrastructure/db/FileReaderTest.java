@@ -1,15 +1,17 @@
 package core.basesyntax.infrastructure.db;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
     private static final String OPERATION_LIST_FILE_PATH
             = "src/main/resources/operationslist.csv";
+
     @Test
     void readInnitDataOk() {
         String[] expectedStr = new String[] {

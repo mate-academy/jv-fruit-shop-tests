@@ -1,14 +1,14 @@
 package core.basesyntax.infrastructure.db;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.infrastructure.DataConverter;
 import core.basesyntax.infrastructure.DataConverterImpl;
 import core.basesyntax.service.FruitTransaction;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FileWriterTest {
     private static final String OPERATION_LIST_FILE_PATH
@@ -56,5 +56,4 @@ class FileWriterTest {
 
         assertEquals(expected, actual);
     }
-
 }

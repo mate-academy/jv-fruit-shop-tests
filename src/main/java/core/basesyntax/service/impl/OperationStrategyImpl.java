@@ -18,6 +18,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         if (operationHandlersMap.containsKey(operation)) {
             return operationHandlersMap.get(operation);
         }
-        throw new RuntimeException("Operation " + operation + " not supported");
+        throw new IllegalArgumentException("Operation "
+                + operation + " not supported");
     }
 }

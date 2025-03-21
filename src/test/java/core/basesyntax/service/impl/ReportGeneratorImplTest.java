@@ -20,10 +20,8 @@ class ReportGeneratorImplTest {
     static void beforeAll() {
         Storage.fruits.clear();
         reportGenerator = new ReportGeneratorImpl();
-        String banana = BANANA;
-        String apple = APPLE;
-        Storage.fruits.put(banana, COUNT_BANANA);
-        Storage.fruits.put(apple, COUNT_APPLE);
+        Storage.fruits.put(BANANA, COUNT_BANANA);
+        Storage.fruits.put(APPLE, COUNT_APPLE);
     }
 
     @Test

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class FileReaderImplTest {
 
     private static CustomFileReader fileReader;
-    private static final Path startFilePath = Paths.get("src/main/resources", "reportToRead.csv");
+    private static final Path startFilePath = Paths.get("src/test/resources", "reportToRead.csv");
 
     @BeforeAll
     static void beforeAll() {
@@ -22,7 +22,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void emptyFile_NotOK() {
+    public void emptyFile_ShouldThrowException() {
         assertThrows(RuntimeException.class, () -> fileReader.read(""));
     }
 

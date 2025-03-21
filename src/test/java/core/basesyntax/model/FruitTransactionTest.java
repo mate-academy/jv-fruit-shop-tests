@@ -2,6 +2,7 @@ package core.basesyntax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +12,11 @@ class FruitTransactionTest {
     @Test
     void false_Operation_NotOk() {
         String code = "m";
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.fromCode(code);
         });
+        assertTrue(exception.getMessage().contains("Unknown operation: "),
+                "Expected 'Unknown operation' but got: " + exception.getMessage());
     }
 
     @Test
@@ -27,10 +30,10 @@ class FruitTransactionTest {
         FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
         assertEquals(operation, fruitTransaction.getOperation());
         int expectedAmount = 50;
-        assertEquals(expectedAmount,fruitTransaction.getQuantity());
+        assertEquals(expectedAmount, fruitTransaction.getQuantity());
         String code = operation.getCode();
         String expectedCode = "b";
-        assertEquals(expectedCode,code);
+        assertEquals(expectedCode, code);
     }
 
     @Test

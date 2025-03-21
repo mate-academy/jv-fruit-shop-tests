@@ -39,10 +39,3 @@ class ShopServiceImplTest {
         assertEquals(expectedResult,Storage.fruits.get(fruit));
     }
 }
-
-
-
-
-
-
-

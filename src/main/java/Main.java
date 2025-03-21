@@ -41,6 +41,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConvertImpl();
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);

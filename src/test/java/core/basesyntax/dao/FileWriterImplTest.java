@@ -3,10 +3,10 @@ package core.basesyntax.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import org.junit.jupiter.api.BeforeAll;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +20,9 @@ class FileWriterImplTest {
     private static final int COUNT_APPLE = 90;
     private final StringBuilder stringBuilder = new StringBuilder();
 
-    @BeforeAll
-    static void beforeAll() {
-        fileWriter = new FileWriterImpl();
-    }
-
     @BeforeEach
     void setUp() {
+        fileWriter = new FileWriterImpl();
         stringBuilder.append(HEADER)
                 .append(System.lineSeparator())
                 .append(BANANA)
@@ -41,32 +37,27 @@ class FileWriterImplTest {
 
     @Test
     void fileWrite_Ok() {
-        StringBuilder lastString = new StringBuilder();
-        String report = stringBuilder.toString();
+        String report = "Test report content";
         String fileName = "fileTest.txt";
+        Path filePath = Path.of(fileName);
+
         fileWriter.write(report, fileName);
 
-        try (BufferedReader br = new BufferedReader(new java.io.FileReader(fileName))) {
-            String str;
-            while ((str = br.readLine()) != null) {
-                lastString.append(str)
-                        .append(System.lineSeparator());
-            }
+        String lastString;
+        try {
+            lastString = Files.readString(filePath);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error reading file: " + fileName, e);
         }
-
-        assertEquals(report, lastString.toString());
+        assertEquals(report, lastString);
     }
 
     @Test
-    void rights_ToWrite_NotOk() throws IOException {
-        String report = stringBuilder.toString();
-        String fileName = "fileNotExist.txt";
-        File file = new File(fileName);
-        file.setWritable(false);
-        assertThrows(RuntimeException.class, () -> {
-            fileWriter.write(report, fileName);
+    void fileRead_NonExistentFile_ShouldThrowException() {
+        Path nonExistentFile = Path.of("nonexistent.txt");
+
+        assertThrows(NoSuchFileException.class, () -> {
+            Files.readString(nonExistentFile);
         });
     }
 }

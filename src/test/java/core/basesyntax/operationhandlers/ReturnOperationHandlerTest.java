@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransactionImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,10 @@ class ReturnOperationHandlerTest {
     void setUp() {
         handler = new ReturnOperationHandler();
         transaction = new FruitTransactionImpl();
+    }
+
+    @AfterEach
+    void clear() {
         Storage.fruits.clear();
     }
 
@@ -44,8 +49,8 @@ class ReturnOperationHandlerTest {
 
     @Test
     void apply_NullTransaction_ThrowsException() {
-        assertThrows(NullPointerException.class, () -> handler.apply(null),
-                "Expected NullPointerException when passing null");
+        assertThrows(IllegalArgumentException.class, () -> handler.apply(null),
+                "Expected IllegalArgumentException when passing null");
     }
 
     @Test

@@ -13,6 +13,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,10 @@ public class ShopServiceImplTest {
         operationStrategy = new OperationStrategyImpl(handlers);
 
         shopService = new ShopServiceImpl(operationStrategy);
+    }
+
+    @AfterEach
+    void clear() {
         Storage.fruits.clear();
     }
 

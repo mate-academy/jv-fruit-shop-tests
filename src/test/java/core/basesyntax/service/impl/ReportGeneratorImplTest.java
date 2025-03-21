@@ -39,7 +39,8 @@ class ReportGeneratorImplTest {
                 .append(System.lineSeparator())
                 .append(APPLE)
                 .append(FOOTER)
-                .append(COUNT_APPLE);
+                .append(COUNT_APPLE)
+                .append(System.lineSeparator());
 
         String expected = stringBuilder.toString();
         assertEquals(expected, report);

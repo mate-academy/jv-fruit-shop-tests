@@ -56,10 +56,6 @@ class FileWriterImplTest {
             throw new RuntimeException(e);
         }
 
-        if (!lastString.isEmpty()) {
-            lastString.setLength(lastString.length() - 2);
-        }
-
         assertEquals(report, lastString.toString());
     }
 

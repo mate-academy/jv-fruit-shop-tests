@@ -17,6 +17,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(FOOTER)
                     .append(Storage.fruits.get(storage.getKey()));
         }
-        return report.toString();
+        return report.append(System.lineSeparator()).toString();
     }
 }

@@ -18,7 +18,7 @@ class FileWriterImplTest {
     @BeforeEach
     void setUp() throws IOException {
         fileWriter = new FileWriterImpl();
-        tempFile = Files.createTempFile("test", ".txt");
+        tempFile = Path.of("src/test/java/core/basesyntax/resources/test.csv");
     }
 
     @AfterEach

@@ -15,14 +15,13 @@ class FileReaderImplTest {
     private Path tempFile;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         fileReader = new FileReaderImpl();
-        tempFile = Files.createTempFile("test", ".csv");
-        Files.writeString(tempFile, "type,fruit,quantity\nb,banana,20\ns,apple,100");
+        tempFile = Path.of("src/test/java/core/basesyntax/resources/test.csv");
     }
 
     @Test
-    void readValidFile() throws IOException {
+    void readValidFile() {
         List<String> lines = fileReader.read(tempFile.toString());
         assertEquals(3, lines.size());
         assertEquals("type,fruit,quantity", lines.get(0));

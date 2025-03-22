@@ -11,7 +11,6 @@ import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

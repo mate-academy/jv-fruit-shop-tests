@@ -3,7 +3,6 @@ package core.basesyntax.converter;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,10 +26,12 @@ class DataConverterImplTest {
         List<FruitTransaction> transactions = dataConverter.convertToTransactions(input);
         Assertions.assertEquals(2, transactions.size());
 
-        FruitTransaction expectedFirst = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        FruitTransaction expectedFirst =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
         Assertions.assertEquals(expectedFirst, transactions.get(0));
 
-        FruitTransaction expectedSecond = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
+        FruitTransaction expectedSecond =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
         Assertions.assertEquals(expectedSecond, transactions.get(1));
     }
 

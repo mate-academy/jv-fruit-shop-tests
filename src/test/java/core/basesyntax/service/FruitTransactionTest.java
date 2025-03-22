@@ -1,52 +1,82 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.infrastructure.db.Storage;
-import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.service.operations.PurchaseOperation;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     @Test
-    void notFoundProduct() {
-        Storage.STORAGE.remove("banana");
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-
-        List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13));
-
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> shopService.process(transactions));
-
-        assertEquals("Can't find fruit: banana", exception.getMessage());
-
+    void gettersOk() {
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        assertEquals(FruitTransaction.Operation.BALANCE, transaction.getOperation());
+        assertEquals("apple", transaction.getFruit());
+        assertEquals(10, transaction.getQuantity());
     }
 
     @Test
-    void notEnoughProduct() {
-        Storage.STORAGE.put("banana", 10);
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+    void settersOk() {
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        transaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        transaction.setFruit("banana");
+        transaction.setQuantity(20);
 
-        List<FruitTransaction> transactions = new ArrayList<>();
+        assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
+        assertEquals("banana", transaction.getFruit());
+        assertEquals(20, transaction.getQuantity());
+    }
 
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 9999));
+    @Test
+    void getOperationFromValidCodeOk() {
+        assertEquals(FruitTransaction.Operation.BALANCE, FruitTransaction.getOperation("b"));
+        assertEquals(FruitTransaction.Operation.SUPPLY, FruitTransaction.getOperation("s"));
+        assertEquals(FruitTransaction.Operation.PURCHASE, FruitTransaction.getOperation("p"));
+        assertEquals(FruitTransaction.Operation.RETURN, FruitTransaction.getOperation("r"));
+    }
 
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> shopService.process(transactions));
+    @Test
+    void getOperationFromInvalidCodeNotOk() {
+        Exception exception = assertThrows(
+                IllegalArgumentException.class, () -> FruitTransaction.getOperation("x"));
+        assertEquals("x operation doesn't exist.", exception.getMessage());
+    }
 
-        assertEquals("Too little of product: banana", exception.getMessage());
+    @Test
+    void equalsOk() {
+        FruitTransaction transaction1 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        FruitTransaction transaction2 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        FruitTransaction transaction3 = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY, "banana", 5);
 
+        assertEquals(transaction1, transaction2);
+        assertNotEquals(transaction1, transaction3);
+    }
+
+    @Test
+    void notEqualsOk() {
+        FruitTransaction transaction1 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        FruitTransaction transaction2 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 20);
+
+        boolean actual = transaction1.equals(transaction2);
+        boolean expected = false;
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void hashCodeOk() {
+        FruitTransaction transaction1 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+        FruitTransaction transaction2 = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 10);
+
+        assertEquals(transaction1.hashCode(), transaction2.hashCode());
     }
 }

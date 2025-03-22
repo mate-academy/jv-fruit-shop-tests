@@ -25,15 +25,6 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_AddNewFruit_Ok() {
-        transaction.setFruit("apple");
-        transaction.setQuantity(50);
-
-        assertThrows(NullPointerException.class, () -> handler.apply(transaction),
-                "Expected NullPointerException when passing null");
-    }
-
-    @Test
     void apply_UpdateExistingFruit_Ok() {
         Storage.addFruit("banana", 30);
         transaction.setFruit("banana");

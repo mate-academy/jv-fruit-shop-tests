@@ -70,7 +70,7 @@ public class FruitTransaction {
     public enum OperationType {
         BALANCE("b"),
         SUPPLY("s"),
-        PURCHASE("p"),
+        ADD("a"),
         RETURN("r");
 
         private final String code;

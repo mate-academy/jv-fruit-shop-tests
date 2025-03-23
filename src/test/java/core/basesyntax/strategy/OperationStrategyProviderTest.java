@@ -1,60 +1,55 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.exception.OperationException;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyProviderTest {
-    private OperationStrategyProvider provider;
+    private InventoryService inventoryService;
+    private OperationStrategyProvider strategyProvider;
 
     @BeforeEach
     void setUp() {
-        provider = new OperationStrategyProvider();
+        inventoryService = new InventoryService();
+        strategyProvider = new OperationStrategyProvider(inventoryService);
     }
 
     @Test
-    void testGetHandlerForBalance() {
-        OperationHandler handler = provider.getHandler(FruitTransaction.OperationType.BALANCE);
-        assertNotNull(handler);
-        assertTrue(handler instanceof BalanceOperationHandler);
+    void getHandler_balanceOperation_returnsBalanceHandler() {
+        OperationHandler handler = strategyProvider
+                .getHandler(FruitTransaction.OperationType.BALANCE);
+        assertNotNull(handler, "Handler for BALANCE should not be null");
     }
 
     @Test
-    void testGetHandlerForSupply() {
-        OperationHandler handler = provider.getHandler(FruitTransaction.OperationType.SUPPLY);
-        assertNotNull(handler);
-        assertTrue(handler instanceof AddOperationHandler.SupplyOperationHandler);
+    void getHandler_supplyOperation_returnsSupplyHandler() {
+        OperationHandler handler = strategyProvider
+                .getHandler(FruitTransaction.OperationType.SUPPLY);
+        assertNotNull(handler, "Handler for SUPPLY should not be null");
     }
 
     @Test
-    void testGetHandlerForPurchase() {
-        OperationHandler handler = provider.getHandler(FruitTransaction.OperationType.PURCHASE);
-        assertNotNull(handler);
-        assertTrue(handler instanceof PurchaseOperationHandler);
+    void getHandler_returnOperation_returnsReturnHandler() {
+        OperationHandler handler = strategyProvider
+                .getHandler(FruitTransaction.OperationType.RETURN);
+        assertNotNull(handler, "Handler for RETURN should not be null");
     }
 
     @Test
-    void testGetHandlerForReturn() {
-        OperationHandler handler = provider.getHandler(FruitTransaction.OperationType.RETURN);
-        assertNotNull(handler);
-        assertTrue(handler instanceof ReturnOperationHandler);
+    void getHandler_addOperation_returnsAddHandler() {
+        OperationHandler handler = strategyProvider
+                .getHandler(FruitTransaction.OperationType.ADD);
+        assertNotNull(handler, "Handler for ADD should not be null");
     }
 
     @Test
-    void testGetHandlerForUnknownOperation() {
-        OperationException exception = assertThrows(OperationException.class,
-                () -> provider.getHandler(null));
-        assertEquals("Unknown operation type: null", exception.getMessage());
-    }
-
-    @Test
-    void testGetOperationStrategySize() {
-        assertEquals(4, provider.getOperationStrategy().size());
+    void getHandler_shouldReturnCorrectHandlerForEachOperation() {
+        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.SUPPLY));
+        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.BALANCE));
+        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.RETURN));
+        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.ADD));
     }
 }

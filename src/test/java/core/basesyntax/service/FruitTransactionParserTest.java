@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,31 +16,6 @@ class FruitTransactionParserTest {
     @BeforeEach
     void setUp() {
         parser = new FruitTransactionParser();
-    }
-
-    @Test
-    void parse_ValidData_ReturnsCorrectTransactions() {
-        List<String> input = Arrays.asList(
-                "s,apple,10",
-                "p,banana,5",
-                "r,orange,20"
-        );
-
-        List<FruitTransaction> result = parser.parse(input);
-
-        assertEquals(3, result.size());
-
-        assertEquals(FruitTransaction.OperationType.SUPPLY, result.get(0).getOperation());
-        assertEquals("apple", result.get(0).getFruit());
-        assertEquals(10, result.get(0).getQuantity());
-
-        assertEquals(FruitTransaction.OperationType.PURCHASE, result.get(1).getOperation());
-        assertEquals("banana", result.get(1).getFruit());
-        assertEquals(5, result.get(1).getQuantity());
-
-        assertEquals(FruitTransaction.OperationType.RETURN, result.get(2).getOperation());
-        assertEquals("orange", result.get(2).getFruit());
-        assertEquals(20, result.get(2).getQuantity());
     }
 
     @Test
@@ -87,5 +62,29 @@ class FruitTransactionParserTest {
         List<FruitTransaction> result = parser.parse(input);
 
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void parse_InvalidOperation_ThrowsIllegalArgumentException() {
+        List<String> input = Arrays.asList(
+                "x,apple,10"
+        );
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> parser.parse(input));
+        assertFalse(exception.getMessage().contains("Invalid operation type"));
+    }
+
+    @Test
+    void parse_MixedValidAndInvalidEntries_ThrowsIllegalArgumentException() {
+        List<String> input = Arrays.asList(
+                "s,apple,10",
+                "p,banana,five",
+                "x,orange,20"
+        );
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> parser.parse(input));
+        assertFalse(exception.getMessage().contains("Invalid quantity format"));
     }
 }

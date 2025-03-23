@@ -1,34 +1,36 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.exception.OperationException;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
-import java.util.Map;
+import core.basesyntax.service.InventoryService;
 
 public class OperationStrategyProvider {
-    private final Map<FruitTransaction.OperationType, OperationHandler> operationStrategy =
-            new HashMap<>();
 
-    public OperationStrategyProvider() {
-        operationStrategy.put(FruitTransaction.OperationType.BALANCE,
-                new BalanceOperationHandler());
-        operationStrategy.put(FruitTransaction.OperationType.SUPPLY,
-                new AddOperationHandler.SupplyOperationHandler());
-        operationStrategy.put(FruitTransaction.OperationType.PURCHASE,
-                new PurchaseOperationHandler());
-        operationStrategy.put(FruitTransaction.OperationType.RETURN,
-                new ReturnOperationHandler());
+    private final AddOperationHandler addOperationHandler;
+    private final SupplyOperationHandler supplyOperationHandler;
+    private final ReturnOperationHandler returnOperationHandler;
+    private final BalanceOperationHandler balanceOperationHandler;
+
+    public OperationStrategyProvider(InventoryService inventoryService) {
+        this.addOperationHandler = new AddOperationHandler(inventoryService);
+        this.supplyOperationHandler = new SupplyOperationHandler();
+        this.returnOperationHandler = new ReturnOperationHandler();
+        this.balanceOperationHandler = new BalanceOperationHandler();
+
     }
 
-    public OperationHandler getHandler(FruitTransaction.OperationType operationType) {
-        OperationHandler handler = operationStrategy.get(operationType);
-        if (handler == null) {
-            throw new OperationException("Unknown operation type: " + operationType);
+    public OperationHandler getHandler(FruitTransaction.OperationType operation) {
+        switch (operation) {
+            case ADD:
+                return addOperationHandler;
+            case BALANCE:
+                return balanceOperationHandler;
+            case SUPPLY:
+                return supplyOperationHandler;
+            case RETURN:
+                return returnOperationHandler;
+            default:
+                throw new IllegalArgumentException("Unknown operation: " + operation);
         }
-        return handler;
-    }
-
-    public Map<FruitTransaction.OperationType, OperationHandler> getOperationStrategy() {
-        return operationStrategy;
     }
 }
+

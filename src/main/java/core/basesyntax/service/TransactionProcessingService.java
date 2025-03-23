@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.Storage.inventory;
+import static core.basesyntax.db.Storage.inventory;
 
 import core.basesyntax.dao.CsvFileWriter;
 import core.basesyntax.dao.FileReader;

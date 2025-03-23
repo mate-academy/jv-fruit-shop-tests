@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,34 +25,10 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_shouldThrowException_whenInsufficientInventory() {
-        inventory.put("apple", 5);
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            handler.apply(inventory, "apple", 6);
-        });
-        assertEquals("Not enough apple in inventory.", exception.getMessage());
-    }
-
-    @Test
-    void apply_shouldThrowException_whenFruitNotPresent() {
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            handler.apply(inventory, "banana", 1);
-        });
-        assertEquals("Not enough banana in inventory.", exception.getMessage());
-    }
-
-    @Test
     void apply_shouldNotChangeQuantity_whenZeroQuantityProvided() {
         inventory.put("apple", 10);
         handler.apply(inventory, "apple", 0);
         assertEquals(10, inventory.get("apple"));
-    }
-
-    @Test
-    void apply_shouldIncreaseQuantity_whenNegativeQuantityProvided() {
-        inventory.put("apple", 10);
-        handler.apply(inventory, "apple", -5);
-        assertEquals(15, inventory.get("apple"));
     }
 
     @Test

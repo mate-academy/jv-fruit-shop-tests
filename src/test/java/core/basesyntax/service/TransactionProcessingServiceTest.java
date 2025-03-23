@@ -57,7 +57,7 @@ class TransactionProcessingServiceTest {
         List<String> fileContent = Arrays.asList("apple,s,10", "banana,p,5");
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "apple", 10),
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "banana", 5)
+                new FruitTransaction(FruitTransaction.OperationType.ADD, "banana", 5)
         );
 
         when(fileReader.readFile(sourceFilePath)).thenReturn(fileContent);

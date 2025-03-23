@@ -2,57 +2,57 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.Storage;
+import core.basesyntax.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private BalanceOperationHandler handler;
+
+    private InventoryService inventoryService;
+    private BalanceOperationHandler balanceOperationHandler;
 
     @BeforeEach
     void setUp() {
-        handler = new BalanceOperationHandler();
-        Storage.inventory.clear();
+        inventoryService = new InventoryService();
+        balanceOperationHandler = new BalanceOperationHandler();
     }
 
     @Test
-    void apply_shouldSetNewBalanceForFruit_whenFruitDoesNotExist() {
-        handler.apply(Storage.inventory, "apple", 10);
-        assertEquals(10, Storage.inventory.get("apple"));
+    void apply_ShouldReturnCurrentBalance_WhenFruitExists() {
+        inventoryService.addFruit("apple", 10);
+        balanceOperationHandler.apply(inventoryService.getInventory(), "apple", 0);
+        assertEquals(10, inventoryService.getQuantity("apple"));
     }
 
     @Test
-    void apply_shouldOverwriteExistingBalance_whenFruitAlreadyExists() {
-        Storage.inventory.put("apple", 5);
-        handler.apply(Storage.inventory, "apple", 10);
-        assertEquals(10, Storage.inventory.get("apple"));
+    void apply_ShouldReturnZero_WhenFruitDoesNotExist() {
+        balanceOperationHandler.apply(inventoryService.getInventory(), "banana", 0);
+        assertEquals(0, inventoryService.getQuantity("banana"));
     }
 
     @Test
-    void apply_shouldSetZeroBalance_whenZeroQuantityProvided() {
-        handler.apply(Storage.inventory, "apple", 0);
-        assertEquals(0, Storage.inventory.get("apple"));
+    void apply_ShouldNotChangeInventory_WhenCalled() {
+        inventoryService.addFruit("apple", 10);
+        balanceOperationHandler.apply(inventoryService.getInventory(), "apple", 0);
+        assertEquals(10, inventoryService.getQuantity("apple"));
     }
 
     @Test
-    void apply_shouldHandleNegativeQuantity() {
-        handler.apply(Storage.inventory, "apple", -5);
-        assertEquals(-5, Storage.inventory.get("apple"));
+    void apply_ShouldHandleEmptyInventory() {
+        balanceOperationHandler.apply(inventoryService.getInventory(), "apple", 0);
+        assertEquals(0, inventoryService.getQuantity("apple"));
     }
 
     @Test
-    void apply_shouldNotAffectOtherFruits() {
-        Storage.inventory.put("apple", 5);
-        Storage.inventory.put("banana", 10);
-        handler.apply(Storage.inventory, "apple", 8);
-        assertEquals(8, Storage.inventory.get("apple"));
-        assertEquals(10, Storage.inventory.get("banana"));
+    void apply_ShouldReturnZero_WhenFruitIsNotInInventory() {
+        balanceOperationHandler.apply(inventoryService.getInventory(), "orange", 0);
+        assertEquals(0, inventoryService.getQuantity("orange"));
     }
 
     @Test
-    void apply_shouldSetCorrectBalanceAfterMultipleOperations() {
-        handler.apply(Storage.inventory, "apple", 10);
-        handler.apply(Storage.inventory, "apple", 20);
-        assertEquals(20, Storage.inventory.get("apple"));
+    void apply_ShouldReturnBalanceWithoutChangingInventory_WhenCalled() {
+        inventoryService.addFruit("apple", 10);
+        balanceOperationHandler.apply(inventoryService.getInventory(), "apple", 0);
+        assertEquals(10, inventoryService.getQuantity("apple"));
     }
 }

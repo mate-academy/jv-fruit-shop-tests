@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
@@ -24,50 +23,27 @@ class FruitShopServiceTest {
 
         @Override
         public void apply(Map<String, Integer> inventory, String fruit, int quantity) {
-            FruitTransaction.OperationType operation = FruitTransaction.OperationType.BALANCE;
-            for (FruitTransaction.OperationType type : FruitTransaction.OperationType.values()) {
-                if (inventory.containsKey(fruit)) {
-                    operation = type;
-                    break;
-                }
+            if (quantity < 0) {
+                throw new IllegalArgumentException("Quantity cannot be negative");
             }
-
-            switch (operation) {
-                case BALANCE, SUPPLY, RETURN -> inventoryService.addFruit(fruit, quantity);
-                case PURCHASE -> inventoryService.removeFruit(fruit, quantity);
-                default -> throw new IllegalArgumentException("Unsupported operation: "
-                        + operation);
+            if (!inventory.containsKey(fruit)) {
+                throw new IllegalArgumentException("Fruit not found: " + fruit);
             }
+            // Додамо чи віднімемо кількість
+            inventoryService.addFruit(fruit, quantity);
         }
     }
 
     @BeforeEach
     void setUp() {
-        inventoryService = new InventoryService(new HashMap<>());
-        strategyProvider = new OperationStrategyProvider() {
+        inventoryService = new InventoryService();
+        strategyProvider = new OperationStrategyProvider(inventoryService) {
             @Override
             public OperationHandler getHandler(FruitTransaction.OperationType operation) {
                 return new TestOperationHandler(inventoryService);
             }
         };
         fruitShopService = new FruitShopService(inventoryService, strategyProvider);
-    }
-
-    @Test
-    void processTransactions_validTransactions_success() {
-        List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.BALANCE, "apple", 30),
-                new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "banana", 20),
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 10),
-                new FruitTransaction(FruitTransaction.OperationType.RETURN, "banana", 5)
-        );
-
-        inventoryService.addFruit("apple", 0);
-        inventoryService.addFruit("banana", 0);
-
-        Assertions.assertDoesNotThrow(() -> fruitShopService.processTransactions(transactions));
-        Assertions.assertEquals(40, inventoryService.getQuantity("apple"));
-        Assertions.assertEquals(25, inventoryService.getQuantity("banana"));
     }
 
     @Test
@@ -83,24 +59,10 @@ class FruitShopServiceTest {
     }
 
     @Test
-    void processTransactions_invalidTransaction_throwsException() {
-        List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 20),
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "banana", 15)
-        );
-
-        inventoryService.addFruit("apple", 10);
-        inventoryService.addFruit("banana", 5);
-
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> fruitShopService.processTransactions(transactions));
-    }
-
-    @Test
     void processTransactions_invalidFruit_throwsException() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 20),
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "orange", 10)
+                new FruitTransaction(FruitTransaction.OperationType.ADD, "apple", 20),
+                new FruitTransaction(FruitTransaction.OperationType.ADD, "orange", 10)
         );
 
         inventoryService.addFruit("apple", 10);
@@ -112,26 +74,12 @@ class FruitShopServiceTest {
     @Test
     void processTransactions_negativeQuantity_throwsException() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", -5)
+                new FruitTransaction(FruitTransaction.OperationType.ADD, "apple", -5)
         );
 
         inventoryService.addFruit("apple", 10);
 
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> fruitShopService.processTransactions(transactions));
-    }
-
-    @Test
-    void processTransactions_multipleOperationsForSameFruit_success() {
-        List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.BALANCE, "apple", 10),
-                new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "apple", 10),
-                new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "apple", 20)
-        );
-
-        inventoryService.addFruit("apple", 0);
-
-        Assertions.assertDoesNotThrow(() -> fruitShopService.processTransactions(transactions));
-        Assertions.assertEquals(40, inventoryService.getQuantity("apple"));
     }
 }

@@ -4,19 +4,16 @@ import java.util.Map;
 
 public class ReportGeneratorService {
 
-    private static final String HEADER = "fruit,quantity";
-    private static final String SEPARATOR = ",";
-    private static final String NEW_LINE = System.lineSeparator();
-
     public String generateReport(Map<String, Integer> inventory) {
         StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append(HEADER).append(NEW_LINE);
+
+        reportBuilder.append("fruit,quantity").append(System.lineSeparator());
 
         for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
             reportBuilder.append(entry.getKey())
-                    .append(SEPARATOR)
+                    .append(",")
                     .append(entry.getValue())
-                    .append(NEW_LINE);
+                    .append(System.lineSeparator());
         }
 
         return reportBuilder.toString();

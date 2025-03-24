@@ -1,5 +1,10 @@
 package core.basesyntax.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -15,21 +20,19 @@ import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class FruitShopController {
     public void run() {
         FileReader fileReader = new FileReaderImpl();
-        List<String> linie = fileReader.read("src/main/resources/input.csv");
+        List<String> linie = fileReader
+                .read("src/main/resources/input.csv");
         List<FruitTransaction> transakcje = parseTransactions(linie);
-        Map<FruitTransaction.Operation, OperationHandler> obslugiwacze = initOperationHandlers();
+        Map<FruitTransaction.Operation
+                , OperationHandler> obslugiwacze = initOperationHandlers();
         ShopService shopService = new ShopServiceImpl(obslugiwacze);
         shopService.process(transakcje);
         ReportGenerator generator = new ReportGeneratorImpl();
-        List<String> raport = generator.getReport(shopService.getStorage());
+        List<String> raport = generator
+                .getReport(shopService.getStorage());
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(raport, "src/main/resources/finalReport.csv");
     }
@@ -50,10 +53,14 @@ public class FruitShopController {
 
     private Map<FruitTransaction.Operation, OperationHandler> initOperationHandlers() {
         Map<FruitTransaction.Operation, OperationHandler> obslugiwacze = new HashMap<>();
-        obslugiwacze.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        obslugiwacze.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        obslugiwacze.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        obslugiwacze.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        obslugiwacze.put(FruitTransaction
+                .Operation.BALANCE, new BalanceOperation());
+        obslugiwacze.put(FruitTransaction
+                .Operation.SUPPLY, new SupplyOperation());
+        obslugiwacze.put(FruitTransaction
+                .Operation.PURCHASE, new PurchaseOperation());
+        obslugiwacze.put(FruitTransaction
+                .Operation.RETURN, new ReturnOperation());
         return obslugiwacze;
     }
 }

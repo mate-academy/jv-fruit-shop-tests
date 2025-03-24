@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileWriter;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import core.basesyntax.service.FileWriter;
 
 public class FileWriterImpl implements FileWriter {
     @Override

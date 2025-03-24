@@ -1,21 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationHandler;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.strategy.OperationHandler;
+
 public class ShopServiceImpl implements ShopService {
-    private final Map<FruitTransaction
-            .Operation, OperationHandler> handlers;
+    private final Map<FruitTransaction.Operation, OperationHandler> handlers;
     private final Map<String, Integer> storage = new HashMap<>();
 
-    public ShopServiceImpl(Map<FruitTransaction
-            .Operation, OperationHandler> handlers) {
+    public ShopServiceImpl(Map<FruitTransaction.Operation, OperationHandler> handlers) {
         this.handlers = handlers;
     }
 
@@ -32,7 +30,6 @@ public class ShopServiceImpl implements ShopService {
         return Collections.unmodifiableMap(storage);
     }
 
-    // Dodane metody
     public void addFruit(String fruit, int quantity) {
         storage.put(fruit, storage.getOrDefault(fruit, 0) + quantity);
     }

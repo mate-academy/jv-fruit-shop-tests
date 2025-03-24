@@ -1,11 +1,11 @@
 package core.basesyntax;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import core.basesyntax.service.impl.ShopServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,8 +34,6 @@ class ShopServiceImplTest {
     @Test
     void shouldThrowExceptionWhenRemovingMoreThanAvailable() {
         shopService.addFruit("apple", 10);
-        assertThrows(IllegalArgumentException.class, () -> {
-            shopService.removeFruit("apple", 15);
-        });
+        assertThrows(IllegalArgumentException.class, () -> shopService.removeFruit("apple", 15));
     }
 }

@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import core.basesyntax.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override

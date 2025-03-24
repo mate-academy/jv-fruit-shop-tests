@@ -16,28 +16,41 @@ class FileWriterImplTest {
     private Path tempFile;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         fileWriter = new FileWriterImpl();
         tempFile = Path.of("src/test/java/core/basesyntax/resources/test.csv");
+        try {
+            Files.createDirectories(tempFile.getParent());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to set up test file", e);
+        }
     }
 
     @AfterEach
-    void tearDown() throws IOException {
-        if (Files.exists(tempFile)) {
-            Files.delete(tempFile);
+    void tearDown() {
+        try {
+            if (Files.exists(tempFile)) {
+                Files.delete(tempFile);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to delete test file", e);
         }
     }
 
     @Test
-    void write_validContentAndFilePath_success() throws IOException {
+    void write_validContentAndFilePath_success() {
         String content = "Hello, World!";
         String filePath = tempFile.toString();
 
         fileWriter.write(content, filePath);
 
         assertTrue(Files.exists(tempFile), "File should exist after writing");
-        String fileContent = Files.readString(tempFile);
-        assertEquals(content, fileContent, "File content should match the input content");
+        try {
+            String fileContent = Files.readString(tempFile);
+            assertEquals(content, fileContent, "File content should match the input content");
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read test file", e);
+        }
     }
 
     @Test

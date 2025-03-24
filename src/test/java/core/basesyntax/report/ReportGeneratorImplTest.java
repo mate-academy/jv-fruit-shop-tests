@@ -26,12 +26,13 @@ class ReportGeneratorImplTest {
         storage.put("apple", 200);
 
         String report = reportGenerator.generateReport(storage);
-        String[] lines = report.split(System.lineSeparator());
+        String expectedReport = String.join(System.lineSeparator(),
+                "fruit,quantity",
+                "banana,150",
+                "apple,200",
+                "");
 
-        assertEquals(3, lines.length);
-        assertEquals("fruit,quantity", lines[0]);
-        assertTrue(report.contains("apple,200"));
-        assertTrue(report.contains("banana,150"));
+        assertEquals(expectedReport, report);
     }
 
     @Test

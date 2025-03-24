@@ -17,7 +17,13 @@ class FileReaderImplTest {
     @BeforeEach
     void setUp() {
         fileReader = new FileReaderImpl();
-        tempFile = Path.of("src/test/java/core/basesyntax/resources/test.csv");
+        tempFile = Path.of("src/test/resources/test.csv");
+        try {
+            Files.createDirectories(tempFile.getParent());
+            Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,20", "s,apple,100"));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to set up test file", e);
+        }
     }
 
     @Test

@@ -3,10 +3,16 @@ package core.basesyntax.operation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
+    @BeforeEach
+    void setUp() {
+        Storage.storage.clear();
+    }
+
     @AfterEach
     void tearDown() {
         Storage.storage.clear();
@@ -15,21 +21,19 @@ class SupplyOperationTest {
     @Test
     void testSupplyOperation() {
         OperationHandler handler = new SupplyOperation();
+        Storage.storage.put("apple", 0);
 
-        // Initial supply
         handler.handle(new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 "apple",
                 100
         ));
-        assertEquals(100, Storage.storage.get("apple").intValue());
-
-        // Additional supply
         handler.handle(new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 "apple",
                 50
         ));
+
         assertEquals(150, Storage.storage.get("apple").intValue());
     }
 }

@@ -2,14 +2,15 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.HashMap;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-
 
 class ShopServiceImplTest {
+
     private ShopServiceImpl shopService;
 
     @BeforeEach

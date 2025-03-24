@@ -14,7 +14,6 @@ import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

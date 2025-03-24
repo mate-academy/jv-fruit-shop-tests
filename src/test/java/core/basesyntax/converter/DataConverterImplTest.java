@@ -54,4 +54,36 @@ class DataConverterImplTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransactions(input));
     }
+
+    @Test
+    void convertToTransactions_nullInput_throwsException() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransactions(null));
+    }
+
+    @Test
+    void convertToTransactions_emptyInput_throwsException() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransactions(Arrays.asList()));
+    }
+
+    @Test
+    void convertToTransactions_invalidOperationCode_throwsException() {
+        List<String> input = Arrays.asList(
+                "type,fruit,quantity",
+                "x,banana,20"
+        );
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransactions(input));
+    }
+
+    @Test
+    void convertToTransactions_nonNumericQuantity_throwsException() {
+        List<String> input = Arrays.asList(
+                "type,fruit,quantity",
+                "b,banana,twenty"
+        );
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransactions(input));
+    }
 }

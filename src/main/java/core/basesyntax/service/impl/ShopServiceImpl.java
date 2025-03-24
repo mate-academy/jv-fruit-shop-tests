@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.strategy.OperationHandler;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationHandler;
 
 public class ShopServiceImpl implements ShopService {
     private final Map<FruitTransaction.Operation, OperationHandler> handlers;

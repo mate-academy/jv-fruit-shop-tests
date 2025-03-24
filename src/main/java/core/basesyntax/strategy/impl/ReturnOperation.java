@@ -1,9 +1,9 @@
 package core.basesyntax.strategy.impl;
 
-import java.util.Map;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+
+import java.util.Map;
 
 public class ReturnOperation implements OperationHandler {
     @Override

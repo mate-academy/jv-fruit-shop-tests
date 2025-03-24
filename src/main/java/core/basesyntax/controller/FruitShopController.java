@@ -1,10 +1,5 @@
 package core.basesyntax.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -20,14 +15,19 @@ import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class FruitShopController {
     public void run() {
         FileReader fileReader = new FileReaderImpl();
         List<String> linie = fileReader
                 .read("src/main/resources/input.csv");
         List<FruitTransaction> transakcje = parseTransactions(linie);
-        Map<FruitTransaction.Operation
-                , OperationHandler> obslugiwacze = initOperationHandlers();
+        Map<FruitTransaction.Operation,
+                OperationHandler> obslugiwacze = initOperationHandlers();
         ShopService shopService = new ShopServiceImpl(obslugiwacze);
         shopService.process(transakcje);
         ReportGenerator generator = new ReportGeneratorImpl();

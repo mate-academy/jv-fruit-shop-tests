@@ -36,7 +36,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convert_Invalid_Format() {
+    void convertInvalidFormat_notOk() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana"
@@ -46,7 +46,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertNegativeQuantity() {
+    void convertInvalidPartsQuantity_notOk() {
         List<String> input = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,-20"

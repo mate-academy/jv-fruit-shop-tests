@@ -27,7 +27,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readValidFile() {
+    void readValidFile_ok() {
         List<String> lines = fileReader.read(tempFile.toString());
         assertEquals(3, lines.size());
         assertEquals("type,fruit,quantity", lines.get(0));
@@ -35,7 +35,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readNonExistentFile() {
+    void readNonExistentFile_notOk() {
         assertThrows(RuntimeException.class, () -> fileReader.read("nonexistent.csv"));
     }
 }

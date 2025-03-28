@@ -18,7 +18,7 @@ class FileWriterImplTest {
     @BeforeEach
     void setUp() {
         fileWriter = new FileWriterImpl();
-        tempFile = Path.of("src/test/java/core/basesyntax/resources/test.csv");
+        tempFile = Path.of("src/test/resources/test.csv");
         try {
             Files.createDirectories(tempFile.getParent());
         } catch (IOException e) {

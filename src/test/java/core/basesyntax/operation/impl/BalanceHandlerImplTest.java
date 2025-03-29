@@ -1,4 +1,10 @@
-import static org.junit.jupiter.api.Assertions.*;
+package core.basesyntax.operation.impl;
+
+import org.junit.jupiter.api.Test;
+
 class BalanceHandlerImplTest {
-  
+
+    @Test
+    void updateNumberOfFruit() {
+    }
 }

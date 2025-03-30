@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private final DataConverterImpl converter = new DataConverterImpl();
@@ -50,6 +50,7 @@ class DataConverterImplTest {
     @Test
     void testConvertToTransaction_invalidQuantity() {
         List<String> inputReport = List.of("b,apple,abc");
-        assertThrows(NumberFormatException.class, () -> converter.convertToTransaction(inputReport));
+        assertThrows(NumberFormatException.class, () ->
+                converter.convertToTransaction(inputReport));
     }
 }

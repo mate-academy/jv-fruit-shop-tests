@@ -4,18 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileReaderImplTest {
+    @TempDir
+    private Path tempDir;
+
     private final FileReaderImpl fileReader = new FileReaderImpl();
 
-    @TempDir
-    Path tempDir;
+    public Path getTempDir() {
+        return tempDir;
+    }
+
+    public void setTempDir(Path tempDir) {
+        this.tempDir = tempDir;
+    }
 
     @Test
     void read_ValidFile_ReturnsCorrectLines() throws IOException {
@@ -43,7 +51,8 @@ class FileReaderImplTest {
     void read_FileDoesNotExist_ThrowsException() {
         String fakePath = tempDir.resolve("nonexistent.csv").toString();
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> fileReader.read(fakePath));
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                fileReader.read(fakePath));
         assertTrue(exception.getMessage().contains("Can't find file by path"));
     }
 }

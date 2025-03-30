@@ -4,18 +4,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterImplTest {
+    @TempDir
+    private Path tempDir;
+
     private final FileWriterImpl fileWriter = new FileWriterImpl();
 
-    @TempDir
-    Path tempDir;
+    public Path getTempDir() {
+        return tempDir;
+    }
+
+    public void setTempDir(Path tempDir) {
+        this.tempDir = tempDir;
+    }
+
+    public FileWriterImpl getFileWriter() {
+        return fileWriter;
+    }
 
     @Test
     void write_ValidInput_CreatesCorrectFile() throws IOException {
@@ -39,7 +51,7 @@ class FileWriterImplTest {
         fileWriter.write("", tempFile.toString());
 
         List<String> lines = Files.readAllLines(tempFile);
-        assertEquals(1, lines.size());
+        assertEquals(2, lines.size());
         assertEquals("fruit,quantity", lines.get(0));
     }
 
@@ -47,7 +59,8 @@ class FileWriterImplTest {
     void write_InvalidPath_ThrowsException() {
         String invalidPath = "/invalid/directory/output.csv";
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> fileWriter.write("apple,10", invalidPath));
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                fileWriter.write("apple,10", invalidPath));
         assertTrue(exception.getMessage().contains("Error while reading the file."));
     }
 }

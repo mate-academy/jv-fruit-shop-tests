@@ -1,5 +1,5 @@
 type,fruit,quantity
-    b,banana,20
+    b,banana,1000
     b,apple,100
     s,banana,100
     p,banana,13
@@ -7,3 +7,4 @@ type,fruit,quantity
     p,apple,20
     p,banana,5
     s,banana,50
+    b,grapes,1

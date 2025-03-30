@@ -1,0 +1,88 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.service.FileWriterService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class FileWriterServiceImplTest {
+    private FileWriterService fileWriterService;
+    private String fileName;
+
+    @BeforeEach
+    void setUp() {
+        fileWriterService = new FileWriterServiceImpl();
+        fileName = "src/test/resources/reportToWrite.csv";
+    }
+
+    @AfterEach
+    void tearDown() {
+        try {
+            Files.deleteIfExists(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void write_validOutputDataAndFilePath_ok() {
+        String outputData = String.join(System.lineSeparator(), "banana,152",
+                "apple,90");
+        fileWriterService.write(outputData, fileName);
+        String expected = String.join(System.lineSeparator(), "fruit,quantity",
+                "banana,152", "apple,90");
+        String actual;
+        try {
+            actual = Files.readString(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file: " + fileName, e);
+        }
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void write_nullOutputData_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> fileWriterService.write(null, fileName));
+    }
+
+    @Test
+    void write_nullFileName_notOk() {
+        String outputData = String.join(System.lineSeparator(), "banana,152",
+                "apple,90");
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileWriterService.write(outputData, null));
+        assertEquals("File name cannot be null", exception.getMessage());
+    }
+
+    @Test
+    void write_emptyOutputData_ok() {
+        String outputData = "";
+        fileWriterService.write(outputData, fileName);
+        String expected = "fruit,quantity\r\n";
+        String actual;
+        try {
+            actual = Files.readString(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file: " + fileName, e);
+        }
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void write_invalidPathFile_notOk() {
+        String invalidFileName = "src/test/resources";
+        String outputData = String.join(System.lineSeparator(), "banana,152",
+                "apple,90");
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> fileWriterService.write(outputData, invalidFileName));
+        assertEquals("Can't write data to file: " + invalidFileName,
+                exception.getMessage());
+    }
+}

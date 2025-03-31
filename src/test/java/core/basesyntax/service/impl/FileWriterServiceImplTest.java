@@ -56,7 +56,7 @@ class FileWriterServiceImplTest {
         String outputData = "";
         String fileName = "src/test/resources/reportToWrite.csv";
         fileWriterService.write(outputData, fileName);
-        String expected = "fruit,quantity\r\n";
+        String expected = "fruit,quantity" + System.lineSeparator();
         String actual;
         try {
             actual = Files.readString(Path.of(fileName));

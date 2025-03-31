@@ -2,13 +2,19 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.storage.Storage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MainTest {
+    @BeforeAll
+    static void setup() {
+        Storage.getFruitStorage().clear();
+    }
 
     @Test
     void standardInput_OK() {

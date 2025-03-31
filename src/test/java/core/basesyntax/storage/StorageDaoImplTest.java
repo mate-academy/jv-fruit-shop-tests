@@ -18,38 +18,38 @@ class StorageDaoImplTest {
 
     @Test
     void testAddNewFruit() {
-        storageDao.add("Apple", 10);
-        assertEquals(10, Storage.getFruitStorage().get("Apple"));
+        storageDao.add("apple", 10);
+        assertEquals(10, Storage.getFruitStorage().get("apple"));
     }
 
     @Test
     void testAddExistingFruit() {
-        storageDao.add("Apple", 10);
-        storageDao.add("Apple", 5);
-        assertEquals(15, Storage.getFruitStorage().get("Apple"));
+        storageDao.add("apple", 10);
+        storageDao.add("apple", 5);
+        assertEquals(15, Storage.getFruitStorage().get("apple"));
     }
 
     @Test
     void testRemoveFruit() {
-        storageDao.add("Apple", 10);
-        storageDao.remove("Apple", 5);
-        assertEquals(5, Storage.getFruitStorage().get("Apple"));
+        storageDao.add("apple", 10);
+        storageDao.remove("apple", 5);
+        assertEquals(5, Storage.getFruitStorage().get("apple"));
     }
 
     @Test
     void testRemoveFruitNotInStorage() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            storageDao.remove("Banana", 5);
+            storageDao.remove("banana", 5);
         });
-        assertEquals("There's no Banana in storage.", exception.getMessage());
+        assertEquals("There's no banana in storage.", exception.getMessage());
     }
 
     @Test
     void testRemoveTooMuchFruit() {
-        storageDao.add("Apple", 10);
+        storageDao.add("apple", 10);
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            storageDao.remove("Apple", 15);
+            storageDao.remove("apple", 15);
         });
-        assertEquals("Apple quantity can't be -5", exception.getMessage());
+        assertEquals("apple quantity can't be -5", exception.getMessage());
     }
 }

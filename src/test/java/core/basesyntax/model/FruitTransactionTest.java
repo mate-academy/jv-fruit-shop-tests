@@ -10,7 +10,7 @@ class FruitTransactionTest {
 
     @BeforeEach
     public void setUp() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "Apple", 10);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10);
     }
 
     @Test
@@ -22,9 +22,9 @@ class FruitTransactionTest {
 
     @Test
     public void testSetFruit() {
-        fruitTransaction.setFruit("Banana");
-        assertEquals("Banana", fruitTransaction.getFruit(),
-                "The fruit should be updated to Banana.");
+        fruitTransaction.setFruit("banana");
+        assertEquals("banana", fruitTransaction.getFruit(),
+                "The fruit should be updated to banana.");
     }
 
     @Test
@@ -49,17 +49,17 @@ class FruitTransactionTest {
     @Test
     void constructor_InitializesFieldsCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "Apple", 100);
+                FruitTransaction.Operation.SUPPLY, "apple", 100);
 
         assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
-        assertEquals("Apple", transaction.getFruit());
+        assertEquals("apple", transaction.getFruit());
         assertEquals(100, transaction.getQuantity());
     }
 
     @Test
     void setOperation_UpdatesOperationCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "Banana", 50);
+                FruitTransaction.Operation.BALANCE, "banana", 50);
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
 
         assertEquals(FruitTransaction.Operation.PURCHASE, transaction.getOperation());
@@ -68,16 +68,16 @@ class FruitTransactionTest {
     @Test
     void setFruit_UpdatesFruitCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "Orange", 30);
-        transaction.setFruit("Mango");
+                FruitTransaction.Operation.BALANCE, "orange", 30);
+        transaction.setFruit("mango");
 
-        assertEquals("Mango", transaction.getFruit());
+        assertEquals("mango", transaction.getFruit());
     }
 
     @Test
     void setQuantity_UpdatesQuantityCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "Grapes", 20);
+                FruitTransaction.Operation.BALANCE, "grapes", 20);
         transaction.setQuantity(45);
 
         assertEquals(45, transaction.getQuantity());

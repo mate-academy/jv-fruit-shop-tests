@@ -16,15 +16,15 @@ class StorageTest {
     @BeforeEach
     void setUp() {
         testMap = new HashMap<>();
-        testMap.put("Apple", 10);
-        testMap.put("Banana", 20);
+        testMap.put("apple", 10);
+        testMap.put("banana", 20);
     }
 
     @Test
     void testSetFruitStorage() {
         Storage.setFruitStorage(testMap);
-        assertEquals(10, Storage.getFruitStorage().get("Apple"));
-        assertEquals(20, Storage.getFruitStorage().get("Banana"));
+        assertEquals(10, Storage.getFruitStorage().get("apple"));
+        assertEquals(20, Storage.getFruitStorage().get("banana"));
     }
 
     @Test
@@ -33,18 +33,18 @@ class StorageTest {
         Map<String, Integer> retrievedStorage = Storage.getFruitStorage();
         assertNotNull(retrievedStorage);
         assertEquals(2, retrievedStorage.size());
-        assertTrue(retrievedStorage.containsKey("Apple"));
-        assertTrue(retrievedStorage.containsKey("Banana"));
+        assertTrue(retrievedStorage.containsKey("apple"));
+        assertTrue(retrievedStorage.containsKey("banana"));
     }
 
     @Test
     void testSetFruitStorage_UpdateStorage() {
         Storage.setFruitStorage(testMap);
         Map<String, Integer> newTestMap = new HashMap<>();
-        newTestMap.put("Orange", 30);
+        newTestMap.put("orange", 30);
         Storage.setFruitStorage(newTestMap);
         assertEquals(1, Storage.getFruitStorage().size());
-        assertTrue(Storage.getFruitStorage().containsKey("Orange"));
-        assertFalse(Storage.getFruitStorage().containsKey("Apple"));
+        assertTrue(Storage.getFruitStorage().containsKey("orange"));
+        assertFalse(Storage.getFruitStorage().containsKey("apple"));
     }
 }

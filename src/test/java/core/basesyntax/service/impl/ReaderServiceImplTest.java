@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ReaderServiceImplTest {
 
-    ReaderServiceImpl readerService;
+    private ReaderServiceImpl readerService;
 
     @BeforeEach
     void setUp() {

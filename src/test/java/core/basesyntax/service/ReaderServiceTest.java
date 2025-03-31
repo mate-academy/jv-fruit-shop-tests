@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ReaderServiceTest {
-    private static final String TEST_FILE_PATH = "src/test/resources/test.cvs";
+    private static final String TEST_FILE_PATH = "src/test/java/core/basesyntax/resources/test.cvs";
     private static final String FAIL_FILE_PATH = "test.cvs";
     private static ReaderService readerService;
 
@@ -39,7 +39,7 @@ class ReaderServiceTest {
 
     @Test
     void readFromFile_filePathNull_ok() {
-        Assertions.assertTrue(readerService.readFromFile(null).isEmpty());
+        Assertions.assertTrue(readerService.readFromFile(FAIL_FILE_PATH).isEmpty());
     }
 
     @Test

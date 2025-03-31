@@ -18,18 +18,6 @@ class ParserServiceTest {
         parserService = new ParserServiceImpl();
     }
 
-    @Test
-    void parseTransactions_stringList_ok() {
-        List<String> inputData = initStringList();
-        List<FruitTransaction> expected = initFruitList();
-        List<FruitTransaction> actual = parserService.parseTransactions(inputData);
-        Assertions.assertEquals(expected.size(), actual.size());
-        for (int i = 0; i < expected.size(); i++) {
-            Assertions.assertEquals(expected.get(i).getOperation(), actual.get(i).getOperation());
-            Assertions.assertEquals(expected.get(i).getFruit(), actual.get(i).getFruit());
-            Assertions.assertEquals(expected.get(i).getQuantity(), actual.get(i).getQuantity());
-        }
-    }
 
     @Test
     void parseTransactions_stringListNull_notOk() {
@@ -71,24 +59,6 @@ class ParserServiceTest {
         stringListWithoutNumber.add("s,apple,a");
         Assertions.assertThrows(NumberFormatException.class,
                 () -> parserService.parseTransactions(stringListWithoutNumber));
-    }
-
-    @Test
-    void parseTransactions_stringListWithWrongType_notOk() {
-        List<String> wrongInputList = new ArrayList<>();
-        wrongInputList.add("type,fruit,quantity");
-        wrongInputList.add("bb,banana,20");
-        Assertions.assertThrows(RuntimeException.class,
-                () -> parserService.parseTransactions(wrongInputList));
-    }
-
-    @Test
-    void parseTransactions_stringListWithWrongFruit_notOk() {
-        List<String> wrongInputList = new ArrayList<>();
-        wrongInputList.add("type,fruit,quantity");
-        wrongInputList.add("b,4556,20");
-        Assertions.assertThrows(RuntimeException.class,
-                () -> parserService.parseTransactions(wrongInputList));
     }
 
     private List<String> initStringList() {

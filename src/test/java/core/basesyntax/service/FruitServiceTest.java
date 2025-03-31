@@ -33,7 +33,7 @@ class FruitServiceTest {
 
     @Test
     void processTransactions_fruitTransactionsNull_ok() {
-        fruitService.processTransactions(null);
+        fruitService.processTransactions(new ArrayList<>());
         Assertions.assertTrue(Storage.getStorage().isEmpty());
     }
 

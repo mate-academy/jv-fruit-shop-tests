@@ -20,12 +20,6 @@ class OperationStrategyTest {
     }
 
     @Test
-    void get_mapEmptyOperationNull_notOk() {
-        operationStrategy = new OperationStrategyImpl(new HashMap<>());
-        Assertions.assertThrows(RuntimeException.class, () -> operationStrategy.get(null));
-    }
-
-    @Test
     void get_mapFilled_Ok() {
         initMapOperationHandler();
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);

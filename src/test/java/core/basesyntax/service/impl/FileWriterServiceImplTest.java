@@ -7,33 +7,22 @@ import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterServiceImplTest {
     private FileWriterService fileWriterService;
-    private String fileName;
 
     @BeforeEach
     void setUp() {
         fileWriterService = new FileWriterServiceImpl();
-        fileName = "src/test/resources/reportToWrite.csv";
-    }
-
-    @AfterEach
-    void tearDown() {
-        try {
-            Files.deleteIfExists(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Test
     void write_validOutputDataAndFilePath_ok() {
         String outputData = String.join(System.lineSeparator(), "banana,152",
                 "apple,90");
+        String fileName = "src/test/resources/reportToWrite.csv";
         fileWriterService.write(outputData, fileName);
         String expected = String.join(System.lineSeparator(), "fruit,quantity",
                 "banana,152", "apple,90");
@@ -48,6 +37,7 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_nullOutputData_notOk() {
+        String fileName = "src/test/resources/reportToWrite.csv";
         assertThrows(RuntimeException.class,
                 () -> fileWriterService.write(null, fileName));
     }
@@ -64,6 +54,7 @@ class FileWriterServiceImplTest {
     @Test
     void write_emptyOutputData_ok() {
         String outputData = "";
+        String fileName = "src/test/resources/reportToWrite.csv";
         fileWriterService.write(outputData, fileName);
         String expected = "fruit,quantity\r\n";
         String actual;
@@ -77,7 +68,7 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_invalidPathFile_notOk() {
-        String invalidFileName = "src/test/resources";
+        String invalidFileName = "src/test/notExistingFolder/invalidFileName";
         String outputData = String.join(System.lineSeparator(), "banana,152",
                 "apple,90");
         Exception exception = assertThrows(RuntimeException.class,

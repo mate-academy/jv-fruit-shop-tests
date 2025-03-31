@@ -2,13 +2,12 @@ package core.basesyntax.converter;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.function.Function;
 
 public class DataConverterImpl implements DataConverter {
-    private final Function<String, FruitTransaction> transactionMapper;
+    private TransactionParser parser;
 
-    public DataConverterImpl(Function<String, FruitTransaction> transactionMapper) {
-        this.transactionMapper = transactionMapper;
+    public DataConverterImpl(TransactionParser parser) {
+        this.parser = parser;
     }
 
     @Override
@@ -17,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
             throw new RuntimeException("Input list can't be null");
         }
         return inputTransactions.stream()
-                .map(transactionMapper)
+                .map(s -> parser.parseToTransaction(s))
                 .toList();
     }
 }

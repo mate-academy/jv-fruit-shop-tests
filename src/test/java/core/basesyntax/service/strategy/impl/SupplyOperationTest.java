@@ -28,7 +28,7 @@ class SupplyOperationTest {
         int quantity = -100;
         Exception exception = assertThrows(RuntimeException.class,
                 () -> operationHandler.getOperationType(quantity));
-        assertEquals("Invalid data. Supply quantity can't be negative: "
+        assertEquals("Invalid data, quantity can't be negative: "
                 + quantity, exception.getMessage());
     }
 }

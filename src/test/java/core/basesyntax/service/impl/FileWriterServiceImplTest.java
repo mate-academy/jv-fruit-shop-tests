@@ -19,7 +19,7 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void write_validOutputDataAndFilePath_ok() {
+    void write_validOutputDataAndFilePath_ok() throws IOException {
         String outputData = String.join(System.lineSeparator(), "banana,152",
                 "apple,90");
         String fileName = "src/test/resources/reportToWrite.csv";
@@ -27,11 +27,7 @@ class FileWriterServiceImplTest {
         String expected = String.join(System.lineSeparator(), "fruit,quantity",
                 "banana,152", "apple,90");
         String actual;
-        try {
-            actual = Files.readString(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file: " + fileName, e);
-        }
+        actual = Files.readString(Path.of(fileName));
         assertEquals(expected, actual);
     }
 
@@ -52,17 +48,13 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void write_emptyOutputData_ok() {
+    void write_emptyOutputData_ok() throws IOException {
         String outputData = "";
         String fileName = "src/test/resources/reportToWrite.csv";
         fileWriterService.write(outputData, fileName);
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual;
-        try {
-            actual = Files.readString(Path.of(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file: " + fileName, e);
-        }
+        actual = Files.readString(Path.of(fileName));
         assertEquals(expected, actual);
     }
 

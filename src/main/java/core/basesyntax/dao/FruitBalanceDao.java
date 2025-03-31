@@ -6,5 +6,7 @@ import java.util.List;
 public interface FruitBalanceDao {
     void add(FruitBalance fruitBalance);
 
-    List<FruitBalance> get();
+    FruitBalance get(String fruit);
+    
+    List<FruitBalance> getFruitBalances();
 }

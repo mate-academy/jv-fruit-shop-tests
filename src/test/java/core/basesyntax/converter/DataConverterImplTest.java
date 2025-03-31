@@ -6,18 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private DataConverter converter;
-    private Function<String, FruitTransaction> mapper;
 
     @BeforeEach
     void setUp() {
-        mapper = new TransactionParser();
-        converter = new DataConverterImpl(mapper);
+        TransactionParser parser = new TransactionParser();
+        converter = new DataConverterImpl(parser);
     }
 
     @Test

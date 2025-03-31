@@ -7,11 +7,18 @@ import java.util.List;
 public class FruitBalanceDaoImpl implements FruitBalanceDao {
     @Override
     public void add(FruitBalance fruitBalance) {
-        Storage.fruitBalanceInfo.add(fruitBalance);
+        Storage.fruitBalances.add(fruitBalance);
     }
 
     @Override
-    public List<FruitBalance> get() {
-        return Storage.fruitBalanceInfo;
+    public FruitBalance get(String fruit) {
+        return Storage.fruitBalances.stream()
+                .filter(fruitBalance -> fruitBalance.getFruit().equals(fruit))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<FruitBalance> getFruitBalances() {
+        return Storage.fruitBalances;
     }
 }

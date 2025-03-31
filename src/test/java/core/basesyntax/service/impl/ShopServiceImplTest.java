@@ -2,12 +2,12 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.dao.FruitBalanceDao;
+import core.basesyntax.dao.FruitBalanceDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitBalance;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitBalanceService;
 import core.basesyntax.service.OperationStrategy;
@@ -20,16 +20,12 @@ import core.basesyntax.service.strategy.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class ShopServiceImplTest {
-    @Mock
-    private FruitBalanceService fruitBalanceService;
+    private FruitBalanceDao fruitBalanceDao;
     private ShopService shopService;
 
     @BeforeEach
@@ -40,23 +36,28 @@ class ShopServiceImplTest {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        fruitBalanceDao = new FruitBalanceDaoImpl();
+        FruitBalanceService fruitBalanceService = new FruitBalanceServiceImpl(fruitBalanceDao);
         shopService = new ShopServiceImpl(operationStrategy, fruitBalanceService);
     }
 
     @Test
     void process_nullInputTransactions_notOk() {
-        Exception exception = assertThrows(RuntimeException.class, () -> shopService.process(null));
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(null));
         assertEquals("Input transactions list cannot be null", exception.getMessage());
     }
 
     @Test
     void process_emptyTransactionList_ok() {
+        assertTrue(Storage.fruitBalances.isEmpty());
         shopService.process(List.of());
-        verify(fruitBalanceService, never()).updateFruitBalance(any(), anyInt());
+        assertTrue(Storage.fruitBalances.isEmpty());
     }
 
     @Test
-    void process_withMultiplyTransactions_ok() {
+    void process_withMultiplyTransactionsAndEmptyStorage_ok() {
+        assertTrue(Storage.fruitBalances.isEmpty());
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,"apple", 50),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,"apple", 30),
@@ -65,9 +66,28 @@ class ShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,"kiwi", 50),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,"kiwi", 40));
         shopService.process(transactions);
-        verify(fruitBalanceService, times(1))
-                .updateFruitBalance("apple", 60);
-        verify(fruitBalanceService, times(1))
-                .updateFruitBalance("kiwi", 110);
+        int expectedAppleBalance = 60;
+        int actualAppleBalance = fruitBalanceDao.get("apple").getBalance();
+        assertEquals(2, Storage.fruitBalances.size());
+        assertEquals(expectedAppleBalance, actualAppleBalance);
+    }
+
+    @Test
+    void process_withMultiplyTransactionsAndExistingFruitInStorage_ok() {
+        Storage.fruitBalances.add(new FruitBalance("kiwi", 50));
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "kiwi", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "kiwi", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "kiwi", 40),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "kiwi", 40));
+        shopService.process(transactions);
+        int expectedBalance = 150;
+        int actualBalance = fruitBalanceDao.get("kiwi").getBalance();
+        assertEquals(expectedBalance, actualBalance);
+    }
+
+    @AfterEach
+    public void afterEachTest() {
+        Storage.fruitBalances.clear();
     }
 }

@@ -16,8 +16,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        List<FruitBalance> info = fruitBalanceDao.get();
-        return info.stream()
+        List<FruitBalance> fruitBalances = fruitBalanceDao.getFruitBalances();
+        return fruitBalances.stream()
                 .map(s -> s.getFruit() + COMMA + s.getBalance())
                 .collect(Collectors.joining(System.lineSeparator()));
     }

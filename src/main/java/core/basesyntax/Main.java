@@ -6,15 +6,21 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.implementation.*;
+import core.basesyntax.service.implementation.FruitServiceImpl;
+import core.basesyntax.service.implementation.ParserServiceImpl;
+import core.basesyntax.service.implementation.ReaderServiceImpl;
+import core.basesyntax.service.implementation.ReportService;
+import core.basesyntax.service.implementation.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.implementation.*;
-
+import core.basesyntax.strategy.implementation.BalanceHandlerImpl;
+import core.basesyntax.strategy.implementation.OperationStrategyImpl;
+import core.basesyntax.strategy.implementation.PurchaseHandlerImpl;
+import core.basesyntax.strategy.implementation.ReturnHandlerImpl;
+import core.basesyntax.strategy.implementation.SupplyHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class Main {
     private static final String FILE_INPUT = "src/main/resources/input.cvs";

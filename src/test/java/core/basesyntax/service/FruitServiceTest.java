@@ -6,16 +6,19 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.implementation.FruitServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.implementation.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
+import core.basesyntax.strategy.implementation.BalanceHandlerImpl;
+import core.basesyntax.strategy.implementation.OperationStrategyImpl;
+import core.basesyntax.strategy.implementation.PurchaseHandlerImpl;
+import core.basesyntax.strategy.implementation.ReturnHandlerImpl;
+import core.basesyntax.strategy.implementation.SupplyHandlerImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class FruitServiceTest {
     private static FruitService fruitService;

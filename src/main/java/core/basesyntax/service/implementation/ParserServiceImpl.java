@@ -5,7 +5,6 @@ import core.basesyntax.dao.ActionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
-
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService {

@@ -3,9 +3,8 @@ package core.basesyntax.service.implementation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-import lombok.AllArgsConstructor;
-
 import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class FruitServiceImpl implements FruitService {

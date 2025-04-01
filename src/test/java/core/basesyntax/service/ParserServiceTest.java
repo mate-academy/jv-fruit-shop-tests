@@ -3,12 +3,11 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.implementation.ParserServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 class ParserServiceTest {
     private static ParserService parserService;
@@ -17,7 +16,6 @@ class ParserServiceTest {
     static void beforeAll() {
         parserService = new ParserServiceImpl();
     }
-
 
     @Test
     void parseTransactions_stringListNull_notOk() {

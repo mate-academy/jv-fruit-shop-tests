@@ -3,24 +3,18 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import core.basesyntax.strategy.implementation.BalanceHandlerImpl;
 import core.basesyntax.strategy.implementation.PurchaseHandlerImpl;
 import core.basesyntax.strategy.implementation.ReturnHandlerImpl;
 import core.basesyntax.strategy.implementation.SupplyHandlerImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class OperationHandlerTest {
     private OperationHandler operationHandler;
-
-    private FruitTransaction fruit = new FruitTransaction();
 
     @Test
     void processTransaction_positiveBalance_ok() {
@@ -45,7 +39,6 @@ class OperationHandlerTest {
                 () -> operationHandler.processTransaction(
                         new FruitTransaction(Operation.BALANCE, "apple", -30)));
     }
-
 
     @Test
     void processTransaction_positivePurchase_ok() {
@@ -118,7 +111,6 @@ class OperationHandlerTest {
             Assertions.assertEquals(entry.getValue(), actual.get(entry.getKey()));
         }
     }
-
 
     @AfterEach
     void afterEachTest() {

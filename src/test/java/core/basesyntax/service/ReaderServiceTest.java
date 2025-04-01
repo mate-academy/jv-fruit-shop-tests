@@ -1,12 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.implementation.ReaderServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 class ReaderServiceTest {
     private static final String TEST_FILE_PATH = "src/test/java/core/basesyntax/resources/test.cvs";

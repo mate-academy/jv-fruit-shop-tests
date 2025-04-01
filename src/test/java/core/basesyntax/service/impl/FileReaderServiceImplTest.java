@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
+    private static final String REPORT_FILE_NAME = "src/test/resources/reportToReadTest.csv";
+    private static final String EMPTY_FILE_NAME = "src/test/resources/emptyFile.csv";
     private FileReaderService fileReaderService;
 
     @BeforeEach
@@ -20,16 +22,16 @@ class FileReaderServiceImplTest {
 
     @Test
     void read_validFileName_ok() {
-        Path path = Path.of("src/test/resources/reportToReadTest.csv");
+        Path path = Path.of(REPORT_FILE_NAME);
         List<String> expected = List.of("b,banana,20", "b,apple,100");
-        List<String> actual = fileReaderService.read(path.toString());
+        List<String> actual = fileReaderService.read(REPORT_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test
     void read_emptyFile_ok() {
-        Path path = Path.of("src/test/resources/emptyFile.csv");
-        List<String> actual = fileReaderService.read(path.toString());
+        Path path = Path.of(EMPTY_FILE_NAME);
+        List<String> actual = fileReaderService.read(EMPTY_FILE_NAME);
         assertTrue(actual.isEmpty());
     }
 

@@ -56,7 +56,7 @@ class FruitBalanceServiceImplTest {
     }
 
     @AfterEach
-    public void afterEachTest() {
+    public void tearDown() {
         Storage.fruitBalances.clear();
     }
 }

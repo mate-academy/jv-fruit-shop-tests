@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterServiceImplTest {
+    private static final String REPORT_FILE_NAME = "src/test/resources/reportToWrite.csv";
     private FileWriterService fileWriterService;
 
     @BeforeEach
@@ -22,20 +23,18 @@ class FileWriterServiceImplTest {
     void write_validOutputDataAndFilePath_ok() throws IOException {
         String outputData = String.join(System.lineSeparator(), "banana,152",
                 "apple,90");
-        String fileName = "src/test/resources/reportToWrite.csv";
-        fileWriterService.write(outputData, fileName);
+        fileWriterService.write(outputData, REPORT_FILE_NAME);
         String expected = String.join(System.lineSeparator(), "fruit,quantity",
                 "banana,152", "apple,90");
         String actual;
-        actual = Files.readString(Path.of(fileName));
+        actual = Files.readString(Path.of(REPORT_FILE_NAME));
         assertEquals(expected, actual);
     }
 
     @Test
     void write_nullOutputData_notOk() {
-        String fileName = "src/test/resources/reportToWrite.csv";
         assertThrows(RuntimeException.class,
-                () -> fileWriterService.write(null, fileName));
+                () -> fileWriterService.write(null, REPORT_FILE_NAME));
     }
 
     @Test
@@ -50,11 +49,10 @@ class FileWriterServiceImplTest {
     @Test
     void write_emptyOutputData_ok() throws IOException {
         String outputData = "";
-        String fileName = "src/test/resources/reportToWrite.csv";
-        fileWriterService.write(outputData, fileName);
+        fileWriterService.write(outputData, REPORT_FILE_NAME);
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual;
-        actual = Files.readString(Path.of(fileName));
+        actual = Files.readString(Path.of(REPORT_FILE_NAME));
         assertEquals(expected, actual);
     }
 

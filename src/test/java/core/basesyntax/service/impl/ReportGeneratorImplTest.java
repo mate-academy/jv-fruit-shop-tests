@@ -41,7 +41,7 @@ class ReportGeneratorImplTest {
     }
 
     @AfterEach
-    public void afterEachTest() {
+    public void tearDown() {
         Storage.fruitBalances.clear();
     }
 }

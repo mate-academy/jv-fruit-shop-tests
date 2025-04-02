@@ -3,6 +3,7 @@ package core.basesyntax.operationstrategy;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.exception.DataProcessingException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationservice.BalanceOperationImpl;
 import core.basesyntax.operationservice.OperationHandler;
@@ -42,8 +43,8 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void getHandler_nullOperation_throwsException() {
-        assertThrows(NullPointerException.class, () -> operationStrategy.getHandler(null));
+    void getHandler_nullOperation_throwsDataProcessingException() {
+        assertThrows(DataProcessingException.class, () -> operationStrategy.getHandler(null));
     }
 }
 

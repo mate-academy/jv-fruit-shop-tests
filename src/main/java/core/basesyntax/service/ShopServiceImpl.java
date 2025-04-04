@@ -14,11 +14,16 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         if (transactions == null) {
-            return;
+            throw new RuntimeException("Transactions are null!!!");
         }
         for (FruitTransaction transaction : transactions) {
+            if (transaction.getOperation() == null || transaction.getFruit() == null
+                    || transaction.getQuantity() == 0) {
+                throw new RuntimeException("Check transactions list! It has dta with null!");
+            }
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             handler.handle(transaction);
         }
+
     }
 }

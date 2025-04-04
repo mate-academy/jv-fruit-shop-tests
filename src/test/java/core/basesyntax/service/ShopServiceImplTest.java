@@ -15,6 +15,8 @@ import core.basesyntax.service.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +35,7 @@ public class ShopServiceImplTest {
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
-    @BeforeEach
+    @AfterEach
     public void clearStorage() {
         getStorage().clear();
     }
@@ -55,21 +57,20 @@ public class ShopServiceImplTest {
     @Test
     public void process_emptyTransactions_noUpdate() {
         shopService.process(List.of());
-        assertEquals(Map.of(), getFruits());
-    }
-
-    @Test
-    public void process_nullTransactions_noUpdate() {
-        shopService.process(null);
         assertEquals(Map.of(), getStorage());
     }
 
     @Test
-    public void process_invalidOperation_throwsNullPointerException() {
+    public void process_nullTransactions_noUpdate() {
+        assertThrows(RuntimeException.class, () -> shopService.process(null));
+    }
+
+    @Test
+    public void process_invalidOperation_fruitNull_throwsNullPointerException() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(null, "banana", 10)
+                new FruitTransaction(Operation.BALANCE, null, 10)
         );
-        assertThrows(NullPointerException.class, () -> shopService.process(transactions));
+        Assertions.assertThrows(RuntimeException.class, () -> shopService.process(transactions));
     }
 
     @Test
@@ -85,6 +86,7 @@ public class ShopServiceImplTest {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(Operation.RETURN, "apple", 3)
         );
-        assertThrows(NullPointerException.class, () -> shopService.process(transactions));
+        Assertions.assertThrows(NullPointerException.class,
+                () -> shopService.process(transactions));
     }
 }

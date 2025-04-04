@@ -10,7 +10,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport(Map<String, Integer> fruitStorage) {
         StringBuilder report = new StringBuilder(HEAD + System.lineSeparator());
         if (fruitStorage == null) {
-            return report.toString();
+            throw new RuntimeException("Fruit storage can not be null!!!");
         }
         for (Map.Entry<String, Integer> entry : fruitStorage.entrySet()) {
             report.append(entry.getKey()).append(COMMA)

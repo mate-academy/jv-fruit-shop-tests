@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,21 @@ class DataConverterImplTest {
         Assert.assertEquals(String.format("Invalid quantity of operations!"
                 + " Expected: " + expected + "Atual: "
                 + fruitTransactions.size()), expected, fruitTransactions.size());
+
+        assertEquals(new FruitTransaction(Operation.BALANCE, "banana", 20),
+                fruitTransactions.get(0));
+        assertEquals(new FruitTransaction(Operation.BALANCE, "apple", 100),
+                fruitTransactions.get(1));
+        assertEquals(new FruitTransaction(Operation.SUPPLY, "banana", 100),
+                fruitTransactions.get(2));
+        assertEquals(new FruitTransaction(Operation.PURCHASE, "banana", 13),
+                fruitTransactions.get(3));
+        assertEquals(new FruitTransaction(Operation.RETURN, "apple", 10),
+                fruitTransactions.get(4));
+        assertEquals(new FruitTransaction(Operation.PURCHASE, "apple", 20),
+                fruitTransactions.get(5));
+        assertEquals(new FruitTransaction(Operation.PURCHASE, "banana", 5),
+                fruitTransactions.get(6));
     }
 
     @Test
@@ -28,6 +44,11 @@ class DataConverterImplTest {
                 "p,orange,5", "r,grape,3", "b,kiwi,15");
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(input);
         assertEquals(5, transactions.size());
+        assertEquals(new FruitTransaction(Operation.BALANCE, "banana", 10), transactions.get(0));
+        assertEquals(new FruitTransaction(Operation.SUPPLY, "apple", 20), transactions.get(1));
+        assertEquals(new FruitTransaction(Operation.PURCHASE, "orange", 5), transactions.get(2));
+        assertEquals(new FruitTransaction(Operation.RETURN, "grape", 3), transactions.get(3));
+        assertEquals(new FruitTransaction(Operation.BALANCE, "kiwi", 15), transactions.get(4));
     }
 
     @Test

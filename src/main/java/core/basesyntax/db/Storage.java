@@ -24,11 +24,13 @@ public class Storage {
 
     public static void addFruit(String fruit, int quantity) {
         storage.put(fruit, storage.getOrDefault(fruit, 0) + quantity);
+        if (fruit == null) {
+            throw new RuntimeException("Invalid fruit is null!");
+        }
     }
 
     public static void removeFruit(String fruit, int quantity) {
         if (storage.get(fruit) == null
-                || storage.get(fruit) == 0
                 || quantity > storage.get(fruit)) {
             throw new RuntimeException("No this fruit on the storage! Avaiable: "
                     + storage.getOrDefault(fruit, 0) + "   Requested: " + quantity);

@@ -8,16 +8,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
 
-    private BalanceOperationHandler balanceOperationHandler;
-    private Map<String, Integer> fruits;
+    private static BalanceOperationHandler balanceOperationHandler;
+    private static Map<String, Integer> fruits;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
         fruits = new HashMap<>();
         Storage.setStorage(fruits);

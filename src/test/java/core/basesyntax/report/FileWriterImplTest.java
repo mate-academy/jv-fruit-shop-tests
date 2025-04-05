@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String WRITE_FILE_TEST = "src/test/java/resources/reportFinalTest.csv";
-    private final FileWriterCustom fileWriter = new FileWriterImpl();
+    private static FileWriterCustom fileWriter;
+    private static ReportGenerator reportGenerator;
 
-    private ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    @BeforeAll
+    static void beforeAll() {
+        fileWriter = new FileWriterImpl();
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @BeforeEach
     void setUp() {

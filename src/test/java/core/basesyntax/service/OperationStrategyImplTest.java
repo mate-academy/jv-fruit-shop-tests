@@ -17,7 +17,7 @@ class OperationStrategyImplTest {
     private Map<Operation, OperationHandler> operationHandlers;
 
     @BeforeEach
-    void seUP() {
+    void setUP() {
         operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlers);

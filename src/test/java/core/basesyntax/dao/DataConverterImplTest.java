@@ -6,11 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.List;
-import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private DataConverter dataConverter = new DataConverterImpl();
+    protected static DataConverter dataConverter;
+
+    @BeforeAll
+    public static void setUp() {
+        dataConverter = new DataConverterImpl();
+    }
 
     @Test
     void convertToTransaction_validListOfTransaction() {
@@ -18,9 +23,9 @@ class DataConverterImplTest {
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5");
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransaction(inputData);
         int expected = inputData.size() - 1;
-        Assert.assertEquals(String.format("Invalid quantity of operations!"
-                + " Expected: " + expected + "Atual: "
-                + fruitTransactions.size()), expected, fruitTransactions.size());
+        assertEquals(expected, fruitTransactions.size(), String.format("Invalid quantity "
+                + "of operations! Expected: " + expected + "Actual: "
+                + fruitTransactions.size()));
 
         assertEquals(new FruitTransaction(Operation.BALANCE, "banana", 20),
                 fruitTransactions.get(0));

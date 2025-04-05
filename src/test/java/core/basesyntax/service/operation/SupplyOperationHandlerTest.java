@@ -8,15 +8,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
-    private SupplyOperationHandler supplyOperationHandler;
-    private Map<String, Integer> fruits;
+    private static SupplyOperationHandler supplyOperationHandler;
+    private static Map<String, Integer> fruits;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         supplyOperationHandler = new SupplyOperationHandler();
         fruits = new HashMap<>();
         Storage.setStorage(fruits);

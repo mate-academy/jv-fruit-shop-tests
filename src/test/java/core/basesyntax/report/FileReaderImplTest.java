@@ -8,12 +8,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.IntStream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
+    private static String READ_FILE_TEST;
+    private static FileReaderCustom fileReader;
 
-    private static final String READ_FILE_TEST = "src/test/java/resources/reportToReadTest.csv";
-    private final FileReaderCustom fileReader = new FileReaderImpl();
+    @BeforeAll
+    public static void setUp() {
+        READ_FILE_TEST = "src/test/java/resources/reportToReadTest.csv";
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void read_validFile_ok() throws IOException {

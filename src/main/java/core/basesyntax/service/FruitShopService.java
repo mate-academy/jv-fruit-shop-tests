@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
@@ -17,7 +18,7 @@ public class FruitShopService {
     }
 
     public void processTransactions(List<FruitTransaction> transactions) {
-        Map<String, Integer> inventory = inventoryService.getInventory();
+        Map<String, Integer> inventory = Storage.inventory;
 
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = strategyProvider

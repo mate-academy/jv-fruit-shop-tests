@@ -6,15 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl implements CsvFileWriter {
-    private static final String DEFAULT_OUTPUT_FILE = "fileWriter.csv";
+    private static final String DEFAULT_OUTPUT_FILE = "src/test/resources/fileWriter.csv";
 
     @Override
     public void writeFile(String fileName, String content) {
-        String outputFile = (fileName == null || fileName.isBlank())
-                ? DEFAULT_OUTPUT_FILE
-                : fileName;
-        File file = new File(outputFile);
-
+        String targetFile = (fileName == null) ? DEFAULT_OUTPUT_FILE : fileName;
+        File file = new File(targetFile);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             bw.write(content);
         } catch (IOException e) {

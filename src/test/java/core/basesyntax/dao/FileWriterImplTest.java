@@ -20,14 +20,12 @@ class FileWriterImplTest {
 
     @BeforeEach
     void setUp() {
-        deleteTestFile(DEFAULT_FILE_NAME);
         deleteTestFile(CUSTOM_FILE_NAME);
         deleteTestFile(EMPTY_CONTENT_FILE);
     }
 
     @AfterEach
     void tearDown() {
-        deleteTestFile(DEFAULT_FILE_NAME);
         deleteTestFile(CUSTOM_FILE_NAME);
         deleteTestFile(EMPTY_CONTENT_FILE);
     }
@@ -39,21 +37,18 @@ class FileWriterImplTest {
                 Files.delete(path);
             }
         } catch (IOException e) {
-            throw new RuntimeException("IOException occurred during the cleanup: "
-                    + e.getMessage());
+            throw new RuntimeException("IOException occurred during cleanup: " + e.getMessage());
         }
     }
 
     @Test
     void writeFile_shouldWriteContentToDefaultFile_whenFileNameIsNull() {
         Path defaultFilePath = Paths.get(RESOURCES_DIR, DEFAULT_FILE_NAME);
-        fileWriter.writeFile(RESOURCES_DIR + DEFAULT_FILE_NAME, TEST_CONTENT);
-        Assertions.assertTrue(Files.exists(defaultFilePath), "Default file should be created.");
-
+        fileWriter.writeFile(null, TEST_CONTENT);
+        Assertions.assertTrue(Files.exists(defaultFilePath));
         try {
             String writtenContent = Files.readString(defaultFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent,
-                    "Content of the default file should match the provided content.");
+            Assertions.assertEquals(TEST_CONTENT, writtenContent);
         } catch (IOException e) {
             Assertions.fail("IOException occurred during the test: " + e.getMessage());
         }
@@ -63,12 +58,10 @@ class FileWriterImplTest {
     void writeFile_shouldWriteContentToSpecifiedFile_whenFileNameIsNotNull() {
         Path customFilePath = Paths.get(RESOURCES_DIR, CUSTOM_FILE_NAME);
         fileWriter.writeFile(RESOURCES_DIR + CUSTOM_FILE_NAME, TEST_CONTENT);
-        Assertions.assertTrue(Files.exists(customFilePath), "Custom file should be created.");
-
+        Assertions.assertTrue(Files.exists(customFilePath));
         try {
             String writtenContent = Files.readString(customFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent,
-                    "Content of the custom file should match the provided content.");
+            Assertions.assertEquals(TEST_CONTENT, writtenContent);
         } catch (IOException e) {
             Assertions.fail("IOException occurred during the test: " + e.getMessage());
         }
@@ -77,21 +70,16 @@ class FileWriterImplTest {
     @Test
     void writeFile_shouldNotThrowException_whenFileAlreadyExists() {
         Path customFilePath = Paths.get(RESOURCES_DIR, CUSTOM_FILE_NAME);
-
         try {
             Files.createFile(customFilePath);
         } catch (IOException e) {
             throw new RuntimeException("IOException occurred during the test: " + e.getMessage());
         }
-
         fileWriter.writeFile(RESOURCES_DIR + CUSTOM_FILE_NAME, TEST_CONTENT);
-        Assertions.assertTrue(Files.exists(customFilePath),
-                "File should still exist after writing.");
-
+        Assertions.assertTrue(Files.exists(customFilePath));
         try {
             String writtenContent = Files.readString(customFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent,
-                    "Content of the file should match the provided content.");
+            Assertions.assertEquals(TEST_CONTENT, writtenContent);
         } catch (IOException e) {
             Assertions.fail("IOException occurred during the test: " + e.getMessage());
         }
@@ -101,13 +89,10 @@ class FileWriterImplTest {
     void writeFile_shouldHandleEmptyContent() {
         Path emptyContentFile = Paths.get(RESOURCES_DIR, EMPTY_CONTENT_FILE);
         fileWriter.writeFile(RESOURCES_DIR + EMPTY_CONTENT_FILE, "");
-        Assertions.assertTrue(Files.exists(emptyContentFile),
-                "File should be created with empty content.");
-
+        Assertions.assertTrue(Files.exists(emptyContentFile));
         try {
             String writtenContent = Files.readString(emptyContentFile);
-            Assertions.assertEquals("", writtenContent,
-                    "Content of the file should be empty.");
+            Assertions.assertEquals("", writtenContent);
         } catch (IOException e) {
             Assertions.fail("IOException occurred during the test: " + e.getMessage());
         }

@@ -21,8 +21,4 @@ public class InventoryService {
         }
         inventory.put(fruit, currentQuantity - quantity);
     }
-
-    public Map<String, Integer> getInventory() {
-        return inventory;
-    }
 }

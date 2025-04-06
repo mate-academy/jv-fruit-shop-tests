@@ -12,11 +12,11 @@ public class FileReaderImpl implements FileReader {
 
     @Override
     public List<String> readFile(String fileName) {
-        String filePath = getFilePath(fileName == null || fileName.isBlank()
-                ? DEFAULT_INPUT_FILE : fileName);
         List<String> lines = new ArrayList<>();
+        Path filePath = Path.of(fileName != null && !fileName.isBlank()
+                ? fileName : DEFAULT_INPUT_FILE);
 
-        try (BufferedReader br = Files.newBufferedReader(Path.of(filePath))) {
+        try (BufferedReader br = Files.newBufferedReader(filePath)) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);
@@ -25,18 +25,5 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("Error while reading file " + filePath, e);
         }
         return lines;
-    }
-
-    private String getFilePath(String fileName) {
-        Path filePath = Path.of(fileName);
-        if (filePath.isAbsolute() || Files.exists(filePath)) {
-            return filePath.toString();
-        }
-
-        var resource = ClassLoader.getSystemResource(fileName);
-        if (resource == null) {
-            throw new RuntimeException("Resource not found: " + fileName);
-        }
-        return Path.of(resource.getPath()).toString();
     }
 }

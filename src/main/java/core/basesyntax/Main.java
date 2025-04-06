@@ -9,30 +9,46 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.InventoryService;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.TransactionProcessingService;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         InventoryService inventoryService = new InventoryService();
-        ReportGeneratorService reportGeneratorService = new ReportGeneratorService();
-        FileReader fileReader = new FileReaderImpl();
-        CsvFileWriter fileWriter = new FileWriterImpl();
-        FruitTransactionParser parser = new FruitTransactionParser();
-        OperationStrategyProvider strategyProvider =
-                new OperationStrategyProvider(inventoryService);
 
+        Map<String, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put("b", new BalanceOperationHandler());
+        operationHandlers.put("p", new PurchaseOperationHandler());
+        operationHandlers.put("r", new ReturnOperationHandler());
+        operationHandlers.put("s", new SupplyOperationHandler());
+
+        OperationStrategyProvider strategyProvider =
+                new OperationStrategyProvider((InventoryService) operationHandlers);
+
+        FileReader fileReader = new FileReaderImpl();
+        FruitTransactionParser parser = new FruitTransactionParser();
         FruitShopService fruitShopService =
                 new FruitShopService(inventoryService, strategyProvider);
+        CsvFileWriter fileWriter = new FileWriterImpl();
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorService();
+
         TransactionProcessingService transactionProcessingService =
-                new TransactionProcessingService(fileReader, parser, fruitShopService, fileWriter,
-                        reportGeneratorService);
+                new TransactionProcessingService(
+                parser,
+                fruitShopService,
+                fileWriter,
+                reportGeneratorService
+        );
 
-        transactionProcessingService.processTransactions(args[0], args[1]);
+        List<String> lines = fileReader.readFile("reportToRead.csv");
 
-        String resultingReport = reportGeneratorService
-                .generateReport(inventoryService.getInventory());
-        fileWriter.writeFile(args[1], resultingReport);
-
-        System.out.println("Report was successfully written to: " + args[1]);
+        transactionProcessingService.processTransactions(lines, "finalReport.csv");
     }
 }

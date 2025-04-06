@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import core.basesyntax.dao.CsvFileWriter;
-import core.basesyntax.dao.FileReader;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +16,6 @@ import org.mockito.MockitoAnnotations;
 class TransactionProcessingServiceTest {
 
     private TransactionProcessingService transactionProcessingService;
-
-    @Mock
-    private FileReader fileReader;
 
     @Mock
     private FruitTransactionParser parser;
@@ -40,7 +36,6 @@ class TransactionProcessingServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         transactionProcessingService = new TransactionProcessingService(
-                fileReader,
                 parser,
                 fruitShopService,
                 fileWriter,
@@ -51,35 +46,32 @@ class TransactionProcessingServiceTest {
 
     @Test
     void processTransactions_shouldReadAndParseTransactions() {
-        String sourceFilePath = "source.csv";
+        List<String> fileContent = Arrays.asList("apple,s,10", "banana,p,5");
         String targetFilePath = "target.csv";
 
-        List<String> fileContent = Arrays.asList("apple,s,10", "banana,p,5");
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "apple", 10),
                 new FruitTransaction(FruitTransaction.OperationType.ADD, "banana", 5)
         );
 
-        when(fileReader.readFile(sourceFilePath)).thenReturn(fileContent);
         when(parser.parse(fileContent)).thenReturn(transactions);
 
-        transactionProcessingService.processTransactions(sourceFilePath, targetFilePath);
+        transactionProcessingService.processTransactions(fileContent, targetFilePath);
 
-        verify(fileReader).readFile(sourceFilePath);
         verify(parser).parse(fileContent);
         verify(fruitShopService).processTransactions(transactions);
+        verify(fileWriter).writeFile(targetFilePath, transactionProcessingService.generateReport());
     }
 
     @Test
-    void processTransactions_shouldThrowExceptionWhenFileReadFails() {
-        String sourceFilePath = "source.csv";
+    void processTransactions_shouldThrowExceptionWhenParseFails() {
+        List<String> fileContent = Arrays.asList("dummy");
         String targetFilePath = "target.csv";
 
-        when(fileReader.readFile(sourceFilePath)).thenThrow(new
-                RuntimeException("File read error"));
+        when(parser.parse(fileContent)).thenThrow(new RuntimeException("Parse error"));
 
         assertThrows(RuntimeException.class, () -> {
-            transactionProcessingService.processTransactions(sourceFilePath, targetFilePath);
+            transactionProcessingService.processTransactions(fileContent, targetFilePath);
         });
     }
 }

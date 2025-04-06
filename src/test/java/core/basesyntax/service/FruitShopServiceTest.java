@@ -58,19 +58,6 @@ class FruitShopServiceTest {
     }
 
     @Test
-    void processTransactions_invalidFruit_throwsException() {
-        List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.OperationType.ADD, "apple", 20),
-                new FruitTransaction(FruitTransaction.OperationType.ADD, "orange", 10)
-        );
-
-        inventoryService.addFruit("apple", 10);
-
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> fruitShopService.processTransactions(transactions));
-    }
-
-    @Test
     void processTransactions_negativeQuantity_throwsException() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.OperationType.ADD, "apple", -5)

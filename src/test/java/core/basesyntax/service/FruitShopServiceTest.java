@@ -29,7 +29,6 @@ class FruitShopServiceTest {
             if (!inventory.containsKey(fruit)) {
                 throw new IllegalArgumentException("Fruit not found: " + fruit);
             }
-            // Додамо чи віднімемо кількість
             inventoryService.addFruit(fruit, quantity);
         }
     }

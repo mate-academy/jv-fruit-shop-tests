@@ -24,6 +24,10 @@ public class FruitShopService {
             OperationHandler handler = strategyProvider
                     .getHandler(transaction.getOperation());
 
+            if (!inventory.containsKey(transaction.getFruit())) {
+                throw new IllegalArgumentException("Fruit not found: " + transaction.getFruit());
+            }
+
             handler.apply(inventory, transaction.getFruit(), transaction.getQuantity());
         }
     }

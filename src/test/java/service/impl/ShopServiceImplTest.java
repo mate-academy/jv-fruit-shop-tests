@@ -19,7 +19,7 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 class ShopServiceImplTest {
-    private static final String TEST_DATA_FILE = "src/test/java/resources/test.csv";
+    private static final String TEST_DATA_FILE = "src/test/resources/test.csv";
 
     private ShopServiceImpl shopService;
 

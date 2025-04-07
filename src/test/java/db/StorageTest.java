@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class StorageTest {
 
-    private static final String TEST_DATA_FILE = "src/test/java/resources/test.csv";
+    private static final String TEST_DATA_FILE = "src/test/resources/test.csv";
 
     @BeforeEach
     void resetStorage() {

@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String VALID_FILE = "src/test/java/resources/test.csv";
-    private static final String EMPTY_FILE = "src/test/java/resources/empty.csv";
-    private static final String NON_EXISTENT_FILE = "src/test/java/resources/nonExistentFile.csv";
+    private static final String VALID_FILE = "src/test/resources/test.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
+    private static final String NON_EXISTENT_FILE = "src/test/resources/nonExistentFile.csv";
 
     private FileReaderImpl fileReader;
 

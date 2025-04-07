@@ -71,4 +71,22 @@ class DataConverterImplTest {
         List<FruitTransaction> result = dataConverter.convertToTransaction(input);
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    void convertToTransaction_missingFields_throwsException() {
+        List<String> input = List.of("b,banana");
+        Exception exception = assertThrows(DataProcessingException.class, () ->
+                dataConverter.convertToTransaction(input));
+
+        assertTrue(exception.getMessage().contains("does not contain all 3 fields"));
+    }
+
+    @Test
+    void convertToTransaction_nonNumericQuantity_throwsException() {
+        List<String> input = List.of("s,apple,ten");
+        Exception exception = assertThrows(DataProcessingException.class, () ->
+                dataConverter.convertToTransaction(input));
+
+        assertTrue(exception.getMessage().contains("quantity is not a number"));
+    }
 }

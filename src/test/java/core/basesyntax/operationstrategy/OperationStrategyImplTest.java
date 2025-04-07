@@ -16,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private OperationStrategy operationStrategy;
     private Map<FruitTransaction.Operation, OperationHandler> handlers;
 
     @BeforeEach
@@ -26,12 +25,23 @@ class OperationStrategyImplTest {
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
+    }
 
-        operationStrategy = new OperationStrategyImpl(handlers);
+    @Test
+    void constructor_nullMap_throwsDataProcessingException() {
+        assertThrows(DataProcessingException.class, () ->
+                new OperationStrategyImpl(null));
+    }
+
+    @Test
+    void constructor_emptyMap_throwsDataProcessingException() {
+        assertThrows(DataProcessingException.class, () ->
+                new OperationStrategyImpl(new HashMap<>()));
     }
 
     @Test
     void getHandler_validOperation_returnsCorrectHandler() {
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
         assertTrue(operationStrategy.getHandler(
                 FruitTransaction.Operation.BALANCE) instanceof BalanceOperationImpl);
         assertTrue(operationStrategy.getHandler(
@@ -44,7 +54,19 @@ class OperationStrategyImplTest {
 
     @Test
     void getHandler_nullOperation_throwsDataProcessingException() {
-        assertThrows(DataProcessingException.class, () -> operationStrategy.getHandler(null));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+        Exception exception = assertThrows(DataProcessingException.class,
+                () -> operationStrategy.getHandler(null));
+        assertTrue(exception.getMessage().contains("Operation cannot be null"));
+    }
+
+    @Test
+    void getHandler_unsupportedOperation_throwsDataProcessingException() {
+        handlers.remove(FruitTransaction.Operation.BALANCE);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+        Exception exception = assertThrows(DataProcessingException.class,
+                () -> operationStrategy.getHandler(FruitTransaction.Operation.BALANCE));
+        assertTrue(exception.getMessage().contains("No handler found for operation"));
     }
 }
 

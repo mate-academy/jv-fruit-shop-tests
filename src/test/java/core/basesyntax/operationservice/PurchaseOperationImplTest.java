@@ -2,6 +2,7 @@ package core.basesyntax.operationservice;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
@@ -27,10 +28,31 @@ class PurchaseOperationImplTest {
     }
 
     @Test
+    void apply_exactAmount_removesFruit() {
+        Storage.putFruit("apple", 10);
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
+        purchaseOperation.apply(transaction);
+        assertEquals(0, Storage.getQuantity("apple"));
+    }
+
+    @Test
     void apply_insufficientStock_throwsException() {
         Storage.putFruit("apple", 5);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 10);
-        assertThrows(RuntimeException.class, () -> purchaseOperation.apply(transaction));
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                purchaseOperation.apply(transaction));
+        assertTrue(exception.getMessage().contains("Not enough apple in storage"));
+    }
+
+    @Test
+    void apply_noStock_throwsException() {
+        Storage.putFruit("apple", 0);
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 1);
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                purchaseOperation.apply(transaction));
+        assertTrue(exception.getMessage().contains("Not enough apple in storage"));
     }
 }

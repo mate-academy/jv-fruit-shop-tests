@@ -3,7 +3,6 @@ package service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import db.Storage;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +25,6 @@ class ShopServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        FileReader fileReader = new FileReaderImpl();
-
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
@@ -36,13 +33,8 @@ class ShopServiceImplTest {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
-
-        List<String> csvData = null;
-        try {
-            csvData = fileReader.read(TEST_DATA_FILE);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        FileReader fileReader = new FileReaderImpl();
+        List<String> csvData = fileReader.read(TEST_DATA_FILE);
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(csvData);
 

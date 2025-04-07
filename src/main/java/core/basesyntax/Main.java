@@ -1,7 +1,6 @@
 package core.basesyntax;
 
-import db.Storage;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class Main {
     private static final String REPORT_TO_READ_FILE = "src/main/resources/reportToRead.csv";
     private static final String FINAL_REPORT_FILE = "src/main/resources/finalReport.csv";
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(REPORT_TO_READ_FILE);
 
@@ -44,8 +43,7 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        Storage storage = new Storage();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
         FileWriterImpl fileWriter = new FileWriterImpl();

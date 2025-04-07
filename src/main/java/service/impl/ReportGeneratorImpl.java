@@ -2,21 +2,19 @@ package service.impl;
 
 import db.Storage;
 import java.util.Map;
+import java.util.stream.Collectors;
 import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,amount";
     private static final String COMMA_DELIMITER = ",";
-    private final Storage storage;
-
-    public ReportGeneratorImpl(Storage storage) {
-        this.storage = storage;
-    }
 
     @Override
     public String getReport() {
         StringBuilder report = new StringBuilder();
-        Map<String, Integer> fruits = storage.getAllFruits();
+        Map<String, Integer> fruits = Storage.fruits.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         report.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {

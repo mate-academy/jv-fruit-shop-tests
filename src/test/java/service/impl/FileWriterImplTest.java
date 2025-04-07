@@ -48,7 +48,7 @@ public class FileWriterImplTest {
 
         FileWriterImpl fileWriter = new FileWriterImpl();
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(IOException.class, () -> {
             fileWriter.write(invalidPath, content);
         });
 

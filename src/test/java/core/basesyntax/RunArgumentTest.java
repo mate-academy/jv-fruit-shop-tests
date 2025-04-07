@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-public class MainTest {
+public class RunArgumentTest {
 
     private static String[] args;
 
@@ -31,69 +31,69 @@ public class MainTest {
     }
 
     @Test
-    void main_withValidArgs_createsCorrectReport() throws IOException {
-        HelloWorld.main(args);
+    void processArgumentsAndRun_withValidArgs_createsCorrectReport() throws IOException {
+        RunArgument.processArgumentsAndRun(args);
         List<String> actual = Files.readAllLines(outputFile);
         List<String> result = List.of("fruit,quantity", "banana,152", "apple,90");
         assertEquals(result, actual);
     }
 
     @Test
-    void main_withInvalidArgsLength_throwsException() {
+    void processArgumentsAndRun_withInvalidArgsLength_throwsException() {
         String[] args = new String[]{"someFile.csv"};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withEmptyInputFile_throwsException() {
+    void processArgumentsAndRun_withEmptyInputFile_throwsException() {
         String[] args = new String[]{"", outputFile.toString()};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withWhitespaceInputFile_throwsException() {
+    void processArgumentsAndRun_withWhitespaceInputFile_throwsException() {
         String[] args = new String[]{"    ", outputFile.toString()};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withWhitespaceOutputFile_throwsException() {
+    void processArgumentsAndRun_withWhitespaceOutputFile_throwsException() {
         String[] args = new String[]{inputFile.toString(), "        "};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withEmptyOutputFile_throwsException() {
+    void processArgumentsAndRun_withEmptyOutputFile_throwsException() {
         String[] args = new String[]{inputFile.toString(), ""};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withEmptyInputAndOutputFiles_throwsException() {
+    void processArgumentsAndRun_withEmptyInputAndOutputFiles_throwsException() {
         String[] args = new String[]{"", ""};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withNullInputFile_throwsException() {
+    void processArgumentsAndRun_withNullInputFile_throwsException() {
         String[] args = new String[]{null, outputFile.toString()};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withNullOutputFile_throwsException() {
+    void processArgumentsAndRun_withNullOutputFile_throwsException() {
         String[] args = new String[]{inputFile.toString(), null};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withTooManyArgs_throwsException() {
+    void processArgumentsAndRun_withTooManyArgs_throwsException() {
         String[] args = new String[]{"someFiles", "fileResult", "Result"};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }
 
     @Test
-    void main_withNonExistentInputFile_throwsException() {
+    void processArgumentsAndRun_withNonExistentInputFile_throwsException() {
         String[] args = new String[]{"nonexistent.csv", outputFile.toString()};
         assertThrows(IllegalArgumentException.class, () -> HelloWorld.main(args));
     }

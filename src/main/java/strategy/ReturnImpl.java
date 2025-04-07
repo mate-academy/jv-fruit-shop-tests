@@ -3,8 +3,6 @@ package strategy;
 import db.Storage;
 
 public class ReturnImpl implements Operation {
-
-    private static final String QUANTITY_NOT_NEGATIVE = "Purchase quantity cannot be negative: ";
     private static final int ZERO = 0;
 
     @Override
@@ -14,7 +12,7 @@ public class ReturnImpl implements Operation {
         }
 
         if (quantity < ZERO) {
-            throw new IllegalArgumentException(QUANTITY_NOT_NEGATIVE + quantity);
+            throw new IllegalArgumentException("Purchase quantity cannot be negative: " + quantity);
         } else if (quantity == ZERO) {
             throw new IllegalArgumentException("Quantity cannot be null");
         }

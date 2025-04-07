@@ -3,7 +3,7 @@ package service.impl;
 import model.FruitTransaction;
 import model.FruitTransaction.Operation;
 
-public class ParseServiceImpl {
+public class ParseServiceImpl implements ParseService {
     private static final String SEPARATOR = ",";
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
@@ -11,6 +11,7 @@ public class ParseServiceImpl {
     private static final int FIELDS_LENGTH = 3;
     private static final int MIN_QUANTITY = 0;
 
+    @Override
     public FruitTransaction parseCsvLine(String line) {
         if (line == null || line.trim().isEmpty()) {
             throw new IllegalArgumentException("Input line cannot be null or empty");

@@ -8,10 +8,9 @@ import model.FruitTransaction;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String ERROR = "Error reading file: ";
-    private final ParseServiceImpl parseService;
+    private final ParseService parseService;
 
-    public ReaderServiceImpl(ParseServiceImpl parseService) {
+    public ReaderServiceImpl(ParseService parseService) {
         this.parseService = parseService;
     }
 
@@ -27,7 +26,7 @@ public class ReaderServiceImpl implements ReaderService {
                 .map(parseService::parseCsvLine)
                 .toList();
         } catch (IOException e) {
-            throw new RuntimeException(ERROR + filePath, e);
+            throw new RuntimeException("Error reading file: " + filePath, e);
         }
     }
 }

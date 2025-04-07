@@ -6,46 +6,44 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import db.Storage;
 import java.util.HashMap;
 import java.util.Map;
+import model.FruitTransaction.Operation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import service.impl.WriterServiceImpl;
 import strategy.BalanceImpl;
-import strategy.Operation;
 import strategy.PurchaseImpl;
 import strategy.ReturnImpl;
 import strategy.SupplyImpl;
 
 public class OperationTest {
-    private static WriterServiceImpl writerService;
     private static Storage storage;
-    private Map<String, Operation> strategy;
+    private Map<Operation, strategy.Operation> operationHandlers;
 
     @BeforeEach
     void create() {
         storage = new Storage();
-        strategy = new HashMap<>();
-        strategy.put("b", new BalanceImpl());
-        strategy.put("s", new SupplyImpl());
-        strategy.put("p", new PurchaseImpl());
-        strategy.put("r", new ReturnImpl());
+        operationHandlers = new HashMap<>();
+        operationHandlers.put(Operation.BALANCE, new BalanceImpl());
+        operationHandlers.put(Operation.SUPPLY, new SupplyImpl());
+        operationHandlers.put(Operation.PURCHASE, new PurchaseImpl());
+        operationHandlers.put(Operation.RETURN, new ReturnImpl());
     }
 
     @Test
     void balanceOperation_withValidTransaction_updatesStorage() {
-        Operation balance = strategy.get("b");
+        strategy.Operation balance = operationHandlers.get(Operation.BALANCE);
         balance.execute("banana", 100);
         assertEquals(100, storage.get("banana"));
     }
 
     @Test
     void balanceOperation_withNegativeQuantity_throwsException() {
-        Operation balance = strategy.get("b");
+        strategy.Operation balance = operationHandlers.get(Operation.BALANCE);
         assertThrows(IllegalArgumentException.class, () -> balance.execute("banana", -100));
     }
 
     @Test
     void supplyOperation_withValidTransaction_updatesStorage() {
-        Operation supply = strategy.get("s");
+        strategy.Operation supply = operationHandlers.get(Operation.SUPPLY);
         supply.execute("apple", 50);
         supply.execute("apple", 30);
         assertEquals(130, storage.get("apple"));
@@ -53,13 +51,13 @@ public class OperationTest {
 
     @Test
     void supplyOperation_withNegativeQuantity_throwsException() {
-        Operation supply = strategy.get("s");
+        strategy.Operation supply = operationHandlers.get(Operation.SUPPLY);
         assertThrows(IllegalArgumentException.class, () -> supply.execute("apple", -100));
     }
 
     @Test
     void returnOperation_withValidTransaction_updatesStorage() {
-        Operation r = strategy.get("r");
+        strategy.Operation r = operationHandlers.get(Operation.RETURN);
         storage.put("apple", 90);
         r.execute("apple", 50);
         r.execute("apple", 40);
@@ -68,13 +66,13 @@ public class OperationTest {
 
     @Test
     void returnOperation_withNegativeQuantity_throwsException() {
-        Operation r = strategy.get("r");
+        strategy.Operation r = operationHandlers.get(Operation.RETURN);
         assertThrows(IllegalArgumentException.class, () -> r.execute("apple", -20));
     }
 
     @Test
     void purchaseOperation_withValidTransaction_updatesStorage() {
-        Operation purchase = strategy.get("p");
+        strategy.Operation purchase = operationHandlers.get(Operation.PURCHASE);
         storage.put("apple", 100);
         purchase.execute("apple", 30);
         purchase.execute("apple", 20);
@@ -83,64 +81,64 @@ public class OperationTest {
 
     @Test
     void purchaseOperation_withInsufficientQuantity_throwsException() {
-        Operation purchase = strategy.get("p");
+        strategy.Operation purchase = operationHandlers.get(Operation.PURCHASE);
         storage.put("banana", 30);
         assertThrows(IllegalArgumentException.class, () -> purchase.execute("banana", 40));
     }
 
     @Test
     void purchaseOperation_withZeroQuantity_throwsException() {
-        Operation purchase = strategy.get("p");
+        strategy.Operation purchase = operationHandlers.get(Operation.PURCHASE);
         storage.put("banana", 30);
         assertThrows(IllegalArgumentException.class, () -> purchase.execute("banana", 0));
     }
 
     @Test
     void purchaseOperation_withNegativeQuantity_throwsException() {
-        Operation purchase = strategy.get("p");
+        strategy.Operation purchase = operationHandlers.get(Operation.PURCHASE);
         storage.put("banana", 30);
         assertThrows(IllegalArgumentException.class, () -> purchase.execute("banana", -20));
     }
 
     @Test
     void balanceOperation_withZeroQuantity_throwsException() {
-        Operation balance = strategy.get("b");
+        strategy.Operation balance = operationHandlers.get(Operation.BALANCE);
         assertThrows(IllegalArgumentException.class, () -> balance.execute("banana", 0));
     }
 
     @Test
     void supplyOperation_withZeroQuantity_throwsException() {
-        Operation supply = strategy.get("s");
+        strategy.Operation supply = operationHandlers.get(Operation.SUPPLY);
         assertThrows(IllegalArgumentException.class, () -> supply.execute("banana", 0));
     }
 
     @Test
     void returnOperation_withZeroQuantity_throwsException() {
-        Operation operationReturn = strategy.get("r");
+        strategy.Operation operationReturn = operationHandlers.get(Operation.RETURN);
         assertThrows(IllegalArgumentException.class, () -> operationReturn.execute("banana", 0));
     }
 
     @Test
     void balanceOperation_withNullFruit_throwsException() {
-        Operation balance = strategy.get("b");
+        strategy.Operation balance = operationHandlers.get(Operation.BALANCE);
         assertThrows(IllegalArgumentException.class, () -> balance.execute(null, 100));
     }
 
     @Test
     void supplyOperation_withNullFruit_throwsException() {
-        Operation supply = strategy.get("s");
+        strategy.Operation supply = operationHandlers.get(Operation.SUPPLY);
         assertThrows(IllegalArgumentException.class, () -> supply.execute(null, 30));
     }
 
     @Test
     void returnOperation_withNullFruit_throwsException() {
-        Operation operationReturn = strategy.get("r");
+        strategy.Operation operationReturn = operationHandlers.get(Operation.RETURN);
         assertThrows(IllegalArgumentException.class, () -> operationReturn.execute(null, 40));
     }
 
     @Test
     void purchaseOperation_withNullFruit_throwsException() {
-        Operation purchase = strategy.get("p");
+        strategy.Operation purchase = operationHandlers.get(Operation.PURCHASE);
         assertThrows(IllegalArgumentException.class, () -> purchase.execute(null, 40));
     }
 }

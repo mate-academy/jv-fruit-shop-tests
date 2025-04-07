@@ -3,8 +3,6 @@ package strategy;
 import db.Storage;
 
 public class SupplyImpl implements Operation {
-
-    private static final String QUANTITY_NOT_NEGATIVE = "Supply quantity cannot be negative: ";
     private static final int ZERO = 0;
 
     @Override
@@ -14,7 +12,7 @@ public class SupplyImpl implements Operation {
         }
 
         if (quantity < ZERO) {
-            throw new IllegalArgumentException(QUANTITY_NOT_NEGATIVE);
+            throw new IllegalArgumentException("Supply quantity cannot be negative: ");
         }
 
         if (quantity == ZERO) {

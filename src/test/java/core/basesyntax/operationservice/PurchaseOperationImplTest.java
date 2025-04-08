@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,10 @@ class PurchaseOperationImplTest {
     @BeforeEach
     void setUp() {
         purchaseOperation = new PurchaseOperationImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
         Storage.clearStorage();
     }
 

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,10 @@ class ReturnOperationImplTest {
     @BeforeEach
     void setUp() {
         returnOperation = new ReturnOperationImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
         Storage.clearStorage();
     }
 

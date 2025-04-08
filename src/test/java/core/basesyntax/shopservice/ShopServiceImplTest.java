@@ -17,7 +17,7 @@ class ShopServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        shopService = new ShopServiceImpl(null); // Мы не используем переданный strategy
+        shopService = new ShopServiceImpl(null);
         Storage.clearStorage();
     }
 

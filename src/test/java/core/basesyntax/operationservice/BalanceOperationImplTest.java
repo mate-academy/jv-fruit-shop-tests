@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,12 @@ class BalanceOperationImplTest {
 
     @BeforeEach
     void setUp() {
-        Storage.clearStorage();
         balanceOperation = new BalanceOperationImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clearStorage();
     }
 
     @Test

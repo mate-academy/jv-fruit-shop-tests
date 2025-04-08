@@ -27,7 +27,7 @@ class FileReaderImplTest {
                 + "s,apple,100\n";
         Files.write(Path.of(TEST_FILE_PATH), testContent.getBytes());
 
-        Files.write(Path.of(EMPTY_FILE_PATH), new byte[0]); // создаём пустой файл
+        Files.write(Path.of(EMPTY_FILE_PATH), new byte[0]);
     }
 
     @Test

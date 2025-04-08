@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.converter.DataConverter;
-import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.reportgenerator.ReportGenerator;
 import core.basesyntax.reportgenerator.ReportGeneratorImpl;
 import core.basesyntax.storage.Storage;
@@ -12,12 +10,10 @@ import org.junit.jupiter.api.Test;
 
 class ReportGeneratorTest {
     private ReportGenerator reportGenerator;
-    private DataConverter converter;
 
     @BeforeEach
     void setup() {
         reportGenerator = new ReportGeneratorImpl();
-        converter = new DataConverterImpl();
         Storage.fruits.clear();
     }
 
@@ -36,11 +32,8 @@ class ReportGeneratorTest {
                 "kiwi,30",
                 "peach,20"
         );
-
-        for (String expectedLine : expectedLines) {
-            Assert.assertTrue("Missing line: " + expectedLine,
-                    List.of(lines).contains(expectedLine));
-        }
+        List<String> actualLines = List.of(lines);
+        Assert.assertTrue(actualLines.containsAll(expectedLines));
     }
 
     @Test

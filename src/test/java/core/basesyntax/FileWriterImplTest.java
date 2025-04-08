@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String TEST_FILE =
-            "src/test/resourcesForTest/testReport";
+            "src/test/resources/testReport";
     private static final String INVALID_PATH =
             "src/test/resourcesForTest/nonExistentDir/testReport.csv";
     private FileWriter fileWriter;

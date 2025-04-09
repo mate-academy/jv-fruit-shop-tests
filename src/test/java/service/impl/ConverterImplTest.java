@@ -25,7 +25,7 @@ public class ConverterImplTest {
         List<String> input = Arrays.asList(
                 "operation,fruit,quantity",
                 "b,orange,10",
-                "s,grape,20"
+                "s,grape,25"
         );
 
         List<Transaction> transactionList = converter.convertTransaction(input);
@@ -36,7 +36,7 @@ public class ConverterImplTest {
         assertEquals(10, transactionList.get(0).getQuantity());
         assertEquals(Transaction.Operation.SUPPLY, transactionList.get(1).getOperation());
         assertEquals("grape", transactionList.get(1).getFruit());
-        assertEquals(20, transactionList.get(1).getQuantity());
+        assertEquals(25, transactionList.get(1).getQuantity());
     }
 
     @Test

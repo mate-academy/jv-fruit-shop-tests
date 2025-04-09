@@ -1,8 +1,8 @@
 operation,fruit,quantity
-b,banana
+b,banana,100
 s,banana,60
 p,banana,10
-r,banana,2
+r,banana,two
 b,apple,80
 s,apple,20
-p,apple,10S
+p,apple,10

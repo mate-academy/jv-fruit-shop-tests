@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import service.ShopService;
 
 public class RunArgumentTest {
 
@@ -19,6 +21,7 @@ public class RunArgumentTest {
     private Path tempDir;
     private Path inputFile;
     private Path outputFile;
+    private ShopService service;
 
     @BeforeEach
     void create() throws IOException {
@@ -36,6 +39,13 @@ public class RunArgumentTest {
         List<String> actual = Files.readAllLines(outputFile);
         List<String> result = List.of("fruit,quantity", "banana,152", "apple,90");
         assertEquals(result, actual);
+    }
+
+    @Test
+    void handlerNull() {
+        FruitTransaction transaction = new FruitTransaction(null, "banana", 100);
+        List<FruitTransaction> transactions = List.of(transaction);
+        assertThrows(RuntimeException.class,() -> service.processTransactions(transactions));
     }
 
     @Test

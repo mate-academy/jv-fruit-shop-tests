@@ -2,6 +2,7 @@ package service.impl;
 
 import model.FruitTransaction;
 import model.FruitTransaction.Operation;
+import service.ParseService;
 
 public class ParseServiceImpl implements ParseService {
     private static final String SEPARATOR = ",";
@@ -38,7 +39,7 @@ public class ParseServiceImpl implements ParseService {
         try {
             fruitTransaction.setQuantity(Integer.parseInt(fields[INDEX_QUANTITY]));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid quantity format in line: " + line, e);
+            throw new NumberFormatException("Invalid quantity format in line");
         }
 
         if (fruitTransaction.getQuantity() <= MIN_QUANTITY) {

@@ -34,6 +34,12 @@ public class ReadFileTest {
     }
 
     @Test
+    void readFromFile() {
+        String filePath = "Example.csv";
+        assertThrows(RuntimeException.class, () -> readerService.readFromFile(filePath));
+    }
+
+    @Test
     void readFromFile_withEmptyFile_throwsException() {
         String filePath = getResourcePath("emptyFile.csv");
         assertThrows(IllegalArgumentException.class, () -> readerService
@@ -45,6 +51,18 @@ public class ReadFileTest {
         String filePath = getResourcePath("emptyLine.csv");
         assertThrows(IllegalArgumentException.class, () -> readerService
                 .readFromFile(filePath));
+    }
+
+    @Test
+    void readFromFile_withSpaceFile_throwsException() {
+        String filePath = getResourcePath("SpaceFile.csv");
+        assertThrows(IllegalArgumentException.class, () -> readerService.readFromFile(filePath));
+    }
+
+    @Test
+    void readFromFile_withInvalidQuantity_throwsException() {
+        String filePath = getResourcePath("invalidQuantity.csv");
+        assertThrows(NumberFormatException.class, () -> readerService.readFromFile(filePath));
     }
 
     @Test

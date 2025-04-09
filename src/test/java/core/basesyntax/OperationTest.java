@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import db.Storage;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
 import model.FruitTransaction.Operation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.ShopService;
+import service.impl.ShopServiceImpl;
 import strategy.BalanceImpl;
 import strategy.PurchaseImpl;
 import strategy.ReturnImpl;
@@ -16,6 +20,7 @@ import strategy.SupplyImpl;
 
 public class OperationTest {
     private static Storage storage;
+    private static ShopService service;
     private Map<Operation, strategy.Operation> operationHandlers;
 
     @BeforeEach
@@ -26,6 +31,7 @@ public class OperationTest {
         operationHandlers.put(Operation.SUPPLY, new SupplyImpl());
         operationHandlers.put(Operation.PURCHASE, new PurchaseImpl());
         operationHandlers.put(Operation.RETURN, new ReturnImpl());
+
     }
 
     @Test
@@ -39,6 +45,14 @@ public class OperationTest {
     void balanceOperation_withNegativeQuantity_throwsException() {
         strategy.Operation balance = operationHandlers.get(Operation.BALANCE);
         assertThrows(IllegalArgumentException.class, () -> balance.execute("banana", -100));
+    }
+
+    @Test
+    void processTransactions_withNullOperation_throwsException() {
+        List<FruitTransaction> transactions = List.of(
+            new FruitTransaction(null, "apple", 50));
+        service = new ShopServiceImpl(operationHandlers);
+        assertThrows(RuntimeException.class, () -> service.processTransactions(transactions));
     }
 
     @Test

@@ -341,8 +341,6 @@ class FruitShopTest {
     @AfterEach
     void tearDown() throws IOException {
         ShopDataBase.shopData.clear();
-        Files.deleteIfExists(Path.of(INPUT_FILE));
-        Files.deleteIfExists(Path.of(OUTPUT_FILE));
     }
 
 }

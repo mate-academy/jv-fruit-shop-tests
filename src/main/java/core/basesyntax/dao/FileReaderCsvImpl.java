@@ -10,7 +10,8 @@ public class FileReaderCsvImpl implements FruitFileReader {
     @Override
     public List<String> read(String fileName) {
         if (!fileName.toLowerCase().endsWith(".csv")) {
-            throw new IllegalArgumentException("Invalid file type. Expected a .csv file: " + fileName);
+            throw new IllegalArgumentException("Invalid file type. Expected a .csv file: "
+                    + fileName);
         }
         List<String> inputArray;
         try {

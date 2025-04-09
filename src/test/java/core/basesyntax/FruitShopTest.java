@@ -1,28 +1,38 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.dao.FileReaderCsvImpl;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.dao.FruitFileReader;
 import core.basesyntax.dao.FruitFileWriter;
 import core.basesyntax.db.ShopDataBase;
-import core.basesyntax.service.*;
-import core.basesyntax.service.operationhandler.*;
+import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.operationhandler.BalanceOperation;
+import core.basesyntax.service.operationhandler.OperationHandler;
+import core.basesyntax.service.operationhandler.PurchaseOperation;
+import core.basesyntax.service.operationhandler.ReturnOperation;
+import core.basesyntax.service.operationhandler.SupplyOperation;
 import core.basesyntax.service.parser.ParseFruitData;
 import core.basesyntax.service.parser.ParseFruitDataImpl;
 import core.basesyntax.service.reportgenerator.ReportGenerator;
 import core.basesyntax.service.reportgenerator.ReportGeneratorImpl;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitShopTest {
     private static final String INPUT_FILE = "src/test/java/resources/TestInput.csv";
@@ -35,7 +45,7 @@ class FruitShopTest {
     private OperationHandler supplyHandler;
     private OperationHandler purchaseHandler;
     private OperationHandler returnHandler;
-    Map<FruitTransaction.Operation, OperationHandler> allHandlers;
+    private Map<FruitTransaction.Operation, OperationHandler> allHandlers;
 
     @BeforeEach
     void beforeAll() {
@@ -109,12 +119,14 @@ class FruitShopTest {
 
     @Test
     void testQuantityLessThanZero_NotOk() {
-        assertThrows(IllegalArgumentException.class, () -> new FruitTransaction("r","apple",-45));
+        assertThrows(IllegalArgumentException.class,
+                () -> new FruitTransaction("r","apple",-45));
     }
 
     @Test
     void testInvalidOperationCode_NotOk() {
-        assertThrows(IllegalArgumentException.class, () -> FruitTransaction.Operation.fromCode("x"));
+        assertThrows(IllegalArgumentException.class,
+                () -> FruitTransaction.Operation.fromCode("x"));
     }
 
     @Test
@@ -265,14 +277,14 @@ class FruitShopTest {
     @Test
     void testStrategyWithAllOperationHandlers_Ok() {
         OperationStrategy fullStrategy = new OperationStrategyImpl(allHandlers);
-        assertNotNull(fullStrategy.getHandler(FruitTransaction.Operation.BALANCE));
-        assertInstanceOf(BalanceOperation.class, fullStrategy.getHandler(FruitTransaction.Operation.BALANCE));
-        assertNotNull(fullStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
-        assertInstanceOf(SupplyOperation.class, fullStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
-        assertNotNull(fullStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
-        assertInstanceOf(PurchaseOperation.class, fullStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
-        assertNotNull(fullStrategy.getHandler(FruitTransaction.Operation.RETURN));
-        assertInstanceOf(ReturnOperation.class, fullStrategy.getHandler(FruitTransaction.Operation.RETURN));
+        assertInstanceOf(BalanceOperation.class,
+                fullStrategy.getHandler(FruitTransaction.Operation.BALANCE));
+        assertInstanceOf(SupplyOperation.class,
+                fullStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
+        assertInstanceOf(PurchaseOperation.class,
+                fullStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
+        assertInstanceOf(ReturnOperation.class,
+                fullStrategy.getHandler(FruitTransaction.Operation.RETURN));
     }
 
     @Test
@@ -286,7 +298,6 @@ class FruitShopTest {
     @Test
     void testCompleteWorkflow_Ok() throws IOException {
         Path inputFile = Path.of(INPUT_FILE);
-        Path outputFile = Path.of(OUTPUT_FILE);
 
         Files.write(inputFile, List.of(
                 "type,fruit,quantity",
@@ -320,6 +331,7 @@ class FruitShopTest {
         assertEquals(130, ShopDataBase.shopData.get("apple"));
         assertEquals(15, ShopDataBase.shopData.get("banana"));
 
+        Path outputFile = Path.of(OUTPUT_FILE);
         List<String> output = Files.readAllLines(outputFile);
         assertTrue(output.contains("apple,130"));
         assertTrue(output.contains("banana,15"));

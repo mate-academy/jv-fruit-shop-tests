@@ -8,10 +8,10 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import org.junit.jupiter.api.Test;
 
-class SupplyOperationTest {
+public class SupplyOperationTest {
 
     @Test
-    void supplyOperationOk() {
+    public void supplyOperationOk() {
         Storage.STORAGE.remove("apple");
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.run(

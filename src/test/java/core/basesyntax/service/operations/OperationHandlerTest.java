@@ -8,9 +8,9 @@ import core.basesyntax.service.FruitTransaction;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
-class OperationHandlerTest {
+public class OperationHandlerTest {
     @Test
-    void noSuchFruitNotOk() {
+    public void noSuchFruitNotOk() {
         Storage.STORAGE.remove("apple");
         OperationHandler pushareOperation = new ReturnOperation();
         RuntimeException exeption = assertThrows(NoSuchElementException.class,

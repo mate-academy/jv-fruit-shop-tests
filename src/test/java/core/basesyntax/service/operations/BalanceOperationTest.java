@@ -8,9 +8,9 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import org.junit.jupiter.api.Test;
 
-class BalanceOperationTest {
+public class BalanceOperationTest {
     @Test
-    void balanceOperationOk() {
+    public void balanceOperationOk() {
         Storage.STORAGE.remove("apple");
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.run(

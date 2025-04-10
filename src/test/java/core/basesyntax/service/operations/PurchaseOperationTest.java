@@ -9,10 +9,10 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import org.junit.jupiter.api.Test;
 
-class PurchaseOperationTest {
+public class PurchaseOperationTest {
 
     @Test
-    void pushareOperationOk() {
+    public void pushareOperationOk() {
         Storage.STORAGE.remove("apple");
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.run(
@@ -29,7 +29,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void notEnoughProductNotOk() {
+    public void notEnoughProductNotOk() {
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.run(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));

@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-class ReportGeneratorImplTest {
+public class ReportGeneratorImplTest {
 
     @Test
-    void getReportOk() {
+    public void getReportOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));

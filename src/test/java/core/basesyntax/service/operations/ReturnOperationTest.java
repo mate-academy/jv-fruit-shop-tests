@@ -7,9 +7,9 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import org.junit.jupiter.api.Test;
 
-class ReturnOperationTest {
+public class ReturnOperationTest {
     @Test
-    void returnOperationOk() {
+    public void returnOperationOk() {
         OperationHandler balanceOperation = new BalanceOperation();
         balanceOperation.run(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20));

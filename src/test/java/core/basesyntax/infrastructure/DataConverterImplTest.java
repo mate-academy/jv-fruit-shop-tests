@@ -8,12 +8,20 @@ import core.basesyntax.infrastructure.db.FileReaderImpl;
 import core.basesyntax.service.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class DataConverterImplTest {
+public class DataConverterImplTest {
+    private static final String PATH = "src/main/resources/operationslist.csv";
+    private static DataConverter converter;
+
+    @BeforeAll
+    static void setUp() {
+        converter = new DataConverterImpl();
+    }
 
     @Test
-    void convertToTransactionOk() {
+    public void convertToTransactionOk() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
@@ -25,7 +33,7 @@ class DataConverterImplTest {
         expected.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
 
         FileReader reader = new FileReaderImpl();
-        List<String> read = reader.read("src/main/resources/operationslist.csv");
+        List<String> read = reader.read(PATH);
         DataConverter converter = new DataConverterImpl();
         List<FruitTransaction> actual = converter.convertToTransaction(read);
 
@@ -33,7 +41,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void getNotIntegerValueToDataConverterNotOk() {
+    public void getNotIntegerValueToDataConverterNotOk() {
         List<String> list = new ArrayList<>();
         list.add("p,banana,wrong");
         DataConverter dataConverter = new DataConverterImpl();
@@ -45,7 +53,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void getLessThanZeroValueToDataConverterNotOk() {
+    public void getLessThanZeroValueToDataConverterNotOk() {
         List<String> list = new ArrayList<>();
         list.add("p,banana,-10");
         DataConverter dataConverter = new DataConverterImpl();

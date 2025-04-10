@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-class OperationStrategyTest {
+public class OperationStrategyTest {
 
     @Test
-    void getOperationHandler() {
+    public void getOperationHandler() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlers);

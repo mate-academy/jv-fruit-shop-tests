@@ -2,6 +2,8 @@ package service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,5 +73,17 @@ public class OperationStrategyImplTest {
                 + " operation but got null");
         assertInstanceOf(ReturnOperation.class, handler,
                 "Expected handler of the ReturnOperation type");
+    }
+
+    @Test
+    void getUnknownOperation_notOk() {
+        Map<Transaction.Operation, OperationHandler> emptyMap = new HashMap<>();
+        OperationStrategy strategy = new OperationStrategyImpl(emptyMap);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> strategy.get(Transaction.Operation.SUPPLY));
+
+        assertTrue(exception.getMessage()
+                .contains("Cannot retrieve operation handler map by type: s"));
     }
 }

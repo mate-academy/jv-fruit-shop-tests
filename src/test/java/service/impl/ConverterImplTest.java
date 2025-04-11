@@ -15,6 +15,14 @@ public class ConverterImplTest {
 
     private Converter converter;
 
+    static Transaction createTransaction(String operationCode, String fruit, int quantity) {
+        Transaction transaction = new Transaction();
+        transaction.setOperation(Transaction.Operation.operationFromCode(operationCode));
+        transaction.setFruit(fruit);
+        transaction.setQuantity(quantity);
+        return transaction;
+    }
+
     @BeforeEach
     void setConverter() {
         converter = new ConverterImpl();
@@ -22,21 +30,20 @@ public class ConverterImplTest {
 
     @Test
     void convertTransaction_ok() {
-        List<String> input = Arrays.asList(
+        List<String> actual = Arrays.asList(
                 "operation,fruit,quantity",
                 "b,orange,10",
                 "s,grape,25"
         );
 
-        List<Transaction> transactionList = converter.convertTransaction(input);
+        List<Transaction> expected = Arrays.asList(
+                createTransaction("b", "orange", 10),
+                createTransaction("s", "grape", 25)
+        );
 
-        assertEquals(2, transactionList.size(), "Transaction list must contain 2 transactions");
-        assertEquals(Transaction.Operation.BALANCE, transactionList.get(0).getOperation());
-        assertEquals("orange", transactionList.get(0).getFruit());
-        assertEquals(10, transactionList.get(0).getQuantity());
-        assertEquals(Transaction.Operation.SUPPLY, transactionList.get(1).getOperation());
-        assertEquals("grape", transactionList.get(1).getFruit());
-        assertEquals(25, transactionList.get(1).getQuantity());
+        List<Transaction> transactionList = converter.convertTransaction(actual);
+
+        assertEquals(expected, transactionList);
     }
 
     @Test

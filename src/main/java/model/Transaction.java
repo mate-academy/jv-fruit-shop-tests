@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Transaction {
     private Operation operation;
     private String fruit;
@@ -29,6 +31,22 @@ public class Transaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) object;
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -53,5 +71,6 @@ public class Transaction {
             }
             throw new IllegalArgumentException("Unknown operation code: " + operationCode);
         }
+
     }
 }

@@ -3,16 +3,20 @@ package service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static service.impl.ConverterImplTest.createTransaction;
 
+import java.util.Arrays;
 import java.util.List;
+import model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.Converter;
 import service.FileReader;
 
 class FileReaderImplTest {
-    private static final String VALID_FILE = "src/test/java/resources/test.csv";
-    private static final String EMPTY_FILE = "src/test/java/resources/empty.csv";
-    private static final String INVALID_FILE = "src/test/java/resources/noSuchFile.csv";
+    private static final String VALID_FILE = "src/test/resources/test.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
+    private static final String INVALID_FILE = "src/test/resources/noSuchFile.csv";
 
     private FileReader reader;
 
@@ -23,20 +27,27 @@ class FileReaderImplTest {
 
     @Test
     void readTestFile_ok() {
-        List<String> lines = reader.read(VALID_FILE);
+        List<String> actual = reader.read(VALID_FILE);
 
-        assertEquals(11, lines.size());
-        assertEquals("type,fruit,quantity", lines.get(0));
-        assertEquals("b,apple,100", lines.get(1));
-        assertEquals("s,banana,50", lines.get(2));
-        assertEquals("s,orange,60", lines.get(3));
-        assertEquals("r,grape,40", lines.get(4));
-        assertEquals("b,banana,90", lines.get(5));
-        assertEquals("p,orange,30", lines.get(6));
-        assertEquals("p,grape,25", lines.get(7));
-        assertEquals("r,apple,15", lines.get(8));
-        assertEquals("s,apple,80", lines.get(9));
-        assertEquals("p,banana,40", lines.get(10));
+        List<Transaction> expected = Arrays.asList(
+                createTransaction("b", "apple", 100),
+                createTransaction("s", "banana", 50),
+                createTransaction("s", "orange", 60),
+                createTransaction("r", "grape", 40),
+                createTransaction("b", "banana", 90),
+                createTransaction("p", "orange", 30),
+                createTransaction("p", "grape", 25),
+                createTransaction("r", "apple", 15),
+                createTransaction("s", "apple", 80),
+                createTransaction("p", "banana", 40)
+        );
+
+        Converter converter = new ConverterImpl();
+
+        List<Transaction> transactionList = converter.convertTransaction(actual);
+
+        assertEquals(expected, transactionList);
+
     }
 
     @Test

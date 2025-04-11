@@ -21,8 +21,7 @@ public class FileWriterImplTest {
         writer.write(testFile, content);
         assertTrue(Files.exists(filePath), "Expected to get existing file");
         String fileContent = new String(Files.readAllBytes(filePath));
-        assertTrue(fileContent.contains("TestLine 1"), "File must contain TestLine 1");
-        assertTrue(fileContent.contains("TestLine 2"), "File must contain TestLine 2");
+        assertEquals("TestLine 1" + System.lineSeparator() + "TestLine 2", content);
 
         Files.delete(filePath);
     }

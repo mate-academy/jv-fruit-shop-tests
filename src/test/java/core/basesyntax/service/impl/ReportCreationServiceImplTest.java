@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 class ReportCreationServiceImplTest {
     private static ReportCreationService reportCreationService;
-    private static final String SEPARATOR = System.lineSeparator();
 
     @BeforeEach
     void setUp() {
@@ -27,8 +26,8 @@ class ReportCreationServiceImplTest {
     void createReport_ok() {
         List<String> expectedValues = new ArrayList<>();
         expectedValues.add("fruit,quantity");
-        expectedValues.add(SEPARATOR + "banana,20");
-        expectedValues.add(SEPARATOR + "apple,71");
+        expectedValues.add(System.lineSeparator() + "banana,20");
+        expectedValues.add(System.lineSeparator() + "apple,71");
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 71);
         List<String> actualValues = reportCreationService.createReport();

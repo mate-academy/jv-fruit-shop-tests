@@ -21,8 +21,7 @@ class ParserServiceImplTest {
     @Test
     void parse_null_notOk() {
         assertThrows(NullPointerException.class, () -> {
-            parserService.parse(null);
-        });
+            parserService.parse(null);});
     }
 
     @Test

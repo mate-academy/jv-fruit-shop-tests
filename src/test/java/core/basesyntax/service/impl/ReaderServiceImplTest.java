@@ -25,24 +25,21 @@ class ReaderServiceImplTest {
     void readFromFile_null_notOk() {
         assertThrows(
                 NullPointerException.class,
-                () -> readerService.readFromFile(null)
-        );
+                () -> readerService.readFromFile(null));
     }
 
     @Test
     void readFromFile_invalidNameOfFile_notOk() {
         assertThrows(
                 RuntimeException.class,
-                () -> readerService.readFromFile(INVALID_NAME_OF_FILE)
-        );
+                () -> readerService.readFromFile(INVALID_NAME_OF_FILE));
     }
 
     @Test
     void readFromFile_invalidFormatOfFile_notOk() {
         assertThrows(
                 RuntimeException.class,
-                () -> readerService.readFromFile(INVALID_FORMAT_OF_FILE)
-        );
+                () -> readerService.readFromFile(INVALID_FORMAT_OF_FILE));
     }
 
     @Test

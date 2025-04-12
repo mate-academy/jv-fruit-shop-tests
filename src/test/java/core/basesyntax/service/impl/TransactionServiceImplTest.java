@@ -30,8 +30,7 @@ class TransactionServiceImplTest {
     @BeforeEach
     void setUp() {
         transactionService = new TransactionServiceImpl(
-                new OperationStrategyImpl(operationHandlerMap)
-        );
+                new OperationStrategyImpl(operationHandlerMap));
     }
 
     @AfterEach
@@ -43,8 +42,7 @@ class TransactionServiceImplTest {
     void processData_nullData_notOk() {
         assertThrows(
                 NullPointerException.class,
-                () -> transactionService.procedureData(null)
-        );
+                () -> transactionService.procedureData(null));
     }
 
     @Test

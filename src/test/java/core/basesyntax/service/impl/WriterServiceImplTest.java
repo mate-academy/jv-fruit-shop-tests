@@ -47,7 +47,7 @@ class WriterServiceImplTest {
         List<String> lines = new ArrayList<>();
         lines.add("fruit,quantity");
         lines.add(System.lineSeparator() + "banana,20");
-        lines.add(System.lineSeparator( + "apple,10");
+        lines.add(System.lineSeparator() + "apple,10");
         writerService.writeToFile(VALID_NAME_OF_FILE, lines);
     }
 }

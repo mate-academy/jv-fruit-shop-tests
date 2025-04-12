@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -52,6 +54,25 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Invalid operation code: " + code);
+        throw new IllegalArgumentException("Inappropriate name of operation");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction fruitTransaction = (FruitTransaction) o;
+        return quantity == fruitTransaction.quantity
+                && operation == fruitTransaction.operation
+                && Objects.equals(fruit, fruitTransaction.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

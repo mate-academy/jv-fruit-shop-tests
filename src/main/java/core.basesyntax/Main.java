@@ -32,15 +32,21 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler()
         );
+
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FILE_NAME_INPUT_DATA);
+
         ParserService parserService = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactions = parserService.parse(dataFromFile);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        TransactionService proceduresData = new TransactionServiceImpl(operationStrategy);
-        proceduresData.procedureData(fruitTransactions);
+
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
+
+        TransactionService procedureData = new TransactionServiceImpl(strategy);
+        procedureData.procedureData(fruitTransactions);
+
         ReportCreationService reportCreationService = new ReportCreationServiceImpl();
         List<String> report = reportCreationService.createReport();
+
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(FILE_NAME_REPORT_DATA, report);
     }

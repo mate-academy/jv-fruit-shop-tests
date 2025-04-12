@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl.test;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

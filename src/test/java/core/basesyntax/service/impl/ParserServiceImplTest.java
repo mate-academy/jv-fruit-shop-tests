@@ -7,7 +7,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.service.impl.ParserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +48,8 @@ class ParserServiceImplTest {
         thirdTransaction.setFruit("banana");
         thirdTransaction.setQuantity(100);
 
-        List<FruitTransaction> anticipatedResult = List.of(firstTransaction, secondTransaction, thirdTransaction);
+        List<FruitTransaction> anticipatedResult = List
+                .of(firstTransaction, secondTransaction, thirdTransaction);
         List<FruitTransaction> actualResult = parserService.parse(dataFromFile);
         assertArrayEquals(anticipatedResult.toArray(), actualResult.toArray());
     }

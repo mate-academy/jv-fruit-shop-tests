@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
-    private ParserService parserService;
+    private static ParserService parserService;
 
     @BeforeEach
     void setUp() {
@@ -20,8 +20,8 @@ class ParserServiceImplTest {
 
     @Test
     void parse_null_notOk() {
-        assertThrows(NullPointerException.class, () -> {
-            parserService.parse(null);});
+        assertThrows(NullPointerException.class,
+                () -> parserService.parse(null));
     }
 
     @Test

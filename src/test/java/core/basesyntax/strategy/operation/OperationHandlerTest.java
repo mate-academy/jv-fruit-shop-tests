@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class OperationHandlerTest {
+class OperationHandlerTest {
     private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
@@ -37,50 +37,50 @@ public class OperationHandlerTest {
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(20);
         operationHandler.getOperation(fruitTransaction);
-        int expectedQuantity = 20;
-        int actualQuantity = Storage.storage.get("banana");
-        assertEquals(expectedQuantity, actualQuantity);
+        int expected = 20;
+        int actual = Storage.storage.get("banana");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getOperation_validDataUsingSupplyHandler_ok() {
+    void getOperation_validDataUsingSupplyOperation_ok() {
         operationHandler = new SupplyHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(100);
         operationHandler.getOperation(fruitTransaction);
-        int expectedQuantity = 100;
-        int actualQuantity = Storage.storage.get("banana");
-        assertEquals(expectedQuantity, actualQuantity);
+        int expected = 100;
+        int actual = Storage.storage.get("banana");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getOperation_validDataUsingReturnHandler_ok() {
+    void getOperation_validDataUsingReturnOperation_ok() {
         operationHandler = new ReturnHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(11);
         operationHandler.getOperation(fruitTransaction);
-        int expectedQuantity = 11;
-        int actualQuantity = Storage.storage.get("banana");
-        assertEquals(expectedQuantity, actualQuantity);
+        int expected = 11;
+        int actual = Storage.storage.get("banana");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getOperation_validDataUsingPurchaseHandler_ok() {
+    void getOperation_validDataUsingPurchaseOperation_ok() {
         Storage.storage.put("banana", 39);
         operationHandler = new PurchaseHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(17);
         operationHandler.getOperation(fruitTransaction);
-        int expectedQuantity = 22;
-        int actualQuantity = Storage.storage.get("banana");
-        assertEquals(expectedQuantity, actualQuantity);
+        int expected = 22;
+        int actual = Storage.storage.get("banana");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getOperation_validDataUsingPurchaseHandler_notOk() {
+    void getOperation_validdataUsingPurchaseOperation_notOk() {
         Storage.storage.put("banana", 7);
         operationHandler = new PurchaseHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

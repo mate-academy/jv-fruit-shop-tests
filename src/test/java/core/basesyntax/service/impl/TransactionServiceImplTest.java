@@ -40,8 +40,7 @@ class TransactionServiceImplTest {
 
     @Test
     void processData_nullData_notOk() {
-        assertThrows(
-                NullPointerException.class,
+        assertThrows(NullPointerException.class,
                 () -> transactionService.procedureData(null));
     }
 
@@ -53,8 +52,8 @@ class TransactionServiceImplTest {
         transaction.setQuantity(20);
         List<FruitTransaction> transactions = List.of(transaction);
         transactionService.procedureData(transactions);
-        int expectedValue = 20;
-        int actualValue = Storage.storage.get("banana");
-        assertEquals(expectedValue, actualValue);
+        int expected = 20;
+        int actual = Storage.storage.get("banana");
+        assertEquals(expected, actual);
     }
 }

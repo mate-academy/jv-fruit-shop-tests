@@ -29,8 +29,8 @@ class OperationStrategyImplTest {
 
     @Test
     void get_BalanceOperation_ok() {
-        Class expectedValue = BalanceHandler.class;
-        Class actualValue = operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
-        assertEquals(expectedValue, actualValue);
+        Class expected = BalanceHandler.class;
+        Class actual = operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
+        assertEquals(expected, actual);
     }
 }

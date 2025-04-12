@@ -25,31 +25,30 @@ class ParserServiceImplTest {
     }
 
     @Test
-    void parse_csvData_ok() {
+    void parse_dataFromFile_ok() {
         List<String> dataFromFile = new ArrayList<>();
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,20");
         dataFromFile.add("b,apple,100");
         dataFromFile.add("s,banana,100");
 
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        firstTransaction.setFruit("banana");
-        firstTransaction.setQuantity(20);
+        FruitTransaction transaction1 = new FruitTransaction();
+        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
+        transaction1.setFruit("banana");
+        transaction1.setQuantity(20);
 
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit("apple");
-        secondTransaction.setQuantity(100);
+        FruitTransaction transaction2 = new FruitTransaction();
+        transaction2.setOperation(FruitTransaction.Operation.BALANCE);
+        transaction2.setFruit("apple");
+        transaction2.setQuantity(100);
 
-        FruitTransaction thirdTransaction = new FruitTransaction();
-        thirdTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        thirdTransaction.setFruit("banana");
-        thirdTransaction.setQuantity(100);
+        FruitTransaction transaction3 = new FruitTransaction();
+        transaction3.setOperation(FruitTransaction.Operation.SUPPLY);
+        transaction3.setFruit("banana");
+        transaction3.setQuantity(100);
 
-        List<FruitTransaction> anticipatedResult = List
-                .of(firstTransaction, secondTransaction, thirdTransaction);
-        List<FruitTransaction> actualResult = parserService.parse(dataFromFile);
-        assertArrayEquals(anticipatedResult.toArray(), actualResult.toArray());
+        List<FruitTransaction> expected = List.of(transaction1, transaction2, transaction3);
+        List<FruitTransaction> actual = parserService.parse(dataFromFile);
+        assertArrayEquals(expected.toArray(), actual.toArray());
     }
 }

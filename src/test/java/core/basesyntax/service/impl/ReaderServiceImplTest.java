@@ -23,34 +23,31 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_null_notOk() {
-        assertThrows(
-                NullPointerException.class,
+        assertThrows(NullPointerException.class,
                 () -> readerService.readFromFile(null));
     }
 
     @Test
-    void readFromFile_invalidNameOfFile_notOk() {
-        assertThrows(
-                RuntimeException.class,
+    void readFromFile_wrongFileName_notOk() {
+        assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(INVALID_NAME_OF_FILE));
     }
 
     @Test
     void readFromFile_invalidFormatOfFile_notOk() {
-        assertThrows(
-                RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(INVALID_FORMAT_OF_FILE));
     }
 
     @Test
     void readFromFile_ok() {
-        List<String> expectedValues = new ArrayList<>();
-        expectedValues.add("type,fruit,quantity");
-        expectedValues.add("b,banana,20");
-        expectedValues.add("b,apple,100");
-        expectedValues.add("s,banana,100");
-        expectedValues.add("p,banana,13");
-        List<String> actualValues = readerService.readFromFile(VALID_NAME_OF_FILE);
-        assertEquals(expectedValues, actualValues);
+        List<String> expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,banana,20");
+        expected.add("b,apple,100");
+        expected.add("s,banana,100");
+        expected.add("p,banana,13");
+        List<String> actual = readerService.readFromFile(VALID_NAME_OF_FILE);
+        assertEquals(expected, actual);
     }
 }

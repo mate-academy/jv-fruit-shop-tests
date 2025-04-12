@@ -1,7 +1,6 @@
 package core.basesyntax.service.reportgenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.ShopDataBase;
 import java.util.List;
@@ -22,11 +21,15 @@ class ReportGeneratorImplTest {
         ShopDataBase.shopData.put("apple", 100);
         ShopDataBase.shopData.put("banana", 50);
 
-        List<String> report = generator.generateReport();
+        List<String> expected = List.of(
+                "fruit,quantity",
+                "banana,50",
+                "apple,100"
 
-        assertTrue(report.contains("fruit,quantity"));
-        assertTrue(report.contains("apple,100"));
-        assertTrue(report.contains("banana,50"));
+        );
+
+        List<String> actual = generator.generateReport();
+        assertEquals(expected, actual);
     }
 
     @Test

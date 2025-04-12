@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -7,9 +8,15 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    void testQuantityLessThanZero_NotOk() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new FruitTransaction("r","apple",-45));
+    void testOperationFromCode_Ok() {
+        assertEquals(FruitTransaction.Operation.BALANCE,
+                FruitTransaction.Operation.fromCode("b"));
+        assertEquals(FruitTransaction.Operation.SUPPLY,
+                FruitTransaction.Operation.fromCode("s"));
+        assertEquals(FruitTransaction.Operation.PURCHASE,
+                FruitTransaction.Operation.fromCode("p"));
+        assertEquals(FruitTransaction.Operation.RETURN,
+                FruitTransaction.Operation.fromCode("r"));
     }
 
     @Test

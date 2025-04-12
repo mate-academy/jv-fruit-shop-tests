@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import static core.basesyntax.dao.FileReaderCsvImplTest.EMPTY_FILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    public static final String OUTPUT_FILE = "src/test/java/resources/TestOutput.csv";
+    private static final String OUTPUT_FILE = "src/test/java/resources/TestOutput.csv";
     private FruitFileWriter fileWriter;
 
     @BeforeEach
@@ -21,7 +22,11 @@ class FileWriterImplTest {
 
     @Test
     void testFileWriterThrowsException_NotOk() {
-        assertThrows(RuntimeException.class,() -> fileWriter.write(List.of(),""));
+        assertThrows(
+                RuntimeException.class,
+                () -> fileWriter.write(List.of(), EMPTY_FILE),
+                "Should throw RuntimeException when writing with empty file path"
+        );
     }
 
     @Test
@@ -33,13 +38,10 @@ class FileWriterImplTest {
                 "apple,90"
 
         );
-        Files.write(outPut, inputList);
-
-        List<String> fileOutPutFiles = Files.readAllLines(outPut);
-
         fileWriter.write(inputList, OUTPUT_FILE);
-
         List<String> fileOutPutImpl = Files.readAllLines(outPut);
-        assertEquals(fileOutPutImpl, fileOutPutFiles);
+        assertEquals(fileOutPutImpl,
+                inputList,
+                "Written content should match expected output");
     }
 }

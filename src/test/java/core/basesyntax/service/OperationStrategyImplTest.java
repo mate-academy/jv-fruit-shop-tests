@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
+    private OperationStrategy strategy;
     private Map<FruitTransaction.Operation, OperationHandler> allHandlers;
 
     @BeforeEach
@@ -23,24 +24,23 @@ class OperationStrategyImplTest {
         allHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         allHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         allHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        strategy = new OperationStrategyImpl(allHandlers);
     }
 
     @Test
     void testStrategyWithAllOperationHandlers_Ok() {
-        OperationStrategy fullStrategy = new OperationStrategyImpl(allHandlers);
         assertInstanceOf(BalanceOperation.class,
-                fullStrategy.getHandler(FruitTransaction.Operation.BALANCE));
+                strategy.getHandler(FruitTransaction.Operation.BALANCE));
         assertInstanceOf(SupplyOperation.class,
-                fullStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
+                strategy.getHandler(FruitTransaction.Operation.SUPPLY));
         assertInstanceOf(PurchaseOperation.class,
-                fullStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
+                strategy.getHandler(FruitTransaction.Operation.PURCHASE));
         assertInstanceOf(ReturnOperation.class,
-                fullStrategy.getHandler(FruitTransaction.Operation.RETURN));
+                strategy.getHandler(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void testGetHandlerForNullOperation_NotOk() {
-        OperationStrategy strategy = new OperationStrategyImpl(allHandlers);
         assertThrows(IllegalArgumentException.class, () -> {
             strategy.getHandler(null);
         });

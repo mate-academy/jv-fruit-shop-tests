@@ -25,12 +25,13 @@ class ParseFruitDataImplTest {
                 "s,apple,100"
         );
 
-        List<FruitTransaction> result = parser.parseData(input);
+        List<FruitTransaction> expected = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100)
+        );
 
-        assertEquals(2, result.size());
-        assertEquals(FruitTransaction.Operation.BALANCE, result.get(0).getOperation());
-        assertEquals("banana", result.get(0).getFruit());
-        assertEquals(20, result.get(0).getQuantity());
+        List<FruitTransaction> actual = parser.parseData(input);
+        assertEquals(expected, actual);
     }
 
     @Test

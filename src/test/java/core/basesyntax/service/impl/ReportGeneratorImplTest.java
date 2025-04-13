@@ -1,10 +1,43 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import core.basesyntax.db.StorageFruit;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-
     @Test
-    void getReport() {
+    void getReport_multipleFruit_ok() {
+        StorageFruit.storage.clear();
+        StorageFruit.storage.put("banana", 50);
+        StorageFruit.storage.put("apple", 30);
+        
+        String report = new ReportGeneratorImpl().getReport();
+        
+        assertTrue(report.contains("fruit,quantity"));
+        assertTrue(report.contains("banana,50"));
+        assertTrue(report.contains("apple,30"));
     }
+    
+    @Test
+    void getReport_emptyStorage_ok() {
+        StorageFruit.storage.clear();
+        String report = new ReportGeneratorImpl().getReport();
+        
+        String expected = "fruit,quantity" + System.lineSeparator();
+        assertEquals(expected, report);
+    }
+    
+    @Test
+    void getReport_zeroQuantity_ok() {
+        StorageFruit.storage.clear();
+        StorageFruit.storage.put("banana", 0);
+        
+        String report = new ReportGeneratorImpl().getReport();
+        
+        assertTrue(report.contains("fruit,quantity"));
+        assertTrue(report.contains("banana,0"));
+    }
+    
 }

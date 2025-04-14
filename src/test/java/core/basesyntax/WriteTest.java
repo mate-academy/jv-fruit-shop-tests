@@ -16,11 +16,12 @@ import service.impl.WriterServiceImpl;
 public class WriteTest {
     private static WriterService writerService;
     private static Path outputDir;
+    private static final String pathToFile = "/test/resources";
 
     @BeforeEach
     void create() throws IOException {
         writerService = new WriterServiceImpl();
-        outputDir = Paths.get("target/test-output");
+        outputDir = Paths.get(pathToFile);
         Files.createDirectories(outputDir);
     }
 
@@ -35,17 +36,20 @@ public class WriteTest {
     @Test
     void writeReport_withNullFilePath_throwsException() {
         String filePath = "fruit,quantity\nbanana,100\napple,50";
-        assertThrows(IllegalArgumentException.class, () ->
-                writerService.writeReport(filePath, null));
+        IllegalArgumentException illegalArgumentException = assertThrows(
+                IllegalArgumentException.class, () -> writerService
+                    .writeReport(filePath, null));
+        assertEquals("File cannot be null", illegalArgumentException.getMessage());
     }
 
     @Test
     void writeReport_withInvalidFilePath_throwsException() {
         String report = "fruit,quantity\nbanana,100\napple,50";
-        String invalidFilePath = outputDir.resolve("invalidDir").resolve("report.csv").toString();
-        assertThrows(RuntimeException.class, () ->
+        String invalidFilePath = outputDir.resolve("testResult.csv")
+                .resolve("report.csv").toString();
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 writerService.writeReport(report, invalidFilePath));
-
+        assertEquals("Failed to write report", exception.getMessage());
     }
 
     public String getResourcePath(String fileName) {

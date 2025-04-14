@@ -1,9 +1,9 @@
 package service;
 
 import java.util.List;
-import model.FruitTransaction;
 
 public interface ReaderService {
+    List<String> readFromFile(String file);
 
-    List<FruitTransaction> readFromFile(String file);
+    void fileValidation(String [] args);
 }

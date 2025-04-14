@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.List;
 import model.FruitTransaction;
 import model.FruitTransaction.Operation;
 import service.ParseService;
@@ -11,6 +12,14 @@ public class ParseServiceImpl implements ParseService {
     private static final int INDEX_QUANTITY = 2;
     private static final int FIELDS_LENGTH = 3;
     private static final int MIN_QUANTITY = 0;
+
+    @Override
+    public List<FruitTransaction> parseList(List<String> filePath) {
+        return filePath.stream()
+            .skip(1)
+            .map(this::parseCsvLine)
+            .toList();
+    }
 
     @Override
     public FruitTransaction parseCsvLine(String line) {
@@ -43,7 +52,8 @@ public class ParseServiceImpl implements ParseService {
         }
 
         if (fruitTransaction.getQuantity() <= MIN_QUANTITY) {
-            throw new IllegalArgumentException("Quantity cannot be negative in line: " + line);
+            throw new IllegalArgumentException("Quantity cannot be negative or zero in line: "
+                + line);
         }
         return fruitTransaction;
     }

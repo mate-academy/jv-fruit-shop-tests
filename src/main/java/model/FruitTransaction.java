@@ -1,20 +1,17 @@
 package model;
 
-public class FruitTransaction {
+public class FruitTransaction extends Fruit {
 
     private static final String ERROR = "Unsupported operation code: ";
     private Operation operation;
-    private String fruit;
-    private int quantity;
 
     public FruitTransaction() {
 
     }
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
+    public FruitTransaction(Operation operation, Fruit fruit) {
+        super(fruit.getName(), fruit.getQuantity());
         this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
     }
 
     public void setOperation(Operation operation) {
@@ -23,22 +20,6 @@ public class FruitTransaction {
 
     public Operation getOperationType() {
         return operation;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
-    public String getFruit() {
-        return fruit;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public enum Operation {

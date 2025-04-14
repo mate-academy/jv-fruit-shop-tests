@@ -1,14 +1,11 @@
 package service.impl;
 
 import db.Storage;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import report.ReportGenerator;
-import report.impl.ReportGeneratorImpl;
-import service.ReaderService;
 import service.ShopService;
-import service.WriterService;
 import strategy.BalanceImpl;
 import strategy.Operation;
 import strategy.PurchaseImpl;
@@ -22,32 +19,21 @@ public class ShopServiceImpl implements ShopService {
         this.operationMap = operationMap;
     }
 
-    @Override
-    public void run(String inputFilePath, String outputFilePath) {
-        Storage.storage.clear();
-
-        ParseServiceImpl parseService = new ParseServiceImpl();
-        ReaderService readerService = new ReaderServiceImpl(parseService);
-
+    public ShopServiceImpl() {
+        operationMap = new HashMap<>();
         operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceImpl());
         operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseImpl());
         operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyImpl());
         operationMap.put(FruitTransaction.Operation.RETURN, new ReturnImpl());
-
-        List<FruitTransaction> transactions = readerService.readFromFile(inputFilePath);
-        processTransactions(transactions);
-
-        ReportGenerator generator = new ReportGeneratorImpl();
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeReport(generator.generateReport(), outputFilePath);
     }
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
+        Storage.storage.clear();
         for (FruitTransaction transaction : transactions) {
             Operation handler = operationMap.get(transaction.getOperationType());
             if (handler != null) {
-                handler.execute(transaction.getFruit(), transaction.getQuantity());
+                handler.execute(transaction);
             } else {
                 throw new RuntimeException("No handler for operation: " + transaction
                         .getOperationType());

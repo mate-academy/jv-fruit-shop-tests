@@ -1,6 +1,8 @@
 package strategy;
 
+import model.Fruit;
+
 public interface Operation {
 
-    void execute(String fruit, int quantity);
+    void execute(Fruit fruit);
 }

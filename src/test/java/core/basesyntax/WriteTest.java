@@ -16,7 +16,7 @@ import service.impl.WriterServiceImpl;
 public class WriteTest {
     private static WriterService writerService;
     private static Path outputDir;
-    private static final String pathToFile = "/test/resources";
+    private static final String pathToFile = "src/test/resources";
 
     @BeforeEach
     void create() throws IOException {

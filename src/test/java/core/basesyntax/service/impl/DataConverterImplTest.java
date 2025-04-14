@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     @Test

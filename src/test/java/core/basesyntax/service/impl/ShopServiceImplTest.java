@@ -8,12 +8,12 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.service.ShopService;
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     static class TestOperationHandler implements OperationHandler {
-        FruitTransaction receivedTransaction;
+        private FruitTransaction receivedTransaction;
         
         @Override
         public void updateNumberOfFruit(FruitTransaction transaction) {

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -56,5 +58,22 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("Unknown operation: " + code);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitTransaction that)) {
+            return false;
+        }
+        return quantity == that.quantity
+                && operation == that.operation && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

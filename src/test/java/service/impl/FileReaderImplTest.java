@@ -3,10 +3,14 @@ package service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static service.impl.DataConverterImplTest.createTransaction;
 
+import java.util.Arrays;
 import java.util.List;
+import model.FruitTransaction;
 import org.junit.Before;
 import org.junit.Test;
+import service.DataConverter;
 
 public class FileReaderImplTest {
     private static final String VALID_FILE = "src/test/resources/test.csv";
@@ -24,16 +28,20 @@ public class FileReaderImplTest {
     public void readValidFile_ok() {
         List<String> lines = fileReader.read(VALID_FILE.toString());
 
-        assertEquals(9, lines.size());
-        assertEquals("type,fruit,quantity", lines.get(0));
-        assertEquals("b,banana,20", lines.get(1));
-        assertEquals("b,apple,100", lines.get(2));
-        assertEquals("s,banana,100", lines.get(3));
-        assertEquals("p,banana,13", lines.get(4));
-        assertEquals("r,apple,10", lines.get(5));
-        assertEquals("p,apple,20", lines.get(6));
-        assertEquals("p,banana,5", lines.get(7));
-        assertEquals("s,banana,50", lines.get(8));
+        List<FruitTransaction> expected = Arrays.asList(
+                createTransaction("b", "banana",20),
+                createTransaction("b", "apple",100),
+                createTransaction("s", "banana",100),
+                createTransaction("p", "banana",13),
+                createTransaction("r", "apple",10),
+                createTransaction("p", "apple",20),
+                createTransaction("p", "banana",5),
+                createTransaction("s", "banana",50)
+        );
+
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(lines);
+        assertEquals(expected, transactions);
     }
 
     @Test

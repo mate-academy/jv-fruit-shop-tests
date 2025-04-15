@@ -18,6 +18,14 @@ public class DataConverterImplTest {
         dataConverter = new DataConverterImpl();
     }
 
+    static FruitTransaction createTransaction(String operationCode, String fruit, int quantity) {
+        FruitTransaction transaction = new FruitTransaction();
+        transaction.setOperation(FruitTransaction.Operation.getOperationFromCode(operationCode));
+        transaction.setFruit(fruit);
+        transaction.setQuantity(quantity);
+        return transaction;
+    }
+
     @Test
     void convertToTransaction_ok() {
         List<String> report = Arrays.asList(
@@ -26,15 +34,13 @@ public class DataConverterImplTest {
                 "s,apple,10"
         );
 
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(report);
+        List<FruitTransaction> expectedTransactions = Arrays.asList(
+                createTransaction("b", "banana", 20),
+                createTransaction("s", "apple", 10)
+        );
 
-        assertEquals(2, transactions.size(), "List should contain 2 transactions");
-        assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0).getOperation());
-        assertEquals("banana", transactions.get(0).getFruit());
-        assertEquals(20, transactions.get(0).getQuantity());
-        assertEquals(FruitTransaction.Operation.SUPPLY, transactions.get(1).getOperation());
-        assertEquals("apple", transactions.get(1).getFruit());
-        assertEquals(10, transactions.get(1).getQuantity());
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(report);
+        assertEquals(expectedTransactions, transactions);
     }
 
     @Test

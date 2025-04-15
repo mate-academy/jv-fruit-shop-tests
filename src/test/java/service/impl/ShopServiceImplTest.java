@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.DataConverter;
 import service.FileReader;
@@ -23,8 +22,8 @@ class ShopServiceImplTest {
 
     private ShopServiceImpl shopService;
 
-    @BeforeEach
-    void setUp() {
+    @Test
+    public void processValidTransactions_ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
@@ -39,10 +38,7 @@ class ShopServiceImplTest {
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(csvData);
 
         shopService.process(transactions);
-    }
 
-    @Test
-    public void processValidTransactions_ok() {
         assertEquals(90, Storage.getAmount("apple"));
         assertEquals(152, Storage.getAmount("banana"));
     }

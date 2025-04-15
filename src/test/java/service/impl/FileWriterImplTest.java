@@ -13,7 +13,7 @@ public class FileWriterImplTest {
     @Test
     public void writeValidFile_ok() throws IOException {
         String fileName = "testFile.txt";
-        String content = "Line 1\nLine 2";
+        String content = "Line 1" + System.lineSeparator() + "Line 2";
 
         FileWriterImpl fileWriter = new FileWriterImpl();
         fileWriter.write(fileName, content);

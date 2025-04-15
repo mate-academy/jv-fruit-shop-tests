@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
+    private final WriterService writerService = new WriterServiceImpl();
     
     private final String fileName = "test_report.csv";
     private final Path filePath = Path.of(fileName);
@@ -23,9 +24,7 @@ class WriterServiceImplTest {
     
     @Test
     void writeTheReport_validInput_ok() throws IOException {
-        
         String content = "fruit,quantity\r\nbanana,50\r\n";
-        WriterService writerService = new WriterServiceImpl();
         
         writerService.writeTheReport(content, fileName);
         
@@ -36,7 +35,6 @@ class WriterServiceImplTest {
     
     @Test
     void writeTheReport_invalidPath_notOK() {
-        
         String content = "something";
         
         String invalidFileName = "con:/test.csv";
@@ -52,7 +50,6 @@ class WriterServiceImplTest {
     
     @Test
     void writeTheReport_emptyContent_ok() throws IOException {
-        
         String content = "";
         WriterService writerService = new WriterServiceImpl();
         
@@ -60,6 +57,6 @@ class WriterServiceImplTest {
         
         assertTrue(Files.exists(filePath));
         String actual = Files.readString(filePath);
-        assertEquals(content, actual); // має бути порожній рядок
+        assertEquals(content, actual);
     }
 }

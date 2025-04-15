@@ -45,7 +45,7 @@ class ReturnHandlerImplTest {
         
         handler.updateNumberOfFruit(transaction);
         
-        assertEquals(5, StorageFruit.storage.get("apple")); // не змінилось
+        assertEquals(5, StorageFruit.storage.get("apple"));
     }
     
 }

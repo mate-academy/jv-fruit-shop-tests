@@ -45,6 +45,6 @@ class SuppliersHandlerImplTest {
         
         handler.updateNumberOfFruit(transaction);
         
-        assertEquals(5, StorageFruit.storage.get("apple")); // кількість не зміниться
+        assertEquals(5, StorageFruit.storage.get("apple"));
     }
 }

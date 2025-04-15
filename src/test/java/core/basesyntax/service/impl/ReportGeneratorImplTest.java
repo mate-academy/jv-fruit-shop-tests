@@ -4,12 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.StorageFruit;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    
+    @AfterEach
+    void tearDown() {
+        StorageFruit.storage.clear();
+    }
+    
     @Test
     void getReport_multipleFruit_ok() {
-        StorageFruit.storage.clear();
         StorageFruit.storage.put("banana", 50);
         StorageFruit.storage.put("apple", 30);
         
@@ -22,7 +28,6 @@ class ReportGeneratorImplTest {
     
     @Test
     void getReport_emptyStorage_ok() {
-        StorageFruit.storage.clear();
         String report = new ReportGeneratorImpl().getReport();
         
         String expected = "fruit,quantity" + System.lineSeparator();
@@ -31,7 +36,6 @@ class ReportGeneratorImplTest {
     
     @Test
     void getReport_zeroQuantity_ok() {
-        StorageFruit.storage.clear();
         StorageFruit.storage.put("banana", 0);
         
         String report = new ReportGeneratorImpl().getReport();

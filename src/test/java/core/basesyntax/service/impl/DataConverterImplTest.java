@@ -10,10 +10,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
+    private List<FruitTransaction> result;
+    
     @Test
     void convertToTransaction_validInput_ok() {
         List<String> data = List.of("type,fruit,quantity", "b,banana,30");
-        List<FruitTransaction> result = new DataConverterImpl().convertToTransaction(data);
+        result = new DataConverterImpl().convertToTransaction(data);
         
         assertEquals(1, result.size());
         assertEquals(Operation.BALANCE, result.get(0).getOperation());

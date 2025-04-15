@@ -11,6 +11,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerImplTest {
+    private OperationHandler handler = new BalanceHandlerImpl();
+    
     @AfterEach
     void cleanUp() {
         StorageFruit.storage.clear();
@@ -20,7 +22,6 @@ class BalanceHandlerImplTest {
     void updateNumberOfFruit_validInput_ok() {
         FruitTransaction transaction =
                 new FruitTransaction(Operation.BALANCE, "banana", 100);
-        OperationHandler handler = new BalanceHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -30,14 +31,14 @@ class BalanceHandlerImplTest {
     
     @Test
     void updateNumberOfFruit_overwritesPreviousBalance() {
-        StorageFruit.storage.put("banana", 50); // існуюче значення
+        StorageFruit.storage.put("banana", 50);
         
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 200);
         OperationHandler handler = new BalanceHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
-        assertEquals(200, StorageFruit.storage.get("banana")); // має перезаписати
+        assertEquals(200, StorageFruit.storage.get("banana"));
     }
     
     @Test

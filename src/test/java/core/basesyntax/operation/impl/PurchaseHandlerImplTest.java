@@ -53,7 +53,7 @@ class PurchaseHandlerImplTest {
     
     @Test
     void updateNumberOfFruit_noSuchFruit_notOK() {
-        StorageFruit.storage.clear(); // жодного фрукту в сховищі
+        StorageFruit.storage.clear();
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "mango", 1);
         OperationHandler handler = new PurchaseHandlerImpl();
         

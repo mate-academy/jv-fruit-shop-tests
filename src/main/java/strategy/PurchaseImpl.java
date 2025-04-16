@@ -5,6 +5,11 @@ import model.Fruit;
 
 public class PurchaseImpl implements Operation {
     private static final int ZERO = 0;
+    private final Storage storage;
+
+    public PurchaseImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void execute(Fruit fruit) {
@@ -30,6 +35,6 @@ public class PurchaseImpl implements Operation {
                     + "for fruit: " + fruit.getName() + ". Available: " + fruit.getName());
         }
 
-        Storage.storage.put(fruit.getName(), newQuantity);
+        storage.put(fruit.getName(), newQuantity);
     }
 }

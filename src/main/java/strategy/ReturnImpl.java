@@ -5,6 +5,11 @@ import model.Fruit;
 
 public class ReturnImpl implements Operation {
     private static final int ZERO = 0;
+    private final Storage storage;
+
+    public ReturnImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void execute(Fruit fruit) {
@@ -21,6 +26,6 @@ public class ReturnImpl implements Operation {
         }
 
         int currentQuantity = Storage.storage.getOrDefault(fruit.getName(), ZERO);
-        Storage.storage.put(fruit.getName(), currentQuantity + fruit.getQuantity());
+        storage.put(fruit.getName(), currentQuantity + fruit.getQuantity());
     }
 }

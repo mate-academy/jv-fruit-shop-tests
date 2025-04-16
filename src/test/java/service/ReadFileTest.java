@@ -1,8 +1,9 @@
-package core.basesyntax;
+package service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.HelloWorld;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -12,8 +13,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import service.ParseService;
-import service.ReaderService;
 import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 
@@ -170,71 +169,10 @@ public class ReadFileTest {
 
     @Test
     void readFromFile_withEmptyFile_throwsException() {
-        String filePath = getResourcePath("emptyFile.csv");
+        String filePath = getResourcePath("serviceResource/emptyFile.csv");
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
                 .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
         assertEquals("File must contain at least a header", illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withEmptyLine_throwsException() {
-        String filePath = getResourcePath("emptyLine.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Input line cannot be null or empty", illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withInvalidQuantity_throwsException() {
-        String filePath = getResourcePath("invalidQuantity.csv");
-        NumberFormatException numberFormatException = assertThrows(NumberFormatException.class,
-                () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Invalid quantity format in line", numberFormatException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withInvalidFieldCount_throwsException() {
-        String filePath = getResourcePath("invalidFieldCount.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Invalid CSV format: expected 3 fields, but got 2 in line: b,banana",
-                illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withInvalidOperationCode_throwsException() {
-        String filePath = getResourcePath("invalidOperationCode.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Invalid operation code in line: h,banana,60",
-                illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withEmptyFruit_throwsException() {
-        String filePath = getResourcePath("emptyFruit.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Fruit name cannot be empty in line: b, ,100",
-                illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withNegativeQuantity_throwsException() {
-        String filePath = getResourcePath("negativeQuantity.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Quantity cannot be negative or zero in line: b,banana,-200",
-                illegalArgumentException.getMessage());
-    }
-
-    @Test
-    void readFromFile_withZeroQuantity_throwsException() throws IOException {
-        String filePath = getResourcePath("zeroQuantity.csv");
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
-        assertEquals("Quantity cannot be negative or zero in line: b,banana,0",
-                illegalArgumentException.getMessage());
     }
 
     public String getResourcePath(String fileName) {

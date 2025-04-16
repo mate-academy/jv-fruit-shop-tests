@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import model.FruitTransaction.OperationType;
 import service.ShopService;
 import strategy.BalanceImpl;
 import strategy.Operation;
@@ -13,18 +14,15 @@ import strategy.ReturnImpl;
 import strategy.SupplyImpl;
 
 public class ShopServiceImpl implements ShopService {
-    private final Map<FruitTransaction.Operation, Operation> operationMap;
-
-    public ShopServiceImpl(Map<FruitTransaction.Operation, Operation> operationMap) {
-        this.operationMap = operationMap;
-    }
+    private final Map<OperationType, Operation> operationMap;
 
     public ShopServiceImpl() {
+        Storage storage = new Storage();
         operationMap = new HashMap<>();
-        operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceImpl());
-        operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseImpl());
-        operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyImpl());
-        operationMap.put(FruitTransaction.Operation.RETURN, new ReturnImpl());
+        operationMap.put(OperationType.BALANCE, new BalanceImpl(storage));
+        operationMap.put(OperationType.PURCHASE, new PurchaseImpl(storage));
+        operationMap.put(OperationType.SUPPLY, new SupplyImpl(storage));
+        operationMap.put(OperationType.RETURN, new ReturnImpl(storage));
     }
 
     @Override

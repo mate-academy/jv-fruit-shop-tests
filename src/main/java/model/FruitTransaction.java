@@ -3,26 +3,26 @@ package model;
 public class FruitTransaction extends Fruit {
 
     private static final String ERROR = "Unsupported operation code: ";
-    private Operation operation;
+    private OperationType operation;
 
     public FruitTransaction() {
 
     }
 
-    public FruitTransaction(Operation operation, Fruit fruit) {
+    public FruitTransaction(OperationType operation, Fruit fruit) {
         super(fruit.getName(), fruit.getQuantity());
         this.operation = operation;
     }
 
-    public void setOperation(Operation operation) {
+    public void setOperation(OperationType operation) {
         this.operation = operation;
     }
 
-    public Operation getOperationType() {
+    public OperationType getOperationType() {
         return operation;
     }
 
-    public enum Operation {
+    public enum OperationType {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -30,7 +30,7 @@ public class FruitTransaction extends Fruit {
 
         private final String code;
 
-        Operation(String code) {
+        OperationType(String code) {
             this.code = code;
         }
 
@@ -38,10 +38,10 @@ public class FruitTransaction extends Fruit {
             return code;
         }
 
-        public static Operation fromCode(String code) {
-            for (Operation op : Operation.values()) {
-                if (op.getCode().equals(code)) {
-                    return op;
+        public static OperationType fromCode(String code) {
+            for (OperationType operationType : OperationType.values()) {
+                if (operationType.getCode().equals(code)) {
+                    return operationType;
                 }
             }
             throw new IllegalArgumentException(ERROR + code);

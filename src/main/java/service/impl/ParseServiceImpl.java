@@ -2,7 +2,7 @@ package service.impl;
 
 import java.util.List;
 import model.FruitTransaction;
-import model.FruitTransaction.Operation;
+import model.FruitTransaction.OperationType;
 import service.ParseService;
 
 public class ParseServiceImpl implements ParseService {
@@ -23,7 +23,7 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public FruitTransaction parseCsvLine(String line) {
-        if (line == null || line.trim().isEmpty()) {
+        if (line.trim().isEmpty()) {
             throw new IllegalArgumentException("Input line cannot be null or empty");
         }
 
@@ -34,12 +34,7 @@ public class ParseServiceImpl implements ParseService {
         }
 
         FruitTransaction fruitTransaction = new FruitTransaction();
-        try {
-            fruitTransaction.setOperation(Operation.fromCode(fields[INDEX_OPERATION]));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid operation code in line: " + line, e);
-        }
-
+        fruitTransaction.setOperation(OperationType.fromCode(fields[INDEX_OPERATION]));
         if (fields[INDEX_FRUIT].trim().isEmpty()) {
             throw new IllegalArgumentException("Fruit name cannot be empty in line: " + line);
         }

@@ -5,6 +5,11 @@ import model.Fruit;
 
 public class BalanceImpl implements Operation {
     private static final int ZERO = 0;
+    private final Storage storage;
+
+    public BalanceImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void execute(Fruit fruit) {
@@ -19,6 +24,6 @@ public class BalanceImpl implements Operation {
         if (fruit.getQuantity() < ZERO) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        Storage.storage.put(fruit.getName(), fruit.getQuantity());
+        storage.put(fruit.getName(), fruit.getQuantity());
     }
 }

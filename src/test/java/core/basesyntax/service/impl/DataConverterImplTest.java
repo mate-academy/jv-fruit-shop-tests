@@ -34,7 +34,7 @@ class DataConverterImplTest {
     @Test
     void convertToTransaction_emptyInput_ok() {
         List<String> data = List.of("type,fruit,quantity");
-        List<FruitTransaction> result = new DataConverterImpl().convertToTransaction(data);
+        result = new DataConverterImpl().convertToTransaction(data);
         
         assertTrue(result.isEmpty());
     }

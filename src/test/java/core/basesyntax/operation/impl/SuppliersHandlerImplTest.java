@@ -7,9 +7,17 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SuppliersHandlerImplTest {
+    private OperationHandler handler;
+    
+    @BeforeEach
+    void setUp() {
+        handler = new SuppliersHandlerImpl();
+    }
+    
     @AfterEach
     void tearDown() {
         StorageFruit.storage.clear();
@@ -19,7 +27,6 @@ class SuppliersHandlerImplTest {
     void updateNumberOfFruit_existingFruit_ok() {
         StorageFruit.storage.put("banana", 10);
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 5);
-        OperationHandler handler = new SuppliersHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -30,7 +37,6 @@ class SuppliersHandlerImplTest {
     void updateNumberOfFruit_newFruit_ok() {
         StorageFruit.storage.clear();
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "kiwi", 7);
-        OperationHandler handler = new SuppliersHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -41,7 +47,6 @@ class SuppliersHandlerImplTest {
     void updateNumberOfFruit_zeroQuantity_ok() {
         StorageFruit.storage.put("apple", 5);
         FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "apple", 0);
-        OperationHandler handler = new SuppliersHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         

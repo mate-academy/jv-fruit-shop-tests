@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private String report;
     
     @AfterEach
     void tearDown() {
@@ -19,7 +20,7 @@ class ReportGeneratorImplTest {
         StorageFruit.storage.put("banana", 50);
         StorageFruit.storage.put("apple", 30);
         
-        String report = new ReportGeneratorImpl().getReport();
+        report = new ReportGeneratorImpl().getReport();
         
         assertTrue(report.contains("fruit,quantity"));
         assertTrue(report.contains("banana,50"));
@@ -28,7 +29,7 @@ class ReportGeneratorImplTest {
     
     @Test
     void getReport_emptyStorage_ok() {
-        String report = new ReportGeneratorImpl().getReport();
+        report = new ReportGeneratorImpl().getReport();
         
         String expected = "fruit,quantity" + System.lineSeparator();
         assertEquals(expected, report);
@@ -38,10 +39,9 @@ class ReportGeneratorImplTest {
     void getReport_zeroQuantity_ok() {
         StorageFruit.storage.put("banana", 0);
         
-        String report = new ReportGeneratorImpl().getReport();
+        report = new ReportGeneratorImpl().getReport();
         
         assertTrue(report.contains("fruit,quantity"));
         assertTrue(report.contains("banana,0"));
     }
-    
 }

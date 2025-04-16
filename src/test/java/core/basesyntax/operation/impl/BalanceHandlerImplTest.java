@@ -8,10 +8,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerImplTest {
-    private OperationHandler handler = new BalanceHandlerImpl();
+    private OperationHandler handler;
+    
+    @BeforeEach
+    void setUp() {
+        handler = new BalanceHandlerImpl();
+    }
     
     @AfterEach
     void cleanUp() {
@@ -34,7 +40,6 @@ class BalanceHandlerImplTest {
         StorageFruit.storage.put("banana", 50);
         
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 200);
-        OperationHandler handler = new BalanceHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -44,7 +49,6 @@ class BalanceHandlerImplTest {
     @Test
     void updateNumberOfFruit_zeroBalance_ok() {
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 0);
-        OperationHandler handler = new BalanceHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         

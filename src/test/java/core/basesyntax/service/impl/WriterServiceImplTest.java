@@ -9,13 +9,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private final WriterService writerService = new WriterServiceImpl();
+    private WriterService writerService;
     
     private final String fileName = "test_report.csv";
     private final Path filePath = Path.of(fileName);
+    
+    @BeforeEach
+    void setUp() {
+        writerService = new WriterServiceImpl();
+    }
     
     @AfterEach
     void tearDown() throws IOException {
@@ -39,8 +45,6 @@ class WriterServiceImplTest {
         
         String invalidFileName = "con:/test.csv";
         
-        WriterService writerService = new WriterServiceImpl();
-        
         RuntimeException ex = assertThrows(RuntimeException.class, () ->
                 writerService.writeTheReport(content, invalidFileName)
         );
@@ -51,7 +55,6 @@ class WriterServiceImplTest {
     @Test
     void writeTheReport_emptyContent_ok() throws IOException {
         String content = "";
-        WriterService writerService = new WriterServiceImpl();
         
         writerService.writeTheReport(content, fileName);
         

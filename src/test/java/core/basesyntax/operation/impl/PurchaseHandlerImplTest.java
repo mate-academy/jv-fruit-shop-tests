@@ -9,9 +9,17 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerImplTest {
+    private OperationHandler handler;
+    
+    @BeforeEach
+    void setUp() {
+        handler = new PurchaseHandlerImpl();
+    }
+    
     @AfterEach
     void tearDown() {
         StorageFruit.storage.clear();
@@ -21,7 +29,6 @@ class PurchaseHandlerImplTest {
     void updateNumberOfFruit_validPurchase_ok() {
         StorageFruit.storage.put("banana", 50);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 20);
-        OperationHandler handler = new PurchaseHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -32,7 +39,6 @@ class PurchaseHandlerImplTest {
     void updateNumberOfFruit_exactPurchase_ok() {
         StorageFruit.storage.put("apple", 10);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "apple", 10);
-        OperationHandler handler = new PurchaseHandlerImpl();
         
         handler.updateNumberOfFruit(transaction);
         
@@ -43,7 +49,6 @@ class PurchaseHandlerImplTest {
     void updateNumberOfFruit_insufficientStock_notOK() {
         StorageFruit.storage.put("kiwi", 5);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "kiwi", 10);
-        OperationHandler handler = new PurchaseHandlerImpl();
         
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
                 handler.updateNumberOfFruit(transaction)
@@ -53,14 +58,11 @@ class PurchaseHandlerImplTest {
     
     @Test
     void updateNumberOfFruit_noSuchFruit_notOK() {
-        StorageFruit.storage.clear();
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "mango", 1);
-        OperationHandler handler = new PurchaseHandlerImpl();
         
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
                 handler.updateNumberOfFruit(transaction)
         );
         assertTrue(ex.getMessage().contains("Can't find any mango"));
     }
-    
 }

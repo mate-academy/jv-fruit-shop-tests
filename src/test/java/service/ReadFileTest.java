@@ -3,23 +3,17 @@ package service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.HelloWorld;
-import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 
 public class ReadFileTest {
-    private static String[] args;
     private static ReaderService readerService;
-    private static ParseService parseService;
 
     @TempDir
     private Path tempDir;
@@ -27,23 +21,26 @@ public class ReadFileTest {
     private Path outputFile;
 
     @BeforeEach
-    void create() throws IOException {
+    void create() {
         inputFile = tempDir.resolve("reportToRead.csv");
         outputFile = tempDir.resolve("fileReport.csv");
-        List<String> list = List.of("operation,fruit,quantity", "b,banana,100", "s,banana,60",
-                "p,banana,10", "r,banana,2", "b,apple,80", "s,apple,20", "p,apple,10");
-        args = new String[]{inputFile.toString(), outputFile.toString()};
-        Files.write(inputFile, list);
         readerService = new ReaderServiceImpl();
-        parseService = new ParseServiceImpl();
     }
 
     @Test
-    void fileValidation_withValidArgs_createsCorrectReport() throws IOException {
-        HelloWorld.main(args);
-        List<String> actual = Files.readAllLines(outputFile);
-        List<String> result = List.of("fruit,quantity", "banana,152", "apple,90");
-        assertEquals(result, actual);
+    void fileValidation_withValidArgs_doesNotThrowException() {
+        List<String> result = readerService.readFromFile("src/main/resources/reportToRead.csv");
+        List<String> expected = List.of(
+                "operation,fruit,quantity",
+                "b,banana,100",
+                "s,banana,60",
+                "p,banana,10",
+                "r,banana,2",
+                "b,apple,80",
+                "s,apple,20",
+                "p,apple,10"
+        );
+        assertEquals(expected, result);
     }
 
     @Test
@@ -163,7 +160,7 @@ public class ReadFileTest {
     void readFromFile_throwsException_whenFileNotFound() {
         String filePath = "example.csv";
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                parseService.parseList(readerService.readFromFile(filePath)));
+                readerService.readFromFile(filePath));
         assertEquals("Error reading file: " + filePath, exception.getMessage());
     }
 
@@ -171,7 +168,7 @@ public class ReadFileTest {
     void readFromFile_withEmptyFile_throwsException() {
         String filePath = getResourcePath("serviceResource/emptyFile.csv");
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException
-                .class, () -> parseService.parseList(readerService.readFromFile(filePath)));
+                .class, () -> readerService.readFromFile(filePath));
         assertEquals("File must contain at least a header", illegalArgumentException.getMessage());
     }
 

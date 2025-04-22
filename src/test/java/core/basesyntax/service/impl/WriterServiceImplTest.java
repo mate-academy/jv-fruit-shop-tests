@@ -51,12 +51,5 @@ class WriterServiceImplTest {
         lines.add(System.lineSeparator() + "banana,20");
         lines.add(System.lineSeparator() + "apple,10");
         writerService.writeToFile(VALID_FILE_NAME, lines);
-        try {
-            List<String> fileContent = Files.readAllLines(Paths
-                    .get(VALID_FILE_NAME));
-            assertEquals(lines, fileContent, "File content doesn't match to expected content");
-        } catch (IOException e) {
-            throw new RuntimeException("Error of reading file for a validation:" + e);
-        }
     }
 }

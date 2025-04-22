@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 public class OperationStrategyImplTest {
     private FruitStock fruitStock;
     private OperationStrategyImpl operationStrategy;
-
     private BalanceHandler balanceHandler;
     private ReturnHandler returnHandler;
     private SupplyHandler supplyHandler;

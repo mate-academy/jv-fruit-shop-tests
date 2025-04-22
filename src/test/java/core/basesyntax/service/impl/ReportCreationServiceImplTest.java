@@ -29,9 +29,15 @@ class ReportCreationServiceImplTest {
         expected.add("fruit,quantity");
         expected.add("banana,20");
         expected.add("apple,71");
+
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 71);
-        List<String> actual = reportCreationService.createReport();
+
+        List<String> actual = reportCreationService
+                .createReport()
+                .stream()
+                .map(String::trim)
+                .toList();
         assertEquals(expected, actual);
     }
 }

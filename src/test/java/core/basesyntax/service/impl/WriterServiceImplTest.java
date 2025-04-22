@@ -1,8 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriterService;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,8 +48,17 @@ class WriterServiceImplTest {
     void writeToFile_validDataAndPath_ok() {
         List<String> lines = new ArrayList<>();
         lines.add("fruit,quantity");
-        lines.add(System.lineSeparator() + "banana,20");
-        lines.add(System.lineSeparator() + "apple,10");
+        lines.add("banana,20");
+        lines.add("apple,10");
+
         writerService.writeToFile(VALID_FILE_NAME, lines);
+
+        try {
+            List<String> fileContent = Files.readAllLines(Paths
+                    .get(VALID_FILE_NAME));
+            assertEquals(lines, fileContent, "File content doesn't match to expected content");
+        } catch (IOException e) {
+            throw new RuntimeException("Error of reading file for a validation:" + e);
+        }
     }
 }

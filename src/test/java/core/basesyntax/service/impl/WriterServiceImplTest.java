@@ -48,11 +48,9 @@ class WriterServiceImplTest {
     void writeToFile_validDataAndPath_ok() {
         List<String> lines = new ArrayList<>();
         lines.add("fruit,quantity");
-        lines.add("banana,20");
-        lines.add("apple,10");
-
+        lines.add(System.lineSeparator() + "banana,20");
+        lines.add(System.lineSeparator() + "apple,10");
         writerService.writeToFile(VALID_FILE_NAME, lines);
-
         try {
             List<String> fileContent = Files.readAllLines(Paths
                     .get(VALID_FILE_NAME));

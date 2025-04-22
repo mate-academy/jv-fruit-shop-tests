@@ -80,7 +80,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void getOperation_validdataUsingPurchaseOperation_notOk() {
+    void getOperation_validDataUsingPurchaseOperation_notOk() {
         Storage.storage.put("banana", 7);
         operationHandler = new PurchaseHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

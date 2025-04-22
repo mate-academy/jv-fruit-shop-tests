@@ -11,11 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportCreationServiceImplTest {
-    private static ReportCreationService reportCreationService;
+    private static ReportCreationService reportCreatorService;
 
     @BeforeEach
     void setUp() {
-        reportCreationService = new ReportCreationServiceImpl();
+        reportCreatorService = new ReportCreationServiceImpl();
     }
 
     @AfterEach
@@ -31,7 +31,7 @@ class ReportCreationServiceImplTest {
         expected.add(System.lineSeparator() + "apple,71");
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 71);
-        List<String> actual = reportCreationService.createReport();
+        List<String> actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }
 }

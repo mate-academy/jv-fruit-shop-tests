@@ -27,8 +27,8 @@ class ReportCreationServiceImplTest {
     void createReport_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
-        expected.add(System.lineSeparator() + "banana,20");
-        expected.add(System.lineSeparator() + "apple,71");
+        expected.add("banana,20" + System.lineSeparator());
+        expected.add("apple,71" + System.lineSeparator());
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 71);
         List<String> actual = reportCreatorService.createReport();

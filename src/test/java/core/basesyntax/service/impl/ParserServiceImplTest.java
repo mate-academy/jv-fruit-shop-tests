@@ -48,7 +48,9 @@ class ParserServiceImplTest {
         transaction3.setQuantity(100);
 
         List<FruitTransaction> expected = List.of(transaction1, transaction2, transaction3);
-        List<FruitTransaction> actual = parserService.parse(dataFromFile);
+        List<String> validDataFromFile = new ArrayList<>(dataFromFile.subList(1,
+                dataFromFile.size()));
+        List<FruitTransaction> actual = parserService.parse(validDataFromFile);
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
 }

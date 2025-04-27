@@ -32,7 +32,6 @@ public class BalanceHandlerTest {
 
     @Test
     void handle_multipleFruits_setsCorrectBalance() {
-        // Додаємо фрукти в інвентар
         fruitStock.add("apple", 0);
         fruitStock.add("banana", 0);
         balanceHandler.handle("apple", 10);

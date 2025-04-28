@@ -11,7 +11,6 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.InventoryService;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.strategy.OperationStrategyProvider;
-
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;

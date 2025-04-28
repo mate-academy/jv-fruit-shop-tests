@@ -4,33 +4,24 @@ import core.basesyntax.dao.CsvFileWriter;
 import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.FileWriterImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.InventoryService;
 import core.basesyntax.service.ReportGeneratorService;
-import core.basesyntax.service.TransactionProcessingService;
-import core.basesyntax.strategy.BalanceOperationHandler;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
-import core.basesyntax.strategy.ReturnOperationHandler;
-import core.basesyntax.strategy.SupplyOperationHandler;
-import core.basesyntax.strategy.impl.PurchaseOperationHandler;
-import java.util.HashMap;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         InventoryService inventoryService = new InventoryService();
-
-        Map<String, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put("b", new BalanceOperationHandler());
-        operationHandlers.put("p", new PurchaseOperationHandler());
-        operationHandlers.put("r", new ReturnOperationHandler());
-        operationHandlers.put("s", new SupplyOperationHandler());
-
         OperationStrategyProvider strategyProvider =
-                new OperationStrategyProvider((InventoryService) operationHandlers);
+                new OperationStrategyProvider(inventoryService);
 
         FileReader fileReader = new FileReaderImpl();
         FruitTransactionParser parser = new FruitTransactionParser();
@@ -39,16 +30,25 @@ public class Main {
         CsvFileWriter fileWriter = new FileWriterImpl();
         ReportGeneratorService reportGeneratorService = new ReportGeneratorService();
 
-        TransactionProcessingService transactionProcessingService =
-                new TransactionProcessingService(
-                parser,
-                fruitShopService,
-                fileWriter,
-                reportGeneratorService
-        );
+        try {
+            ClassLoader classLoader = Main.class.getClassLoader();
+            String inputFileName = "reportToRead.csv";
+            URL resource = classLoader.getResource(inputFileName);
+            if (resource == null) {
+                throw new RuntimeException("File not found in resources: " + inputFileName);
+            }
+            String inputFilePath = Paths.get(resource.toURI()).toString();
+            List<String> lines = fileReader.readFile(inputFilePath);
 
-        List<String> lines = fileReader.readFile("reportToRead.csv");
+            List<FruitTransaction> transactions = parser.parse(lines);
+            fruitShopService.processTransactions(transactions);
+            String report = reportGeneratorService.generateReport(Storage.inventory);
 
-        transactionProcessingService.processTransactions(lines, "finalReport.csv");
+            String outputFileName = "finalReport.csv";
+            Path outputPath = Paths.get("src", "main", "resources", outputFileName);
+            fileWriter.writeFile(outputPath.toString(), report);
+        } catch (URISyntaxException e) {
+            System.err.println("Error forming file path: " + e.getMessage());
+        }
     }
 }

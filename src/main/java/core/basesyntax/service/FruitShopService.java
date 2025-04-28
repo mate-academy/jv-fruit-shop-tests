@@ -28,7 +28,7 @@ public class FruitShopService {
                 throw new IllegalArgumentException("Fruit not found: " + transaction.getFruit());
             }
 
-            handler.apply(inventory, transaction.getFruit(), transaction.getQuantity());
+            handler.apply(transaction.getFruit(), transaction.getQuantity());
         }
     }
 }

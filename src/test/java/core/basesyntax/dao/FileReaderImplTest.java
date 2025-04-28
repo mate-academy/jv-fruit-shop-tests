@@ -27,25 +27,31 @@ class FileReaderImplTest {
             List<String> result = fileReader.readFile(emptyFile.toString());
             assertTrue(result.isEmpty());
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при создании временного файла", e);
+            throw new RuntimeException("Failed to create temporary file", e);
         }
     }
 
     @Test
-    void readFile_nonExistingFile_throwsException() {
+    void readFile_nonExistingFile_throwsRuntimeException() {
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 fileReader.readFile("non_existing_file.csv")
         );
-        assertTrue(exception.getMessage().contains("Error while reading file")
-                || exception.getMessage().contains("Resource not found"));
+        assertTrue(exception.getMessage().contains("Error reading file"));
     }
 
     @Test
-    void readFile_nullOrEmptyFileName_throwsException() {
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+    void readFile_nullFileName_throwsIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                fileReader.readFile(null)
+        );
+        assertTrue(exception.getMessage().contains("must not be null or blank"));
+    }
+
+    @Test
+    void readFile_blankFileName_throwsIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 fileReader.readFile("")
         );
-        assertTrue(exception.getMessage().contains("Error while reading file")
-                || exception.getMessage().contains("Resource not found"));
+        assertTrue(exception.getMessage().contains("must not be null or blank"));
     }
 }

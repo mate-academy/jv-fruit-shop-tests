@@ -1,10 +1,11 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.db.Storage.inventory;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class FruitShopServiceTest {
         }
 
         @Override
-        public void apply(Map<String, Integer> inventory, String fruit, int quantity) {
+        public void apply(String fruit, int quantity) {
             if (quantity < 0) {
                 throw new IllegalArgumentException("Quantity cannot be negative");
             }

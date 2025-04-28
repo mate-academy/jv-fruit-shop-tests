@@ -1,10 +1,10 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
+import static core.basesyntax.db.Storage.inventory;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void apply(Map<String, Integer> inventory, String fruit, int quantity) {
+    public void apply(String fruit, int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity for purchase cannot be negative");
         }

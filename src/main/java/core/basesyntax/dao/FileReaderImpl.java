@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final String DEFAULT_INPUT_FILE = "reportToRead.csv";
-
     @Override
     public List<String> readFile(String fileName) {
-        List<String> lines = new ArrayList<>();
-        Path filePath = Path.of(fileName != null && !fileName.isBlank()
-                ? fileName : DEFAULT_INPUT_FILE);
+        if (fileName == null || fileName.isBlank()) {
+            throw new IllegalArgumentException("File name must not be null or blank");
+        }
+        Path filePath = Path.of(fileName);
 
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
+            List<String> lines = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
+            return lines;
         } catch (IOException e) {
-            throw new RuntimeException("Error while reading file " + filePath, e);
+            throw new RuntimeException("Error reading file " + filePath, e);
         }
-        return lines;
     }
 }

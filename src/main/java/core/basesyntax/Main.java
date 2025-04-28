@@ -11,6 +11,7 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.InventoryService;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.strategy.OperationStrategyProvider;
+
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -20,6 +21,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         InventoryService inventoryService = new InventoryService();
+
         OperationStrategyProvider strategyProvider =
                 new OperationStrategyProvider(inventoryService);
 

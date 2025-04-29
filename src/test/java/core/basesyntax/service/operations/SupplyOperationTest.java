@@ -1,0 +1,28 @@
+package core.basesyntax.service.operations;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import core.basesyntax.infrastructure.db.Storage;
+import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportGeneratorImpl;
+import org.junit.jupiter.api.Test;
+
+public class SupplyOperationTest {
+
+    @Test
+    public void supplyOperationOk() {
+        Storage.STORAGE.remove("apple");
+        OperationHandler balanceOperation = new BalanceOperation();
+        balanceOperation.run(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
+        OperationHandler supplyOperation = new SupplyOperation();
+        supplyOperation.run(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20));
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String actual = reportGenerator.getReport();
+
+        String expected = "banana,40";
+
+        assertEquals(actual, expected);
+    }
+}

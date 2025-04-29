@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +15,17 @@ class StorageImplTest {
     @BeforeEach
     void setUp() {
         storage = new StorageImpl();
-        storage.clearStorage();
+    }
+
+    @AfterEach
+    void tearDown() {
+        StorageImpl.fruitStorage.clear();
     }
 
     @Test
     void updateFruitBalance_Ok() {
         storage.updateFruitBalance("apple", 1);
-        assertEquals(1,storage.getFruitBalance("apple"));
+        assertEquals(1,StorageImpl.fruitStorage.get("apple"));
     }
 
     @Test
@@ -38,13 +43,13 @@ class StorageImplTest {
     @Test
     void getFruitBalanceFromStorage_Ok() {
         storage.setFruitBalance("apple", 40);
-        assertEquals(40, storage.getFruitBalance("apple"));
+        assertEquals(40, StorageImpl.fruitStorage.get("apple"));
     }
 
     @Test
     void setFruitBalance_Ok() {
         storage.setFruitBalance("apple", 1);
-        assertEquals(1,storage.getFruitBalance("apple"));
+        assertEquals(1,StorageImpl.fruitStorage.get("apple"));
     }
 
     @Test
@@ -55,8 +60,8 @@ class StorageImplTest {
 
     @Test
     void getAllFromNonEmptyStorage_Ok() {
-        storage.updateFruitBalance("apple", 10);
-        storage.updateFruitBalance("banana", 20);
+        StorageImpl.fruitStorage.put("apple", 10);
+        StorageImpl.fruitStorage.put("banana", 20);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 10);
         expected.put("banana", 20);
@@ -65,22 +70,13 @@ class StorageImplTest {
 
     @Test
     void getAllFromEmptyStorage_Ok() {
-        assertEquals(new HashMap<String,Integer>(),storage.getAll());
-    }
-
-    @Test
-    void clearAll_Ok() {
-        storage.setFruitBalance("apple",100);
-        storage.setFruitBalance("orange",10);
-        storage.clearStorage();
         assertEquals(new HashMap<String,Integer>(), storage.getAll());
     }
 
     @Test
-    void clearStorage_AfterMultipleUpdates_Ok() {
-        storage.updateFruitBalance("apple", 10);
-        storage.updateFruitBalance("banana", 20);
+    void clearAll_Ok() {
+        StorageImpl.fruitStorage.put("apple",100);
         storage.clearStorage();
-        assertEquals(new HashMap<String, Integer>(), storage.getAll());
+        assertEquals(0, StorageImpl.fruitStorage.size());
     }
 }

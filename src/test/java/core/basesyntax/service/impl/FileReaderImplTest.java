@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
+    private static final String FILE_PATH =
+            "src/test/resources/Test1.csv";
+    private static final String PATH_TO_A_NON_EXISTENT_FILE =
+            "src/test/resources/NonExistingFile.csv";
     private FileReader fileReader;
 
     @BeforeEach
@@ -26,12 +30,13 @@ class FileReaderImplTest {
         expectedList.add("p,mango,10");
         expectedList.add("s,mango,70");
 
-        List<String> actual = fileReader.read("src/test/resources/Test1.csv");
+        List<String> actual = fileReader.read(FILE_PATH);
         assertEquals(expectedList, actual);
     }
 
     @Test
     void readFromNonExistingFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read("qwerty11.csv"));
+        assertThrows(RuntimeException.class,
+                () -> fileReader.read(PATH_TO_A_NON_EXISTENT_FILE));
     }
 }

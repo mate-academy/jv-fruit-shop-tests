@@ -22,9 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     private static final String START_FILE = "src/main/resources/reportToRead.csv";
     private static final String FINAL_FILE = "src/main/resources/finalReport.csv";

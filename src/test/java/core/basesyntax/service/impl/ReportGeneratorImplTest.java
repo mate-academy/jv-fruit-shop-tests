@@ -2,27 +2,38 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.service.ReportGenerator;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static final String HEADER = "fruit,quantity";
-    private final Storage storage = new StorageImpl();
     private final StringBuilder builder = new StringBuilder();
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
+    @AfterEach
+    void tearDown() {
+        StorageImpl.fruitStorage.clear();
+    }
+
     @Test
     void getReport_Ok() {
-        storage.setFruitBalance("apple",30);
-        storage.setFruitBalance("orange", 15);
-        builder.append(HEADER)
+        String header = "fruit,quantity";
+        StorageImpl.fruitStorage.put("apple",30);
+        StorageImpl.fruitStorage.put("orange", 15);
+        builder.append(header)
                 .append(System.lineSeparator())
                 .append("orange,15")
                 .append(System.lineSeparator())
                 .append("apple,30")
                 .append(System.lineSeparator());
         assertEquals(builder.toString(), reportGenerator.getReport());
+    }
+
+    @Test
+    void getReportWithEmptyStorage_Ok() {
+        String header = "fruit,quantity";
+        assertEquals(header + System.lineSeparator(),
+                reportGenerator.getReport());
     }
 }

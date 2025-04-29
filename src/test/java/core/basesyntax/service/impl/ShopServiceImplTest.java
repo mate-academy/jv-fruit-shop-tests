@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
@@ -18,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,11 +29,10 @@ class ShopServiceImplTest {
     private final ShopService shopService =
             new ShopServiceImpl(operationStrategy);
     private List<FruitTransaction> transactionList;
-    private final Storage storage = new StorageImpl();
 
     @BeforeEach
     void setUp() {
-        storage.clearStorage();
+        StorageImpl.fruitStorage.clear();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
@@ -46,9 +45,14 @@ class ShopServiceImplTest {
         ));
     }
 
+    @AfterEach
+    void tearDown() {
+        StorageImpl.fruitStorage.clear();
+    }
+
     @Test
     void process() {
         shopService.process(transactionList);
-        assertEquals(37, storage.getFruitBalance("apple"));
+        assertEquals(37, StorageImpl.fruitStorage.get("apple"));
     }
 }

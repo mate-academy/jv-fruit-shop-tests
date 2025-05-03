@@ -96,6 +96,8 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/HandlerMap*</exclude>
+                        <exclude>**/Fruit*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

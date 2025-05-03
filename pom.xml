@@ -53,6 +53,7 @@
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <excludes>**/Application.class*</excludes>
                 </configuration>
             </plugin>
             <plugin>

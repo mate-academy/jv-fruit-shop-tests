@@ -107,6 +107,9 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
+                        <excludes>
+                            <exclude>**/Main*</exclude>
+                        </excludes>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>

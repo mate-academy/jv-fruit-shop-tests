@@ -95,7 +95,10 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                            <exclude>**/Storage*</exclude>
+                            <exclude>**/Fruit*</exclude>
+                            <exclude>**/Transaction*</exclude>
+                           <exclude>**/App*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

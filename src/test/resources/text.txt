@@ -1,0 +1,11 @@
+Businesses plan to ramp up Java developer recruitment in 2024 and beyond, according to new research, with investment in development tools also expected to surge.
+
+The Java Developer Productivity Report from Perforce surveyed 440 people, mostly Java developers, architects, and team leads across 72 countries.
+
+Perforce said the results showed that investment in talent will rise significantly, with nearly two-thirds (60%) of respondents planning to add additional developers in the coming year.
+
+Developer tool budgets also appear to be creeping up despite economic headwinds, the report noted. Nearly half (42%) said their company plans to increase its tool budget and 31% said their annual tool budget (per developer) was $500 or more, marking an increase compared to the year previous.
+
+Only 22% of respondents said they had that much to spend, however, while just 15% said they would be spending more than $1,000 on developer tools.
+
+“Java is here to stay”, said Rod Cope, CTO at Perforce. “These investments in tools and talent are testament to Java’s role as the stable backbone of enterprise applications.”

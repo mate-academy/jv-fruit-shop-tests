@@ -1,0 +1,34 @@
+package core.basesyntax.dataservice;
+
+import core.basesyntax.transactions.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DataConverterImpl implements DataConverter {
+    private static final int OPERATION = 0;
+    private static final int FRUIT_TYPE = 1;
+    private static final int NUMBER = 2;
+    private static final String SEPARATOR = ",";
+
+    @Override
+    public List<FruitTransaction> convertToTransaction(List<String> data) {
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        try {
+            for (String array : data) {
+                String[] strings = array.split(SEPARATOR);
+                FruitTransaction fruitTransaction = new FruitTransaction();
+                if (strings[FRUIT_TYPE].length() == 0) {
+                    throw new IllegalArgumentException("Field fruit can`t be empty");
+                }
+                fruitTransaction.setFruit(strings[FRUIT_TYPE]);
+                fruitTransaction.setQuantity(Integer.parseInt(strings[NUMBER]));
+                fruitTransaction.setOperation(FruitTransaction.Operation
+                        .coverToOperation(strings[OPERATION]));
+                fruitTransactionList.add(fruitTransaction);
+            }
+            return fruitTransactionList;
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("Date in this file are invalid");
+        }
+    }
+}

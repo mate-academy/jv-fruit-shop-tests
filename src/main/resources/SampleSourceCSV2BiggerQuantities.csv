@@ -1,0 +1,9 @@
+type,fruit,quantity
+b,banana,20000
+b,apple,40000
+s,banana,10000
+s,apple,20000
+p,banana,5000
+p,apple,10000
+r,apple,2500
+r,banana,5000

@@ -1,0 +1,9 @@
+type,fruit,quantity
+b,orange,200
+b,kiwi,1000
+s,orange,1000
+p,orange,130
+r,kiwi,100
+p,kiwi,200
+p,orange,50
+s,orange,500

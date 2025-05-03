@@ -1,0 +1,41 @@
+package core.basesyntax.strategy.operations;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.StorageFruits;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ReturnOperationTest {
+    private ReturnOperation returnOperation;
+
+    @Before
+    public void setUp() {
+        returnOperation = new ReturnOperation(new FruitDaoImpl());
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void apply_dailyTransactionNull_notOk() {
+        returnOperation.apply(null);
+    }
+
+    @Test
+    public void apply_allOk() {
+        StorageFruits.fruits.add(new Fruit("orange", 200));
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.RETURN, "orange", 100);
+        returnOperation.apply(fruitTransaction);
+        Fruit actual = StorageFruits.fruits.get(0);
+        Fruit expected = new Fruit("orange", 300);
+        assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        StorageFruits.fruits.clear();
+    }
+}

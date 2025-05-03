@@ -96,6 +96,10 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/Storage*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/FruitTransaction*</exclude>
+                        <exclude>**/OperationHandler*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

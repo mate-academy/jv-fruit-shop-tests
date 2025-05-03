@@ -1,0 +1,6 @@
+fruit,quantity
+banana,20
+apple,100
+lime,4
+peach,21
+pineapple,60

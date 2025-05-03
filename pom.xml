@@ -96,6 +96,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/dao/*</exclude>
+                        <exclude>**/db/*</exclude>
+                        <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

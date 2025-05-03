@@ -1,0 +1,4 @@
+type,fruit,quantity // Something wrong!!!
+b,banana,20
+b,apple,100
+s,banana,100

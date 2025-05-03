@@ -1,0 +1,36 @@
+package core.basesyntax.service.reporter;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class CsvReporterTest {
+    private static final String FIRST_LINE = "fruit,quantity";
+    private static Reporter reporter;
+
+    @BeforeEach
+    void setUp() {
+        reporter = new CsvReporter();
+        Storage.FRUITS.put("apple", 20);
+    }
+
+    @Test
+    void startedWithFirstLine_Ok() {
+        String actual = reporter.makeReport();
+        assertTrue(actual.startsWith(FIRST_LINE));
+    }
+
+    @Test
+    void containsFruitInformation_Ok() {
+        String actual = reporter.makeReport();
+        assertTrue(actual.contains("apple,20"));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.FRUITS.clear();
+    }
+}

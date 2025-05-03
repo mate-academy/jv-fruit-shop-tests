@@ -96,6 +96,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/OperationType*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

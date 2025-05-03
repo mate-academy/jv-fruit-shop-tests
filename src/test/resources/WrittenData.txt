@@ -1,0 +1,8 @@
+b,banana,100
+b,apple,29
+r,banana,10
+r,apple,4
+p,banana,20
+p,apple,10
+s,banana,20
+s,apple,20

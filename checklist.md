@@ -60,7 +60,7 @@ Example:
 ```java
 @Test
 public void getReport_Ok() {
-    Storage.storage.put(...); // put fruits directly to the storage
+    Storage.storage.put(...)// put fruits directly to the storage
     String expected = "your expected result here";
     String actual = fruitService.getReport();
     Assert.assertEquals(expected, actual);
@@ -70,7 +70,7 @@ public void getReport_Ok() {
 public void afterEachTest() {
     Storage.storage.clear();
 }
-```  
+```
 #### Unit testing is <ins>isolated</ins> testing
 Keep your strategy, handler, and service tests separate from each other. Each of them needs a separate test class with their corresponding test cases.
 

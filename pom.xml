@@ -32,7 +32,7 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+          </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -96,6 +96,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude name="model"/>
+                        <exclude name="db"/>
+                        <exclude name="dto"/>
                     </excludes>
                 </configuration>
             </plugin>

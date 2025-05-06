@@ -2,6 +2,7 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.InventoryService;
+
 import java.util.Map;
 
 public class OperationStrategyProvider {
@@ -12,8 +13,7 @@ public class OperationStrategyProvider {
         handlers = Map.of(
                 FruitTransaction.OperationType.ADD, new AddOperationHandler(inventoryService),
                 FruitTransaction.OperationType.SUPPLY, new SupplyOperationHandler(),
-                FruitTransaction.OperationType.RETURN, new ReturnOperationHandler(),
-                FruitTransaction.OperationType.BALANCE, new BalanceOperationHandler()
+                FruitTransaction.OperationType.RETURN, new ReturnOperationHandler()
         );
     }
 

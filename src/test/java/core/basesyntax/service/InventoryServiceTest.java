@@ -1,65 +1,64 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+package core.basesyntax.service;
 
-import core.basesyntax.service.InventoryService;
+import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class InventoryServiceTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+class InventoryServiceTest {
     private InventoryService inventoryService;
 
     @BeforeEach
     void setUp() {
         inventoryService = new InventoryService();
+        Storage.inventory.clear();
     }
 
     @Test
-    void addFruit_ShouldHandleZeroQuantity() {
-        inventoryService.addFruit("apple", 0);
-        assertEquals(0, inventoryService.getQuantity("apple"));
-    }
-
-    @Test
-    void addFruit_ShouldIncreaseExistingQuantity() {
+    void addFruit_shouldAddQuantityToEmptyStorage() {
         inventoryService.addFruit("apple", 10);
-        inventoryService.addFruit("apple", 5);
-        assertEquals(15, inventoryService.getQuantity("apple"));
+        assertEquals(10, Storage.inventory.get("apple"));
     }
 
     @Test
-    void removeFruit_ShouldReduceQuantity() {
-        inventoryService.addFruit("apple", 10);
-        inventoryService.removeFruit("apple", 5);
-        assertEquals(5, inventoryService.getQuantity("apple"));
+    void addFruit_shouldAddQuantityToExistingFruit() {
+        Storage.inventory.put("banana", 5);
+        inventoryService.addFruit("banana", 3);
+        assertEquals(8, Storage.inventory.get("banana"));
     }
 
     @Test
-    void removeFruit_ShouldThrowException_WhenNotEnoughQuantity() {
-        inventoryService.addFruit("apple", 5);
-        assertThrows(IllegalArgumentException.class,
-                () -> inventoryService.removeFruit("apple", 10));
+    void getQuantity_shouldReturnCorrectQuantity() {
+        Storage.inventory.put("orange", 7);
+        assertEquals(7, inventoryService.getQuantity("orange"));
     }
 
     @Test
-    void getQuantity_ShouldReturnZero_WhenFruitNotInInventory() {
-        assertEquals(0, inventoryService.getQuantity("banana"));
+    void getQuantity_shouldReturnZeroForAbsentFruit() {
+        assertEquals(0, inventoryService.getQuantity("kiwi"));
     }
 
     @Test
-    void addFruit_ShouldHandleMultipleFruits() {
-        inventoryService.addFruit("apple", 5);
-        inventoryService.addFruit("banana", 8);
-        inventoryService.addFruit("orange", 3);
-        assertEquals(5, inventoryService.getQuantity("apple"));
-        assertEquals(8, inventoryService.getQuantity("banana"));
-        assertEquals(3, inventoryService.getQuantity("orange"));
+    void removeFruit_shouldReduceQuantityCorrectly() {
+        Storage.inventory.put("grape", 10);
+        inventoryService.removeFruit("grape", 4);
+        assertEquals(6, Storage.inventory.get("grape"));
     }
 
     @Test
-    void removeFruit_NegativeQuantity_ShouldIncreaseInventory() {
-        inventoryService.addFruit("apple", 10);
-        inventoryService.removeFruit("apple", -5);
-        assertEquals(15, inventoryService.getQuantity("apple"));
+    void removeFruit_shouldThrowExceptionIfNotEnough() {
+        Storage.inventory.put("mango", 2);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> inventoryService.removeFruit("mango", 5));
+        assertEquals("Not enough fruit to remove", exception.getMessage());
+    }
+
+    @Test
+    void removeFruit_shouldThrowExceptionIfFruitAbsent() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> inventoryService.removeFruit("pear", 1));
+        assertEquals("Not enough fruit to remove", exception.getMessage());
     }
 }

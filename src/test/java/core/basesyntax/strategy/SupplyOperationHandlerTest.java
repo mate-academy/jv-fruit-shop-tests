@@ -1,12 +1,12 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SupplyOperationHandlerTest {
 
@@ -31,7 +31,7 @@ class SupplyOperationHandlerTest {
     void apply_ShouldIncreaseQuantity_WhenFruitExists() {
         inventoryService.addFruit("orange", 10);
         supplyOperationHandler.apply("orange", 5);
-        assertEquals(10, inventoryService.getQuantity("orange"));
+        assertEquals(15, inventoryService.getQuantity("orange"));
     }
 
 }

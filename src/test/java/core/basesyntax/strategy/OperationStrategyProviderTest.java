@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class OperationStrategyProviderTest {
     private InventoryService inventoryService;
@@ -15,13 +15,6 @@ class OperationStrategyProviderTest {
     void setUp() {
         inventoryService = new InventoryService();
         strategyProvider = new OperationStrategyProvider(inventoryService);
-    }
-
-    @Test
-    void getHandler_balanceOperation_returnsBalanceHandler() {
-        OperationHandler handler = strategyProvider
-                .getHandler(FruitTransaction.OperationType.BALANCE);
-        assertNotNull(handler, "Handler for BALANCE should not be null");
     }
 
     @Test
@@ -48,7 +41,6 @@ class OperationStrategyProviderTest {
     @Test
     void getHandler_shouldReturnCorrectHandlerForEachOperation() {
         assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.SUPPLY));
-        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.BALANCE));
         assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.RETURN));
         assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.ADD));
     }

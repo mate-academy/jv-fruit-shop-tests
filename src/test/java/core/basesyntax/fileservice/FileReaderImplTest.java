@@ -3,6 +3,8 @@ package core.basesyntax.fileservice;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,9 @@ import org.junit.jupiter.api.Test;
 public class FileReaderImplTest {
 
     private FileReaderImpl fileReader;
-    private String falidPath = "src\\test\\java\\core\\basesyntax\\resources\\databaseTest.csv";
+    private Path path = Paths.get(
+            "src", "test", "java", "core", "basesyntax", "resources", "databaseTest.csv");
+    private String falidPath = path.toString();
     private String invalidPath = "invalidPath";
 
     @BeforeEach

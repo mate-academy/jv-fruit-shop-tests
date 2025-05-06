@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,13 @@ public class FileWriterImplTest {
     private String validReportInput = "fruit,quantity\n"
             + "apple,120\n"
             + "banana,100";
-    private String validReportPath =
-            "src\\test\\java\\core\\basesyntax\\resources\\reportTest.csv";
+
+    private Path path = Paths.get(
+            "src", "test", "java", "core", "basesyntax", "resources", "reportTest.csv");
+    private String validReportPath = path.toString();
+
     private String invalidReportPath =
-            "test\\java\\core\\\basesyntax\\resources<7>";
+            "Z:\\this\\does\\not\\exist\\report.csv";
 
     @BeforeEach
     void setUp() {

@@ -1,7 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
-import java.util.function.Supplier;
+import java.util.Objects;
 
 public class FruitOperation {
     private Operation operation;
@@ -41,6 +41,34 @@ public class FruitOperation {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitOperation)) {
+            return false;
+        }
+        FruitOperation that = (FruitOperation) o;
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "FruitOperation{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -54,15 +82,10 @@ public class FruitOperation {
         }
 
         public static Operation getOperation(String code) {
-            try {
-                return Arrays.stream(Operation.values())
+            return Arrays.stream(Operation.values())
                         .filter(operation -> operation.code.equals(code))
                         .findFirst()
-                        .orElseThrow((Supplier<Throwable>) ()
-                                -> new RuntimeException("operation code not found."));
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
+                        .orElse(null);
         }
 
         public String getCode() {

@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class OperationStrategyProviderTest {
     private InventoryService inventoryService;

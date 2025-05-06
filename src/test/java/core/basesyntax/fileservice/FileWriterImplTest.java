@@ -23,7 +23,7 @@ public class FileWriterImplTest {
     private String validReportPath = path.toString();
 
     private String invalidReportPath =
-            "Z:\\this\\does\\not\\exist\\report.csv";
+            "";
 
     @BeforeEach
     void setUp() {

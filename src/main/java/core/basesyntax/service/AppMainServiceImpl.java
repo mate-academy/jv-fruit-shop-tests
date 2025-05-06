@@ -34,7 +34,7 @@ public class AppMainServiceImpl implements AppMainService {
     public void run() {
         List<String> rawLines = reader.read(FILE_READ_SRC);
 
-        // Step 2: Convert to FruitOperation list
+        // Step 2: Convert to FruitOperation List
         List<FruitOperation> operations = dataConvertor.convertToTransaction(rawLines);
 
         // Step 3: Apply operations

@@ -35,7 +35,15 @@ public class DataConvertorImpl implements DataConvertor {
                 continue;
             }
 
-            int fruitQuantity = Integer.parseInt(fruitInfo[QUANTITY_INDEX]);
+            int fruitQuantity = 0;
+            try {
+                fruitQuantity = Integer.parseInt(fruitInfo[QUANTITY_INDEX]);
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid quantity (not a number), setting quantity to 0: "
+                        + fruitInfoList.get(i));
+                fruitQuantity = 0;
+            }
+
             if (fruitQuantity < 0) {
                 System.err.println("Skipping line with negative quantity: " + fruitInfoList.get(i));
                 continue;

@@ -1,16 +1,15 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitOperationDao;
-import core.basesyntax.dao.FruitOperationDaoImpl;
-import core.basesyntax.model.FruitOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.dao.FruitOperationDao;
+import core.basesyntax.model.FruitOperation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitOperationServiceImplTest {
     private InMemoryFruitOperationDao fruitOperationDao;

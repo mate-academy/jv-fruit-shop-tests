@@ -29,7 +29,8 @@ class ShopServiceImplTest {
 
     @Test
     void testChangeQuantityStoreWithBalanceOperation() {
-        FruitOperation balanceOp = new FruitOperation(FruitOperation.Operation.BALANCE, "apple", 100);
+        FruitOperation balanceOp = new FruitOperation(FruitOperation.Operation.BALANCE,
+                "apple", 100);
 
         shopService.changeQuantityStore(List.of(balanceOp));
 
@@ -49,25 +50,28 @@ class ShopServiceImplTest {
 
         Optional<FruitOperation> updated = fruitOperationDao.get("orange");
         assertTrue(updated.isPresent());
-        assertEquals(50, updated.get().getQuantity());  // 30 + 20
+        assertEquals(50, updated.get().getQuantity());
     }
 
     @Test
     void testChangeQuantityStoreWithPurchaseOperation() {
-        fruitOperationDao.add(new FruitOperation(FruitOperation.Operation.BALANCE, "banana", 50));
+        fruitOperationDao.add(new FruitOperation(FruitOperation.Operation.BALANCE,
+                "banana", 50));
 
-        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE, "banana", 10);
+        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE,
+                "banana", 10);
 
         shopService.changeQuantityStore(List.of(purchaseOp));
 
         Optional<FruitOperation> updated = fruitOperationDao.get("banana");
         assertTrue(updated.isPresent());
-        assertEquals(40, updated.get().getQuantity());  // 50 - 10
+        assertEquals(40, updated.get().getQuantity());
     }
 
     @Test
     void testChangeQuantityStoreWithNonExistingFruit() {
-        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE, "mango", 10);
+        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE,
+                "mango", 10);
 
         shopService.changeQuantityStore(List.of(purchaseOp));
 
@@ -77,19 +81,20 @@ class ShopServiceImplTest {
 
     @Test
     void testChangeQuantityStoreWithMultipleOperations() {
-        fruitOperationDao.add(new FruitOperation(FruitOperation.Operation.BALANCE, "kiwi", 10));
+        fruitOperationDao.add(new FruitOperation(FruitOperation.Operation.BALANCE,
+                "kiwi", 10));
 
-        FruitOperation supplyOp = new FruitOperation(FruitOperation.Operation.SUPPLY, "kiwi", 5);
-        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE, "kiwi", 3);
+        FruitOperation supplyOp = new FruitOperation(FruitOperation.Operation.SUPPLY,
+                "kiwi", 5);
+        FruitOperation purchaseOp = new FruitOperation(FruitOperation.Operation.PURCHASE,
+                "kiwi", 3);
 
         shopService.changeQuantityStore(List.of(supplyOp, purchaseOp));
 
         Optional<FruitOperation> updated = fruitOperationDao.get("kiwi");
         assertTrue(updated.isPresent());
-        assertEquals(12, updated.get().getQuantity());  // 10 + 5 - 3
+        assertEquals(12, updated.get().getQuantity());
     }
-
-    // ----------- In-memory DAO stub -----------
 
     static class InMemoryFruitOperationDao implements FruitOperationDao {
         private final Map<String, FruitOperation> store = new HashMap<>();
@@ -113,8 +118,6 @@ class ShopServiceImplTest {
             store.put(fruit.getFruit(), fruit);
         }
     }
-
-    // ----------- Simple OperationStrategy stub -----------
 
     static class SimpleOperationStrategy implements OperationStrategy {
         @Override

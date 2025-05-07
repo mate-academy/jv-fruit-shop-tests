@@ -2,11 +2,11 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.service.InventoryService;
 
-public class AddOperationHandler implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
 
     private final InventoryService inventoryService;
 
-    public AddOperationHandler(InventoryService inventoryService) {
+    public BalanceOperationHandler(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 

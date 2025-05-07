@@ -1,19 +1,14 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.InventoryService;
 import java.util.Map;
 
 public class OperationStrategyProvider {
-
     private final Map<FruitTransaction.OperationType, OperationHandler> handlers;
 
-    public OperationStrategyProvider(InventoryService inventoryService) {
-        handlers = Map.of(
-                FruitTransaction.OperationType.ADD, new AddOperationHandler(inventoryService),
-                FruitTransaction.OperationType.SUPPLY, new SupplyOperationHandler(),
-                FruitTransaction.OperationType.RETURN, new ReturnOperationHandler()
-        );
+    public OperationStrategyProvider(Map<FruitTransaction.OperationType,
+            OperationHandler> handlers) {
+        this.handlers = handlers;
     }
 
     public OperationHandler getHandler(FruitTransaction.OperationType operation) {

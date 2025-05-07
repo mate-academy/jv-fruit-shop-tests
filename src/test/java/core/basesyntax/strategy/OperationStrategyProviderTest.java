@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.InventoryService;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,14 @@ class OperationStrategyProviderTest {
     @BeforeEach
     void setUp() {
         inventoryService = new InventoryService();
-        strategyProvider = new OperationStrategyProvider(inventoryService);
+        strategyProvider = new OperationStrategyProvider(
+                Map.of(
+                        FruitTransaction.OperationType.SUPPLY, new SupplyOperationHandler(),
+                        FruitTransaction.OperationType.RETURN, new ReturnOperationHandler(),
+                        FruitTransaction.OperationType.ADD,
+                        new BalanceOperationHandler(inventoryService)
+                )
+        );
     }
 
     @Test

@@ -6,6 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,13 +37,12 @@ class FruitShopServiceTest {
 
     @BeforeEach
     void setUp() {
+        inventory.clear();
         inventoryService = new InventoryService();
-        strategyProvider = new OperationStrategyProvider(inventoryService) {
-            @Override
-            public OperationHandler getHandler(FruitTransaction.OperationType operation) {
-                return new TestOperationHandler(inventoryService);
-            }
-        };
+        Map<FruitTransaction.OperationType, OperationHandler> handlers = Map.of(
+                FruitTransaction.OperationType.ADD, new TestOperationHandler(inventoryService)
+        );
+        strategyProvider = new OperationStrategyProvider(handlers);
         fruitShopService = new FruitShopService(inventoryService, strategyProvider);
     }
 

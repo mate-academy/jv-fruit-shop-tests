@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,32 +12,31 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private FileReaderImpl fileReader;
+    private static final String NON_EXISTING_FILE_PATH = "non_existing_file.csv";
+
+    private FileReader fileReader;
+    private Path emptyFile;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         fileReader = new FileReaderImpl();
+        emptyFile = Files.createTempFile("emptyTestFile", ".csv");
+        Files.write(emptyFile, List.of());
     }
 
     @Test
-    void readFile_emptyFile_success() {
-        try {
-            Path emptyFile = Files.createTempFile("emptyTestFile", ".csv");
-            Files.write(emptyFile, List.of());
-
-            List<String> result = fileReader.readFile(emptyFile.toString());
-            assertTrue(result.isEmpty());
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to create temporary file", e);
-        }
+    void readFile_emptyFile_success() throws IOException {
+        List<String> result = fileReader.readFile(emptyFile.toString());
+        assertTrue(result.isEmpty(), "Expected empty list for empty file");
     }
 
     @Test
     void readFile_nonExistingFile_throwsRuntimeException() {
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                fileReader.readFile("non_existing_file.csv")
+                fileReader.readFile(NON_EXISTING_FILE_PATH)
         );
-        assertTrue(exception.getMessage().contains("Error reading file"));
+        assertEquals("Error reading file " + NON_EXISTING_FILE_PATH, exception.getMessage());
+
     }
 
     @Test

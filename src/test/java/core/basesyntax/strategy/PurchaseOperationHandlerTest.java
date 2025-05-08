@@ -22,22 +22,23 @@ class PurchaseOperationHandlerTest {
     @Test
     void apply_ShouldThrowException_WhenQuantityIsNegative() {
         assertThrows(IllegalArgumentException.class,
-                () -> handler.apply("apple", -1),
-                "Quantity for purchase cannot be negative");
+                () -> handler.apply("apple", -1)
+        );
     }
 
     @Test
     void apply_ShouldThrowException_WhenNotEnoughStock() {
-        inventoryService.addFruit("apple", 5);
+        Storage.inventory.put("apple", 5);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> handler.apply("apple", 10));
+                () -> handler.apply("apple", 10)
+        );
         assertEquals("Not enough stock for apple", exception.getMessage());
     }
 
     @Test
     void apply_ShouldNotChangeQuantity_WhenZeroQuantityProvided() {
-        inventoryService.addFruit("apple", 10);
+        Storage.inventory.put("apple", 10);
         handler.apply("apple", 0);
-        assertEquals(10, inventoryService.getQuantity("apple"));
+        assertEquals(10, Storage.inventory.get("apple"));
     }
 }

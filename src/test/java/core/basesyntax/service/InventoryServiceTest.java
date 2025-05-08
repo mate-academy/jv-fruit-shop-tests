@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ class InventoryServiceTest {
 
     @BeforeEach
     void setUp() {
-        inventoryService = new InventoryService();
         Storage.inventory.clear();
+        inventoryService = new InventoryService();
     }
 
     @Test
@@ -50,15 +51,24 @@ class InventoryServiceTest {
     @Test
     void removeFruit_shouldThrowExceptionIfNotEnough() {
         Storage.inventory.put("mango", 2);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> inventoryService.removeFruit("mango", 5));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> inventoryService.removeFruit("mango", 5)
+        );
         assertEquals("Not enough fruit to remove", exception.getMessage());
     }
 
     @Test
     void removeFruit_shouldThrowExceptionIfFruitAbsent() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> inventoryService.removeFruit("pear", 1));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> inventoryService.removeFruit("pear", 1)
+        );
         assertEquals("Not enough fruit to remove", exception.getMessage());
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.inventory.clear();
     }
 }

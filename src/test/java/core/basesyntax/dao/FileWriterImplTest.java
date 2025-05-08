@@ -26,6 +26,7 @@ class FileWriterImplTest {
 
     @AfterEach
     void tearDown() {
+        deleteTestFile(DEFAULT_FILE_NAME);
         deleteTestFile(CUSTOM_FILE_NAME);
         deleteTestFile(EMPTY_CONTENT_FILE);
     }
@@ -41,17 +42,21 @@ class FileWriterImplTest {
         }
     }
 
+    private void assertFileContentEquals(Path filePath, String expectedContent) {
+        try {
+            String actualContent = Files.readString(filePath);
+            Assertions.assertEquals(expectedContent, actualContent);
+        } catch (IOException e) {
+            Assertions.fail("IOException occurred while reading the file: " + e.getMessage());
+        }
+    }
+
     @Test
     void writeFile_shouldWriteContentToDefaultFile_whenFileNameIsNull() {
         Path defaultFilePath = Paths.get(RESOURCES_DIR, DEFAULT_FILE_NAME);
         fileWriter.writeFile(null, TEST_CONTENT);
         Assertions.assertTrue(Files.exists(defaultFilePath));
-        try {
-            String writtenContent = Files.readString(defaultFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred during the test: " + e.getMessage());
-        }
+        assertFileContentEquals(defaultFilePath, TEST_CONTENT);
     }
 
     @Test
@@ -59,12 +64,7 @@ class FileWriterImplTest {
         Path customFilePath = Paths.get(RESOURCES_DIR, CUSTOM_FILE_NAME);
         fileWriter.writeFile(RESOURCES_DIR + CUSTOM_FILE_NAME, TEST_CONTENT);
         Assertions.assertTrue(Files.exists(customFilePath));
-        try {
-            String writtenContent = Files.readString(customFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred during the test: " + e.getMessage());
-        }
+        assertFileContentEquals(customFilePath, TEST_CONTENT);
     }
 
     @Test
@@ -73,16 +73,11 @@ class FileWriterImplTest {
         try {
             Files.createFile(customFilePath);
         } catch (IOException e) {
-            throw new RuntimeException("IOException occurred during the test: " + e.getMessage());
+            throw new RuntimeException("IOException occurred during test setup: " + e.getMessage());
         }
         fileWriter.writeFile(RESOURCES_DIR + CUSTOM_FILE_NAME, TEST_CONTENT);
         Assertions.assertTrue(Files.exists(customFilePath));
-        try {
-            String writtenContent = Files.readString(customFilePath);
-            Assertions.assertEquals(TEST_CONTENT, writtenContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred during the test: " + e.getMessage());
-        }
+        assertFileContentEquals(customFilePath, TEST_CONTENT);
     }
 
     @Test
@@ -90,11 +85,6 @@ class FileWriterImplTest {
         Path emptyContentFile = Paths.get(RESOURCES_DIR, EMPTY_CONTENT_FILE);
         fileWriter.writeFile(RESOURCES_DIR + EMPTY_CONTENT_FILE, "");
         Assertions.assertTrue(Files.exists(emptyContentFile));
-        try {
-            String writtenContent = Files.readString(emptyContentFile);
-            Assertions.assertEquals("", writtenContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred during the test: " + e.getMessage());
-        }
+        assertFileContentEquals(emptyContentFile, "");
     }
 }

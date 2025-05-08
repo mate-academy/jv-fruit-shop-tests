@@ -20,71 +20,68 @@ class FruitTransactionParserTest {
 
     @Test
     void parse_InvalidDataFormat_ThrowsIllegalArgumentException() {
-        List<String> input = Arrays.asList(
-                "s,apple",
-                "p,banana,5",
-                "orange,20"
+        List<String> input = Arrays.asList("s,apple", "p,banana,5", "orange,20");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> parser.parse(input)
         );
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> parser.parse(input));
         assertTrue(exception.getMessage().contains("Invalid data format"));
     }
 
     @Test
     void parse_InvalidQuantityFormat_ThrowsIllegalArgumentException() {
-        List<String> input = Arrays.asList(
-                "s,apple,ten",
-                "p,banana,5"
+        List<String> input = Arrays.asList("s,apple,ten", "p,banana,5");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> parser.parse(input)
         );
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> parser.parse(input));
         assertTrue(exception.getMessage().contains("Invalid quantity format"));
     }
 
     @Test
     void parse_NegativeQuantity_ThrowsIllegalArgumentException() {
-        List<String> input = Arrays.asList(
-                "s,apple,-10",
-                "p,banana,5"
+        List<String> input = Arrays.asList("s,apple,-10", "p,banana,5");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> parser.parse(input)
         );
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> parser.parse(input));
         assertTrue(exception.getMessage().contains("Quantity must be non-negative"));
     }
 
     @Test
     void parse_EmptyInput_ReturnsEmptyList() {
-        List<String> input = Arrays.asList();
-
-        List<FruitTransaction> result = parser.parse(input);
-
+        List<FruitTransaction> result = parser.parse(Arrays.asList());
         assertTrue(result.isEmpty());
     }
 
     @Test
     void parse_InvalidOperation_ThrowsIllegalArgumentException() {
-        List<String> input = Arrays.asList(
-                "x,apple,10"
+        List<String> input = Arrays.asList("x,apple,10");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> parser.parse(input)
         );
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> parser.parse(input));
         assertFalse(exception.getMessage().contains("Invalid operation type"));
     }
 
     @Test
     void parse_MixedValidAndInvalidEntries_ThrowsIllegalArgumentException() {
-        List<String> input = Arrays.asList(
-                "s,apple,10",
-                "p,banana,five",
-                "x,orange,20"
+        List<String> input = Arrays.asList("s,apple,10", "s,banana,five");
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> parser.parse(input)
         );
+        assertTrue(exception.getMessage().contains("Invalid quantity format"));
+    }
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> parser.parse(input));
-        assertFalse(exception.getMessage().contains("Invalid quantity format"));
+    @Test
+    void parse_ValidData_ReturnsCorrectFruitTransactions() {
+        List<String> input = Arrays.asList("s,apple,10", "s,banana,5");
+        List<FruitTransaction> result = parser.parse(input);
+        assertTrue(result.size() == 2);
+        assertTrue(result.get(0).getFruit().equals("apple"));
+        assertTrue(result.get(0).getQuantity() == 10);
+        assertTrue(result.get(1).getFruit().equals("banana"));
+        assertTrue(result.get(1).getQuantity() == 5);
     }
 }

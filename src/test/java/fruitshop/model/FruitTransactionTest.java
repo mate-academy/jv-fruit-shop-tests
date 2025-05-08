@@ -1,10 +1,9 @@
-package fruitshop;
+package fruitshop.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import fruitshop.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {

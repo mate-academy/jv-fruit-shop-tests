@@ -1,11 +1,10 @@
-package fruitshop;
+package fruitshop.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fruitshop.service.FileReaderService;
-import fruitshop.service.impl.FileReaderServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

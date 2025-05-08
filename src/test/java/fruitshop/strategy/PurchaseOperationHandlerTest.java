@@ -1,4 +1,4 @@
-package fruitshop;
+package fruitshop.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
-import fruitshop.strategy.PurchaseOperationHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +14,8 @@ class PurchaseOperationHandlerTest {
     private PurchaseOperationHandler handler;
 
     @BeforeEach
-    void setUp_cleanStorage() {
+    void setUp_handler() {
         handler = new PurchaseOperationHandler();
-        Storage.clear();
     }
 
     @Test
@@ -94,5 +93,10 @@ class PurchaseOperationHandlerTest {
         transaction.setQuantity(5);
 
         assertThrows(NullPointerException.class, () -> handler.apply(transaction));
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.clear();
     }
 }

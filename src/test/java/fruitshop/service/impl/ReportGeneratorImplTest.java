@@ -1,11 +1,11 @@
-package fruitshop;
+package fruitshop.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fruitshop.db.Storage;
 import fruitshop.service.ReportGenerator;
-import fruitshop.service.impl.ReportGeneratorImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,6 @@ class ReportGeneratorImplTest {
     @BeforeEach
     void setUp() {
         reportGenerator = new ReportGeneratorImpl();
-        Storage.clear();
     }
 
     @Test
@@ -49,5 +48,10 @@ class ReportGeneratorImplTest {
     void getReport_emptyStorage_headerOnly() {
         String report = reportGenerator.getReport();
         assertEquals("fruit,quantity", report);
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.clear();
     }
 }

@@ -95,7 +95,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>src/main/java/fruitshop/Main.java*</exclude>
+                        <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

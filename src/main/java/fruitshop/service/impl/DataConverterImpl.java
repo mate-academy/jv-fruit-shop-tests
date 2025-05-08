@@ -11,6 +11,9 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> lines) {
+        if (lines == null) {
+            throw new RuntimeException("Wrong input - it's nothing to convert");
+        }
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : lines) {
             if (line.equals(HEADER)) {

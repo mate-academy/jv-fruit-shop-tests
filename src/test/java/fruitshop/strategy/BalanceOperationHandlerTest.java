@@ -1,22 +1,20 @@
-package fruitshop;
+package fruitshop.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
-import fruitshop.strategy.BalanceOperationHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-
     private BalanceOperationHandler handler;
 
     @BeforeEach
-    void setUp_cleanStorage() {
+    void setUp_handler() {
         handler = new BalanceOperationHandler();
-        Storage.clear();
     }
 
     @Test
@@ -60,6 +58,11 @@ class BalanceOperationHandlerTest {
         transaction.setFruit("banana");
 
         assertThrows(IllegalArgumentException.class, () -> transaction.setQuantity(-10));
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.clear();
     }
 }
 

@@ -1,11 +1,11 @@
-package fruitshop;
+package fruitshop.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
-import fruitshop.strategy.ReturnOperationHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +13,8 @@ class ReturnOperationHandlerTest {
     private ReturnOperationHandler handler;
 
     @BeforeEach
-    void setUp_clearStorage() {
+    void setUp_handler() {
         handler = new ReturnOperationHandler();
-        Storage.clear();
     }
 
     @Test
@@ -75,5 +74,10 @@ class ReturnOperationHandlerTest {
         handler.apply(transaction);
 
         assertEquals(100, Storage.get("kiwi"));
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.clear();
     }
 }

@@ -1,4 +1,4 @@
-package fruitshop;
+package fruitshop.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
 import fruitshop.service.ShopService;
-import fruitshop.service.impl.ShopServiceImpl;
 import fruitshop.strategy.BalanceOperationHandler;
 import fruitshop.strategy.OperationHandler;
 import fruitshop.strategy.OperationStrategy;
@@ -17,6 +16,7 @@ import fruitshop.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,6 @@ class ShopServiceImplTest {
 
         OperationStrategy strategy = new OperationStrategyImpl(handlers);
         shopService = new ShopServiceImpl(strategy);
-        Storage.clear();
     }
 
     @Test
@@ -73,10 +72,15 @@ class ShopServiceImplTest {
     }
 
     private FruitTransaction transaction(FruitTransaction.Operation op, String fruit, int q) {
-        FruitTransaction t = new FruitTransaction();
-        t.setOperation(op);
-        t.setFruit(fruit);
-        t.setQuantity(q);
-        return t;
+        FruitTransaction transaction = new FruitTransaction();
+        transaction.setOperation(op);
+        transaction.setFruit(fruit);
+        transaction.setQuantity(q);
+        return transaction;
+    }
+
+    @AfterEach
+    void clearStorage() {
+        Storage.clear();
     }
 }

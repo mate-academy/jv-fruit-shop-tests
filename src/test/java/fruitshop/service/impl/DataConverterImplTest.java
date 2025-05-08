@@ -1,4 +1,4 @@
-package fruitshop;
+package fruitshop.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fruitshop.model.FruitTransaction;
 import fruitshop.service.DataConverter;
-import fruitshop.service.impl.DataConverterImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,6 +92,10 @@ class DataConverterImplTest {
 
     @Test
     void convertToTransactions_nullInput_notOk() {
-        assertThrows(NullPointerException.class, () -> dataConverter.convertToTransactions(null));
+        RuntimeException exception = assertThrows(
+                RuntimeException.class,
+                () -> dataConverter.convertToTransactions(null)
+        );
+        assertEquals("Wrong input - it's nothing to convert", exception.getMessage());
     }
 }

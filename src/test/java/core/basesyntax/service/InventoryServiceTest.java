@@ -13,7 +13,6 @@ class InventoryServiceTest {
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
         inventoryService = new InventoryService();
     }
 

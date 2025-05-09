@@ -31,26 +31,6 @@ class FileWriterImplTest {
         deleteTestFile(EMPTY_CONTENT_FILE);
     }
 
-    private void deleteTestFile(String fileName) {
-        try {
-            Path path = Paths.get(RESOURCES_DIR, fileName);
-            if (Files.exists(path)) {
-                Files.delete(path);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("IOException occurred during cleanup: " + e.getMessage());
-        }
-    }
-
-    private void assertFileContentEquals(Path filePath, String expectedContent) {
-        try {
-            String actualContent = Files.readString(filePath);
-            Assertions.assertEquals(expectedContent, actualContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred while reading the file: " + e.getMessage());
-        }
-    }
-
     @Test
     void writeFile_shouldWriteContentToDefaultFile_whenFileNameIsNull() {
         Path defaultFilePath = Paths.get(RESOURCES_DIR, DEFAULT_FILE_NAME);
@@ -86,5 +66,25 @@ class FileWriterImplTest {
         fileWriter.writeFile(RESOURCES_DIR + EMPTY_CONTENT_FILE, "");
         Assertions.assertTrue(Files.exists(emptyContentFile));
         assertFileContentEquals(emptyContentFile, "");
+    }
+
+    private void deleteTestFile(String fileName) {
+        try {
+            Path path = Paths.get(RESOURCES_DIR, fileName);
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("IOException occurred during cleanup: " + e.getMessage());
+        }
+    }
+
+    private void assertFileContentEquals(Path filePath, String expectedContent) {
+        try {
+            String actualContent = Files.readString(filePath);
+            Assertions.assertEquals(expectedContent, actualContent);
+        } catch (IOException e) {
+            Assertions.fail("IOException occurred while reading the file: " + e.getMessage());
+        }
     }
 }

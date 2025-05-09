@@ -38,10 +38,10 @@ class ShopServiceImplTest {
     @Test
     void process_validTransactions_storageUpdatedCorrectly() {
         List<FruitTransaction> transactions = List.of(
-                transaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                transaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
-                transaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
-                transaction(FruitTransaction.Operation.RETURN, "apple", 10)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10)
         );
 
         shopService.process(transactions);
@@ -51,32 +51,23 @@ class ShopServiceImplTest {
 
     @Test
     void process_nullOperation_notOk() {
-        FruitTransaction transaction = transaction(null, "banana", 20);
-
+        FruitTransaction transaction = new FruitTransaction(null, "banana", 20);
         List<FruitTransaction> transactions = List.of(transaction);
-
         RuntimeException exception = assertThrows(
                 RuntimeException.class, () -> shopService.process(transactions)
         );
+
         assertEquals("Unknown operation: null", exception.getMessage());
     }
 
     @Test
     void process_notEnoughFruitsToPurchase_notOk() {
         List<FruitTransaction> transactions = List.of(
-                transaction(FruitTransaction.Operation.BALANCE, "orange", 10),
-                transaction(FruitTransaction.Operation.PURCHASE, "orange", 20)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "orange", 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 20)
         );
 
         assertThrows(RuntimeException.class, () -> shopService.process(transactions));
-    }
-
-    private FruitTransaction transaction(FruitTransaction.Operation op, String fruit, int q) {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(op);
-        transaction.setFruit(fruit);
-        transaction.setQuantity(q);
-        return transaction;
     }
 
     @AfterEach

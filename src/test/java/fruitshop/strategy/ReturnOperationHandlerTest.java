@@ -21,11 +21,8 @@ class ReturnOperationHandlerTest {
     void apply_returnToStorage_increasedOk() {
         Storage.put("apple", 20);
 
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.RETURN);
-        transaction.setFruit("apple");
-        transaction.setQuantity(10);
-
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10);
         handler.apply(transaction);
 
         assertEquals(30, Storage.get("apple"));
@@ -33,11 +30,8 @@ class ReturnOperationHandlerTest {
 
     @Test
     void apply_returnToMissingFruit_storageInitializedOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.RETURN);
-        transaction.setFruit("banana");
-        transaction.setQuantity(15);
-
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 15);
         handler.apply(transaction);
 
         assertEquals(15, Storage.get("banana"));
@@ -45,32 +39,26 @@ class ReturnOperationHandlerTest {
 
     @Test
     void apply_nullFruit_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.RETURN);
-        transaction.setFruit(null);
-        transaction.setQuantity(5);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, null, 5);
 
         assertThrows(NullPointerException.class, () -> handler.apply(transaction));
     }
 
     @Test
     void apply_negativeQuantity_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.RETURN);
-        transaction.setFruit("orange");
-
-        assertThrows(IllegalArgumentException.class, () -> transaction.setQuantity(-5));
+        assertThrows(IllegalArgumentException.class, () -> {
+            FruitTransaction transaction =
+                    new FruitTransaction(FruitTransaction.Operation.RETURN, "orange", -5);
+        });
     }
 
     @Test
     void apply_zeroQuantity_storageUnchangedOk() {
         Storage.put("kiwi", 100);
 
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.RETURN);
-        transaction.setFruit("kiwi");
-        transaction.setQuantity(0);
-
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "kiwi", 0);
         handler.apply(transaction);
 
         assertEquals(100, Storage.get("kiwi"));

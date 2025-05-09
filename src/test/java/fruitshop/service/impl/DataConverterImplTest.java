@@ -30,15 +30,17 @@ class DataConverterImplTest {
 
         assertEquals(2, transactions.size());
 
-        FruitTransaction first = transactions.get(0);
-        assertEquals(FruitTransaction.Operation.BALANCE, first.getOperation());
-        assertEquals("banana", first.getFruit());
-        assertEquals(20, first.getQuantity());
+        FruitTransaction actualFirst = transactions.get(0);
+        FruitTransaction expectedFirst =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,"banana", 20);
 
-        FruitTransaction second = transactions.get(1);
-        assertEquals(FruitTransaction.Operation.SUPPLY, second.getOperation());
-        assertEquals("apple", second.getFruit());
-        assertEquals(10, second.getQuantity());
+        assertEquals(expectedFirst, actualFirst);
+
+        FruitTransaction actualSecond = transactions.get(1);
+        FruitTransaction expectedSecond =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY,"apple", 10);
+
+        assertEquals(expectedSecond, actualSecond);
     }
 
     @Test

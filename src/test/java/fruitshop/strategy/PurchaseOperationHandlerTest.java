@@ -21,11 +21,8 @@ class PurchaseOperationHandlerTest {
     @Test
     void apply_enoughQuantity_storageReducedOk() {
         Storage.put("apple", 50);
-
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("apple");
-        transaction.setQuantity(20);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20);
 
         handler.apply(transaction);
 
@@ -36,11 +33,8 @@ class PurchaseOperationHandlerTest {
     void apply_exactQuantity_storageZeroedOk() {
         Storage.put("banana", 10);
 
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("banana");
-        transaction.setQuantity(10);
-
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10);
         handler.apply(transaction);
 
         assertEquals(0, Storage.get("banana"));
@@ -50,10 +44,8 @@ class PurchaseOperationHandlerTest {
     void apply_notEnoughQuantity_notOk() {
         Storage.put("orange", 5);
 
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("orange");
-        transaction.setQuantity(10);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 10);
 
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> handler.apply(transaction));
@@ -63,19 +55,16 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void apply_negativeQuantity_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("apple");
-
-        assertThrows(IllegalArgumentException.class, () -> transaction.setQuantity(-3));
+        assertThrows(IllegalArgumentException.class, () -> {
+            FruitTransaction transaction =
+                    new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", -1);
+        });
     }
 
     @Test
     void apply_fruitNotInStorage_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("kiwi");
-        transaction.setQuantity(1);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "kiwi", 1);
 
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> handler.apply(transaction));
@@ -85,12 +74,8 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void apply_nullFruit_notOk() {
-        Storage.put("orange", 5);
-
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit(null);
-        transaction.setQuantity(5);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, null, 1);
 
         assertThrows(NullPointerException.class, () -> handler.apply(transaction));
     }

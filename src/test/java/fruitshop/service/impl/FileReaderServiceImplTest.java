@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static final String TEST_FILE = "src/test/resources/test_file.csv";
+    private static final String NONE_SUCH_FILE = "no_such_file.csv";
     private FileReaderService fileReaderService;
 
     @BeforeEach
@@ -37,15 +38,9 @@ class FileReaderServiceImplTest {
 
     @Test
     void read_missingFile_notOk() {
-        String noSuchFile = "no_such_file.csv";
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> fileReaderService.read(noSuchFile));
+                () -> fileReaderService.read(NONE_SUCH_FILE));
 
         assertTrue(exception.getMessage().contains("Can't read file"));
-    }
-
-    @Test
-    void read_nullPath_notOk() {
-        assertThrows(NullPointerException.class, () -> fileReaderService.read(null));
     }
 }

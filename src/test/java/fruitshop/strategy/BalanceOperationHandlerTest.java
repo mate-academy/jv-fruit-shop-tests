@@ -19,43 +19,33 @@ class BalanceOperationHandlerTest {
 
     @Test
     void apply_correctValues_storageUpdatedOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction.setFruit("apple");
-        transaction.setQuantity(100);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
 
         handler.apply(transaction);
-
         assertEquals(100, Storage.get("apple"));
     }
 
     @Test
     void apply_nullFruit_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction.setFruit(null);
-        transaction.setQuantity(50);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, null, 50);
 
         assertThrows(NullPointerException.class, () -> handler.apply(transaction));
     }
 
     @Test
     void apply_transactionWithNegativeQuantity_notOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction.setFruit("banana");
-
         assertThrows(IllegalArgumentException.class, () -> {
-            transaction.setQuantity(-5);
-            handler.apply(transaction);
+            FruitTransaction transaction =
+                    new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", -5);
         });
     }
 
     @Test
     void setQuantity_negativeQuantity_storageUpdatedNotOk() {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction.setFruit("banana");
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 5);
 
         assertThrows(IllegalArgumentException.class, () -> transaction.setQuantity(-10));
     }

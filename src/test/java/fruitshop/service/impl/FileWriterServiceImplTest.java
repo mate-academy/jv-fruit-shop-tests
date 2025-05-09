@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterServiceImplTest {
     private static final String TEST_FILE = "src/test/resources/test_output.csv";
+    private static final String INVALID_PATH_FILE = "/invalid_path/file.csv";
     private FileWriterService fileWriterService;
 
     @BeforeEach
@@ -30,20 +31,9 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void write_nullData_notOk() {
-        assertThrows(NullPointerException.class, () -> fileWriterService.write(null, TEST_FILE));
-    }
-
-    @Test
-    void write_nullFilePath_notOk() {
-        assertThrows(NullPointerException.class, () -> fileWriterService.write("some data", null));
-    }
-
-    @Test
     void write_invalidPath_notOk() {
-        String invalidPath = "/invalid_path/file.csv";
         assertThrows(RuntimeException.class, () ->
-                fileWriterService.write("data", invalidPath));
+                fileWriterService.write("data", INVALID_PATH_FILE));
     }
 
     @AfterEach

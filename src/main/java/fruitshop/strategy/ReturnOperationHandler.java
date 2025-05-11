@@ -6,9 +6,6 @@ import fruitshop.model.FruitTransaction;
 public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        if (transaction.getFruit() == null) {
-            throw new NullPointerException("Fruit can't be null");
-        }
         int newQuantity = Storage.get(transaction.getFruit()) + transaction.getQuantity();
         Storage.put(transaction.getFruit(), newQuantity);
     }

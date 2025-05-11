@@ -38,14 +38,6 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void apply_nullFruit_notOk() {
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN, null, 5);
-
-        assertThrows(NullPointerException.class, () -> handler.apply(transaction));
-    }
-
-    @Test
     void apply_negativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction transaction =

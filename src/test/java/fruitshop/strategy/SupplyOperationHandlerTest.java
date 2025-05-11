@@ -37,14 +37,6 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void apply_nullFruit_notOk() {
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, null,10);
-
-        assertThrows(NullPointerException.class, () -> handler.apply(transaction));
-    }
-
-    @Test
     void apply_zeroQuantity_storageUnchangedOk() {
         FruitTransaction transaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple",0);

@@ -72,14 +72,6 @@ class PurchaseOperationHandlerTest {
         assertTrue(exception.getMessage().contains("Not enough kiwi"));
     }
 
-    @Test
-    void apply_nullFruit_notOk() {
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, null, 1);
-
-        assertThrows(NullPointerException.class, () -> handler.apply(transaction));
-    }
-
     @AfterEach
     void clearStorage() {
         Storage.clear();

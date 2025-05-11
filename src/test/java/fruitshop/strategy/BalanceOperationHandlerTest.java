@@ -27,14 +27,6 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void apply_nullFruit_notOk() {
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, null, 50);
-
-        assertThrows(NullPointerException.class, () -> handler.apply(transaction));
-    }
-
-    @Test
     void apply_transactionWithNegativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction transaction =

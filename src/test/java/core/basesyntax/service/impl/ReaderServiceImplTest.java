@@ -23,14 +23,14 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_null_notOk() {
-        assertThrows(NullPointerException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> readerService.readFromFile(null));
     }
 
     @Test
-    void readFromFile_wrongFileName_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> readerService.readFromFile(INVALID_NAME_OF_FILE));
+    void readFromFile_emptyFile_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> readerService.readFromFile("src/test/resources/emptyFile.csv"));
     }
 
     @Test

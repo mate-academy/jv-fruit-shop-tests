@@ -38,7 +38,8 @@ public class ParserServiceImpl implements ParserService {
                 listOfTransactions.add(fruitTransaction);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid quantity value "
-                        + (transactionArray != null ? transactionArray[INDEX_OF_QUANTITY_VALUE] : null)
+                        + (transactionArray != null
+                        ? transactionArray[INDEX_OF_QUANTITY_VALUE] : null)
                         + " in transaction: " + transactions);
             }
         }

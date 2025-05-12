@@ -20,8 +20,14 @@ class ParserServiceImplTest {
 
     @Test
     void parse_null_notOk() {
-        assertThrows(NullPointerException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> parserService.parse(null));
+    }
+
+    @Test
+    void parse_emptyData_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> parserService.parse(new ArrayList<>()));
     }
 
     @Test
@@ -32,23 +38,23 @@ class ParserServiceImplTest {
         dataFromFile.add("b,apple,100");
         dataFromFile.add("s,banana,100");
 
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(20);
+        FruitTransaction bananaBalanceTransaction = new FruitTransaction();
+        bananaBalanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        bananaBalanceTransaction.setFruit("banana");
+        bananaBalanceTransaction.setQuantity(20);
 
-        FruitTransaction transaction2 = new FruitTransaction();
-        transaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction2.setFruit("apple");
-        transaction2.setQuantity(100);
+        FruitTransaction appleBalanceTransaction = new FruitTransaction();
+        appleBalanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        appleBalanceTransaction.setFruit("apple");
+        appleBalanceTransaction.setQuantity(100);
 
-        FruitTransaction transaction3 = new FruitTransaction();
-        transaction3.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction3.setFruit("banana");
-        transaction3.setQuantity(100);
+        FruitTransaction bananaSupplyTransaction = new FruitTransaction();
+        bananaSupplyTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        bananaSupplyTransaction.setFruit("banana");
+        bananaSupplyTransaction.setQuantity(100);
 
         List<FruitTransaction> expected = List
-                .of(transaction1, transaction2, transaction3);
+                .of(bananaBalanceTransaction, appleBalanceTransaction, bananaSupplyTransaction);
         List<String> validDataFromFile = new ArrayList<>(dataFromFile
                 .subList(1, dataFromFile.size()));
         List<FruitTransaction> actual = parserService.parse(validDataFromFile);

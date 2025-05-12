@@ -13,24 +13,34 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
-        if (dataFromFile.isEmpty()) {
-            throw new IllegalArgumentException("The started data file is empty.");
+        if (dataFromFile == null || dataFromFile.isEmpty()) {
+            throw new IllegalArgumentException("Input data cannot be null or empty.");
         }
         List<FruitTransaction> listOfTransactions = new ArrayList<>();
         for (String transactions : dataFromFile) {
-            String[] transactionArray = transactions
-                    .split(SEPARATOR);
-            FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction
-                            .getOperationByCode(transactionArray[INDEX_OF_OPERATION_CODE]));
-            fruitTransaction.setFruit(transactionArray[INDEX_OF_FRUIT_NAME]);
-            try {
-                fruitTransaction.setQuantity(Integer
-                                .parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
-            } catch (NumberFormatException e) {
-                System.err.println("The quantity value is not a number.");
+            if (transactions.trim().isEmpty()) {
+                continue;
             }
-            listOfTransactions.add(fruitTransaction);
+            String[] transactionArray = null;
+            try {
+                transactionArray = transactions.split(SEPARATOR);
+                if (transactionArray.length < 3) {
+                    System.err.println("Invalid transaction format! Expected 3 values, but got "
+                            + transactionArray.length + " in: " + transactions);
+                    continue;
+                }
+                FruitTransaction fruitTransaction = new FruitTransaction();
+                fruitTransaction.setOperation(FruitTransaction
+                        .getOperationByCode(transactionArray[INDEX_OF_OPERATION_CODE]));
+                fruitTransaction.setFruit(transactionArray[INDEX_OF_FRUIT_NAME]);
+                fruitTransaction.setQuantity(Integer
+                        .parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
+                listOfTransactions.add(fruitTransaction);
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid quantity value "
+                        + (transactionArray != null ? transactionArray[INDEX_OF_QUANTITY_VALUE] : null)
+                        + " in transaction: " + transactions);
+            }
         }
         return listOfTransactions;
     }

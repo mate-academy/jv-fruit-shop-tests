@@ -1,6 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.implementation.ReaderServiceImpl;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -11,10 +16,15 @@ class ReaderServiceTest {
     private static final String TEST_FILE_PATH = "src/test/java/core/basesyntax/resources/test.cvs";
     private static final String FAIL_FILE_PATH = "test.cvs";
     private static ReaderService readerService;
+    private static String TEMP_TEST_FILE_PATH;
 
     @BeforeAll
-    static void beforeAll() {
+    static void beforeAll() throws IOException {
         readerService = new ReaderServiceImpl();
+        Path originalPath = Paths.get(TEST_FILE_PATH);
+        Path tempFilePath = Files.createTempFile("test", ".cvs");
+        Files.copy(originalPath, tempFilePath, StandardCopyOption.REPLACE_EXISTING);
+        TEMP_TEST_FILE_PATH = tempFilePath.toString();
     }
 
     @Test
@@ -31,7 +41,7 @@ class ReaderServiceTest {
         expected.add("b,apple,100");
         expected.add("s,banana,100");
         expected.add("p,apple,20");
-        List<String> actual = readerService.readFromFile(TEST_FILE_PATH);
+        List<String> actual = readerService.readFromFile(TEMP_TEST_FILE_PATH);
         Assertions.assertEquals(expected.size(), actual.size());
         Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
     }

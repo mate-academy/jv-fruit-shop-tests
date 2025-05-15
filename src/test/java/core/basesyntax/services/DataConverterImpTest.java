@@ -16,23 +16,22 @@ class DataConverterImpTest {
     private static final int ZERO_POSITION = 0;
     private static final int TYPICAL_QUANTITY_TEN = 10;
     private static final String FRUIT_APPLE = "apple";
-    private static final String correctLineBalanceOperation = "b,apple,10";
-    private static final String correctLineReturnOperation = "r,apple,10";
-    private static final String correctLinePurchaseOperation = "p,apple,10";
-    private static final String correctLineSupplyOperation = "s,apple,10";
-    private static final String inCorrectLineNumberByLetters = "b,apple,ten";
-    private static final String inCorrectLineNumberZero = "b,apple,0";
-    private static final String inCorrectLineNegativeNumber = "b,apple,-10";
-    private static final String inCorrectLineMissingElementAfter = "b,apple";
-    private static final String inCorrectLineMissingElementBefore = "apple,10";
-    private static final String inCorrectLineWithWrongElement = "x,apple,10";
-    private static final String inCorrectLineWithWrongSeparator = "b;apple;10";
-    private static final String inCorrectLineExtraElement = "b,apple,10,extra";
-    private static final String inCorrectLineMissingElementWithCommasBetween = "b,apple";
-    private static final String inCorrectLineMissingElementWithCommasBefore = "b,apple";
-    private static final String inCorrectLineMissingElementWithCommasAfter = "b,apple";
-    private static final String inCorrectLineWithNull = null;
-    private static final String inCorrectLineWithEmptyString = "";
+
+    private static final String CORRECT_LINE_BALANCE = "b,apple,10";
+    private static final String CORRECT_LINE_RETURN = "r,apple,10";
+    private static final String CORRECT_LINE_PURCHASE = "p,apple,10";
+    private static final String CORRECT_LINE_SUPPLY = "s,apple,10";
+
+    private static final String INCORRECT_LINE_LETTERS_INSTEAD_OF_NUMBER = "b,apple,ten";
+    private static final String INCORRECT_LINE_ZERO_NUMBER = "b,apple,0";
+    private static final String INCORRECT_LINE_NEGATIVE_NUMBER = "b,apple,-10";
+    private static final String INCORRECT_LINE_MISSING_QUANTITY = "b,apple";
+    private static final String INCORRECT_LINE_MISSING_OPERATION = "apple,10";
+    private static final String INCORRECT_LINE_UNKNOWN_OPERATION = "x,apple,10";
+    private static final String INCORRECT_LINE_WRONG_SEPARATOR = "b;apple;10";
+    private static final String INCORRECT_LINE_EXTRA_ELEMENT = "b,apple,10,extra";
+    private static final String INCORRECT_LINE_NULL_ENTRY = null;
+    private static final String INCORRECT_LINE_EMPTY_STRING = "";
 
     private DataConverter dataConverter;
     private List<String> list;
@@ -43,152 +42,115 @@ class DataConverterImpTest {
     }
 
     @Test
-    void checkingIsEverything_WorkingWith_BalanceOperation() {
-        list = List.of(correctLineBalanceOperation);
-        List<FruitTransaction> transaction = dataConverter.convertToTransaction(list);
-        assertEquals(ONE_ELEMENT, transaction.size());
-        assertEquals(FruitTransaction.Operation.BALANCE,
-                transaction.get(ZERO_POSITION).getOperation());
-        assertEquals(FRUIT_APPLE, transaction.get(ZERO_POSITION).getFruit());
-        assertEquals(TYPICAL_QUANTITY_TEN, transaction.get(ZERO_POSITION).getQuantity());
+    void convertToTransaction_balanceOperation_ok() {
+        list = List.of(CORRECT_LINE_BALANCE);
+        List<FruitTransaction> result = dataConverter.convertToTransaction(list);
+        assertEquals(ONE_ELEMENT, result.size());
+        assertEquals(FruitTransaction.Operation.BALANCE, result.get(ZERO_POSITION).getOperation());
+        assertEquals(FRUIT_APPLE, result.get(ZERO_POSITION).getFruit());
+        assertEquals(TYPICAL_QUANTITY_TEN, result.get(ZERO_POSITION).getQuantity());
     }
 
     @Test
-    void checkingIsEverything_WorkingWith_PurchaseOperation() {
-        list = List.of(correctLinePurchaseOperation);
-        List<FruitTransaction> transaction = dataConverter.convertToTransaction(list);
-        assertEquals(ONE_ELEMENT, transaction.size());
-        assertEquals(FruitTransaction.Operation.PURCHASE,
-                transaction.get(ZERO_POSITION).getOperation());
-        assertEquals(FRUIT_APPLE, transaction.get(ZERO_POSITION).getFruit());
-        assertEquals(TYPICAL_QUANTITY_TEN, transaction.get(ZERO_POSITION).getQuantity());
+    void convertToTransaction_purchaseOperation_ok() {
+        list = List.of(CORRECT_LINE_PURCHASE);
+        List<FruitTransaction> result = dataConverter.convertToTransaction(list);
+        assertEquals(ONE_ELEMENT, result.size());
+        assertEquals(FruitTransaction.Operation.PURCHASE, result.get(ZERO_POSITION).getOperation());
     }
 
     @Test
-    void checkingIsEverything_WorkingWith_ReturnOperation() {
-        list = List.of(correctLineReturnOperation);
-        List<FruitTransaction> transaction = dataConverter.convertToTransaction(list);
-        assertEquals(ONE_ELEMENT, transaction.size());
-        assertEquals(FruitTransaction.Operation.RETURN,
-                transaction.get(ZERO_POSITION).getOperation());
-        assertEquals(FRUIT_APPLE, transaction.get(ZERO_POSITION).getFruit());
-        assertEquals(TYPICAL_QUANTITY_TEN, transaction.get(ZERO_POSITION).getQuantity());
+    void convertToTransaction_returnOperation_ok() {
+        list = List.of(CORRECT_LINE_RETURN);
+        List<FruitTransaction> result = dataConverter.convertToTransaction(list);
+        assertEquals(ONE_ELEMENT, result.size());
+        assertEquals(FruitTransaction.Operation.RETURN, result.get(ZERO_POSITION).getOperation());
     }
 
     @Test
-    void checkingIsEverything_WorkingWith_SupplyOperation() {
-        list = List.of(correctLineSupplyOperation);
-        List<FruitTransaction> transaction = dataConverter.convertToTransaction(list);
-        assertEquals(ONE_ELEMENT, transaction.size());
-        assertEquals(FruitTransaction.Operation.SUPPLY,
-                transaction.get(ZERO_POSITION).getOperation());
-        assertEquals(FRUIT_APPLE, transaction.get(ZERO_POSITION).getFruit());
-        assertEquals(TYPICAL_QUANTITY_TEN, transaction.get(ZERO_POSITION).getQuantity());
+    void convertToTransaction_supplyOperation_ok() {
+        list = List.of(CORRECT_LINE_SUPPLY);
+        List<FruitTransaction> result = dataConverter.convertToTransaction(list);
+        assertEquals(ONE_ELEMENT, result.size());
+        assertEquals(FruitTransaction.Operation.SUPPLY, result.get(ZERO_POSITION).getOperation());
     }
 
     @Test
-    void convertToTransaction_EmptyList_ReturnsEmptyList() {
+    void convertToTransaction_emptyList_returnsEmptyList() {
         List<FruitTransaction> result = dataConverter.convertToTransaction(Collections.emptyList());
-        assertNotNull(result, "Method mustn't return null");
-        assertEquals(0, result.size(), "List must be empty");
+        assertNotNull(result);
+        assertEquals(0, result.size());
     }
 
     @Test
-    void convertToTransaction_IncorrectNumber_ThrowsException() {
-        list = List.of(inCorrectLineNumberByLetters);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to incorrect number format");
+    void convertToTransaction_lettersInsteadOfNumber_throwsException() {
+        list = List.of(INCORRECT_LINE_LETTERS_INSTEAD_OF_NUMBER);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void convertToTransaction_IncorrectNumberZero_ThrowsException() {
-        list = List.of(inCorrectLineNumberZero);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to incorrect number format");
+    void convertToTransaction_zeroQuantity_throwsException() {
+        list = List.of(INCORRECT_LINE_ZERO_NUMBER);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void convertToTransaction_IncorrectNegativeNumber_ThrowsException() {
-        list = List.of(inCorrectLineNegativeNumber);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to incorrect number format");
+    void convertToTransaction_negativeQuantity_throwsException() {
+        list = List.of(INCORRECT_LINE_NEGATIVE_NUMBER);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void convertToTransaction_IncorrectSeparator_ThrowsException() {
-        list = List.of(inCorrectLineWithWrongSeparator);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to incorrect separator usage");
+    void convertToTransaction_wrongSeparator_throwsException() {
+        list = List.of(INCORRECT_LINE_WRONG_SEPARATOR);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void convertToTransaction_IncorrectElement_ThrowsException() {
-        list = List.of(inCorrectLineWithWrongElement);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to unrecognized operation type");
+    void convertToTransaction_unknownOperation_throwsException() {
+        list = List.of(INCORRECT_LINE_UNKNOWN_OPERATION);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void checkLineWithAMissingElement_Before() {
-        list = List.of(inCorrectLineMissingElementBefore);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to missing operation type");
+    void convertToTransaction_missingQuantity_throwsException() {
+        list = List.of(INCORRECT_LINE_MISSING_QUANTITY);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void checkLineWithAMissingElement_After() {
-        list = List.of(inCorrectLineMissingElementAfter);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to missing quantity field");
+    void convertToTransaction_missingOperation_throwsException() {
+        list = List.of(INCORRECT_LINE_MISSING_OPERATION);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void checkLineWithAMissingElement_AfterWithComma() {
-        list = List.of(inCorrectLineMissingElementWithCommasAfter);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to missing element after comma");
+    void convertToTransaction_extraElement_throwsException() {
+        list = List.of(INCORRECT_LINE_EXTRA_ELEMENT);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void checkLineWithAMissingElement_BeforeWithComma() {
-        list = List.of(inCorrectLineMissingElementWithCommasBefore);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to missing element before comma");
-    }
-
-    @Test
-    void checkLineWithAMissingElement_BetweenWithComma() {
-        list = List.of(inCorrectLineMissingElementWithCommasBetween);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to missing element between commas");
-    }
-
-    @Test
-    void checkLineWithExtraElement() {
-        list = List.of(inCorrectLineExtraElement);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected exception due to extra unexpected element");
-    }
-
-    @Test
-    void checkLineWithNull() {
-        assertThrows(NullPointerException.class, () -> dataConverter.convertToTransaction(null),
-                "Expected NullPointerException due to null input");
-    }
-
-    @Test
-    void checkLineWithDataNull() {
+    void convertToTransaction_listContainsNullEntry_throwsException() {
         list = new ArrayList<>();
-        list.add(inCorrectLineWithNull);
-        assertThrows(NullPointerException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected NullPointerException due to null entry in the list");
+        list.add(INCORRECT_LINE_NULL_ENTRY);
+        assertThrows(NullPointerException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 
     @Test
-    void checkLineWithEmptyString() {
+    void convertToTransaction_emptyString_throwsException() {
         list = new ArrayList<>();
-        list.add(inCorrectLineWithEmptyString);
-        assertThrows(IllegalArgumentException.class, () -> dataConverter.convertToTransaction(list),
-                "Expected NullPointerException due to empty list");
+        list.add(INCORRECT_LINE_EMPTY_STRING);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(list));
     }
 }

@@ -44,37 +44,10 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
         WriterService writeService = new WriterServiceImp();
 
-        List<String> fileData;
-        try {
-            fileData = readService.read(INPUT_FILE);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to read input file: " + INPUT_FILE, e);
-        }
-
-        List<FruitTransaction> transactions;
-        try {
-            transactions = dataConverter.convertToTransaction(fileData);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to convert data to transactions", e);
-        }
-
-        try {
-            transactionProcessor.processTransactions(transactions);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to process transactions", e);
-        }
-
-        String report;
-        try {
-            report = reportGenerator.generateReport();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to generate report", e);
-        }
-
-        try {
-            writeService.write(OUTPUT_FILE, report);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to write report to file: " + OUTPUT_FILE, e);
-        }
+        List<String> fileData = readService.read(INPUT_FILE);
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
+        transactionProcessor.processTransactions(transactions);
+        String report = reportGenerator.generateReport();
+        writeService.write(OUTPUT_FILE, report);
     }
 }

@@ -18,12 +18,9 @@ public class ReportGeneratorImp implements ReportGenerator {
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
         if (fruits == null) {
-            return HEADER + System.lineSeparator();
+            return report.toString();
         }
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            if (entry.getKey() == null || entry.getValue() == null) {
-                continue;
-            }
             report.append(entry.getKey())
                     .append(COMMA)
                     .append(entry.getValue())

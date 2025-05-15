@@ -1,46 +1,57 @@
 package core.basesyntax.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.services.operations.BalanceOperation;
+import core.basesyntax.services.operations.PurchaseOperation;
+import core.basesyntax.services.operations.ReturnOperation;
+import core.basesyntax.services.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class TransactionProcessorTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
-    private OperationHandler balanceHandler;
-    private OperationHandler supplyHandler;
-    private OperationHandler purchaseHandler;
-    private OperationHandler returnHandler;
+    private StorageService storageService;
+    private TransactionProcessor processor;
 
     @BeforeEach
     void setUp() {
-        operationHandlers = new HashMap<>();
-        balanceHandler = Mockito.mock(OperationHandler.class);
-        supplyHandler = Mockito.mock(OperationHandler.class);
-        purchaseHandler = Mockito.mock(OperationHandler.class);
-        returnHandler = Mockito.mock(OperationHandler.class);
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, balanceHandler);
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, supplyHandler);
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, purchaseHandler);
-        operationHandlers.put(FruitTransaction.Operation.RETURN, returnHandler);
+        storageService = new StorageServiceImp();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(storageService));
+        processor = new TransactionProcessor(operationHandlers);
+    }
+
+    @AfterEach
+    void tearDown() {
+        storageService.clear();
     }
 
     @Test
-    void processTransactions_validTransaction_shouldCallHandler() {
+    void processTransactions_validTransaction_shouldUpdateStorage() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "grape", 20)
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 20)
         );
-        TransactionProcessor processor = new TransactionProcessor(operationHandlers);
+
         processor.processTransactions(transactions);
-        Mockito.verify(balanceHandler).apply(transactions.get(0));
-        Mockito.verify(supplyHandler).apply(transactions.get(1));
-        Mockito.verify(purchaseHandler).apply(transactions.get(2));
-        Mockito.verify(returnHandler).apply(transactions.get(3));
+
+        int expectedQuantity = 100 + 50 - 30 + 20;
+        int actualQuantity = storageService.getQuantity("apple");
+
+        assertEquals(expectedQuantity, actualQuantity);
     }
 }

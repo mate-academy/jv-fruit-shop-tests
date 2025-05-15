@@ -1,35 +1,37 @@
 package core.basesyntax.services;
 
-import core.basesyntax.db.Storage;
+import java.util.HashMap;
 import java.util.Map;
 
 public class StorageServiceImp implements StorageService {
+    private final Map<String, Integer> fruitMap = new HashMap<>();
+
     @Override
     public void add(String fruit, int quantity) {
         if (fruit == null || quantity < 0) {
             throw new IllegalArgumentException("Fruit name cannot be null and "
                     + "quantity must be non-negative");
         }
-        Storage.fruitMap.put(fruit, Storage.fruitMap.getOrDefault(fruit, 0) + quantity);
+        fruitMap.put(fruit, fruitMap.getOrDefault(fruit, 0) + quantity);
     }
 
     @Override
     public void remove(String fruit, int quantity) {
-        if (fruit == null || !Storage.fruitMap.containsKey(fruit)) {
+        if (fruit == null || !fruitMap.containsKey(fruit)) {
             throw new RuntimeException("Fruit not found in storage: " + fruit);
         }
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity to remove cannot be negative");
         }
-        int currentQuantity = Storage.fruitMap.get(fruit);
+        int currentQuantity = fruitMap.get(fruit);
         if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in storage to remove " + quantity);
         }
         int newQuantity = currentQuantity - quantity;
         if (newQuantity == 0) {
-            Storage.fruitMap.remove(fruit);
+            fruitMap.remove(fruit);
         } else {
-            Storage.fruitMap.put(fruit, newQuantity);
+            fruitMap.put(fruit, newQuantity);
         }
     }
 
@@ -38,16 +40,25 @@ public class StorageServiceImp implements StorageService {
         if (fruit == null) {
             throw new IllegalArgumentException("Fruit name cannot be null");
         }
-        return Storage.fruitMap.getOrDefault(fruit, 0);
+        return fruitMap.getOrDefault(fruit, 0);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return Map.copyOf(Storage.fruitMap);
+        return Map.copyOf(fruitMap);
     }
 
     @Override
     public void clear() {
-        Storage.fruitMap.clear();
+        fruitMap.clear();
+    }
+
+    @Override
+    public void update(String fruit, int quantity) {
+        if (fruit == null || quantity < 0) {
+            throw new IllegalArgumentException("Fruit name cannot "
+                    + "be null and quantity must be non-negative");
+        }
+        fruitMap.put(fruit, quantity);
     }
 }

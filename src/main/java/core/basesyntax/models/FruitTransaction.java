@@ -37,13 +37,12 @@ public class FruitTransaction {
 
         public static Operation fromString(String value) {
             for (Operation op : Operation.values()) {
-                if (op.code.equalsIgnoreCase(value)) {
+                if (op.code.equals(value)) {
                     return op;
                 }
             }
             throw new IllegalArgumentException("No enum constant for value: " + value);
         }
     }
-
 }
 

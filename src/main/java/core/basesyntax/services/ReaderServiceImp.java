@@ -12,14 +12,14 @@ public class ReaderServiceImp implements ReaderService {
     public List<String> read(String filePath) {
         List<String> fileData = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-            bufferedReader.readLine();
+            bufferedReader.readLine(); // Пропускаємо заголовок
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 fileData.add(line);
             }
-            return fileData;
         } catch (IOException e) {
-            throw new ReadDataFromFileException("Can't read filePath: " + filePath);
+            throw new ReadDataFromFileException("Can't read file from path: " + filePath, e);
         }
+        return fileData;
     }
 }

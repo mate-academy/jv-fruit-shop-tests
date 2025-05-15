@@ -12,4 +12,6 @@ public interface StorageService {
     Map<String, Integer> getAll();
 
     void clear();
+
+    void update(String fruit, int newQuantity);
 }

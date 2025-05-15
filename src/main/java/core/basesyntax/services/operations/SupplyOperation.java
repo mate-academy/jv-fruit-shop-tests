@@ -15,8 +15,7 @@ public class SupplyOperation implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        int currentQuantity = storageService.getQuantity(fruit);
-        storageService.add(fruit, currentQuantity + quantity); // додаємо до поточної кількості
+        storageService.add(fruit, quantity); //
     }
 }
 

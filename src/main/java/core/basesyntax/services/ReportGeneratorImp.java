@@ -13,20 +13,17 @@ public class ReportGeneratorImp implements ReportGenerator {
 
     @Override
     public String generateReport() {
-
-        Map<String, Integer> fruits = storageService.getAll();
-        StringBuilder report = new StringBuilder();
-        report.append(HEADER).append(System.lineSeparator());
-        if (fruits == null) {
-            return report.toString();
-        }
-        for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            report.append(entry.getKey())
-                    .append(COMMA)
-                    .append(entry.getValue())
-                    .append(System.lineSeparator());
-        }
-
+        StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
+        storageService.getAll().entrySet().stream()
+                .sorted(Map.Entry.comparingByKey()) // сортоване за назвою фрукта
+                .forEach(entry -> {
+                    if (entry.getKey() != null && entry.getValue() != null) {
+                        report.append(entry.getKey())
+                                .append(",")
+                                .append(entry.getValue())
+                                .append(System.lineSeparator());
+                    }
+                });
         return report.toString();
     }
 }

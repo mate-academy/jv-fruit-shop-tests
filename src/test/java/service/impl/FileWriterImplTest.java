@@ -1,6 +1,7 @@
 package service.impl;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -8,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.FileWriter;
@@ -16,6 +16,7 @@ import service.FileWriter;
 class FileWriterImplTest {
 
     private Path filePath;
+
     private FileWriter fileWriter;
 
     @BeforeEach
@@ -31,10 +32,11 @@ class FileWriterImplTest {
 
     @Test
     void writeToFile_ok() throws IOException {
+
         fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
 
         String result = Files.readString(filePath);
-        Assertions.assertEquals("fruit,quantity\napple,20\n", result);
+        assertEquals("fruit,quantity\napple,20\n", result);
     }
 
     @Test
@@ -55,6 +57,12 @@ class FileWriterImplTest {
         fileWriter.write(filePath.toString(), "");
 
         String fileContent = Files.readString(filePath);
-        Assertions.assertEquals("", fileContent);
+        assertEquals("", fileContent);
+
+        FileWriterImpl fileWriter = new FileWriterImpl();
+        fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
+
+        String result = Files.readString(filePath);
+        assertEquals("fruit,quantity\napple,20\n", result);
     }
 }

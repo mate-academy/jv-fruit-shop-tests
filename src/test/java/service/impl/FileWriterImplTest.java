@@ -1,6 +1,7 @@
 package service.impl;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -16,12 +17,15 @@ import service.FileWriter;
 class FileWriterImplTest {
 
     private Path filePath;
+
     private FileWriter fileWriter;
 
     @BeforeEach
     void setUp() throws IOException {
         filePath = Files.createTempFile("reportToRead", ".csv");
+
         fileWriter = new FileWriterImpl();
+
     }
 
     @AfterEach
@@ -31,6 +35,7 @@ class FileWriterImplTest {
 
     @Test
     void writeToFile_ok() throws IOException {
+
         fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
 
         String result = Files.readString(filePath);
@@ -56,5 +61,11 @@ class FileWriterImplTest {
 
         String fileContent = Files.readString(filePath);
         Assertions.assertEquals("", fileContent);
+
+        FileWriterImpl fileWriter = new FileWriterImpl();
+        fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
+
+        String result = Files.readString(filePath);
+        assertEquals("fruit,quantity\napple,20\n", result);
     }
 }

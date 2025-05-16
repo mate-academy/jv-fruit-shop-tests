@@ -26,6 +26,7 @@ class ReportGeneratorImplTest {
     void getCorrectReport_Ok() {
         Storage.storage.put("banana", 20);
         Storage.storage.put("apple", 100);
+
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator();

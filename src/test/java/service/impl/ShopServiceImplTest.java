@@ -25,6 +25,7 @@ class ShopServiceImplTest {
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
                 FruitTransaction.Operation.RETURN, new ReturnOperation(),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation())));
+        Storage.storage.clear();
     }
 
     @AfterEach

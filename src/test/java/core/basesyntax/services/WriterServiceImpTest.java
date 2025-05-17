@@ -63,12 +63,8 @@ class WriterServiceImpTest {
     void write_ReadOnlyFile_ThrowsException(@TempDir Path tempDir) throws IOException {
         Path tempFile = Files.createTempFile(tempDir, test, format);
         tempFile.toFile().setWritable(false);
-        try {
-            assertThrows(WriteDataToFileException.class, () ->
-                    writerServiceImp.write(tempFile.toString(), expectedData)
-            );
-        } finally {
-            tempFile.toFile().setWritable(true);
-        }
+        assertThrows(WriteDataToFileException.class, () ->
+                writerServiceImp.write(tempFile.toString(), expectedData)
+        );
     }
 }

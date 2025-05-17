@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class StorageServiceImpTest {
@@ -15,11 +15,10 @@ class StorageServiceImpTest {
     private static final int NEGATIVE_TYPICAL_QUANTITY_TEN = -10;
     private static final int TYPICAL_QUANTITY_FIVE = 5;
     private static final int TYPICAL_QUANTITY_ZERO = 0;
-    private StorageServiceImp storageService;
+    private StorageServiceImp storageService = new StorageServiceImp();
 
-    @BeforeEach
-    void setUp() {
-        storageService = new StorageServiceImp();
+    @AfterEach
+    void tearDown() {
         storageService.clear();
     }
 
@@ -34,53 +33,40 @@ class StorageServiceImpTest {
     void addFruit_newFruit_storageContains() {
         storageService.add("apple", TYPICAL_QUANTITY_TEN);
         int getQuantity = storageService.getQuantity("apple");
-        assertEquals(TYPICAL_QUANTITY_TEN, getQuantity, "Error, quantity expected: "
-                + TYPICAL_QUANTITY_TEN + " but was: " + getQuantity);
+        assertEquals(TYPICAL_QUANTITY_TEN, getQuantity);
     }
 
     @Test
     void addFruits_newFruits_storageContains() {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
         storageService.add("apple", TYPICAL_QUANTITY_FIVE);
-        int quantityBanana = storageService.getQuantity("banana");
-        int quantityApple = storageService.getQuantity("apple");
-        assertEquals(TYPICAL_QUANTITY_TEN, quantityBanana, "Error, quantityBanana expected: "
-                + TYPICAL_QUANTITY_TEN + " but was: " + quantityBanana);
-        assertEquals(TYPICAL_QUANTITY_FIVE, quantityApple, "Error, quantityApple expected: "
-                + TYPICAL_QUANTITY_FIVE + " but was: " + quantityApple);
+        assertEquals(TYPICAL_QUANTITY_TEN, storageService.getQuantity("banana"));
+        assertEquals(TYPICAL_QUANTITY_FIVE, storageService.getQuantity("apple"));
     }
 
     @Test
     void addSameFruits_newFruits_storageContains() {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
         storageService.add("banana", TYPICAL_QUANTITY_FIVE);
-        int quantityBanana = storageService.getQuantity("banana");
-        assertEquals(TYPICAL_QUANTITY_FIFTEEN, quantityBanana, "Error, quantityBanana expected: "
-                + TYPICAL_QUANTITY_FIFTEEN + " but was: " + quantityBanana);
+        assertEquals(TYPICAL_QUANTITY_FIFTEEN, storageService.getQuantity("banana"));
     }
 
     @Test
     void addMinusFruit_NotOk() {
         assertThrows(IllegalArgumentException.class, () ->
-                        storageService.add("banana", NEGATIVE_TYPICAL_QUANTITY_TEN),
-                "Expected IllegalArgumentException "
-                        + "when adding negative quantity"
-        );
+                storageService.add("banana", NEGATIVE_TYPICAL_QUANTITY_TEN));
     }
 
     @Test
     void thisFruitIsAbsent_IsOk() {
-        int getQuantity = storageService.getQuantity("mango");
-        assertEquals(0, getQuantity, "This fruit can't be here");
+        assertEquals(0, storageService.getQuantity("mango"));
     }
 
     @Test
     void removeFruit_existingFruit_quantityDecrease() {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
         storageService.remove("banana", TYPICAL_QUANTITY_FIVE);
-        int quantity = storageService.getQuantity("banana");
-        assertEquals(TYPICAL_QUANTITY_FIVE, quantity, "Error: result must be: "
-                + TYPICAL_QUANTITY_FIVE);
+        assertEquals(TYPICAL_QUANTITY_FIVE, storageService.getQuantity("banana"));
     }
 
     @Test
@@ -92,33 +78,28 @@ class StorageServiceImpTest {
 
     @Test
     void removeFruit_notExistingFruit_quantityDecrease() {
-        assertThrows(RuntimeException.class, () -> storageService
-                .remove("banana", TYPICAL_QUANTITY_FIVE), "Expected RuntimeException "
-                + "when trying to remove a non-existing fruit");
+        assertThrows(RuntimeException.class, () ->
+                storageService.remove("banana", TYPICAL_QUANTITY_FIVE));
     }
 
     @Test
     void addRemoveFruit_existingFruit_badQuantityDecrease() {
         storageService.add("banana", TYPICAL_QUANTITY_FIVE);
-        assertThrows(RuntimeException.class, () -> storageService
-                .remove("banana", TYPICAL_QUANTITY_TEN),"Expected "
-                + "RuntimeException when trying to remove more than available quantity"
-        );
+        assertThrows(RuntimeException.class, () ->
+                storageService.remove("banana", TYPICAL_QUANTITY_TEN));
     }
 
     @Test
     void removeFruit_existingFruit_negativeQuantityDecrease() {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
-        assertThrows(IllegalArgumentException.class, () -> storageService
-                .remove("banana", NEGATIVE_TYPICAL_QUANTITY_TEN), "Expected "
-                + "IllegalArgumentException "
-                + "when trying to remove a existing fruit with negative Decrease");
+        assertThrows(IllegalArgumentException.class, () ->
+                storageService.remove("banana", NEGATIVE_TYPICAL_QUANTITY_TEN));
     }
 
     @Test
     void removeZeroFruit_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> storageService.remove(null, TYPICAL_QUANTITY_FIVE));
+        assertThrows(RuntimeException.class, () ->
+                storageService.remove(null, TYPICAL_QUANTITY_FIVE));
     }
 
     @Test
@@ -126,8 +107,7 @@ class StorageServiceImpTest {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
         storageService.add("apple", TYPICAL_QUANTITY_FIVE);
         storageService.clear();
-        assertTrue(storageService.getAll().isEmpty(),
-                "Expected storage to be empty after clear");
+        assertTrue(storageService.getAll().isEmpty());
     }
 
     @Test
@@ -135,8 +115,8 @@ class StorageServiceImpTest {
         storageService.add("banana", TYPICAL_QUANTITY_TEN);
         storageService.add("apple", TYPICAL_QUANTITY_FIVE);
         Map<String, Integer> all = storageService.getAll();
-        assertTrue(all.containsKey("banana"), "Expected 'banana' to be present");
-        assertTrue(all.containsKey("apple"), "Expected 'apple' to be present");
+        assertTrue(all.containsKey("banana"));
+        assertTrue(all.containsKey("apple"));
         assertEquals(TYPICAL_QUANTITY_TEN, all.get("banana"));
         assertEquals(TYPICAL_QUANTITY_FIVE, all.get("apple"));
         assertThrows(UnsupportedOperationException.class, () ->

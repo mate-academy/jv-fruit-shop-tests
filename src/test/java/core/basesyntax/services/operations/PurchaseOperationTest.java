@@ -15,13 +15,13 @@ class PurchaseOperationTest {
     @BeforeEach
     void setUp() {
         storageService = new StorageServiceImp();
-        storageService.clear(); // очищення перед кожним тестом
+        storageService.clear();
         purchaseOperation = new PurchaseOperation(storageService);
     }
 
     @Test
     void apply_validTransaction_shouldDecreaseQuantityCorrectly() {
-        storageService.add("apple", 20); // додали початкову кількість
+        storageService.add("apple", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 "apple",
@@ -31,6 +31,6 @@ class PurchaseOperationTest {
         purchaseOperation.apply(fruitTransaction);
 
         int actualQuantity = storageService.getQuantity("apple");
-        assertEquals(10, actualQuantity); // 20 - 10 = 10
+        assertEquals(10, actualQuantity);
     }
 }

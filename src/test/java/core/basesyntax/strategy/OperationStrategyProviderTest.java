@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import core.basesyntax.model.FruitTransaction;
@@ -20,7 +21,7 @@ class OperationStrategyProviderTest {
                         FruitTransaction.OperationType.SUPPLY, new SupplyOperationHandler(),
                         FruitTransaction.OperationType.RETURN, new ReturnOperationHandler(),
                         FruitTransaction.OperationType.ADD,
-                        new BalanceOperationHandler(inventoryService)
+                        new BalanceOperationHandler()
                 )
         );
     }
@@ -48,8 +49,12 @@ class OperationStrategyProviderTest {
 
     @Test
     void getHandler_shouldReturnCorrectHandlerForEachOperation() {
-        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.SUPPLY));
-        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.RETURN));
-        assertNotNull(strategyProvider.getHandler(FruitTransaction.OperationType.ADD));
+        assertEquals(SupplyOperationHandler.class,
+                strategyProvider.getHandler(FruitTransaction.OperationType.SUPPLY).getClass());
+        assertEquals(ReturnOperationHandler.class,
+                strategyProvider.getHandler(FruitTransaction.OperationType.RETURN).getClass());
+        assertEquals(BalanceOperationHandler.class,
+                strategyProvider.getHandler(FruitTransaction.OperationType.ADD).getClass());
     }
+
 }

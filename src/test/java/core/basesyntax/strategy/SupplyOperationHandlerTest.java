@@ -4,19 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.InventoryService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
 
-    private InventoryService inventoryService;
     private SupplyOperationHandler supplyOperationHandler;
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
-        inventoryService = new InventoryService();
         supplyOperationHandler = new SupplyOperationHandler();
     }
 
@@ -29,9 +26,13 @@ class SupplyOperationHandlerTest {
 
     @Test
     void apply_ShouldIncreaseQuantity_WhenFruitExists() {
-        inventoryService.addFruit("orange", 10);
+        Storage.inventory.put("orange", 10);
         supplyOperationHandler.apply("orange", 5);
-        assertEquals(15, inventoryService.getQuantity("orange"));
+        assertEquals(15, Storage.inventory.get("orange"));
     }
 
+    @AfterEach
+    void setUpAfter() {
+        Storage.inventory.clear();
+    }
 }

@@ -4,7 +4,6 @@ import core.basesyntax.dao.CsvFileWriter;
 import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitTransactionParser;
@@ -13,6 +12,7 @@ import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
+import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
 import java.net.URL;
@@ -31,9 +31,10 @@ public class Main {
         InventoryService inventoryService = new InventoryService();
 
         Map<FruitTransaction.OperationType, OperationHandler> handlers = Map.of(
-                FruitTransaction.OperationType.ADD, new BalanceOperationHandler(inventoryService),
+                FruitTransaction.OperationType.ADD, new BalanceOperationHandler(),
                 FruitTransaction.OperationType.SUPPLY, new SupplyOperationHandler(),
-                FruitTransaction.OperationType.RETURN, new ReturnOperationHandler()
+                FruitTransaction.OperationType.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.OperationType.PURCHASE, new PurchaseOperationHandler()
         );
 
         OperationStrategyProvider strategyProvider = new OperationStrategyProvider(handlers);
@@ -50,7 +51,7 @@ public class Main {
         List<String> lines = fileReader.readFile(inputFilePath);
         List<FruitTransaction> transactions = parser.parse(lines);
         fruitShopService.processTransactions(transactions);
-        String report = reportGeneratorService.generateReport(Storage.inventory);
+        String report = reportGeneratorService.generateReport();
         fileWriter.writeFile(OUTPUT_FILE_PATH.toString(), report);
     }
 }

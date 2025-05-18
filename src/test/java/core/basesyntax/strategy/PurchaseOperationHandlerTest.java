@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.InventoryService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,6 @@ class PurchaseOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
         inventoryService = new InventoryService();
         handler = new PurchaseOperationHandler();
     }
@@ -40,5 +40,10 @@ class PurchaseOperationHandlerTest {
         Storage.inventory.put("apple", 10);
         handler.apply("apple", 0);
         assertEquals(10, Storage.inventory.get("apple"));
+    }
+
+    @AfterEach
+    void setUpAfter() {
+        Storage.inventory.clear();
     }
 }

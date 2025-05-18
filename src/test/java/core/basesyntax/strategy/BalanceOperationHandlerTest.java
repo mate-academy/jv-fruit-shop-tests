@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.InventoryService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,7 @@ class BalanceOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
-        balanceOperationHandler = new BalanceOperationHandler(new InventoryService());
+        balanceOperationHandler = new BalanceOperationHandler();
     }
 
     @Test
@@ -42,5 +41,10 @@ class BalanceOperationHandlerTest {
         Storage.inventory.put("apple", 10);
         balanceOperationHandler.apply("apple", 0);
         assertEquals(10, Storage.inventory.get("apple"));
+    }
+
+    @AfterEach
+    void setUpAfter() {
+        Storage.inventory.clear();
     }
 }

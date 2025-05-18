@@ -13,6 +13,7 @@ import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +22,13 @@ class FruitShopServiceTest {
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
         InventoryService inventoryService = new InventoryService();
         OperationStrategyProvider strategyProvider = new OperationStrategyProvider(
                 Map.of(
                         OperationType.ADD, new PurchaseOperationHandler(),
                         OperationType.SUPPLY, new SupplyOperationHandler(),
-                        OperationType.RETURN, new ReturnOperationHandler()
+                        OperationType.RETURN, new ReturnOperationHandler(),
+                        OperationType.PURCHASE, new PurchaseOperationHandler()
                 )
         );
         service = new FruitShopService(inventoryService, strategyProvider);
@@ -85,5 +86,10 @@ class FruitShopServiceTest {
         service.processTransactions(List.of());
 
         assertEquals(10, Storage.inventory.get("apple"));
+    }
+
+    @AfterEach
+    void setUpAfter() {
+        Storage.inventory.clear();
     }
 }

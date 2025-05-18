@@ -3,11 +3,9 @@ package core.basesyntax.strategy;
 import core.basesyntax.service.InventoryService;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private final InventoryService inventoryService = new InventoryService();
 
-    private final InventoryService inventoryService;
-
-    public BalanceOperationHandler(InventoryService inventoryService) {
-        this.inventoryService = inventoryService;
+    public BalanceOperationHandler() {
     }
 
     @Override

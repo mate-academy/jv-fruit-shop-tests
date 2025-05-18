@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -77,11 +78,12 @@ class FruitTransactionParserTest {
     @Test
     void parse_ValidData_ReturnsCorrectFruitTransactions() {
         List<String> input = Arrays.asList("s,apple,10", "s,banana,5");
-        List<FruitTransaction> result = parser.parse(input);
-        assertTrue(result.size() == 2);
-        assertTrue(result.get(0).getFruit().equals("apple"));
-        assertTrue(result.get(0).getQuantity() == 10);
-        assertTrue(result.get(1).getFruit().equals("banana"));
-        assertTrue(result.get(1).getQuantity() == 5);
+
+        List<FruitTransaction> expected = Arrays.asList(
+                new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "apple", 10),
+                new FruitTransaction(FruitTransaction.OperationType.SUPPLY, "banana", 5)
+        );
+        List<FruitTransaction> actual = parser.parse(input);
+        assertEquals(expected, actual);
     }
 }

@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
@@ -17,12 +16,6 @@ class FileWriterImplTest {
     private static final String CUSTOM_FILE_NAME = "testCustomFile.csv";
     private static final String EMPTY_CONTENT_FILE = "emptyContentFile.csv";
     private final FileWriterImpl fileWriter = new FileWriterImpl();
-
-    @BeforeEach
-    void setUp() {
-        deleteTestFile(CUSTOM_FILE_NAME);
-        deleteTestFile(EMPTY_CONTENT_FILE);
-    }
 
     @AfterEach
     void tearDown() {

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,6 @@ class ReturnOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Storage.inventory.clear();
         returnHandler = new ReturnOperationHandler();
     }
 
@@ -43,5 +43,10 @@ class ReturnOperationHandlerTest {
         Storage.inventory.put("banana", 3);
         returnHandler.apply("banana", 2);
         assertEquals(5, Storage.inventory.get("banana"));
+    }
+
+    @AfterEach
+    void setUpAfter() {
+        Storage.inventory.clear();
     }
 }

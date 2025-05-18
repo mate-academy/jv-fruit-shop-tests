@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private OperationType operation;
     private String fruit;
@@ -42,7 +44,8 @@ public class FruitTransaction {
         BALANCE("b"),
         SUPPLY("s"),
         ADD("a"),
-        RETURN("r");
+        RETURN("r"),
+        PURCHASE("p");
 
         private final String code;
 
@@ -62,5 +65,20 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("No enum constant for code: " + code);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation
+                == that.operation && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

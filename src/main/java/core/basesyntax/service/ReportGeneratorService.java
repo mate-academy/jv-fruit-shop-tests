@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.db.Storage.inventory;
+
 import java.util.Map;
 
 public class ReportGeneratorService {
@@ -7,7 +9,7 @@ public class ReportGeneratorService {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String COMMA_SEPARATOR = ",";
 
-    public String generateReport(Map<String, Integer> inventory) {
+    public String generateReport() {
         StringBuilder reportBuilder = new StringBuilder();
 
         reportBuilder.append(REPORT_HEADER).append(System.lineSeparator());

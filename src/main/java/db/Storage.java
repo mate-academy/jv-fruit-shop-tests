@@ -21,8 +21,11 @@ public class Storage {
         return fruits.getOrDefault(fruit, 0);
     }
 
+    public static void setAmount(String fruit, Integer amount) {
+        fruits.put(fruit, amount);
+    }
+
     public static void clearStorage() {
         fruits.clear();
     }
-
 }

@@ -19,13 +19,12 @@ public class BalanceOperationTest {
 
     @Test
     void testBalanceOperation_ok() {
-        Storage.add("orange", 10);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("orange");
         fruitTransaction.setQuantity(20);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
-        assertEquals(30, Storage.getAmount("orange"));
+        assertEquals(20, Storage.getAmount("orange"));
     }
 
     @Test
@@ -36,12 +35,11 @@ public class BalanceOperationTest {
 
     @Test
     void testZeroBalanceOperation_ok() {
-        Storage.add("apple", 15);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(0);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
-        assertEquals(15, Storage.getAmount("apple"));
+        assertEquals(0, Storage.getAmount("apple"));
     }
 }

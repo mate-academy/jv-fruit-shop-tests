@@ -26,8 +26,7 @@ class OperationHandlerTest {
     @Test
     void getOperation_null_notOk() {
         operationHandler = new BalanceHandler();
-        assertThrows(NullPointerException.class,
-                () -> operationHandler.getOperation(null));
+        assertThrows(IllegalArgumentException.class, () -> operationHandler.getOperation(null));
     }
 
     @Test

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriterService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,8 +20,8 @@ class WriterServiceImplTest {
     private List<String> createNewTestLines() {
         List<String> newLines = new ArrayList<>();
         newLines.add("fruit,quantity");
-        newLines.add(System.lineSeparator() + "banana,20");
-        newLines.add(System.lineSeparator() + "apple,10");
+        newLines.add("banana,20");
+        newLines.add("apple,10");
         return newLines;
     }
 

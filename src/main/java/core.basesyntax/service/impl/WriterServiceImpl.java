@@ -8,6 +8,13 @@ import java.util.List;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String path, List<String> report) {
+        if (path == null) {
+            throw new IllegalArgumentException("Path cannot be null");
+        }
+        if (report == null) {
+            throw new IllegalArgumentException("Report cannot be null");
+        }
+
         try (FileWriter writer = new FileWriter(path)) {
             for (String line : report) {
                 writer.write(line + System.lineSeparator());

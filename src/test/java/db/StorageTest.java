@@ -33,6 +33,26 @@ public class StorageTest {
     }
 
     @Test
+    void testSetNegativeAmount_notOk() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> Storage.setAmount("apple", -10));
+        assertEquals("Fruits amount can't be negative", ex.getMessage());
+    }
+
+    @Test
+    void testGetFruitAmount_ok() {
+        Storage.add("apple", 10);
+        int amount = Storage.getAmount("apple");
+        assertEquals(10, amount, "Should return correct amount for existing fruit");
+    }
+
+    @Test
+    void testGetFruitAmount_notOk() {
+        int amount = Storage.getAmount("banana");
+        assertEquals(0, amount, "Should return 0 for fruit not in storage");
+    }
+
+    @Test
     void testGetFruitAmountFromEmptyStorage_Ok() {
         assertEquals(0,Storage.getAmount("apple"));
     }

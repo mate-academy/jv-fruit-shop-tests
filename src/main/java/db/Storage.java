@@ -25,6 +25,9 @@ public class Storage {
     }
 
     public static void setAmount(String fruit, Integer amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Fruits amount can't be negative");
+        }
         fruits.put(fruit, amount);
     }
 

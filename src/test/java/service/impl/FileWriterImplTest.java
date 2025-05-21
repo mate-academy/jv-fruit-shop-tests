@@ -55,5 +55,24 @@ public class FileWriterImplTest {
         assertTrue(exception.getMessage().contains("Error writing to file"),
                 "Exception should be thrown for invalid path");
     }
+
+    @Test
+    public void writeOverwriteFile_ok() throws IOException {
+        String fileName = "overwriteFile.txt";
+        String initialContent = "Initial content";
+        String newContent = "New content";
+
+        FileWriterImpl fileWriter = new FileWriterImpl();
+
+        fileWriter.write(fileName, initialContent);
+        String fileContent = new String(Files.readAllBytes(Paths.get(fileName)));
+        assertEquals(initialContent, fileContent, "File should contain initial content");
+
+        fileWriter.write(fileName, newContent);
+        fileContent = new String(Files.readAllBytes(Paths.get(fileName)));
+        assertEquals(newContent, fileContent, "File should contain new content after overwrite");
+
+        Files.delete(Paths.get(fileName));
+    }
 }
 

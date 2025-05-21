@@ -1,6 +1,7 @@
 package service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -41,6 +42,25 @@ public class DataConverterImplTest {
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(report);
         assertEquals(expectedTransactions, transactions);
+    }
+
+    @Test
+    void convertInvalidAmountToTransaction_notOk() {
+        List<String> report = Arrays.asList(
+                "type,fruit,quantity",
+                "b,apple,not_a_number"
+        );
+        assertThrows(NumberFormatException.class, () -> dataConverter.convertToTransaction(report));
+    }
+
+    @Test
+    void convertInvalidOperationToTransaction_notOk() {
+        List<String> report = Arrays.asList(
+                "type,fruit,quantity",
+                "z,apple,20"
+        );
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test

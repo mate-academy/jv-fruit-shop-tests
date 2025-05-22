@@ -4,23 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
-    private final PurchaseOperation purchaseOperation = new PurchaseOperation();
-    private final Map<String, Integer> originalStorage = new HashMap<>(Storage.storage);
+    private PurchaseOperation purchaseOperation;
 
     @BeforeEach
     void setUp() {
+        PurchaseOperation purchaseOperation = new PurchaseOperation();
         Storage.storage.put("banana", 0);
     }
 
     @Test
-    void invalidFruit_NotOk() {
+    void getCalculation_invalidFruit_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             purchaseOperation.getCalculation(new FruitTransaction(
                     FruitTransaction.Operation.PURCHASE,"invalidFruit",6));
@@ -28,7 +26,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void negativeValue_NotOk() {
+    void getCalculation_negativeValue_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             purchaseOperation.getCalculation(new FruitTransaction(
                     FruitTransaction.Operation.PURCHASE,"banana",5));
@@ -36,8 +34,7 @@ class PurchaseOperationTest {
     }
 
     @AfterEach
-    void returnOriginalData() {
+    void tearDown() {
         Storage.storage.clear();
-        Storage.storage.putAll(originalStorage);
     }
 }

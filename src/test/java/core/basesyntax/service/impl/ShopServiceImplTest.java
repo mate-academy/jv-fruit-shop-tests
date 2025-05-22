@@ -21,13 +21,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
-    private final ShopService shopService = new ShopServiceImpl(operationStrategy);
-    private final Map<String, Integer> originalStorage = new HashMap<>(Storage.storage);
+    private ShopService shopService;
 
     @BeforeEach
     void setup() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
+        shopService = new ShopServiceImpl(operationStrategy);
+
         operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
@@ -35,7 +36,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void getOperationPurchase_isOk() {
+    void process_getOperationPurchase_Ok() {
         Storage.storage.put("apple", 15);
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 10));
@@ -45,7 +46,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void getOperationReturn_isOk() {
+    void process_getOperationReturn_Ok() {
         Storage.storage.put("apple", 15);
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10));
@@ -55,7 +56,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void getOperationSupply_isOk() {
+    void process_getOperationSupply_Ok() {
         Storage.storage.put("apple", 15);
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10));
@@ -65,7 +66,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void getOperationBalance_isOk() {
+    void process_getOperationBalance_Ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10));
         shopService.process(fruitTransactionList);
@@ -73,9 +74,7 @@ class ShopServiceImplTest {
     }
 
     @AfterEach
-    void clean() {
+    void tearDown() {
         Storage.storage.clear();
-        Storage.storage.putAll(originalStorage);
-
     }
 }

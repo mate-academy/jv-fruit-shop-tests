@@ -5,17 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private final ReturnOperation returnOperation = new ReturnOperation();
-    private final Map<String, Integer> originalStorage = new HashMap<>(Storage.storage);
+    private ReturnOperation returnOperation;
+
+    @BeforeEach
+    void setUp() {
+        returnOperation = new ReturnOperation();
+    }
 
     @Test
-    void invalidFruit_NotOk() {
+    void getCalculation_invalidFruit_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             returnOperation.getCalculation(new FruitTransaction(
                     FruitTransaction.Operation.RETURN,"invalidFruit",6));
@@ -23,7 +26,7 @@ class ReturnOperationTest {
     }
 
     @Test
-    void dataWasAdded_Ok() {
+    void getCalculation_addData_Ok() {
         Storage.storage.clear();
         Storage.storage.put("banana", 0);
         returnOperation.getCalculation(new FruitTransaction(
@@ -32,8 +35,7 @@ class ReturnOperationTest {
     }
 
     @AfterEach
-    void returnOriginalData() {
+    void tearDown() {
         Storage.storage.clear();
-        Storage.storage.putAll(originalStorage);
     }
 }

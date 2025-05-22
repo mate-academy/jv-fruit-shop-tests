@@ -11,16 +11,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
+    private OperationStrategy operationStrategy;
 
     @BeforeEach
     void setup() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
+        operationStrategy = new OperationStrategyImpl(operationHandler);
         operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
     }
 
     @Test
-    void getOperationBalance_isOk() {
+    void getOperationBalance_Ok() {
         Class<? extends OperationHandler> current =
                 operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
         assertEquals(BalanceOperation.class, current);

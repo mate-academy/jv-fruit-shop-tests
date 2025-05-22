@@ -3,30 +3,23 @@ package basesyntax.reader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private FileReaderInterface fileReader;
+    private static final String VALID_FILE_PATH = "src/test/resources/validFile.csv";
+    private static FileReaderInterface fileReader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         fileReader = new FileReaderImpl();
     }
 
     @Test
-    void read_validFiles_Ok() throws IOException {
-        Path tempFile = Files.createTempFile("test", ".csv");
-        Files.write(tempFile, List.of("line1", "line2", "line3"));
-
-        List<String> result = fileReader.read(tempFile.toString());
-
+    void read_validFiles_Ok() {
+        List<String> result = fileReader.read(VALID_FILE_PATH);
         assertEquals(List.of("line1", "line2", "line3"), result);
-        Files.deleteIfExists(tempFile);
     }
 
     @Test

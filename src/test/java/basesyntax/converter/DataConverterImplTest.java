@@ -21,11 +21,9 @@ class DataConverterImplTest {
     void convertToTransaction_oneValidConvert_Ok() {
         List<String> lines = List.of("type,fruit,quantity", "b,apple,20");
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(lines);
-        assertEquals(1, transactions.size());
-        FruitTransaction transaction = transactions.get(0);
-        assertEquals(Operation.BALANCE, transaction.getOperation());
-        assertEquals("apple", transaction.getFruit());
-        assertEquals(20, transaction.getQuantity());
+        FruitTransaction expectedTransaction = new FruitTransaction(Operation.BALANCE, "apple", 20);
+        FruitTransaction actualTransaction = transactions.get(0);
+        assertEquals(expectedTransaction, actualTransaction);
     }
 
     @Test
@@ -35,22 +33,20 @@ class DataConverterImplTest {
                 "b,apple,20",
                 "p,kiwi,5");
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(lines);
-        assertEquals(3, transactions.size());
+        FruitTransaction expectedTransaction1 = new FruitTransaction(
+                Operation.SUPPLY, "banana", 25);
+        FruitTransaction actualTransaction1 = transactions.get(0);
+        assertEquals(expectedTransaction1, actualTransaction1);
 
-        FruitTransaction fruitTransaction1 = transactions.get(0);
-        assertEquals(Operation.SUPPLY, fruitTransaction1.getOperation());
-        assertEquals("banana", fruitTransaction1.getFruit());
-        assertEquals(25, fruitTransaction1.getQuantity());
+        FruitTransaction expectedTransaction2 = new FruitTransaction(
+                Operation.BALANCE, "apple", 20);
+        FruitTransaction actualTransaction2 = transactions.get(1);
+        assertEquals(expectedTransaction2, actualTransaction2);
 
-        FruitTransaction fruitTransaction2 = transactions.get(1);
-        assertEquals(Operation.BALANCE, fruitTransaction2.getOperation());
-        assertEquals("apple", fruitTransaction2.getFruit());
-        assertEquals(20, fruitTransaction2.getQuantity());
-
-        FruitTransaction fruitTransaction3 = transactions.get(2);
-        assertEquals(Operation.PURCHASE, fruitTransaction3.getOperation());
-        assertEquals("kiwi", fruitTransaction3.getFruit());
-        assertEquals(5, fruitTransaction3.getQuantity());
+        FruitTransaction expectedTransaction3 = new FruitTransaction(
+                Operation.PURCHASE, "kiwi", 5);
+        FruitTransaction actualTransaction3 = transactions.get(2);
+        assertEquals(expectedTransaction3, actualTransaction3);
     }
 
     @Test

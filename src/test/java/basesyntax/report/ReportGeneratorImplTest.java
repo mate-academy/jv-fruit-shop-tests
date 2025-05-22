@@ -1,11 +1,12 @@
 package basesyntax.report;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import basesyntax.storage.Storage;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,6 @@ class ReportGeneratorImplTest {
     @BeforeEach
     void setUp() {
         reportGenerator = new ReportGeneratorImpl();
-        Storage.clear();
     }
 
     @Test
@@ -39,7 +39,6 @@ class ReportGeneratorImplTest {
         Storage.put("apple", 15);
         Storage.put("banana", 10);
         Storage.put("kiwi", 5);
-        String header = "fruit,quantity";
         List<String> expectedLines = Arrays.asList(
                 "apple,15",
                 "banana,10",
@@ -47,10 +46,15 @@ class ReportGeneratorImplTest {
         );
         String actual = reportGenerator.getReport();
         List<String> actualLines = Arrays.asList(actual.split(System.lineSeparator()));
-        assertTrue(actualLines.contains(header));
-        for (String expectedLine : expectedLines) {
-            assertTrue(actualLines.contains(expectedLine));
-        }
-        assertEquals(expectedLines.size() + 1, actualLines.size());
+        assertEquals("fruit,quantity", actualLines.get(0));
+        List<String> actualDataLines = actualLines.subList(1, actualLines.size());
+        Collections.sort(expectedLines);
+        Collections.sort(actualDataLines);
+        assertEquals(expectedLines, actualDataLines);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import basesyntax.model.FruitTransaction;
 import basesyntax.model.Operation;
 import basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,6 @@ class PurchaseOperationTest {
     @BeforeEach
     void setUp() {
         purchase = new PurchaseOperation();
-        Storage.clear();
     }
 
     @Test
@@ -56,5 +56,10 @@ class PurchaseOperationTest {
         Storage.put("banana", 5);
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 10);
         assertThrows(RuntimeException.class, () -> purchase.handle(transaction));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 }

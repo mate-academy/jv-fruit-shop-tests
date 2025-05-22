@@ -32,4 +32,15 @@ public class PurchaseOperationTest {
                 FruitTransaction.Operation.PURCHASE, "apple", 10);
         assertThrows(IllegalArgumentException.class, () -> fruitTransaction.setQuantity(-10));
     }
+
+    @Test
+    void testPurchaseOperationWithNotEnoughFruitsAmount_notOk() {
+        Storage.fruits.put("apple", 5);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> operationHandler.performOperation(fruitTransaction));
+        assertEquals("Not enough apple in the store.", ex.getMessage());
+    }
 }

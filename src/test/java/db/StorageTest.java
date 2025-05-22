@@ -71,6 +71,21 @@ public class StorageTest {
     }
 
     @Test
+    void testRemoveDefunctFruit_notOk() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> Storage.remove("banana", 5));
+        assertEquals("Not enough banana in storage.", exception.getMessage());
+    }
+
+    @Test
+    void testRemoveFruitWithNotEnoughAmount_notOk() {
+        Storage.fruits.put("apple", 3);
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> Storage.remove("apple", 5));
+        assertEquals("Not enough apple in storage.", exception.getMessage());
+    }
+
+    @Test
     void testClearStorage_Ok() {
         Storage.fruits.put("apple",100);
         Storage.clearStorage();

@@ -23,11 +23,10 @@ public class DataConverterImpl implements DataConverter {
 
     private FruitTransaction getFromCsvRow(String row) {
         String[] fields = row.split(COMMA_SEPARATOR);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation
-                .getOperationFromCode(fields[OPERATION_PARAMETER]));
-        fruitTransaction.setFruit(fields[FRUIT_PARAMETER]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_PARAMETER]));
-        return fruitTransaction;
+        return new FruitTransaction(
+                FruitTransaction.Operation.getOperationFromCode(fields[OPERATION_PARAMETER]),
+                fields[FRUIT_PARAMETER],
+                Integer.parseInt(fields[QUANTITY_PARAMETER])
+        );
     }
 }

@@ -19,26 +19,23 @@ public class BalanceOperationTest {
 
     @Test
     void testBalanceOperation_ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("orange");
-        fruitTransaction.setQuantity(20);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "orange", 20);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(20, Storage.getAmount("orange"));
     }
 
     @Test
     void testNegativeBalanceOperation_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
         assertThrows(IllegalArgumentException.class, () -> fruitTransaction.setQuantity(-40));
     }
 
     @Test
     void testZeroBalanceOperation_ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(0);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 0);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(0, Storage.getAmount("apple"));
     }

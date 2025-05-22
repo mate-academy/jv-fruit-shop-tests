@@ -13,28 +13,25 @@ public class SupplyOperationTest {
 
     @Test
     void testSupplyOperation_ok() {
-        Storage.add("apple", 15);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(23);
+        Storage.add("apple", 25);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY, "apple", 13);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(38, Storage.getAmount("apple"));
     }
 
     @Test
     void testNegativeSupplyOperation_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
         assertThrows(IllegalArgumentException.class, () -> fruitTransaction.setQuantity(-39));
     }
 
     @Test
     void testZeroSupplyOperation_ok() {
         Storage.add("pineapple", 45);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction.setFruit("pineapple");
-        fruitTransaction.setQuantity(0);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY, "pineapple", 0);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(45, Storage.getAmount("pineapple"));
     }

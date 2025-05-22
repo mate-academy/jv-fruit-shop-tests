@@ -14,27 +14,24 @@ public class ReturnOperationTest {
     @Test
     void testReturnOperation_ok() {
         Storage.add("strawberry", 5);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction.setFruit("strawberry");
-        fruitTransaction.setQuantity(30);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.RETURN, "strawberry", 30);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(35, Storage.getAmount("strawberry"));
     }
 
     @Test
     void testNegativeReturnOperation_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
         assertThrows(IllegalArgumentException.class, () -> fruitTransaction.setQuantity(-10));
     }
 
     @Test
     void testZeroReturnOperation_ok() {
         Storage.add("apple", 0);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(0);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.RETURN, "apple", 0);
         assertDoesNotThrow(() -> operationHandler.performOperation(fruitTransaction));
         assertEquals(0, Storage.getAmount("apple"));
     }

@@ -20,11 +20,9 @@ public class DataConverterImplTest {
     }
 
     static FruitTransaction createTransaction(String operationCode, String fruit, int quantity) {
-        FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.getOperationFromCode(operationCode));
-        transaction.setFruit(fruit);
-        transaction.setQuantity(quantity);
-        return transaction;
+        return new FruitTransaction(FruitTransaction.Operation
+                .getOperationFromCode(operationCode),
+                fruit, quantity);
     }
 
     @Test
@@ -50,7 +48,8 @@ public class DataConverterImplTest {
                 "type,fruit,quantity",
                 "b,apple,not_a_number"
         );
-        assertThrows(NumberFormatException.class, () -> dataConverter.convertToTransaction(report));
+        assertThrows(IllegalArgumentException.class,
+                () -> dataConverter.convertToTransaction(report));
     }
 
     @Test

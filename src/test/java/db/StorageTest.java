@@ -65,7 +65,7 @@ public class StorageTest {
 
     @Test
     void testRemoveFruitAmount_Ok() {
-        Storage.add("apple", 10);
+        Storage.fruits.put("apple", 10);
         Storage.remove("apple", 5);
         assertEquals(5, Storage.getAmount("apple"));
     }

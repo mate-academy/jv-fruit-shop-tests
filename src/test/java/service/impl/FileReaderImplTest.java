@@ -8,24 +8,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.FileReader;
 
 class FileReaderImplTest {
-    private FileReader fileReader;
-    private Path filePath;
+    private static FileReader fileReader;
+    private static Path filePath;
+    private static final String NON_EXISTENT_FILE = "nonExistent_file.csv";
 
-    @BeforeEach
-    void setUp() throws IOException {
+    @BeforeAll
+    static void setUp() throws IOException {
         fileReader = new FileReaderImpl();
         filePath = Files.createTempFile("reportToRead", ".csv");
         Files.write(filePath, List.of("type,fruit,quantity", "b,banana,20", "b,apple,100"));
     }
 
-    @AfterEach
-    void tearDown() throws IOException {
+    @AfterAll
+    static void tearDown() throws IOException {
         Files.deleteIfExists(filePath);
     }
 
@@ -42,7 +43,7 @@ class FileReaderImplTest {
     @Test
     void failureReadFile_noOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> fileReader.read("reportToRead.csv"));
+                () -> fileReader.read(NON_EXISTENT_FILE));
 
         assertTrue(exception.getMessage().contains("Can`t read file"));
     }

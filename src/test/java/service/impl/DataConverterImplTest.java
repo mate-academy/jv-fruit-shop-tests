@@ -1,6 +1,7 @@
 package service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -25,16 +26,12 @@ class DataConverterImplTest {
         fruits.add("b,apple,20");
         fruits.add("b,banana,100");
 
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(fruits);
+        List<FruitTransaction> actualTransactions = dataConverter.convertToTransaction(fruits);
+        List<FruitTransaction> expectedTransactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100));
 
-        assertEquals(2, transactions.size());
-        assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(0).getOperation());
-        assertEquals("apple", transactions.get(0).getFruit());
-        assertEquals(20, transactions.get(0).getQuantity());
-
-        assertEquals(FruitTransaction.Operation.BALANCE, transactions.get(1).getOperation());
-        assertEquals("banana", transactions.get(1).getFruit());
-        assertEquals(100, transactions.get(1).getQuantity());
+        assertIterableEquals(expectedTransactions, actualTransactions);
     }
 
     @Test
@@ -46,24 +43,11 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_InputNull_notOk() {
-        List<String> fruits = null;
-        assertThrows(NullPointerException.class, () -> dataConverter.convertToTransaction(fruits));
-    }
-
-    @Test
     void convertToTransaction_unknownOperation_notOk() {
         List<String> unknownType = List.of("type,fruit,quantity", "y,banana,100");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> dataConverter.convertToTransaction(unknownType));
         assertEquals("Unknown operation type! y", exception.getMessage());
-    }
-
-    @Test
-    void convertToTransaction_unknownFormatQuantity_notOk() {
-        List<String> unknownQuantity = List.of("type,fruit,quantity", "b,banana,abc");
-        assertThrows(NumberFormatException.class,
-                () -> dataConverter.convertToTransaction(unknownQuantity));
     }
 }

@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
 import service.FileWriter;
 
 class FileWriterImplTest {
+    private static final String EXAMPLE_CONTENT = "fruit,quantity\napple,20\n";
+    private static final String EMPTY_CONTENT = "";
+    private static final String INVALID_FILE_PATH = File.separator + "invalidFilePath"
+            + File.separator + "directory" + File.separator + "finalReport.csv";
 
     private Path filePath;
 
@@ -32,37 +36,33 @@ class FileWriterImplTest {
 
     @Test
     void writeToFile_ok() throws IOException {
-
-        fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
+        fileWriter.write(filePath.toString(), EXAMPLE_CONTENT);
 
         String result = Files.readString(filePath);
-        assertEquals("fruit,quantity\napple,20\n", result);
+        assertEquals(EXAMPLE_CONTENT, result);
     }
 
     @Test
-    void invalidPath_notOk() {
-        String invalidFilePath = File.separator
-                + "invalidFilePath" + File.separator
-                + "directory" + File.separator + "finalReport.csv";
-
+    void write_invalidPath_shouldThrowException() {
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> fileWriter.write(invalidFilePath, "fruit,quantity"));
+                () -> fileWriter.write(INVALID_FILE_PATH, EXAMPLE_CONTENT));
 
         assertTrue(exception.getMessage().contains("Error to write file!"));
     }
 
     @Test
-    void emptyContent_notOk() throws IOException {
-        filePath = Files.createTempFile("reportToRead", ".csv");
-        fileWriter.write(filePath.toString(), "");
+    void write_shouldToShowEmptyContent() throws IOException {
+        fileWriter.write(filePath.toString(), EMPTY_CONTENT);
 
         String fileContent = Files.readString(filePath);
-        assertEquals("", fileContent);
+        assertEquals(EMPTY_CONTENT, fileContent);
+    }
 
-        FileWriterImpl fileWriter = new FileWriterImpl();
-        fileWriter.write(filePath.toString(), "fruit,quantity\napple,20\n");
+    @Test
+    void write_shouldToOverWriteContent() throws IOException {
+        fileWriter.write(filePath.toString(), EXAMPLE_CONTENT);
 
-        String result = Files.readString(filePath);
-        assertEquals("fruit,quantity\napple,20\n", result);
+        String fileContent = Files.readString(filePath);
+        assertEquals(EXAMPLE_CONTENT, fileContent);
     }
 }

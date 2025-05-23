@@ -33,14 +33,13 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_quantityLessZero_NotOk() {
-        Storage.storage.put("testFruit", -5);
+        Storage.storage.put("banana", -5);
         assertThrows(RuntimeException.class, reportGenerator::getReport);
     }
 
     @Test
     void getReport_emptyReport_Ok() {
         String actual = "fruit,quantity";
-        Storage.storage.clear();
         assertEquals(actual, reportGenerator.getReport());
 
     }

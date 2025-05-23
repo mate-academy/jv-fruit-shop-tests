@@ -27,7 +27,6 @@ class ReturnOperationTest {
 
     @Test
     void getCalculation_addData_Ok() {
-        Storage.storage.clear();
         Storage.storage.put("banana", 0);
         returnOperation.getCalculation(new FruitTransaction(
                 FruitTransaction.Operation.RETURN,"banana",3));

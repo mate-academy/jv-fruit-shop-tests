@@ -27,7 +27,6 @@ class SupplyOperationTest {
 
     @Test
     void getCalculation_addData_Ok() {
-        Storage.storage.clear();
         Storage.storage.put("apple", 0);
         supplyOperation.getCalculation(new FruitTransaction(
                 FruitTransaction.Operation.RETURN,"apple",5));

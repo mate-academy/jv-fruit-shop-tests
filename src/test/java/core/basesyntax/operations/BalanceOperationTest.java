@@ -18,9 +18,13 @@ class BalanceOperationTest {
 
     @Test
     void getCalculation_addData_Ok() {
+
+        int expectQuantity = 5;
         balanceOperation.getCalculation(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "peach", 5));
-        assertTrue(Storage.storage.containsKey("peach"));
+
+        assertTrue(Storage.storage.containsKey("peach")
+                        && Storage.storage.get("peach").equals(expectQuantity));
     }
 
     @AfterEach

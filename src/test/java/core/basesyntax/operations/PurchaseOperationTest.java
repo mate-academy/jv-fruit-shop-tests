@@ -1,5 +1,6 @@
 package core.basesyntax.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
@@ -13,8 +14,16 @@ class PurchaseOperationTest {
 
     @BeforeEach
     void setUp() {
-        PurchaseOperation purchaseOperation = new PurchaseOperation();
-        Storage.storage.put("banana", 0);
+        purchaseOperation = new PurchaseOperation();
+        Storage.storage.put("banana", 2);
+    }
+
+    @Test
+    void getCalculation_correctData_Ok() {
+        int expect = 1;
+        purchaseOperation.getCalculation(new FruitTransaction(
+                    FruitTransaction.Operation.PURCHASE,"banana",1));
+        assertEquals(expect, Storage.storage.get("banana"));
     }
 
     @Test

@@ -2,8 +2,6 @@ package core.basesyntax.service.nio;
 
 import java.util.List;
 
-public interface FileService {
+public interface FileReaderService {
     List<String> read(String path);
-
-    void write(String path, String report);
 }

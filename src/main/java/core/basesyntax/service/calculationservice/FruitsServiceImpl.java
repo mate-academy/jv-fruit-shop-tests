@@ -8,25 +8,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitsServiceImpl implements FruitService {
-    private HandlerService realizeByActivityFruits;
+    private HandlerService handlerService;
     private FruitsDao fruitsDao;
 
     public FruitsServiceImpl(FruitsDao fruitsDao, HandlerService realizeByActivityFruits) {
         this.fruitsDao = fruitsDao;
-        this.realizeByActivityFruits = realizeByActivityFruits;
+        this.handlerService = realizeByActivityFruits;
     }
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
-        Map<String, List<FruitTransaction>> map = mapFruits(transactions);
-        for (Map.Entry<String, List<FruitTransaction>> fruit : map.entrySet()) {
-            Integer result = 0;
-            for (int i = 0; i < fruit.getValue().size(); i++) {
-                result = Integer.sum(result, realizeByActivityFruits
-                        .getHandler(fruit.getValue().get(i).getOperation())
-                        .handle(fruit.getValue().get(i).getQuantity()));
-            }
-            fruitsDao.addFruit(fruit.getKey(), result);
+        for (FruitTransaction transaction : transactions) {
+            handlerService.getHandler(transaction.getOperation()).handle(transaction);
         }
     }
 

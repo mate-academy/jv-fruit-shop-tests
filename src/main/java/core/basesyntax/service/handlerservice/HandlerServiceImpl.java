@@ -1,19 +1,19 @@
 package core.basesyntax.service.handlerservice;
 
 import core.basesyntax.entity.FruitTransaction;
-import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.OperationHandlers;
 import java.util.Map;
 
 public class HandlerServiceImpl implements HandlerService {
-    private final Map<FruitTransaction.Operation, OperationHandler> handlers;
+    private final Map<FruitTransaction.Operation, OperationHandlers> handlers;
 
     public HandlerServiceImpl(Map<FruitTransaction.Operation,
-            OperationHandler> handlers) {
+            OperationHandlers> handlers) {
         this.handlers = handlers;
     }
 
     @Override
-    public OperationHandler getHandler(FruitTransaction.Operation activity) {
+    public OperationHandlers getHandler(FruitTransaction.Operation activity) {
         return handlers.get(activity);
     }
 

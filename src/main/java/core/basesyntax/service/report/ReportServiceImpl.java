@@ -4,6 +4,9 @@ import core.basesyntax.dao.FruitsDao;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
+    private static final String HEADER = "fruit,quantity";
+    private static final String DELIMITER = ",";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private FruitsDao fruitsDao;
 
     public ReportServiceImpl(FruitsDao fruitsDao) {
@@ -12,9 +15,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String reportAllFruits() {
-        return fruitsDao.getAllFruits().entrySet().stream().map(t -> t.getKey()
-                        .concat(",")
-                        .concat(String.valueOf(t.getValue())))
-                .collect(Collectors.joining("\n"));
+        return HEADER + LINE_SEPARATOR + fruitsDao.getAllFruits()
+                .entrySet().stream()
+                .map(t -> t.getKey() + DELIMITER + t.getValue())
+                .collect(Collectors.joining(LINE_SEPARATOR));
     }
 }

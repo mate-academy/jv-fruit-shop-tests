@@ -1,8 +1,8 @@
 package core.basesyntax.service.handlerservice;
 
 import core.basesyntax.entity.FruitTransaction;
-import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.OperationHandlers;
 
 public interface HandlerService {
-    OperationHandler getHandler(FruitTransaction.Operation activity);
+    OperationHandlers getHandler(FruitTransaction.Operation activity);
 }

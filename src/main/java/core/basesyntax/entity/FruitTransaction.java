@@ -17,6 +17,15 @@ public class FruitTransaction {
             this.code = operation;
         }
 
+        public static Operation fromCode(String code) {
+            for (Operation op : values()) {
+                if (op.code.equals(code)) {
+                    return op;
+                }
+            }
+            throw new IllegalArgumentException("Unknown operation code: " + code);
+        }
+
         public String getOperation() {
             return code;
         }

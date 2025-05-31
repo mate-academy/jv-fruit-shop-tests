@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class FruitsDaoImplTest {
+public class FruitsDaoTest {
     private final FruitsDao dao = new FruitsDaoImpl();
 
     @BeforeEach

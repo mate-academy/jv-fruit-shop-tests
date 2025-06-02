@@ -4,8 +4,6 @@ import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.entity.FruitTransaction;
 import core.basesyntax.service.handlerservice.HandlerService;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class FruitsServiceImpl implements FruitService {
     private HandlerService handlerService;
@@ -21,10 +19,5 @@ public class FruitsServiceImpl implements FruitService {
         for (FruitTransaction transaction : transactions) {
             handlerService.getHandler(transaction.getOperation()).handle(transaction);
         }
-    }
-
-    private Map<String, List<FruitTransaction>> mapFruits(List<FruitTransaction> str) {
-        return str.stream()
-                .collect(Collectors.groupingBy(FruitTransaction::getFruit));
     }
 }

@@ -6,10 +6,13 @@ import core.basesyntax.entity.FruitTransaction;
 public class OperationHandlerImpl implements OperationHandlers {
     @Override
     public void handle(FruitTransaction transaction) {
+        FruitTransaction.Operation operation = transaction.getOperation();
+        if (operation == null) {
+            throw new UnsupportedOperationException("Operation is null");
+        }
+
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        FruitTransaction.Operation operation = transaction.getOperation();
-
         int currentQuantity = Storage.fruitStorage.getOrDefault(fruit, 0);
         int updatedQuantity;
 

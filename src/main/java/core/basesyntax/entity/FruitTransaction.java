@@ -9,7 +9,8 @@ public class FruitTransaction {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
-        RETURN("r");
+        RETURN("r"),
+        UNKNOWN("u");
 
         private String code;
 

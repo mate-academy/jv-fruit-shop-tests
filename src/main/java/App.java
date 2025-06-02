@@ -25,7 +25,6 @@ public class App {
 
     public static void main(String[] args) {
         FileReaderService reader = new FileReaderServiceImpl();
-
         List<String> lines = reader.read(INPUT_FILE);
         if (lines.isEmpty()) {
             throw new RuntimeException("Input file is empty");

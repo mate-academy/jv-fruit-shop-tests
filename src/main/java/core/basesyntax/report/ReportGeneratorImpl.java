@@ -1,0 +1,23 @@
+package core.basesyntax.report;
+
+import core.basesyntax.model.FruitStorage;
+import java.util.Map;
+
+public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String CSV_HEADER = "fruit,quantity";
+    private static final String CSV_SEPARATOR = ",";
+
+    @Override
+    public String getReport() {
+        StringBuilder report = new StringBuilder();
+
+        report.append(CSV_HEADER).append("\r\n");
+        for (Map.Entry<String, Integer> entry : FruitStorage.getStorage().entrySet()) {
+            report.append(entry.getKey())
+                    .append(CSV_SEPARATOR)
+                    .append(entry.getValue())
+                    .append("\r\n");
+        }
+        return report.toString();
+    }
+}

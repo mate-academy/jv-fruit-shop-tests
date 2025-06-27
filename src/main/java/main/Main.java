@@ -24,8 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String SOURCE_PATH_NAME = "src/resources/fruit_shop_transactions";
-    private static final String TARGET_PATH_NAME = "src/resources/report";
+    private static final String SOURCE_PATH_NAME = "src/main/java/"
+            + "recources/fruit_shop_transactions";
+    private static final String TARGET_PATH_NAME = "src/main/java/recources/report";
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();

@@ -4,42 +4,59 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.data.exeption.FileException;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private static final String TEST_FILE_NAME = "src/resources/test.csv";
-    private static final String NON_EXISTENT_FILE_NAME = "src/resources/nonExistent.csv";
-    private static final String EMPTY_FILE_NAME = "src/resources/empty.csv";
-    private static final List<String> EMPTY_LIST = new ArrayList<>();
-    private static List<String> EXPECTED;
+    private static final String TEST_FILE_CONTENT = "fruit,quantity\nbanana,108\napple,88";
+    private static final String EMPTY_FILE_CONTENT = "";
+    private static Path testFilePath;
+    private static Path emptyFilePath;
     private static FileReader fileReader;
+    private static List<String> EXPECTED_TEST_CONTENT;
 
     @BeforeAll
-    static void beforeAll() {
+    static void beforeAll() throws IOException {
         fileReader = new FileReaderImpl();
-        EXPECTED = List.of("fruit,quantity", "banana,108", "apple,88");
+        EXPECTED_TEST_CONTENT = List.of("fruit,quantity", "banana,108", "apple,88");
+
+        testFilePath = Files.createTempFile("test", ".csv");
+        Files.writeString(testFilePath, TEST_FILE_CONTENT);
+
+        emptyFilePath = Files.createTempFile("empty", ".csv");
+        Files.writeString(emptyFilePath, EMPTY_FILE_CONTENT);
+    }
+
+    @AfterAll
+    static void afterAll() throws IOException {
+        Files.deleteIfExists(testFilePath);
+        Files.deleteIfExists(emptyFilePath);
     }
 
     @Test
     void read_fromExistentFile_Ok() {
-        List<String> actual = fileReader.readFile(TEST_FILE_NAME);
-        assertEquals(EXPECTED, actual);
+        List<String> actual = fileReader.readFile(testFilePath.toString());
+        assertEquals(EXPECTED_TEST_CONTENT, actual);
     }
 
     @Test
     void read_fromNonExistentFile_NotOk() {
-        assertThrows(FileException.class,
-                () -> fileReader.readFile(NON_EXISTENT_FILE_NAME),
-                "Can't read data from file name: "
-                        + NON_EXISTENT_FILE_NAME);
+        String nonExistentPath = "nonExistent" + System.nanoTime() + ".csv";
+        FileException exception = assertThrows(FileException.class,
+                () -> fileReader.readFile(nonExistentPath));
+        assertEquals("Can't read data from file: " + nonExistentPath, exception.getMessage());
     }
 
     @Test
     void read_fromEmptyFile_Ok() {
-        List<String> actual = fileReader.readFile(EMPTY_FILE_NAME);
-        assertEquals(EMPTY_LIST, actual);
+        List<String> actual = fileReader.readFile(emptyFilePath.toString());
+        assertEquals(Collections.emptyList(), actual);
     }
 }
+

@@ -20,7 +20,6 @@ class DataConverterImplTest {
     private static final String SUPPLY_BANANA = "s," + BANANA + ",20";
     private static final String RETURN_APPLE = "r," + APPLE + ",20";
     private static final String PURCHASE_BANANA = "p," + BANANA + ",20";
-    private static final String INVALID_OPERATION_CODE = "y," + APPLE + ",20";
     private static final String INVALID_QUANTITY = "b," + APPLE + ",abc";
     private static final int EXPECTED_SIZE = 4;
     private static final int FIRST_INDEX = 0;

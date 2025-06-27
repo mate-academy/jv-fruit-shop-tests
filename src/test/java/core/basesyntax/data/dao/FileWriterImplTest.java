@@ -1,15 +1,15 @@
 package core.basesyntax.data.dao;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.data.exeption.FileException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
-    private static final String TEST_FILE_NAME = "src/resources/testWrite.csv";
+    private static final String TEST_FILE_NAME = "java/resources/testWrite.csv";
     private static final String DATA = "apple,40";
+    private static final String NON_EXISTENT_FILE_NAME = "scr/java/nonExistent.csv";
     private static FileWriter fileWriter;
 
     @BeforeAll
@@ -18,15 +18,10 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void write_toExistentFile_Ok() {
-        boolean expected = false;
-        try {
-            fileWriter.writeFile(TEST_FILE_NAME, DATA);
-            expected = true;
-        } catch (FileException e) {
-            throw new FileException("Can't write data to file: " + TEST_FILE_NAME, e);
-        }
-        assertTrue(expected);
+    void write_toNonExistentFile_NotOk() {
+        assertThrows(FileException.class,
+                () -> fileWriter.writeFile(NON_EXISTENT_FILE_NAME, DATA),
+                "Path to file is wrong: " + NON_EXISTENT_FILE_NAME);
     }
 
     @Test

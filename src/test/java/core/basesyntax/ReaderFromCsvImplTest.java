@@ -45,4 +45,10 @@ public class ReaderFromCsvImplTest {
         assertThrows(RuntimeException.class, () ->
                 readerFromCsv.read(filePath));
     }
+
+    @Test
+    public void readFromFile_FileIsEmpty_NotOk() {
+        assertThrows(RuntimeException.class, () ->
+                readerFromCsv.read(null));
+    }
 }

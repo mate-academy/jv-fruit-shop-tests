@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -17,7 +18,6 @@ import core.basesyntax.service.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -74,21 +74,21 @@ public class ShopServiceImplTest {
 
     @Test
     public void transfer_NullOperation_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 shopService.transfer(new FruitTransaction(null, "banana", 50))
         );
     }
 
     @Test
     public void transfer_NullQuantity_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 shopService.transfer(new FruitTransaction(Operation.BALANCE, "banana", null))
         );
     }
 
     @Test
     public void transfer_NullFruit_NotOk() {
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 shopService.transfer(new FruitTransaction(Operation.BALANCE, null, 50))
         );
     }

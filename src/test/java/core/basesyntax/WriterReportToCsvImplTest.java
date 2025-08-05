@@ -44,7 +44,7 @@ public class WriterReportToCsvImplTest {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 writerReportToCsv.writeReport(report, null));
     }
 

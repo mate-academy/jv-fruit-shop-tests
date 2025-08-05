@@ -48,7 +48,7 @@ public class DataConverterImplTest {
 
     @Test
     public void convertToTransaction_NullList_NotOk() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 dataConverter.convertToTransaction(null));
     }
 

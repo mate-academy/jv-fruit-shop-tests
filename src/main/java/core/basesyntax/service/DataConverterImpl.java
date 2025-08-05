@@ -10,6 +10,9 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
+        if (lines == null) {
+            throw new IllegalArgumentException("List must not be null");
+        }
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);

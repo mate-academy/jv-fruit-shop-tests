@@ -1,36 +1,58 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
-import core.basesyntax.db.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperation;
+import core.basesyntax.strategy.impl.ReturnOperation;
+import core.basesyntax.strategy.impl.SupplyOperation;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import core.basesyntax.db.Storage;
 
-public class ShopServiceImpl implements ShopService {
-    private final OperationStrategy operationStrategy;
+public class ShopServiceImplTest {
+    private ShopServiceImpl shopService;
+    private OperationStrategy operationStrategy;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy) {
-        this.operationStrategy = operationStrategy;
+    @BeforeEach
+    public void setUp() {
+        Map<FruitTransaction.Operation, core.basesyntax.strategy.OperationHandler> handlerMap = new java.util.HashMap<>();
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationStrategy = new OperationStrategyImpl(handlerMap);
+        shopService = new ShopServiceImpl(operationStrategy);
+        Storage.getFruitStorage().clear();
     }
 
-    @Override
-    public void process(List<FruitTransaction> transactions) {
-        if (transactions == null) {
-            throw new RuntimeException("Transactions list cannot be null.");
-        }
+    @Test
+    public void process_correctData_ok() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 20),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10)
+        );
+        shopService.process(transactions);
+        Assertions.assertEquals(90, Storage.getFruitStorage().get("banana"));
+        Assertions.assertEquals(70, Storage.getFruitStorage().get("apple"));
+    }
 
-        Map<String, Integer> fruitStorage = Storage.getFruitStorage();
+    @Test
+    public void process_nullTransactionsList_throwsException() {
+        assertThrows(RuntimeException.class, () -> shopService.process(null));
+    }
 
-        for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy
-                    .getHandler(transaction.getOperation());
-            int currentQuantity = fruitStorage
-                    .getOrDefault(transaction.getFruit(), 0);
-
-            int newQuantity = handler.apply(currentQuantity, transaction.getQuantity());
-            fruitStorage.put(transaction.getFruit(), newQuantity);
-        }
+    @Test
+    public void process_emptyTransactionsList_doesNothing() {
+        shopService.process(Collections.emptyList());
+        Assertions.assertTrue(Storage.getFruitStorage().isEmpty());
     }
 }

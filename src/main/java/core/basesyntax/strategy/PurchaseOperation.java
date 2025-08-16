@@ -3,14 +3,14 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperation implements OperationHandler {
-
     @Override
     public int apply(int currentQuantity, int transactionQuantity) {
-        int newQuantity = currentQuantity - transactionQuantity;
-        if (newQuantity < 0) {
-            throw new RuntimeException("Purchase operation resulted in negative balance! "
-                    + "Current: " + currentQuantity + ", Purchased: " + transactionQuantity);
+        if (transactionQuantity < 0) {
+            throw new RuntimeException("Purchase quantity cannot be negative: " + transactionQuantity);
         }
-        return newQuantity;
+        if (currentQuantity < transactionQuantity) {
+            throw new RuntimeException("Cannot purchase " + transactionQuantity + " units, only " + currentQuantity + " available.");
+        }
+        return currentQuantity - transactionQuantity;
     }
 }

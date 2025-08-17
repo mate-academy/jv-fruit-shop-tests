@@ -18,7 +18,13 @@ public class DataConverterImpl implements DataConverter {
 
         for (String line : data) {
             String processedLine = line.trim();
-            if (processedLine.isEmpty() || processedLine.startsWith(HEADER_PREFIX)) {
+            if (processedLine.isEmpty()) {
+                continue;
+            }
+
+            if (processedLine.startsWith(HEADER_PREFIX)
+                    && processedLine.split(CSV_DELIMITER)[0]
+                    .equalsIgnoreCase(HEADER_PREFIX)) {
                 continue;
             }
 
@@ -31,17 +37,27 @@ public class DataConverterImpl implements DataConverter {
             try {
                 String operationCode = parts[0];
                 String fruitName = parts[1];
-                int quantity = Integer.parseInt(parts[2]);
+                String quantityString = parts[2];
+
+                if (operationCode.contains(" ") || fruitName.contains(" ")
+                        || quantityString.contains(" ")) {
+                    throw new RuntimeException("Invalid data format: "
+                            + "fields contain unexpected spaces. Line: '" + line + "'");
+                }
+
+                int quantity = Integer.parseInt(quantityString);
 
                 FruitTransaction.Operation operation = FruitTransaction
                         .Operation.getByCode(operationCode);
                 transactions.add(new FruitTransaction(operation, fruitName, quantity));
+
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity format in line: '" + line + "'", e);
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException("Invalid operation code in line: '" + line + "'", e);
             }
         }
+
         return transactions;
     }
 }

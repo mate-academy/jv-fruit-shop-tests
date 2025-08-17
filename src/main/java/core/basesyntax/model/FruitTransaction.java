@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private final Operation operation;
-    private final String fruit;
-    private final int quantity;
+    private Operation operation;
+    private String fruit;
+    private int quantity;
 
-    public FruitTransaction(final Operation operation, final String fruit, final int quantity) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -29,10 +29,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String code;
+        private String code;
 
-        Operation(final String code) {
+        Operation(String code) {
             this.code = code;
+        }
+
+        public String getCode() {
+            return code;
         }
 
         public static Operation getByCode(String code) {
@@ -41,7 +45,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Cannot parse operation from code: " + code);
+            throw new IllegalArgumentException("Unknown operation code: " + code);
         }
     }
 }

@@ -2,12 +2,11 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ class OperationStrategyImplTest {
     @BeforeEach
     void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, mock(BalanceOperation.class)
+                FruitTransaction.Operation.BALANCE, new BalanceOperation()
         );
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }

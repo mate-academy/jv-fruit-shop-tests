@@ -1,9 +1,8 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.OperationStrategyImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,25 +27,25 @@ class OperationStrategyImplTest {
     @Test
     void get_balanceOperation_ok() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        assertTrue(handler instanceof BalanceOperation);
+        assertInstanceOf(BalanceOperation.class, handler);
     }
 
     @Test
     void get_supplyOperation_ok() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
-        assertTrue(handler instanceof SupplyOperation);
+        assertInstanceOf(SupplyOperation.class, handler);
     }
 
     @Test
     void get_purchaseOperation_ok() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
-        assertTrue(handler instanceof PurchaseOperation);
+        assertInstanceOf(PurchaseOperation.class, handler);
     }
 
     @Test
     void get_returnOperation_ok() {
         OperationHandler handler = operationStrategy.get(FruitTransaction.Operation.RETURN);
-        assertTrue(handler instanceof ReturnOperation);
+        assertInstanceOf(ReturnOperation.class, handler);
     }
 
     @Test

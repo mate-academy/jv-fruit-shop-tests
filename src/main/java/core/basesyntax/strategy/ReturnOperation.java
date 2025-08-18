@@ -15,7 +15,6 @@ public class ReturnOperation implements OperationHandler {
             throw new IllegalArgumentException("Storage cannot be null");
         }
 
-        // Основна логіка - додаємо кількість до існуючого запасу
         storage.put(transaction.getFruit(), storage.getOrDefault(transaction.getFruit(), 0)
                 + transaction.getQuantity());
     }

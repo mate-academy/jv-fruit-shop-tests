@@ -17,14 +17,17 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("fruit").append(COMMA).append("quantity").append(System.lineSeparator());
 
-        shopService.getStorage().entrySet().stream()
+        Map<String, Integer> storage = shopService.getStorage();
+        if (storage == null || storage.isEmpty()) {
+            return sb.toString();
+        }
+
+        storage.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> {
-                    sb.append(entry.getKey())
-                            .append(COMMA)
-                            .append(entry.getValue())
-                            .append(System.lineSeparator());
-                });
+                .forEach(entry -> sb.append(entry.getKey())
+                        .append(COMMA)
+                        .append(entry.getValue())
+                        .append(System.lineSeparator()));
 
         return sb.toString();
     }

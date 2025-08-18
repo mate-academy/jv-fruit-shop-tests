@@ -29,21 +29,21 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void handle_purchaseMoreThanAvailable_throwRuntimeException() {
+    void handle_purchaseMoreThanAvailable_throwIllegalArgumentException() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 150);
 
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 purchaseOperation.handle(transaction, Storage.storage)
         );
     }
 
     @Test
-    void handle_purchaseNonExistingFruit_throwRuntimeException() {
+    void handle_purchaseNonExistingFruit_throwIllegalArgumentException() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 10);
 
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 purchaseOperation.handle(transaction, Storage.storage)
         );
     }

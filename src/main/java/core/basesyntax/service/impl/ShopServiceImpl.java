@@ -25,18 +25,16 @@ public class ShopServiceImpl implements ShopService {
             throw new IllegalArgumentException("Transactions list cannot be null");
         }
 
-        // СПОЧАТКУ перевіряємо всі транзакції на null
         for (FruitTransaction transaction : transactions) {
             if (transaction == null) {
                 throw new IllegalArgumentException("Transaction cannot be null");
             }
         }
 
-        // ПОТІМ обробляємо всі транзакції
         for (FruitTransaction transaction : transactions) {
             try {
                 OperationHandler handler = operationStrategy.get(transaction.getOperation());
-                handler.handle(transaction, Storage.storage);
+                handler.handle(transaction, Storage.getAll());
             } catch (Exception e) {
                 throw new RuntimeException("Failed to process transaction: " + transaction, e);
             }
@@ -45,6 +43,6 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Integer> getStorage() {
-        return Collections.unmodifiableMap(Storage.storage);
+        return Collections.unmodifiableMap(Storage.getAll());
     }
 }

@@ -15,7 +15,6 @@ public class SupplyOperation implements OperationHandler {
             throw new IllegalArgumentException("Storage cannot be null");
         }
 
-        // Основна логіка - додаємо кількість до існуючого запасу (як і у ReturnOperation)
         storage.put(transaction.getFruit(), storage
                 .getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }

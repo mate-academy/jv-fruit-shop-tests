@@ -1,10 +1,13 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +25,10 @@ class DataConverterImplTest {
         List<String> data = List.of("type,fruit,quantity", "b,apple,100");
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
 
-        Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals(FruitTransaction.Operation.BALANCE, result.get(0).getOperation());
-        Assertions.assertEquals("apple", result.get(0).getFruit());
-        Assertions.assertEquals(100, result.get(0).getQuantity());
+        assertEquals(1, result.size());
+        assertEquals(FruitTransaction.Operation.BALANCE, result.get(0).getOperation());
+        assertEquals("apple", result.get(0).getFruit());
+        assertEquals(100, result.get(0).getQuantity());
     }
 
     @Test
@@ -38,10 +41,10 @@ class DataConverterImplTest {
         );
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
 
-        Assertions.assertEquals(3, result.size());
-        Assertions.assertEquals(FruitTransaction.Operation.BALANCE, result.get(0).getOperation());
-        Assertions.assertEquals(FruitTransaction.Operation.SUPPLY, result.get(1).getOperation());
-        Assertions.assertEquals(FruitTransaction.Operation.PURCHASE, result.get(2).getOperation());
+        assertEquals(3, result.size());
+        assertEquals(FruitTransaction.Operation.BALANCE, result.get(0).getOperation());
+        assertEquals(FruitTransaction.Operation.SUPPLY, result.get(1).getOperation());
+        assertEquals(FruitTransaction.Operation.PURCHASE, result.get(2).getOperation());
     }
 
     @Test
@@ -49,14 +52,14 @@ class DataConverterImplTest {
         List<String> data = Collections.emptyList();
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
 
-        Assertions.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void convertToTransaction_nullList_returnEmptyList() {
         List<FruitTransaction> result = dataConverter.convertToTransaction(null);
 
-        Assertions.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -64,13 +67,13 @@ class DataConverterImplTest {
         List<String> data = List.of(
                 "type,fruit,quantity",
                 "b,apple,100",
-                "invalid,line,extra,part", // Некоректний рядок
-                "s,banana", // Некоректний рядок
+                "invalid,line,extra,part",
+                "s,banana",
                 "p,apple,20"
         );
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
 
-        Assertions.assertEquals(2, result.size());
+        assertEquals(2, result.size());
     }
 
     @Test
@@ -79,7 +82,7 @@ class DataConverterImplTest {
                 "type,fruit,quantity",
                 "x,apple,100"
         );
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 dataConverter.convertToTransaction(data)
         );
     }
@@ -90,7 +93,7 @@ class DataConverterImplTest {
                 "type,fruit,quantity",
                 "s,banana,abc"
         );
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 dataConverter.convertToTransaction(data)
         );
     }

@@ -1,11 +1,14 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,13 +35,13 @@ public class DataConverterImplTest {
 
         List<FruitTransaction> actual = dataConverter.convert(data);
 
-        Assertions.assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(), actual.size());
         for (int i = 0; i < expected.size(); i++) {
-            Assertions.assertEquals(expected.get(i)
+            assertEquals(expected.get(i)
                     .getOperation(), actual.get(i).getOperation());
-            Assertions.assertEquals(expected.get(i)
+            assertEquals(expected.get(i)
                     .getFruit(), actual.get(i).getFruit());
-            Assertions.assertEquals(expected
+            assertEquals(expected
                     .get(i).getQuantity(), actual.get(i).getQuantity());
         }
     }
@@ -47,27 +50,27 @@ public class DataConverterImplTest {
     public void convert_emptyFile_returnsEmptyList() {
         List<String> data = Collections.emptyList();
         List<FruitTransaction> transactions = dataConverter.convert(data);
-        Assertions.assertTrue(transactions.isEmpty());
+        assertTrue(transactions.isEmpty());
     }
 
     @Test
     public void convert_invalidQuantity_throwsException() {
         List<String> data = List.of("b,banana,abc");
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convert(data));
     }
 
     @Test
     public void convert_invalidOperation_throwsException() {
         List<String> data = List.of("x,banana,150");
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convert(data));
     }
 
     @Test
     public void convert_invalidFormat_throwsException() {
         List<String> data = List.of("b,banana");
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataConverter.convert(data));
     }
 
@@ -84,13 +87,13 @@ public class DataConverterImplTest {
 
         List<FruitTransaction> actual = dataConverter.convert(data);
 
-        Assertions.assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(), actual.size());
         for (int i = 0; i < expected.size(); i++) {
-            Assertions.assertEquals(expected.get(i)
+            assertEquals(expected.get(i)
                     .getOperation(), actual.get(i).getOperation());
-            Assertions.assertEquals(expected.get(i)
+            assertEquals(expected.get(i)
                     .getFruit(), actual.get(i).getFruit());
-            Assertions.assertEquals(expected.get(i)
+            assertEquals(expected.get(i)
                     .getQuantity(), actual.get(i).getQuantity());
         }
     }

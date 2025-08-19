@@ -58,7 +58,6 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_emptyStorage_ok() {
-        // Немає транзакцій, сховище порожнє
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String actualReport = reportGenerator.getReport();
         assertEquals(expectedReport, actualReport);

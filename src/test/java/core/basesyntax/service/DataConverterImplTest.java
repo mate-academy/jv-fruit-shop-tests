@@ -8,8 +8,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {

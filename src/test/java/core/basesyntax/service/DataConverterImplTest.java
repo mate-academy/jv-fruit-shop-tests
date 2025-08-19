@@ -9,6 +9,7 @@ import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
@@ -18,6 +19,11 @@ class DataConverterImplTest {
     @BeforeEach
     void setUp() {
         dataConverter = new DataConverterImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        dataConverter = null;
     }
 
     @Test

@@ -11,11 +11,12 @@ import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
 
-    private final BalanceOperation balanceOperation = new BalanceOperation();
+    private BalanceOperation operation;
 
     @BeforeEach
     void setUp() {
-        Storage.storage.clear();
+        operation = new BalanceOperation();
+        Storage.storage.put("apple", 100);
     }
 
     @AfterEach
@@ -28,7 +29,7 @@ class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 100);
 
-        balanceOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(100, Storage.storage.get("banana"));
     }
@@ -39,7 +40,7 @@ class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 200);
 
-        balanceOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(200, Storage.storage.get("banana"));
     }
@@ -47,7 +48,7 @@ class BalanceOperationTest {
     @Test
     void handle_nullTransaction_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () ->
-                balanceOperation.handle(null, Storage.storage)
+                operation.handle(null, Storage.storage)
         );
     }
 
@@ -57,7 +58,6 @@ class BalanceOperationTest {
                 FruitTransaction.Operation.BALANCE, "banana", 100);
 
         assertThrows(IllegalArgumentException.class, () ->
-                balanceOperation.handle(transaction, null)
-        );
+                operation.handle(transaction, null));
     }
 }

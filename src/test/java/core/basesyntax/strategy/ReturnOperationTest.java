@@ -5,17 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
 
-    private final ReturnOperation returnOperation = new ReturnOperation();
+    private ReturnOperation operation;
 
     @BeforeEach
     void setUp() {
-        Storage.storage.clear();
+        operation = new ReturnOperation();
         Storage.storage.put("apple", 100);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
     }
 
     @Test
@@ -23,7 +29,7 @@ class ReturnOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "apple", 10);
 
-        returnOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(110, Storage.storage.get("apple"));
     }
@@ -33,7 +39,7 @@ class ReturnOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 10);
 
-        returnOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(10, Storage.storage.get("banana"));
     }
@@ -41,7 +47,7 @@ class ReturnOperationTest {
     @Test
     void handle_nullTransaction_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () ->
-                returnOperation.handle(null, Storage.storage)
+                operation.handle(null, Storage.storage)
         );
     }
 
@@ -51,7 +57,6 @@ class ReturnOperationTest {
                 FruitTransaction.Operation.RETURN, "apple", 10);
 
         assertThrows(IllegalArgumentException.class, () ->
-                returnOperation.handle(transaction, null)
-        );
+                operation.handle(transaction, null));
     }
 }

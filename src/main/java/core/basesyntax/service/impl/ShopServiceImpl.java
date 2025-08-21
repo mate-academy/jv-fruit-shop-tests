@@ -40,9 +40,4 @@ public class ShopServiceImpl implements ShopService {
             }
         }
     }
-
-    @Override
-    public Map<String, Integer> getStorage() {
-        return Collections.unmodifiableMap(Storage.getAll());
-    }
 }

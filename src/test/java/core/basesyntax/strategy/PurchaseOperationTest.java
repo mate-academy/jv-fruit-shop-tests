@@ -11,10 +11,11 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
 
-    private final PurchaseOperation purchaseOperation = new PurchaseOperation();
+    private  PurchaseOperation operation;
 
     @BeforeEach
     void setUp() {
+        operation = new PurchaseOperation();
         Storage.storage.put("apple", 100);
     }
 
@@ -28,7 +29,7 @@ class PurchaseOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 20);
 
-        purchaseOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(80, Storage.storage.get("apple"));
     }
@@ -39,7 +40,7 @@ class PurchaseOperationTest {
                 FruitTransaction.Operation.PURCHASE, "apple", 150);
 
         assertThrows(IllegalArgumentException.class, () ->
-                purchaseOperation.handle(transaction, Storage.storage)
+                operation.handle(transaction, Storage.storage)
         );
     }
 
@@ -49,14 +50,14 @@ class PurchaseOperationTest {
                 FruitTransaction.Operation.PURCHASE, "banana", 10);
 
         assertThrows(IllegalArgumentException.class, () ->
-                purchaseOperation.handle(transaction, Storage.storage)
+                operation.handle(transaction, Storage.storage)
         );
     }
 
     @Test
     void handle_nullTransaction_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () ->
-                purchaseOperation.handle(null, Storage.storage)
+                operation.handle(null, Storage.storage)
         );
     }
 
@@ -66,7 +67,6 @@ class PurchaseOperationTest {
                 FruitTransaction.Operation.PURCHASE, "apple", 50);
 
         assertThrows(IllegalArgumentException.class, () ->
-                purchaseOperation.handle(transaction, null)
-        );
+                operation.handle(transaction, null));
     }
 }

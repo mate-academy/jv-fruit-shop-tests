@@ -8,9 +8,13 @@ import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.BalanceHandler;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +22,7 @@ class ShopServiceImplTest {
 
     private ShopServiceImpl shopService;
 
-    @BeforeEach
-    void setUp() {
-        OperationStrategy operationStrategy = new TestOperationStrategy();
-        shopService = new ShopServiceImpl(operationStrategy);
-    }
-
-    @BeforeEach
+    @AfterEach
     void clearStorage() {
         Storage.storage.clear();
     }
@@ -57,32 +55,23 @@ class ShopServiceImplTest {
 
     @Test
     void getStorage_returnsUnmodifiableMap_ok() {
-        Map<String, Integer> storage = shopService.getStorage();
+        Map<String, Integer> storage = Storage.storage;
         assertThrows(UnsupportedOperationException.class, () -> storage.put("orange", 50));
     }
 
     @Test
     void getStorage_returnsCorrectData_ok() {
         Storage.storage.put("apple", 10);
-        Map<String, Integer> storage = shopService.getStorage();
+        Map<String, Integer> storage = Storage.storage;
         assertEquals(1, storage.size());
         assertEquals(10, storage.get("apple"));
     }
 
-    private static class TestOperationStrategy implements OperationStrategy {
-        @Override
-        public OperationHandler get(FruitTransaction.Operation operation) {
-            if (operation == FruitTransaction.Operation.BALANCE) {
-                return new TestBalanceHandler();
-            }
-            throw new IllegalArgumentException("Unsupported operation: " + operation);
-        }
-    }
-
-    private static class TestBalanceHandler implements OperationHandler {
-        @Override
-        public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
-            storage.put(transaction.getFruit(), transaction.getQuantity());
-        }
+    @BeforeEach
+    void setUp() {
+        Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+        shopService = new ShopServiceImpl(operationStrategy);
     }
 }

@@ -5,15 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
 
-    private final SupplyOperation supplyOperation = new SupplyOperation();
+    private SupplyOperation operation;
 
     @BeforeEach
     void setUp() {
+        operation = new SupplyOperation();
+        Storage.storage.put("apple", 100);
+    }
+
+    @AfterEach
+     void tearDown() {
         Storage.storage.clear();
     }
 
@@ -22,18 +29,17 @@ class SupplyOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 50);
 
-        supplyOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(50, Storage.storage.get("banana"));
     }
 
     @Test
     void handle_existingFruit_ok() {
-        Storage.storage.put("apple", 100);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "apple", 50);
 
-        supplyOperation.handle(transaction, Storage.storage);
+        operation.handle(transaction, Storage.storage);
 
         assertEquals(150, Storage.storage.get("apple"));
     }
@@ -41,7 +47,7 @@ class SupplyOperationTest {
     @Test
     void handle_nullTransaction_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () ->
-                supplyOperation.handle(null, Storage.storage)
+                operation.handle(null, Storage.storage)
         );
     }
 
@@ -51,7 +57,6 @@ class SupplyOperationTest {
                 FruitTransaction.Operation.SUPPLY, "apple", 50);
 
         assertThrows(IllegalArgumentException.class, () ->
-                supplyOperation.handle(transaction, null)
-        );
+                operation.handle(transaction, null));
     }
 }

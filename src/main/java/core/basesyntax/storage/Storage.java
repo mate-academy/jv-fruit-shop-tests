@@ -17,8 +17,4 @@ public class Storage {
     public static Map<String, Integer> getAll() {
         return storage;
     }
-
-    public static void clear() {
-        storage.clear();
-    }
 }

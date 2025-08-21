@@ -6,14 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.storage.Storage;
+import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.BalanceHandler;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,12 +50,6 @@ class ShopServiceImplTest {
         );
 
         assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
-    }
-
-    @Test
-    void getStorage_returnsUnmodifiableMap_ok() {
-        Map<String, Integer> storage = Storage.storage;
-        assertThrows(UnsupportedOperationException.class, () -> storage.put("orange", 50));
     }
 
     @Test

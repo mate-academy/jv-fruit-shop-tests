@@ -5,9 +5,7 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;

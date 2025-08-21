@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
 
-    private  PurchaseOperation operation;
+    private PurchaseOperation operation;
 
     @BeforeEach
     void setUp() {

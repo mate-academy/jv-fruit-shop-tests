@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.storage.Storage;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -17,7 +18,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("fruit").append(COMMA).append("quantity").append(System.lineSeparator());
 
-        Map<String, Integer> storage = shopService.getStorage();
+        Map<String, Integer> storage = Storage.storage;
         if (storage == null || storage.isEmpty()) {
             return sb.toString();
         }

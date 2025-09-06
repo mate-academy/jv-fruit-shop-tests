@@ -16,9 +16,9 @@ class SupplyHandlerTest {
 
     @AfterEach
     public void afterEach() {
-
         storage.getDataStorageMapOrDefault("randomFruit").clear();
     }
+
     @Test
     void handle_nullFruitTransaction_notOk() {
         Assertions.assertThrows(RuntimeException.class,

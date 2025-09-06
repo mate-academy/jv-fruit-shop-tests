@@ -10,12 +10,12 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.TypeOfTransaction;
 import core.basesyntax.operationstrategy.OperationStrategyImpl;
 import core.basesyntax.operationstrategy.OperationStrategyService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static final Map<TypeOfTransaction, OperationHandler>

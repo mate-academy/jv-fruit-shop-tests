@@ -3,11 +3,11 @@ package core.basesyntax.fruittransactionhandler;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.TypeOfTransaction;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 class BalanceHandlerTest {
     private static final Storage storage = new Storage();
@@ -19,6 +19,7 @@ class BalanceHandlerTest {
     public void afterEach() {
         storage.getDataStorageMapOrDefault("randomFruit").clear();
     }
+
     @Test
     void handle_nullFruitTransaction_notOk() {
         Assertions.assertThrows(RuntimeException.class, () -> balancedHandler.handle(null));

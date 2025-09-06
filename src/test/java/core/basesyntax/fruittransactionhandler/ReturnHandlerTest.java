@@ -7,8 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ReturnHandlerTest {
     private static final Storage storage = new Storage();
     private static final OperationHandler returnHandler = new ReturnHandler(storage);
@@ -20,6 +18,7 @@ class ReturnHandlerTest {
     public void afterEach() {
         storage.getDataStorageMapOrDefault("radomFruit").clear();
     }
+
     @Test
     void handle_nullFruitTransaction_notOk() {
         Assertions.assertThrows(RuntimeException.class,

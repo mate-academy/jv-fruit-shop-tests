@@ -1,11 +1,10 @@
 package core.basesyntax.model;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import static core.basesyntax.model.TypeOfTransaction.B;
 import static core.basesyntax.model.TypeOfTransaction.S;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     private static final FruitTransaction fruitTransactionNo1 = new FruitTransaction();
@@ -25,8 +24,8 @@ class FruitTransactionTest {
     @Test
     void setTypeOfTransaction_incorrectValue_notOk() {
         Assertions.assertThrows(RuntimeException.class,
-                () -> fruitTransactionNo1.setTypeOfTransaction
-                        (TypeOfTransaction.valueOf("N")));
+                () -> fruitTransactionNo1.setTypeOfTransaction(
+                        TypeOfTransaction.valueOf("N")));
     }
 
     @Test
@@ -44,6 +43,7 @@ class FruitTransactionTest {
         Assertions.assertThrows(RuntimeException.class,
                 () -> fruitTransactionNo1.setQuantity(-10));
     }
+
     @Test
     void equals_comparisonTwoEqualTransactions_ok() {
         fruitTransactionNo1.setTypeOfTransaction(B);
@@ -52,7 +52,7 @@ class FruitTransactionTest {
         fruitTransactionNo2.setTypeOfTransaction(B);
         fruitTransactionNo2.setFruit("banana");
         fruitTransactionNo2.setQuantity(20);
-        assertEquals(fruitTransactionNo1, fruitTransactionNo2);
+        Assertions.assertEquals(fruitTransactionNo1, fruitTransactionNo2);
     }
 
     @Test

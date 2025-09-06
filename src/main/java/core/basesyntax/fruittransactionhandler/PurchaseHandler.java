@@ -22,7 +22,7 @@ public class PurchaseHandler implements OperationHandler {
             storageService.getDataStorageMapOrDefault(fruitTransaction.getFruit())
                     .put(fruitTransaction.getFruit(), oldValue - fruitTransaction.getQuantity());
         } else {
-                throw new RuntimeException("The result of purchase operation is negative.");
+            throw new RuntimeException("The result of purchase operation is negative.");
         }
     }
 }

@@ -1,12 +1,12 @@
 package core.basesyntax.filereader;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final List<String> inputListToFile = new ArrayList<>();
@@ -54,9 +54,9 @@ class FileReaderImplTest {
         List<String> stringListFromFile = fileReaderService
                 .read("src/test/resources/inputFile.csv");
         for (int i = 0; i < stringListFromFile.size(); i++) {
-        Assertions.assertEquals(inputListToFile.get(i),
-                stringListFromFile.get(i));
-        file.delete();
+            Assertions.assertEquals(inputListToFile.get(i),
+                    stringListFromFile.get(i));
         }
+        file.delete();
     }
 }

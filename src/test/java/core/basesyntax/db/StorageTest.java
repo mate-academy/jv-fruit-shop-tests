@@ -1,10 +1,10 @@
 package core.basesyntax.db;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 class StorageTest {
     private static final Storage storage = new Storage();

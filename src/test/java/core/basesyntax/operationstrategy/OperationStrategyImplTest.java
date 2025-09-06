@@ -1,5 +1,7 @@
 package core.basesyntax.operationstrategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.fruittransactionhandler.BalanceHandler;
 import core.basesyntax.fruittransactionhandler.OperationHandler;
@@ -8,13 +10,11 @@ import core.basesyntax.fruittransactionhandler.ReturnHandler;
 import core.basesyntax.fruittransactionhandler.SupplyHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.TypeOfTransaction;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OperationStrategyImplTest {
     public static final FruitTransaction fruitTransaction = new FruitTransaction();
@@ -62,7 +62,7 @@ class OperationStrategyImplTest {
         fruitTransaction.setTypeOfTransaction(TypeOfTransaction.S);
         operationHandlerMap.put(TypeOfTransaction.S, new SupplyHandler(storage));
         OperationHandler expectedHandler = new SupplyHandler(storage);
-        Assertions.assertEquals(expectedHandler.getClass(), operationStrategy
+        assertEquals(expectedHandler.getClass(), operationStrategy
                 .getHandler(fruitTransaction.getTypeOfTransaction()).getClass());
     }
 
@@ -81,5 +81,5 @@ class OperationStrategyImplTest {
         OperationStrategyService operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         Assertions.assertThrows(RuntimeException.class, () -> operationStrategy
                         .getHandler(null));
-        }
+    }
 }

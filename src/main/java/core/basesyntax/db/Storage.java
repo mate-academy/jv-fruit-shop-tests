@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-//powtórz HashMap - jak zmienić samą wartość?
+
     private static final Map<String, Integer> dataStorageMap = new HashMap<>();
 
     public Map<String, Integer> getDataStorageMapOrDefault(String fruit) {

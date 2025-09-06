@@ -1,12 +1,12 @@
 package core.basesyntax.writer;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
     private static final WriterService writerService = new WriterImpl();
@@ -42,9 +42,9 @@ class WriterImplTest {
         }
         List<String> reportList = report.lines().toList();
         for (int i = 0; i < stringList.size(); i++) {
-        Assertions.assertEquals(reportList.get(i), stringList.get(i));
+            Assertions.assertEquals(reportList.get(i), stringList.get(i));
+        }
         File file = new File(path);
         file.delete();
-        }
     }
 }

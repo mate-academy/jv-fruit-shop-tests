@@ -18,9 +18,9 @@ public class FruitTransaction {
 
     public void setTypeOfTransaction(TypeOfTransaction typeOfTransaction) {
         try {
-        this.typeOfTransaction = typeOfTransaction;
-    } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Type of transaction is incorrect.");
+            this.typeOfTransaction = typeOfTransaction;
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Type of transaction is incorrect.", e);
         }
     }
 

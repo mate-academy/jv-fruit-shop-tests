@@ -1,0 +1,23 @@
+package core.basesyntax.db;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Storage {
+//powtórz HashMap - jak zmienić samą wartość?
+    private static final Map<String, Integer> dataStorageMap = new HashMap<>();
+
+    public Map<String, Integer> getDataStorageMapOrDefault(String fruit) {
+        if (fruit == null) {
+            throw new RuntimeException("Name of fruit is null.");
+        }
+        dataStorageMap.putIfAbsent(fruit, 0);
+        return dataStorageMap;
+    }
+
+    public Map<String, Integer> getDataStorageMap() {
+
+        return Collections.unmodifiableMap(dataStorageMap);
+    }
+}

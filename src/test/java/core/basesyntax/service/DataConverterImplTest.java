@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.exception.FruitShopException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class DataConverterImplTest {
                 new FruitTransaction(Operation.PURCHASE, "orange", 20)
         );
 
-        assertEquals(expected, transactions);
+        assertIterableEquals(expected, transactions);
     }
 
     @Test

@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.FruitShopException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -14,23 +17,32 @@ class FileReaderTest {
     @TempDir
     private Path tempDir;
 
-    @Test
-    void readShouldReturnLines_whenFileExists() {
-        FileWriter writer = new FileWriterImpl();
-        FileReader reader = new FileReaderImpl();
+    private FileReader reader;
 
-        Path file = tempDir.resolve("input.csv");
-        String data = "type,fruit,quantity\nb,banana,2\n";
-        writer.write(data, file.toString());
-
-        List<String> lines = reader.read(file.toString());
-        assertFalse(lines.isEmpty());
-        assertEquals("type,fruit,quantity", lines.get(0));
+    @BeforeEach
+    void setUp() {
+        reader = new FileReaderImpl();
     }
 
     @Test
-    void readShouldThrow_whenPathIsNull() {
-        FileReader reader = new FileReaderImpl();
+    void readShouldReturnLines_whenFileExists() throws Exception {
+        Path file = tempDir.resolve("input.csv");
+        String data = String.join(System.lineSeparator(),
+                "type,fruit,quantity",
+                "b,banana,2"
+        ) + System.lineSeparator();
+
+        Files.writeString(file, data, StandardCharsets.UTF_8);
+
+        List<String> lines = reader.read(file.toString());
+
+        assertFalse(lines.isEmpty());
+        assertEquals("type,fruit,quantity", lines.get(0));
+        assertEquals("b,banana,2", lines.get(1));
+    }
+
+    @Test
+    void readShouldThrowOnNull() {
         assertThrows(FruitShopException.class, () -> reader.read(null));
     }
 }

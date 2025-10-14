@@ -25,4 +25,12 @@ public class Storage {
     public static Map<String, Integer> getSnapshot() {
         return Collections.unmodifiableMap(fruitStorage);
     }
+    public static void clear() {
+        fruitStorage.clear();
+    }
+
+    public static Map<String, Integer> getAll() {
+        return new HashMap<>(fruitStorage);
+    }
 }
+

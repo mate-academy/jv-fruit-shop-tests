@@ -37,3 +37,4 @@ public class WriterServiceImplTest {
         assertTrue(exception.getMessage().contains("Can't write report to file"));
     }
 }
+

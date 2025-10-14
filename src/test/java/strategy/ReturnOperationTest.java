@@ -12,14 +12,9 @@ public class ReturnOperationTest {
     private ReturnOperation returnOperation;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         returnOperation = new ReturnOperation();
-
-        var field = Storage.class.getDeclaredField("fruitStorage");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        var map = (java.util.Map<String, Integer>) field.get(null);
-        map.clear();
+        Storage.clear();
     }
 
     @Test

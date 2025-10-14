@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
+import model.FruitTransaction.Operation;
 import org.junit.jupiter.api.Test;
 import service.DataConverter;
 
@@ -16,60 +17,62 @@ public class DataConverterImplTest {
 
     @Test
     void convertToTransactions_validData_returnsListOfTransactions() {
-        List<String> lines = new ArrayList<>();
-        lines.add("type,fruit,quantity");
-        lines.add("b,banana,20");
-        lines.add("s,apple,15");
-        lines.add("p,banana,5");
+        List<String> lines = List.of(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "s,apple,15",
+                "p,banana,5"
+        );
 
-        List<FruitTransaction> result = dataConverter.convertToTransactions(lines);
+        List<FruitTransaction> actual = dataConverter.convertToTransactions(lines);
 
-        assertEquals(3, result.size());
-
-        FruitTransaction first = result.get(0);
-        assertEquals(FruitTransaction.Operation.BALANCE, first.getOperation());
-        assertEquals("banana", first.getFruit());
-        assertEquals(20, first.getQuantity());
-
-        FruitTransaction second = result.get(1);
-        assertEquals(FruitTransaction.Operation.SUPPLY, second.getOperation());
-        assertEquals("apple", second.getFruit());
-        assertEquals(15, second.getQuantity());
-
-        FruitTransaction third = result.get(2);
-        assertEquals(FruitTransaction.Operation.PURCHASE, third.getOperation());
-        assertEquals("banana", third.getFruit());
-        assertEquals(5, third.getQuantity());
+        List<FruitTransaction> expected = getExpectedTransactions();
+        assertEquals(expected, actual, "Converted transactions should match expected list");
     }
 
     @Test
     void convertToTransactions_emptyList_returnsEmptyList() {
         List<String> lines = new ArrayList<>();
+
         List<FruitTransaction> result = dataConverter.convertToTransactions(lines);
-        assertTrue(result.isEmpty());
+
+        assertTrue(result.isEmpty(), "Expected empty list for empty input");
     }
 
     @Test
     void convertToTransactions_invalidOperation_throwsException() {
-        List<String> lines = new ArrayList<>();
-        lines.add("type,fruit,quantity");
-        lines.add("x,apple,10");
+        List<String> lines = List.of(
+                "type,fruit,quantity",
+                "x,apple,10"
+        );
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> dataConverter.convertToTransactions(lines)
+                () -> dataConverter.convertToTransactions(lines),
+                "Expected exception for invalid operation code"
         );
     }
 
     @Test
     void convertToTransactions_invalidQuantity_throwsException() {
-        List<String> lines = new ArrayList<>();
-        lines.add("type,fruit,quantity");
-        lines.add("s,apple,abc");
+        List<String> lines = List.of(
+                "type,fruit,quantity",
+                "s,apple,abc"
+        );
 
         assertThrows(
                 NumberFormatException.class,
-                () -> dataConverter.convertToTransactions(lines)
+                () -> dataConverter.convertToTransactions(lines),
+                "Expected exception for non-numeric quantity"
+        );
+    }
+
+    private List<FruitTransaction> getExpectedTransactions() {
+        return List.of(
+                new FruitTransaction(Operation.BALANCE, "banana", 20),
+                new FruitTransaction(Operation.SUPPLY, "apple", 15),
+                new FruitTransaction(Operation.PURCHASE, "banana", 5)
         );
     }
 }
+

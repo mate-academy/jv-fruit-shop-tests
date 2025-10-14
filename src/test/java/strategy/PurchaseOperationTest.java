@@ -14,14 +14,9 @@ public class PurchaseOperationTest {
     private PurchaseOperation purchaseOperation;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         purchaseOperation = new PurchaseOperation();
-
-        var field = Storage.class.getDeclaredField("fruitStorage");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        var map = (java.util.Map<String, Integer>) field.get(null);
-        map.clear();
+        Storage.clear();
     }
 
     @Test

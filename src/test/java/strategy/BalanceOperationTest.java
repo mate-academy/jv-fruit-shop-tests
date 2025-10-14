@@ -12,14 +12,9 @@ public class BalanceOperationTest {
     private BalanceOperation balanceOperation;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         balanceOperation = new BalanceOperation();
-
-        var field = Storage.class.getDeclaredField("fruitStorage");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        var map = (java.util.Map<String, Integer>) field.get(null);
-        map.clear();
+        Storage.clear();
     }
 
     @Test
@@ -27,9 +22,7 @@ public class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 10
         );
-
         balanceOperation.apply(transaction);
-
         assertEquals(10, Storage.getQuantity("apple"));
     }
 
@@ -39,9 +32,7 @@ public class BalanceOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 12
         );
-
         balanceOperation.apply(transaction);
-
         assertEquals(12, Storage.getQuantity("apple"));
     }
 }

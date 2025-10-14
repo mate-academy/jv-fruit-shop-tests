@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import db.Storage;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.ReportGenerator;
@@ -14,17 +13,8 @@ public class ReportGeneratorImplTest {
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @BeforeEach
-    void setUp() throws Exception {
-        Map<String, Integer> map = getFruitStorage();
-        map.clear();
-    }
-
-    private Map<String, Integer> getFruitStorage() throws Exception {
-        var field = Storage.class.getDeclaredField("fruitStorage");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        Map<String, Integer> map = (Map<String, Integer>) field.get(null);
-        return map;
+    void setUp() {
+        Storage.clear();
     }
 
     @Test

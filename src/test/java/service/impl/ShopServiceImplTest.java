@@ -23,12 +23,18 @@ public class ShopServiceImplTest {
 
     private ShopService createShopService() {
         Map<Operation, OperationHandler> handlers = Map.of(
-                Operation.BALANCE, transaction -> Storage.setQuantity(transaction.getFruit(), transaction.getQuantity()),
-                Operation.SUPPLY, transaction -> Storage.addQuantity(transaction.getFruit(), transaction.getQuantity()),
-                Operation.PURCHASE, transaction -> Storage.addQuantity(transaction.getFruit(), -transaction.getQuantity()),
-                Operation.RETURN, transaction -> Storage.addQuantity(transaction.getFruit(), transaction.getQuantity())
+                Operation.BALANCE, transaction ->
+                        Storage.setQuantity(transaction.getFruit(), transaction.getQuantity()),
+                Operation.SUPPLY, transaction ->
+                        Storage.addQuantity(transaction.getFruit(), transaction.getQuantity()),
+                Operation.PURCHASE, transaction ->
+                        Storage.addQuantity(transaction.getFruit(), -transaction.getQuantity()),
+                Operation.RETURN, transaction ->
+                        Storage.addQuantity(transaction.getFruit(), transaction.getQuantity())
         );
+
         OperationStrategy strategy = new OperationStrategyImpl(handlers);
+
         return new ShopServiceImpl(strategy);
     }
 
@@ -47,4 +53,5 @@ public class ShopServiceImplTest {
         assertEquals(7, Storage.getQuantity("banana"));
     }
 }
+
 

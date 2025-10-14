@@ -20,19 +20,28 @@ public class BalanceOperationTest {
     @Test
     void apply_setsQuantityCorrectly() {
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 10
+                FruitTransaction.Operation.BALANCE,
+                "apple",
+                10
         );
+
         balanceOperation.apply(transaction);
+
         assertEquals(10, Storage.getQuantity("apple"));
     }
 
     @Test
     void apply_overwritesPreviousQuantity() {
         Storage.setQuantity("apple", 5);
+
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 12
+                FruitTransaction.Operation.BALANCE,
+                "apple",
+                12
         );
+
         balanceOperation.apply(transaction);
+
         assertEquals(12, Storage.getQuantity("apple"));
     }
 }

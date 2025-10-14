@@ -16,7 +16,7 @@ public class ReaderServiceImplTest {
 
     @Test
     void readFromFile_validFile_returnsAllLines() throws IOException {
-        Path path = Path.of("src", "test", "resources", "test-data.csv");
+        Path path = Path.of("src", "test", "resources", "finalReport.csv");
         List<String> expectedLines = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

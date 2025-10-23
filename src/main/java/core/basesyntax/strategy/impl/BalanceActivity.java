@@ -8,6 +8,6 @@ public class BalanceActivity implements StoreActivities {
 
     @Override
     public void doActivity(FruitTransaction transaction) {
-        Storage.getStorage().put(transaction.getFruit(), transaction.getQuantity());
+        Storage.getStorage().put(transaction.fruit(), transaction.quantity());
     }
 }

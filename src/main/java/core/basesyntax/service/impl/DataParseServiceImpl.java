@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static java.lang.Integer.parseInt;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParseService;
 import java.util.Arrays;
@@ -21,7 +19,7 @@ public class DataParseServiceImpl implements DataParseService {
         return data.stream()
                 .map(line -> line.split(PATTERN))
                 .map(strings -> new FruitTransaction(getTypeActivity(strings[ACTIVITY_INDEX]),
-                        strings[FRUIT_INDEX], parseInt(strings[QUANTITY_INDEX])))
+                        strings[FRUIT_INDEX], Integer.parseInt(strings[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
 
     }
@@ -29,8 +27,8 @@ public class DataParseServiceImpl implements DataParseService {
     public FruitTransaction.Operation getTypeActivity(String code) {
         Optional<FruitTransaction.Operation> first =
                 Arrays.stream(FruitTransaction.Operation.values())
-                .filter(type -> type.getCode().equals(code))
-                .findFirst();
+                        .filter(type -> type.getCode().equals(code))
+                        .findFirst();
         return first.orElseThrow(() -> new NoSuchElementException("Can't find such element"));
     }
 }

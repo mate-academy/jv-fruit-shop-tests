@@ -7,7 +7,7 @@ import core.basesyntax.strategy.StoreActivities;
 public class PurchaseActivity implements StoreActivities {
     @Override
     public void doActivity(FruitTransaction transaction) {
-        Storage.getStorage().merge(transaction.getFruit(),
-                -transaction.getQuantity(), Integer::sum);
+        Storage.getStorage().merge(transaction.fruit(),
+                -transaction.quantity(), Integer::sum);
     }
 }

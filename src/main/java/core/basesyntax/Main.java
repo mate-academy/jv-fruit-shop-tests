@@ -16,11 +16,16 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final Path ROOT_PATH = Path.of("src", "main", "resources");
+    private static final Path INPUT_PATH = ROOT_PATH.resolve("inputfile.csv");
+    private static final Path REPORT_PATH = ROOT_PATH.resolve("finalReport.csv");
+
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
 
@@ -37,13 +42,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> fruitData = readerService.read("src/main/resources/inputfile.csv");
+        List<String> fruitData = readerService.read(INPUT_PATH.toString());
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(fruitData);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        reportGenerator.generateReport(fruitDao.getAll(),
-                "src/main/resources/finalReport.csv");
+        reportGenerator.generateReport(fruitDao.getAll(), REPORT_PATH.toString());
     }
 }

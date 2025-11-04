@@ -69,6 +69,10 @@ class DataConverterImplTest {
         );
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransaction(list);
         assertEquals(2, fruitTransactions.size());
+        assertEquals("apple", fruitTransactions.get(0).getFruit());
+        assertEquals(25, fruitTransactions.get(0).getQuantity());
+        assertEquals("banana", fruitTransactions.get(1).getFruit());
+        assertEquals(13, fruitTransactions.get(1).getQuantity());
     }
 
     @Test

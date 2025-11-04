@@ -2,9 +2,11 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +19,7 @@ class BalanceOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
+        storageDao = mock(StorageDao.class);
         balanceOperationHandler = new BalanceOperationHandler(storageDao);
     }
 
@@ -37,8 +39,7 @@ class BalanceOperationHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 25);
         balanceOperationHandler.handleTransaction(fruitTransaction);
-        int actual = storageDao.getFruitQuantity(fruitTransaction.getFruit());
-        assertEquals(25, actual);
+        verify(storageDao, times(1)).setFruitQuantity("apple", 25);
     }
 
     @Test
@@ -47,5 +48,6 @@ class BalanceOperationHandlerTest {
                 () -> balanceOperationHandler.handleTransaction(
                         new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", -1)));
         assertEquals("Quantity cannot be negative", exception.getMessage());
+        verify(storageDao, times(0)).setFruitQuantity("apple", -1);
     }
 }

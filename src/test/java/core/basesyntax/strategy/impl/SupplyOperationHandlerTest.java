@@ -1,11 +1,12 @@
 package core.basesyntax.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +19,7 @@ class SupplyOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
+        storageDao = mock(StorageDao.class);
         supplyOperationHandler = new SupplyOperationHandler(storageDao);
     }
 
@@ -36,10 +37,9 @@ class SupplyOperationHandlerTest {
     @Test
     void handleTransaction_validTransaction_Ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 25);
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 25);
         supplyOperationHandler.handleTransaction(fruitTransaction);
-        int actual = storageDao.getFruitQuantity(fruitTransaction.getFruit());
-        assertEquals(25, actual);
+        verify(storageDao, times(1)).addFruitQuantity("apple", 25);
     }
 
     @Test
@@ -57,6 +57,5 @@ class SupplyOperationHandlerTest {
                 () -> supplyOperationHandler.handleTransaction(
                         new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 0)));
         assertTrue(exception.getMessage().contains("Supply quantity must be positive"));
-
     }
 }

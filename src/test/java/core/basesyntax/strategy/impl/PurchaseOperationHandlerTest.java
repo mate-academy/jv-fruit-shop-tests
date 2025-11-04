@@ -1,11 +1,13 @@
 package core.basesyntax.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +20,7 @@ class PurchaseOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
+        storageDao = mock(StorageDao.class);
         purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
     }
 
@@ -36,17 +38,16 @@ class PurchaseOperationHandlerTest {
     @Test
     void handleTransaction_validTransaction_Ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 25);
-        storageDao.setFruitQuantity("apple", 25);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 25);
+        when(storageDao.getFruitQuantity("apple")).thenReturn(25);
         purchaseOperationHandler.handleTransaction(fruitTransaction);
-        int actual = storageDao.getFruitQuantity("apple");
-        assertEquals(0, actual);
+        verify(storageDao, times(1)).deductFruitQuantity("apple", 25);
     }
 
     @Test
     void handleTransaction_negativeQuantity_notOk() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", -12);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", -12);
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.handleTransaction(fruitTransaction));
         assertTrue(exception.getMessage().contains("Purchase quantity must be positive"));
@@ -55,7 +56,7 @@ class PurchaseOperationHandlerTest {
     @Test
     void handleTransaction_zeroQuantity_notOk() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 0);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 0);
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.handleTransaction(fruitTransaction));
         assertTrue(exception.getMessage().contains("Purchase quantity must be positive"));
@@ -65,7 +66,7 @@ class PurchaseOperationHandlerTest {
     void handleTransaction_quantityBiggerThanBalance_notOk() {
         storageDao.setFruitQuantity("apple", 5);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20);
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.handleTransaction(fruitTransaction));
         assertTrue(exception.getMessage().contains("Not enough"));

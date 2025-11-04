@@ -39,7 +39,7 @@ class FileReaderImplTest {
     void read_validFile_ok() throws IOException {
         File tempFile = File.createTempFile("test-file", ".csv");
         try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write("apple,10\nbanana,20");
+            writer.write("apple,10" + System.lineSeparator() + "banana,20");
         }
         List<String> actual = fileReaderImpl.read(tempFile.getAbsolutePath());
         assertEquals(2, actual.size());

@@ -1,11 +1,13 @@
 package core.basesyntax.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +20,7 @@ class ReturnOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
+        storageDao = mock(StorageDao.class);
         returnOperationHandler = new ReturnOperationHandler(storageDao);
     }
 
@@ -36,17 +38,17 @@ class ReturnOperationHandlerTest {
     @Test
     void handleTransaction_validTransaction_Ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 25);
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 25);
+        when(storageDao.getFruitQuantity("apple")).thenReturn(5);
         returnOperationHandler.handleTransaction(fruitTransaction);
-        int actual = storageDao.getFruitQuantity(fruitTransaction.getFruit());
-        assertEquals(25, actual);
+        verify(storageDao, times(1)).addFruitQuantity("apple", 25);
     }
 
     @Test
     void handleTransaction_negativeQuantity_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> returnOperationHandler.handleTransaction(
-                        new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", -1)));
+                        new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", -1)));
         assertTrue(exception.getMessage().contains("Return quantity must be positive"));
 
     }
@@ -55,7 +57,7 @@ class ReturnOperationHandlerTest {
     void handleTransaction_zeroQuantity_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> returnOperationHandler.handleTransaction(
-                        new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 0)));
+                        new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 0)));
         assertTrue(exception.getMessage().contains("Return quantity must be positive"));
 
     }

@@ -7,13 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterImplTest {
-    private final FileWriterImpl fileWriterImpl = new FileWriterImpl();
+    private FileWriterImpl fileWriterImpl;
     @TempDir
     private Path tempDir;
+
+    @BeforeEach
+    void setUp() {
+        fileWriterImpl = new FileWriterImpl();
+    }
 
     @Test
     void write_validFileAndData_Ok() throws IOException {

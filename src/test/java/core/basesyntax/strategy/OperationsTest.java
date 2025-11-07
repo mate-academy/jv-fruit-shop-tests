@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class OperationsTest {
     @Test
     void balanceOperation_setsValue() {
         new BalanceOperation().apply(new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", 30));
+                Operation.BALANCE, "banana", 30));
         assertEquals(30, Storage.getQuantity("banana"));
     }
 
@@ -25,7 +26,7 @@ public class OperationsTest {
     void supplyOperation_addsValue() {
         Storage.setQuantity("apple", 5);
         new SupplyOperation().apply(new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "apple", 10));
+                Operation.SUPPLY, "apple", 10));
         assertEquals(15, Storage.getQuantity("apple"));
     }
 
@@ -33,7 +34,7 @@ public class OperationsTest {
     void purchaseOperation_ok() {
         Storage.setQuantity("orange", 10);
         new PurchaseOperation().apply(new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "orange", 4));
+                Operation.PURCHASE, "orange", 4));
         assertEquals(6, Storage.getQuantity("orange"));
     }
 
@@ -42,14 +43,14 @@ public class OperationsTest {
         Storage.setQuantity("orange", 2);
         assertThrows(RuntimeException.class, () ->
                 new PurchaseOperation().apply(new FruitTransaction(
-                        FruitTransaction.Operation.PURCHASE, "orange", 5)));
+                        Operation.PURCHASE, "orange", 5)));
     }
 
     @Test
     void returnOperation_addsValue() {
         Storage.setQuantity("pear", 7);
         new ReturnOperation().apply(new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "pear", 3));
+                Operation.RETURN, "pear", 3));
         assertEquals(10, Storage.getQuantity("pear"));
     }
 }

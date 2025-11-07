@@ -1,6 +1,7 @@
 package core.basesyntax.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,7 @@ public class StorageTest {
     @Test
     void clear_removesAllEntries() {
         Storage.setQuantity("banana", 10);
+        assertFalse(Storage.getAll().isEmpty());
         Storage.clear();
         assertTrue(Storage.getAll().isEmpty());
     }

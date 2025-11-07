@@ -8,9 +8,6 @@ public class Storage {
 
     private static final Map<String, Integer> fruitStorage = new HashMap<>();
 
-    private Storage() {
-    }
-
     public static void setQuantity(String fruit, int quantity) {
         fruitStorage.put(fruit, quantity);
     }

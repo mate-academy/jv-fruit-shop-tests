@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,10 @@ public class DataConverterImpl implements DataConverter {
                         + (i + 1) + ": " + line);
             }
             String type = parts[0].trim();
+            if (type.isEmpty()) {
+                throw new IllegalArgumentException("Missing operation type at line "
+                        + (i + 1) + ": " + line);
+            }
             int quantity;
             try {
                 quantity = Integer.parseInt(parts[2].trim());
@@ -31,9 +36,9 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException("Negative quantity not allowed at line "
                         + (i + 1) + ": " + line);
             }
-            FruitTransaction.Operation operation;
+            Operation operation;
             try {
-                operation = FruitTransaction.Operation.fromCode(type);
+                operation = Operation.fromCode(type);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Unknown operation type at line "
                         + (i + 1) + ": " + line);

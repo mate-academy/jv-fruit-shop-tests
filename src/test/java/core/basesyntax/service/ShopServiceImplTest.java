@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
@@ -24,11 +25,11 @@ public class ShopServiceImplTest {
     void process_balanceOperation_updatesStorage() {
         OperationHandler balanceHandler = new BalanceOperation();
         OperationStrategy strategy = new OperationStrategyImpl(
-                Map.of(FruitTransaction.Operation.BALANCE, balanceHandler)
+                Map.of(Operation.BALANCE, balanceHandler)
         );
         ShopService shopService = new ShopServiceImpl(strategy);
         FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10);
+                new FruitTransaction(Operation.BALANCE, "banana", 10);
         shopService.process(List.of(transaction));
         assertEquals(10, Storage.getQuantity("banana"));
     }

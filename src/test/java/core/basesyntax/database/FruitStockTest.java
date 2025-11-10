@@ -8,10 +8,12 @@ public class FruitStockTest {
 
     @Test
     void add() {
+        FruitStock.stock.clear();
         FruitStock fruitStock = new FruitStock();
         fruitStock.add("apple", 10);
         Assertions.assertEquals(10, fruitStock.getQuantity("apple"));
     }
+
 
     @Test
     void subtract() {

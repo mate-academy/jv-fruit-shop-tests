@@ -2,9 +2,15 @@ package core.basesyntax.database;
 
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitStockTest {
+
+    @BeforeEach
+    void setUp() {
+        FruitStock.stock.clear();
+    }
 
     @Test
     void add() {

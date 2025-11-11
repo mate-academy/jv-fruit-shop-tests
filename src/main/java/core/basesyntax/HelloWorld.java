@@ -31,26 +31,20 @@ public class HelloWorld {
     public static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
-
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE);
-
         DataConverter dataConverter = new DataConverterImpl();
-
         Map<Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(Operation.BALANCE, new BalanceOperation());
         handlers.put(Operation.SUPPLY, new SupplyOperation());
         handlers.put(Operation.PURCHASE, new PurchaseOperation());
         handlers.put(Operation.RETURN, new ReturnOperation());
-
         OperationStrategy strategy = new OperationStrategyImpl(handlers);
         ShopService shopService = new ShopServiceImpl(strategy);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         shopService.process(transactions);
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
-
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(report, OUTPUT_FILE);
     }

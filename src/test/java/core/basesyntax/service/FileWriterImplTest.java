@@ -15,7 +15,10 @@ class FileWriterImplTest {
     @Test
     void write_validFile_ok() throws IOException {
         Path tempFile = Files.createTempFile("testOutput", ".csv");
-        String content = "fruit,quantity\nbanana,10";
+        String content = String.join(System.lineSeparator(),
+                "fruit,quantity",
+                "banana,10"
+        );
         fileWriter.write(content, tempFile.toString());
         String read = Files.readString(tempFile);
         assertEquals(content, read);

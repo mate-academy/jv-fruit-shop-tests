@@ -27,17 +27,17 @@ public class ConverterImpl implements Converter {
             String fruit = parts[1].trim();
             String quantityLine = parts[2].trim();
 
-            Operation operation = Operation.parseOperation(operationSymbol, i);
+            Operation operation = Operation.parseOperation(operationSymbol, i + 1);
 
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityLine);
             } catch (NumberFormatException e) {
-                throw new RuntimeException("Incorrect number in a line " + (i + 1), e);
+                throw new RuntimeException("Incorrect number in a line " + (i + 1));
             }
 
             if (quantity < 0) {
-                throw new RuntimeException("Quantity can't be negative");
+                throw new RuntimeException("Quantity can't be negative " + (i + 1));
             }
 
             transactions.add(new FruitTransaction(operation, fruit, quantity));

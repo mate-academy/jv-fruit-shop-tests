@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReportGeneratorImplTest {
+public class ReportGeneratorImplTest {
     private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
 
     @BeforeEach

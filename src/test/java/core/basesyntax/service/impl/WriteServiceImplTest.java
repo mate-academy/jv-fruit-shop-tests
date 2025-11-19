@@ -10,11 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Test;
 
-class WriteServiceImplTest {
+public class WriteServiceImplTest {
     private final WriteServiceImpl writeService = new WriteServiceImpl();
 
     @Test
-    void validPathWriting() throws Exception {
+    public void validPathWriting() throws Exception {
         Path tempFile = Files.createTempFile("report", ".csv");
         String report = "banana,100\napple,50\norange,70";
 
@@ -25,7 +25,7 @@ class WriteServiceImplTest {
     }
 
     @Test
-    void invalidPathWriting() throws Exception {
+    public void invalidPathWriting() throws Exception {
         Path testDir = Files.createTempDirectory("testDir");
 
         RuntimeException exception = assertThrows(

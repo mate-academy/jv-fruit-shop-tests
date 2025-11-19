@@ -13,14 +13,14 @@ import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
-class ShopServiceImplTest {
+public class ShopServiceImplTest {
     private ShopServiceImpl shopService;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         Map<Operation, OperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(Operation.BALANCE, new BalanceHandler());
         strategyMap.put(Operation.SUPPLY, new SupplyHandler());
@@ -31,7 +31,6 @@ class ShopServiceImplTest {
 
         shopService = new ShopServiceImpl(strategy);
 
-        // Очистимо Storage
         Storage.put("apple", null);
     }
 

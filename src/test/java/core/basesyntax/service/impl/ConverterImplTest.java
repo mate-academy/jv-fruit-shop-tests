@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 
-class ConverterImplTest {
+public class ConverterImplTest {
 
     private final ConverterImpl converter = new ConverterImpl();
 
@@ -27,7 +27,7 @@ class ConverterImplTest {
         assertEquals("banana", fruitTransaction1.getFruit());
         assertEquals(20, fruitTransaction1.getQuantity());
 
-        FruitTransaction fruitTransaction2 = resultData.get(0);
+        FruitTransaction fruitTransaction2 = resultData.get(1);
         assertEquals(Operation.SUPPLY, fruitTransaction2.getOperation());
         assertEquals("apple", fruitTransaction2.getFruit());
         assertEquals(5, fruitTransaction2.getQuantity());
@@ -41,13 +41,45 @@ class ConverterImplTest {
     }
 
     @Test
+    public void multipleEmptyLines() {
+        List<String> data = Arrays.asList("", "b, banana , 10", "",
+                "", "s, apple , 5", ""
+        );
+
+        List<FruitTransaction> result = converter.convert(data);
+
+        assertEquals(2, result.size());
+
+        assertEquals(Operation.BALANCE, result.get(0).getOperation());
+        assertEquals("banana", result.get(0).getFruit());
+        assertEquals(10, result.get(0).getQuantity());
+
+        assertEquals(Operation.SUPPLY, result.get(1).getOperation());
+        assertEquals("apple", result.get(1).getFruit());
+        assertEquals(5, result.get(1).getQuantity());
+    }
+
+    @Test
+    public void wrongFormatInMiddleLine() {
+        List<String> data = Arrays.asList("b,banana,20",
+                "error", "s,apple,5");
+
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> converter.convert(data));
+
+        String message = exception.getMessage();
+        assertTrue(message.contains("Wrong format of the line "));
+        assertTrue(message.contains("2"));
+    }
+
+    @Test
     public void wrongNumberOfData() {
         List<String> data = Arrays.asList("b,20");
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> converter.convert(data));
         String message = exception.getMessage();
-        assertTrue(message.contains("Wrong format of the line"));
-        assertTrue(message.contains("2"));
+        assertTrue(message.contains("Wrong format of the line "));
+        assertTrue(message.contains("1"));
     }
 
     @Test
@@ -78,7 +110,7 @@ class ConverterImplTest {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> converter.convert(data));
         String message = exception.getMessage();
-        assertTrue(message.contains("Quantity can't be negative"));
+        assertTrue(message.contains("Quantity can't be negative "));
         assertTrue(message.contains("1"));
     }
 

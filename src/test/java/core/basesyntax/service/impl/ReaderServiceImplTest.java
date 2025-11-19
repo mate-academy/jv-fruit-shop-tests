@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.Test;
 
-class ReaderServiceImplTest {
+public class ReaderServiceImplTest {
     private final ReaderServiceImpl reader = new ReaderServiceImpl();
 
     @Test

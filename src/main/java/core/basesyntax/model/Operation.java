@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new RuntimeException("Invalid operation symbol in line " + (lineIndex + 1));
+        throw new RuntimeException("Invalid operation symbol in line " + lineIndex);
     }
 }

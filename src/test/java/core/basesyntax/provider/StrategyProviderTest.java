@@ -1,21 +1,20 @@
 package core.basesyntax.provider;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyStrategy;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class StrategyProviderTest {
     private StrategyProvider strategyProvider;
-
 
     @Test
     public void get_getCorrectStrategy_ok() {

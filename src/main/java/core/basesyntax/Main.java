@@ -36,6 +36,7 @@ public class Main {
         strategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
         strategyMap.put(Operation.BALANCE, new BalanceOperation());
         strategyMap.put(Operation.SUPPLY, new SupplyStrategy());
+
         StrategyProvider strategyProvider = new StrategyProvider(strategyMap);
         ReportService reportService = new ReportServiceImpl(
                 new CalculateAvailableFruits(strategyProvider)

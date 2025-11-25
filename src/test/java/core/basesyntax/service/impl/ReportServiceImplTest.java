@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.CalculateAvailableFruits;
@@ -29,6 +30,26 @@ class ReportServiceImplTest {
     );
 
     @Test
+    public void createReport_validData_ok() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(Operation.BALANCE, "banana", 20),
+                new FruitTransaction(Operation.SUPPLY, "banana", 100),
+                new FruitTransaction(Operation.PURCHASE, "banana", 13),
+                new FruitTransaction(Operation.PURCHASE, "banana", 5),
+                new FruitTransaction(Operation.SUPPLY, "banana", 50)
+        );
+
+        String expected = """
+                    fruit,quantity
+                    banana,152
+                    """.trim();
+
+        String actual = this.reportService.createReport(transactions);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void createReport_nullData_notOk() {
         assertThrows(
                 RuntimeException.class,
@@ -37,7 +58,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_invalidQuantityOfFruits() {
+    public void createReport_invalidQuantityOfFruits_notOk() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.SUPPLY, "banana", 10),

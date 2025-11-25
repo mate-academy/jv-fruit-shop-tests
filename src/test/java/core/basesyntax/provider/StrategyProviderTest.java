@@ -30,7 +30,8 @@ class StrategyProviderTest {
         assertNotNull(operationStrategy);
     }
 
-    @Test void get_getNullIfStrategyIsNotExist_notOk() {
+    @Test
+    public void get_getNullIfStrategyIsNotExist_notOk() {
         Map<Operation, OperationStrategy> strategies = new HashMap<>();
         strategies.put(Operation.PURCHASE, new PurchaseStrategy());
         strategies.put(Operation.BALANCE, new BalanceOperation());

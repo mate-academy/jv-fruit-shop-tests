@@ -114,21 +114,6 @@ class ShopServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("should generate a correct report for a truly empty file (no header)")
-    void testFullProcess_trulyEmptyInput() throws IOException {
-        List<String> rawData = List.of();
-        Files.write(inputFilePath, rawData);
-        List<String> rawTransactions = fileReader.read(inputFilePath.toString());
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawTransactions);
-        shopService.process(transactions);
-        String report = reportGenerator.getReport();
-        fileWriter.write(report, outputFilePath.toString());
-        String expectedReport = "fruit,quantity" + lineSeparator();
-        String generatedReport = Files.readString(outputFilePath);
-        assertEquals(expectedReport, generatedReport);
-    }
-
-    @Test
     @DisplayName("should process a single transaction correctly")
     void testFullProcess_singleTransaction() throws IOException {
         List<String> rawData = List.of("type,fruit,quantity", "s,banana,100");

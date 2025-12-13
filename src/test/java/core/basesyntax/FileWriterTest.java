@@ -16,6 +16,8 @@ import org.junit.jupiter.api.io.TempDir;
 @DisplayName("FileWriter Operations")
 public class FileWriterTest {
 
+    private static final String TEST = "PR_TEST";
+
     @TempDir
     private static Path tempDir;
     private FileWriter fileWriter;

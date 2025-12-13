@@ -3,7 +3,7 @@ package core.basesyntax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.serviceimpl.FileWriterImpl;
+import core.basesyntax.service.serviceimpl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

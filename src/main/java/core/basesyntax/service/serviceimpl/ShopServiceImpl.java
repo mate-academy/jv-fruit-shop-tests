@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.common.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;

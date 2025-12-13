@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.common.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.serviceimpl.OperationStrategyImpl;
+import core.basesyntax.service.serviceimpl.OperationStrategyImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.SupplyOperation;

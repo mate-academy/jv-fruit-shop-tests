@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReader;
-import core.basesyntax.serviceimpl.FileReaderImpl;
+import core.basesyntax.service.serviceimpl.FileReaderImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

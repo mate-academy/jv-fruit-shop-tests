@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.common.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.serviceimpl.DataConverterImpl;
+import core.basesyntax.service.serviceimpl.DataConverterImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.common.FruitTransaction;
 import core.basesyntax.service.DataConverter;
@@ -13,6 +13,9 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> rawData) {
+        if (rawData == null || rawData.isEmpty()) {
+            throw new RuntimeException("Input file is empty.");
+        }
         return rawData.stream()
                 .skip(1)
                 .map(line -> {

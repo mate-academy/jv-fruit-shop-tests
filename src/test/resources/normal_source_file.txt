@@ -1,0 +1,4 @@
+type,fruit,quantity
+b,pineapple,2
+p,orange,100
+p,orange,13

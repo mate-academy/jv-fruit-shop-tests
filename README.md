@@ -11,4 +11,4 @@ Use the JUnit5 library (the dependency is already in `pom.xml`).
 Your code coverage should not be less than 80% of covered lines.
 
 To test your code coverage locally - run `mvn clean verify` in the terminal.
-#### [Try to avoid these common mistakes while solving task](./checklist.md)
+#### [Try to avoid these common mistakes while solving task](/checklist.md)

@@ -6,7 +6,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InventoryTest {
-    public Inventory inventory;
+    private Inventory inventory;
 
     @BeforeEach
     public void SetUp() {
@@ -17,6 +17,11 @@ public class InventoryTest {
     public void getFruitQuantityReturnsZero() {
         inventory.setFruitQuantity("apple", null);
         assertEquals(0, inventory.getFruitQuantity("apple"));
+    }
+
+    @Test
+    public void getNonExistentFruitQuantityReturnsZero() {
+        assertEquals(0, inventory.getFruitQuantity("banana"));
     }
 
     @Test

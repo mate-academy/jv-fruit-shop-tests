@@ -1,26 +1,27 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.FileReader;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class FileReaderImplTest {
+    @TempDir
+    private Path tempDir;
+
     private FileReader fileReader;
 
     @BeforeEach
     public void setUp() {
         fileReader = new FileReaderImpl();
     }
-
-    @TempDir
-    Path tempDir;
 
     @Test
     public void readMethodWhenPathIsNullThrowsException() {
@@ -32,7 +33,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readThrowsExceptionWhenFileDoesNotExist(){
+    public void readThrowsExceptionWhenFileDoesNotExist() {
         Path missingFile = tempDir.resolve("missing.txt");
         RuntimeException exception = assertThrows(
                 RuntimeException.class, () -> fileReader.read(missingFile.toString())

@@ -1,11 +1,15 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.Inventory;
 import core.basesyntax.service.ReportGenerator;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;

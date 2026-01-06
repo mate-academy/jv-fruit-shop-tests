@@ -1,12 +1,16 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.DataConverter;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DataConverterImplTest {
     private DataConverter dataConverter;
@@ -77,7 +81,8 @@ public class DataConverterImplTest {
     @Test
     public void convertThrowsException_whenOperationCodeIsUnknown() {
         String line = "x,apple,10";
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> dataConverter.convert(line));
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> dataConverter.convert(line));
         assertEquals("Unknown operation: x", ex.getMessage());
     }
 

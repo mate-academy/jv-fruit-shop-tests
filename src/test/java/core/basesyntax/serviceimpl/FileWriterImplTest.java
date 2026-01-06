@@ -1,26 +1,29 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.FileWriter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class FileWriterImplTest {
+    @TempDir
+    private Path tempDir;
+
     private FileWriter fileWriter;
 
     @BeforeEach
     public void setUp() {
         fileWriter = new FileWriterImpl();
     }
-
-    @TempDir
-    Path tempDir;
 
     @Test
     public void whenLineIsNullReturnsException() {

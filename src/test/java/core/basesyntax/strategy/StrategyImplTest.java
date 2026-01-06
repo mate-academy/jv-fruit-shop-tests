@@ -1,17 +1,19 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import java.util.Map;
-import java.util.HashMap;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import core.basesyntax.model.Operation;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StrategyImplTest {
+    private OperationHandler handler;
     private Strategy strategy;
-    Map<Operation, OperationHandler> operationHandlerMap;
-    OperationHandler handler;
+    private Map<Operation, OperationHandler> operationHandlerMap;
 
     @BeforeEach
     public void setUp() {
@@ -25,7 +27,7 @@ public class StrategyImplTest {
     public void getOperationHandlerReturnsHandlerWhenRegistered() {
         OperationHandler result = strategy.getOperationHandler(Operation.SUPPLY);
         assertNotNull(result);
-        assertSame(handler, result);
+        assertEquals(handler, result);
     }
 
     @Test

@@ -1,11 +1,12 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Inventory;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BalanceOperationHandlerTest {
     private Inventory inventory;

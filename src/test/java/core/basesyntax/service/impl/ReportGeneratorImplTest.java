@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
@@ -26,6 +27,6 @@ class ReportGeneratorImplTest {
 
         String report = generator.getReport(Map.of());
 
-        assertTrue(report.equals("fruit,quantity\n"));
+        assertEquals("fruit,quantity\n", report);
     }
 }

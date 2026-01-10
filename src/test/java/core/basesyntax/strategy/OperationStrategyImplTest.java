@@ -1,10 +1,10 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
 

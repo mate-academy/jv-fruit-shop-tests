@@ -1,11 +1,8 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
@@ -18,9 +15,9 @@ class ReportGeneratorImplTest {
                 Map.of("banana", 10, "apple", 5)
         );
 
-        Assertions.assertTrue(report.startsWith("fruit,quantity\n"));
-        Assertions.assertTrue(report.contains("banana,10\n"));
-        Assertions.assertTrue(report.contains("apple,5\n"));
+        assertTrue(report.startsWith("fruit,quantity\n"));
+        assertTrue(report.contains("banana,10\n"));
+        assertTrue(report.contains("apple,5\n"));
     }
 
     @Test
@@ -29,6 +26,6 @@ class ReportGeneratorImplTest {
 
         String report = generator.getReport(Map.of());
 
-        assertEquals("fruit,quantity\n", report);
+        assertTrue(report.equals("fruit,quantity\n"));
     }
 }

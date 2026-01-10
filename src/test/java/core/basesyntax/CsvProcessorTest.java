@@ -1,10 +1,9 @@
 package core.basesyntax;
 
-import java.util.List;
-import java.util.Map;
-
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

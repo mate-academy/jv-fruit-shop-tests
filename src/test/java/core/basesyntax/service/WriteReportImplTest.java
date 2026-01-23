@@ -2,16 +2,19 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WriteReportImplTest {
-    WriteReport writeReport;
     private static final String FILE_PATH = "finalReportTest.csv";
+
+    private WriteReport writeReport;
 
     @BeforeEach
     void setUp() {
@@ -60,7 +63,5 @@ public class WriteReportImplTest {
             writeReport.writeReport(reportData, "");
         });
     }
-
-
 
 }

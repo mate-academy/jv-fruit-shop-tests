@@ -2,9 +2,12 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import core.basesyntax.model.FruitTransaction;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +90,8 @@ public class PurchaseOperationTest {
         storage.put("apple", 50);
 
         assertThrows(RuntimeException.class, () -> {
-           operationHandler.handle(fruitTransaction, storage);
+            operationHandler.handle(fruitTransaction, storage);
         });
     }
+
 }

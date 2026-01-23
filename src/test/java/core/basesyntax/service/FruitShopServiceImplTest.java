@@ -2,9 +2,11 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
@@ -13,6 +15,7 @@ import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -83,7 +86,5 @@ public class FruitShopServiceImplTest {
             Map<String, Integer> report = fruitShopService.process(transactions);
         });
     }
-
-
 
 }

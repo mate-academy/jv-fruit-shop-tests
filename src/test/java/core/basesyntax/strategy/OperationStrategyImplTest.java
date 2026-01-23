@@ -2,9 +2,12 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import core.basesyntax.model.FruitTransaction;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +25,8 @@ public class OperationStrategyImplTest {
 
     @Test
     void get_validOperation_returnCorrectHandler() {
-        OperationHandler operationHandler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
+        OperationHandler operationHandler = operationStrategy
+                .get(FruitTransaction.Operation.BALANCE);
 
         assertEquals(BalanceOperation.class, operationHandler.getClass());
     }
@@ -47,7 +51,5 @@ public class OperationStrategyImplTest {
             operationStrategy.get(FruitTransaction.Operation.PURCHASE);
         });
     }
-
-
 
 }

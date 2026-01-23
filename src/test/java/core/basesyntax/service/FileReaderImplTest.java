@@ -7,14 +7,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private FileReader fileReader;
     private static final String FILE_PATH = "src/test/inputdata.csv";
+    private FileReader fileReader;
 
     @BeforeEach
     void setUp() throws IOException {

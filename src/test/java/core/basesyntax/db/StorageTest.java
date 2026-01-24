@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class StorageTest {
 
     @Test
-    void shouldReturnBalanceOperation() {
+    void fromCode_ShouldReturnBalance_WhenCodeIsB() {
         Storage.Operation operation =
                 Storage.Operation.fromCode("b");
 
@@ -16,7 +16,7 @@ class StorageTest {
     }
 
     @Test
-    void shouldThrowExceptionForUnknownCode() {
+    void fromCode_ShouldThrowException_WhenCodeIsUnknown() {
         assertThrows(RuntimeException.class,
                 () -> Storage.Operation.fromCode("x"));
     }

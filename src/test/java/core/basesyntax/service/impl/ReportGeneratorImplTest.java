@@ -4,15 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
 
-    @Test
-    void shouldGenerateReportForMultipleFruits() {
-        ReportGeneratorImpl generator = new ReportGeneratorImpl();
+    private static ReportGeneratorImpl reportGenerator;
 
-        String report = generator.getReport(
+    @BeforeAll
+    static void init() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
+
+    @Test
+    void getReport_ShouldContainAllFruits_WhenMapHasMultipleEntries() {
+        String report = reportGenerator.getReport(
                 Map.of("banana", 10, "apple", 5)
         );
 
@@ -22,11 +28,8 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void shouldGenerateReportForEmptyMap() {
-        ReportGeneratorImpl generator = new ReportGeneratorImpl();
-
-        String report = generator.getReport(Map.of());
-
+    void getReport_ShouldReturnOnlyHeader_WhenMapIsEmpty() {
+        String report = reportGenerator.getReport(Map.of());
         assertEquals("fruit,quantity\n", report);
     }
 }

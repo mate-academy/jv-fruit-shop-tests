@@ -21,7 +21,10 @@ public class FruitTransactionValidatorTest {
         validator = new FruitTransactionValidatorImpl();
         fruitTransaction = new FruitTransaction();
     }
-
+@AfterEach
+public void afterEachTest() {
+    Storage.storage.clear();
+}
     @Test
     void validateTransaction_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);

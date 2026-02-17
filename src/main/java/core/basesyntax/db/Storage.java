@@ -17,4 +17,8 @@ public class Storage {
     public static Integer get(String fruit) {
         return fruits.get(fruit);
     }
+
+    public static void clear() {
+        fruits.clear();
+    }
 }

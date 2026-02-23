@@ -43,7 +43,7 @@ class PurchaseOperationHandlerTest {
         assertThrows(RuntimeException.class,
                 () -> handler.handle(transaction));
     }
-
+    //сделал
     @AfterEach
     void tearDown() {
         Storage.clear();

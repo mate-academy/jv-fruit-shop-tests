@@ -23,7 +23,6 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Integer getQuantity(String fruit) {
-        // Додамо перевірку входу, як просив рев'юер
         if (fruit == null || fruit.isBlank()) {
             throw new RuntimeException("Fruit name cannot be null or empty");
         }

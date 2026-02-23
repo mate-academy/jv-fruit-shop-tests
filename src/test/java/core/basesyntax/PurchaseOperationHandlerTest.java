@@ -8,6 +8,7 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class PurchaseOperationHandlerTest {
     @BeforeEach
     void setUp() {
         Storage.clear();
-        fruitDao = new FruitDaoImpl(); 
+        fruitDao = new FruitDaoImpl();
         handler = new PurchaseOperationHandler(fruitDao);
     }
 
@@ -41,5 +42,10 @@ class PurchaseOperationHandlerTest {
 
         assertThrows(RuntimeException.class,
                 () -> handler.handle(transaction));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 }

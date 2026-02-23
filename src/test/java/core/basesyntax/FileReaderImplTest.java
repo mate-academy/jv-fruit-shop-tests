@@ -14,7 +14,7 @@ class FileReaderImplTest {
     private final FileReaderImpl fileReader = new FileReaderImpl();
 
     @Test
-    void writeToRead_isOk() throws IOException {
+    void read_fromExistingFile_isOk() throws IOException {
         String filePath = "test_input.csv";
         String content = "type,fruit,quantity" + System.lineSeparator() + "b,banana,20";
         Files.writeString(Path.of(filePath), content);

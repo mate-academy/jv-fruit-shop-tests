@@ -23,10 +23,6 @@ public class DefaultShopService implements ShopService {
         Objects.requireNonNull(transactions, "Transactions list is null");
 
         for (ShopTransaction transaction : transactions) {
-            if (transaction.quantity() < 0) {
-                throw new RuntimeException("Transaction quantity must be greater than 0");
-            }
-
             ShopOperationHandler handler = operationStrategy.resolve(transaction.operation());
             handler.handle(storage, transaction.product(), transaction.quantity());
         }

@@ -8,13 +8,13 @@ import java.util.Objects;
 
 public class CsvFileWriter implements FileWriter {
     @Override
-    public void write(String data, String fileName) {
+    public void write(String data, String filePath) {
         Objects.requireNonNull(data, "data is null");
-        Objects.requireNonNull(fileName, "file name is null");
+        Objects.requireNonNull(filePath, "file path is null");
         try {
-            Files.writeString(Path.of(fileName), data);
+            Files.writeString(Path.of(filePath), data);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to write file: " + fileName, e);
+            throw new RuntimeException("Failed to write file, path:  " + filePath, e);
         }
     }
 }

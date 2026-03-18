@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReader;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
     private static final FileReader csvFileReader = new CsvFileReader();
     private static final List<String> fileLines = new ArrayList<>();
 
-    public static final String TEST_FILE_PATH = "src/test/resources/test-test-input-example.csv";
+    private static final String TEST_FILE_PATH = "src/test/resources/test-input-example.csv";
 
     @BeforeAll
     static void init() {

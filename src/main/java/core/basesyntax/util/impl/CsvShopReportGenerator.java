@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CsvShopReportGenerator implements ReportGenerator {
-    private static final String REPORT_TITLE = "fruit,quantity";
+    private static final String REPORT_HEADER = "fruit,quantity";
     private static final String DELIMITER = ",";
 
     @Override
@@ -16,7 +16,7 @@ public class CsvShopReportGenerator implements ReportGenerator {
         Map<String, Integer> dataFromStorage = storage.getAll();
         StringBuilder report = new StringBuilder();
 
-        report.append(REPORT_TITLE);
+        report.append(REPORT_HEADER);
 
         for (Map.Entry<String, Integer> entry : dataFromStorage.entrySet()) {
             report.append(System.lineSeparator())

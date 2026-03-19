@@ -9,10 +9,17 @@ public class ShopTransactionMapper implements Mapper<String, ShopTransaction> {
     public ShopTransaction map(String from) {
         Objects.requireNonNull(from, "transaction string is null");
 
-        String[] parts = from.trim().split(",");
+        String[] parts = from
+                .replaceAll("\\s", "")
+                .split(",");
 
         if (parts.length != 3) {
             throw new RuntimeException("Invalid transaction format: " + from);
+        }
+
+        String productName = parts[1];
+        if (parts[1].isBlank()) {
+            throw new RuntimeException("Product name can't be blank");
         }
 
         int quantity;
@@ -31,6 +38,6 @@ public class ShopTransactionMapper implements Mapper<String, ShopTransaction> {
             default -> throw new RuntimeException("Unexpected operation: " + stringOperation);
         };
 
-        return new ShopTransaction(operation, parts[1], quantity);
+        return new ShopTransaction(operation, productName, quantity);
     }
 }

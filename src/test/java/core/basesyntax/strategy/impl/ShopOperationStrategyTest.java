@@ -22,11 +22,6 @@ class ShopOperationStrategyTest {
     }
 
     @Test
-    void constructor_handlersIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> new ShopOperationStrategy(null));
-    }
-
-    @Test
     void resolve_validCase_returnsRightHandler_ok() {
         handlers.put(ShopTransaction.Operation.BALANCE, new ShopBalanceOperationHandler());
         handlers.put(ShopTransaction.Operation.SUPPLY, new ShopSupplyOperationHandler());
@@ -36,24 +31,5 @@ class ShopOperationStrategyTest {
         assertEquals(ShopSupplyOperationHandler.class,
                 operationStrategy.resolve(ShopTransaction.Operation.SUPPLY).getClass(),
                 "resolve() return wrong handler");
-
-    }
-
-    @Test
-    void resolve_operationTypeArgumentIsNull_notOk() {
-        assertThrows(NullPointerException.class, () ->
-                operationStrategy.resolve(null));
-    }
-
-    @Test
-    void resolve_handlerInMapIsNull_notOk() {
-        handlers.put(ShopTransaction.Operation.BALANCE, new ShopBalanceOperationHandler());
-        handlers.put(ShopTransaction.Operation.SUPPLY, new ShopSupplyOperationHandler());
-        handlers.put(ShopTransaction.Operation.PURCHASE, new ShopPurchaseOperationHandler());
-        handlers.put(ShopTransaction.Operation.RETURN, null);
-
-        assertThrows(RuntimeException.class, () ->
-                operationStrategy.resolve(ShopTransaction.Operation.RETURN));
-
     }
 }

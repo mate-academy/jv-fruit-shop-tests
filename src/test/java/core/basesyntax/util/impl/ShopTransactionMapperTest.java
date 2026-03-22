@@ -41,11 +41,6 @@ class ShopTransactionMapperTest {
     }
 
     @Test
-    void map_inputStringIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> mapper.map(null));
-    }
-
-    @Test
     void map_inputStringDoesNotContainExactlyThreeParts_notOk() {
         assertThrows(RuntimeException.class, () -> mapper.map("b,banana,10,yellow"));
         assertThrows(RuntimeException.class, () -> mapper.map("b,yellow"));

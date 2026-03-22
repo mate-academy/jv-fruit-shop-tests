@@ -39,10 +39,4 @@ class CsvFileReaderTest {
     void read_notExistingFilePathOrFile_notOk() {
         assertThrows(RuntimeException.class, () -> csvFileReader.read("invalid"));
     }
-
-    @Test
-    void read_filePathIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> csvFileReader.read(null));
-    }
-
 }

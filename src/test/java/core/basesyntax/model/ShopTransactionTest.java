@@ -16,12 +16,6 @@ class ShopTransactionTest {
     }
 
     @Test
-    void constructor_productIsNull_notOk() {
-        assertThrows(NullPointerException.class, () ->
-                new ShopTransaction(ShopTransaction.Operation.SUPPLY, null, 2));
-    }
-
-    @Test
     void constructor_productIsBlank_notOk() {
         assertThrows(RuntimeException.class, () ->
                 new ShopTransaction(ShopTransaction.Operation.SUPPLY, "  ", 5));

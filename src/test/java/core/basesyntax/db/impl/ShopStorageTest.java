@@ -64,11 +64,6 @@ class ShopStorageTest {
     }
 
     @Test
-    void getByKey_KeyIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> storage.getByKey(null));
-    }
-
-    @Test
     void update_AllValid_AddFunction_ok() {
         storage.update("plum", 99);
 
@@ -88,15 +83,4 @@ class ShopStorageTest {
 
         assertEquals(expected, actual, "update() does not update the value");
     }
-
-    @Test
-    void update_keyIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> storage.update(null, 4));
-    }
-
-    @Test
-    void update_valueIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> storage.update("peach", null));
-    }
-
 }

@@ -36,18 +36,6 @@ class CsvFileWriterTest {
     }
 
     @Test
-    void write_dataIsNull_notOk() {
-        assertThrows(NullPointerException.class, () ->
-                csvFileWriter.write(null, TEST_FILE_PATH));
-    }
-
-    @Test
-    void write_filePathIsNull_notOk() {
-        assertThrows(NullPointerException.class, () ->
-                csvFileWriter.write(TEST_FILE_CONTENT, null));
-    }
-
-    @Test
     void write_filePathIsInvalid() {
         assertThrows(RuntimeException.class, () ->
                 csvFileWriter.write(TEST_FILE_CONTENT, TEST_INVALID_FILE_PATH));

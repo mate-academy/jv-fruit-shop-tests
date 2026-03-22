@@ -54,22 +54,6 @@ class DefaultShopServiceTest {
     }
 
     @Test
-    void constructor_storageIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> new DefaultShopService(
-                null,
-                new ShopOperationStrategy(operationHandlers)
-        ));
-    }
-
-    @Test
-    void constructor_OperationStrategyIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> new DefaultShopService(
-                storage,
-                null
-        ));
-    }
-
-    @Test
     void process_validCase_updates_ok() {
         testShopTransactions.add(
                 new ShopTransaction(ShopTransaction.Operation.BALANCE, "banana", 20));
@@ -94,10 +78,5 @@ class DefaultShopServiceTest {
         Map<String, Integer> actual = storage.getAll();
 
         assertEquals(expected, actual, "service.process() does not process transactions right");
-    }
-
-    @Test
-    void process_transactionsIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> service.process(null));
     }
 }

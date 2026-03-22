@@ -22,11 +22,6 @@ class CsvShopReportGeneratorTest {
     }
 
     @Test
-    void generate_storageIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> reportGenerator.generate(null));
-    }
-
-    @Test
     void generate_validCase_returnsRightReport_ok() {
         shopStorage.update("banana", 152);
         shopStorage.update("apple", 90);

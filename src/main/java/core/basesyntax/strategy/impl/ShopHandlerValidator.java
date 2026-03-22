@@ -4,6 +4,10 @@ import core.basesyntax.db.Storage;
 import java.util.Objects;
 
 public class ShopHandlerValidator {
+    private ShopHandlerValidator() {
+
+    }
+
     static void validate(Storage storage, String product, Integer quantity) {
         Objects.requireNonNull(storage, "storage is null");
         Objects.requireNonNull(product, "product is null");

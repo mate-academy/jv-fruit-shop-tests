@@ -8,4 +8,6 @@ public interface Storage {
     Integer getByKey(String key);
 
     void update(String key, Integer value);
+
+    void clear();
 }

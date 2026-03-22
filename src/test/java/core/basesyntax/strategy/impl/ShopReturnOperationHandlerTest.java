@@ -6,16 +6,22 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.ShopStorage;
 import core.basesyntax.strategy.ShopOperationHandler;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ShopReturnOperationHandlerTest {
     private static Storage shopStorage;
     private final ShopOperationHandler handler = new ShopReturnOperationHandler();
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void init() {
         shopStorage = new ShopStorage();
+    }
+
+    @AfterEach
+    void tearDown() {
+        shopStorage.clear();
     }
 
     @Test

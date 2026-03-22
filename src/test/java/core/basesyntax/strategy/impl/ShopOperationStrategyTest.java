@@ -31,5 +31,13 @@ class ShopOperationStrategyTest {
         assertEquals(ShopSupplyOperationHandler.class,
                 operationStrategy.resolve(ShopTransaction.Operation.SUPPLY).getClass(),
                 "resolve() return wrong handler");
+
+    }
+
+    @Test
+    void resolve_handlerIsNull_notOk() {
+        handlers.put(ShopTransaction.Operation.BALANCE, null);
+        assertThrows(RuntimeException.class, () ->
+                operationStrategy.resolve(ShopTransaction.Operation.BALANCE));
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.ShopStorage;
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DefaultShopServiceTest {
@@ -31,18 +30,20 @@ class DefaultShopServiceTest {
     @BeforeAll
     static void init() {
         operationHandlers = new HashMap<>();
+        storage = new ShopStorage();
+
         operationHandlers.put(ShopTransaction.Operation.BALANCE, new ShopBalanceOperationHandler());
         operationHandlers.put(ShopTransaction.Operation.SUPPLY, new ShopSupplyOperationHandler());
         operationHandlers.put(ShopTransaction.Operation.PURCHASE,
                 new ShopPurchaseOperationHandler());
         operationHandlers.put(ShopTransaction.Operation.RETURN, new ShopReturnOperationHandler());
+
+        service = new DefaultShopService(storage, new ShopOperationStrategy(operationHandlers));
     }
 
-    @BeforeEach
-    void setUp() {
-        testShopTransactions.clear();
-        storage = new ShopStorage();
-        service = new DefaultShopService(storage, new ShopOperationStrategy(operationHandlers));
+    @AfterEach
+    void tearDown() {
+        storage.clear();
     }
 
     @Test

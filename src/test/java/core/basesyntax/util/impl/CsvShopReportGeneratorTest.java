@@ -1,24 +1,29 @@
 package core.basesyntax.util.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.ShopStorage;
 import core.basesyntax.util.ReportGenerator;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvShopReportGeneratorTest {
     private static final String TEST_REPORT_HEADER = "fruit,quantity";
 
-    private Storage shopStorage;
+    private static Storage shopStorage;
     private final ReportGenerator reportGenerator = new CsvShopReportGenerator();
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void init() {
         shopStorage = new ShopStorage();
+    }
+
+    @AfterEach
+    void tearDown() {
+        shopStorage.clear();
     }
 
     @Test

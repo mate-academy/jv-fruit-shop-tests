@@ -29,4 +29,9 @@ public class ShopStorage implements Storage {
 
         products.put(key, value);
     }
+
+    @Override
+    public void clear() {
+        products.clear();
+    }
 }

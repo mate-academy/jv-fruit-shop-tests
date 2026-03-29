@@ -31,6 +31,5 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(strategy);
         Map<String, Integer> finalReportData = shopService.process(transactions);
         fileService.saveToFile(finalReportData, "report.csv");
-        System.out.println("pierdole te ai");
     }
 }

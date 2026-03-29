@@ -35,8 +35,8 @@ class FileServiceImplTest {
     @Test
     void loadFromFile_validInputFile_ok() {
         List<FruitTransaction> transactions = fileService.loadFromFile(VALID_INPUT_FILE_PATH);
-        Assertions.assertNotEquals
-                (0, transactions.size(), "Size can't be 0");
+        Assertions.assertNotEquals(
+                0, transactions.size(), "Size can't be 0");
         Assertions.assertEquals(8, transactions.size(), "List size should be 8");
         Assertions.assertEquals("banana", transactions.get(FIRST_INDEX_OF_LIST).getFruitName());
     }

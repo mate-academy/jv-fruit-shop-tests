@@ -12,8 +12,8 @@ class FruitParserTest {
 
     @BeforeEach
     void setUp() {
-    fruitParser = new FruitParser();
-    fruitTransaction = FruitTransaction.of(Operation.B,"banana",20);
+        fruitParser = new FruitParser();
+        fruitTransaction = FruitTransaction.of(Operation.B, "banana", 20);
     }
 
     @Test

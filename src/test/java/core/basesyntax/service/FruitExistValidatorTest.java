@@ -18,17 +18,17 @@ class FruitExistValidatorTest {
     }
 
     @Test
-    void FruitExistValidator_goodOutput_ok() {
+    void getCurrentQuantity_goodOutput_ok() {
         Assertions.assertEquals(20, storageInterface.getQuantity("banana"));
     }
 
     @Test
-    void FruitExistValidator_amountZero_ok() {
+    void getCurrentQuantity_amountZero_ok() {
         Assertions.assertEquals(0, storageInterface.getQuantity("kiwi"));
     }
 
     @Test
-    void FruitExistValidator_nonExistentFruit_returnZero() {
+    void getCurrentQuantity_nonExistentFruit_returnZero() {
         Assertions.assertEquals(0, storageInterface.getQuantity("orange"));
     }
 }

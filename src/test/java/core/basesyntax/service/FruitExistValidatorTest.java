@@ -9,26 +9,28 @@ import org.junit.jupiter.api.Test;
 class FruitExistValidatorTest {
 
     private StorageInterface storageInterface;
+    private FruitExistValidator fruitExistValidator;
 
     @BeforeEach
     void setUp() {
         storageInterface = new Storage();
         storageInterface.put("banana", 20);
         storageInterface.put("kiwi", 0);
+        fruitExistValidator = new FruitExistValidator(storageInterface);
     }
 
     @Test
     void getCurrentQuantity_goodOutput_ok() {
-        Assertions.assertEquals(20, storageInterface.getQuantity("banana"));
+        Assertions.assertEquals(20, fruitExistValidator.getCurrentQuantity("banana"));
     }
 
     @Test
     void getCurrentQuantity_amountZero_ok() {
-        Assertions.assertEquals(0, storageInterface.getQuantity("kiwi"));
+        Assertions.assertEquals(0, fruitExistValidator.getCurrentQuantity("kiwi"));
     }
 
     @Test
-    void getCurrentQuantity_nonExistentFruit_returnZero() {
-        Assertions.assertEquals(0, storageInterface.getQuantity("orange"));
+    void getCurrentQuantity_nonExistentFruit_ok() {
+        Assertions.assertEquals(0, fruitExistValidator.getCurrentQuantity("orange"));
     }
 }

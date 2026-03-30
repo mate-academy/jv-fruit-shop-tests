@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitParser;
 import java.io.IOException;
@@ -26,7 +27,12 @@ class FileServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        FruitParser fruitParser = new FruitParser();
+        FruitParser fruitParser = new FruitParser() {
+            @Override
+            public FruitTransaction parse(String line) {
+                return FruitTransaction.of(Operation.B, "test_fruit", 50);
+            }
+        };
         fileService = new FileServiceImpl(fruitParser);
         mapOfTotalTransactions.put("banana", 132);
         mapOfTotalTransactions.put("apple", 90);
@@ -38,7 +44,7 @@ class FileServiceImplTest {
         Assertions.assertNotEquals(
                 0, transactions.size(), "Size can't be 0");
         Assertions.assertEquals(8, transactions.size(), "List size should be 8");
-        Assertions.assertEquals("banana", transactions.get(FIRST_INDEX_OF_LIST).getFruitName());
+        Assertions.assertEquals("test_fruit", transactions.get(FIRST_INDEX_OF_LIST).getFruitName());
     }
 
     @Test
@@ -48,7 +54,7 @@ class FileServiceImplTest {
     }
 
     @Test
-    void loadFromFile_emptyFile_returnEmptyList() {
+    void loadFromFile_emptyFile_ok() {
         List<FruitTransaction> transactions = fileService.loadFromFile(EMPTY_FILE_PATH);
         Assertions.assertTrue(transactions.isEmpty());
     }
@@ -64,7 +70,7 @@ class FileServiceImplTest {
     }
 
     @Test
-    void saveToFile_emptyMap_onlyHeaderOk() throws IOException {
+    void saveToFile_emptyMap_ok() throws IOException {
         fileService.saveToFile(Collections.emptyMap(), EMPTY_REPORT_FILE_PATH);
         List<String> lines = Files.readAllLines(Path.of(EMPTY_REPORT_FILE_PATH));
         Assertions.assertEquals(1, lines.size());

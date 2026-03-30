@@ -45,7 +45,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_returnGoodMap_Ok() {
+    void process_validTransaction_ok() {
         Map<String, Integer> result = shopService.process(transactions);
         Assertions.assertEquals(4, result.size());
         Assertions.assertTrue(result.containsKey("banana"));
@@ -59,7 +59,7 @@ class ShopServiceImplTest {
     }
 
     @Test
-    void process_emptyList_Ok() {
+    void process_emptyTransaction_ok() {
         Map<String, Integer> result = shopService.process(new ArrayList<>());
         Assertions.assertEquals(0, result.size());
     }

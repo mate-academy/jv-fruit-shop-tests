@@ -30,7 +30,7 @@ class FruitExistValidatorTest {
     }
 
     @Test
-    void getCurrentQuantity_nonExistentFruit_ok() {
+    void getCurrentQuantity_fruitAbsent_ok() {
         Assertions.assertEquals(0, fruitExistValidator.getCurrentQuantity("orange"));
     }
 }

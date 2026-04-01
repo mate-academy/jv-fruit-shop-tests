@@ -14,14 +14,17 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileServiceImplTest {
     private static final String VALID_INPUT_FILE_PATH = "src/test/resources/input.csv";
-    private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
     private static final String EMPTY_REPORT_FILE_PATH = "src/test/resources/empty_report.csv";
-    private static final String VALID_REPORT_FILE_PATH = "src/test/resources/report.csv";
     private static final String INVALID_PATH_FILE = "invalid_path.csv";
     private static final int FIRST_INDEX_OF_LIST = 0;
+
+    @TempDir
+    private Path tempDir;
+
     private FileService fileService;
     private final Map<String, Integer> mapOfTotalTransactions = new LinkedHashMap<>();
 
@@ -55,14 +58,15 @@ class FileServiceImplTest {
 
     @Test
     void loadFromFile_emptyFile_ok() {
-        List<FruitTransaction> transactions = fileService.loadFromFile(EMPTY_FILE_PATH);
+        List<FruitTransaction> transactions = fileService.loadFromFile(EMPTY_REPORT_FILE_PATH);
         Assertions.assertTrue(transactions.isEmpty());
     }
 
     @Test
     void saveToFile_validInputFile_ok() throws IOException {
-        fileService.saveToFile(mapOfTotalTransactions, VALID_REPORT_FILE_PATH);
-        List<String> actualLines = Files.readAllLines(Path.of(VALID_REPORT_FILE_PATH));
+        Path tempSaveFile = tempDir.resolve("report.csv");
+        fileService.saveToFile(mapOfTotalTransactions, tempSaveFile.toString());
+        List<String> actualLines = Files.readAllLines(tempSaveFile);
         Assertions.assertEquals(3, actualLines.size());
         Assertions.assertEquals("fruit,quantity", actualLines.get(0));
         Assertions.assertEquals("banana,132", actualLines.get(1));
@@ -71,8 +75,9 @@ class FileServiceImplTest {
 
     @Test
     void saveToFile_emptyMap_ok() throws IOException {
-        fileService.saveToFile(Collections.emptyMap(), EMPTY_REPORT_FILE_PATH);
-        List<String> lines = Files.readAllLines(Path.of(EMPTY_REPORT_FILE_PATH));
+        Path tempEmptyFile = tempDir.resolve("report.csv");
+        fileService.saveToFile(Collections.emptyMap(), tempEmptyFile.toString());
+        List<String> lines = Files.readAllLines(tempEmptyFile);
         Assertions.assertEquals(1, lines.size());
         Assertions.assertEquals("fruit,quantity", lines.get(0));
     }

@@ -14,6 +14,11 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String[] parts = lines.get(i).split(",");
+
+            if (parts.length < 3) {
+                throw new RuntimeException("Invalid line format: " + lines.get(i));
+            }
+
             FruitTransaction.Operation operation = FruitTransaction.Operation.getByCode(parts[0]);
             int quantity = Integer.parseInt(parts[2]);
             if (quantity < 0) {

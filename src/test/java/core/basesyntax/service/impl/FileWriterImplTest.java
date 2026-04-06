@@ -1,9 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,5 +18,11 @@ class FileWriterImplTest {
         List<String> result = new FileReaderImpl().read(tempFile.toString());
         assertEquals("apple,10", result.get(1));
         Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    void write_toInvalidPath_notOk() {
+        assertThrows(RuntimeException.class, () ->
+                new FileWriterImpl().write("data", "/invalid/path/file.csv"));
     }
 }

@@ -1,11 +1,11 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -16,6 +16,7 @@ import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,11 @@ class ShopServiceImplTest {
         shopService = new ShopServiceImpl(strategy);
     }
 
+    @AfterEach
+    void tearDown() {
+        storage.clear();
+    }
+
     @Test
     void process_validTransactions_ok() {
         List<FruitTransaction> transactions = List.of(
@@ -43,5 +49,10 @@ class ShopServiceImplTest {
         );
         shopService.process(transactions);
         assertEquals(80, (int) storage.get("apple"));
+    }
+
+    @Test
+    void process_nullTransactions_notOk() {
+        assertThrows(RuntimeException.class, () -> shopService.process(null));
     }
 }

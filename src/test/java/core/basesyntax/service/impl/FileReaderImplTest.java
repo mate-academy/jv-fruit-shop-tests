@@ -1,8 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.impl.FileReaderImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,5 +18,10 @@ class FileReaderImplTest {
         assertEquals(2, result.size());
         assertEquals("b,banana,20", result.get(1));
         Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    void read_nonExistentFile_notOk() {
+        assertThrows(RuntimeException.class, () -> new FileReaderImpl().read("invalid_path.csv"));
     }
 }

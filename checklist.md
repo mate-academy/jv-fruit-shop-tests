@@ -31,17 +31,17 @@ Same goes for files that you use in tests, **let's put them into this folder:** 
 #### Try to cover different scenarios in tests
 Your task is to include edge cases apart from the regular method use case.
 
-#### Don't test the Main class
-We want to test only business logic, so there is no need to cover the `Main` class with tests. 
-You can exclude the Main class with the `main()` method from being checked for code coverage in `pom.xml`.   
+#### Don't test the core.basesyntax.Main class
+We want to test only business logic, so there is no need to cover the `core.basesyntax.Main` class with tests. 
+You can exclude the core.basesyntax.Main class with the `main()` method from being checked for code coverage in `pom.xml`.   
 
-__Example__: find the following code in the `pom.xml` and change `Main` according to your 
-    class naming where you have your `main()` method.  
-    
+__Example__: find the following code in the `pom.xml` and change `core.basesyntax.Main` according to your 
+    class naming where you have your `main()` method.
+
 ```java
-    <configuration>  
+    import core.basesyntax.Main;<configuration>  
         <excludes>  
-            <exclude>**/Main*</exclude>  
+            <exclude>**/core.basesyntax.Main*</exclude>  
         </excludes>  
     </configuration>  
 ```  

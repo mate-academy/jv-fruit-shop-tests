@@ -1,0 +1,31 @@
+package mate.academy.fruitshop.service.impl;
+
+import java.util.Map;
+import mate.academy.fruitshop.service.ReportGenerator;
+
+public class ReportGeneratorImpl implements ReportGenerator {
+
+    private final Map<String, Integer> storage;
+
+    public ReportGeneratorImpl(Map<String, Integer> storage) {
+        if (storage == null) {
+            throw new RuntimeException("Storage cannot be null");
+        }
+        this.storage = storage;
+    }
+
+    @Override
+    public String getReport() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("fruit,quantity\n");
+
+        for (Map.Entry<String, Integer> entry : storage.entrySet()) {
+            sb.append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue())
+                    .append("\n");
+        }
+
+        return sb.toString();
+    }
+}

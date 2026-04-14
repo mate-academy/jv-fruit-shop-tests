@@ -1,4 +1,4 @@
-package core.basesyntax;
+package mate.academy.fruitshop;
 
 /**
  * Feel free to remove this class and create your own.

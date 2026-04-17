@@ -15,7 +15,8 @@ public class ShopServiceImpl implements ShopService {
         this.operationStrategy = operationStrategy;
     }
 
-    public ShopServiceImpl(OperationStrategy operationStrategy,  Map<String, Integer> storage) {
+    public ShopServiceImpl(OperationStrategy operationStrategy,
+                           Map<String, Integer> storage) {
         this.storage = storage;
         this.operationStrategy = operationStrategy;
     }

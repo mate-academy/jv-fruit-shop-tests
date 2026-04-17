@@ -1,24 +1,28 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.*;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.ReturnOperation;
+import core.basesyntax.service.operation.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    Map<FruitTransaction.Operation, OperationHandler> handlers;
-    OperationStrategy operationStrategy ;
-    Map<String, Integer> storage;
-    ShopService shopService;
+    private Map<FruitTransaction.Operation, OperationHandler> handlers;
+    private OperationStrategy operationStrategy;
+    private Map<String, Integer> storage;
+    private ShopService shopService;
 
     @BeforeEach
     void setUp() {
@@ -30,7 +34,6 @@ class ShopServiceImplTest {
         operationStrategy = new OperationStrategyImpl(map);
         shopService = new ShopServiceImpl(operationStrategy, storage);
     }
-
 
     @Test
     void process_nullTransactionList_notOk() {
@@ -67,7 +70,6 @@ class ShopServiceImplTest {
         assertEquals(10, storage.get("banana"));
     }
 
-
     @Test
     void process_multipleBalanceOperationForSameFruit_ok() {
         initService(Map.of(
@@ -84,7 +86,6 @@ class ShopServiceImplTest {
 
         assertEquals(15, storage.get("banana"));
     }
-
 
     @Test
     void process_multipleBalanceOperationForDifferentFruits_ok() {

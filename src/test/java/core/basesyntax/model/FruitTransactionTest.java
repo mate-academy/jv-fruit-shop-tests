@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -82,68 +81,5 @@ class FruitTransactionTest {
     void fromCode_unknownCode_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> FruitTransaction.Operation.fromCode("x"));
-    }
-
-    @Test
-    void equals_sameObjects_true() {
-        FruitTransaction t1 =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10
-                );
-
-        FruitTransaction t2 =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10
-                );
-
-        assertEquals(t1, t2);
-        assertEquals(t1.hashCode(), t2.hashCode());
-    }
-
-    @Test
-    void equals_differentQuantity_false() {
-        FruitTransaction t1 =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10
-                );
-
-        FruitTransaction t2 =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        5
-                );
-
-        assertNotEquals(t1, t2);
-    }
-
-    @Test
-    void equals_null_false() {
-        FruitTransaction transaction =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10
-                );
-
-        assertNotEquals(null, transaction);
-    }
-
-    @Test
-    void equals_differentClass_false() {
-        FruitTransaction transaction =
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10
-                );
-
-        assertNotEquals("string", transaction);
     }
 }

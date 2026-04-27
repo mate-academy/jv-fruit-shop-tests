@@ -1,0 +1,33 @@
+package core.basesyntax.checker;
+
+import core.basesyntax.db.Storage;
+
+public class EntryValidator {
+    private final Storage storage;
+    
+    public EntryValidator(Storage storage) {
+        this.storage = storage;
+    }
+    
+    public void validateQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero.");
+        }
+    }
+    
+    public void validateFruit(String fruit) {
+        if (fruit == null) {
+            throw new IllegalArgumentException("Fruit must not be null.");
+        }
+        if (!storage.contains(fruit)) {
+            throw new RuntimeException("Cannot find fruit: " + fruit);
+        }
+    }
+    
+    public void validateNewFruitEntry(String fruit, int quantity) {
+        if (fruit == null || fruit.isEmpty()) {
+            throw new IllegalArgumentException("Fruit must not be null or empty.");
+        }
+        validateQuantity(quantity);
+    }
+}

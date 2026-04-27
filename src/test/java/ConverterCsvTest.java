@@ -1,4 +1,4 @@
-import core.basesyntax.checker.Checker;
+import core.basesyntax.checker.EntryValidator;
 import core.basesyntax.db.InMemoryStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
@@ -14,20 +14,20 @@ import org.junit.jupiter.api.Test;
 
 public class ConverterCsvTest {
     private Storage storage;
-    private Checker checker;
+    private EntryValidator entryValidator;
     private TransactionDao dao;
     private Converter converter;
     
     @BeforeEach
     public void setup() {
         storage = new InMemoryStorage();
-        checker = new Checker(storage);
-        dao = new TransactionDaoImpl(storage, checker);
+        entryValidator = new EntryValidator(storage);
+        dao = new TransactionDaoImpl(storage, entryValidator);
         converter = new ConverterCsvImpl(dao);
     }
     
     @Test
-    public void convertCsvLines_correctLines_ok() {
+    public void convertCsvLines_createsList_correctCsvLines() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,10");
@@ -52,21 +52,20 @@ public class ConverterCsvTest {
     }
     
     @Test
-    public void convertCsvLines_emptyLines_notOk() {
+    public void convertCsvLines_throwsException_emptyList() {
         List<String> lines = new ArrayList<>();
         Assertions.assertThrows(IllegalArgumentException.class, 
                 () -> converter.convertCsvLines(lines));
     }
     
     @Test
-    public void convertCsvLines_nullLines_notOk() {
-        List<String> lines = null;
+    public void convertCsvLines_throwsException_nullList() {
         Assertions.assertThrows(IllegalArgumentException.class, 
-                () -> converter.convertCsvLines(lines));
+                () -> converter.convertCsvLines(null));
     }
     
     @Test
-    public void convertCsvLines_wrongLength_notOk() {
+    public void convertCsvLines_throwsException_wrongLength() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,10,30");
@@ -76,7 +75,7 @@ public class ConverterCsvTest {
     }
 
     @Test
-    public void convertCsvLines_wrongOperation_notOk() {
+    public void convertCsvLines_throwsException_wrongOperation() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("x,banana,10");

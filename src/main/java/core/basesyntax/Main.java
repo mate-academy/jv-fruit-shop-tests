@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.checker.Checker;
+import core.basesyntax.checker.EntryValidator;
 import core.basesyntax.db.InMemoryStorage; 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.Converter;
@@ -31,9 +31,9 @@ public class Main {
         List<String> lines = reader.readFile("FileInput.csv");
 
         InMemoryStorage inMemoryStorage = new InMemoryStorage();
-        Checker checker = new Checker(inMemoryStorage);
+        EntryValidator entryValidator = new EntryValidator(inMemoryStorage);
 
-        TransactionDao transactionDao = new TransactionDaoImpl(inMemoryStorage, checker);
+        TransactionDao transactionDao = new TransactionDaoImpl(inMemoryStorage, entryValidator);
         Converter converter = new ConverterCsvImpl(transactionDao);
 
         List<Transaction> transactions = converter.convertCsvLines(lines);

@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.checker.Checker;
+import core.basesyntax.checker.EntryValidator;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.TransactionDao;
 import java.util.HashMap;
@@ -8,23 +8,23 @@ import java.util.Map;
 
 public class TransactionDaoImpl implements TransactionDao {
     private final Storage storage;
-    private final Checker checker;
+    private final EntryValidator entryValidator;
     
-    public TransactionDaoImpl(Storage storage, Checker checker) {
+    public TransactionDaoImpl(Storage storage, EntryValidator entryValidator) {
         this.storage = storage;
-        this.checker = checker;
+        this.entryValidator = entryValidator;
     }
     
     @Override
     public void set(String fruit, int quantity) {
-        checker.validateNewEntry(fruit, quantity);
+        entryValidator.validateNewFruitEntry(fruit, quantity);
         storage.put(fruit, quantity);
     }
 
     @Override
     public void add(String fruit, int quantity) {
-        checker.validateFruit(fruit);
-        checker.validateQuantity(quantity);
+        entryValidator.validateFruit(fruit);
+        entryValidator.validateQuantity(quantity);
 
         int current = storage.getQuantity(fruit)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find fruit"));
@@ -35,8 +35,8 @@ public class TransactionDaoImpl implements TransactionDao {
 
     @Override
     public void subtract(String fruit, int quantity) {
-        checker.validateFruit(fruit);
-        checker.validateQuantity(quantity);
+        entryValidator.validateFruit(fruit);
+        entryValidator.validateQuantity(quantity);
         
         int currentValue = storage.getQuantity(fruit)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find fruit"));

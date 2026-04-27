@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class InMemoryStorage implements Storage {
-    private static final Map<String, Integer> storage = new HashMap<>();
+    private final Map<String, Integer> storage = new HashMap<>();
     
     @Override
     public void put(String key, Integer value) {

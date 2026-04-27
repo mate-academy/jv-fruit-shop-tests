@@ -2,10 +2,10 @@ package core.basesyntax.checker;
 
 import core.basesyntax.db.Storage;
 
-public class Checker {
+public class EntryValidator {
     private final Storage storage;
     
-    public Checker(Storage storage) {
+    public EntryValidator(Storage storage) {
         this.storage = storage;
     }
     
@@ -24,7 +24,7 @@ public class Checker {
         }
     }
     
-    public void validateNewEntry(String fruit, int quantity) {
+    public void validateNewFruitEntry(String fruit, int quantity) {
         if (fruit == null || fruit.isEmpty()) {
             throw new IllegalArgumentException("Fruit must not be null or empty.");
         }

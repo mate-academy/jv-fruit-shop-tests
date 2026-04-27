@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.checker.Checker;
+import core.basesyntax.checker.EntryValidator;
 import core.basesyntax.db.InMemoryStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.TransactionDao;
@@ -13,30 +13,30 @@ import org.junit.jupiter.api.Test;
 public class TransactionDaoTest {
 
     private Storage storage;
-    private Checker checker;
+    private EntryValidator entryValidator;
     private TransactionDao dao;
 
     @BeforeEach
     void setUp() {
         storage = new InMemoryStorage();
-        checker = new Checker(storage);
-        dao = new TransactionDaoImpl(storage, checker);
+        entryValidator = new EntryValidator(storage);
+        dao = new TransactionDaoImpl(storage, entryValidator);
     }
 
     @Test
-    void set_validFruitAndQuantity_ok() {
+    void set_setNewEntryInDb_correctValues() {
         dao.set("Banana", 100);
         Assertions.assertEquals(100, storage.getQuantity("Banana").get());
     }
 
     @Test
-    void set_invalidFruit_notOk() {
+    void set_throwsException_emptyString() {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> dao.set("", 10));
     }
 
     @Test
-    void add_existingFruit_ok() {
+    void add_addValueToFruitInDb_correctValues() {
         dao.set("Apple", 50);
 
         dao.add("Apple", 30);
@@ -45,7 +45,7 @@ public class TransactionDaoTest {
     }
 
     @Test
-    void add_negativeQuantity_notOk() {
+    void add_throwsException_incorrectValue() {
         dao.set("Apple", 10);
 
         Assertions.assertThrows(IllegalArgumentException.class,
@@ -53,7 +53,7 @@ public class TransactionDaoTest {
     }
 
     @Test
-    void subtract_valid_ok() {
+    void subtract_addValueToFruitInDb_correctValues() {
         dao.set("Banana", 100);
 
         dao.subtract("Banana", 50);
@@ -62,7 +62,7 @@ public class TransactionDaoTest {
     }
 
     @Test
-    void subtract_resultLessThanZero_notOk() {
+    void subtract_throwsException_resultLessThanZero() {
         dao.set("Banana", 100);
 
         Assertions.assertThrows(RuntimeException.class,
@@ -70,7 +70,7 @@ public class TransactionDaoTest {
     }
 
     @Test
-    void getAll_returnsCopy_ok() {
+    void getAll_returnsCopyWithoutModifyingOriginal_correctValues() {
         dao.set("Banana", 100);
         dao.set("Apple", 50);
 

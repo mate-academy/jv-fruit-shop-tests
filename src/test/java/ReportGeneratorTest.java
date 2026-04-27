@@ -9,7 +9,7 @@ public class ReportGeneratorTest {
     private final ReportGenerator generator = new ReportGeneratorImpl();
     
     @Test
-    public void generateReport_validData_ok() {
+    public void generateReport_correctReport_correctData() {
         Map<String, Integer> validData = new LinkedHashMap<>();
         validData.put("banana", 10);
         validData.put("apple", 30);
@@ -19,7 +19,7 @@ public class ReportGeneratorTest {
     }
     
     @Test
-    public void generateReport_emptyKey_notOk() {
+    public void generateReport_throwsException_emptyKey() {
         Map<String, Integer> invalidData = new LinkedHashMap<>();
         invalidData.put("", 10);
         
@@ -28,7 +28,7 @@ public class ReportGeneratorTest {
     }
     
     @Test
-    public void generateReport_nullKey_notOk() {
+    public void generateReport_throwsException_nullKey() {
         Map<String, Integer> invalidData = new LinkedHashMap<>();
         invalidData.put(null, 10);
         Assertions.assertThrows(IllegalArgumentException.class,
@@ -36,7 +36,7 @@ public class ReportGeneratorTest {
     }
     
     @Test
-    public void generateReport_nullValue_notOk() {
+    public void generateReport_throwsException_nullValue() {
         Map<String, Integer> invalidData = new LinkedHashMap<>();
         invalidData.put("pineapple", null);
         Assertions.assertThrows(IllegalArgumentException.class,
@@ -44,7 +44,7 @@ public class ReportGeneratorTest {
     }
     
     @Test
-    public void generateReport_negativeValue_notOk() {
+    public void generateReport_throwsException_invalidData() {
         Map<String, Integer> invalidData = new LinkedHashMap<>();
         invalidData.put("pineapple", -42);
         Assertions.assertThrows(IllegalArgumentException.class,

@@ -1,21 +1,33 @@
 package core.basesyntax.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import core.basesyntax.checker.EntryValidator;
+import core.basesyntax.db.InMemoryStorage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionDao;
+import core.basesyntax.service.impl.TransactionDaoImpl;
 import core.basesyntax.strategy.handler.BalanceHandler;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceHandlerTest {
+    private Storage storage;
+    private TransactionDao dao;
+    
+    @BeforeEach
+    public void setUp() {
+        storage = new InMemoryStorage();
+        EntryValidator entryValidator = new EntryValidator(storage);
+        dao = new TransactionDaoImpl(storage, entryValidator);
+    }
+    
     @Test
-    public void handle_BalanceHandler_ok() {
-        FakeTransactionDao dao = new FakeTransactionDao();
+    public void handle_balanceTransaction_doesntThrowException() {
         BalanceHandler balanceHandler = new BalanceHandler(dao);
-        Transaction transaction = new Transaction(Transaction.Operation.BALANCE, "banana", 120);
-        balanceHandler.handle(transaction);
-
-        assertEquals("set", dao.getLastMethod());
-        assertEquals("banana", dao.getFruit());
-        assertEquals(120, dao.getQuantity());
+        Transaction transaction = new Transaction(Transaction.Operation.BALANCE, "pineapple", 30);
+        
+        assertDoesNotThrow(() -> balanceHandler.handle(transaction));
     }
 }

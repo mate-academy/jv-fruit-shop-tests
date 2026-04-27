@@ -8,7 +8,7 @@ public class CsvReaderTest {
     private Reader reader = new CsvReaderImpl();
     
     @Test
-    public void readFile_correctFileNameAndData_ok() {
+    public void readFile_readsFileCorrectly_existingFile() {
         List<String> readLines = reader.readFile("TestFileInput.csv");
 
         Assertions.assertEquals(3, readLines.size());
@@ -18,7 +18,7 @@ public class CsvReaderTest {
     }
     
     @Test
-    public void readFile_badFileName_notOk() {
+    public void readFile_throwsException_notExistingFile() {
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
                 () -> reader.readFile("RandomFile.csv"));
 

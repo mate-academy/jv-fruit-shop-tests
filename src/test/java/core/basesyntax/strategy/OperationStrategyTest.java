@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.checker.Checker;
+import core.basesyntax.checker.EntryValidator;
 import core.basesyntax.db.InMemoryStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
@@ -19,15 +19,15 @@ import org.junit.jupiter.api.Test;
 public class OperationStrategyTest {
 
     private Storage storage;
-    private Checker checker;
+    private EntryValidator entryValidator;
     private TransactionDao dao;
     private OperationStrategy strategy;
 
     @BeforeEach
     void setUp() {
         storage = new InMemoryStorage();
-        checker = new Checker(storage);
-        dao = new TransactionDaoImpl(storage, checker);
+        entryValidator = new EntryValidator(storage);
+        dao = new TransactionDaoImpl(storage, entryValidator);
 
         Map<Transaction.Operation, OperationHandler> handlers = Map.of(
                 Transaction.Operation.BALANCE, new BalanceHandler(dao),
@@ -40,7 +40,7 @@ public class OperationStrategyTest {
     }
     
     @Test
-    void getOperationHandler_allHandlers_ok() {
+    void getOperationHandler_allHandlersInMapCorrect_correctHandlers() {
         Assertions.assertTrue(
                 strategy.getOperationHandler(Transaction.Operation.BALANCE)
                         instanceof BalanceHandler);

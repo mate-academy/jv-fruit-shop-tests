@@ -1,77 +1,104 @@
-## Common mistakes (jv-fruit-shop-tests)
+## Common mistakes (jv-fruit-shop)
 
-#### Don't begin class or method implementation with an empty line. 
+#### Don't begin class or method implementation with empty line. 
 Remove all redundant empty lines, be careful :)
 
-#### Remember about the naming of test methods.
-There are a lot of ways to name your test methods. The main point is that 
-they should have informative names and be consistent along with other developers in your team. 
-For this task use such convention: `<methodUnderTest>_<state>_<expectedBehavior>`. 
-For example, if we are testing the method `register` with a `null` user's age 
-the test method name should be `register_nullAge_notOk`. `notOk` is because 
-the test expects the register method to throw an exception.
+#### Follow SOLID rules
+Please design your classes according to the SOLID principles. Make your classes simple, reusable and focused on a single problem.
+In this case you will save a lot of time when you need to add/modify existing functionality in the future.
 
-#### Strive to have most of the functionality covered with tests
-Ensure you have covered at least 80% of the code with tests. That will reduce the chances of getting unexpected behavior 
-after the software release and during the maintenance stage.
-You can check this requirement by `running your tests with coverage` or running `mvn clean verify` in the terminal.
+#### Make your services independent and call them in main() method
+All services should be independent. 
+We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
 
-#### Don't keep all tests in a single class
-Create a corresponding test class for each service you test. Do not test the logic of the whole program in one test class.
-That's important for code readability.
+Let's create `Main` class with `main()` method to show how the program works.
+Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
 
-Example:  
-```java  
-    CsvFileService -> CsvFileServiceTest  
-    FruitService -> FruitServiceTest  
-    ...  
-```  
-Same goes for files that you use in tests, **let's put them into this folder:** `src/test/resources/[your-files.csv]`   
+#### Don't keep all logic in a single package
+You can use packages to make the structure of the code better, so let's do it. Gather classes with same 
+purpose/common logic in a corresponding package.
 
-#### Try to cover different scenarios in tests
-Your task is to include edge cases apart from the regular method use case.
+Your project structure should consist the following packages:
+- `db` for holding Storage
+- `model` for holding models like Fruit (if necessary)
+- `service` for holding services, like Writer, Reader, Parser and so on
+- `service.impl` for holding implementations of services
+- `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
 
-#### Don't test the Main class
-We want to test only business logic, so there is no need to cover the `Main` class with tests. 
-You can exclude the Main class with the `main()` method from being checked for code coverage in `pom.xml`.   
+#### VCS usage
+Remember about the informative commit and PR naming. Person that is outside of context of your work progress should understand
+what feature/functional you have added.
 
-__Example__: find the following code in the `pom.xml` and change `Main` according to your 
-    class naming where you have your `main()` method.  
+#### Don't ignore exceptions in try-catch blocks
+Don't leave `e.printStackTrace()` or `System.out.println(e.getMessage())` in the catch blocks. 
+Let's rethrow a RuntimeException with an **informative** message and exception object.
+
+- Good:   
+    ```java
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
+        }
+    ```
+  
+#### try-with-resources
+Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resources.
+
+#### Follow the encapsulation principle
+Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
+
+#### Use data structures from the Collection framework
+In order to represent fruit storage you may use already existing data structures, think of the one that will be 
+the most suitable for your needs.
+
+#### Place the input and output files into the `src/main/resources` folder.
+
+#### Avoid hardcode in your solution
+* Use hardcoded values only in the Main class and/or test classes.  
     
-```java
-    <configuration>  
-        <excludes>  
-            <exclude>**/Main*</exclude>  
-        </excludes>  
-    </configuration>  
-```  
+- Bad:  
+    ```java
+    public class ReaderServiceImpl implements ReaderService {
+       public List<String> readFromFile() {
+          File file = new File("src/main/resources/file.txt");
+          ...
+       }
+    }
+    ```     
+- Good:  
+    ```java
+    public class ReaderServiceImpl implements ReaderService {
+       public List<String> readFromFile(String filePath) {
+          File file = new File(filePath);
+          ...
+       }
+    }
+    ```
 
-#### Don't use any other version of JUnit
-Use JUnit5 which is already present in your `pom.xml`.
-#### Ensure that you test your services and they are independently
-If you are testing FruitService behavior - don't use FileReader or any other service in your tests.
+#### Do not use the absolute path to a resource. Everyone who pulls your project should be able to run it. 
+Please provide the relative path to a resource instead. 
+ 
+- Bad:  
+    ```java
+    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
+    ```  
+    
+- Good:  
+    ```java
+    readerService.readFromFile("src/main/resources/file.txt");
+    ```
+      
+#### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
+In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
 
-Same, when you are testing the method of FruitService that returns all information about the fruits in the storage -
-there is no need to use the other FruitService method that puts the fruit into storage.
+- Example:  
+    ```java
+    public static void main(String[] args){
+        // create and fill the strategy map
+        FruitService fruitService = new FruitServiceImpl(operationStrategies);
+    }
+    ```  
 
-REMEMBER: you can access the storage directly instead - just remember to clear it after each test.
+#### Be attentive with [class](https://mate-academy.github.io/style-guides/java/java.html#s5.2.2-class-names) and [method](https://mate-academy.github.io/style-guides/java/java.html#s5.2.3-method-names) naming. 
 
-Example:
-```java
-@Test
-public void getReport_Ok() {
-    Storage.storage.put(...); // put fruits directly to the storage
-    String expected = "your expected result here";
-    String actual = fruitService.getReport();
-    Assert.assertEquals(expected, actual);
-}
-
-@AfterEach
-public void afterEachTest() {
-    Storage.storage.clear();
-}
-```  
-#### Unit testing is <ins>isolated</ins> testing
-Keep your strategy, handler, and service tests separate from each other. Each of them needs a separate test class with their corresponding test cases.
-
-Don't test your strategy in service (e.g. `FruitService`). It's enough to create a map with only one handler (e.g. `Balance`).
+#### Handling Purchase operation.
+Check result balance before saving it in the Storage - it should be positive. Throw `RuntimeException` in case the balance is negative.

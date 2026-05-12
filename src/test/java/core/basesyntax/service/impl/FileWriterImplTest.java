@@ -34,6 +34,7 @@ class FileWriterImplTest {
     void writeToInvalidPathThrowsException() {
         Path invalidPath = tempDir.resolve("missing").resolve("report.csv");
 
-        assertThrows(RuntimeException.class, () -> fileWriter.write("report", invalidPath.toString()));
+        assertThrows(RuntimeException.class,
+                () -> fileWriter.write("report", invalidPath.toString()));
     }
 }

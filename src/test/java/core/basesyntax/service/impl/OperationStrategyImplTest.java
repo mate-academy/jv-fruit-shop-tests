@@ -19,7 +19,9 @@ class OperationStrategyImplTest {
                 FruitTransaction.Operation.PURCHASE, purchaseHandler
         ));
 
-        assertSame(balanceHandler, operationStrategy.getHandler(FruitTransaction.Operation.BALANCE));
-        assertSame(purchaseHandler, operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
+        assertSame(balanceHandler,
+                operationStrategy.getHandler(FruitTransaction.Operation.BALANCE));
+        assertSame(purchaseHandler,
+                operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE));
     }
 }

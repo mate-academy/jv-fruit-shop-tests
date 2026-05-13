@@ -4,24 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.strategy.OperationHandler;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopServiceImpl shopService;
-    private CountingOperationHandler operationHandler;
+    private List<String> handledTransactions;
 
     @BeforeEach
     void setUp() {
-        operationHandler = new CountingOperationHandler();
-        OperationStrategy operationStrategy = operation -> operationHandler;
+        handledTransactions = new ArrayList<>();
+        OperationStrategy operationStrategy = operation -> (fruit, quantity) ->
+                handledTransactions.add(operation + ":" + fruit + ":" + quantity);
         shopService = new ShopServiceImpl(operationStrategy);
     }
 
     @Test
-    void processValidTransactionsAppliesHandlers() {
+    void process_validTransactions_appliesHandlers() {
         FruitTransaction firstTransaction = createTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20);
         FruitTransaction secondTransaction = createTransaction(
@@ -29,9 +30,8 @@ class ShopServiceImplTest {
 
         shopService.process(List.of(firstTransaction, secondTransaction));
 
-        assertEquals(2, operationHandler.calls);
-        assertEquals("apple", operationHandler.lastFruit);
-        assertEquals(15, operationHandler.lastQuantity);
+        List<String> expected = List.of("BALANCE:banana:20", "SUPPLY:apple:15");
+        assertEquals(expected, handledTransactions);
     }
 
     private FruitTransaction createTransaction(FruitTransaction.Operation operation,
@@ -41,18 +41,5 @@ class ShopServiceImplTest {
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(quantity);
         return fruitTransaction;
-    }
-
-    private static class CountingOperationHandler implements OperationHandler {
-        private int calls;
-        private String lastFruit;
-        private int lastQuantity;
-
-        @Override
-        public void handle(String fruit, int quantity) {
-            calls++;
-            lastFruit = fruit;
-            lastQuantity = quantity;
-        }
     }
 }

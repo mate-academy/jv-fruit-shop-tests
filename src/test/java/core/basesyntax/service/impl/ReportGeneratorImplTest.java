@@ -3,16 +3,15 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private ReportGeneratorImpl reportGenerator;
+    private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
         Storage.getInstance().getFruitStorage().clear();
-        reportGenerator = new ReportGeneratorImpl();
     }
 
     @Test

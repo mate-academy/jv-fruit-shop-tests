@@ -22,7 +22,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readExistingFileReturnsLines() throws IOException {
+    void read_existingFile_returnsLines() throws IOException {
         Path inputFile = tempDir.resolve("report.csv");
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20");
         Files.write(inputFile, expected);
@@ -33,9 +33,19 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readMissingFileThrowsException() {
+    void read_missingFile_throwsException() {
         Path missingFile = tempDir.resolve("missing.csv");
 
         assertThrows(RuntimeException.class, () -> fileReader.read(missingFile.toString()));
+    }
+
+    @Test
+    void read_emptyFile_returnsEmptyList() throws IOException {
+        Path emptyFile = tempDir.resolve("empty.csv");
+        Files.createFile(emptyFile);
+
+        List<String> actual = fileReader.read(emptyFile.toString());
+
+        assertEquals(List.of(), actual);
     }
 }

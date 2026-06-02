@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.impl.BalanceOperation;
+import core.basesyntax.service.impl.PurchaseOperation;
+import core.basesyntax.service.impl.ReturnOperation;
 import core.basesyntax.service.impl.ShopServiceImpl;
-import core.basesyntax.service.strategy.BalanceOperation;
+import core.basesyntax.service.impl.SupplyOperation;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import core.basesyntax.service.strategy.PurchaseOperation;
-import core.basesyntax.service.strategy.ReturnOperation;
-import core.basesyntax.service.strategy.SupplyOperation;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,30 +1,31 @@
-package core.basesyntax.strategy;
+package core.basesyntax.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.strategy.ReturnOperation;
+import core.basesyntax.service.impl.SupplyOperation;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ReturnOperationTest {
-    private ReturnOperation ro;
+public class SupplyOperationTest {
+    private SupplyOperation so;
 
     @BeforeEach
     void setUp() {
         Storage.getStorage().clear();
-        ro = new ReturnOperation();
+        so = new SupplyOperation();
     }
 
     @Test
-    void returnOperation_ok() {
+    void supplyOperation_ok() {
         String banana = "banana";
         Storage.getStorage().put(banana, 50);
-        FruitTransaction ft = new FruitTransaction(banana, Operation.RETURN, 25);
-        ro.apply(ft);
+        FruitTransaction ft = new FruitTransaction(banana, Operation.SUPPLY, 50);
+        so.apply(ft);
         int actual = Storage.getStorage().get(banana);
-        assertEquals(75, actual);
+        assertEquals(100, actual);
     }
 }

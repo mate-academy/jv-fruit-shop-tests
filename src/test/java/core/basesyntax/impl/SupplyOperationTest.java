@@ -6,7 +6,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.SupplyOperation;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

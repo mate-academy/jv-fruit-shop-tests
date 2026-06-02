@@ -12,7 +12,6 @@ import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.SupplyOperation;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

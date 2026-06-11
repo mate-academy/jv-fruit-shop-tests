@@ -16,12 +16,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterTest {
-    private static final String FILE_PATH = "src/test/resources/finalReport.csv";
+    private static final String SOURCE_DIR = "src/test/resources/";
+    private static final String FILE_PATH = SOURCE_DIR + "finalReport.csv";
     private static final String FILE_CONTENT = "type,fruit,quantity\n" + "b,banana,20";
     private static FileWriter writer;
 
     @BeforeAll
     public static void setUp() {
+        File file = new File(SOURCE_DIR);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         writer = new CsvFileWriterImpl();
     }
 

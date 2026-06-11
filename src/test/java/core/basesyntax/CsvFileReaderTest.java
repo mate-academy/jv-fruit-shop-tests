@@ -18,13 +18,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderTest {
-    private static final String FILE_PATH = "src/test/resources/reportToRead.csv";
+    private static final String SOURCE_DIR = "src/test/resources/";
+    private static final String FILE_PATH = SOURCE_DIR + "reportToRead.csv";
     private static final String FILE_CONTENT = "type,fruit,quantity\n" + "b,banana,20";
     private static FileReader reader;
     private File file;
 
     @BeforeAll
     public static void setUp() {
+        File file = new File(SOURCE_DIR);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         reader = new CsvFileReaderImpl();
     }
 

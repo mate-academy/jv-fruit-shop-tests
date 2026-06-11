@@ -40,12 +40,12 @@ public class CsvFileWriterTest {
 
     @Test
     public void write_NullPath_NotOk() {
-        assertThrows(NullPointerException.class, () -> writer.write(null, FILE_CONTENT));
+        assertThrows(RuntimeException.class, () -> writer.write(null, FILE_CONTENT));
     }
 
     @Test
     public void write_NullContent_NotOk() {
-        assertThrows(NullPointerException.class, () -> writer.write(FILE_PATH, null));
+        assertThrows(RuntimeException.class, () -> writer.write(FILE_PATH, null));
     }
 
     @Test

@@ -67,7 +67,7 @@ public class ShopServiceTest {
 
     @Test
     public void process_NullStrategy_NotOk() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             shopService = new ShopServiceImpl(null);
             shopService.process(List.of(defaultTransaction));
         });
@@ -75,7 +75,7 @@ public class ShopServiceTest {
 
     @Test
     public void process_NullTransactions_NotOk() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             shopService = new ShopServiceImpl(strategy);
             shopService.process(null);
         });

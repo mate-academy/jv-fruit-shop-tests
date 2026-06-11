@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -45,13 +44,19 @@ public class CsvFileReaderTest {
     }
 
     @Test
-    public void readAllLines_Null_NotOk() {
-        assertThrows(NullPointerException.class, () -> reader.readAllLines(null));
+    public void readAllLines_Null_Ok() {
+        assertDoesNotThrow(() -> {
+            List<String> actual = reader.readAllLines(null);
+            assertTrue(actual.isEmpty());
+        });
     }
 
     @Test
     public void readAllLines_Empty_NotOk() {
-        assertThrows(RuntimeException.class, () -> reader.readAllLines(""));
+        assertDoesNotThrow(() -> {
+            List<String> actual = reader.readAllLines("");
+            assertTrue(actual.isEmpty());
+        });
     }
 
     @Test

@@ -9,6 +9,14 @@ import java.nio.file.StandardOpenOption;
 public class CsvFileWriterImpl implements FileWriter {
     @Override
     public void write(String filePath, String text) {
+        if (filePath == null) {
+            throw new RuntimeException("FilePath is null");
+        }
+
+        if (text == null) {
+            throw new RuntimeException("Content is null");
+        }
+
         File resultFile = new File(filePath);
         if (!resultFile.exists()) {
             try {

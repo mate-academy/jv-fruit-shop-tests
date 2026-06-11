@@ -27,7 +27,7 @@ public class CsvReportGeneratorTest {
 
     @Test
     public void report_NullStorageDao_NotOk() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             reportGenerator = new CsvReportGeneratorImpl(null);
             reportGenerator.getReport();
         });

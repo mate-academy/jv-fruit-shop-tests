@@ -15,6 +15,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new RuntimeException("Transactions is null");
+        }
+
         transactions.forEach(transaction -> {
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
             if (operationHandler == null) {

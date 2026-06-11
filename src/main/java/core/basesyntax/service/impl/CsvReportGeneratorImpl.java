@@ -12,6 +12,9 @@ public class CsvReportGeneratorImpl implements ReportGenerator {
     private final StorageDao storageDao;
 
     public CsvReportGeneratorImpl(StorageDao storageDao) {
+        if (storageDao == null) {
+            throw new RuntimeException("StorageDao is null");
+        }
         this.storageDao = storageDao;
     }
 

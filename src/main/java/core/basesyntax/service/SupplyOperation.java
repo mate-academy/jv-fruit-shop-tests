@@ -9,4 +9,5 @@ public class SupplyOperation implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         Storage.incrementQuantity(transaction.getFruit(), transaction.getQuantity());
     }
+
 }

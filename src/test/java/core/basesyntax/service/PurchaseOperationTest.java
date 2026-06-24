@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class PurchaseOperationTest {
 
@@ -26,9 +26,11 @@ public class PurchaseOperationTest {
     public void shouldDecreaseQuantityWhenPurchase() {
         purchaseOperation.apply(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 100));
-        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE,
                 "banana", 100);
         int actual = Storage.getQuantity("banana");
         assertEquals(50, actual);
     }
+
 }

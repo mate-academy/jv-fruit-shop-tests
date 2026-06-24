@@ -1,6 +1,5 @@
 package core.basesyntax.model;
 
-
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
@@ -45,4 +44,5 @@ public class FruitTransaction {
             throw new RuntimeException("Unknown operation: " + code);
         }
     }
+
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,13 @@ class SupplyOperationTest {
     private SupplyOperation supplyOperation;
 
     @BeforeEach
-    void supplyOperation_isOk() {
+    void setUp() {
         supplyOperation = new SupplyOperation();
+        Storage.clear();
+    }
+
+    @AfterEach
+    void clearStorage() {
         Storage.clear();
     }
 

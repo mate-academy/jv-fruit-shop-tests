@@ -19,7 +19,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void bananaNotANumber() {
+    void convert_invalidNumberFormat_throwsException() {
         List<String> inputLines = new ArrayList<>();
         inputLines.add("type,fruit,quantity");
         inputLines.add("b,banana,NOT_A_NUMBER");

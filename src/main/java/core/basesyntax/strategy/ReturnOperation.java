@@ -1,0 +1,15 @@
+package core.basesyntax.strategy;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+
+public class ReturnOperation implements OperationHandler {
+    @Override
+    public void handle(FruitTransaction transaction) {
+        String fruit = transaction.getFruit();
+        int currentQuantity = Storage.getQuantity(fruit);
+        Storage.updateQuantity(fruit, currentQuantity + transaction.getQuantity());
+    }
+}
+
+

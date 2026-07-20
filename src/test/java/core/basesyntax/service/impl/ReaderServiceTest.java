@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 class ReaderServiceTest {
     private static final String CORRECT_FILE_PATH = "src/test/resources/input.csv";
     private static final String NOT_EXISTING_FILE_PATH = "src/test/resources/notExisting.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
     private static final ReaderService readerService = new ReaderServiceImpl();
     private static final List<String> CORRECT_FILE_CONTENT = new ArrayList<>();
 
@@ -39,5 +40,10 @@ class ReaderServiceTest {
     void dataReadTest_notExistingFile_noTok() {
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(NOT_EXISTING_FILE_PATH));
+    }
+
+    @Test
+    void dataReaderTest_emptyFile_notOk() {
+        assertThrows(RuntimeException.class, () -> readerService.readFromFile(EMPTY_FILE_PATH));
     }
 }

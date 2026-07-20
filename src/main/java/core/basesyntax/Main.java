@@ -19,10 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        final String inputFilePath = "src/main/resources/input.csv";
-        final String outputFilePath = "src/main/resources/report.csv";
 
+    private static final String INPUT_FILE = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/report.csv";
+
+    public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new HashMap<>();
         operationStrategies.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
@@ -38,9 +39,9 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operationStrategies);
         WriterService writerService = new WriterServiceImpl();
 
-        List<String> lines = readerService.readFromFile(inputFilePath);
+        List<String> lines = readerService.readFromFile(INPUT_FILE);
         List<FruitTransaction> transactions = parserService.parse(lines);
         Map<String, Integer> report = fruitService.process(transactions);
-        writerService.writeToFile(report, outputFilePath);
+        writerService.writeToFile(report, OUTPUT_FILE);
     }
 }

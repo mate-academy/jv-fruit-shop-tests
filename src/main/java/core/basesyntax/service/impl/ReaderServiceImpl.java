@@ -19,6 +19,9 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + filePath, e);
         }
+        if (lines.isEmpty()) {
+            throw new RuntimeException("File is empty!");
+        }
         return lines;
     }
 }

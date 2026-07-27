@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShopServiceImplTest {
 

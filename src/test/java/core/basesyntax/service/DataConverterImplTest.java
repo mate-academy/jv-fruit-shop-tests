@@ -1,13 +1,13 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.parse.OperationParser;
 import core.basesyntax.parse.OperationParserImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DataConverterImplTest {
     private DataConverter dataConverter;

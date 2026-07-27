@@ -1,10 +1,9 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.handler.BalanceOperation;
 import java.util.HashMap;
 import java.util.Map;
-
-import core.basesyntax.strategy.handler.BalanceOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -3,13 +3,11 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.parse.OperationParser;
 import core.basesyntax.parse.OperationParserImpl;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 class DataConverterImplTest {
     private DataConverter dataConverter;
@@ -29,8 +27,8 @@ class DataConverterImplTest {
                 "p,banana,5"
         );
 
-        List<FruitTransaction> transactions = dataConverter.
-                convertToTransaction(list);
+        List<FruitTransaction> transactions = dataConverter
+                .convertToTransaction(list);
 
         assertEquals(3, transactions.size());
 

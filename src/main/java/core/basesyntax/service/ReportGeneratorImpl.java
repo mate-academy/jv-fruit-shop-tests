@@ -13,10 +13,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
         builder.append(HEADER).append(LINE_SEPARATOR);
 
-        for (String fruit : Storage.fruits.keySet()) {
+        for (String fruit : Storage.getFruits().keySet()) {
             builder.append(fruit)
                     .append(SEPARATOR)
-                    .append(Storage.fruits.get(fruit))
+                    .append(Storage.getFruits().get(fruit))
                     .append(LINE_SEPARATOR);
         }
 

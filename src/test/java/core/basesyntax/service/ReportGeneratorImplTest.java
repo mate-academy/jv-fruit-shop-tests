@@ -4,16 +4,14 @@ import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReportGeneratorImplTest {
     private ReportGenerator reportGenerator;
 
     @BeforeEach
     void setUp() {
-        Storage.fruits = new LinkedHashMap<>();
+        Storage.getFruits().clear();
         reportGenerator = new ReportGeneratorImpl();
     }
 
@@ -26,8 +24,8 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_twoFruits_ok() {
-        Storage.fruits.put("banana", 20);
-        Storage.fruits.put("apple", 15);
+        Storage.getFruits().put("banana", 20);
+        Storage.getFruits().put("apple", 15);
 
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()

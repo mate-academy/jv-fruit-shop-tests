@@ -8,9 +8,9 @@ public class SupplyOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.fruits.put(
+        Storage.getFruits().put(
                 transaction.getFruit(),
-                Storage.fruits.getOrDefault(
+                Storage.getFruits().getOrDefault(
                         transaction.getFruit(), 0)
                         + transaction.getQuantity()
         );

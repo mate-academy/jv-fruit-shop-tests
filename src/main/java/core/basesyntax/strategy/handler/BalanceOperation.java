@@ -8,7 +8,7 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.fruits.put(
+        Storage.getFruits().put(
                 transaction.getFruit(),
                 transaction.getQuantity()
         );

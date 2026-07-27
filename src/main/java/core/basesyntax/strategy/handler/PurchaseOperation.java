@@ -8,7 +8,7 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        int balance = Storage.fruits.getOrDefault(
+        int balance = Storage.getFruits().getOrDefault(
                 transaction.getFruit(), 0)
                 - transaction.getQuantity();
 
@@ -17,7 +17,7 @@ public class PurchaseOperation implements OperationHandler {
                     "Not enough " + transaction.getFruit());
         }
 
-        Storage.fruits.put(
+        Storage.getFruits().put(
                 transaction.getFruit(),
                 balance
         );

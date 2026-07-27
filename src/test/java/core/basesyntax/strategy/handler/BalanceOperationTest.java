@@ -13,8 +13,8 @@ class BalanceOperationTest {
 
     @BeforeEach
     void setUp() {
-       balanceOperation = new BalanceOperation();
-       Storage.getFruits().clear();
+        Storage.getFruits().clear();
+        balanceOperation = new BalanceOperation();
     }
 
     @Test
@@ -38,6 +38,6 @@ class BalanceOperationTest {
                 "banana",
                 10));
 
-        assertNotEquals(3, Storage.getFruits().get("banana"));;
+        assertNotEquals(3, Storage.getFruits().get("banana"));
     }
 }

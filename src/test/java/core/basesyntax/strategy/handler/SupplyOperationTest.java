@@ -12,8 +12,8 @@ class SupplyOperationTest {
 
     @BeforeEach
     void setUp() {
-        supplyOperation = new SupplyOperation();
         Storage.getFruits().clear();
+        supplyOperation = new SupplyOperation();
     }
 
     @Test

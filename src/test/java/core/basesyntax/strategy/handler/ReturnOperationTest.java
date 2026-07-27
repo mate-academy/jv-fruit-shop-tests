@@ -13,13 +13,12 @@ class ReturnOperationTest {
 
     @BeforeEach
     void serUp() {
-        returnOperation = new ReturnOperation();
         Storage.getFruits().clear();
+        returnOperation = new ReturnOperation();
     }
 
     @Test
     void apply_ok() {
-
         returnOperation.apply(new FruitTransaction(
                 FruitTransaction.Operation.RETURN,
                 "apple",

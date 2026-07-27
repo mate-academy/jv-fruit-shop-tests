@@ -13,9 +13,10 @@ class PurchaseOperationTest {
 
     @BeforeEach
     void setUp() {
-        purchaseOperation = new PurchaseOperation();
         Storage.getFruits().clear();
+        purchaseOperation = new PurchaseOperation();
     }
+
     @Test
     void apply_ok() {
         Storage.getFruits().put("apple", 10);
@@ -30,7 +31,6 @@ class PurchaseOperationTest {
 
     @Test
     void apply_notEnoughFruit_notOk() {
-
         assertThrows(RuntimeException.class,
                 () -> purchaseOperation.apply(
                         new FruitTransaction(

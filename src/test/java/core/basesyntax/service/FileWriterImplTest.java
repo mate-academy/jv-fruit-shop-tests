@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private final FileWriterImpl fileWriter= new FileWriterImpl();
+    private final FileWriterImpl fileWriter = new FileWriterImpl();
 
     @Test
     void write_ok() throws IOException {

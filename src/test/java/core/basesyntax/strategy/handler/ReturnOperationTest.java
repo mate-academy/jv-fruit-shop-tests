@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,6 @@ class ReturnOperationTest {
 
     @BeforeEach
     void serUp() {
-        Storage.getFruits().clear();
         returnOperation = new ReturnOperation();
     }
 
@@ -51,5 +51,10 @@ class ReturnOperationTest {
         ));
 
         assertNotEquals(45, Storage.getFruits().get("apple"));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.getFruits().clear();
     }
 }

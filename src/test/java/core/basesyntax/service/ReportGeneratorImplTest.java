@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,6 @@ class ReportGeneratorImplTest {
 
     @BeforeEach
     void setUp() {
-        Storage.getFruits().clear();
         reportGenerator = new ReportGeneratorImpl();
     }
 
@@ -32,5 +32,10 @@ class ReportGeneratorImplTest {
                 + "apple,15" + System.lineSeparator();
 
         assertEquals(expected, reportGenerator.getReport());
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.getFruits().clear();
     }
 }

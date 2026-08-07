@@ -5,9 +5,15 @@ import static core.basesyntax.db.Storage.getFruits;
 import core.basesyntax.model.Fruit;
 
 public class ReportCreator {
+    private static final String REPORT_HEADER = "fruit,quantity";
+
+    public static String getReportHeader() {
+        return REPORT_HEADER;
+    }
+
     public static String createReport() {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator());
+        report.append(REPORT_HEADER).append(System.lineSeparator());
         for (Fruit fruit : getFruits()) {
             report.append(fruit.getName())
                     .append(",")

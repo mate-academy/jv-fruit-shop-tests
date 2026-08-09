@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
@@ -16,11 +18,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
+    private static ShopService shopService;
+
+    @BeforeAll
+    static void beforeAll() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        shopService = new ShopServiceImpl(operationStrategy);
+    }
+
     @BeforeEach
     void setUp() {
         Storage.getFruits().clear();
@@ -28,44 +43,23 @@ public class ShopServiceImplTest {
 
     @Test
     void process_validList_updatesStorage() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(100);
         List<FruitTransaction> list = new ArrayList<>();
         list.add(fruitTransaction);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(list);
-        Assertions.assertEquals(100, Storage.getFruits().get("banana"));
+        assertEquals(100, Storage.getFruits().get("banana"));
     }
 
     @Test
     void process_nullList_doesNothing() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(null);
     }
 
     @Test
     void process_emptyList_doesNothing() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
         List<FruitTransaction> emptyList = new ArrayList<>();
         shopService.process(emptyList);
     }

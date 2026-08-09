@@ -1,5 +1,11 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.BalanceOperation;
@@ -12,68 +18,64 @@ import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {
+    private static Map<FruitTransaction.Operation, OperationHandler> map;
+    private static OperationStrategy strategy;
+
+    @BeforeAll
+    static void beforeAll() {
+        map = new HashMap<>();
+        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        map.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        strategy = new OperationStrategyImpl(map);
+    }
+
     @Test
     void getHandler_validOperationsMap_returnsCorrectHandler() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertNotNull(strategy.getHandler(FruitTransaction.Operation.BALANCE));
-        Assertions.assertTrue(strategy.getHandler(FruitTransaction.Operation.BALANCE)
+        assertNotNull(strategy.getHandler(FruitTransaction.Operation.BALANCE));
+        assertTrue(strategy.getHandler(FruitTransaction.Operation.BALANCE)
                 instanceof BalanceOperation);
     }
 
     @Test
     void getHandler_nullMap_throwsException() {
         OperationStrategy strategy = new OperationStrategyImpl(null);
-        Assertions.assertThrows(NullPointerException.class,
+        assertThrows(NullPointerException.class,
                 () -> strategy.getHandler(FruitTransaction.Operation.BALANCE));
     }
 
     @Test
     void getHandler_unknownOperation_returnsNull() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertNull(strategy.getHandler(FruitTransaction.Operation.RETURN));
+        OperationStrategy emptyStrategy = new OperationStrategyImpl(new HashMap<>());
+        assertNull(emptyStrategy.getHandler(FruitTransaction.Operation.RETURN));
     }
 
     @Test
     void getHandler_purchaseOperation_returnsCorrectHandler() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertTrue(strategy.getHandler(FruitTransaction.Operation.PURCHASE)
+        assertTrue(strategy.getHandler(FruitTransaction.Operation.PURCHASE)
                 instanceof PurchaseOperation);
     }
 
     @Test
     void getHandler_balanceOperation_returnsCorrectHandler() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertTrue(strategy.getHandler(FruitTransaction.Operation.BALANCE)
+        assertTrue(strategy.getHandler(FruitTransaction.Operation.BALANCE)
                 instanceof BalanceOperation);
     }
 
     @Test
     void getHandler_returnOperation_returnsCorrectHandler() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertTrue(strategy.getHandler(FruitTransaction.Operation.RETURN)
+        assertTrue(strategy.getHandler(FruitTransaction.Operation.RETURN)
                 instanceof ReturnOperation);
     }
 
     @Test
     void getHandler_supplyOperation_returnsCorrectHandler() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy strategy = new OperationStrategyImpl(map);
-        Assertions.assertTrue(strategy.getHandler(FruitTransaction.Operation.SUPPLY)
+        assertTrue(strategy.getHandler(FruitTransaction.Operation.SUPPLY)
                 instanceof SupplyOperation);
     }
 
@@ -86,7 +88,7 @@ public class OperationStrategyImplTest {
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         OperationHandler handler = new PurchaseOperation();
         handler.operate(Storage.getFruits(), transaction);
-        Assertions.assertEquals(40, Storage.getFruits().get("banana"));
+        assertEquals(40, Storage.getFruits().get("banana"));
     }
 
     @Test
@@ -98,7 +100,7 @@ public class OperationStrategyImplTest {
         transaction.setOperation(FruitTransaction.Operation.RETURN);
         OperationHandler handler = new ReturnOperation();
         handler.operate(Storage.getFruits(), transaction);
-        Assertions.assertEquals(10, Storage.getFruits().get("banana"));
+        assertEquals(10, Storage.getFruits().get("banana"));
     }
 
     @Test
@@ -110,7 +112,7 @@ public class OperationStrategyImplTest {
         transaction.setOperation(FruitTransaction.Operation.SUPPLY);
         OperationHandler handler = new SupplyOperation();
         handler.operate(Storage.getFruits(), transaction);
-        Assertions.assertEquals(10, Storage.getFruits().get("banana"));
+        assertEquals(10, Storage.getFruits().get("banana"));
     }
 
     @AfterEach

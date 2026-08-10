@@ -30,10 +30,7 @@ class SupplyTransactionTest {
 
     @AfterEach
     void cleanUp(TestInfo testInfo) {
-        if (testInfo.getTags().contains("SkipCleanup")) {
-            return;
-        }
-        Storage.removeFruit(fruitName);
+        Storage.getFruits().clear();
     }
 
     @Test
@@ -51,7 +48,6 @@ class SupplyTransactionTest {
 
     @Test
     @Tag("SkipSetup")
-    @Tag("SkipCleanup")
     void process_fruitNotExist_notOk() {
         int suppliedQuantity = 20;
         assertThrows(IllegalArgumentException.class,

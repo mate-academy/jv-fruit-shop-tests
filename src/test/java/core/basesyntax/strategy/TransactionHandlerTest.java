@@ -14,6 +14,7 @@ import core.basesyntax.service.impl.ReportCreator;
 import core.basesyntax.service.impl.WriterImpl;
 import java.util.ArrayList;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,6 @@ class TransactionHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Storage.getFruits().clear();
         Map<String, Transaction> transactionMap = Map.of(
                 "b", new BalanceTransaction(),
                 "s", new SupplyTransaction(),
@@ -43,6 +43,11 @@ class TransactionHandlerTest {
         boolean purchaseTransactionPresent = false;
         boolean returnTransactionPresent = false;
         boolean supplyTransactionPresent = false;
+    }
+
+    @AfterEach
+    void cleanUp() {
+        Storage.getFruits().clear();
     }
 
     @Test

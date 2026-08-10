@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,6 @@ class OperationStrategyImplTest {
 
     @BeforeEach
     void setUp() {
-        Storage.getFruits().clear();
         Map<String, Transaction> transactionMap = Map.of(
                 "b", new BalanceTransaction(),
                 "s", new SupplyTransaction(),
@@ -21,6 +21,11 @@ class OperationStrategyImplTest {
                 "r", new ReturnTransaction()
         );
         operationStrategy = new OperationStrategyImpl(transactionMap);
+    }
+
+    @AfterEach
+    void cleanUp() {
+        Storage.getFruits().clear();
     }
 
     @Test

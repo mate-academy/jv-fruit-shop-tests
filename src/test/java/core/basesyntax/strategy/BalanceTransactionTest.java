@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceTransactionTest {
     private static final String fruitName = "testfruit";
     private static final int fruitQuantity = 123;
     private final BalanceTransaction balanceTransaction = new BalanceTransaction();
+
+    @AfterEach
+    void cleanUp() {
+        Storage.getFruits().clear();
+    }
 
     @Test
     void process_inputCorrect_ok() {

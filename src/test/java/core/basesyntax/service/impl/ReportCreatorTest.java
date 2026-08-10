@@ -30,10 +30,7 @@ class ReportCreatorTest {
 
     @AfterEach
     void cleanUp(TestInfo testInfo) {
-        if (testInfo.getTags().contains("SkipCleanup")) {
-            return;
-        }
-        Storage.removeFruit(fruitName);
+        Storage.getFruits().clear();
     }
 
     @Test

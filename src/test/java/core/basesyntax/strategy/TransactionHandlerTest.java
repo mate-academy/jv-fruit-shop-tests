@@ -12,21 +12,21 @@ import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportCreator;
 import core.basesyntax.service.impl.WriterImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class TransactionHandlerTest {
+    private boolean balanceTransactionPresent;
+    private boolean purchaseTransactionPresent;
+    private boolean returnTransactionPresent;
+    private boolean supplyTransactionPresent;
     private final Reader reader = new ReaderImpl();
     private final Writer writer = new WriterImpl();
     private OperationStrategy operationStrategy;
     private TransactionHandler transactionHandler;
     private String path;
-    boolean balanceTransactionPresent;
-    boolean purchaseTransactionPresent;
-    boolean returnTransactionPresent;
-    boolean supplyTransactionPresent;
 
     @BeforeEach
     void setUp() {

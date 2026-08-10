@@ -18,11 +18,11 @@ public class Storage {
 
     public static void removeFruit(String fruitName) {
         for (Fruit fruit : fruits) {
-               if (fruit.getName().equals(fruitName)) {
-                   fruits.remove(fruit);
-                   break;
-               }
-        throw new NoSuchElementException("Found no fruits with matching name to remove");
+            if (fruit.getName().equals(fruitName)) {
+                fruits.remove(fruit);
+                return;
+            }
         }
+        throw new NoSuchElementException("Found no fruits with matching name to remove");
     }
 }

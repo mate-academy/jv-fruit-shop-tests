@@ -4,17 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Writer;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
     private final Writer writer = new WriterImpl();
     private final String path = "src/main/resources/testReport.csv";
     private final String report = "test123";
-
 
     @AfterEach
     void tearDown() {

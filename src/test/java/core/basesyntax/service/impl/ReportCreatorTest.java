@@ -7,12 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.jupiter.api.*;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 class ReportCreatorTest {
-    private final static String fruitName = "testfruit";
-    private final static int fruitQuantity = 123;
+    private static final String fruitName = "testfruit";
+    private static final int fruitQuantity = 123;
 
     @BeforeEach
     void setUp(TestInfo testInfo) {
@@ -26,7 +29,10 @@ class ReportCreatorTest {
     }
 
     @AfterEach
-    void cleanUp() {
+    void cleanUp(TestInfo testInfo) {
+        if (testInfo.getTags().contains("SkipCleanup")) {
+            return;
+        }
         Storage.removeFruit(fruitName);
     }
 
@@ -40,6 +46,7 @@ class ReportCreatorTest {
 
     @Test
     @Tag("SkipSetup")
+    @Tag("SkipCleanup")
     void createReport_storageEmpty_notOk() {
         assertThrows(IllegalArgumentException.class, ReportCreator::createReport,
                 "Storage is not empty");

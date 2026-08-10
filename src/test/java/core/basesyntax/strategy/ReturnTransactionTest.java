@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
-import java.util.List;
 
 class ReturnTransactionTest {
-    private final static String fruitName = "testfruit";
-    private final static int fruitQuantity = 123;
-    ReturnTransaction returnTransaction = new ReturnTransaction();
+    private static final String fruitName = "testfruit";
+    private static final int fruitQuantity = 123;
+    private final ReturnTransaction returnTransaction = new ReturnTransaction();
 
     @BeforeEach
     void setUp(TestInfo testInfo) {
@@ -29,7 +29,10 @@ class ReturnTransactionTest {
     }
 
     @AfterEach
-    void cleanUp() {
+    void cleanUp(TestInfo testInfo) {
+        if (testInfo.getTags().contains("SkipCleanup")) {
+            return;
+        }
         Storage.removeFruit(fruitName);
     }
 
@@ -48,6 +51,7 @@ class ReturnTransactionTest {
 
     @Test
     @Tag("SkipSetup")
+    @Tag("SkipCleanup")
     void process_fruitNotExist_notOk() {
         int returnedQuantity = 20;
         assertThrows(IllegalArgumentException.class,

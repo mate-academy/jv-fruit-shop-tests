@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class BalanceTransactionTest {
-    private final static String fruitName = "testfruit";
-    private final static int fruitQuantity = 123;
-    BalanceTransaction balanceTransaction = new BalanceTransaction();
+    private static final String fruitName = "testfruit";
+    private static final int fruitQuantity = 123;
+    private final BalanceTransaction balanceTransaction = new BalanceTransaction();
 
     @Test
     void process_inputCorrect_ok() {

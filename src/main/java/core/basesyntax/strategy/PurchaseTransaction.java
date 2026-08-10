@@ -11,7 +11,8 @@ public class PurchaseTransaction implements Transaction {
         Fruit fruit = getFruits().stream()
                 .filter(f -> f.getName().equals(fruitName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Fruit not in storage: " + fruitName));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Fruit not in storage: " + fruitName));
         int storageAmount = fruit.getQuantity();
         if (storageAmount - amount >= 0) {
             fruit.setQuantity(storageAmount - amount);

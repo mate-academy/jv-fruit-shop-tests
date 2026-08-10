@@ -10,7 +10,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public Transaction get(String operationType) {
+    public Transaction getOperationType(String operationType) {
         Transaction transaction = transactionMap.get(operationType);
         if (transaction == null) {
             throw new IllegalArgumentException("Invalid transaction type: " + operationType);

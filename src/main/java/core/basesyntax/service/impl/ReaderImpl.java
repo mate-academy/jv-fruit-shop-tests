@@ -13,9 +13,13 @@ public class ReaderImpl implements Reader {
             ArrayList<String> lines = new ArrayList<>();
 
             while ((line = reader.readLine()) != null) {
-                lines.add(line);
+                if (!line.trim().isEmpty()) {
+                    lines.add(line);
+                }
             }
-
+            if (lines.isEmpty()) {
+                throw new IllegalArgumentException("Input file is empty");
+            }
             return lines;
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + fileName, e);

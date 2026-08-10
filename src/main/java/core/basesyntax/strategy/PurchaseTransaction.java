@@ -8,15 +8,13 @@ public class PurchaseTransaction implements Transaction {
 
     @Override
     public void process(String fruitName, int amount) {
-        int storageAmount = getFruits().stream()
-                .filter(fruit -> fruit.getName().equals(fruitName))
+        Fruit fruit = getFruits().stream()
+                .filter(f -> f.getName().equals(fruitName))
                 .findFirst()
-                .map(Fruit::getQuantity)
-                .orElse(0);
+                .orElseThrow(() -> new IllegalArgumentException("Fruit not in storage: " + fruitName));
+        int storageAmount = fruit.getQuantity();
         if (storageAmount - amount >= 0) {
-            getFruits().stream().filter(fruit -> fruit.getName().equals(fruitName))
-                    .findFirst()
-                    .ifPresent(fruit -> fruit.setQuantity(storageAmount - amount));
+            fruit.setQuantity(storageAmount - amount);
         } else {
             throw new RuntimeException("Not enough fruits in storage");
         }

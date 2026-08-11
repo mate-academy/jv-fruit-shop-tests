@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,11 +51,14 @@ class TransactionHandlerTest {
     void process_inputBalanceTransaction_ok() {
         int expectedBalance = 20;
         String expectedFruit = "banana";
-        List<String> lines = List.of("b," + expectedFruit + "," + expectedBalance);
-        for (String line : lines) {
-            transactionHandler.process(line);
-        }
-        assertEquals(expectedBalance, getQuantity(expectedFruit));
+        String line = "b," + expectedFruit + "," + expectedBalance;
+        transactionHandler.process(line);
+        assertEquals(expectedBalance, getQuantity(expectedFruit),
+                "Expected quantity was "
+                        + expectedBalance
+                        + " but received "
+                        + getQuantity(expectedFruit));
+        assertEquals(1, Storage.getFruits().size(), "Storage should contain exactly one fruit");
     }
 
     @Test
@@ -66,11 +68,14 @@ class TransactionHandlerTest {
         int purchase = 30;
         int expectedBalance = startBalance - purchase;
         seedFruit(expectedFruit,startBalance);
-        List<String> lines = List.of("p," + expectedFruit + "," + purchase);
-        for (String line : lines) {
-            transactionHandler.process(line);
-        }
-        assertEquals(expectedBalance, getQuantity(expectedFruit));
+        String line = "p," + expectedFruit + "," + purchase;
+        transactionHandler.process(line);
+        assertEquals(expectedBalance, getQuantity(expectedFruit),
+                "Expected quantity was "
+                        + expectedBalance
+                        + " but received "
+                        + getQuantity(expectedFruit));
+        assertEquals(1, Storage.getFruits().size(), "Storage should contain exactly one fruit");
     }
 
     @Test
@@ -80,11 +85,14 @@ class TransactionHandlerTest {
         int returned = 30;
         int expectedBalance = startBalance + returned;
         seedFruit(expectedFruit,startBalance);
-        List<String> lines = List.of("r," + expectedFruit + "," + returned);
-        for (String line : lines) {
-            transactionHandler.process(line);
-        }
-        assertEquals(expectedBalance, getQuantity(expectedFruit));
+        String line = "r," + expectedFruit + "," + returned;
+        transactionHandler.process(line);
+        assertEquals(expectedBalance, getQuantity(expectedFruit),
+                "Expected quantity was "
+                        + expectedBalance
+                        + " but received "
+                        + getQuantity(expectedFruit));
+        assertEquals(1, Storage.getFruits().size(), "Storage should contain exactly one fruit");
     }
 
     @Test
@@ -94,40 +102,34 @@ class TransactionHandlerTest {
         int supplied = 30;
         int expectedBalance = startBalance + supplied;
         seedFruit(expectedFruit,startBalance);
-        List<String> lines = List.of("s," + expectedFruit + "," + supplied);
-        for (String line : lines) {
-            transactionHandler.process(line);
-        }
-        assertEquals(expectedBalance, getQuantity(expectedFruit));
+        String line = "s," + expectedFruit + "," + supplied;
+        transactionHandler.process(line);
+        assertEquals(expectedBalance, getQuantity(expectedFruit),
+                "Expected quantity was "
+                        + expectedBalance
+                        + " but received "
+                        + getQuantity(expectedFruit));
+        assertEquals(1, Storage.getFruits().size(), "Storage should contain exactly one fruit");
     }
 
     @Test
     void process_inputMissingElement_notOk() {
-        List<String> lines = List.of("b,banana");
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            for (String line : lines) {
-                transactionHandler.process(line);
-            }
-        });
+        String line = "b,banana";
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> transactionHandler.process(line));
     }
 
     @Test
     void process_tooManyElements_notOk() {
-        List<String> lines = List.of("b,banana,10,extra");
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            for (String line : lines) {
-                transactionHandler.process(line);
-            }
-        });
+        String line = "b,banana,10,extra";
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> transactionHandler.process(line));
     }
 
     @Test
     void process_incorrectAmount_notOk() {
-        List<String> lines = List.of("b,banana,-2");
-        assertThrows(IllegalArgumentException.class, () -> {
-            for (String line : lines) {
-                transactionHandler.process(line);
-            }
-        });
+        String line = "b,banana,-2";
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionHandler.process(line));
     }
 }

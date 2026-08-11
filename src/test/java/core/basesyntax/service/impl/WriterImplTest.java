@@ -34,6 +34,7 @@ class WriterImplTest {
         assertTrue(Files.exists(Path.of(path)), "File was not written");
         List<String> reportLines = reader.readFromFile(path);
         assertEquals(report, reportLines.get(0));
+        assertEquals(1, reportLines.size(), "Report should contain exactly one line");
     }
 
     @Test

@@ -16,7 +16,6 @@ class PurchaseTransactionTest {
     private static final String FRUIT_NAME = "testfruit";
     private static final int FRUIT_QUANTITY = 123;
     private final PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
-    private int fruitPurchased;
 
     @BeforeEach
     void setUp(TestInfo testInfo) {
@@ -36,29 +35,37 @@ class PurchaseTransactionTest {
 
     @Test
     void process_inputCorrect_ok() {
-        fruitPurchased = 122;
+        int fruitPurchased = 122;
+        int fruitAfterTransaction = FRUIT_QUANTITY - fruitPurchased;
         purchaseTransaction.process(FRUIT_NAME, fruitPurchased);
         List<Fruit> fruits = Storage.getFruits();
         Fruit fruit = fruits.stream()
                 .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
-                .get();
-        assertEquals(FRUIT_NAME, fruit.getName());
-        assertEquals(FRUIT_QUANTITY - fruitPurchased, fruit.getQuantity());
+                .orElseThrow(() -> new AssertionError("Fruit was not added to storage"));
+        assertEquals(FRUIT_NAME, fruit.getName(), "Fruit not found in storage");
+        assertEquals(fruitAfterTransaction, fruit.getQuantity(),
+                "Fruit quantity expected: "
+                        + fruitAfterTransaction
+                        + " but received "
+                        + fruit.getQuantity());
+        assertEquals(1, fruits.size(), "Storage should contain exactly one fruit");
     }
 
     @Test
     void process_purchaseMoreThanAvailable_notOk() {
-        fruitPurchased = 124;
+        int fruitPurchased = 124;
         assertThrows(RuntimeException.class,
-                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased));
+                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased),
+                "Purchasing more than available in storage should not be allowed");
     }
 
     @Test
     @Tag("SkipSetup")
     void process_fruitNotExist_notOk() {
-        fruitPurchased = 1;
+        int fruitPurchased = 1;
         assertThrows(IllegalArgumentException.class,
-                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased));
+                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased),
+                "Purchasing not existing fruit should not be allowed");
     }
 }

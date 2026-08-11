@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 class ReportCreatorTest {
-    private static final String fruitName = "testfruit";
-    private static final int fruitQuantity = 123;
+    private static final String FRUIT_NAME = "testfruit";
+    private static final int FRUIT_QUANTITY = 123;
 
     @BeforeEach
     void setUp(TestInfo testInfo) {
@@ -23,8 +23,8 @@ class ReportCreatorTest {
             return;
         }
         Fruit testFruit = new Fruit();
-        testFruit.setName(fruitName);
-        testFruit.setQuantity(fruitQuantity);
+        testFruit.setName(FRUIT_NAME);
+        testFruit.setQuantity(FRUIT_QUANTITY);
         Storage.addFruit(testFruit);
     }
 
@@ -36,9 +36,9 @@ class ReportCreatorTest {
     @Test
     void createReport_reportCreated_ok() {
         String expectedReport = REPORT_HEADER + System.lineSeparator()
-                + fruitName + "," + fruitQuantity + System.lineSeparator();
+                + FRUIT_NAME + "," + FRUIT_QUANTITY + System.lineSeparator();
         assertEquals(expectedReport,createReport(),
-                "Correct report should have been created");
+                "Expected a correctly formatted report");
     }
 
     @Test
@@ -46,6 +46,6 @@ class ReportCreatorTest {
     @Tag("SkipCleanup")
     void createReport_storageEmpty_notOk() {
         assertThrows(IllegalArgumentException.class, ReportCreator::createReport,
-                "Storage is not empty");
+                "Expected storage to be empty");
     }
 }

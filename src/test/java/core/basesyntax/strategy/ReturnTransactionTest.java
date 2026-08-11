@@ -36,14 +36,19 @@ class ReturnTransactionTest {
     @Test
     void process_inputCorrect_ok() {
         int returnedQuantity = 20;
+        int fruitAfterTransaction = FRUIT_QUANTITY + returnedQuantity;
         returnTransaction.process(FRUIT_NAME, returnedQuantity);
         List<Fruit> fruits = Storage.getFruits();
-        Fruit fruit = fruits
-                .stream()
+        Fruit fruit = fruits.stream()
                 .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
-                .get();
-        assertEquals(FRUIT_QUANTITY + returnedQuantity, fruit.getQuantity());
+                .orElseThrow(() -> new AssertionError("Fruit was not added to storage"));
+        assertEquals(fruitAfterTransaction, fruit.getQuantity(),
+                "Fruit quantity expected: "
+                        + fruitAfterTransaction
+                        + " but received "
+                        + fruit.getQuantity());
+        assertEquals(1, fruits.size(), "Storage should contain exactly one fruit");
     }
 
     @Test
@@ -51,6 +56,7 @@ class ReturnTransactionTest {
     void process_fruitNotExist_notOk() {
         int returnedQuantity = 20;
         assertThrows(IllegalArgumentException.class,
-                () -> returnTransaction.process(FRUIT_NAME, returnedQuantity));
+                () -> returnTransaction.process(FRUIT_NAME, returnedQuantity),
+                "Return of non existing fruit should not be allowed");
     }
 }

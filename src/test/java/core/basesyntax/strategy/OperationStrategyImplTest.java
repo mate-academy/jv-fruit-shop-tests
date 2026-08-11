@@ -15,10 +15,7 @@ class OperationStrategyImplTest {
     @BeforeEach
     void setUp() {
         Map<String, Transaction> transactionMap = Map.of(
-                "b", new BalanceTransaction(),
-                "s", new SupplyTransaction(),
-                "p", new PurchaseTransaction(),
-                "r", new ReturnTransaction()
+                "b", new BalanceTransaction()
         );
         operationStrategy = new OperationStrategyImpl(transactionMap);
     }
@@ -32,24 +29,6 @@ class OperationStrategyImplTest {
     void getOperationType_balanceInput_ok() {
         String input = "b";
         assertInstanceOf(BalanceTransaction.class,operationStrategy.getOperationType(input));
-    }
-
-    @Test
-    void getOperationType_purchaseInput_ok() {
-        String input = "p";
-        assertInstanceOf(PurchaseTransaction.class,operationStrategy.getOperationType(input));
-    }
-
-    @Test
-    void getOperationType_returnInput_ok() {
-        String input = "r";
-        assertInstanceOf(ReturnTransaction.class,operationStrategy.getOperationType(input));
-    }
-
-    @Test
-    void getOperationType_supplyInput_ok() {
-        String input = "s";
-        assertInstanceOf(SupplyTransaction.class,operationStrategy.getOperationType(input));
     }
 
     @Test

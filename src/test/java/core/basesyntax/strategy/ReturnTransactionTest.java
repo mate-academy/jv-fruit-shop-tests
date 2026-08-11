@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 class ReturnTransactionTest {
-    private static final String fruitName = "testfruit";
-    private static final int fruitQuantity = 123;
+    private static final String FRUIT_NAME = "testfruit";
+    private static final int FRUIT_QUANTITY = 123;
     private final ReturnTransaction returnTransaction = new ReturnTransaction();
 
     @BeforeEach
@@ -23,8 +23,8 @@ class ReturnTransactionTest {
             return;
         }
         Fruit fruit = new Fruit();
-        fruit.setName(fruitName);
-        fruit.setQuantity(fruitQuantity);
+        fruit.setName(FRUIT_NAME);
+        fruit.setQuantity(FRUIT_QUANTITY);
         Storage.addFruit(fruit);
     }
 
@@ -36,14 +36,14 @@ class ReturnTransactionTest {
     @Test
     void process_inputCorrect_ok() {
         int returnedQuantity = 20;
-        returnTransaction.process(fruitName, returnedQuantity);
+        returnTransaction.process(FRUIT_NAME, returnedQuantity);
         List<Fruit> fruits = Storage.getFruits();
         Fruit fruit = fruits
                 .stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
                 .get();
-        assertEquals(fruitQuantity + returnedQuantity, fruit.getQuantity());
+        assertEquals(FRUIT_QUANTITY + returnedQuantity, fruit.getQuantity());
     }
 
     @Test
@@ -51,6 +51,6 @@ class ReturnTransactionTest {
     void process_fruitNotExist_notOk() {
         int returnedQuantity = 20;
         assertThrows(IllegalArgumentException.class,
-                () -> returnTransaction.process(fruitName, returnedQuantity));
+                () -> returnTransaction.process(FRUIT_NAME, returnedQuantity));
     }
 }

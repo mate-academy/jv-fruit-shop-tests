@@ -1,33 +1,19 @@
 package core.basesyntax.strategy;
 
-import static core.basesyntax.Main.OUTPUT_PATH;
-import static core.basesyntax.Main.START_LINE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.ReaderImpl;
-import core.basesyntax.service.impl.ReportCreator;
-import core.basesyntax.service.impl.WriterImpl;
-import java.util.ArrayList;
+import core.basesyntax.model.Fruit;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionHandlerTest {
-    private boolean balanceTransactionPresent;
-    private boolean purchaseTransactionPresent;
-    private boolean returnTransactionPresent;
-    private boolean supplyTransactionPresent;
-    private final Reader reader = new ReaderImpl();
-    private final Writer writer = new WriterImpl();
     private OperationStrategy operationStrategy;
     private TransactionHandler transactionHandler;
-    private String path;
 
     @BeforeEach
     void setUp() {
@@ -39,10 +25,6 @@ class TransactionHandlerTest {
         );
         operationStrategy = new OperationStrategyImpl(transactionMap);
         transactionHandler = new TransactionHandler(operationStrategy);
-        boolean balanceTransactionPresent = false;
-        boolean purchaseTransactionPresent = false;
-        boolean returnTransactionPresent = false;
-        boolean supplyTransactionPresent = false;
     }
 
     @AfterEach
@@ -50,51 +32,80 @@ class TransactionHandlerTest {
         Storage.getFruits().clear();
     }
 
+    private void seedFruit(String name, int quantity) {
+        Fruit fruit = new Fruit();
+        fruit.setName(name);
+        fruit.setQuantity(quantity);
+        Storage.addFruit(fruit);
+    }
+
+    private int getQuantity(String name) {
+        return Storage.getFruits().stream()
+                .filter(f -> f.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError(
+                        "Expected fruit not found in storage: " + name))
+                .getQuantity();
+    }
+
     @Test
-    void process_inputAllTransactions_ok() {
-        path = "src/main/resources/testOk.csv";
-        ArrayList<String> lines = reader.readFromFile(path);
+    void process_inputBalanceTransaction_ok() {
+        int expectedBalance = 20;
+        String expectedFruit = "banana";
+        List<String> lines = List.of("b," + expectedFruit + "," + expectedBalance);
         for (String line : lines) {
-            if (line.equals(START_LINE)) {
-                continue;
-            }
-            if (line.charAt(0) == 'b') {
-                balanceTransactionPresent = true;
-            }
-            if (line.charAt(0) == 'p') {
-                purchaseTransactionPresent = true;
-            }
-            if (line.charAt(0) == 'r') {
-                returnTransactionPresent = true;
-            }
-            if (line.charAt(0) == 's') {
-                supplyTransactionPresent = true;
-            }
             transactionHandler.process(line);
         }
-        assertTrue(balanceTransactionPresent
-                        && purchaseTransactionPresent
-                        && returnTransactionPresent
-                        && supplyTransactionPresent,
-                "All transaction types are not present in input file");
-        String report = ReportCreator.createReport();
-        writer.writeToFile(OUTPUT_PATH, report);
-        Reader resultReader = new ReaderImpl();
-        ArrayList<String> resultLines = resultReader.readFromFile(OUTPUT_PATH);
-        assertEquals("fruit,quantity", resultLines.get(0));
-        assertEquals("banana,152", resultLines.get(1));
-        assertEquals("apple,90", resultLines.get(2));
+        assertEquals(expectedBalance, getQuantity(expectedFruit));
+    }
+
+    @Test
+    void process_inputPurchaseTransaction_ok() {
+        String expectedFruit = "banana";
+        int startBalance = 50;
+        int purchase = 30;
+        int expectedBalance = startBalance - purchase;
+        seedFruit(expectedFruit,startBalance);
+        List<String> lines = List.of("p," + expectedFruit + "," + purchase);
+        for (String line : lines) {
+            transactionHandler.process(line);
+        }
+        assertEquals(expectedBalance, getQuantity(expectedFruit));
+    }
+
+    @Test
+    void process_inputReturnTransaction_ok() {
+        String expectedFruit = "banana";
+        int startBalance = 50;
+        int returned = 30;
+        int expectedBalance = startBalance + returned;
+        seedFruit(expectedFruit,startBalance);
+        List<String> lines = List.of("r," + expectedFruit + "," + returned);
+        for (String line : lines) {
+            transactionHandler.process(line);
+        }
+        assertEquals(expectedBalance, getQuantity(expectedFruit));
+    }
+
+    @Test
+    void process_inputSupplyTransaction_ok() {
+        String expectedFruit = "banana";
+        int startBalance = 50;
+        int supplied = 30;
+        int expectedBalance = startBalance + supplied;
+        seedFruit(expectedFruit,startBalance);
+        List<String> lines = List.of("s," + expectedFruit + "," + supplied);
+        for (String line : lines) {
+            transactionHandler.process(line);
+        }
+        assertEquals(expectedBalance, getQuantity(expectedFruit));
     }
 
     @Test
     void process_inputMissingElement_notOk() {
-        path = "src/main/resources/testMissingElement.csv";
-        ArrayList<String> lines = reader.readFromFile(path);
+        List<String> lines = List.of("b,banana");
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
             for (String line : lines) {
-                if (line.equals(START_LINE)) {
-                    continue;
-                }
                 transactionHandler.process(line);
             }
         });
@@ -102,13 +113,9 @@ class TransactionHandlerTest {
 
     @Test
     void process_tooManyElements_notOk() {
-        path = "src/main/resources/testTooManyElements.csv";
-        ArrayList<String> lines = reader.readFromFile(path);
+        List<String> lines = List.of("b,banana,10,extra");
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
             for (String line : lines) {
-                if (line.equals(START_LINE)) {
-                    continue;
-                }
                 transactionHandler.process(line);
             }
         });
@@ -116,13 +123,9 @@ class TransactionHandlerTest {
 
     @Test
     void process_incorrectAmount_notOk() {
-        path = "src/main/resources/testIncorrectAmount.csv";
-        ArrayList<String> lines = reader.readFromFile(path);
+        List<String> lines = List.of("b,banana,-2");
         assertThrows(IllegalArgumentException.class, () -> {
             for (String line : lines) {
-                if (line.equals(START_LINE)) {
-                    continue;
-                }
                 transactionHandler.process(line);
             }
         });

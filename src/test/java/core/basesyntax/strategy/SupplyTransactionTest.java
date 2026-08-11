@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 class SupplyTransactionTest {
-    private static final String fruitName = "testfruit";
-    private static final int fruitQuantity = 123;
-    private final ReturnTransaction returnTransaction = new ReturnTransaction();
+    private static final String FRUIT_NAME = "testfruit";
+    private static final int FRUIT_QUANTITY = 123;
+    private final SupplyTransaction supplyTransaction = new SupplyTransaction();
 
     @BeforeEach
     void setUp(TestInfo testInfo) {
@@ -23,8 +23,8 @@ class SupplyTransactionTest {
             return;
         }
         Fruit fruit = new Fruit();
-        fruit.setName(fruitName);
-        fruit.setQuantity(fruitQuantity);
+        fruit.setName(FRUIT_NAME);
+        fruit.setQuantity(FRUIT_QUANTITY);
         Storage.addFruit(fruit);
     }
 
@@ -36,14 +36,14 @@ class SupplyTransactionTest {
     @Test
     void process_inputCorrect_ok() {
         int suppliedQuantity = 20;
-        returnTransaction.process(fruitName, suppliedQuantity);
+        supplyTransaction.process(FRUIT_NAME, suppliedQuantity);
         List<Fruit> fruits = Storage.getFruits();
         Fruit fruit = fruits
                 .stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
                 .get();
-        assertEquals(fruitQuantity + suppliedQuantity, fruit.getQuantity());
+        assertEquals(FRUIT_QUANTITY + suppliedQuantity, fruit.getQuantity());
     }
 
     @Test
@@ -51,6 +51,6 @@ class SupplyTransactionTest {
     void process_fruitNotExist_notOk() {
         int suppliedQuantity = 20;
         assertThrows(IllegalArgumentException.class,
-                () -> returnTransaction.process(fruitName, suppliedQuantity));
+                () -> supplyTransaction.process(FRUIT_NAME, suppliedQuantity));
     }
 }

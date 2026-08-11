@@ -9,8 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceTransactionTest {
-    private static final String fruitName = "testfruit";
-    private static final int fruitQuantity = 123;
+    private static final String FRUIT_NAME = "testfruit";
+    private static final int FRUIT_QUANTITTY = 123;
     private final BalanceTransaction balanceTransaction = new BalanceTransaction();
 
     @AfterEach
@@ -20,13 +20,13 @@ class BalanceTransactionTest {
 
     @Test
     void process_inputCorrect_ok() {
-        balanceTransaction.process(fruitName, fruitQuantity);
+        balanceTransaction.process(FRUIT_NAME, FRUIT_QUANTITTY);
         List<Fruit> fruits = Storage.getFruits();
         Fruit fruit = fruits.stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
                 .get();
-        assertEquals(fruitName, fruit.getName());
-        assertEquals(fruitQuantity, fruit.getQuantity());
+        assertEquals(FRUIT_NAME, fruit.getName());
+        assertEquals(FRUIT_QUANTITTY, fruit.getQuantity());
     }
 }

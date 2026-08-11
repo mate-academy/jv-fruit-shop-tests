@@ -1,18 +1,22 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
+    private final Reader reader = new ReaderImpl();
     private final Writer writer = new WriterImpl();
-    private final String path = "src/main/resources/testReport.csv";
+    private final String path = "src/test/resources/testReport.csv";
     private final String report = "test123";
 
     @AfterEach
@@ -28,6 +32,8 @@ class WriterImplTest {
     void writeToFile_fileWritten_ok() {
         writer.writeToFile(path, report);
         assertTrue(Files.exists(Path.of(path)), "File was not written");
+        List<String> reportLines = reader.readFromFile(path);
+        assertEquals(report, reportLines.get(0));
     }
 
     @Test
@@ -38,7 +44,7 @@ class WriterImplTest {
 
     @Test
     void writeToFile_pathDoesNotExist_notOk() {
-        String wrongPath = "src/main/resourceses/testReport.csv";
+        String wrongPath = "src/test/resourceses/testReport.csv";
         assertThrows(RuntimeException.class, () -> writer.writeToFile(wrongPath,
                 report), "Runtime exception expected");
     }

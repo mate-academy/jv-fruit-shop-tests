@@ -19,14 +19,14 @@ class ReaderImplTest {
 
     @Test
     void readFromFile_fileExists_ok() {
-        path = "src/main/resources/testOk.csv";
+        path = "src/test/resources/testOk.csv";
         assertFalse(reader.readFromFile(path).isEmpty(),
                 "The provided file: " + path + " is empty");
     }
 
     @Test
     void readFromFile_fileEmpty_notOk() {
-        path = "src/main/resources/testEmpty.csv";
+        path = "src/test/resources/testEmpty.csv";
         assertThrows(IllegalArgumentException.class, () -> reader.readFromFile(path),
                 "The provided file: " + path + " is not empty");
     }

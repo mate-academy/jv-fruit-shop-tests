@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 class PurchaseTransactionTest {
-    private static final String fruitName = "testfruit";
-    private static final int fruitQuantity = 123;
+    private static final String FRUIT_NAME = "testfruit";
+    private static final int FRUIT_QUANTITY = 123;
     private final PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
     private int fruitPurchased;
 
@@ -24,8 +24,8 @@ class PurchaseTransactionTest {
             return;
         }
         Fruit fruit = new Fruit();
-        fruit.setName(fruitName);
-        fruit.setQuantity(fruitQuantity);
+        fruit.setName(FRUIT_NAME);
+        fruit.setQuantity(FRUIT_QUANTITY);
         Storage.addFruit(fruit);
     }
 
@@ -37,28 +37,28 @@ class PurchaseTransactionTest {
     @Test
     void process_inputCorrect_ok() {
         fruitPurchased = 122;
-        purchaseTransaction.process(fruitName, fruitPurchased);
+        purchaseTransaction.process(FRUIT_NAME, fruitPurchased);
         List<Fruit> fruits = Storage.getFruits();
         Fruit fruit = fruits.stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(f -> f.getName().equals(FRUIT_NAME))
                 .findFirst()
                 .get();
-        assertEquals(fruitName, fruit.getName());
-        assertEquals(fruitQuantity - fruitPurchased, fruit.getQuantity());
+        assertEquals(FRUIT_NAME, fruit.getName());
+        assertEquals(FRUIT_QUANTITY - fruitPurchased, fruit.getQuantity());
     }
 
     @Test
-    void process_purchaseMoreThanAvailable_ok() {
+    void process_purchaseMoreThanAvailable_notOk() {
         fruitPurchased = 124;
         assertThrows(RuntimeException.class,
-                () -> purchaseTransaction.process(fruitName, fruitPurchased));
+                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased));
     }
 
     @Test
     @Tag("SkipSetup")
-    void process_fruitNotExist_ok() {
+    void process_fruitNotExist_notOk() {
         fruitPurchased = 1;
         assertThrows(IllegalArgumentException.class,
-                () -> purchaseTransaction.process(fruitName, fruitPurchased));
+                () -> purchaseTransaction.process(FRUIT_NAME, fruitPurchased));
     }
 }

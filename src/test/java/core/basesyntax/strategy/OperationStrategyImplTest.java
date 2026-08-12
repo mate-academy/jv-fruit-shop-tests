@@ -21,7 +21,9 @@ class OperationStrategyImplTest {
     @Test
     void getOperationType_balanceInput_ok() {
         String input = "b";
-        assertInstanceOf(BalanceTransaction.class,operationStrategy.getOperationType(input),
+        assertInstanceOf(
+                BalanceTransaction.class,
+                operationStrategy.getOperationType(input),
                 "Incorrect strategy for operation type");
     }
 

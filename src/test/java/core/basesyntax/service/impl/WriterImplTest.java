@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,15 +13,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
-    private final Reader reader = new ReaderImpl();
     private final Writer writer = new WriterImpl();
-    private final String path = "src/test/resources/testReport.csv";
+    private final String pathString = "src/test/resources/testReport.csv";
     private final String report = "test123";
 
     @AfterEach
     void tearDown() {
         try {
-            Files.deleteIfExists(Path.of(path));
+            Files.deleteIfExists(Path.of(pathString));
         } catch (IOException e) {
             System.out.println("Could not delete file: " + e.getMessage());
         }
@@ -30,10 +28,16 @@ class WriterImplTest {
 
     @Test
     void writeToFile_fileWritten_ok() {
-        writer.writeToFile(path, report);
-        assertTrue(Files.exists(Path.of(path)), "File was not written");
-        List<String> reportLines = reader.readFromFile(path);
-        assertEquals(report, reportLines.get(0));
+        writer.writeToFile(pathString, report);
+        Path path = Path.of(pathString);
+        assertTrue(Files.exists(path), "File was not written");
+        List<String> reportLines;
+        try {
+            reportLines = Files.readAllLines(path);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read file: " + pathString, e);
+        }
+        assertEquals(report, reportLines.get(reportLines.size() - 1));
         assertEquals(1, reportLines.size(), "Report should contain exactly one line");
     }
 
@@ -52,7 +56,7 @@ class WriterImplTest {
 
     @Test
     void writeToFile_dataIsNull_notOk() {
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(path,
+        assertThrows(RuntimeException.class, () -> writer.writeToFile(pathString,
                 null), "Runtime exception expected");
     }
 }

@@ -37,7 +37,7 @@ class ReportCreatorTest {
     void createReport_reportCreated_ok() {
         String expectedReport = REPORT_HEADER + System.lineSeparator()
                 + FRUIT_NAME + "," + FRUIT_QUANTITY + System.lineSeparator();
-        assertEquals(expectedReport,createReport(),
+        assertEquals(expectedReport, createReport(),
                 "Expected a correctly formatted report");
     }
 

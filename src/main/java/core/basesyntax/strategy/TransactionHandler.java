@@ -10,16 +10,21 @@ public class TransactionHandler {
     public void process(String data) {
         String[] parts = data.split(",");
         if (parts.length != 3) {
-            throw new ArrayIndexOutOfBoundsException("Data must contain 3 parts");
+            throw new IllegalArgumentException("Input data not properly formatted");
         }
         String operation = parts[0];
         String fruitName = parts[1];
-        if (Integer.parseInt(parts[2]) <= 0) {
-            throw new IllegalArgumentException(
-                    "Amount need to be greater than 0, but was: "
-                            + Integer.parseInt(parts[2]));
+        int amount;
+        try {
+            amount = Integer.parseInt(parts[2]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Amount must be a valid number, but was: "
+                    + parts[2], e);
         }
-        int amount = Integer.parseInt(parts[2]);
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount need to be greater than 0, but was: "
+                    + amount);
+        }
 
         operationStrategy.getOperationType(operation).process(fruitName, amount);
     }

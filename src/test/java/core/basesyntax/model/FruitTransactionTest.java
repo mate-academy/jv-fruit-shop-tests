@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    void getOperation_createdTransaction() {
+    void getOperation_createdTransaction_isOperationOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.OperationType.SUPPLY,
                 "banana",
@@ -22,7 +22,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void getFruit_createdTransaction() {
+    void getFruit_createdTransaction_isGetFruitOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.OperationType.SUPPLY,
                 "banana",
@@ -33,7 +33,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void getQuantity_createdTransaction() {
+    void getQuantity_createdTransaction_isGetQuantityOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.OperationType.SUPPLY,
                 "banana",
@@ -44,7 +44,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void getCode_operationType() {
+    void getCode_operationType_enumIsOk() {
         assertEquals(
                 "b",
                 FruitTransaction.OperationType.BALANCE.getCode()
@@ -67,7 +67,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_balance() {
+    void fromCode_balance_IsOk() {
         assertEquals(
                 FruitTransaction.OperationType.BALANCE,
                 FruitTransaction.OperationType.fromCode("b")
@@ -75,7 +75,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_supply() {
+    void fromCode_supply_IsOk() {
         assertEquals(
                 FruitTransaction.OperationType.SUPPLY,
                 FruitTransaction.OperationType.fromCode("s")
@@ -83,7 +83,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_purchase() {
+    void fromCode_purchase_IsOk() {
         assertEquals(
                 FruitTransaction.OperationType.PURCHASE,
                 FruitTransaction.OperationType.fromCode("p")
@@ -91,7 +91,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_return() {
+    void fromCode_return_IsOk() {
         assertEquals(
                 FruitTransaction.OperationType.RETURN,
                 FruitTransaction.OperationType.fromCode("r")
@@ -99,7 +99,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_unknownCode() {
+    void fromCode_unknownCode_throwsException() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> FruitTransaction.OperationType.fromCode("x")
@@ -112,7 +112,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fromCode_nullCode() {
+    void fromCode_nullCode_throwsException() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> FruitTransaction.OperationType.fromCode(null)
@@ -125,7 +125,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void toString_createdTransaction() {
+    void toString_createdTransaction_returnsContent() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.OperationType.SUPPLY,
                 "banana",

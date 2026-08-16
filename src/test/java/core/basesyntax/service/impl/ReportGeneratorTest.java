@@ -14,7 +14,7 @@ class ReportGeneratorTest {
             new ReportGenerator();
 
     @Test
-    void generateReport_emptyStorage() {
+    void generateReport_emptyStorage_returnsHeaderOnly() {
         Map<String, Integer> storage = new HashMap<>();
 
         String result = reportGenerator.generateReport(storage);
@@ -26,7 +26,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    void generateReport_oneFruit() {
+    void generateReport_oneFruit_returnsContent() {
         Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 100);
 
@@ -42,7 +42,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    void generateReport_multipleFruits() {
+    void generateReport_multipleFruits_returnsContent() {
         Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 152);
         storage.put("apple", 90);
@@ -55,7 +55,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    void generateReport_zeroQuantity() {
+    void generateReport_zeroQuantity_returnsContent() {
         Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 0);
 

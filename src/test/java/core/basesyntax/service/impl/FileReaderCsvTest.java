@@ -13,7 +13,7 @@ class FileReaderCsvTest {
     private final FileReaderCsv fileReader = new FileReaderCsv();
 
     @Test
-    void readFile_existingFile() throws Exception {
+    void readFile_existingFile_returnsContent() throws Exception {
         Path file = Files.createTempFile("test", ".csv");
 
         Files.write(
@@ -34,7 +34,7 @@ class FileReaderCsvTest {
     }
 
     @Test
-    void readFile_nonExistingFile() {
+    void readFile_nonExistingFile_throwsException() {
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
                 () -> fileReader.readFile("non-existing-file.csv")

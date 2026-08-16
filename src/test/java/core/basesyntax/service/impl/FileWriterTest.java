@@ -12,7 +12,7 @@ class FileWriterTest {
     private final FileWriter fileWriter = new FileWriter();
 
     @Test
-    void writeToFile_validFile() throws Exception {
+    void writeToFile_validFile_returnsContent() throws Exception {
         Path file = Files.createTempFile("test", ".csv");
 
         try {
@@ -29,7 +29,7 @@ class FileWriterTest {
     }
 
     @Test
-    void writeToFile_invalidPath() {
+    void writeToFile_invalidPath_throwsException() {
         String filePath = "non-existing-folder/test.csv";
 
         RuntimeException exception = assertThrows(

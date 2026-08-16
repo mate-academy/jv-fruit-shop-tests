@@ -11,7 +11,7 @@ class DataConverterTest {
     private final DataConverter dataConverter = new DataConverter();
 
     @Test
-    void convertData_validData() {
+    void convertData_validData_returnsTransaction() {
         List<String> data = List.of(
                 "b,banana,20",
                 "s,apple,100",
@@ -29,10 +29,31 @@ class DataConverterTest {
         );
         assertEquals("banana", result.get(0).getFruit());
         assertEquals(20, result.get(0).getQuantity());
+
+        assertEquals(
+                FruitTransaction.OperationType.SUPPLY,
+                result.get(1).getOperation()
+        );
+        assertEquals("apple", result.get(1).getFruit());
+        assertEquals(100, result.get(1).getQuantity());
+
+        assertEquals(
+                FruitTransaction.OperationType.PURCHASE,
+                result.get(2).getOperation()
+        );
+        assertEquals("banana", result.get(2).getFruit());
+        assertEquals(13, result.get(2).getQuantity());
+
+        assertEquals(
+                FruitTransaction.OperationType.RETURN,
+                result.get(3).getOperation()
+        );
+        assertEquals("apple", result.get(3).getFruit());
+        assertEquals(10, result.get(3).getQuantity());
     }
 
     @Test
-    void convertData_emptyLine() {
+    void convertData_emptyLine_skipEmptyLines() {
         List<String> data = List.of(
                 "",
                 "   ",
@@ -45,7 +66,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_nullLine() {
+    void convertData_nullLine_skipNull() {
         List<String> data = new java.util.ArrayList<>();
         data.add(null);
         data.add("s,banana,100");
@@ -56,7 +77,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_wrongNumberOfColumns() {
+    void convertData_wrongNumberOfColumns_skipWrongSizeOfData() {
         List<String> data = List.of(
                 "s,banana",
                 "s,apple,100,extra",
@@ -69,7 +90,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_emptyFruit() {
+    void convertData_emptyFruit_skipEmptyValue() {
         List<String> data = List.of(
                 "s,,100",
                 "s,apple,50"
@@ -82,7 +103,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_unknownOperation() {
+    void convertData_unknownOperation_skipUnknownOperation() {
         List<String> data = List.of(
                 "x,banana,100",
                 "s,apple,50"
@@ -95,7 +116,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_invalidQuantity() {
+    void convertData_invalidQuantity_skipWrongType() {
         List<String> data = List.of(
                 "s,banana,abc",
                 "s,apple,50"
@@ -108,7 +129,7 @@ class DataConverterTest {
     }
 
     @Test
-    void convertData_negativeQuantity() {
+    void convertData_negativeQuantity_isOk() {
         List<String> data = List.of(
                 "s,banana,-10",
                 "s,apple,50"
@@ -117,10 +138,11 @@ class DataConverterTest {
         List<FruitTransaction> result = dataConverter.convertData(data);
 
         assertEquals(2, result.size());
+        assertEquals(-10, result.get(0).getQuantity());
     }
 
     @Test
-    void convertData_spacesAroundValues() {
+    void convertData_ConvertData_dataTrimmed() {
         List<String> data = List.of(
                 " s , banana , 100 "
         );

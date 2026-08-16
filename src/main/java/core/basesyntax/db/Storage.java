@@ -7,7 +7,7 @@ public class Storage {
     private final HashMap<String, Integer> storage = new HashMap<>();
 
     public void setFruitQuantity(String fruit, int quantity) {
-        if (quantity <= 0) {
+        if (quantity < 0) {
             throw new IllegalArgumentException("Quantity must be greater than or equal to 0");
         }
         storage.put(fruit, quantity);

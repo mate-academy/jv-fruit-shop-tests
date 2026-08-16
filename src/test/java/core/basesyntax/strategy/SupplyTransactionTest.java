@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class SupplyTransactionTest {
 
     @Test
-    void execute_addsFruitQuantity() {
+    void execute_addsFruitQuantity_increasesQuantity() {
         Storage storage = new Storage();
         storage.setFruitQuantity("banana", 50);
 
@@ -27,7 +27,7 @@ class SupplyTransactionTest {
     }
 
     @Test
-    void execute_addsFruitWhenFruitDoesNotExist() {
+    void execute_addsFruitWhenFruitDoesNotExist_createsPosition() {
         Storage storage = new Storage();
 
         FruitTransaction transaction = new FruitTransaction(

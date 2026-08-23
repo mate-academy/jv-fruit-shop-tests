@@ -6,16 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
-    private ReportGenerator reportGenerator;
+    private static ReportGenerator reportGenerator;
+
+    @BeforeAll
+    public static void initialize() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @BeforeEach
     void setUp() {
         Storage.fruitStorage.clear();
-        reportGenerator = new ReportGeneratorImpl();
     }
 
     @Test

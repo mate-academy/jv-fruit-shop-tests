@@ -9,10 +9,16 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
-    private final FileWriter fileWriter = new FileWriterImpl();
+    private static FileWriter fileWriter = new FileWriterImpl();
+
+    @BeforeAll
+    public static void initialize() {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test
     public void writeFile_validContent_Ok() throws IOException {

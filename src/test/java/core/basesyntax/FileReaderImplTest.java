@@ -8,10 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
-    private final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeAll
+    public static void initialize() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void readFile_validFile_Ok() {

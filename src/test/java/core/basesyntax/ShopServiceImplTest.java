@@ -17,15 +17,15 @@ import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
-    private ShopService shopService;
+    private static ShopService shopService;
 
-    @BeforeEach
-    public void setup() {
-        Storage.fruitStorage.clear();
+    @BeforeAll
+    public static void initialize() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
@@ -33,6 +33,11 @@ public class ShopServiceImplTest {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
+    }
+
+    @AfterEach
+    public void clear() {
+        Storage.fruitStorage.clear();
     }
 
     @Test

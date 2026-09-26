@@ -40,7 +40,7 @@ class ShopServiceImplTest {
     @Test
     void process_validArgs_ok() {
         String fruitName = "apple";
-        int expected1 = 5;
+        int expected = 5;
         List<FruitTransaction> list = new java.util.ArrayList<>(List.of(
                 new FruitTransaction(Operation.BALANCE, fruitName, 1),
                 new FruitTransaction(Operation.SUPPLY, fruitName, 2),
@@ -48,13 +48,13 @@ class ShopServiceImplTest {
 
         shopService.process(list);
 
-        assertEquals(expected1, dao.getFruitFromStorage(fruitName));
+        assertEquals(expected, dao.getFruitFromStorage(fruitName));
 
-        list.add(new FruitTransaction(Operation.PURCHASE, fruitName, 5));
-        shopService.process(list);
+        shopService.process(List.of(
+                new FruitTransaction(Operation.PURCHASE, fruitName, expected)
+        ));
 
-        int expected2 = 0;
-        assertEquals(expected2, dao.getFruitFromStorage(fruitName));
+        assertEquals(0, dao.getFruitFromStorage(fruitName));
     }
 
     @Test

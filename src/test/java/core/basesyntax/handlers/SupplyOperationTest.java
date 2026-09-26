@@ -1,13 +1,14 @@
 package core.basesyntax.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.fruittransaction.FruitTransaction;
 import core.basesyntax.fruittransaction.Operation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SupplyOperationTest {
     private static final String FRUIT_NAME_BANANA = "banana";
@@ -47,5 +48,4 @@ class SupplyOperationTest {
     void updateData_nullData_notOk() {
         assertThrows(IllegalArgumentException.class,() -> so.updateData(null));
     }
-
 }

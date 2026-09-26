@@ -5,7 +5,7 @@ import core.basesyntax.fruittransaction.FruitTransaction;
 
 public class AddFruitsToStorage {
     static void add(FruitTransaction transaction, FruitsDao dao) {
-        if (transaction == null){
+        if (transaction == null) {
             throw new IllegalArgumentException("Transaction can't be null");
         }
 

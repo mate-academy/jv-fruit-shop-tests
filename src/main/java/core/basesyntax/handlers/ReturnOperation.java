@@ -1,9 +1,9 @@
 package core.basesyntax.handlers;
 
+import static core.basesyntax.handlers.AddFruitsToStorage.add;
+
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.fruittransaction.FruitTransaction;
-
-import static core.basesyntax.handlers.AddFruitsToStorage.add;
 
 public class ReturnOperation implements OperationHandler {
     private final FruitsDao dao;
@@ -16,6 +16,4 @@ public class ReturnOperation implements OperationHandler {
     public void updateData(FruitTransaction transaction) {
         add(transaction, dao);
     }
-
-
 }

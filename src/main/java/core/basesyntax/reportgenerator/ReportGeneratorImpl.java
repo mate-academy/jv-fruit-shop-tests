@@ -18,6 +18,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private String createReport() {
         StringBuilder sb = new StringBuilder(REPORT_FIRST_LINE);
         dao.getAll()
+
                 .forEach((k, v) ->
                         sb.append(System.lineSeparator()).append(k).append(",").append(v)
                 );

@@ -7,6 +7,9 @@ import java.nio.file.Path;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void writeToFile(String data, String filename) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data can't be null");
+        }
         Path filePath = Path.of(filename);
         try {
             Files.write(filePath, data.getBytes());

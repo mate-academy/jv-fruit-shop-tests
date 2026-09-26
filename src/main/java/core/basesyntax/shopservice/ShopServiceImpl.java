@@ -15,12 +15,14 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        transactions
-                .forEach(transaction -> {
-                    Operation op = transaction.operation();
-                    OperationHandler handler = strategy.getTransactionHandler(op);
-                    handler.updateData(transaction);
-                });
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions can't be null");
+        }
+        transactions.forEach(transaction -> {
+            Operation op = transaction.operation();
+            OperationHandler handler = strategy.getTransactionHandler(op);
+            handler.updateData(transaction);
+        });
 
     }
 }

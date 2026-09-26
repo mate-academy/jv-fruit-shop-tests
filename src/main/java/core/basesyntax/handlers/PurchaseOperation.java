@@ -12,16 +12,20 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void updateData(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new IllegalArgumentException("Transaction can't be null");
+        }
+
         Integer currentFruitQuantity = dao.getFruitFromStorage(transaction.fruitName());
 
         if (currentFruitQuantity == null) {
-            throw new RuntimeException("Can't find the fruit" + transaction.fruitName());
+            throw new IllegalArgumentException("Can't find the fruit " + transaction.fruitName());
         }
 
         int newQuantity = currentFruitQuantity - transaction.quantity();
 
         if (newQuantity < 0) {
-            throw new RuntimeException("New value of "
+            throw new IllegalArgumentException("New value of "
                     + transaction.fruitName()
                     + " can't be less than 0");
         }

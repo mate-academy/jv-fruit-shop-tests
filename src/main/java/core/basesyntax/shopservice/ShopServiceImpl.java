@@ -1,0 +1,28 @@
+package core.basesyntax.shopservice;
+
+import core.basesyntax.fruittransaction.FruitTransaction;
+import core.basesyntax.fruittransaction.Operation;
+import core.basesyntax.handlers.OperationHandler;
+import core.basesyntax.operationstrategy.OperationStrategy;
+import java.util.List;
+
+public class ShopServiceImpl implements ShopService {
+    private final OperationStrategy strategy;
+
+    public ShopServiceImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    @Override
+    public void process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions can't be null");
+        }
+        transactions.forEach(transaction -> {
+            Operation op = transaction.operation();
+            OperationHandler handler = strategy.getTransactionHandler(op);
+            handler.updateData(transaction);
+        });
+
+    }
+}

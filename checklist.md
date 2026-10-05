@@ -21,7 +21,7 @@ Create a corresponding test class for each service you test. Do not test the log
 That's important for code readability.
 
 Example:  
-```java  
+```  
     CsvFileService -> CsvFileServiceTest  
     FruitService -> FruitServiceTest  
     ...  
@@ -31,17 +31,17 @@ Same goes for files that you use in tests, **let's put them into this folder:** 
 #### Try to cover different scenarios in tests
 Your task is to include edge cases apart from the regular method use case.
 
-#### Don't test the Main class
+#### Don't test the core.basesyntax.Main class
 We want to test only business logic, so there is no need to cover the `Main` class with tests. 
 You can exclude the Main class with the `main()` method from being checked for code coverage in `pom.xml`.   
 
 __Example__: find the following code in the `pom.xml` and change `Main` according to your 
     class naming where you have your `main()` method.  
     
-```java
+```
     <configuration>  
         <excludes>  
-            <exclude>**/Main*</exclude>  
+            <exclude>**/*Main*</exclude>  
         </excludes>  
     </configuration>  
 ```  
@@ -57,7 +57,7 @@ there is no need to use the other FruitService method that puts the fruit into s
 REMEMBER: you can access the storage directly instead - just remember to clear it after each test.
 
 Example:
-```java
+```
 @Test
 public void getReport_Ok() {
     Storage.storage.put(...); // put fruits directly to the storage

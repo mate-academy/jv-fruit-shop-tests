@@ -1,15 +1,25 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataConverterImpl;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {
 
-    private final DataConverter dataConverter = new DataConverterImpl();
+    private static DataConverter dataConverter;
+
+    @BeforeAll
+    static void beforeAll() {
+        dataConverter = new DataConverterImpl();
+    }
 
     @Test
     void convertToTransaction_validList_ok() {
@@ -23,29 +33,29 @@ public class DataConverterTest {
 
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputLines);
 
-        Assertions.assertNotNull(actual);
-        Assertions.assertEquals(4, actual.size());
+        assertNotNull(actual);
+        assertEquals(4, actual.size());
 
-        Assertions.assertEquals(FruitTransaction.Operation.BALANCE, actual.get(0).getOperation());
-        Assertions.assertEquals("banana", actual.get(0).getFruit());
-        Assertions.assertEquals(10, actual.get(0).getQuantity());
+        assertEquals(FruitTransaction.Operation.BALANCE, actual.get(0).getOperation());
+        assertEquals("banana", actual.get(0).getFruit());
+        assertEquals(10, actual.get(0).getQuantity());
 
-        Assertions.assertEquals(FruitTransaction.Operation.SUPPLY, actual.get(1).getOperation());
-        Assertions.assertEquals("apple", actual.get(1).getFruit());
-        Assertions.assertEquals(5, actual.get(1).getQuantity());
+        assertEquals(FruitTransaction.Operation.SUPPLY, actual.get(1).getOperation());
+        assertEquals("apple", actual.get(1).getFruit());
+        assertEquals(5, actual.get(1).getQuantity());
 
-        Assertions.assertEquals(FruitTransaction.Operation.PURCHASE, actual.get(2).getOperation());
-        Assertions.assertEquals("orange", actual.get(2).getFruit());
-        Assertions.assertEquals(20, actual.get(2).getQuantity());
+        assertEquals(FruitTransaction.Operation.PURCHASE, actual.get(2).getOperation());
+        assertEquals("orange", actual.get(2).getFruit());
+        assertEquals(20, actual.get(2).getQuantity());
 
-        Assertions.assertEquals(FruitTransaction.Operation.RETURN, actual.get(3).getOperation());
-        Assertions.assertEquals("banana", actual.get(3).getFruit());
-        Assertions.assertEquals(2, actual.get(3).getQuantity());
+        assertEquals(FruitTransaction.Operation.RETURN, actual.get(3).getOperation());
+        assertEquals("banana", actual.get(3).getFruit());
+        assertEquals(2, actual.get(3).getQuantity());
     }
 
     @Test
     void convertToTransaction_nullList_notOk() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             dataConverter.convertToTransaction(null);
         });
     }
@@ -55,8 +65,8 @@ public class DataConverterTest {
         List<String> inputList = List.of();
         List<FruitTransaction> actual = dataConverter.convertToTransaction(inputList);
 
-        Assertions.assertNotNull(actual);
-        Assertions.assertTrue(actual.isEmpty());
+        assertNotNull(actual);
+        assertTrue(actual.isEmpty());
     }
 
     @Test
@@ -65,7 +75,7 @@ public class DataConverterTest {
                 "type,fruit,quantity",
                 "p,banana,-10"
         );
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             dataConverter.convertToTransaction(inputLines);
         });
     }

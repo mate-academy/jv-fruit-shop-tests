@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -16,7 +18,6 @@ import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +55,7 @@ public class ShopServiceTest {
         List<FruitTransaction> fruitTransactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10)
         );
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             shopService.process(fruitTransactions);
         });
     }
@@ -94,12 +95,8 @@ public class ShopServiceTest {
         List<FruitTransaction> fruitTransactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 50)
         );
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             shopService.process(fruitTransactions);
         });
     }
 }
-
-/*
-
-process_existentFruitReturn_ok()*/

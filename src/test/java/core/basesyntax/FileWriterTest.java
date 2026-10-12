@@ -1,17 +1,26 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 public class FileWriterTest {
 
-    private final FileWriter fileWriter = new FileWriterImpl();
+    private static FileWriter fileWriter;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test
     void write_validData_ok(@TempDir Path tempDir) throws IOException {
@@ -20,14 +29,13 @@ public class FileWriterTest {
 
         fileWriter.write(reportContent, filePath.toString());
 
-        Assertions.assertTrue(Files.exists(filePath));
-
-        Assertions.assertEquals(reportContent, Files.readString(filePath));
+        assertTrue(Files.exists(filePath));
+        assertEquals(reportContent, Files.readString(filePath));
     }
 
     @Test
     void write_filePathIsNull_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             fileWriter.write("some report", null);
         });
     }
@@ -37,7 +45,7 @@ public class FileWriterTest {
         String path = "src/test/resources";
         String content = "fruit,quantity\npineapple,2";
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             fileWriter.write(content, path);
         });
     }

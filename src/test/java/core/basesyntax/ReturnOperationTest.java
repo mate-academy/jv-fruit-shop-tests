@@ -1,14 +1,23 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.ReturnOperation;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
+    private static OperationHandler operationHandler;
+
+    @BeforeAll
+    static void setUp() {
+        operationHandler = new ReturnOperation();
+    }
+
     @AfterEach
     void tearDown() {
         Storage.fruitModels.clear();
@@ -20,9 +29,8 @@ public class ReturnOperationTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 100
         );
-        OperationHandler operationHandler = new ReturnOperation();
         operationHandler.handle(fruitTransaction);
-        Assertions.assertEquals(200,Storage.fruitModels.get("banana"));
+        assertEquals(200,Storage.fruitModels.get("banana"));
     }
 
     @Test
@@ -30,8 +38,7 @@ public class ReturnOperationTest {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 100
         );
-        OperationHandler operationHandler = new ReturnOperation();
         operationHandler.handle(transaction);
-        Assertions.assertEquals(100, Storage.fruitModels.get("banana"));
+        assertEquals(100, Storage.fruitModels.get("banana"));
     }
 }

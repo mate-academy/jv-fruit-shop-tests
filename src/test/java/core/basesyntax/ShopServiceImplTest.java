@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
@@ -13,15 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceImplTest {
-    private ShopService shopService;
+    private static ShopService shopService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
@@ -43,6 +44,6 @@ public class ShopServiceImplTest {
 
         shopService.process(transactions);
 
-        Assertions.assertEquals(150, Storage.fruitModels.get("apple"));
+        assertEquals(150, Storage.fruitModels.get("apple"));
     }
 }

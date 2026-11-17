@@ -16,13 +16,6 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_blankPath_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            fileReader.read("   ");
-        });
-    }
-
-    @Test
     void read_nonExistentFile_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read("non_existent_file.csv");

@@ -34,9 +34,8 @@ class FileWriterImplTest {
     void write_validData_Ok() {
         String fileName = "reportToRead.csv";
         String data = "finalReport.csv";
-
         assertDoesNotThrow(() -> {
-            fileWriter.write(fileName, data);
+            fileWriter.write(data, fileName);
         });
     }
 }

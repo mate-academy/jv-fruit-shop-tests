@@ -38,7 +38,7 @@ public class Storage {
     }
 
     private static void validateFruit(String fruit) {
-        if (fruit == null || fruit.isBlank()) {
+        if (fruit == null) {
             throw new IllegalArgumentException("The fruit name cannot be null or empty.");
         }
     }

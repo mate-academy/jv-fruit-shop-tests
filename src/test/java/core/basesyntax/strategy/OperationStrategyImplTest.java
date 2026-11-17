@@ -11,11 +11,10 @@ import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private OperationStrategy operationStrategy;
-    private Map<FruitTransaction.Operation, OperationHandler> handlersMap;
 
     @BeforeEach
     void setUp() {
-        handlersMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> handlersMap = new HashMap<>();
         handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationStrategy = new OperationStrategyImpl(handlersMap);
     }

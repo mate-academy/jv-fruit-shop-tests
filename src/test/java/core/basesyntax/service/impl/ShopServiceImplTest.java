@@ -17,12 +17,11 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private ShopService shopService;
-    private OperationStrategyImpl operationStrategy;
 
     @BeforeEach
     void setUp() {
         Storage.clear();
-        operationStrategy = new OperationStrategyImpl(Map.of(
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation()

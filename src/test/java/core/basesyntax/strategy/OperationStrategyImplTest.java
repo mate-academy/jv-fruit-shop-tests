@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         Map<FruitTransaction.Operation, OperationHandler> handlersMap = new HashMap<>();
         handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationStrategy = new OperationStrategyImpl(handlersMap);

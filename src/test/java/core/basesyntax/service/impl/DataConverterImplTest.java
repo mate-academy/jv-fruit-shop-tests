@@ -6,10 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private final DataConverter dataConverter = new DataConverterImpl();
+    private static DataConverter dataConverter;
+
+    @BeforeAll
+    static void beforeAll() {
+        dataConverter = new DataConverterImpl();
+    }
 
     @Test
     void convert_linesNull_notOK() {

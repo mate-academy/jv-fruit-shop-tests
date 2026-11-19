@@ -5,14 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private static ReportGenerator reportGenerator;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
         Storage.clear();
     }
 

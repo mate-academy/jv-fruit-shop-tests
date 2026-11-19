@@ -12,21 +12,26 @@ import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.SupplyOperation;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
-    private ShopService shopService;
+    private static ShopService shopService;
 
-    @BeforeEach
-    void setUp() {
-        Storage.clear();
+    @BeforeAll
+    static void beforeAll() {
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation()
         ));
         shopService = new ShopServiceImpl(operationStrategy);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.clear();
     }
 
     @Test

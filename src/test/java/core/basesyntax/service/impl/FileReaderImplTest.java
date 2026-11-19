@@ -3,10 +3,16 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReader;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     void read_nullPath_notOk() {

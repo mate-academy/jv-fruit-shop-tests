@@ -4,10 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private final FileWriter fileWriter = new FileWriterImpl();
+    private static FileWriter fileWriter;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test
     void write_dataNull_notOk() {

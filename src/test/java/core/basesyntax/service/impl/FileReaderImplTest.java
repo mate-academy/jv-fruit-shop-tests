@@ -1,0 +1,30 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.service.FileReader;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+class FileReaderImplTest {
+    private static FileReader fileReader;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileReader = new FileReaderImpl();
+    }
+
+    @Test
+    void read_nullPath_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileReader.read(null);
+        });
+    }
+
+    @Test
+    void read_nonExistentFile_notOk() {
+        assertThrows(RuntimeException.class, () -> {
+            fileReader.read("non_existent_file.csv");
+        });
+    }
+}
